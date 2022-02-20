@@ -1,0 +1,9 @@
+<Preferences>
+
+    <Window>
+        <resolutionWidth>1280</resolutionWidth>
+        <resolutionHeight>720</resolutionHeight>
+        <windowType>0</windowType> <!-- 0 = Windowed, 1 = Windowed Borderless, 2 = Fullscreen -->
+    </Window>
+
+</Preferences>

@@ -1,5 +1,7 @@
 package graphics.ui;
 
+import files.Preferences;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,22 +11,26 @@ public class GameWindow extends JFrame {
 
     public GameWindow(GameCanvas gameCanvas) {
         this.gameCanvas = gameCanvas;
-
-        init();
     }
 
-    public void init() {
+    public void init(Preferences preferences) {
 
         add(gameCanvas);
 
-        setUndecorated(true);
+        if(preferences.getWindowType() == Preferences.WindowType.FULLSCREEN) {
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
+            setUndecorated(true);
+        } else {
+            double[] screenDim = {
+                    preferences.getWindowWidth(),
+                    preferences.getWindowHeight()
+            };
+            setPreferredSize(new Dimension((int)screenDim[0], (int)screenDim[1]));
+        }
+        setVisible(true);
         setAlwaysOnTop(true);
         setResizable(false);
 
-        double[] screenDim =
-                {Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height};
-
-        setPreferredSize(new Dimension((int)screenDim[0], (int)screenDim[1]));
 
         pack();
 
