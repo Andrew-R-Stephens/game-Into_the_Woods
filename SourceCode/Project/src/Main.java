@@ -2,6 +2,7 @@ import files.Preferences;
 import files.PreferencesXMLParser;
 import graphics.ui.GameCanvas;
 import graphics.ui.GameWindow;
+import viewmodels.GameModel;
 
 /**
  * The type Main.
@@ -9,6 +10,8 @@ import graphics.ui.GameWindow;
 public class Main {
 
     private static Preferences preferences;
+
+    private static GameModel gameModel;
 
     /**
      * The entry point of application.
@@ -20,12 +23,11 @@ public class Main {
         // Initialize Preferences
         initPreferenceFiles();
 
+        // Initialize Game Models
+        initViewModels();
+
         // Initialize UI
         initWindow();
-
-
-        // Initialize Game Models
-        initGameObjects();
 
     }
 
@@ -36,28 +38,23 @@ public class Main {
         preferences = new Preferences();
         PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "Preferences.xml");
         preferencesXMLParser.read();
+        preferences.postInit();
     }
-
-    public static void initWindow() {
-        GameCanvas gameCanvas = new GameCanvas();
-        GameWindow gameWindow = new GameWindow(gameCanvas);
-        gameWindow.init(preferences);
-        //gameWindow.setVisible(true);
-    }
-
-    /**
-     * Init game files.
-     */
-    public static void initGameFiles() {
-
-    }
-
 
     /**
      * Init game objects.
      */
-    public static void initGameObjects() {
-
+    public static void initViewModels() {
+        gameModel = new GameModel();
+        gameModel.init(preferences);
     }
+
+    public static void initWindow() {
+        GameCanvas gameCanvas = new GameCanvas(gameModel);
+        GameWindow gameWindow = new GameWindow(gameCanvas);
+        gameWindow.init(preferences);
+    }
+
+
 
 }

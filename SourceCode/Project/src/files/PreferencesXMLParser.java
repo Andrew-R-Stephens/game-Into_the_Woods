@@ -43,17 +43,29 @@ public class PreferencesXMLParser extends XMLParser {
 
         doc.getDocumentElement().normalize();
         System.out.println("Root element = " + doc.getDocumentElement().getNodeName());
-        NodeList nList = doc.getElementsByTagName("Window");
+        NodeList windowNodes = doc.getElementsByTagName("Window");
         System.out.println("----------------------------");
 
-        for (int temp = 0; temp < nList.getLength(); temp++) {
-            Node nNode = nList.item(temp);
+        for (int temp = 0; temp < windowNodes.getLength(); temp++) {
+            Node nNode = windowNodes.item(temp);
             System.out.println("\nCurrent Element = " + nNode.getNodeName());
 
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
                 /*System.out.println("Student roll no : "
                         + eElement.getAttribute("resolutionWidth"));*/
+
+                int dwidth = Integer.parseInt(eElement
+                        .getElementsByTagName("resolutionWidthDefault")
+                        .item(0)
+                        .getTextContent());
+                preferences.setWindowWidthDefault(dwidth);
+
+                int dheight = Integer.parseInt(eElement
+                        .getElementsByTagName("resolutionHeightDefault")
+                        .item(0)
+                        .getTextContent());
+                preferences.setWindowHeightDefault(dheight);
 
                 int width = Integer.parseInt(eElement
                         .getElementsByTagName("resolutionWidth")
@@ -81,6 +93,26 @@ public class PreferencesXMLParser extends XMLParser {
 
                 System.out.println("Window Type = "
                         + windowType);
+            }
+        }
+
+        NodeList performanceNodes = doc.getElementsByTagName("Performance");
+        System.out.println("----------------------------");
+        for (int temp = 0; temp < performanceNodes.getLength(); temp++) {
+            Node nNode = performanceNodes.item(temp);
+            System.out.println("\nCurrent Element = " + nNode.getNodeName());
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+
+                int frameRate = Integer.parseInt(eElement
+                        .getElementsByTagName("frameRate")
+                        .item(0)
+                        .getTextContent());
+                preferences.setFrameRate(frameRate);
+
+                System.out.println("Frame Rate = "
+                        + frameRate);
             }
         }
 

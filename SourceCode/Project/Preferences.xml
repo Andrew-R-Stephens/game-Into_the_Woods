@@ -1,9 +1,15 @@
 <Preferences>
 
     <Window>
-        <resolutionWidth>1280</resolutionWidth>
-        <resolutionHeight>720</resolutionHeight>
-        <windowType>0</windowType> <!-- 0 = Windowed, 1 = Windowed Borderless, 2 = Fullscreen -->
+        <resolutionWidthDefault>1920</resolutionWidthDefault>
+        <resolutionHeightDefault>1080</resolutionHeightDefault>
+        <resolutionWidth>3840</resolutionWidth>
+        <resolutionHeight>2160</resolutionHeight>
+        <windowType>2</windowType> <!-- 0 = Windowed, 1 = Windowed Borderless, 2 = Fullscreen -->
     </Window>
+
+    <Performance>
+        <frameRate>1000</frameRate>
+    </Performance>
 
 </Preferences>
