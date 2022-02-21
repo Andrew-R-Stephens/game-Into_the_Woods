@@ -9,7 +9,7 @@
     </Window>
 
     <Performance>
-        <frameRate>1000</frameRate>
+        <frameRate>60</frameRate>
     </Performance>
 
 </Preferences>
