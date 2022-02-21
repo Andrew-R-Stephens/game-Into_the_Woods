@@ -13,9 +13,9 @@ import java.io.IOException;
 
 public class PreferencesXMLParser extends XMLParser {
 
-    private Preferences preferences;
+    private PreferenceData preferences;
 
-    public PreferencesXMLParser(Preferences preferences, String fileName) {
+    public PreferencesXMLParser(PreferenceData preferences, String fileName) {
         super(fileName);
 
         this.preferences = preferences;

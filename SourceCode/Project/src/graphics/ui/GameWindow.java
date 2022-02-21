@@ -1,20 +1,22 @@
 package graphics.ui;
 
-import files.Preferences;
+import files.PreferenceData;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class GameWindow extends JFrame {
 
     private GameCanvas gameCanvas;
     private boolean isRunning = false;
 
-    public GameWindow(GameCanvas gameCanvas) {
-        this.gameCanvas = gameCanvas;
+    public GameWindow() {
     }
 
-    public void init(Preferences preferences) {
+    public void init(PreferenceData preferences, GameCanvas gameCanvas){
+        this.gameCanvas = gameCanvas;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -53,6 +55,61 @@ public class GameWindow extends JFrame {
 
         setLocationRelativeTo(null);
         setVisible(true);
+
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch(e.getKeyCode()) {
+                    case KeyEvent.VK_ESCAPE -> {
+                        System.out.println("Quitting");
+                        System.exit(1);
+                    }
+                    case KeyEvent.VK_LEFT -> {
+                        System.out.println("Left Button");
+                        gameCanvas.isPressed[0] = true;
+                    }
+                    case KeyEvent.VK_RIGHT -> {
+                        System.out.println("Right Button");
+                        gameCanvas.isPressed[1] = true;
+                    }
+                    case KeyEvent.VK_UP -> {
+                        System.out.println("Up Button");
+                        gameCanvas.isPressed[2] = true;
+                    }
+                    case KeyEvent.VK_DOWN -> {
+                        System.out.println("Down Button");
+                        gameCanvas.isPressed[3] = true;
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                switch(e.getKeyCode()) {
+                    case KeyEvent.VK_LEFT -> {
+                        System.out.println("Left Button");
+                        gameCanvas.isPressed[0] = false;
+                    }
+                    case KeyEvent.VK_RIGHT -> {
+                        System.out.println("Right Button");
+                        gameCanvas.isPressed[1] = false;
+                    }
+                    case KeyEvent.VK_UP -> {
+                        System.out.println("Up Button");
+                        gameCanvas.isPressed[2] = false;
+                    }
+                    case KeyEvent.VK_DOWN -> {
+                        System.out.println("Down Button");
+                        gameCanvas.isPressed[3] = false;
+                    }
+                }
+            }
+        });
+
 
         Thread updateThread = new Thread(() -> {
 

@@ -2,7 +2,7 @@ package files;
 
 import java.util.HashMap;
 
-public class Preferences {
+public class PreferenceData {
 
     private HashMap<String, Integer> values;
 
@@ -83,7 +83,7 @@ public class Preferences {
         }
     }
 
-    public void postInit() {
+    public void post() {
         calcResScale();
     }
 

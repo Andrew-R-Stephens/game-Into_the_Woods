@@ -1,6 +1,6 @@
-package game.objects.entities;
+package viewmodels.game.objects.entities;
 
-import game.objects.GameObject;
+import viewmodels.game.objects.GameObject;
 import graphics.ui.GameCanvas;
 
 public class Entity extends GameObject {

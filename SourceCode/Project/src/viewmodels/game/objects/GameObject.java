@@ -1,4 +1,4 @@
-package game.objects;
+package viewmodels.game.objects;
 
 public abstract class GameObject {
 

@@ -1,17 +1,20 @@
-import files.Preferences;
+import files.PreferenceData;
 import files.PreferencesXMLParser;
 import graphics.ui.GameCanvas;
 import graphics.ui.GameWindow;
-import viewmodels.GameModel;
+import viewmodels.game.GameViewModel;
 
 /**
  * The type Main.
  */
 public class Main {
 
-    private static Preferences preferences;
+    private static PreferenceData preferences;
 
-    private static GameModel gameModel;
+    private static GameViewModel gameModel;
+
+    private static GameCanvas gameCanvas = new GameCanvas();
+    private static GameWindow gameWindow = new GameWindow();
 
     /**
      * The entry point of application.
@@ -20,39 +23,50 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        // Initialize Preferences
-        initPreferenceFiles();
+        create();
 
         // Initialize Game Models
         initViewModels();
+
+        // Initialize Preferences
+        initPreferenceFiles();
 
         // Initialize UI
         initWindow();
 
     }
 
-    /**
-     * Init preference files.
-     */
-    public static void initPreferenceFiles() {
-        preferences = new Preferences();
-        PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "Preferences.xml");
-        preferencesXMLParser.read();
-        preferences.postInit();
+    public static void create() {
+
+        gameModel = new GameViewModel();
+        preferences = new PreferenceData();
+
+        gameCanvas = new GameCanvas();
+        gameWindow = new GameWindow();
     }
 
     /**
      * Init game objects.
      */
     public static void initViewModels() {
-        gameModel = new GameModel();
         gameModel.init(preferences);
     }
 
+    /**
+     * Init preference files.
+     */
+    public static void initPreferenceFiles() {
+        PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "Preferences.xml");
+        preferencesXMLParser.read();
+
+        preferences.post();
+    }
+
+
+
     public static void initWindow() {
-        GameCanvas gameCanvas = new GameCanvas(gameModel);
-        GameWindow gameWindow = new GameWindow(gameCanvas);
-        gameWindow.init(preferences);
+        gameCanvas.init(gameModel);
+        gameWindow.init(preferences, gameCanvas);
     }
 
 
