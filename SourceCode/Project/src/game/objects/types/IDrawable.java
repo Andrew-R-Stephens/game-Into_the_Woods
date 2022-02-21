@@ -2,7 +2,7 @@ package game.objects.types;
 
 import java.awt.*;
 
-public interface Drawable {
+public interface IDrawable {
 
     void draw(Graphics g);
 

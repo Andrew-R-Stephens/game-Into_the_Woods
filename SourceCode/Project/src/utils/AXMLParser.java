@@ -2,10 +2,10 @@ package utils;
 
 import java.io.File;
 
-public abstract class XMLParser {
+public abstract class AXMLParser {
 
     protected File file;
-    public XMLParser(String file) {
+    public AXMLParser(String file) {
 
         try {
             this.file = new File(file);

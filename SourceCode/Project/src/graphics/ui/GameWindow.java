@@ -1,29 +1,21 @@
 package graphics.ui;
 
-import files.PreferenceData;
-import game.objects.entities.Player;
-import viewmodels.game.GameViewModel;
+import data.PreferenceData;
+import viewmodels.game.ControlsViewModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class GameWindow extends JFrame {
 
-    private GameViewModel gameViewModel;
+    private ControlsViewModel controlsViewModel;
 
-    private GameCanvas gameCanvas;
+    //private GameCanvas gameCanvas;
     private boolean isRunning = false;
 
-    public GameWindow() {
-    }
-
-    public void init(PreferenceData preferences, GameCanvas gameCanvas, GameViewModel gameViewModel){
-        this.gameCanvas = gameCanvas;
-        this.gameViewModel = gameViewModel;
+    public void init(PreferenceData preferences, GameCanvas gameCanvas, ControlsViewModel controlsViewModel){
+        //this.gameCanvas = gameCanvas;
+        this.controlsViewModel = controlsViewModel;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -63,71 +55,9 @@ public class GameWindow extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
-        addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                switch(e.getKeyCode()) {
-                    case KeyEvent.VK_ESCAPE -> {
-                        System.out.println("Quitting");
-                        System.exit(1);
-                    }
-                    case KeyEvent.VK_LEFT -> {
-                        gameCanvas.isPressed[0] = true;
-                    }
-                    case KeyEvent.VK_RIGHT -> {
-                        gameCanvas.isPressed[1] = true;
-                    }
-                    case KeyEvent.VK_UP -> {
-                        gameCanvas.isPressed[2] = true;
-                    }
-                    case KeyEvent.VK_DOWN -> {
-                        gameCanvas.isPressed[3] = true;
-                    }
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                switch(e.getKeyCode()) {
-                    case KeyEvent.VK_LEFT -> {
-                        gameCanvas.isPressed[0] = false;
-                    }
-                    case KeyEvent.VK_RIGHT -> {
-                        gameCanvas.isPressed[1] = false;
-                    }
-                    case KeyEvent.VK_UP -> {
-                        gameCanvas.isPressed[2] = false;
-                    }
-                    case KeyEvent.VK_DOWN -> {
-                        gameCanvas.isPressed[3] = false;
-                    }
-                }
-            }
-        });
-
-        addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                gameViewModel.addGameObject(new Player(e.getX(), e.getY(), 10, 10, 0, 0, 9.8));
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) { }
-
-            @Override
-            public void mouseEntered(MouseEvent e) { }
-
-            @Override
-            public void mouseExited(MouseEvent e) {  }
-        });
+        addKeyListener(this.controlsViewModel.getKeyController());
+        addMouseListener(this.controlsViewModel.getMouseController());
 
 
         Thread updateThread = new Thread(() -> {

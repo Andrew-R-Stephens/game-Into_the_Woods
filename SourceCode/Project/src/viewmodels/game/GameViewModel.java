@@ -1,6 +1,6 @@
 package viewmodels.game;
 
-import files.PreferenceData;
+import data.PreferenceData;
 import game.objects.GameObject;
 
 import java.util.ArrayList;
@@ -9,11 +9,12 @@ public class GameViewModel {
 
     private PreferenceData preferences;
 
+    private ControlsViewModel controlsViewModel;
+
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
 
-
-    public GameViewModel() {
-
+    public void setControlsViewModel(ControlsViewModel controlsViewModel) {
+        this.controlsViewModel = controlsViewModel;
     }
 
     public void addGameObject(GameObject gameObject) {
@@ -31,11 +32,13 @@ public class GameViewModel {
         return gameObjects;
     }
 
-    public void init(PreferenceData preferences) {
+    public void init(PreferenceData preferences, ControlsViewModel controlsViewModel) {
         this.preferences = preferences;
     }
 
     public PreferenceData getPreferences() {
         return preferences;
     }
+
+
 }

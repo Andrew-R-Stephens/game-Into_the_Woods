@@ -4,7 +4,7 @@ import game.objects.GameObject;
 
 import java.awt.*;
 
-public abstract class Entity extends GameObject implements Drawable {
+public abstract class Entity extends GameObject implements IDrawable {
 
     protected double vx, vy;
     protected double MAX_VEL = 1;
@@ -49,5 +49,6 @@ public abstract class Entity extends GameObject implements Drawable {
     public void draw(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillOval((int) (x - (w/2)), (int) (y - (h/2)), (int) w, (int) h);
+        System.out.println("Drawing");
     }
 }

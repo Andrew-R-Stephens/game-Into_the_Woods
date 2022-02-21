@@ -1,6 +1,6 @@
 package utils;
 
-import files.PreferenceData;
+import data.PreferenceData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -12,7 +12,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
-public class PreferencesXMLParser extends XMLParser {
+public class PreferencesXMLParser extends AXMLParser {
 
     private PreferenceData preferences;
 

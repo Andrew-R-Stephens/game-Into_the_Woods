@@ -1,11 +1,11 @@
 package graphics.sprite;
 
-import game.objects.types.Drawable;
+import game.objects.types.IDrawable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Sprite implements Drawable {
+public class Sprite implements IDrawable {
 
     private BufferedImage img;
 

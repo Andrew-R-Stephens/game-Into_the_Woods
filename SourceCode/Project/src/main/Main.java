@@ -1,20 +1,24 @@
-import files.PreferenceData;
+package main;
+
+import data.PreferenceData;
 import graphics.ui.GameCanvas;
 import graphics.ui.GameWindow;
 import utils.PreferencesXMLParser;
+import viewmodels.game.ControlsViewModel;
 import viewmodels.game.GameViewModel;
 
 /**
- * The type Main.
+ * The type main.Main.
  */
 public class Main {
 
     private static PreferenceData preferences;
 
+    private static ControlsViewModel controlsViewModel;
     private static GameViewModel gameViewModel;
 
-    private static GameCanvas gameCanvas = new GameCanvas();
-    private static GameWindow gameWindow = new GameWindow();
+    private static GameCanvas gameCanvas;
+    private static GameWindow gameWindow;
 
     /**
      * The entry point of application.
@@ -23,22 +27,18 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        //
         create();
 
         // Initialize Game Models
-        initViewModels();
-
-        // Initialize Preferences
-        initPreferenceFiles();
-
-        // Initialize UI
-        initWindow();
+        init();
 
     }
 
     public static void create() {
-
+        controlsViewModel = new ControlsViewModel();
         gameViewModel = new GameViewModel();
+
         preferences = new PreferenceData();
 
         gameCanvas = new GameCanvas();
@@ -48,27 +48,16 @@ public class Main {
     /**
      * Init game objects.
      */
-    public static void initViewModels() {
-        gameViewModel.init(preferences);
-    }
+    public static void init() {
+        gameViewModel.init(preferences, controlsViewModel);
+        controlsViewModel.init(preferences, gameViewModel);
 
-    /**
-     * Init preference files.
-     */
-    public static void initPreferenceFiles() {
         PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "Preferences.xml");
         preferencesXMLParser.read();
-
         preferences.post();
-    }
 
-
-
-    public static void initWindow() {
         gameCanvas.init(gameViewModel);
-        gameWindow.init(preferences, gameCanvas, gameViewModel);
+        gameWindow.init(preferences, gameCanvas, controlsViewModel);
     }
-
-
 
 }

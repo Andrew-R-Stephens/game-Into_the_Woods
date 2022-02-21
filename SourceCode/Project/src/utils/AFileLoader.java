@@ -3,7 +3,7 @@ package utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public abstract class FileLoader {
+public abstract class AFileLoader {
 
     protected File file;
 

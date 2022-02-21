@@ -1,14 +1,14 @@
 package graphics.sprite;
 
-import utils.FileLoader;
-import utils.ImageLoader;
-import utils.SpriteSheetParser;
+import utils.AFileLoader;
+import utils.IImageLoader;
+import utils.ISpriteSheetParser;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
-public class SpriteSheet extends FileLoader implements ImageLoader, SpriteSheetParser {
+public class SpriteSheet extends AFileLoader implements IImageLoader, ISpriteSheetParser {
 
     private BufferedImage sheet;
 

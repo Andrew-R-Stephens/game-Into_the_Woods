@@ -3,14 +3,13 @@ package game.objects.entities;
 import data.PreferenceData;
 import game.objects.types.Entity;
 
+public class TestEntity extends Entity {
 
-public class Player extends Entity {
-
-    public Player(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
+    public TestEntity(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
         super(x, y, w, h, vx, vy, MAX_VEL);
     }
 
-    public Player(double x, double y, double w, double h, double vx, double vy) {
+    public TestEntity(double x, double y, double w, double h, double vx, double vy) {
         super(x, y, w, h, vx, vy);
     }
 
@@ -18,7 +17,7 @@ public class Player extends Entity {
     public void update() {
 
         if(gravityAllowed){
-            vy += (gravity/PreferenceData.frameRate);
+            vy += (gravity/ PreferenceData.frameRate);
         }
 
         if(Math.abs(vy) > MAX_VEL) {
@@ -26,6 +25,8 @@ public class Player extends Entity {
         }
 
         y += vy;
+
+        System.out.println("Updating");
     }
 
 }
