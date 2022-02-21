@@ -37,6 +37,8 @@ public class GameCanvas extends JPanel {
 
     public void update() {
 
+        // DETERMINE MOVEMENT BASED ON USER INPUT
+
         if(isPressed[0]) {
             vx -= .1;
         }
