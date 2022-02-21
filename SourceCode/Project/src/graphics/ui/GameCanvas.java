@@ -1,5 +1,8 @@
 package graphics.ui;
 
+import game.objects.GameObject;
+import game.objects.entities.Player;
+import game.objects.types.Entity;
 import viewmodels.game.GameViewModel;
 
 import javax.swing.*;
@@ -9,15 +12,14 @@ public class GameCanvas extends JPanel {
 
     private GameViewModel gameModel;
 
-    double tick = 0, MAX_TICK = Math.PI*2;
-    double w = 20, h = 20;
-    double vx, vy, MAX_VEL = 1;
-    double x, y, ox = 0, oy = 0;
+    private double tick = 0, MAX_TICK = Math.PI*2;
+    private double w = 20, h = 20;
+    private double vx, vy, MAX_VEL = 1;
+    private double x, y, ox = 0, oy = 0;
 
-    int red = 100, green = 100, blue = 100;
+    private int red = 100, green = 100, blue = 100;
 
-    double sW;
-    double sH;
+    private double sW, sH;
 
     boolean[] isPressed = new boolean[4];
 
@@ -122,27 +124,48 @@ public class GameCanvas extends JPanel {
             }
         }
 
+        for(GameObject object: gameModel.getGameObjects()) {
+            if (object instanceof Entity) {
+                Entity e = (Entity) object;
+                e.update();
+            }
+        }
+
     }
 
     public void render() {
-        revalidate();
+        //revalidate();
         repaint();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
+
+        super.paintComponent(g);
+
         Graphics2D g2d = (Graphics2D)g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Fill background
         g2d.setColor(new Color(255, 255, 255));
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
+        // Draw test objects
+        for(GameObject object: gameModel.getGameObjects()) {
+            if (object instanceof Entity) {
+                Entity e = ((Entity) object);
+                e.draw(g2d);
+            }
+        }
         // Draw object
         g2d.setColor(new Color(red, green, blue));
         g2d.fillOval((int)x, (int)y, (int)w, (int)h);
 
-        g.setColor(Color.BLACK);
+        //Draw origin
+        g.setColor(Color.WHITE);
         g2d.fillOval((int)ox, (int)oy, 5, 5);
+
+        //Draw text
         g.setColor(Color.BLUE);
         g.setFont(new Font("Consolas", Font.PLAIN, (int)(sH * 12)));
         g.drawString("Origin", (int)(ox) + 10, (int)(oy) + 6);

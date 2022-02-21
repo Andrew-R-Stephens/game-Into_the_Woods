@@ -1,6 +1,6 @@
-package game;
+package game.objects.entities;
 
-import viewmodels.game.objects.entities.Entity;
+import game.objects.types.Entity;
 
 public class Box extends Entity {
 

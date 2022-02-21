@@ -1,7 +1,7 @@
 import files.PreferenceData;
-import files.PreferencesXMLParser;
 import graphics.ui.GameCanvas;
 import graphics.ui.GameWindow;
+import utils.PreferencesXMLParser;
 import viewmodels.game.GameViewModel;
 
 /**
@@ -11,7 +11,7 @@ public class Main {
 
     private static PreferenceData preferences;
 
-    private static GameViewModel gameModel;
+    private static GameViewModel gameViewModel;
 
     private static GameCanvas gameCanvas = new GameCanvas();
     private static GameWindow gameWindow = new GameWindow();
@@ -38,7 +38,7 @@ public class Main {
 
     public static void create() {
 
-        gameModel = new GameViewModel();
+        gameViewModel = new GameViewModel();
         preferences = new PreferenceData();
 
         gameCanvas = new GameCanvas();
@@ -49,7 +49,7 @@ public class Main {
      * Init game objects.
      */
     public static void initViewModels() {
-        gameModel.init(preferences);
+        gameViewModel.init(preferences);
     }
 
     /**
@@ -65,8 +65,8 @@ public class Main {
 
 
     public static void initWindow() {
-        gameCanvas.init(gameModel);
-        gameWindow.init(preferences, gameCanvas);
+        gameCanvas.init(gameViewModel);
+        gameWindow.init(preferences, gameCanvas, gameViewModel);
     }
 
 

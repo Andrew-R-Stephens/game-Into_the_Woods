@@ -3,9 +3,9 @@
     <Window>
         <resolutionWidthDefault>1920</resolutionWidthDefault>
         <resolutionHeightDefault>1080</resolutionHeightDefault>
-        <resolutionWidth>3840</resolutionWidth>
-        <resolutionHeight>2160</resolutionHeight>
-        <windowType>2</windowType> <!-- 0 = Windowed, 1 = Windowed Borderless, 2 = Fullscreen -->
+        <resolutionWidth>1920</resolutionWidth>
+        <resolutionHeight>1080</resolutionHeight>
+        <windowType>0</windowType> <!-- 0 = Windowed, 1 = Windowed Borderless, 2 = Fullscreen -->
     </Window>
 
     <Performance>

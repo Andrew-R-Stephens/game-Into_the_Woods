@@ -1,7 +1,8 @@
 package graphics.sprite;
 
-import Utils.FileLoader;
-import Utils.ImageLoader;
+import utils.FileLoader;
+import utils.ImageLoader;
+import utils.SpriteSheetParser;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -10,6 +11,8 @@ import java.io.FileNotFoundException;
 public class SpriteSheet extends FileLoader implements ImageLoader, SpriteSheetParser {
 
     private BufferedImage sheet;
+
+    private int w = 0, h = 0;
 
     public SpriteSheet(String filename) throws FileNotFoundException {
         setFile(filename);
@@ -27,7 +30,9 @@ public class SpriteSheet extends FileLoader implements ImageLoader, SpriteSheetP
     }
 
     @Override
-    public BufferedImage grabImage(int x, int y, int w, int h) {
-        return null;
+    public BufferedImage grabImage(int currentFrame) {
+        BufferedImage img = sheet.getSubimage(currentFrame*w, currentFrame*h, w, h);
+
+        return img;
     }
 }

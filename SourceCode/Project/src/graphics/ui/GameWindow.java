@@ -1,13 +1,19 @@
 package graphics.ui;
 
 import files.PreferenceData;
+import game.objects.entities.Player;
+import viewmodels.game.GameViewModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class GameWindow extends JFrame {
+
+    private GameViewModel gameViewModel;
 
     private GameCanvas gameCanvas;
     private boolean isRunning = false;
@@ -15,8 +21,9 @@ public class GameWindow extends JFrame {
     public GameWindow() {
     }
 
-    public void init(PreferenceData preferences, GameCanvas gameCanvas){
+    public void init(PreferenceData preferences, GameCanvas gameCanvas, GameViewModel gameViewModel){
         this.gameCanvas = gameCanvas;
+        this.gameViewModel = gameViewModel;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -69,19 +76,15 @@ public class GameWindow extends JFrame {
                         System.exit(1);
                     }
                     case KeyEvent.VK_LEFT -> {
-                        System.out.println("Left Button");
                         gameCanvas.isPressed[0] = true;
                     }
                     case KeyEvent.VK_RIGHT -> {
-                        System.out.println("Right Button");
                         gameCanvas.isPressed[1] = true;
                     }
                     case KeyEvent.VK_UP -> {
-                        System.out.println("Up Button");
                         gameCanvas.isPressed[2] = true;
                     }
                     case KeyEvent.VK_DOWN -> {
-                        System.out.println("Down Button");
                         gameCanvas.isPressed[3] = true;
                     }
                 }
@@ -91,23 +94,39 @@ public class GameWindow extends JFrame {
             public void keyReleased(KeyEvent e) {
                 switch(e.getKeyCode()) {
                     case KeyEvent.VK_LEFT -> {
-                        System.out.println("Left Button");
                         gameCanvas.isPressed[0] = false;
                     }
                     case KeyEvent.VK_RIGHT -> {
-                        System.out.println("Right Button");
                         gameCanvas.isPressed[1] = false;
                     }
                     case KeyEvent.VK_UP -> {
-                        System.out.println("Up Button");
                         gameCanvas.isPressed[2] = false;
                     }
                     case KeyEvent.VK_DOWN -> {
-                        System.out.println("Down Button");
                         gameCanvas.isPressed[3] = false;
                     }
                 }
             }
+        });
+
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                gameViewModel.addGameObject(new Player(e.getX(), e.getY(), 10, 10, 0, 0, 9.8));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+
+            @Override
+            public void mouseEntered(MouseEvent e) { }
+
+            @Override
+            public void mouseExited(MouseEvent e) {  }
         });
 
 

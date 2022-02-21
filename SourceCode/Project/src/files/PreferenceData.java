@@ -13,7 +13,7 @@ public class PreferenceData {
     private int window_height = 0;
     private WindowType window_type;
 
-    private int frameRate = 60;
+    public static int frameRate = 60;
 
     private double scaledW = 1;
     private double scaledH = 1;

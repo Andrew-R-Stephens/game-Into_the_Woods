@@ -1,11 +1,16 @@
-package viewmodels.game.objects.entities;
+package game.objects.types;
 
-import viewmodels.game.objects.GameObject;
+import game.objects.GameObject;
 
-public abstract class Entity extends GameObject {
+import java.awt.*;
+
+public abstract class Entity extends GameObject implements Drawable {
 
     protected double vx, vy;
-    protected double MAX_VEL;
+    protected double MAX_VEL = 1;
+
+    protected boolean gravityAllowed = true;
+    protected double gravity = 9.8;
 
     public Entity(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
         super(x, y, w, h);
@@ -39,4 +44,10 @@ public abstract class Entity extends GameObject {
     }
 
     public abstract void update();
+
+    @Override
+    public void draw(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillOval((int) (x - (w/2)), (int) (y - (h/2)), (int) w, (int) h);
+    }
 }
