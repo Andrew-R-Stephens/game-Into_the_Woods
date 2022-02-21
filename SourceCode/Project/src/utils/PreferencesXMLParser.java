@@ -106,6 +106,15 @@ public class PreferencesXMLParser extends AXMLParser {
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
 
+                int frameRateDefault = Integer.parseInt(eElement
+                        .getElementsByTagName("frameRate")
+                        .item(0)
+                        .getTextContent());
+                preferences.setFrameRate(frameRateDefault);
+
+                System.out.println("Frame Rate Default= "
+                        + frameRateDefault);
+
                 int frameRate = Integer.parseInt(eElement
                         .getElementsByTagName("frameRate")
                         .item(0)

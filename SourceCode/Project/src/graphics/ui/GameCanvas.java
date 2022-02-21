@@ -1,7 +1,5 @@
 package graphics.ui;
 
-import game.objects.GameObject;
-import game.objects.types.Entity;
 import viewmodels.game.GameViewModel;
 
 import javax.swing.*;
@@ -11,7 +9,7 @@ public class GameCanvas extends JPanel {
 
     private GameViewModel gameModel;
 
-    private double sW, sH;
+    private boolean isUpdated = true;
 
     public GameCanvas() {
         // TODO: Nothing yet
@@ -19,25 +17,24 @@ public class GameCanvas extends JPanel {
 
     public void init(GameViewModel gameModel) {
         this.gameModel = gameModel;
+    }
 
-        sW = gameModel.getPreferences().getScaledW();
-        sH = gameModel.getPreferences().getScaledH();
+    public void update(double updateRate) {
+        System.out.println("Updating");
+        gameModel.updateGameObjects(updateRate);
+        isUpdated = true;
     }
 
     public void update() {
-
-        for(GameObject object: gameModel.getGameObjects()) {
-            if (object instanceof Entity) {
-                Entity e = (Entity) object;
-                e.update();
-            }
-        }
-
+        System.out.println("Updating");
+        gameModel.updateGameObjects();
+        isUpdated = true;
     }
 
     public void render() {
-        //revalidate();
+        System.out.println("Rendering");
         repaint();
+        isUpdated = false;
     }
 
     @Override
@@ -53,12 +50,11 @@ public class GameCanvas extends JPanel {
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
         // Draw test objects
-        for(GameObject object: gameModel.getGameObjects()) {
-            if (object instanceof Entity) {
-                Entity e = ((Entity) object);
-                e.draw(g2d);
-            }
-        }
+        gameModel.renderGameObjects(g);
 
+    }
+
+    public boolean isRenderReady() {
+        return isUpdated;
     }
 }

@@ -27,10 +27,10 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        //
+        // Create Objects
         create();
 
-        // Initialize Game Models
+        // Initialize Objects
         init();
 
     }
@@ -49,7 +49,7 @@ public class Main {
      * Init game objects.
      */
     public static void init() {
-        gameViewModel.init(preferences, controlsViewModel);
+        gameViewModel.init(preferences);
         controlsViewModel.init(preferences, gameViewModel);
 
         PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "Preferences.xml");

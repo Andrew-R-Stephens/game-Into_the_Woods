@@ -13,6 +13,7 @@ public class PreferenceData {
     private int window_height = 0;
     private WindowType window_type;
 
+    public static int FRAMERATE_DEFAULT = 60;
     public static int frameRate = 60;
 
     private double scaledW = 1;
@@ -69,6 +70,10 @@ public class PreferenceData {
 
     public int getFrameRate() {
         return frameRate;
+    }
+
+    public void setFramerateDefault(int framerateDefault) {
+        FRAMERATE_DEFAULT = framerateDefault;
     }
 
     public enum WindowType {

@@ -2,37 +2,20 @@ package viewmodels.game;
 
 import data.PreferenceData;
 import game.objects.GameObject;
+import game.objects.types.Entity;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class GameViewModel {
 
     private PreferenceData preferences;
 
-    private ControlsViewModel controlsViewModel;
+    private int frameInterpolationRate = PreferenceData.frameRate/PreferenceData.FRAMERATE_DEFAULT;
 
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
 
-    public void setControlsViewModel(ControlsViewModel controlsViewModel) {
-        this.controlsViewModel = controlsViewModel;
-    }
-
-    public void addGameObject(GameObject gameObject) {
-        gameObjects.add(gameObject);
-    }
-
-    public GameObject getGameObject(int i) {
-        if(gameObjects == null || gameObjects.size() == 0 || gameObjects.size() < i)
-            return null;
-
-        return gameObjects.get(i);
-    }
-
-    public ArrayList<GameObject> getGameObjects() {
-        return gameObjects;
-    }
-
-    public void init(PreferenceData preferences, ControlsViewModel controlsViewModel) {
+    public void init(PreferenceData preferences) {
         this.preferences = preferences;
     }
 
@@ -40,5 +23,39 @@ public class GameViewModel {
         return preferences;
     }
 
+    public void addGameObject(GameObject gameObject) {
+        gameObjects.add(gameObject);
+    }
+
+    public ArrayList<GameObject> getGameObjects() {
+        return gameObjects;
+    }
+
+    public void updateGameObjects(double updateRate) {
+        for(GameObject gameObject: gameObjects) {
+            if(gameObject instanceof Entity) {
+                Entity e = (Entity)gameObject;
+                e.update(updateRate);
+            }
+        }
+    }
+
+    public void updateGameObjects() {
+        for(GameObject gameObject: gameObjects) {
+            if(gameObject instanceof Entity) {
+                Entity e = (Entity)gameObject;
+                e.update();
+            }
+        }
+    }
+
+    public void renderGameObjects(Graphics g) {
+        for(GameObject gameObject: gameObjects) {
+            if(gameObject instanceof Entity) {
+                Entity e = (Entity)gameObject;
+                e.draw(g);
+            }
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package game.objects.entities;
 
+import data.PreferenceData;
 import game.objects.types.Entity;
 
 public class Box extends Entity {
@@ -11,6 +12,20 @@ public class Box extends Entity {
     @Override
     public void update() {
 
+    }
+
+    @Override
+    public void update(double delta) {
+
+        if(gravityAllowed){
+            vy += (gravity/ PreferenceData.frameRate);
+        }
+
+        if(Math.abs(vy) > MAX_VEL) {
+            vy = MAX_VEL;
+        }
+
+        y += vy;
     }
 
 }

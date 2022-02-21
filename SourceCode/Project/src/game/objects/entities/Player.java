@@ -14,6 +14,21 @@ public class Player extends Entity {
         super(x, y, w, h, vx, vy);
     }
 
+
+    @Override
+    public void update(double delta) {
+
+        if(gravityAllowed){
+            vy += (gravity * delta);
+        }
+
+        if(Math.abs(vy) > MAX_VEL) {
+            vy = MAX_VEL;
+        }
+
+        y += vy;
+    }
+
     @Override
     public void update() {
 

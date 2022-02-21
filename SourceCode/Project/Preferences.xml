@@ -9,6 +9,7 @@
     </Window>
 
     <Performance>
+        <frameRateDefault>60</frameRateDefault>
         <frameRate>60</frameRate>
     </Performance>
 

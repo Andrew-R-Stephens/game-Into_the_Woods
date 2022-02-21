@@ -14,10 +14,29 @@ public class TestEntity extends Entity {
     }
 
     @Override
+    public void update(double delta) {
+
+        if(gravityAllowed){
+            vy += (gravity);
+        }
+
+        vy /= delta;
+
+        if(Math.abs(vy) > MAX_VEL) {
+            vy = MAX_VEL / delta;
+        }
+
+        y += vy;
+
+        System.out.println("Updating");
+
+    }
+
+    @Override
     public void update() {
 
         if(gravityAllowed){
-            vy += (gravity/ PreferenceData.frameRate);
+            vy += (gravity);
         }
 
         if(Math.abs(vy) > MAX_VEL) {

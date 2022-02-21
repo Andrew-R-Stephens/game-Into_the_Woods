@@ -59,64 +59,44 @@ public class GameWindow extends JFrame {
         addKeyListener(this.controlsViewModel.getKeyController());
         addMouseListener(this.controlsViewModel.getMouseController());
 
+        Thread combinedThread = new Thread(() -> {
 
-        Thread updateThread = new Thread(() -> {
+            long lastTime = System.nanoTime();
+            final double amountOfTicks = preferences.getFrameRate();
+            double ns = 1000000000 / amountOfTicks;
+            double delta = 0;
+            int updates = 0;
+            int lastFPS = preferences.getFrameRate();
+            int frames = 0;
+            long timer = System.currentTimeMillis();
 
             isRunning = true;
-
             while(isRunning) {
+                long now = System.nanoTime();
+                delta += (now - lastTime) / ns;
+                lastTime = now;
 
-                gameCanvas.update();
+                if(delta >= 1) {
+                    updates++;
+                    gameCanvas.update((double)lastFPS/ (double) PreferenceData.FRAMERATE_DEFAULT);
+                    delta--;
+                }
+                if(gameCanvas.isRenderReady()) {
+                    gameCanvas.render();
+                }
+                frames++;
 
-                try {
-                    long now = System.nanoTime();
-                    long updateTime = System.nanoTime() - now;
-
-                    long OPTIMAL_TIME = 1000000000 / preferences.getFrameRate();
-                    long wait = (long) ((OPTIMAL_TIME - updateTime) / 1000000.0);
-
-                    if (wait < 0) {
-                        wait = 1;
-                    }
-
-                    Thread.sleep(wait);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(System.currentTimeMillis() - timer > 1000) {
+                    timer += 1000; // add a thousand to timer
+                    lastFPS = updates;
+                    System.out.println("Ticks: " + updates + " / " + PreferenceData.FRAMERATE_DEFAULT + " = " + (lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT) + ", Cycles: " + frames + "\n");
+                    updates = 0;
+                    frames = 0;
                 }
 
             }
         });
-        updateThread.start();
-
-        Thread renderThread = new Thread(() -> {
-
-            isRunning = true;
-
-            while(isRunning) {
-
-                gameCanvas.render();
-
-                try {
-                    long now = System.nanoTime();
-                    long updateTime = System.nanoTime() - now;
-
-                    long OPTIMAL_TIME = 1000000000 / preferences.getFrameRate();
-                    long wait = (long) ((OPTIMAL_TIME - updateTime) / 1000000.0);
-
-                    if (wait < 0) {
-                        wait = 1;
-                    }
-
-                    Thread.sleep(wait);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-        renderThread.start();
+        combinedThread.start();
 
     }
 

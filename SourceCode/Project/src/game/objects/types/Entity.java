@@ -43,12 +43,15 @@ public abstract class Entity extends GameObject implements IDrawable {
         return vy;
     }
 
+
+    public abstract void update(double delta);
+
+
     public abstract void update();
 
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillOval((int) (x - (w/2)), (int) (y - (h/2)), (int) w, (int) h);
-        System.out.println("Drawing");
     }
 }

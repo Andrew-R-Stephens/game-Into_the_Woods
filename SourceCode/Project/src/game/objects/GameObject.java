@@ -20,6 +20,8 @@ public abstract class GameObject {
         return y;
     }
 
+    protected abstract void update(double delta);
+
     protected abstract void update();
 
 }
