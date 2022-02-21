@@ -72,7 +72,7 @@ public class PreferenceData {
         return frameRate;
     }
 
-    public void setFramerateDefault(int framerateDefault) {
+    public void setFrameRateDefault(int framerateDefault) {
         FRAMERATE_DEFAULT = framerateDefault;
     }
 

@@ -89,11 +89,10 @@ public class GameWindow extends JFrame {
                 if(System.currentTimeMillis() - timer > 1000) {
                     timer += 1000; // add a thousand to timer
                     lastFPS = updates;
-                    System.out.println("Ticks: " + updates + " / " + PreferenceData.FRAMERATE_DEFAULT + " = " + (lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT) + ", Cycles: " + frames + "\n");
+                    //System.out.println("Ticks: " + updates + " / " + PreferenceData.FRAMERATE_DEFAULT + " = " + (lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT) + ", Cycles: " + frames + "\n");
                     updates = 0;
                     frames = 0;
                 }
-
             }
         });
         combinedThread.start();

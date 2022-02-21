@@ -1,6 +1,5 @@
 package game.objects.entities;
 
-import data.PreferenceData;
 import game.objects.types.Entity;
 
 public class TestEntity extends Entity {
@@ -17,23 +16,46 @@ public class TestEntity extends Entity {
     public void update(double delta) {
 
         if(gravityAllowed){
-            vy += (gravity);
+            vy += (gravity / delta);
+            //vy /= delta;
         }
 
-        vy /= delta;
+        if(vy < 0) {
+            vy += .2 / delta;
 
-        if(Math.abs(vy) > MAX_VEL) {
-            vy = MAX_VEL / delta;
+            if(vy < -MAX_VEL) {
+                vy = -MAX_VEL;
+            }
+        } else if (vy > 0) {
+            vy -= .2 / delta;
+
+            if(vy > MAX_VEL) {
+                vy = MAX_VEL;
+            }
         }
+        y += vy / delta;
 
-        y += vy;
 
-        System.out.println("Updating");
+        if(vx < 0) {
+            vx += .2 / delta;
+
+            if(vx < -MAX_VEL) {
+                vx = -MAX_VEL;
+            }
+        } else if (vx > 0) {
+            vx -= .2 / delta;
+
+            if(vx > MAX_VEL) {
+                vx = MAX_VEL;
+            }
+        }
+        x += vx / delta;
 
     }
 
     @Override
     public void update() {
+/*
 
         if(gravityAllowed){
             vy += (gravity);
@@ -44,8 +66,8 @@ public class TestEntity extends Entity {
         }
 
         y += vy;
+*/
 
-        System.out.println("Updating");
     }
 
 }

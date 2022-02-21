@@ -10,7 +10,7 @@ public abstract class Entity extends GameObject implements IDrawable {
     protected double MAX_VEL = 1;
 
     protected boolean gravityAllowed = true;
-    protected double gravity = 9.8;
+    protected double gravity = .98;
 
     public Entity(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
         super(x, y, w, h);

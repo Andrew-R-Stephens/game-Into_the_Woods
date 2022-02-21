@@ -20,19 +20,19 @@ public class GameCanvas extends JPanel {
     }
 
     public void update(double updateRate) {
-        System.out.println("Updating");
+        //System.out.println("Updating");
         gameModel.updateGameObjects(updateRate);
         isUpdated = true;
     }
 
     public void update() {
-        System.out.println("Updating");
+        //System.out.println("Updating");
         gameModel.updateGameObjects();
         isUpdated = true;
     }
 
     public void render() {
-        System.out.println("Rendering");
+        //System.out.println("Rendering");
         repaint();
         isUpdated = false;
     }
