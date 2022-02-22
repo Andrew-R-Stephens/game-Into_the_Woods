@@ -9,10 +9,9 @@ import java.awt.event.KeyEvent;
 public class GameKeyControls extends KeyController {
 
     private ControlsViewModel controlsViewModel;
-    private GameViewModel gameViewModel;
 
-    public GameKeyControls(GameViewModel gameViewModel) {
-        this.gameViewModel = gameViewModel;
+    public GameKeyControls(ControlsViewModel controlsViewModel) {
+        this.controlsViewModel = controlsViewModel;
     }
 
     @Override

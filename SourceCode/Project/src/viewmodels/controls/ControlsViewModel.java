@@ -7,7 +7,7 @@ import utils.MouseController;
 import data.PreferenceData;
 import viewmodels.game.GameViewModel;
 
-public class ControlsViewModel {
+public class ControlsViewModel{
 
     private PreferenceData preferenceData;
     private GameViewModel gameViewModel;
@@ -17,10 +17,11 @@ public class ControlsViewModel {
 
     public void init(PreferenceData preferences, GameViewModel gameViewModel) {
         this.preferenceData = preferences;
+
         this.gameViewModel = gameViewModel;
 
-        mouseController = new GameMouseControls(gameViewModel);
-        keyController = new GameKeyControls(gameViewModel);
+        mouseController = new GameMouseControls(this);
+        keyController = new GameKeyControls(this);
     }
 
     public enum Directionals {LEFT, RIGHT, UP, DOWN};

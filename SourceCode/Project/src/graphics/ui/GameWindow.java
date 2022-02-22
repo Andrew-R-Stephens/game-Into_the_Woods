@@ -5,6 +5,7 @@ import viewmodels.controls.ControlsViewModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class GameWindow extends JFrame {
 
@@ -58,17 +59,50 @@ public class GameWindow extends JFrame {
 
         addKeyListener(this.controlsViewModel.getKeyController());
         addMouseListener(this.controlsViewModel.getMouseController());
+        addMouseMotionListener(this.controlsViewModel.getMouseController());
 
         Thread combinedThread = new Thread(() -> {
 
             long lastTime = System.nanoTime();
-            final double amountOfTicks = preferences.getFrameRate();
-            double ns = 1000000000 / amountOfTicks;
+            final short targetFPS = preferences.getFrameRate();
+            double ns = 1000000000 / (float)targetFPS;
             double delta = 0;
             int updates = 0;
-            int lastFPS = preferences.getFrameRate();
-            int frames = 0;
+            int lastFPS = targetFPS;
+            //int frames = 0;
             long timer = System.currentTimeMillis();
+
+            //Output data
+            JFrame fpsframe = new JFrame();
+            fpsframe.setAlwaysOnTop(true);
+            fpsframe.setPreferredSize(new Dimension(200, 200));
+            LinkedList<Integer> points = new LinkedList<>();
+            JPanel fpspanel = new JPanel(){
+                int secondX = 0;
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    int x = 0;
+                    int prevPoint = 0;
+                    g.fillRect(0,0,getWidth(), getHeight());
+                    for (Integer point : points) {
+                        g.setColor(Color.GREEN);
+                        g.drawLine(x, getHeight() - point, x-1,getHeight()-prevPoint);
+                        prevPoint = point;
+                        x++;
+                    }
+                    g.setColor(Color.RED);
+                    if(!points.isEmpty()) {
+                        g.drawString(points.getLast() + "", 0, 20);
+                    } else {
+                        g.drawString(String.valueOf(targetFPS), 0, 20);
+                    }
+                    secondX ++;
+                }
+            };
+            fpsframe.add(fpspanel);
+            fpsframe.pack();
+            fpsframe.setVisible(true);
 
             isRunning = true;
             while(isRunning) {
@@ -84,15 +118,22 @@ public class GameWindow extends JFrame {
                 if(gameCanvas.isRenderReady()) {
                     gameCanvas.render();
                 }
-                frames++;
+                //frames++;
 
                 if(System.currentTimeMillis() - timer > 1000) {
                     timer += 1000; // add a thousand to timer
                     lastFPS = updates;
                     //System.out.println("Ticks: " + updates + " / " + PreferenceData.FRAMERATE_DEFAULT + " = " + (lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT) + ", Cycles: " + frames + "\n");
                     updates = 0;
-                    frames = 0;
+                    //frames = 0;
+
+                    points.addLast(lastFPS);
+                    if(points.size() > fpspanel.getWidth()) {
+                        points.removeFirst();
+                    }
+                    fpsframe.repaint();
                 }
+
             }
         });
         combinedThread.start();

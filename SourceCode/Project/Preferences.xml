@@ -1,16 +1,20 @@
 <Preferences>
 
     <Window>
+
         <resolutionWidthDefault>1920</resolutionWidthDefault>
         <resolutionHeightDefault>1080</resolutionHeightDefault>
         <resolutionWidth>1920</resolutionWidth>
         <resolutionHeight>1080</resolutionHeight>
         <windowType>0</windowType> <!-- 0 = Windowed, 1 = Windowed Borderless, 2 = Fullscreen -->
+
     </Window>
 
     <Performance>
+
         <frameRateDefault>60</frameRateDefault>
-        <frameRate>60</frameRate>
+        <frameRate>144</frameRate>
+
     </Performance>
 
 </Preferences>

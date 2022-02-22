@@ -13,8 +13,8 @@ public class PreferenceData {
     private int window_height = 0;
     private WindowType window_type;
 
-    public static int FRAMERATE_DEFAULT = 60;
-    public static int frameRate = 60;
+    public static short FRAMERATE_DEFAULT = 60;
+    public static short frameRate = 60;
 
     private double scaledW = 1;
     private double scaledH = 1;
@@ -64,15 +64,15 @@ public class PreferenceData {
         return window_type;
     }
 
-    public void setFrameRate(int frameRate) {
+    public void setFrameRate(short frameRate) {
         this.frameRate = frameRate;
     }
 
-    public int getFrameRate() {
+    public short getFrameRate() {
         return frameRate;
     }
 
-    public void setFrameRateDefault(int framerateDefault) {
+    public void setFrameRateDefault(short framerateDefault) {
         FRAMERATE_DEFAULT = framerateDefault;
     }
 

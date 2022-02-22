@@ -1,18 +1,20 @@
 package controls;
 
-import objects.actors.TestActor;
 import utils.MouseController;
-import viewmodels.game.GameViewModel;
+import viewmodels.controls.ControlsViewModel;
 
 import java.awt.event.MouseEvent;
-import java.util.Random;
 
 public class GameMouseControls extends MouseController {
 
-    private final GameViewModel gameViewModel;
+    private final ControlsViewModel controlsViewModel;
 
-    public GameMouseControls(GameViewModel gameViewModel) {
-        this.gameViewModel = gameViewModel;
+    private boolean isLeftPressed = false;
+    private boolean isRightPressed = false;
+    private final int[] mPos = new int[]{-100, -100};
+
+    public GameMouseControls(ControlsViewModel controlsViewModel) {
+        this.controlsViewModel = controlsViewModel;
     }
 
     @Override
@@ -21,25 +23,71 @@ public class GameMouseControls extends MouseController {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        gameViewModel.addGameObject(
-                new TestActor(
-                        e.getX(), e.getY(),
-                        10,
-                        10,
-                        new Random().nextInt(-10, 10),
-                        new Random().nextInt(-10, 10),
-                        20)
-        );
-        System.out.println("Clicked!");
+
+        switch (e.getButton()){
+            case MouseEvent.BUTTON1 -> {
+                isLeftPressed = true;
+                mPos[0] = e.getX();
+                mPos[1] = e.getY();
+            }
+            case MouseEvent.BUTTON2 -> {
+                isRightPressed = true;
+                mPos[0] = e.getX();
+                mPos[1] = e.getY();
+            }
+        }
+
+        System.out.println("Pressed!");
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) { }
+    public void mouseReleased(MouseEvent e) {
+
+        switch (e.getButton()){
+            case MouseEvent.BUTTON1 -> {
+                isLeftPressed = false;
+                mPos[0] = -100;
+                mPos[1] = -100;
+            }
+            case MouseEvent.BUTTON2 -> {
+                isRightPressed = false;
+                mPos[0] = -100;
+                mPos[1] = -100;
+            }
+        }
+
+        System.out.println("Released!");
+
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) { }
 
     @Override
     public void mouseExited(MouseEvent e) {  }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        mPos[0] = e.getX();
+        mPos[1] = e.getY();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        mPos[0] = e.getX();
+        mPos[1] = e.getY();
+    }
+
+    public boolean isLeftPressed() {
+        return isLeftPressed;
+    }
+
+    public boolean isRightPressed() {
+        return isRightPressed;
+    }
+
+    public int[] getPos() {
+        return mPos;
+    }
 
 }

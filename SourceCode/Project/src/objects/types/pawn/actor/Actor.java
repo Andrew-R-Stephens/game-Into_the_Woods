@@ -7,48 +7,9 @@ import java.awt.*;
 
 public abstract class Actor extends APawn implements IDrawable {
 
-    protected double vx, vy;
-    protected double MAX_VEL = 1;
-
-    protected boolean gravityAllowed = true;
-    protected double gravity = .98;
-
-    public Actor(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
-        super(x, y, w, h);
-
-        this.vx = vx;
-        this.vy = vy;
-        this.MAX_VEL = MAX_VEL;
+    protected Actor(float x, float y, float w, float h, float vx, float vy, float MIN_VELX, float MIN_VELY, float MAX_VELX, float MAX_VELY, boolean hasGravity, float mass) {
+        super(x, y, w, h, vx, vy, MIN_VELX, MIN_VELY, MAX_VELX, MAX_VELY, hasGravity, mass);
     }
-
-    public Actor(double x, double y, double w, double h, double vx, double vy) {
-        super(x, y, w, h);
-
-        this.vx = vx;
-        this.vy = vy;
-    }
-
-    protected void setVX(double vx) {
-        this.vx = vx;
-    }
-
-    protected void setVY(double vy) {
-        this.vy = vy;
-    }
-
-    protected double getVX() {
-        return vx;
-    }
-
-    protected double getVY() {
-        return vy;
-    }
-
-
-    public abstract void update(double delta);
-
-
-    public abstract void update();
 
     @Override
     public void draw(Graphics g) {

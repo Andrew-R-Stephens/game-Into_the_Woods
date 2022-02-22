@@ -4,70 +4,44 @@ import objects.types.pawn.actor.Actor;
 
 public class TestActor extends Actor {
 
-    public TestActor(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
-        super(x, y, w, h, vx, vy, MAX_VEL);
-    }
-
-    public TestActor(double x, double y, double w, double h, double vx, double vy) {
-        super(x, y, w, h, vx, vy);
+    public TestActor(float x, float y, float w, float h, float vx, float vy, float MIN_VELX, float MIN_VELY, float MAX_VELX, float MAX_VELY, boolean hasGravity, float mass) {
+        super(x, y, w, h, vx, vy, MIN_VELX, MIN_VELY, MAX_VELX, MAX_VELY, hasGravity, mass);
     }
 
     @Override
     public void update(double delta) {
 
-        if(gravityAllowed){
-            vy += (gravity / delta);
+        if(hasGravity){
+            vY += (GRAVITY / delta);
             //vy /= delta;
         }
 
-        if(vy < 0) {
-            vy += .2 / delta;
+        if(vY < 0) {
+            vY += .2 / delta;
 
-            if(vy < -MAX_VEL) {
-                vy = -MAX_VEL;
+            if(vY < MIN_VELY) {
+                vY = MIN_VELY;
             }
-        } else if (vy > 0) {
-            vy -= .2 / delta;
+        } else if (vY > 0) {
+            vY -= .2 / delta;
 
-            if(vy > MAX_VEL) {
-                vy = MAX_VEL;
-            }
-        }
-        y += vy / delta;
-
-
-        if(vx < 0) {
-            vx += .2 / delta;
-
-            if(vx < -MAX_VEL) {
-                vx = -MAX_VEL;
-            }
-        } else if (vx > 0) {
-            vx -= .2 / delta;
-
-            if(vx > MAX_VEL) {
-                vx = MAX_VEL;
+            if(vY > MAX_VELY) {
+                vY = MAX_VELY;
             }
         }
-        x += vx / delta;
+        y += vY / delta;
 
+
+        if(vX < 0) {
+            vX += .2 / delta;
+        } else if (vX > 0) {
+            vX -= .2 / delta;
+        }
+        x += vX / delta;
+
+        y += vY;
+        x += vX;
     }
 
-    @Override
-    public void update() {
-/*
-
-        if(gravityAllowed){
-            vy += (gravity);
-        }
-
-        if(Math.abs(vy) > MAX_VEL) {
-            vy = MAX_VEL;
-        }
-
-        y += vy;
-*/
-
-    }
 
 }

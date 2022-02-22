@@ -49,7 +49,7 @@ public class Main {
      * Init game objects.
      */
     public static void init() {
-        gameViewModel.init(preferences);
+        gameViewModel.init(preferences, controlsViewModel);
         controlsViewModel.init(preferences, gameViewModel);
 
         PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "Preferences.xml");

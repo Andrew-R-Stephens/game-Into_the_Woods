@@ -1,11 +1,20 @@
 package objects.types.pawn;
 
-public abstract class APawn {
+import utils.math.APhysics;
+
+public abstract class APawn extends APhysics {
 
     protected double x, y;
     protected double w, h;
 
-    public APawn(double x, double y, double w, double h) {
+    protected APawn(float x, float y,
+                    float w, float h,
+                    float vx, float vy,
+                    float MIN_VELX, float MIN_VELY, float MAX_VELX, float MAX_VELY,
+                    boolean hasGravity,
+                    float mass) {
+        super(vx, vy, MIN_VELX, MIN_VELY, MAX_VELX, MAX_VELY, hasGravity, mass);
+
         this.x = x;
         this.y = y;
         this.w = w;
@@ -20,8 +29,11 @@ public abstract class APawn {
         return y;
     }
 
-    protected abstract void update(double delta);
+    protected void update(double delta) {
+        super.update(delta);
 
-    protected abstract void update();
+        x += vX;
+        y += vY;
+    }
 
 }
