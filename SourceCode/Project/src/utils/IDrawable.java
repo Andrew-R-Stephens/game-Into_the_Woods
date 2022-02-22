@@ -1,4 +1,4 @@
-package game.objects.types;
+package utils;
 
 import java.awt.*;
 

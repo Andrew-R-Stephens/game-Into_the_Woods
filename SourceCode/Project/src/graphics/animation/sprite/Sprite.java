@@ -1,6 +1,6 @@
-package graphics.sprite;
+package graphics.animation.sprite;
 
-import game.objects.types.IDrawable;
+import utils.IDrawable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

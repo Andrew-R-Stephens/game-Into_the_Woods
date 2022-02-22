@@ -1,4 +1,4 @@
-package graphics.sprite;
+package graphics.animation.sprite;
 
 import utils.AFileLoader;
 import utils.IImageLoader;

@@ -1,7 +1,7 @@
 package controls;
 
-import game.objects.entities.Player;
-import game.objects.entities.TestEntity;
+import objects.actors.TestActor;
+import utils.MouseController;
 import viewmodels.game.GameViewModel;
 
 import java.awt.event.MouseEvent;
@@ -22,7 +22,7 @@ public class GameMouseControls extends MouseController {
     @Override
     public void mousePressed(MouseEvent e) {
         gameViewModel.addGameObject(
-                new TestEntity(
+                new TestActor(
                         e.getX(), e.getY(),
                         10,
                         10,

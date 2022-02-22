@@ -1,6 +1,7 @@
 package controls;
 
-import viewmodels.game.ControlsViewModel;
+import utils.KeyController;
+import viewmodels.controls.ControlsViewModel;
 import viewmodels.game.GameViewModel;
 
 import java.awt.event.KeyEvent;

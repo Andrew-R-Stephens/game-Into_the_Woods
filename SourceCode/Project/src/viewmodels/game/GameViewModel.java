@@ -1,8 +1,8 @@
 package viewmodels.game;
 
 import data.PreferenceData;
-import game.objects.GameObject;
-import game.objects.types.Entity;
+import objects.types.pawn.APawn;
+import objects.types.pawn.actor.Actor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class GameViewModel {
 
     private int frameInterpolationRate = PreferenceData.frameRate/PreferenceData.FRAMERATE_DEFAULT;
 
-    private ArrayList<GameObject> gameObjects = new ArrayList<>();
+    private ArrayList<APawn> gameObjects = new ArrayList<>();
 
     public void init(PreferenceData preferences) {
         this.preferences = preferences;
@@ -23,36 +23,36 @@ public class GameViewModel {
         return preferences;
     }
 
-    public void addGameObject(GameObject gameObject) {
+    public void addGameObject(APawn gameObject) {
         gameObjects.add(gameObject);
     }
 
-    public ArrayList<GameObject> getGameObjects() {
+    public ArrayList<APawn> getGameObjects() {
         return gameObjects;
     }
 
     public void updateGameObjects(double updateRate) {
-        for(GameObject gameObject: gameObjects) {
-            if(gameObject instanceof Entity) {
-                Entity e = (Entity)gameObject;
+        for(APawn gameObject: gameObjects) {
+            if(gameObject instanceof Actor) {
+                Actor e = (Actor)gameObject;
                 e.update(updateRate);
             }
         }
     }
 
     public void updateGameObjects() {
-        for(GameObject gameObject: gameObjects) {
-            if(gameObject instanceof Entity) {
-                Entity e = (Entity)gameObject;
+        for(APawn gameObject: gameObjects) {
+            if(gameObject instanceof Actor) {
+                Actor e = (Actor)gameObject;
                 e.update();
             }
         }
     }
 
     public void renderGameObjects(Graphics g) {
-        for(GameObject gameObject: gameObjects) {
-            if(gameObject instanceof Entity) {
-                Entity e = (Entity)gameObject;
+        for(APawn gameObject: gameObjects) {
+            if(gameObject instanceof Actor) {
+                Actor e = (Actor)gameObject;
                 e.draw(g);
             }
         }

@@ -1,10 +1,11 @@
-package viewmodels.game;
+package viewmodels.controls;
 
 import controls.GameKeyControls;
 import controls.GameMouseControls;
-import controls.KeyController;
-import controls.MouseController;
+import utils.KeyController;
+import utils.MouseController;
 import data.PreferenceData;
+import viewmodels.game.GameViewModel;
 
 public class ControlsViewModel {
 

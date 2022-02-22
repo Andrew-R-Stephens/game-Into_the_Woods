@@ -1,14 +1,14 @@
-package game.objects.entities;
+package objects.actors;
 
-import game.objects.types.Entity;
+import objects.types.pawn.actor.Actor;
 
-public class TestEntity extends Entity {
+public class TestActor extends Actor {
 
-    public TestEntity(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
+    public TestActor(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
         super(x, y, w, h, vx, vy, MAX_VEL);
     }
 
-    public TestEntity(double x, double y, double w, double h, double vx, double vy) {
+    public TestActor(double x, double y, double w, double h, double vx, double vy) {
         super(x, y, w, h, vx, vy);
     }
 

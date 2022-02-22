@@ -1,10 +1,11 @@
-package game.objects.types;
+package objects.types.pawn.actor;
 
-import game.objects.GameObject;
+import utils.IDrawable;
+import objects.types.pawn.APawn;
 
 import java.awt.*;
 
-public abstract class Entity extends GameObject implements IDrawable {
+public abstract class Actor extends APawn implements IDrawable {
 
     protected double vx, vy;
     protected double MAX_VEL = 1;
@@ -12,7 +13,7 @@ public abstract class Entity extends GameObject implements IDrawable {
     protected boolean gravityAllowed = true;
     protected double gravity = .98;
 
-    public Entity(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
+    public Actor(double x, double y, double w, double h, double vx, double vy, double MAX_VEL) {
         super(x, y, w, h);
 
         this.vx = vx;
@@ -20,7 +21,7 @@ public abstract class Entity extends GameObject implements IDrawable {
         this.MAX_VEL = MAX_VEL;
     }
 
-    public Entity(double x, double y, double w, double h, double vx, double vy) {
+    public Actor(double x, double y, double w, double h, double vx, double vy) {
         super(x, y, w, h);
 
         this.vx = vx;

@@ -1,4 +1,4 @@
-package controls;
+package utils;
 
 import java.awt.event.MouseListener;
 

@@ -4,7 +4,7 @@ import data.PreferenceData;
 import graphics.ui.GameCanvas;
 import graphics.ui.GameWindow;
 import utils.PreferencesXMLParser;
-import viewmodels.game.ControlsViewModel;
+import viewmodels.controls.ControlsViewModel;
 import viewmodels.game.GameViewModel;
 
 /**

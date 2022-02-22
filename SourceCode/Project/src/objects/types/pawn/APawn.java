@@ -1,11 +1,11 @@
-package game.objects;
+package objects.types.pawn;
 
-public abstract class GameObject {
+public abstract class APawn {
 
     protected double x, y;
     protected double w, h;
 
-    public GameObject(double x, double y, double w, double h) {
+    public APawn(double x, double y, double w, double h) {
         this.x = x;
         this.y = y;
         this.w = w;

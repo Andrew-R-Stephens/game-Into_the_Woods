@@ -1,7 +1,7 @@
 package graphics.ui;
 
 import data.PreferenceData;
-import viewmodels.game.ControlsViewModel;
+import viewmodels.controls.ControlsViewModel;
 
 import javax.swing.*;
 import java.awt.*;
