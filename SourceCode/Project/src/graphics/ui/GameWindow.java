@@ -5,11 +5,17 @@ import viewmodels.controls.ControlsViewModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.LinkedList;
 
 public class GameWindow extends JFrame {
 
     private ControlsViewModel controlsViewModel;
+
+    private final JFrame thisFrame = this;
+
+    double scaleFpsWindow = 1;
 
     //private GameCanvas gameCanvas;
     private boolean isRunning = false;
@@ -47,47 +53,41 @@ public class GameWindow extends JFrame {
                 setPreferredSize(new Dimension((int) screenDim[0], (int) screenDim[1]));
             }
         }
-
         setAlwaysOnTop(true);
         setResizable(false);
-
         pack();
-
         setLocationRelativeTo(null);
         setVisible(true);
-
-
         addKeyListener(this.controlsViewModel.getKeyController());
         addMouseListener(this.controlsViewModel.getMouseController());
         addMouseMotionListener(this.controlsViewModel.getMouseController());
 
+
         Thread combinedThread = new Thread(() -> {
 
-            long lastTime = System.nanoTime();
+
+
+            long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
             final short targetFPS = preferences.getFrameRate();
-            double ns = 1000000000 / (float)targetFPS;
-            double delta = 0;
-            int updates = 0;
-            int lastFPS = targetFPS;
-            //int frames = 0;
-            long timer = System.currentTimeMillis();
+            double ns = 1000000000 / (float)targetFPS, delta = 0;
+            int updates = 0, lastFPS = targetFPS;
+
+            LinkedList<Integer> points = new LinkedList<>();
 
             //Output data
             JFrame fpsframe = new JFrame();
             fpsframe.setAlwaysOnTop(true);
-            fpsframe.setPreferredSize(new Dimension(200, 200));
-            LinkedList<Integer> points = new LinkedList<>();
+            fpsframe.setPreferredSize(new Dimension(200, thisFrame.getHeight()));
             JPanel fpspanel = new JPanel(){
                 int secondX = 0;
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
-                    int x = 0;
-                    int prevPoint = 0;
+                    int x = 0, prevPoint = targetFPS;
                     g.fillRect(0,0,getWidth(), getHeight());
                     for (Integer point : points) {
                         g.setColor(Color.GREEN);
-                        g.drawLine(x, getHeight() - point, x-1,getHeight()-prevPoint);
+                        g.drawLine((int)(x*scaleFpsWindow), getHeight() - (int)(scaleFpsWindow*point), (int)(scaleFpsWindow*(x-1)),getHeight() - (int)(scaleFpsWindow*prevPoint));
                         prevPoint = point;
                         x++;
                     }
@@ -100,9 +100,15 @@ public class GameWindow extends JFrame {
                     secondX ++;
                 }
             };
+            fpspanel.addMouseWheelListener(e -> {
+                scaleFpsWindow -= e.getWheelRotation() * .1;
+            });
             fpsframe.add(fpspanel);
             fpsframe.pack();
             fpsframe.setVisible(true);
+            fpsframe.setLocation(thisFrame.getX() - fpsframe.getWidth(), thisFrame.getY());
+
+
 
             isRunning = true;
             while(isRunning) {
@@ -118,17 +124,15 @@ public class GameWindow extends JFrame {
                 if(gameCanvas.isRenderReady()) {
                     gameCanvas.render();
                 }
-                //frames++;
 
                 if(System.currentTimeMillis() - timer > 1000) {
                     timer += 1000; // add a thousand to timer
                     lastFPS = updates;
-                    //System.out.println("Ticks: " + updates + " / " + PreferenceData.FRAMERATE_DEFAULT + " = " + (lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT) + ", Cycles: " + frames + "\n");
+                    //System.out.println("Ticks: " + updates + " / " + PreferenceData.FRAMERATE_DEFAULT + " = " + (lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT) + ", Cycles: " + lastFPS + "\n");
                     updates = 0;
-                    //frames = 0;
 
                     points.addLast(lastFPS);
-                    if(points.size() > fpspanel.getWidth()) {
+                    if(points.size()*scaleFpsWindow > (fpspanel.getWidth())) {
                         points.removeFirst();
                     }
                     fpsframe.repaint();

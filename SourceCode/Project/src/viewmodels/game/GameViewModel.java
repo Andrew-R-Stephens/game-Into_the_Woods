@@ -4,7 +4,7 @@ import controls.GameMouseControls;
 import data.PreferenceData;
 import objects.actors.TestActor;
 import objects.types.pawn.APawn;
-import objects.types.pawn.actor.Actor;
+import objects.types.pawn.actor.AActor;
 import utils.MouseController;
 import viewmodels.controls.ControlsViewModel;
 
@@ -34,21 +34,23 @@ public class GameViewModel {
 
     public synchronized void update(double updateRate) {
         MouseController mouseController = controlsViewModel.getMouseController();
-        if(mouseController instanceof GameMouseControls) {
-            GameMouseControls gmc = (GameMouseControls)mouseController;
-            if(gmc.isLeftPressed()) {
-                addGameObject(
-                    new TestActor(
-                            gmc.getPos()[0],
-                            gmc.getPos()[1],
-                            10,
-                            10,
-                            new Random().nextFloat(-10, 10),
-                            new Random().nextFloat(-10, 10),
-                            -10, -10, 10, 10,
-                            /*new Random().nextInt(0, 2) == 1*/ true, 1
-                    )
-                );
+        if (mouseController instanceof GameMouseControls) {
+            GameMouseControls gmc = (GameMouseControls) mouseController;
+            if (gmc.isLeftPressed()) {
+                for (int i = 0; i < 10; i++) {
+                    addGameObject(
+                            new TestActor(
+                                    gmc.getPos()[0],
+                                    gmc.getPos()[1],
+                                    10,
+                                    10,
+                                    new Random().nextFloat(-10, 10),
+                                    new Random().nextFloat(-10, 10),
+                                    -10, -10, 10, 10,
+                                    /*new Random().nextInt(0, 2) == 1*/ true, 1
+                            )
+                    );
+                }
             }
         }
 
@@ -66,8 +68,8 @@ public class GameViewModel {
 
     public synchronized void renderGameObjects(Graphics g) {
         for(APawn gameObject: gameObjects) {
-            if(gameObject instanceof Actor) {
-                Actor e = (Actor)gameObject;
+            if(gameObject instanceof AActor) {
+                AActor e = (AActor)gameObject;
                 e.draw(g);
             }
         }
