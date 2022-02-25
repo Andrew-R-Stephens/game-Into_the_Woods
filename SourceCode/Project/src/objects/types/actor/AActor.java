@@ -1,18 +1,23 @@
-package objects.types.pawn;
+package objects.types.actor;
 
+import utils.IDrawable;
 import utils.math.APhysics;
 
-public abstract class APawn extends APhysics {
+/**
+ *
+ */
+public abstract class AActor extends APhysics implements IDrawable {
 
     protected double x, y;
     protected double w, h;
 
-    protected APawn(float x, float y,
-                    float w, float h,
-                    float vx, float vy,
-                    float MIN_VELX, float MIN_VELY, float MAX_VELX, float MAX_VELY,
-                    boolean hasGravity,
-                    float mass) {
+    protected AActor(float x, float y,
+                     float w, float h,
+                     float vx, float vy,
+                     float MIN_VELX, float MIN_VELY, float MAX_VELX, float MAX_VELY,
+                     boolean hasGravity,
+                     float mass) {
+
         super(vx, vy, MIN_VELX, MIN_VELY, MAX_VELX, MAX_VELY, hasGravity, mass);
 
         this.x = x;
