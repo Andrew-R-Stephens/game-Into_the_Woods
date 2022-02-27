@@ -70,7 +70,7 @@ public class GameWindow extends JFrame {
             long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
             final short targetFPS = preferences.getFrameRate();
             double ns = 1000000000 / (float)targetFPS, delta = 0;
-            int updates = 0, lastFPS = targetFPS;
+            int updates = 0, frames = 0, lastFPS = targetFPS;
 
             LinkedList<Integer> points = new LinkedList<>();
 
@@ -118,18 +118,25 @@ public class GameWindow extends JFrame {
 
                 if(delta >= 1) {
                     updates++;
-                    gameCanvas.update((double)lastFPS/ (double) PreferenceData.FRAMERATE_DEFAULT);
+                    int finalLastFPS = lastFPS;
+                    Thread t = new Thread(() -> gameCanvas.update((double) finalLastFPS / (double) PreferenceData.FRAMERATE_DEFAULT));
+                    t.start();
+
                     delta--;
                 }
                 if(gameCanvas.isRenderReady()) {
-                    gameCanvas.render();
+                    Thread t = new Thread(() -> gameCanvas.render());
+                    t.start();
+                    frames++;
                 }
 
                 if(System.currentTimeMillis() - timer > 1000) {
                     timer += 1000; // add a thousand to timer
-                    lastFPS = updates;
+                    //lastFPS = updates;
+                    lastFPS = frames;
                     //System.out.println("Ticks: " + updates + " / " + PreferenceData.FRAMERATE_DEFAULT + " = " + (lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT) + ", Cycles: " + lastFPS + "\n");
                     updates = 0;
+                    frames = 0;
 
                     points.addLast(lastFPS);
                     if(points.size()*scaleFpsWindow > (fpspanel.getWidth())) {

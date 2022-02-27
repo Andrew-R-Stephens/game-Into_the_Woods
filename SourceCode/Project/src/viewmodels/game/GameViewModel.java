@@ -29,11 +29,12 @@ public class GameViewModel {
     }
 
     public void addGameObject(AActor gameObject) {
-
+        /*
         if(gameObjects.size() - 10000 > 0) {
             gameObjects.subList(0, 10).clear();
             System.out.println("Removing");
         }
+        */
         gameObjects.add(gameObject);
         //System.out.println(gameObjects.size());
 

@@ -29,18 +29,27 @@ public class TestGameActor extends APawn {
                 vY = MAX_VELY;
             }
         }
-        y += vY / delta;
-
 
         if(vX < 0) {
             vX += .2 / delta;
+
+            if(vX < MIN_VELX) {
+                vX = MIN_VELX;
+            }
         } else if (vX > 0) {
             vX -= .2 / delta;
+
+            if(vX > MAX_VELX) {
+                vX = MAX_VELX;
+            }
         }
         x += vX / delta;
+        y += vY / delta;
 
+        /*
         y += vY;
         x += vX;
+        */
     }
 
 
