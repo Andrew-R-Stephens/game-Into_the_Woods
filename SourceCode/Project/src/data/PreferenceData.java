@@ -1,10 +1,6 @@
 package data;
 
-import java.util.HashMap;
-
 public class PreferenceData {
-
-    private HashMap<String, Integer> values;
 
     private int window_width_default = 0;
     private int window_height_default = 0;
@@ -16,20 +12,12 @@ public class PreferenceData {
     public static short FRAMERATE_DEFAULT = 60;
     public static short frameRate = 60;
 
-    private double scaledW = 1;
-    private double scaledH = 1;
-
-    public double getScaledW() {
-        return scaledW;
-    }
-
-    public double getScaledH() {
-        return scaledH;
-    }
+    public static double scaledW = 1;
+    public static double scaledH = 1;
 
     public void calcResScale() {
-        this.scaledW = (double)window_width/window_width_default;
-        this.scaledH = (double)window_height/window_height_default;
+        scaledW = (double)window_width/window_width_default;
+        scaledH = (double)window_height/window_height_default;
     }
 
     public void setWindowWidth(int width) {

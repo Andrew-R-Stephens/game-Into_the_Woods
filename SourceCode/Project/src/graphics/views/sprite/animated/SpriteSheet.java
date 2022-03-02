@@ -1,4 +1,4 @@
-package graphics.visuals.sprite;
+package graphics.views.sprite.animated;
 
 import utils.AFileLoader;
 import utils.IImageLoader;
@@ -12,7 +12,7 @@ public class SpriteSheet extends AFileLoader implements IImageLoader, ISpriteShe
 
     private BufferedImage sheet;
 
-    private int w = 0, h = 0;
+    private int keyFrameWidth = 0, getKeyFrameHeight = 0;
 
     public SpriteSheet(String filename) throws FileNotFoundException {
         setFile(filename);
@@ -31,7 +31,7 @@ public class SpriteSheet extends AFileLoader implements IImageLoader, ISpriteShe
 
     @Override
     public BufferedImage grabImage(int currentFrame) {
-        BufferedImage img = sheet.getSubimage(currentFrame*w, currentFrame*h, w, h);
+        BufferedImage img = sheet.getSubimage(currentFrame* keyFrameWidth, currentFrame* getKeyFrameHeight, keyFrameWidth, getKeyFrameHeight);
 
         return img;
     }

@@ -1,7 +1,8 @@
-package objects.types.actor.pawn;
+package proptypes.types.actor.pawn;
 
+import data.PreferenceData;
 import utils.IDrawable;
-import objects.types.actor.AActor;
+import proptypes.types.actor.AActor;
 
 import java.awt.*;
 
@@ -13,7 +14,9 @@ public abstract class APawn extends AActor implements IDrawable {
 
     @Override
     public void draw(Graphics g) {
+        double sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
+
         g.setColor(Color.BLACK);
-        g.fillOval((int) (x - (w/2)), (int) (y - (h/2)), (int) w, (int) h);
+        g.fillOval((int) ((x) - (w*sW/2)), (int) ((y) - (h*sH/2)), (int) (w*sW), (int) (h*sH));
     }
 }

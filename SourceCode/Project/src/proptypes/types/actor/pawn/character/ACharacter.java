@@ -1,6 +1,6 @@
-package objects.types.actor.pawn.character;
+package proptypes.types.actor.pawn.character;
 
-import objects.types.actor.pawn.APawn;
+import proptypes.types.actor.pawn.APawn;
 import utils.IDrawable;
 
 public class ACharacter extends APawn implements IDrawable {

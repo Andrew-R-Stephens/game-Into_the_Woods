@@ -5,8 +5,6 @@ import viewmodels.controls.ControlsViewModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.util.LinkedList;
 
 public class GameWindow extends JFrame {
@@ -19,6 +17,8 @@ public class GameWindow extends JFrame {
 
     //private GameCanvas gameCanvas;
     private boolean isRunning = false;
+    private int updates, frames, lastFPS;
+    double avgFrames;
 
     public void init(PreferenceData preferences, GameCanvas gameCanvas, ControlsViewModel controlsViewModel){
         //this.gameCanvas = gameCanvas;
@@ -63,16 +63,17 @@ public class GameWindow extends JFrame {
         addMouseMotionListener(this.controlsViewModel.getMouseController());
 
 
-        Thread combinedThread = new Thread(() -> {
-
-
+        Thread gameThread = new Thread(() -> {
 
             long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
             final short targetFPS = preferences.getFrameRate();
             double ns = 1000000000 / (float)targetFPS, delta = 0;
-            int updates = 0, frames = 0, lastFPS = targetFPS;
+            updates = 0;
+            frames = 0;
+            lastFPS = targetFPS;
+            avgFrames = targetFPS;
 
-            LinkedList<Integer> points = new LinkedList<>();
+            LinkedList<Integer> fpsPoints = new LinkedList<>();
 
             //Output data
             JFrame fpsframe = new JFrame();
@@ -85,15 +86,19 @@ public class GameWindow extends JFrame {
                     super.paintComponent(g);
                     int x = 0, prevPoint = targetFPS;
                     g.fillRect(0,0,getWidth(), getHeight());
-                    for (Integer point : points) {
+                    for (Integer point : fpsPoints) {
                         g.setColor(Color.GREEN);
-                        g.drawLine((int)(x*scaleFpsWindow), getHeight() - (int)(scaleFpsWindow*point), (int)(scaleFpsWindow*(x-1)),getHeight() - (int)(scaleFpsWindow*prevPoint));
+                        g.drawLine(
+                                (int)(x*scaleFpsWindow),
+                                getHeight() - (int)(scaleFpsWindow * point),
+                                (int)(scaleFpsWindow*(x-1)),
+                                getHeight() - (int)(scaleFpsWindow * prevPoint));
                         prevPoint = point;
                         x++;
                     }
                     g.setColor(Color.RED);
-                    if(!points.isEmpty()) {
-                        g.drawString(points.getLast() + "", 0, 20);
+                    if(!fpsPoints.isEmpty()) {
+                        g.drawString(fpsPoints.getLast() + "", 0, 20);
                     } else {
                         g.drawString(String.valueOf(targetFPS), 0, 20);
                     }
@@ -119,35 +124,45 @@ public class GameWindow extends JFrame {
                 if(delta >= 1) {
                     updates++;
                     int finalLastFPS = lastFPS;
-                    Thread t = new Thread(() -> gameCanvas.update((double) finalLastFPS / (double) PreferenceData.FRAMERATE_DEFAULT));
+                    double finalAvgFrames = avgFrames;
+                    Thread t = new Thread(() -> {
+                        //double frameRatio = (double) finalLastFPS / (double) PreferenceData.FRAMERATE_DEFAULT;
+                        double frameRatio = finalAvgFrames / (double) PreferenceData.FRAMERATE_DEFAULT;
+                        gameCanvas.update(frameRatio);
+                    });
                     t.start();
 
                     delta--;
                 }
                 if(gameCanvas.isRenderReady()) {
-                    Thread t = new Thread(() -> gameCanvas.render());
+                    Thread t = new Thread(() -> {
+                        gameCanvas.render();
+                        frames++;
+                    }
+                    );
                     t.start();
-                    frames++;
                 }
 
                 if(System.currentTimeMillis() - timer > 1000) {
                     timer += 1000; // add a thousand to timer
                     //lastFPS = updates;
                     lastFPS = frames;
+                    avgFrames = .5 * (lastFPS + avgFrames);
                     //System.out.println("Ticks: " + updates + " / " + PreferenceData.FRAMERATE_DEFAULT + " = " + (lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT) + ", Cycles: " + lastFPS + "\n");
                     updates = 0;
                     frames = 0;
 
-                    points.addLast(lastFPS);
-                    if(points.size()*scaleFpsWindow > (fpspanel.getWidth())) {
-                        points.removeFirst();
+                    //fpsPoints.addLast(lastFPS);
+                    fpsPoints.addLast((int)avgFrames);
+                    if(fpsPoints.size()*scaleFpsWindow > (fpspanel.getWidth())) {
+                        fpsPoints.removeFirst();
                     }
                     fpsframe.repaint();
                 }
 
             }
         });
-        combinedThread.start();
+        gameThread.start();
 
     }
 

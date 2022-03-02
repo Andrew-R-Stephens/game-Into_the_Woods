@@ -1,4 +1,4 @@
-package graphics.visuals.sprite;
+package graphics.views.sprite.animated;
 
 import utils.IDrawable;
 

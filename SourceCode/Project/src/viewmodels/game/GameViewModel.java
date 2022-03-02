@@ -2,9 +2,9 @@ package viewmodels.game;
 
 import controls.GameMouseControls;
 import data.PreferenceData;
-import objects.actors.gameactors.TestGameActor;
-import objects.types.actor.AActor;
-import objects.types.actor.pawn.APawn;
+import props.gameactors.TestActor;
+import proptypes.types.actor.AActor;
+import proptypes.types.actor.pawn.APawn;
 import utils.MouseController;
 import viewmodels.controls.ControlsViewModel;
 
@@ -45,18 +45,30 @@ public class GameViewModel {
         if (mouseController instanceof GameMouseControls) {
             GameMouseControls gmc = (GameMouseControls) mouseController;
             if (gmc.isLeftPressed()) {
-                for (int i = 0; i < 10; i++) {
+                for(int i = 0; i < 1; i++) {
+                    float s = new Random().nextFloat(10, 100);
                     addGameObject(
-                            new TestGameActor(
+                            new TestActor(
                                     gmc.getPos()[0],
                                     gmc.getPos()[1],
-                                    10,
-                                    10,
-                                    new Random().nextFloat(-10, 10),
-                                    new Random().nextFloat(-10, 10),
-                                    -10, -10, 10, 10,
-                                    /*new Random().nextInt(0, 2) == 1*/ true, 1
+                                    s,
+                                    s,
+                                    50,
+                                    -50,
+                                    -50, -50, 50, 50,
+                                    true, 1
                             )
+                            /*new TestActor(
+                                    gmc.getPos()[0],
+                                    gmc.getPos()[1],
+                                    s,
+                                    s,
+                                    new Random().nextFloat(-100, 100),
+                                    new Random().nextFloat(-100, 100),
+                                    -50, -50, 50, 50,
+                                    *//*new Random().nextInt(0, 2) == 1*//* true, new Random().nextFloat(1, 1000)
+                            )*/
+
                     );
                 }
             }
@@ -67,8 +79,8 @@ public class GameViewModel {
 
     public void updateGameObjects(double updateRate) {
         for(AActor gameObject: gameObjects) {
-            if(gameObject instanceof TestGameActor) {
-                TestGameActor a = (TestGameActor)gameObject;
+            if(gameObject instanceof TestActor) {
+                TestActor a = (TestActor)gameObject;
                 a.update(updateRate);
             }
         }

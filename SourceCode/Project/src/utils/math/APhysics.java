@@ -3,8 +3,12 @@ package utils.math;
 public abstract class APhysics {
 
     protected boolean hasGravity = true;
-    protected final float GRAVITY = .98f;
+    protected final float GRAVITY = 9.8f;
+    protected final float FLUID_DENSITY = 1.225f;
 
+    protected float
+            x, y,
+            w, h;
     protected float vX, vY;
     protected float
             MIN_VELY, MAX_VELY,
@@ -12,11 +16,32 @@ public abstract class APhysics {
 
     protected float mass = 1;
 
-    protected APhysics(float vX, float vY, float MIN_VELX, float MIN_VELY, float MAX_VELX, float MAX_VELY, boolean hasGravity, float mass) {
+    protected APhysics(
+            float x, float y,
+            float w, float h,
+            float vX, float vY,
+            float MIN_VELX, float MIN_VELY,
+            float MAX_VELX, float MAX_VELY,
+            boolean hasGravity, float mass) {
+
+        setPosition(x, y);
+        setSize(w, h);
+
         setVelocity(vX, vY);
+        setMass(mass);
+
         setVelocityConstraints(MIN_VELX, MIN_VELY, MAX_VELX, MAX_VELY);
         hasGravity(hasGravity);
-        setMass(mass);
+    }
+
+    private void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    private void setSize(float w, float h) {
+        this.w = w;
+        this.h = h;
     }
 
     private void setMass(float mass) {
@@ -37,11 +62,32 @@ public abstract class APhysics {
         this.MIN_VELY = MIN_VELY;
         this.MAX_VELX = MAX_VELX;
         this.MAX_VELY = MAX_VELY;
+        /*this.MIN_VELX = factorMass(MIN_VELX);
+        this.MIN_VELY = factorMass(MIN_VELY);
+        this.MAX_VELX = factorMass(MAX_VELX);
+        this.MAX_VELY = factorMass(MAX_VELY);*/
+    }
+
+    private float factorMass(float baseVel) {
+        float objectarea = w*h;
+        float dragForce = 1;
+        float flowSpeed = 1;
+        float dragCoeff = (2*dragForce)/(FLUID_DENSITY*(flowSpeed*flowSpeed)* 1);
+        return baseVel * (float)Math.sqrt((2*mass*GRAVITY) / (FLUID_DENSITY*(objectarea)*dragCoeff));
     }
 
     protected void update(double delta) {
         calculateGravity(delta);
+
+        updateVelocity(delta);
+
         constrainVelocity(delta);
+    }
+
+    private void updateVelocity(double delta) {
+
+
+
     }
 
     protected void reverseVelocity(boolean revX, boolean revY) {
