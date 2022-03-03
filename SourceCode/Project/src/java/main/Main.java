@@ -1,6 +1,5 @@
 package main;
 
-
 import data.PreferenceData;
 import graphics.ui.GameCanvas;
 import graphics.ui.GameWindow;
