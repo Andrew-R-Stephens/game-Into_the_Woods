@@ -6,14 +6,12 @@ public abstract class APhysics {
     protected final float GRAVITY = 9.8f;
     protected final float FLUID_DENSITY = 1.225f;
     protected double terminalVelocity;
+    double deccelerationRate = .2;
 
     protected float
             x, y,
             w, h;
     protected float vX, vY;
-    protected float
-            MIN_VELY, MAX_VELY,
-            MIN_VELX, MAX_VELX;
 
     protected float mass = 1;
 
@@ -21,22 +19,18 @@ public abstract class APhysics {
             float x, float y,
             float w, float h,
             float vX, float vY,
-            float MIN_VELX, float MIN_VELY,
-            float MAX_VELX, float MAX_VELY,
             boolean hasGravity, float mass) {
 
         setPosition(x, y);
         setSize(w, h);
         setVelocity(vX, vY);
         setMass(mass);
-
-        setTerminalVelocity();
-
+        setAcceleration();
         hasGravity(hasGravity);
     }
 
-    private void setTerminalVelocity() {
-        terminalVelocity = (2*mass*GRAVITY)/(1.225*w*h*.47);
+    private void setAcceleration() {
+        deccelerationRate = .2  * mass;
     }
 
     private void setPosition(float x, float y) {
@@ -66,23 +60,27 @@ public abstract class APhysics {
         calculateGravity(delta);
 
         updateVelocity(delta);
-
-        constrainVelocity(delta);
     }
 
     private void updateVelocity(double delta) {
 
+        deccelerationRate /= delta;
 
+        vY += deccelerationRate;
+        vX += deccelerationRate;
 
     }
 
-    protected void reverseVelocity(boolean revX, boolean revY) {
-        if(revX) {
-            vX = -vX;
+    public void reverseVelocity(double revX, double revY) {
+        /*if(revX != 0) {
+            vX = -vX / 2f;
+            x += revX/2f;
         }
-        if(revY) {
-            vY = -vY;
-        }
+
+        if(revY != 0) {
+            vY = -vY / 2f;
+            y += revY/2f;
+        }*/
     }
 
     private void calculateGravity(double delta) {
@@ -90,15 +88,5 @@ public abstract class APhysics {
             vY += (GRAVITY / delta) * mass;
         }
     }
-
-    private void constrainVelocity(double delta) {
-
-        double deccelerationRate = .2/delta/mass; //((mass - (.5 * FLUID_DENSITY * (vY*vY) * .47 * (w*h))))/ mass/delta;
-
-        vY += deccelerationRate;
-        vX += deccelerationRate;
-
-    }
-
 
 }

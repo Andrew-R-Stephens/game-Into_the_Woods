@@ -4,8 +4,8 @@
 
         <resolutionWidthDefault>1920</resolutionWidthDefault>
         <resolutionHeightDefault>1080</resolutionHeightDefault>
-        <resolutionWidth>1280</resolutionWidth>
-        <resolutionHeight>720</resolutionHeight>
+        <resolutionWidth>720</resolutionWidth>
+        <resolutionHeight>480</resolutionHeight>
         <windowType>0</windowType> <!-- 0 = Windowed, 1 = Windowed Borderless, 2 = Fullscreen -->
 
     </Window>

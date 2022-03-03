@@ -1,3 +1,6 @@
+package main;
+
+
 import data.PreferenceData;
 import graphics.ui.GameCanvas;
 import graphics.ui.GameWindow;
@@ -50,7 +53,7 @@ public class Main {
         gameViewModel.init(preferences, controlsViewModel);
         controlsViewModel.init(preferences, gameViewModel);
 
-        PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "Preferences.xml");
+        PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "files/Preferences.xml");
         preferencesXMLParser.read();
         preferences.post();
 
