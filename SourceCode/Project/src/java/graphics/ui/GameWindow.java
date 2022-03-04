@@ -145,14 +145,11 @@ public class GameWindow extends JFrame {
 
                 if(System.currentTimeMillis() - timer > 1000) {
                     timer += 1000; // add a thousand to timer
-                    //lastFPS = updates;
                     lastFPS = frames;
                     avgFrames = .5 * (lastFPS + avgFrames);
-                    //System.out.println("Ticks: " + updates + " / " + PreferenceData.FRAMERATE_DEFAULT + " = " + (lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT) + ", Cycles: " + lastFPS + "\n");
                     updates = 0;
                     frames = 0;
 
-                    //fpsPoints.addLast(lastFPS);
                     fpsPoints.addLast((int)avgFrames);
                     if(fpsPoints.size()*scaleFpsWindow > (fpspanel.getWidth())) {
                         fpsPoints.removeFirst();

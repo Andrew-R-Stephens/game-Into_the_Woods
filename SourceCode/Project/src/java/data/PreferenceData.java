@@ -5,8 +5,8 @@ public class PreferenceData {
     private int window_width_default = 0;
     private int window_height_default = 0;
 
-    private int window_width = 0;
-    private int window_height = 0;
+    public static int window_width = 0;
+    public static int window_height = 0;
     private WindowType window_type;
 
     public static short FRAMERATE_DEFAULT = 60;

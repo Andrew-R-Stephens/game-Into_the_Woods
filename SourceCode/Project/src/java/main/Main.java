@@ -5,7 +5,7 @@ import graphics.ui.GameCanvas;
 import graphics.ui.GameWindow;
 import utils.PreferencesXMLParser;
 import viewmodels.controls.ControlsViewModel;
-import viewmodels.game.GameViewModel;
+import viewmodels.game.GameModel;
 
 /**
  * The type main.Main.
@@ -15,7 +15,7 @@ public class Main {
     private static PreferenceData preferences;
 
     private static ControlsViewModel controlsViewModel;
-    private static GameViewModel gameViewModel;
+    private static GameModel gameViewModel;
 
     private static GameCanvas gameCanvas;
     private static GameWindow gameWindow;
@@ -37,7 +37,7 @@ public class Main {
 
     public static void create() {
         controlsViewModel = new ControlsViewModel();
-        gameViewModel = new GameViewModel();
+        gameViewModel = new GameModel();
 
         preferences = new PreferenceData();
 
@@ -49,8 +49,8 @@ public class Main {
      * Init game objects.
      */
     public static void init() {
-        gameViewModel.init(preferences, controlsViewModel);
-        controlsViewModel.init(preferences, gameViewModel);
+        gameViewModel.init(controlsViewModel);
+        controlsViewModel.init();
 
         PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "files/Preferences.xml");
         preferencesXMLParser.read();

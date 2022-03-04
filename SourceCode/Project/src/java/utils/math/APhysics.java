@@ -1,5 +1,7 @@
 package utils.math;
 
+import data.PreferenceData;
+
 public abstract class APhysics {
 
     protected boolean hasGravity = true;
@@ -56,6 +58,22 @@ public abstract class APhysics {
         this.vY = velocityY;
     }
 
+    protected float left() {
+        return x;
+    }
+
+    protected float right() {
+        return x+w;
+    }
+
+    protected float top() {
+        return y;
+    }
+
+    protected float bottom() {
+        return y+h;
+    }
+
     protected void update(double delta) {
         calculateGravity(delta);
 
@@ -71,22 +89,25 @@ public abstract class APhysics {
 
     }
 
-    public void reverseVelocity(double revX, double revY) {
-        /*if(revX != 0) {
-            vX = -vX / 2f;
-            x += revX/2f;
-        }
-
-        if(revY != 0) {
-            vY = -vY / 2f;
-            y += revY/2f;
-        }*/
-    }
-
     private void calculateGravity(double delta) {
         if(hasGravity) {
             vY += (GRAVITY / delta) * mass;
         }
     }
 
+    public boolean isInBounds() {
+        if(x + w > 0 && x < PreferenceData.window_width) {
+            if(y + h > 0 && y < PreferenceData.window_height) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void doCollision(float[] collisions) {
+        vX *= collisions[0];
+        vY *= -1;
+        x = collisions[2];
+        y = collisions[3];
+    }
 }

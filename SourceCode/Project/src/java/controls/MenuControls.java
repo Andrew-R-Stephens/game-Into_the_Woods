@@ -1,7 +1,7 @@
 package controls;
 
 import viewmodels.controls.ControlsViewModel;
-import viewmodels.game.GameViewModel;
+import viewmodels.game.GameModel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,9 +9,9 @@ import java.awt.event.KeyListener;
 public class MenuControls implements KeyListener {
 
     private ControlsViewModel controlsViewModel;
-    private GameViewModel gameViewModel;
+    private GameModel gameViewModel;
 
-    public MenuControls(ControlsViewModel controlsViewModel, GameViewModel gameViewModel) {
+    public MenuControls(ControlsViewModel controlsViewModel, GameModel gameViewModel) {
         this.controlsViewModel = controlsViewModel;
         this.gameViewModel = gameViewModel;
     }

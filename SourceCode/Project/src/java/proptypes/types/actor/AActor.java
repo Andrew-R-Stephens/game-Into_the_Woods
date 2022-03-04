@@ -1,6 +1,5 @@
 package proptypes.types.actor;
 
-import props.gameactors.TestActor;
 import utils.IDrawable;
 import utils.math.APhysics;
 
@@ -24,28 +23,28 @@ public abstract class AActor extends APhysics implements IDrawable {
         super.update(delta);
     }
 
-    public float[] getCollisions(TestActor a2) {
-        float[] side = new float[2];
-        if((x+w) > (a2.x)){
+    public float[] getCollisions(AActor o) {
+        float[] c = new float[4];
 
-            side[0] = x + w - a2.x;
+        c[0] = o.vX - vX;
+        c[1] = o.vY - vY;
 
-            if((a2.x+a2.w) > (x)){
-
-                side[0] = a2.x + a2.w - x;
-
-                if ((y + h) > (a2.y)) {
-
-                    side[1] = y + h - a2.y;
-
-                    if((a2.y + a2.h) > (y)) {
-
-                        side[1] = a2.y + a2.h - y;
-
-                    }
-                }
+        if(o.right() > left() && o.left() < right()) {
+            c[2] = left() - o.right();
+        } else {
+            if(o.right() < left() && o.left() > right()) {
+                c[2] = o.left() - right();
             }
         }
-        return side;
+
+        if(o.bottom() > top() && o.top() < bottom()) {
+            c[3] = top() - o.bottom();
+        } else {
+            if(o.bottom() < top() && o.top() > bottom()) {
+                c[3] = o.top() - bottom();
+            }
+        }
+
+        return c;
     }
 }

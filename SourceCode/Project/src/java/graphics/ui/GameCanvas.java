@@ -1,13 +1,13 @@
 package graphics.ui;
 
-import viewmodels.game.GameViewModel;
+import viewmodels.game.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameCanvas extends JPanel {
 
-    private GameViewModel gameModel;
+    private GameModel gameModel;
 
     private boolean isUpdated = true;
 
@@ -15,7 +15,7 @@ public class GameCanvas extends JPanel {
         // TODO: Nothing yet
     }
 
-    public void init(GameViewModel gameModel) {
+    public void init(GameModel gameModel) {
         this.gameModel = gameModel;
     }
 

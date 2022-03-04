@@ -4,31 +4,22 @@ import controls.GameKeyControls;
 import controls.GameMouseControls;
 import utils.KeyController;
 import utils.MouseController;
-import data.PreferenceData;
-import viewmodels.game.GameViewModel;
 
 public class ControlsViewModel{
 
-    private PreferenceData preferenceData;
-    private GameViewModel gameViewModel;
-
     private KeyController keyController;
     private MouseController mouseController;
-
-    public void init(PreferenceData preferences, GameViewModel gameViewModel) {
-        this.preferenceData = preferences;
-
-        this.gameViewModel = gameViewModel;
-
-        mouseController = new GameMouseControls(this);
-        keyController = new GameKeyControls(this);
-    }
 
     public enum Directionals {LEFT, RIGHT, UP, DOWN};
     enum Abilities {JUMP, DASH};
 
     boolean[] directionals = new boolean[Directionals.values().length];
     boolean[] abilities = new boolean[Abilities.values().length];
+
+    public void init() {
+        mouseController = new GameMouseControls(this);
+        keyController = new GameKeyControls(this);
+    }
 
     public KeyController getKeyController() {
         return keyController;
@@ -44,6 +35,10 @@ public class ControlsViewModel{
 
     public boolean getDirectional(Directionals type) {
         return directionals[type.ordinal()];
+    }
+
+    public boolean[] getDirectionals() {
+        return directionals;
     }
 
     public void setAbility(Abilities type, boolean state) {

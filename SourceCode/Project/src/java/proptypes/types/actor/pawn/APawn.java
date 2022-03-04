@@ -1,8 +1,8 @@
 package proptypes.types.actor.pawn;
 
 import data.PreferenceData;
-import utils.IDrawable;
 import proptypes.types.actor.AActor;
+import utils.IDrawable;
 
 import java.awt.*;
 
@@ -20,4 +20,5 @@ public abstract class APawn extends AActor implements IDrawable {
     @Override
     public void draw(Graphics g) {
     }
+
 }
