@@ -12,7 +12,7 @@ public class ALevelProp extends AActor {
 
     @Override
     public void draw(Graphics g) {
-
+        super.draw(g);
     }
 
 }

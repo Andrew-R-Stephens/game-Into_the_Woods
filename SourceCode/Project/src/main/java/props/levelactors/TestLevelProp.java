@@ -3,12 +3,11 @@ package props.levelactors;
 import data.PreferenceData;
 import proptypes.actors.levelactors.animated.ALevelProp;
 import proptypes.types.actor.AActor;
+import viewmodels.game.WorldModel;
 
 import java.awt.*;
 
 public class TestLevelProp extends ALevelProp {
-
-    Color c = Color.GREEN;
 
     public TestLevelProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {
         super(x, y, w, h, vx, vy, hasGravity, mass);
@@ -32,11 +31,5 @@ public class TestLevelProp extends ALevelProp {
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-
-        double sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
-
-        g.setColor(c);
-        g.drawRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)(h*sH));
-        g.drawString("TLP", (int)(x*sW) + 3, (int)(y*sH) + 12);
     }
 }

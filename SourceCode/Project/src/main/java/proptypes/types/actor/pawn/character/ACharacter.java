@@ -21,16 +21,23 @@ public class ACharacter extends APawn implements IDrawable {
         int xDir = (directionals[0] ? -1 : 0) + (directionals[1] ? 1 : 0);
         int yDir = (directionals[2] ? -1 : 0) + (directionals[3] ? 1 : 0);
 
-        vX += GRAVITY*xDir;
-        vY += GRAVITY*yDir;
+        //System.out.println(vX + " " + vY + " " + accelerationRate + " " + xDir + " " + yDir);
+
+        vX += .5*xDir;
+        vY += .5*yDir;
+
+        //System.out.println(vX + " " + vY + " " + accelerationRate + " " + xDir + " " + yDir);
 
     }
 
     protected void doAbilitiy(boolean[] abilities) {
-        if((canPrimaryJump || canWallJump) && abilities[0]) {
-            vY -= 50;
+        if(abilities[0]) {
+            if ((canPrimaryJump || canWallJump)) {
+                System.out.println(canPrimaryJump + " " + canWallJump);
+                vY = -50;
+                canPrimaryJump = canWallJump = false;
+            }
         }
-
     }
 
 }

@@ -2,12 +2,11 @@ package utils.math;
 
 import data.PreferenceData;
 import proptypes.types.actor.AActor;
-
+import viewmodels.game.LevelModel;
 public abstract class APhysics {
 
     protected boolean hasGravity = true;
-    protected final float GRAVITY = 9.8f;
-    protected double deccelerationRate = .2;
+    protected double accelerationRate = .2;
     protected float mass = 1;
 
     protected boolean canPrimaryJump, canWallJump;
@@ -34,7 +33,7 @@ public abstract class APhysics {
     }
 
     private void setAcceleration() {
-        deccelerationRate = .2  * mass;
+        accelerationRate = .2  * mass;
     }
 
     private void setPosition(float x, float y) {
@@ -87,16 +86,16 @@ public abstract class APhysics {
 
     private void calculateGravity(double delta) {
         if(hasGravity) {
-            vY += (GRAVITY / delta) * mass;
+            vY += (LevelModel.GRAVITY / delta) * mass;
         }
     }
 
     private void updateVelocity(double delta) {
 
-        deccelerationRate /= delta;
+        accelerationRate /= delta;
 
-        vY += vY * deccelerationRate;
-        vX += vY * deccelerationRate;
+        vY += vY * accelerationRate;
+        vX += vY * accelerationRate;
 
         if(vY > 100) {
             vY = 100;
@@ -122,13 +121,17 @@ public abstract class APhysics {
 
     public boolean hasCollision(AActor a) {
 
+        // Determine the conditions of the object collision
         boolean hitBottom = (a.top() <= bottom()) && (a.top() >= top());
         boolean hitTop = (a.bottom() >= top()) && (a.bottom() <= bottom());
         boolean hitLeft = (a.right() >= left()) && (a.right() <= right());
         boolean hitRight = (a.left() <= right()) && (a.left() >= left());
 
+
+
         if((hitBottom || hitTop) && (hitLeft || hitRight)) {
 
+            // Determine the side that the object should rebound off of
             float distX, distY;
             if (hitBottom) {
                 distY = Math.abs(a.top() - bottom());
@@ -144,13 +147,14 @@ public abstract class APhysics {
             if(distX > distY) {
                 if(hitTop) {
                     a.y = top() - a.h;
+                    a.vX *= .75;
+
+                    a.canPrimaryJump(true);
                 }
                 else {
                     a.y = bottom();
                 }
-
-                a.vX *= .5;
-                a.vY *= -.5;
+                a.vY = 0;
 
             } else if (distX < distY){
                 if(hitRight) {
@@ -164,9 +168,6 @@ public abstract class APhysics {
                 a.vX *= -.5;
 
             }
-
-            a.canPrimaryJump(a.bottom() + jumpBufferVert > top());
-            a.canWallJump(a.left() - jumpBufferHoriz < right() || a.right() + jumpBufferHoriz > left());
 
             return true;
         }

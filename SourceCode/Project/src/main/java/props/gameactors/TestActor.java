@@ -19,9 +19,11 @@ public class TestActor extends APawn {
 
     @Override
     public void draw(Graphics g) {
-        double sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
+        super.draw(g);
+
+        /*double sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
 
         g.setColor(Color.RED);
-        g.drawRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)(h*sH));
+        g.drawRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)(h*sH));*/
     }
 }

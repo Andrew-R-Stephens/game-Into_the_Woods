@@ -1,7 +1,9 @@
 package proptypes.types.actor;
 
+import data.PreferenceData;
 import utils.IDrawable;
 import utils.math.APhysics;
+import viewmodels.game.WorldModel;
 
 import java.awt.*;
 
@@ -9,6 +11,8 @@ import java.awt.*;
  *
  */
 public abstract class AActor extends APhysics implements IDrawable {
+
+    protected Color c = Color.GREEN;
 
     protected AActor(float x, float y,
                      float w, float h,
@@ -28,5 +32,13 @@ public abstract class AActor extends APhysics implements IDrawable {
     @Override
     public void draw(Graphics g) {
 
+        double offsetX = ((x) + (WorldModel.offX));
+        double offsetY = ((y) + (WorldModel.offY));
+
+        double scaledW = w * PreferenceData.scaledW;
+        double scaledH = h * PreferenceData.scaledH;
+
+        //g.drawRect((int)(sX), (int)(sY), (int)(sW), (int)(sH));
+        g.drawRect((int)((offsetX)), (int)(offsetY), (int)(scaledW), (int)(scaledH));
     }
 }

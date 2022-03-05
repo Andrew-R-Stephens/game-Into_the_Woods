@@ -15,10 +15,11 @@ import java.util.Random;
 
 public class GameModel {
 
+    private final LevelModel levelModel = new LevelModel();
+
     private ControlsModel controlsViewModel;
 
     private final ArrayList<AActor> gameObjects = new ArrayList<>();
-    private final ArrayList<ALevelProp> levelProps = new ArrayList<>();
 
     public void init(ControlsModel controlsViewModel) {
         this.controlsViewModel = controlsViewModel;
@@ -33,15 +34,15 @@ public class GameModel {
         ));
 
         // Wall
-        levelProps.add(new TestLevelPropStatic(0 , 0, 100, 1080, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(0 , 0, 100, 1080, 0, 0, false, 0));
         // Floor
-        levelProps.add(new TestLevelPropStatic(0 , 980, 10000, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(0 , 980, 10000, 100, 0, 0, false, 0));
 
         // Other Props
-        levelProps.add(new TestLevelPropStatic(1800 , 100, 500, 100, 0, 0, false, 0));
-        levelProps.add(new TestLevelPropStatic(70 , 800, 500, 100, 0, 0, false, 0));
-        levelProps.add(new TestLevelPropStatic(500 , 700, 500, 100, 0, 0, false, 0));
-        levelProps.add(new TestLevelPropStatic(1100 , 600, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(1800 , 100, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(70 , 800, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(500 , 700, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(1100 , 600, 500, 100, 0, 0, false, 0));
     }
 
     public void addGameObject(AActor gameObject) {
@@ -63,8 +64,8 @@ public class GameModel {
                 for(int i = 0; i < count; i++) {
                     addGameObject(
                         new TestActor(
-                                (float)gmc.getPos()[0],
-                                (float)gmc.getPos()[1],
+                                (float)(gmc.getPos()[0] - WorldModel.offX),
+                                (float)(gmc.getPos()[1] - WorldModel.offY),
                                 50f,
                                 50f,
                                 new Random().nextFloat(-100, 100),
@@ -73,7 +74,7 @@ public class GameModel {
                                1f
                         )
                     );
-                    addGameObject(
+                    /*addGameObject(
                             new TestCharacter(
                                     (float)gmc.getPos()[0],
                                     (float)gmc.getPos()[1],
@@ -84,7 +85,7 @@ public class GameModel {
                                     true,
                                     1f
                             )
-                    );
+                    );*/
                 }
             }
         }
@@ -117,11 +118,9 @@ public class GameModel {
     }
 
     private void checkCollisions() {
-        for(ALevelProp p: levelProps) {
+        for(ALevelProp p: levelModel.getLevelProps()) {
             for(AActor a: gameObjects) {
-                if(a.isInFrameBounds()) {
-                    p.hasCollision(a);
-                }
+                p.hasCollision(a);
             }
         }
     }
@@ -129,22 +128,22 @@ public class GameModel {
     public synchronized void renderGameObjects(Graphics g) {
         for(AActor gameObject: gameObjects) {
             if(gameObject instanceof TestCharacter o) {
-                if(o.isInFrameBounds()) {
+                //if(o.isInFrameBounds()) {
                     o.draw(g);
-                }
+                //}
             }
             if(gameObject instanceof TestActor o) {
-                if(o.isInFrameBounds()) {
+                //if(o.isInFrameBounds()) {
                     o.draw(g);
-                }
+                //}
             }
         }
 
-        for(AActor levelProps : levelProps) {
+        for(AActor levelProps : levelModel.getLevelProps()) {
             if(levelProps instanceof ALevelProp p) {
-                if(p.isInFrameBounds()) {
+                //if(p.isInFrameBounds()) {
                     p.draw(g);
-                }
+                //}
             }
         }
     }
