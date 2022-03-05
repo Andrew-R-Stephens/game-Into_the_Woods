@@ -1,13 +1,12 @@
 package utils.math;
 
 import data.PreferenceData;
+import proptypes.types.actor.AActor;
 
 public abstract class APhysics {
 
     protected boolean hasGravity = true;
     protected final float GRAVITY = 9.8f;
-    protected final float FLUID_DENSITY = 1.225f;
-    protected double terminalVelocity;
     double deccelerationRate = .2;
 
     protected float
@@ -84,8 +83,8 @@ public abstract class APhysics {
 
         deccelerationRate /= delta;
 
-        vY += deccelerationRate;
-        vX += deccelerationRate;
+        vY += vY*deccelerationRate;
+        vX += vY*deccelerationRate;
 
     }
 
@@ -96,18 +95,67 @@ public abstract class APhysics {
     }
 
     public boolean isInBounds() {
-        if(x + w > 0 && x < PreferenceData.window_width) {
-            if(y + h > 0 && y < PreferenceData.window_height) {
+        if(x + w > 0 && x < PreferenceData.DEFAULT_WINDOW_WIDTH) {
+            if(y + h > 0 && y < PreferenceData.DEFAULT_WINDOW_HEIGHT) {
                 return true;
             }
         }
         return false;
     }
 
-    public void doCollision(float[] collisions) {
-        vX *= collisions[0];
-        vY *= -1;
-        x = collisions[2];
-        y = collisions[3];
+    public boolean hasCollision(AActor a) {
+
+        boolean hitBottom = (a.top() < bottom()) && (a.top() > top());
+        boolean hitTop = (a.bottom() > top()) && (a.bottom() < bottom());
+        boolean hitLeft = (a.right() > left()) && (a.right() < right());
+        boolean hitRight = (a.left() < right()) && (a.left() > left());
+
+        if((hitBottom || hitTop) && (hitLeft || hitRight)) {
+
+            float distX, distY;
+            if (hitBottom) {
+                distY = Math.abs(a.top() - bottom());
+            } else {
+                distY = Math.abs(a.bottom() - top());
+            }
+            if (hitLeft) {
+                distX = Math.abs(a.right() - left());
+            } else {
+                distX = Math.abs(a.left() - right());
+            }
+
+            System.out.println(distX + " " + distY);
+
+            if(distX > distY) {
+                if(hitTop) {
+                    a.y = top() - a.h;
+                }
+                else {
+                    a.y = bottom();
+                }
+
+                a.vX *= .5;
+                a.vY *= -.5;
+
+            } else if (distX < distY){
+                if(hitRight) {
+                    a.x = right();
+                }
+                else {
+                    a.x = left() - a.w;
+                }
+
+                a.vY *= .5;
+                a.vX *= -.5;
+
+            }
+
+
+            return true;
+        }
+
+        return false;
+
     }
+
 }

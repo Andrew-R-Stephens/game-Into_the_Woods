@@ -1,13 +1,11 @@
 package viewmodels.game;
 
 import controls.GameMouseControls;
-import data.PreferenceData;
 import props.gameactors.TestActor;
 import props.gameactors.TestCharacter;
 import props.levelactors.TestLevelPropStatic;
 import proptypes.actors.levelactors.animated.ALevelProp;
 import proptypes.types.actor.AActor;
-import proptypes.types.actor.pawn.APawn;
 import utils.MouseController;
 import viewmodels.controls.ControlsViewModel;
 
@@ -25,7 +23,18 @@ public class GameModel {
     public void init(ControlsViewModel controlsViewModel) {
         this.controlsViewModel = controlsViewModel;
 
-        levelProps.add(new TestLevelPropStatic(300 , 200, 300, 100, 0, 0, false, 0));
+        gameObjects.add(new TestCharacter(
+                100,100,
+                100,100,
+                0,0,
+                false,
+                1
+        ));
+        levelProps.add(new TestLevelPropStatic(600 , 400, 500, 100, 0, 0, false, 0));
+        levelProps.add(new TestLevelPropStatic(1800 , 100, 500, 100, 0, 0, false, 0));
+        levelProps.add(new TestLevelPropStatic(70 , 800, 500, 100, 0, 0, false, 0));
+        levelProps.add(new TestLevelPropStatic(500 , 700, 500, 100, 0, 0, false, 0));
+        levelProps.add(new TestLevelPropStatic(1100 , 600, 500, 100, 0, 0, false, 0));
     }
 
     public void addGameObject(AActor gameObject) {
@@ -47,8 +56,8 @@ public class GameModel {
                         new TestActor(
                                 (float)gmc.getPos()[0],
                                 (float)gmc.getPos()[1],
-                                10,
-                                10,
+                                50f,
+                                50f,
                                 new Random().nextFloat(-100, 100),
                                 new Random().nextFloat(-100, 100),
                                true,
@@ -59,13 +68,12 @@ public class GameModel {
                             new TestCharacter(
                                     (float)gmc.getPos()[0],
                                     (float)gmc.getPos()[1],
-                                    10,
-                                    10,
-                                    /*new Random().nextFloat(-10, 10),
-                                    new Random().nextFloat(-50, 10),*/
-                                    0, 0,
+                                    20f,
+                                    20f,
+                                    new Random().nextFloat(-10, 10),
+                                    new Random().nextFloat(-10, 10),
                                     true,
-                                    1
+                                    1f
                             )
                     );
                 }
@@ -103,23 +111,23 @@ public class GameModel {
         for(ALevelProp p: levelProps) {
             for(AActor a: gameObjects) {
                 if(a.isInBounds()) {
-                    float[] c = a.getCollisions(p);
-                    System.out.println(c[0] + " " + c[1] + " " + c[2] + " " + c[3]);
-                    a.doCollision(c);
+                    p.hasCollision(a);
                 }
             }
         }
     }
 
     public synchronized void renderGameObjects(Graphics g) {
+        int count = 0;
         for(AActor gameObject: gameObjects) {
-            if(gameObject instanceof APawn) {
-                APawn e = (APawn)gameObject;
-                if(e.isInBounds()) {
-                    e.draw(g);
+            if(gameObject instanceof TestCharacter o) {
+                if(o.isInBounds()) {
+                    o.draw(g);
+                    count++;
                 }
             }
         }
+        //System.out.println(count);
 
         for(AActor levelProps : levelProps) {
             if(levelProps instanceof ALevelProp p) {

@@ -2,8 +2,8 @@ package data;
 
 public class PreferenceData {
 
-    private int window_width_default = 0;
-    private int window_height_default = 0;
+    public static int DEFAULT_WINDOW_WIDTH = 0;
+    public static int DEFAULT_WINDOW_HEIGHT = 0;
 
     public static int window_width = 0;
     public static int window_height = 0;
@@ -16,8 +16,8 @@ public class PreferenceData {
     public static double scaledH = 1;
 
     public void calcResScale() {
-        scaledW = (double)window_width/window_width_default;
-        scaledH = (double)window_height/window_height_default;
+        scaledW = (double)window_width/ DEFAULT_WINDOW_WIDTH;
+        scaledH = (double)window_height/ DEFAULT_WINDOW_HEIGHT;
     }
 
     public void setWindowWidth(int width) {
@@ -37,11 +37,11 @@ public class PreferenceData {
     }
 
     public void setWindowWidthDefault(int width) {
-        this.window_width_default = width;
+        this.DEFAULT_WINDOW_WIDTH = width;
     }
 
     public void setWindowHeightDefault(int height) {
-        this.window_height_default = height;
+        this.DEFAULT_WINDOW_HEIGHT = height;
     }
 
     public void setWindowType(int type) {
