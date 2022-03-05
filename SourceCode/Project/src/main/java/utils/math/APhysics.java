@@ -7,14 +7,17 @@ public abstract class APhysics {
 
     protected boolean hasGravity = true;
     protected final float GRAVITY = 9.8f;
-    double deccelerationRate = .2;
+    protected double deccelerationRate = .2;
+    protected float mass = 1;
+
+    protected boolean canPrimaryJump, canWallJump;
+    protected double jumpBufferVert = 20, jumpBufferHoriz = 20;
 
     protected float
             x, y,
             w, h;
     protected float vX, vY;
 
-    protected float mass = 1;
 
     protected APhysics(
             float x, float y,
@@ -74,18 +77,12 @@ public abstract class APhysics {
     }
 
     protected void update(double delta) {
+        canPrimaryJump(false);
+        canWallJump(false);
+
         calculateGravity(delta);
 
         updateVelocity(delta);
-    }
-
-    private void updateVelocity(double delta) {
-
-        deccelerationRate /= delta;
-
-        vY += vY*deccelerationRate;
-        vX += vY*deccelerationRate;
-
     }
 
     private void calculateGravity(double delta) {
@@ -94,7 +91,27 @@ public abstract class APhysics {
         }
     }
 
-    public boolean isInBounds() {
+    private void updateVelocity(double delta) {
+
+        deccelerationRate /= delta;
+
+        vY += vY * deccelerationRate;
+        vX += vY * deccelerationRate;
+
+        if(vY > 100) {
+            vY = 100;
+        } else if(vY < -100) {
+            vY = -100;
+        }
+        if(vX > 100) {
+            vX = 100;
+        } else if(vX < -100) {
+            vX = -100;
+        }
+
+    }
+
+    public boolean isInFrameBounds() {
         if(x + w > 0 && x < PreferenceData.DEFAULT_WINDOW_WIDTH) {
             if(y + h > 0 && y < PreferenceData.DEFAULT_WINDOW_HEIGHT) {
                 return true;
@@ -105,10 +122,10 @@ public abstract class APhysics {
 
     public boolean hasCollision(AActor a) {
 
-        boolean hitBottom = (a.top() < bottom()) && (a.top() > top());
-        boolean hitTop = (a.bottom() > top()) && (a.bottom() < bottom());
-        boolean hitLeft = (a.right() > left()) && (a.right() < right());
-        boolean hitRight = (a.left() < right()) && (a.left() > left());
+        boolean hitBottom = (a.top() <= bottom()) && (a.top() >= top());
+        boolean hitTop = (a.bottom() >= top()) && (a.bottom() <= bottom());
+        boolean hitLeft = (a.right() >= left()) && (a.right() <= right());
+        boolean hitRight = (a.left() <= right()) && (a.left() >= left());
 
         if((hitBottom || hitTop) && (hitLeft || hitRight)) {
 
@@ -123,8 +140,6 @@ public abstract class APhysics {
             } else {
                 distX = Math.abs(a.left() - right());
             }
-
-            System.out.println(distX + " " + distY);
 
             if(distX > distY) {
                 if(hitTop) {
@@ -150,12 +165,22 @@ public abstract class APhysics {
 
             }
 
+            a.canPrimaryJump(a.bottom() + jumpBufferVert > top());
+            a.canWallJump(a.left() - jumpBufferHoriz < right() || a.right() + jumpBufferHoriz > left());
 
             return true;
         }
 
         return false;
 
+    }
+
+    public void canPrimaryJump(boolean canJump) {
+        this.canPrimaryJump = canJump;
+    }
+
+    public void canWallJump(boolean canJump) {
+        this.canWallJump = canJump;
     }
 
 }

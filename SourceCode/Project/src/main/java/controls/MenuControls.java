@@ -1,6 +1,6 @@
 package controls;
 
-import viewmodels.controls.ControlsViewModel;
+import viewmodels.controls.ControlsModel;
 import viewmodels.game.GameModel;
 
 import java.awt.event.KeyEvent;
@@ -8,10 +8,10 @@ import java.awt.event.KeyListener;
 
 public class MenuControls implements KeyListener {
 
-    private ControlsViewModel controlsViewModel;
+    private ControlsModel controlsViewModel;
     private GameModel gameViewModel;
 
-    public MenuControls(ControlsViewModel controlsViewModel, GameModel gameViewModel) {
+    public MenuControls(ControlsModel controlsViewModel, GameModel gameViewModel) {
         this.controlsViewModel = controlsViewModel;
         this.gameViewModel = gameViewModel;
     }
@@ -28,16 +28,16 @@ public class MenuControls implements KeyListener {
                 System.exit(1);
             }
             case KeyEvent.VK_LEFT -> {
-                controlsViewModel.setDirectional(ControlsViewModel.Directionals.LEFT, true);
+                controlsViewModel.setDirectional(ControlsModel.Directionals.LEFT, true);
             }
             case KeyEvent.VK_RIGHT -> {
-                controlsViewModel.setDirectional(ControlsViewModel.Directionals.RIGHT, true);
+                controlsViewModel.setDirectional(ControlsModel.Directionals.RIGHT, true);
             }
             case KeyEvent.VK_UP -> {
-                controlsViewModel.setDirectional(ControlsViewModel.Directionals.UP, true);
+                controlsViewModel.setDirectional(ControlsModel.Directionals.UP, true);
             }
             case KeyEvent.VK_DOWN -> {
-                controlsViewModel.setDirectional(ControlsViewModel.Directionals.DOWN, true);
+                controlsViewModel.setDirectional(ControlsModel.Directionals.DOWN, true);
             }
         }
     }
@@ -46,16 +46,16 @@ public class MenuControls implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_LEFT -> {
-                controlsViewModel.setDirectional(ControlsViewModel.Directionals.LEFT, false);
+                controlsViewModel.setDirectional(ControlsModel.Directionals.LEFT, false);
             }
             case KeyEvent.VK_RIGHT -> {
-                controlsViewModel.setDirectional(ControlsViewModel.Directionals.RIGHT, false);
+                controlsViewModel.setDirectional(ControlsModel.Directionals.RIGHT, false);
             }
             case KeyEvent.VK_UP -> {
-                controlsViewModel.setDirectional(ControlsViewModel.Directionals.UP, false);
+                controlsViewModel.setDirectional(ControlsModel.Directionals.UP, false);
             }
             case KeyEvent.VK_DOWN -> {
-                controlsViewModel.setDirectional(ControlsViewModel.Directionals.DOWN, false);
+                controlsViewModel.setDirectional(ControlsModel.Directionals.DOWN, false);
             }
         }
     }

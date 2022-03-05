@@ -1,7 +1,7 @@
 package graphics.ui;
 
 import data.PreferenceData;
-import viewmodels.controls.ControlsViewModel;
+import viewmodels.controls.ControlsModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class GameWindow extends JFrame {
 
-    private ControlsViewModel controlsViewModel;
+    private ControlsModel controlsViewModel;
 
     private final JFrame thisFrame = this;
 
@@ -20,7 +20,7 @@ public class GameWindow extends JFrame {
     private int updates, frames, lastFPS;
     double avgFrames;
 
-    public void init(PreferenceData preferences, GameCanvas gameCanvas, ControlsViewModel controlsViewModel){
+    public void init(PreferenceData preferences, GameCanvas gameCanvas, ControlsModel controlsViewModel){
         //this.gameCanvas = gameCanvas;
         this.controlsViewModel = controlsViewModel;
 

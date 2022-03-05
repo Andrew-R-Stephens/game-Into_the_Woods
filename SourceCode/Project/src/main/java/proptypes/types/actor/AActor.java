@@ -3,6 +3,8 @@ package proptypes.types.actor;
 import utils.IDrawable;
 import utils.math.APhysics;
 
+import java.awt.*;
+
 /**
  *
  */
@@ -23,4 +25,8 @@ public abstract class AActor extends APhysics implements IDrawable {
         super.update(delta);
     }
 
+    @Override
+    public void draw(Graphics g) {
+
+    }
 }

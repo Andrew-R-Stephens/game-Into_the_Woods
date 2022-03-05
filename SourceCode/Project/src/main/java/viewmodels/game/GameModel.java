@@ -7,7 +7,7 @@ import props.levelactors.TestLevelPropStatic;
 import proptypes.actors.levelactors.animated.ALevelProp;
 import proptypes.types.actor.AActor;
 import utils.MouseController;
-import viewmodels.controls.ControlsViewModel;
+import viewmodels.controls.ControlsModel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,22 +15,29 @@ import java.util.Random;
 
 public class GameModel {
 
-    private ControlsViewModel controlsViewModel;
+    private ControlsModel controlsViewModel;
 
     private final ArrayList<AActor> gameObjects = new ArrayList<>();
     private final ArrayList<ALevelProp> levelProps = new ArrayList<>();
 
-    public void init(ControlsViewModel controlsViewModel) {
+    public void init(ControlsModel controlsViewModel) {
         this.controlsViewModel = controlsViewModel;
 
+        // Main Test Character
         gameObjects.add(new TestCharacter(
-                100,100,
+                200,200,
                 100,100,
                 0,0,
-                false,
-                1
+                true,
+                1f
         ));
-        levelProps.add(new TestLevelPropStatic(600 , 400, 500, 100, 0, 0, false, 0));
+
+        // Wall
+        levelProps.add(new TestLevelPropStatic(0 , 0, 100, 1080, 0, 0, false, 0));
+        // Floor
+        levelProps.add(new TestLevelPropStatic(0 , 980, 10000, 100, 0, 0, false, 0));
+
+        // Other Props
         levelProps.add(new TestLevelPropStatic(1800 , 100, 500, 100, 0, 0, false, 0));
         levelProps.add(new TestLevelPropStatic(70 , 800, 500, 100, 0, 0, false, 0));
         levelProps.add(new TestLevelPropStatic(500 , 700, 500, 100, 0, 0, false, 0));
@@ -42,9 +49,11 @@ public class GameModel {
     }
 
     public synchronized void update(double delta) {
+
         // Mouse Input (Adding Game Objects)
         MouseController mouseController = controlsViewModel.getMouseController();
         if (mouseController instanceof GameMouseControls) {
+
             GameMouseControls gmc = (GameMouseControls) mouseController;
             if (gmc.isLeftPressed()) {
                 int count = (int)(1/delta);
@@ -52,7 +61,7 @@ public class GameModel {
                     count = 1;
                 }
                 for(int i = 0; i < count; i++) {
-                    /*addGameObject(
+                    addGameObject(
                         new TestActor(
                                 (float)gmc.getPos()[0],
                                 (float)gmc.getPos()[1],
@@ -61,15 +70,15 @@ public class GameModel {
                                 new Random().nextFloat(-100, 100),
                                 new Random().nextFloat(-100, 100),
                                true,
-                               1
+                               1f
                         )
-                    );*/
+                    );
                     addGameObject(
                             new TestCharacter(
                                     (float)gmc.getPos()[0],
                                     (float)gmc.getPos()[1],
-                                    20f,
-                                    20f,
+                                    50f,
+                                    50f,
                                     new Random().nextFloat(-10, 10),
                                     new Random().nextFloat(-10, 10),
                                     true,
@@ -99,7 +108,7 @@ public class GameModel {
 
             // Update Characters
             if(gameObject instanceof TestCharacter tc) {
-                tc.move(controlsViewModel.getDirectionals());
+                tc.control(controlsViewModel.getDirectionals(), controlsViewModel.getAbilities());
                 tc.update(updateRate);
             }
 
@@ -110,7 +119,7 @@ public class GameModel {
     private void checkCollisions() {
         for(ALevelProp p: levelProps) {
             for(AActor a: gameObjects) {
-                if(a.isInBounds()) {
+                if(a.isInFrameBounds()) {
                     p.hasCollision(a);
                 }
             }
@@ -118,20 +127,22 @@ public class GameModel {
     }
 
     public synchronized void renderGameObjects(Graphics g) {
-        int count = 0;
         for(AActor gameObject: gameObjects) {
             if(gameObject instanceof TestCharacter o) {
-                if(o.isInBounds()) {
+                if(o.isInFrameBounds()) {
                     o.draw(g);
-                    count++;
+                }
+            }
+            if(gameObject instanceof TestActor o) {
+                if(o.isInFrameBounds()) {
+                    o.draw(g);
                 }
             }
         }
-        //System.out.println(count);
 
         for(AActor levelProps : levelProps) {
             if(levelProps instanceof ALevelProp p) {
-                if(p.isInBounds()) {
+                if(p.isInFrameBounds()) {
                     p.draw(g);
                 }
             }

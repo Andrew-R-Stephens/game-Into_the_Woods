@@ -37,7 +37,11 @@ public class TestCharacter extends ACharacter {
 
         g.setColor(c);
         g.drawRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)(h*sH));
-        g.drawString("TC", (int)(x*sW) + 3, (int)(y*sH) + 12);
+        g.drawLine((int)(x*sW), (int)(y*sH), (int)((x*sW)+(w*sW)), (int)((y*sW) + (h*sH)));
+        g.drawLine((int)((x*sW)+(w*sW)), (int)(y*sH), (int)(x*sW), (int)((y*sW) + (h*sH)));
+        g.setColor(Color.CYAN);
+        g.drawRect((int)((x*sW) - (jumpBufferHoriz*sW)), (int)(y*sH), (int)((w*sW) + (jumpBufferHoriz*sW*2)), (int)(h*sH));
+        g.drawRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)((h*sH)+(jumpBufferVert*sH)));
     }
 
 }

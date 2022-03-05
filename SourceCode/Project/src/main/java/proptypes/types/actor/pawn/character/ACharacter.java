@@ -9,16 +9,28 @@ public class ACharacter extends APawn implements IDrawable {
         super(x, y, w, h, vx, vy, hasGravity, mass);
     }
 
+    public void control(boolean[] directionals, boolean[] abilities) {
+
+        doAbilitiy(abilities);
+        move(directionals);
+
+    }
+
     public void move(boolean[] directionals) {
 
         int xDir = (directionals[0] ? -1 : 0) + (directionals[1] ? 1 : 0);
         int yDir = (directionals[2] ? -1 : 0) + (directionals[3] ? 1 : 0);
 
-        vX += .5*xDir;
-        vY += .5*yDir;
+        vX += GRAVITY*xDir;
+        vY += GRAVITY*yDir;
 
-        x += vX;
-        y += vY;
+    }
+
+    protected void doAbilitiy(boolean[] abilities) {
+        if((canPrimaryJump || canWallJump) && abilities[0]) {
+            vY -= 50;
+        }
+
     }
 
 }

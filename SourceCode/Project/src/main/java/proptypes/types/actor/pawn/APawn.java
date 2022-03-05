@@ -14,10 +14,15 @@ public abstract class APawn extends AActor implements IDrawable {
     @Override
     protected void update(double delta) {
         super.update(delta);
+
+        x += vX / delta;
+        y += vY / delta;
+
     }
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
     }
 
 }

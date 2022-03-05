@@ -1,19 +1,19 @@
 package controls;
 
 import utils.MouseController;
-import viewmodels.controls.ControlsViewModel;
+import viewmodels.controls.ControlsModel;
 
 import java.awt.event.MouseEvent;
 
 public class GameMouseControls extends MouseController {
 
-    private final ControlsViewModel controlsViewModel;
+    private final ControlsModel controlsViewModel;
 
     private boolean isLeftPressed = false;
     private boolean isRightPressed = false;
     private final int[] mPos = new int[]{-100, -100};
 
-    public GameMouseControls(ControlsViewModel controlsViewModel) {
+    public GameMouseControls(ControlsModel controlsViewModel) {
         this.controlsViewModel = controlsViewModel;
     }
 

@@ -4,7 +4,7 @@ import data.PreferenceData;
 import graphics.ui.GameCanvas;
 import graphics.ui.GameWindow;
 import utils.PreferencesXMLParser;
-import viewmodels.controls.ControlsViewModel;
+import viewmodels.controls.ControlsModel;
 import viewmodels.game.GameModel;
 
 /**
@@ -14,7 +14,7 @@ public class Main {
 
     private static PreferenceData preferences;
 
-    private static ControlsViewModel controlsViewModel;
+    private static ControlsModel controlsViewModel;
     private static GameModel gameViewModel;
 
     private static GameCanvas gameCanvas;
@@ -36,7 +36,7 @@ public class Main {
     }
 
     public static void create() {
-        controlsViewModel = new ControlsViewModel();
+        controlsViewModel = new ControlsModel();
         gameViewModel = new GameModel();
 
         preferences = new PreferenceData();

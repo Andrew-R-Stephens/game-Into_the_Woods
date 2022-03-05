@@ -15,9 +15,6 @@ public class TestActor extends APawn {
     public void update(double delta) {
         super.update(delta);
 
-        x += vX / delta;
-        y += vY / delta;
-
     }
 
     @Override
@@ -25,6 +22,6 @@ public class TestActor extends APawn {
         double sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
 
         g.setColor(Color.RED);
-        g.drawRect((int) ((x) - (w*sW/2)), (int) ((y) - (h*sH/2)), (int) (w*sW), (int) (h*sH));
+        g.drawRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)(h*sH));
     }
 }
