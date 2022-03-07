@@ -1,19 +1,16 @@
-package controls;
+package controls.game;
 
+import utils.AKeyController;
 import viewmodels.controls.ControlsModel;
-import viewmodels.game.GameModel;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class MenuControls implements KeyListener {
+public class GameKeyControls extends AKeyController {
 
     private ControlsModel controlsViewModel;
-    private GameModel gameViewModel;
 
-    public MenuControls(ControlsModel controlsViewModel, GameModel gameViewModel) {
+    public GameKeyControls(ControlsModel controlsViewModel) {
         this.controlsViewModel = controlsViewModel;
-        this.gameViewModel = gameViewModel;
     }
 
     @Override
@@ -27,17 +24,22 @@ public class MenuControls implements KeyListener {
                 System.out.println("Quitting");
                 System.exit(1);
             }
-            case KeyEvent.VK_LEFT -> {
+
+            case KeyEvent.VK_A -> {
                 controlsViewModel.setDirectional(ControlsModel.Directionals.LEFT, true);
             }
-            case KeyEvent.VK_RIGHT -> {
+            case KeyEvent.VK_D -> {
                 controlsViewModel.setDirectional(ControlsModel.Directionals.RIGHT, true);
             }
-            case KeyEvent.VK_UP -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.UP, true);
+            case KeyEvent.VK_W -> {
+                controlsViewModel.setDirectional(ControlsModel.Directionals.UP, false);
             }
-            case KeyEvent.VK_DOWN -> {
+            case KeyEvent.VK_S -> {
                 controlsViewModel.setDirectional(ControlsModel.Directionals.DOWN, true);
+            }
+
+            case KeyEvent.VK_SPACE -> {
+                controlsViewModel.setAbility(ControlsModel.Abilities.JUMP, true);
             }
         }
     }
@@ -45,17 +47,21 @@ public class MenuControls implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
-            case KeyEvent.VK_LEFT -> {
+            case KeyEvent.VK_A -> {
                 controlsViewModel.setDirectional(ControlsModel.Directionals.LEFT, false);
             }
-            case KeyEvent.VK_RIGHT -> {
+            case KeyEvent.VK_D -> {
                 controlsViewModel.setDirectional(ControlsModel.Directionals.RIGHT, false);
             }
-            case KeyEvent.VK_UP -> {
+            case KeyEvent.VK_W -> {
                 controlsViewModel.setDirectional(ControlsModel.Directionals.UP, false);
             }
-            case KeyEvent.VK_DOWN -> {
+            case KeyEvent.VK_S -> {
                 controlsViewModel.setDirectional(ControlsModel.Directionals.DOWN, false);
+            }
+
+            case KeyEvent.VK_SPACE -> {
+                controlsViewModel.setAbility(ControlsModel.Abilities.JUMP, false);
             }
         }
     }

@@ -1,19 +1,22 @@
 package viewmodels.controls;
 
-import controls.GameKeyControls;
-import controls.GameMouseControls;
-import utils.KeyController;
-import utils.MouseController;
+import controls.game.GameKeyControls;
+import controls.game.GameMouseControls;
+import utils.AKeyController;
+import utils.AMouseController;
 
 public class ControlsModel {
 
-    private KeyController keyController;
-    private MouseController mouseController;
+    private AKeyController keyController;
+    private AMouseController mouseController;
 
-    public enum Directionals {LEFT, RIGHT, UP, DOWN};
-    public enum Abilities {JUMP, DASH};
+    public enum Directionals {LEFT, RIGHT, UP, DOWN}
+    public enum Actions {ESCAPE, ENTER}
+    public enum Abilities {JUMP, DASH}
+    public enum AbilityStates{JUMP_PRESSED, DASH_PRESSED}
 
     boolean[] directionals = new boolean[Directionals.values().length];
+    boolean[] actions = new boolean[Actions.values().length];
     boolean[] abilities = new boolean[Abilities.values().length];
 
     public void init() {
@@ -21,11 +24,11 @@ public class ControlsModel {
         keyController = new GameKeyControls(this);
     }
 
-    public KeyController getKeyController() {
+    public AKeyController getKeyController() {
         return keyController;
     }
 
-    public MouseController getMouseController() {
+    public AMouseController getMouseController() {
         return mouseController;
     }
 
@@ -37,20 +40,20 @@ public class ControlsModel {
         return directionals;
     }
 
-    public void setAbilities(Abilities type, boolean state) {
-        abilities[type.ordinal()] = state;
+    public void setAction(Actions type, boolean state) {
+        actions[type.ordinal()] = state;
     }
 
-    public boolean[] getAbilities() {
-        return abilities;
+    public boolean[] getActions() {
+        return actions;
     }
 
     public void setAbility(Abilities type, boolean state) {
         abilities[type.ordinal()] = state;
     }
 
-    public boolean getAbility(Abilities type) {
-        return abilities[type.ordinal()];
+    public boolean[] getAbilities() {
+        return abilities;
     }
 
 }

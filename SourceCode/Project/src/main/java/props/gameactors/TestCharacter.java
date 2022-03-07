@@ -3,6 +3,7 @@ package props.gameactors;
 import data.PreferenceData;
 import proptypes.types.actor.AActor;
 import proptypes.types.actor.pawn.character.ACharacter;
+import viewmodels.controls.ControlsModel;
 import viewmodels.game.WorldModel;
 
 import java.awt.*;
@@ -11,8 +12,8 @@ public class TestCharacter extends ACharacter {
 
     protected Color c = Color.BLUE;
 
-    public TestCharacter(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {
-        super(x, y, w, h, vx, vy, hasGravity, mass);
+    public TestCharacter(ControlsModel cModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {
+        super(cModel, x, y, w, h, vx, vy, hasGravity, mass);
     }
 
     @Override

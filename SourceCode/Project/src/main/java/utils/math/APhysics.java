@@ -30,69 +30,6 @@ public abstract class APhysics {
 
     }
 
-    private void setAcceleration() {
-        accelerationRate = .2f  * mass;
-    }
-
-    private void setPosition(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    private void setSize(float w, float h) {
-        this.w = w;
-        this.h = h;
-    }
-
-    private void setMass(float mass) {
-        this.mass = mass;
-    }
-
-    protected void hasGravity(boolean hasGravity) {
-        this.hasGravity = hasGravity;
-    }
-
-    protected void setVelocity(float velocityX, float velocityY) {
-        this.vX = velocityX;
-        this.vY = velocityY;
-    }
-
-    protected float top() {
-        return y;
-    }
-
-    protected float bottom() {
-        return top() + h;
-    }
-
-    protected float left() {
-        return x;
-    }
-
-    protected float right() {
-        return left() + w;
-    }
-
-    protected float leftBufferInner() {
-        return left() + bufferHoriz;
-    }
-
-    protected float leftBufferOuter() { return left() - bufferHoriz; }
-
-    protected float rightBufferInner() {
-        return right() + bufferHoriz;
-    }
-
-    protected float rightBufferOuter() { return right() - bufferHoriz; }
-
-    protected float bottomBufferInner() {
-        return bottom() - bufferVert;
-    }
-
-    protected float bottomBufferOuter() {
-        return bottom() + bufferVert;
-    }
-
     protected void update(double delta) {
         isFloorCollision = false;
         isWallCollisionLeft = false;
@@ -145,8 +82,8 @@ public abstract class APhysics {
                         ((bottom() >= a.top()) && (bottom() <= a.bottom()));
 
         boolean hitTop =
-                    ((a.bottom() >= top()) && (a.bottom() <= bottom())) ||
-                            ((top() <= a.bottom()) && (top() >= a.top()));
+                ((a.bottom() >= top()) && (a.bottom() <= bottom())) ||
+                        ((top() <= a.bottom()) && (top() >= a.top()));
         boolean hitLeft =
                 ((a.right() >= left()) && (a.right() <= right())) ||
                         ((left() <= a.right()) && (left() >= a.left()));
@@ -217,6 +154,69 @@ public abstract class APhysics {
 
         return false;
 
+    }
+
+    private void setAcceleration() {
+        accelerationRate = .2f  * mass;
+    }
+
+    private void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    private void setSize(float w, float h) {
+        this.w = w;
+        this.h = h;
+    }
+
+    private void setMass(float mass) {
+        this.mass = mass;
+    }
+
+    protected void hasGravity(boolean hasGravity) {
+        this.hasGravity = hasGravity;
+    }
+
+    protected void setVelocity(float velocityX, float velocityY) {
+        this.vX = velocityX;
+        this.vY = velocityY;
+    }
+
+    protected float top() {
+        return y;
+    }
+
+    protected float bottom() {
+        return top() + h;
+    }
+
+    protected float left() {
+        return x;
+    }
+
+    protected float right() {
+        return left() + w;
+    }
+
+    protected float leftBufferInner() {
+        return left() + bufferHoriz;
+    }
+
+    protected float leftBufferOuter() { return left() - bufferHoriz; }
+
+    protected float rightBufferInner() {
+        return right() + bufferHoriz;
+    }
+
+    protected float rightBufferOuter() { return right() - bufferHoriz; }
+
+    protected float bottomBufferInner() {
+        return bottom() - bufferVert;
+    }
+
+    protected float bottomBufferOuter() {
+        return bottom() + bufferVert;
     }
 
 }

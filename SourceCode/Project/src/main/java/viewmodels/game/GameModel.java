@@ -1,12 +1,12 @@
 package viewmodels.game;
 
-import controls.GameMouseControls;
+import controls.game.GameMouseControls;
 import props.gameactors.TestActor;
 import props.gameactors.TestCharacter;
 import props.levelactors.TestLevelPropStatic;
 import proptypes.actors.levelactors.animated.ALevelProp;
 import proptypes.types.actor.AActor;
-import utils.MouseController;
+import utils.AMouseController;
 import viewmodels.controls.ControlsModel;
 
 import java.awt.*;
@@ -26,6 +26,7 @@ public class GameModel {
 
         // Main Test Character
         gameObjects.add(new TestCharacter(
+                controlsViewModel,
                 200,50,
                 50,50,
                 0,0,
@@ -35,6 +36,14 @@ public class GameModel {
 
         // Wall
         levelModel.addProp(new TestLevelPropStatic(0 , 0, 100, 1080, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(0 , 0, 100, 1080, 0, 0, false, 0));
+        // Climbing Walls
+        levelModel.addProp(new TestLevelPropStatic(320 , -150, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(500 , 0, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(320 , 220, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(500 , 360, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(320 , 500, 50, 200, 0, 0, false, 0));
+
         levelModel.addProp(new TestLevelPropStatic(9000 , 0, 100, 1080, 0, 0, false, 0));
         // Floor
         levelModel.addProp(new TestLevelPropStatic(0 , 980, 10000, 100, 0, 0, false, 0));
@@ -63,7 +72,7 @@ public class GameModel {
     public synchronized void update(double delta) {
 
         // Mouse Input (Adding Game Objects)
-        MouseController mouseController = controlsViewModel.getMouseController();
+        AMouseController mouseController = controlsViewModel.getMouseController();
         if (mouseController instanceof GameMouseControls) {
 
             GameMouseControls gmc = (GameMouseControls) mouseController;
@@ -109,7 +118,7 @@ public class GameModel {
 
             // Update Characters
             if(gameObject instanceof TestCharacter tc) {
-                tc.control(controlsViewModel.getDirectionals(), controlsViewModel.getAbilities());
+                tc.control();
                 tc.update(updateRate);
             }
 
