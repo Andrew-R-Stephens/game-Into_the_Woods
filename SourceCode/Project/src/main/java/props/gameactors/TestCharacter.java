@@ -29,40 +29,28 @@ public class TestCharacter extends ACharacter {
     public void update(double delta) {
         super.update(delta);
 
-        WorldModel.offX = ((PreferenceData.window_width * .5) - (w * PreferenceData.scaledW)) - (x * PreferenceData.scaledW);
-        WorldModel.offY = ((PreferenceData.window_height * .5) - (h * PreferenceData.scaledH)) - (y * PreferenceData.scaledH);
+        WorldModel.offX = ((PreferenceData.window_width_actual * .5) - (w * PreferenceData.scaledW)) - (x * PreferenceData.scaledW);
+        WorldModel.offY = ((PreferenceData.window_height_actual * .5) - (h * PreferenceData.scaledH)) - (y * PreferenceData.scaledH);
     }
 
     @Override
     public void draw(Graphics g) {
         super.draw(g);
 
-        /*
-        double sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
-
-        g.setColor(c);
-        g.drawRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)(h*sH));
-        g.drawLine((int)(x*sW), (int)(y*sH), (int)((x*sW)+(w*sW)), (int)((y*sW) + (h*sH)));
-        g.drawLine((int)((x*sW)+(w*sW)), (int)(y*sH), (int)(x*sW), (int)((y*sW) + (h*sH)));
-        g.setColor(Color.CYAN);
-        g.drawRect((int)((x*sW) - (jumpBufferHoriz*sW)), (int)(y*sH), (int)((w*sW) + (jumpBufferHoriz*sW*2)), (int)(h*sH));
-        g.drawRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)((h*sH)+(jumpBufferVert*sH)));
-        */
-
         //Half window width
-        double centerX = PreferenceData.window_width * .5 * WorldModel.zoomLevel;
-        double centerY = PreferenceData.window_height * .5 * WorldModel.zoomLevel;
+        double centerX = PreferenceData.window_width_actual * .5;
+        double centerY = PreferenceData.window_height_actual * .5;
 
         // Scaled size
-        double scaleW = w * PreferenceData.scaledW * WorldModel.zoomLevel;
-        double scaleH = h * PreferenceData.scaledH * WorldModel.zoomLevel;
+        double scaleW = w * PreferenceData.scaledW;
+        double scaleH = h * PreferenceData.scaledH;
 
         centerX -= scaleW;
         centerY -= scaleH;
 
         g.setColor(c);
         g.drawRect((int)(centerX), (int)(centerY), (int)(scaleW), (int)(scaleH));
-        g.drawString("TC", (int)(x* scaleW) + 3, (int)(y* scaleH) + 12);
+        g.drawString("TC", (int)(centerX) + 3, (int)(centerY) + 12);
 
     }
 

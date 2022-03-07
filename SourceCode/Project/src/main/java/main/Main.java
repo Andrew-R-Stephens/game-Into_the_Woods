@@ -7,6 +7,15 @@ import utils.PreferencesXMLParser;
 import viewmodels.controls.ControlsModel;
 import viewmodels.game.GameModel;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.security.CodeSource;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
 /**
  * The type main.Main.
  */
@@ -36,6 +45,7 @@ public class Main {
     }
 
     public static void create() {
+
         controlsViewModel = new ControlsModel();
         gameViewModel = new GameModel();
 
@@ -43,21 +53,26 @@ public class Main {
 
         gameCanvas = new GameCanvas();
         gameWindow = new GameWindow();
+
     }
 
     /**
      * Init game objects.
      */
     public static void init() {
+
         gameViewModel.init(controlsViewModel);
         controlsViewModel.init();
 
-        PreferencesXMLParser preferencesXMLParser = new PreferencesXMLParser(preferences, "files/Preferences.xml");
+        PreferencesXMLParser preferencesXMLParser =
+                new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
         preferencesXMLParser.read();
-        preferences.post();
 
         gameCanvas.init(gameViewModel);
         gameWindow.init(preferences, gameCanvas, controlsViewModel);
+
+        preferences.post();
+
     }
 
 }

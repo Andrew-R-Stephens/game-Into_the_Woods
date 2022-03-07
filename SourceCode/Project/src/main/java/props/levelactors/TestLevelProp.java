@@ -1,9 +1,7 @@
 package props.levelactors;
 
-import data.PreferenceData;
 import proptypes.actors.levelactors.animated.ALevelProp;
 import proptypes.types.actor.AActor;
-import viewmodels.game.WorldModel;
 
 import java.awt.*;
 

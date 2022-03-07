@@ -1,22 +1,19 @@
 package utils.math;
 
-import data.PreferenceData;
 import proptypes.types.actor.AActor;
 import viewmodels.game.LevelModel;
 public abstract class APhysics {
 
     protected boolean hasGravity = true;
-    protected double accelerationRate = .2;
-    protected float mass = 1;
 
-    protected boolean canPrimaryJump, canWallJump;
-    protected double jumpBufferVert = 20, jumpBufferHoriz = 20;
-
-    protected float
-            x, y,
-            w, h;
+    protected float accelerationRate = .2f, mass = 1;
     protected float vX, vY;
+    protected float x, y, w, h;
 
+    protected float bufferVert = 5, bufferHoriz = 5;
+
+    protected boolean isFloorCollision, isWallCollisionLeft, isWallCollisionRight;
+    protected boolean isUnderControl;
 
     protected APhysics(
             float x, float y,
@@ -30,10 +27,11 @@ public abstract class APhysics {
         setMass(mass);
         setAcceleration();
         hasGravity(hasGravity);
+
     }
 
     private void setAcceleration() {
-        accelerationRate = .2  * mass;
+        accelerationRate = .2f  * mass;
     }
 
     private void setPosition(float x, float y) {
@@ -59,25 +57,46 @@ public abstract class APhysics {
         this.vY = velocityY;
     }
 
-    protected float left() {
-        return x;
-    }
-
-    protected float right() {
-        return x+w;
-    }
-
     protected float top() {
         return y;
     }
 
     protected float bottom() {
-        return y+h;
+        return top() + h;
+    }
+
+    protected float left() {
+        return x;
+    }
+
+    protected float right() {
+        return left() + w;
+    }
+
+    protected float leftBufferInner() {
+        return left() + bufferHoriz;
+    }
+
+    protected float leftBufferOuter() { return left() - bufferHoriz; }
+
+    protected float rightBufferInner() {
+        return right() + bufferHoriz;
+    }
+
+    protected float rightBufferOuter() { return right() - bufferHoriz; }
+
+    protected float bottomBufferInner() {
+        return bottom() - bufferVert;
+    }
+
+    protected float bottomBufferOuter() {
+        return bottom() + bufferVert;
     }
 
     protected void update(double delta) {
-        canPrimaryJump(false);
-        canWallJump(false);
+        isFloorCollision = false;
+        isWallCollisionLeft = false;
+        isWallCollisionRight = false;
 
         calculateGravity(delta);
 
@@ -97,37 +116,57 @@ public abstract class APhysics {
         vY += vY * accelerationRate;
         vX += vY * accelerationRate;
 
-        if(vY > 100) {
-            vY = 100;
-        } else if(vY < -100) {
-            vY = -100;
+        if(vY > 100f) {
+            vY = 100f;
+        } else if(vY < -100f) {
+            vY = -100f;
         }
-        if(vX > 100) {
-            vX = 100;
-        } else if(vX < -100) {
-            vX = -100;
+        if(vX > 100f) {
+            vX = 100f;
+        } else if(vX < -100f) {
+            vX = -100f;
         }
 
-    }
-
-    public boolean isInFrameBounds() {
-        if(x + w > 0 && x < PreferenceData.DEFAULT_WINDOW_WIDTH) {
-            if(y + h > 0 && y < PreferenceData.DEFAULT_WINDOW_HEIGHT) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public boolean hasCollision(AActor a) {
 
+        boolean isFloorBounded = ((a.bottomBufferOuter()) >= top()) && (a.bottomBufferInner() <= bottom());
+
+        boolean isWallBoundedLeft =
+                !isFloorBounded && ((a.leftBufferOuter() >= right()) && (a.leftBufferInner() <= left()));
+
+        boolean isWallBoundedRight =
+                !isFloorBounded && ((a.rightBufferInner() >= left()) && (a.rightBufferOuter() <= right()));
+
         // Determine the conditions of the object collision
-        boolean hitBottom = (a.top() <= bottom()) && (a.top() >= top());
-        boolean hitTop = (a.bottom() >= top()) && (a.bottom() <= bottom());
-        boolean hitLeft = (a.right() >= left()) && (a.right() <= right());
-        boolean hitRight = (a.left() <= right()) && (a.left() >= left());
+        boolean hitBottom =
+                ((a.top() <= bottom()) && (a.top() >= top())) ||
+                        ((bottom() >= a.top()) && (bottom() <= a.bottom()));
 
+        boolean hitTop =
+                    ((a.bottom() >= top()) && (a.bottom() <= bottom())) ||
+                            ((top() <= a.bottom()) && (top() >= a.top()));
+        boolean hitLeft =
+                ((a.right() >= left()) && (a.right() <= right())) ||
+                        ((left() <= a.right()) && (left() >= a.left()));
+        boolean hitRight =
+                ((a.left() <= right()) && (a.left() >= left())) ||
+                        ((right() >= a.left()) && (right() <= a.right()));
 
+        if ((hitRight || hitLeft) && isFloorBounded) {
+            a.isFloorCollision = true;
+        }
+
+        if (hitTop || hitBottom) {
+
+            if(isWallBoundedLeft) {
+                a.isWallCollisionLeft = true;
+            }
+            if(isWallBoundedRight) {
+                a.isWallCollisionRight = true;
+            }
+        }
 
         if((hitBottom || hitTop) && (hitLeft || hitRight)) {
 
@@ -147,9 +186,12 @@ public abstract class APhysics {
             if(distX > distY) {
                 if(hitTop) {
                     a.y = top() - a.h;
-                    a.vX *= .75;
 
-                    a.canPrimaryJump(true);
+                    a.isFloorCollision = true;
+
+                    if(!a.isUnderControl) {
+                        a.vX *= .9f;
+                    }
                 }
                 else {
                     a.y = bottom();
@@ -159,13 +201,14 @@ public abstract class APhysics {
             } else if (distX < distY){
                 if(hitRight) {
                     a.x = right();
+                    a.isWallCollisionLeft = true;
                 }
                 else {
                     a.x = left() - a.w;
+                    a.isWallCollisionRight = true;
                 }
 
-                a.vY *= .5;
-                a.vX *= -.5;
+                a.vX = 0;
 
             }
 
@@ -174,14 +217,6 @@ public abstract class APhysics {
 
         return false;
 
-    }
-
-    public void canPrimaryJump(boolean canJump) {
-        this.canPrimaryJump = canJump;
-    }
-
-    public void canWallJump(boolean canJump) {
-        this.canWallJump = canJump;
     }
 
 }

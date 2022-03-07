@@ -26,8 +26,8 @@ public class GameModel {
 
         // Main Test Character
         gameObjects.add(new TestCharacter(
-                200,200,
-                100,100,
+                200,50,
+                50,50,
                 0,0,
                 true,
                 1f
@@ -35,6 +35,7 @@ public class GameModel {
 
         // Wall
         levelModel.addProp(new TestLevelPropStatic(0 , 0, 100, 1080, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(9000 , 0, 100, 1080, 0, 0, false, 0));
         // Floor
         levelModel.addProp(new TestLevelPropStatic(0 , 980, 10000, 100, 0, 0, false, 0));
 
@@ -43,6 +44,16 @@ public class GameModel {
         levelModel.addProp(new TestLevelPropStatic(70 , 800, 500, 100, 0, 0, false, 0));
         levelModel.addProp(new TestLevelPropStatic(500 , 700, 500, 100, 0, 0, false, 0));
         levelModel.addProp(new TestLevelPropStatic(1100 , 600, 500, 100, 0, 0, false, 0));
+
+        levelModel.addProp(new TestLevelPropStatic(1800 , 600, 500, 50, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(2000 , 650, 220, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(3500 , 750, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(4000 , 780, 200, 100, 0, 0, false, 0));
+
+        levelModel.addProp(new TestLevelPropStatic(6800 , 400, 500, 50, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(2500 , 720, 220, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(3000 , 700, 500, 50, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(3200 , 650, 100, 100, 0, 0, false, 0));
     }
 
     public void addGameObject(AActor gameObject) {
@@ -74,18 +85,6 @@ public class GameModel {
                                1f
                         )
                     );
-                    /*addGameObject(
-                            new TestCharacter(
-                                    (float)gmc.getPos()[0],
-                                    (float)gmc.getPos()[1],
-                                    50f,
-                                    50f,
-                                    new Random().nextFloat(-10, 10),
-                                    new Random().nextFloat(-10, 10),
-                                    true,
-                                    1f
-                            )
-                    );*/
                 }
             }
         }
@@ -95,6 +94,7 @@ public class GameModel {
 
         // Check Game Object Collisions with Level Props
         checkCollisions();
+
     }
 
     public void updateGameObjects(double updateRate) {

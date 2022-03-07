@@ -32,13 +32,12 @@ public abstract class AActor extends APhysics implements IDrawable {
     @Override
     public void draw(Graphics g) {
 
-        double offsetX = ((x) + (WorldModel.offX));
-        double offsetY = ((y) + (WorldModel.offY));
+        double offsetX = ((x*PreferenceData.scaledW) + (WorldModel.offX));
+        double offsetY = ((y*PreferenceData.scaledH) + (WorldModel.offY));
 
         double scaledW = w * PreferenceData.scaledW;
         double scaledH = h * PreferenceData.scaledH;
 
-        //g.drawRect((int)(sX), (int)(sY), (int)(sW), (int)(sH));
         g.drawRect((int)((offsetX)), (int)(offsetY), (int)(scaledW), (int)(scaledH));
     }
 }

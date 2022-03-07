@@ -9,73 +9,36 @@ import java.util.LinkedList;
 
 public class GameWindow extends JFrame {
 
-    private ControlsModel controlsViewModel;
-
     private final JFrame thisFrame = this;
+    private int updates = 0, frames = 0, lastFPS = Integer.MAX_VALUE;
+    private double avgFrames;
+    private boolean isRunning;
 
-    double scaleFpsWindow = 1;
 
-    //private GameCanvas gameCanvas;
-    private boolean isRunning = false;
-    private int updates, frames, lastFPS;
-    double avgFrames;
+    private double fpsWindowScale = 1;
 
     public void init(PreferenceData preferences, GameCanvas gameCanvas, ControlsModel controlsViewModel){
-        //this.gameCanvas = gameCanvas;
-        this.controlsViewModel = controlsViewModel;
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         add(gameCanvas);
+        constructWindowAndDimensions(preferences);
 
-        switch (preferences.getWindowType()) {
-            case FULLSCREEN -> {
-                double[] screenDim = {
-                        Toolkit.getDefaultToolkit().getScreenSize().width,
-                        Toolkit.getDefaultToolkit().getScreenSize().height
-                };
-                setPreferredSize(new Dimension((int) screenDim[0], (int) screenDim[1]));
-                setUndecorated(true);
-                setExtendedState(JFrame.MAXIMIZED_BOTH);
-            }
-            case WINDOWED_FULLSCREEN -> {
-                double[] screenDim = {
-                        Toolkit.getDefaultToolkit().getScreenSize().width,
-                        Toolkit.getDefaultToolkit().getScreenSize().height
-                };
-                setPreferredSize(new Dimension((int) screenDim[0], (int) screenDim[1]));
-            }
-            default -> {
-                double[] screenDim = {
-                        preferences.getWindowWidth(),
-                        preferences.getWindowHeight()
-                };
-                setPreferredSize(new Dimension((int) screenDim[0], (int) screenDim[1]));
-            }
-        }
-        setAlwaysOnTop(true);
-        setResizable(false);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        addKeyListener(this.controlsViewModel.getKeyController());
-        addMouseListener(this.controlsViewModel.getMouseController());
-        addMouseMotionListener(this.controlsViewModel.getMouseController());
+        addKeyListener(controlsViewModel.getKeyController());
+        addMouseListener(controlsViewModel.getMouseController());
+        addMouseMotionListener(controlsViewModel.getMouseController());
 
-
+        // CREATE GAME THREAD
         Thread gameThread = new Thread(() -> {
 
             long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
             final short targetFPS = preferences.getFrameRate();
             double ns = 1000000000 / (float)targetFPS, delta = 0;
-            updates = 0;
-            frames = 0;
-            lastFPS = targetFPS;
             avgFrames = targetFPS;
 
             LinkedList<Integer> fpsPoints = new LinkedList<>();
 
-            //Output data
+
+            // FRAMERATE DISPLAY
+
             JFrame fpsframe = new JFrame();
             fpsframe.setAlwaysOnTop(true);
             fpsframe.setPreferredSize(new Dimension(200, thisFrame.getHeight()));
@@ -89,10 +52,10 @@ public class GameWindow extends JFrame {
                     for (Integer point : fpsPoints) {
                         g.setColor(Color.GREEN);
                         g.drawLine(
-                                (int)(x*scaleFpsWindow),
-                                getHeight() - (int)(scaleFpsWindow * point),
-                                (int)(scaleFpsWindow*(x-1)),
-                                getHeight() - (int)(scaleFpsWindow * prevPoint));
+                                (int)(x* fpsWindowScale),
+                                getHeight() - (int)(fpsWindowScale * point),
+                                (int)(fpsWindowScale *(x-1)),
+                                getHeight() - (int)(fpsWindowScale * prevPoint));
                         prevPoint = point;
                         x++;
                     }
@@ -106,7 +69,7 @@ public class GameWindow extends JFrame {
                 }
             };
             fpspanel.addMouseWheelListener(e -> {
-                scaleFpsWindow -= e.getWheelRotation() * .1;
+                fpsWindowScale -= e.getWheelRotation() * .1;
             });
             fpsframe.add(fpspanel);
             fpsframe.pack();
@@ -114,6 +77,7 @@ public class GameWindow extends JFrame {
             fpsframe.setLocation(thisFrame.getX() - fpsframe.getWidth(), thisFrame.getY());
 
 
+            // GAME LOOP
 
             isRunning = true;
             while(isRunning) {
@@ -122,13 +86,11 @@ public class GameWindow extends JFrame {
                 lastTime = now;
 
                 if(delta >= 1) {
-                    updates++;
-                    int finalLastFPS = lastFPS;
-                    double finalAvgFrames = avgFrames;
                     Thread t = new Thread(() -> {
-                        //double frameRatio = (double) finalLastFPS / (double) PreferenceData.FRAMERATE_DEFAULT;
-                        double frameRatio = finalAvgFrames / (double) PreferenceData.FRAMERATE_DEFAULT;
+                        //double frameRatio = (double) lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT;
+                        double frameRatio = lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT;
                         gameCanvas.update(frameRatio);
+                        updates++;
                     });
                     t.start();
 
@@ -151,7 +113,7 @@ public class GameWindow extends JFrame {
                     frames = 0;
 
                     fpsPoints.addLast((int)avgFrames);
-                    if(fpsPoints.size()*scaleFpsWindow > (fpspanel.getWidth())) {
+                    if(fpsPoints.size()* fpsWindowScale > (fpspanel.getWidth())) {
                         fpsPoints.removeFirst();
                     }
                     fpsframe.repaint();
@@ -163,19 +125,51 @@ public class GameWindow extends JFrame {
 
     }
 
+    private void constructWindowAndDimensions(PreferenceData preferences) {
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        switch (preferences.getWindowType()) {
+            case FULLSCREEN -> {
+                int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+                int height = Toolkit.getDefaultToolkit().getScreenSize().height;
+                preferences.setWindowWidthActual(width);
+                preferences.setWindowHeightActual(height);
+
+                setPreferredSize(new Dimension(width, height));
+                setUndecorated(true);
+                setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }
+            case WINDOWED_FULLSCREEN -> {
+                int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+                int height =Toolkit.getDefaultToolkit().getScreenSize().height;
+                preferences.setWindowWidthActual(width);
+                preferences.setWindowHeightActual(height);
+
+                setPreferredSize(new Dimension(width, height));
+            }
+            default -> {
+                int width = preferences.getWindowWidthSelected();
+                int height = preferences.getWindowHeightSelected();
+                preferences.setWindowWidthActual(width);
+                preferences.setWindowHeightActual(height);
+
+                setPreferredSize(new Dimension(width, height));
+            }
+        }
+
+        setAlwaysOnTop(true);
+        setResizable(false);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
     @Override
     public void setDefaultCloseOperation(int operation) {
         isRunning = false;
 
         super.setDefaultCloseOperation(operation);
-    }
-
-    public void showWindow() {
-        setVisible(true);
-    }
-
-    public void hideWindow() {
-        setVisible(false);
     }
 
 }

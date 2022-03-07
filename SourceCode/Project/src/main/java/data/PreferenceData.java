@@ -5,9 +5,13 @@ public class PreferenceData {
     public static int DEFAULT_WINDOW_WIDTH = 0;
     public static int DEFAULT_WINDOW_HEIGHT = 0;
 
-    public static int window_width = 0;
-    public static int window_height = 0;
-    private WindowType window_type;
+    public static int window_width_selected = 0;
+    public static int window_height_selected = 0;
+
+    public static int window_width_actual = 0;
+    public static int window_height_actual = 0;
+
+    private static WindowType window_type = WindowType.WINDOWED;
 
     public static short FRAMERATE_DEFAULT = 60;
     public static short frameRate = 60;
@@ -16,24 +20,40 @@ public class PreferenceData {
     public static double scaledH = 1;
 
     public void calcResScale() {
-        scaledW = (double)window_width/ DEFAULT_WINDOW_WIDTH;
-        scaledH = (double)window_height/ DEFAULT_WINDOW_HEIGHT;
+        /*
+        scaledW = (double) window_width_selected / DEFAULT_WINDOW_WIDTH;
+        scaledH = (double) window_height_selected / DEFAULT_WINDOW_HEIGHT;
+        */
+        /*
+        scaledW = (double) DEFAULT_WINDOW_WIDTH / (double)window_width_actual;
+        scaledH = (double) DEFAULT_WINDOW_HEIGHT / (double)window_height_actual;
+        */
+        scaledW = (double)window_width_actual / (double) DEFAULT_WINDOW_WIDTH;
+        scaledH = (double)window_height_actual / (double) DEFAULT_WINDOW_HEIGHT;
     }
 
-    public void setWindowWidth(int width) {
-        this.window_width = width;
+    public void setWindowWidthSelected(int width) {
+        this.window_width_selected = width;
     }
 
-    public int getWindowWidth() {
-        return window_width;
+    public int getWindowWidthSelected() {
+        return window_width_selected;
     }
 
-    public void setWindowHeight(int height) {
-        this.window_height = height;
+    public void setWindowHeightSelected(int height) {
+        this.window_height_selected = height;
     }
 
-    public int getWindowHeight() {
-        return window_height;
+    public int getWindowHeightSelected() {
+        return window_height_selected;
+    }
+
+    public void setWindowWidthActual(int width) {
+        window_width_actual = width;
+    }
+
+    public void setWindowHeightActual(int height) {
+        window_height_actual = height;
     }
 
     public void setWindowWidthDefault(int width) {
@@ -64,6 +84,8 @@ public class PreferenceData {
         FRAMERATE_DEFAULT = framerateDefault;
     }
 
+
+
     public enum WindowType {
         WINDOWED(0, "Windowed"), WINDOWED_FULLSCREEN(1, "Windowed Fullscreen"), FULLSCREEN(2, "Fullscreen");
 
@@ -81,7 +103,7 @@ public class PreferenceData {
     }
 
     public String toString() {
-        return window_width + " " + window_height + " " + window_type;
+        return window_width_selected + " " + window_height_selected + " " + window_type;
     }
 
 }
