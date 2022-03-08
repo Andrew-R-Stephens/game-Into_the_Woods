@@ -1,6 +1,7 @@
 package viewmodels.game;
 
 import controls.game.GameMouseControls;
+import data.PreferenceData;
 import props.gameactors.TestActor;
 import props.gameactors.TestCharacter;
 import props.levelactors.TestLevelPropStatic;
@@ -84,8 +85,8 @@ public class GameModel {
                 for(int i = 0; i < count; i++) {
                     addGameObject(
                         new TestActor(
-                                (float)(gmc.getPos()[0] - WorldModel.offX),
-                                (float)(gmc.getPos()[1] - WorldModel.offY),
+                                (float)(PreferenceData.window_width_actual - (WorldModel.offX / PreferenceData.scaledW) + (gmc.getPos()[0]*.5)),
+                                (float)(PreferenceData.window_height_actual - (WorldModel.offY / PreferenceData.scaledH) + (gmc.getPos()[1]*.5)),
                                 50f,
                                 50f,
                                 new Random().nextFloat(-100, 100),

@@ -13,7 +13,8 @@ public abstract class APhysics {
     protected float bufferVert = 5, bufferHoriz = 5;
 
     protected boolean isFloorCollision, isWallCollisionLeft, isWallCollisionRight;
-    protected boolean isUnderControl;
+
+    protected boolean isUserControlled;
 
     protected APhysics(
             float x, float y,
@@ -126,7 +127,7 @@ public abstract class APhysics {
 
                     a.isFloorCollision = true;
 
-                    if(!a.isUnderControl) {
+                    if(!a.isUserControlled) {
                         a.vX *= .9f;
                     }
                 }

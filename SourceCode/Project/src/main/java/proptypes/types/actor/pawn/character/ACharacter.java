@@ -36,7 +36,7 @@ public class ACharacter extends APawn implements IDrawable {
         int xDir = (directionals[0] ? -1 : 0) + (directionals[1] ? 1 : 0);
         int yDir = (directionals[2] ? -1 : 0) + (directionals[3] ? 1 : 0);
 
-        isUnderControl = directionals[0] || directionals[1] || directionals[2] || directionals[3];
+        isUserControlled = directionals[0] || directionals[1] || directionals[2] || directionals[3];
 
         // If control direction goes against character movement direction, slow velocity down
         if(vX * xDir < 0) {
@@ -45,11 +45,13 @@ public class ACharacter extends APawn implements IDrawable {
 
         // Handle wall collisions with control input considered
         if((xDir < 0 && isWallCollisionLeft) || (xDir > 0 && isWallCollisionRight)) {
+            //Decrement y velocity using time
             vY -= (vY * wallrideTime);
             if(wallrideTime > 0) {
                 wallrideTime -= .05f;
             }
         } else {
+            // If jumping, reset the wallride
             if(isJumpLocked) {
                 wallrideTime = MAX_ALLOWED_WALLRIDE_TIME;
             }
@@ -82,7 +84,7 @@ public class ACharacter extends APawn implements IDrawable {
 
                 if(isFloorCollision) {
 
-                    if(!isUnderControl) {
+                    if(!isUserControlled) {
                         vX *= .25;
                     }
                     isFloorCollision = false;
