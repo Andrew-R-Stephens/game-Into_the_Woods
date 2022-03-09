@@ -14,6 +14,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * TODO: Add description
+ */
 public class GameModel {
 
     private final LevelModel levelModel = new LevelModel();
@@ -28,42 +31,42 @@ public class GameModel {
         // Main Test Character
         gameObjects.add(new TestCharacter(
                 controlsViewModel,
-                200,50,
-                50,50,
-                0,0,
+                200, 50,
+                50, 50,
+                0, 0,
                 true,
                 1f
         ));
 
         // Wall
-        levelModel.addProp(new TestLevelPropStatic(0 , 0, 100, 1080, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(0 , 0, 100, 1080, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false, 0));
         // Climbing Walls
-        levelModel.addProp(new TestLevelPropStatic(320 , -150, 50, 200, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(500 , 0, 50, 200, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(320 , 220, 50, 200, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(500 , 360, 50, 200, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(320 , 500, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(320, -150, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(500, 0, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(320, 220, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(500, 360, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(320, 500, 50, 200, 0, 0, false, 0));
 
-        levelModel.addProp(new TestLevelPropStatic(9000 , 0, 100, 1080, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(9000, 0, 100, 1080, 0, 0, false, 0));
         // Floor
-        levelModel.addProp(new TestLevelPropStatic(0 , 980, 10000, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(0, 980, 10000, 100, 0, 0, false, 0));
 
         // Other Props
-        levelModel.addProp(new TestLevelPropStatic(1800 , 100, 500, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(70 , 800, 500, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(500 , 700, 500, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(1100 , 600, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(1800, 100, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(70, 800, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(500, 700, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(1100, 600, 500, 100, 0, 0, false, 0));
 
-        levelModel.addProp(new TestLevelPropStatic(1800 , 600, 500, 50, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(2000 , 650, 220, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(3500 , 750, 500, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(4000 , 780, 200, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(1800, 600, 500, 50, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(2000, 650, 220, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(3500, 750, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(4000, 780, 200, 100, 0, 0, false, 0));
 
-        levelModel.addProp(new TestLevelPropStatic(6800 , 400, 500, 50, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(2500 , 720, 220, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(3000 , 700, 500, 50, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(3200 , 650, 100, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(6800, 400, 500, 50, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(2500, 720, 220, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(3000, 700, 500, 50, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(3200, 650, 100, 100, 0, 0, false, 0));
     }
 
     public void addGameObject(AActor gameObject) {
@@ -78,22 +81,22 @@ public class GameModel {
 
             GameMouseControls gmc = (GameMouseControls) mouseController;
             if (gmc.isLeftPressed()) {
-                int count = (int)(1/delta);
-                if(count < 1) {
+                int count = (int) (1 / delta);
+                if (count < 1) {
                     count = 1;
                 }
-                for(int i = 0; i < count; i++) {
+                for (int i = 0; i < count; i++) {
                     addGameObject(
-                        new TestActor(
-                                (float)(PreferenceData.window_width_actual - (WorldModel.offX / PreferenceData.scaledW) + (gmc.getPos()[0]*.5)),
-                                (float)(PreferenceData.window_height_actual - (WorldModel.offY / PreferenceData.scaledH) + (gmc.getPos()[1]*.5)),
-                                50f,
-                                50f,
-                                new Random().nextFloat(-100, 100),
-                                new Random().nextFloat(-100, 100),
-                               true,
-                               1f
-                        )
+                            new TestActor(
+                                    (float) (PreferenceData.window_width_actual - (WorldModel.offX / PreferenceData.scaledW) + (gmc.getPos()[0] * .5)),
+                                    (float) (PreferenceData.window_height_actual - (WorldModel.offY / PreferenceData.scaledH) + (gmc.getPos()[1] * .5)),
+                                    50f,
+                                    50f,
+                                    new Random().nextFloat(-100, 100),
+                                    new Random().nextFloat(-100, 100),
+                                    true,
+                                    1f
+                            )
                     );
                 }
             }
@@ -110,15 +113,15 @@ public class GameModel {
     public void updateGameObjects(double updateRate) {
 
         // Update all Actors
-        for(AActor gameObject: gameObjects) {
+        for (AActor gameObject : gameObjects) {
 
             // Update TestActors
-            if(gameObject instanceof TestActor a) {
+            if (gameObject instanceof TestActor a) {
                 a.update(updateRate);
             }
 
             // Update Characters
-            if(gameObject instanceof TestCharacter tc) {
+            if (gameObject instanceof TestCharacter tc) {
                 tc.control();
                 tc.update(updateRate);
             }
@@ -128,31 +131,31 @@ public class GameModel {
     }
 
     private void checkCollisions() {
-        for(ALevelProp p: levelModel.getLevelProps()) {
-            for(AActor a: gameObjects) {
+        for (ALevelProp p : levelModel.getLevelProps()) {
+            for (AActor a : gameObjects) {
                 p.hasCollision(a);
             }
         }
     }
 
     public synchronized void renderGameObjects(Graphics g) {
-        for(AActor gameObject: gameObjects) {
-            if(gameObject instanceof TestCharacter o) {
+        for (AActor gameObject : gameObjects) {
+            if (gameObject instanceof TestCharacter o) {
                 //if(o.isInFrameBounds()) {
-                    o.draw(g);
+                o.draw(g);
                 //}
             }
-            if(gameObject instanceof TestActor o) {
+            if (gameObject instanceof TestActor o) {
                 //if(o.isInFrameBounds()) {
-                    o.draw(g);
+                o.draw(g);
                 //}
             }
         }
 
-        for(AActor levelProps : levelModel.getLevelProps()) {
-            if(levelProps instanceof ALevelProp p) {
+        for (AActor levelProps : levelModel.getLevelProps()) {
+            if (levelProps instanceof ALevelProp p) {
                 //if(p.isInFrameBounds()) {
-                    p.draw(g);
+                p.draw(g);
                 //}
             }
         }

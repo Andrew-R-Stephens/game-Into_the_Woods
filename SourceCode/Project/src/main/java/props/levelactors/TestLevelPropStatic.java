@@ -1,5 +1,8 @@
 package props.levelactors;
 
+/**
+ * TODO: Add description
+ */
 public class TestLevelPropStatic extends TestLevelProp {
 
     public TestLevelPropStatic(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {

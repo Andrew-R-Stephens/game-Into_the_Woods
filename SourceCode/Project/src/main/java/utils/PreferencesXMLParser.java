@@ -10,11 +10,11 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
+import java.io.IOException;
 
 public class PreferencesXMLParser extends AFileReader {
 
-    private PreferenceData preferences;
+    private final PreferenceData preferences;
 
     public PreferencesXMLParser(PreferenceData preferences, String filePath, String fileName, String fileType) {
         super(filePath, fileName, fileType);
@@ -40,86 +40,86 @@ public class PreferencesXMLParser extends AFileReader {
             doc = dBuilder.parse(file);
 
             doc.getDocumentElement().normalize();
-                System.out.println("Root element = " + doc.getDocumentElement().getNodeName());
-                NodeList windowNodes = doc.getElementsByTagName("Window");
-                System.out.println("----------------------------");
+            System.out.println("Root element = " + doc.getDocumentElement().getNodeName());
+            NodeList windowNodes = doc.getElementsByTagName("Window");
+            System.out.println("----------------------------");
 
-                for (int temp = 0; temp < windowNodes.getLength(); temp++) {
-                    Node nNode = windowNodes.item(temp);
-                    System.out.println("\nCurrent Element = " + nNode.getNodeName());
+            for (int temp = 0; temp < windowNodes.getLength(); temp++) {
+                Node nNode = windowNodes.item(temp);
+                System.out.println("\nCurrent Element = " + nNode.getNodeName());
 
-                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                        Element eElement = (Element) nNode;
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
 
-                        int dwidth = Integer.parseInt(eElement
-                                .getElementsByTagName("resolutionWidthDefault")
-                                .item(0)
-                                .getTextContent());
-                        preferences.setWindowWidthDefault(dwidth);
+                    int dwidth = Integer.parseInt(eElement
+                            .getElementsByTagName("resolutionWidthDefault")
+                            .item(0)
+                            .getTextContent());
+                    preferences.setWindowWidthDefault(dwidth);
 
-                        int dheight = Integer.parseInt(eElement
-                                .getElementsByTagName("resolutionHeightDefault")
-                                .item(0)
-                                .getTextContent());
-                        preferences.setWindowHeightDefault(dheight);
+                    int dheight = Integer.parseInt(eElement
+                            .getElementsByTagName("resolutionHeightDefault")
+                            .item(0)
+                            .getTextContent());
+                    preferences.setWindowHeightDefault(dheight);
 
-                        int width = Integer.parseInt(eElement
-                                .getElementsByTagName("resolutionWidth")
-                                .item(0)
-                                .getTextContent());
-                        preferences.setWindowWidthSelected(width);
+                    int width = Integer.parseInt(eElement
+                            .getElementsByTagName("resolutionWidth")
+                            .item(0)
+                            .getTextContent());
+                    preferences.setWindowWidthSelected(width);
 
-                        int height = Integer.parseInt(eElement
-                                .getElementsByTagName("resolutionHeight")
-                                .item(0)
-                                .getTextContent());
-                        preferences.setWindowHeightSelected(height);
+                    int height = Integer.parseInt(eElement
+                            .getElementsByTagName("resolutionHeight")
+                            .item(0)
+                            .getTextContent());
+                    preferences.setWindowHeightSelected(height);
 
-                        int windowType = Integer.parseInt(eElement
-                                .getElementsByTagName("windowType")
-                                .item(0)
-                                .getTextContent());
-                        preferences.setWindowType(windowType);
+                    int windowType = Integer.parseInt(eElement
+                            .getElementsByTagName("windowType")
+                            .item(0)
+                            .getTextContent());
+                    preferences.setWindowType(windowType);
 
-                        System.out.println("Resolution Width = "
-                                + width);
+                    System.out.println("Resolution Width = "
+                            + width);
 
-                        System.out.println("Resolution Height = "
-                                + height);
+                    System.out.println("Resolution Height = "
+                            + height);
 
-                        System.out.println("Window Type = "
-                                + windowType);
-                    }
+                    System.out.println("Window Type = "
+                            + windowType);
                 }
+            }
 
-                NodeList performanceNodes = doc.getElementsByTagName("Performance");
-                System.out.println("----------------------------");
-                for (int temp = 0; temp < performanceNodes.getLength(); temp++) {
-                    Node nNode = performanceNodes.item(temp);
-                    System.out.println("\nCurrent Element = " + nNode.getNodeName());
+            NodeList performanceNodes = doc.getElementsByTagName("Performance");
+            System.out.println("----------------------------");
+            for (int temp = 0; temp < performanceNodes.getLength(); temp++) {
+                Node nNode = performanceNodes.item(temp);
+                System.out.println("\nCurrent Element = " + nNode.getNodeName());
 
-                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                        Element eElement = (Element) nNode;
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
 
-                        short frameRateDefault = Short.parseShort(eElement
-                                .getElementsByTagName("frameRateDefault")
-                                .item(0)
-                                .getTextContent());
-                        preferences.setFrameRateDefault(frameRateDefault);
+                    short frameRateDefault = Short.parseShort(eElement
+                            .getElementsByTagName("frameRateDefault")
+                            .item(0)
+                            .getTextContent());
+                    preferences.setFrameRateDefault(frameRateDefault);
 
-                        System.out.println("Frame Rate Default= "
-                                + frameRateDefault);
+                    System.out.println("Frame Rate Default= "
+                            + frameRateDefault);
 
-                        short frameRate = Short.parseShort(eElement
-                                .getElementsByTagName("frameRate")
-                                .item(0)
-                                .getTextContent());
-                        preferences.setFrameRate(frameRate);
+                    short frameRate = Short.parseShort(eElement
+                            .getElementsByTagName("frameRate")
+                            .item(0)
+                            .getTextContent());
+                    preferences.setFrameRate(frameRate);
 
-                        System.out.println("Frame Rate = "
-                                + frameRate);
-                    }
+                    System.out.println("Frame Rate = "
+                            + frameRate);
                 }
+            }
         } catch (SAXException | IOException e) {
             e.printStackTrace();
         }

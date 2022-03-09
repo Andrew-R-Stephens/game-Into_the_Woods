@@ -5,6 +5,9 @@ import viewmodels.controls.ControlsModel;
 
 import java.awt.event.MouseEvent;
 
+/**
+ * Menu Mouse Controls define the controls for Main Manu or Pause Menu navigation with Mouse input.
+ */
 public class MenuMouseControls extends AMouseController {
 
     private final ControlsModel controlsViewModel;

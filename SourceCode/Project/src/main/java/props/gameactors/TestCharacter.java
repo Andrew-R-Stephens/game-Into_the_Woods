@@ -8,17 +8,21 @@ import viewmodels.game.WorldModel;
 
 import java.awt.*;
 
+/**
+ * TODO: Add description
+ */
 public class TestCharacter extends ACharacter {
 
     protected Color c = Color.BLUE;
 
-    public TestCharacter(ControlsModel cModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {
+    public TestCharacter(ControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
+                         boolean hasGravity, float mass) {
         super(cModel, x, y, w, h, vx, vy, hasGravity, mass);
     }
 
     @Override
     public boolean hasCollision(AActor a) {
-        if(super.hasCollision(a)) {
+        if (super.hasCollision(a)) {
             c = Color.RED;
             return true;
         }
@@ -30,8 +34,10 @@ public class TestCharacter extends ACharacter {
     public void update(double delta) {
         super.update(delta);
 
-        WorldModel.offX = ((PreferenceData.window_width_actual * .5) - (w * PreferenceData.scaledW)) - (x * PreferenceData.scaledW);
-        WorldModel.offY = ((PreferenceData.window_height_actual * .5) - (h * PreferenceData.scaledH)) - (y * PreferenceData.scaledH);
+        WorldModel.offX =
+                ((PreferenceData.window_width_actual * .5) - (w * PreferenceData.scaledW)) - (x * PreferenceData.scaledW);
+        WorldModel.offY =
+                ((PreferenceData.window_height_actual * .5) - (h * PreferenceData.scaledH)) - (y * PreferenceData.scaledH);
     }
 
     @Override
@@ -50,8 +56,8 @@ public class TestCharacter extends ACharacter {
         centerY -= scaleH;
 
         g.setColor(c);
-        g.drawRect((int)(centerX), (int)(centerY), (int)(scaleW), (int)(scaleH));
-        g.drawString("TC", (int)(centerX) + 3, (int)(centerY) + 12);
+        g.drawRect((int) (centerX), (int) (centerY), (int) (scaleW), (int) (scaleH));
+        g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
 
     }
 

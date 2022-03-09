@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
+/**
+ * The Application Window contains the Canvas which is currently active.
+ */
 public class GameWindow extends JFrame {
 
     private final JFrame thisFrame = this;
@@ -52,9 +55,9 @@ public class GameWindow extends JFrame {
                     for (Integer point : fpsPoints) {
                         g.setColor(Color.GREEN);
                         g.drawLine(
-                                (int)(x* fpsWindowScale),
+                                (int)(x * fpsWindowScale),
                                 getHeight() - (int)(fpsWindowScale * point),
-                                (int)(fpsWindowScale *(x-1)),
+                                (int)(fpsWindowScale * (x-1)),
                                 getHeight() - (int)(fpsWindowScale * prevPoint));
                         prevPoint = point;
                         x++;

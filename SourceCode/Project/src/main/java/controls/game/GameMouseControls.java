@@ -5,6 +5,9 @@ import viewmodels.controls.ControlsModel;
 
 import java.awt.event.MouseEvent;
 
+/**
+ * Game Mouse Controls define the controls for in-game actions with Mouse input.
+ */
 public class GameMouseControls extends AMouseController {
 
     private final ControlsModel controlsViewModel;

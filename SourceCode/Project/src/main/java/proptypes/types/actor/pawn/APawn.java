@@ -5,6 +5,9 @@ import utils.IDrawable;
 
 import java.awt.*;
 
+/**
+ * TODO: Add description
+ */
 public abstract class APawn extends AActor implements IDrawable {
 
     protected APawn(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {

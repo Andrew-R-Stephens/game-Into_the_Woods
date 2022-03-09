@@ -2,6 +2,9 @@ package utils;
 
 import java.io.*;
 
+/**
+ * TODO: Add description
+ */
 public abstract class AFileReader {
 
     protected File file;
@@ -40,7 +43,6 @@ public abstract class AFileReader {
     }
 
     public abstract boolean read();
-
 
 
 }

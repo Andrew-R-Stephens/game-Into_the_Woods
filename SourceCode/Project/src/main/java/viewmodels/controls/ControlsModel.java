@@ -5,15 +5,21 @@ import controls.game.GameMouseControls;
 import utils.AKeyController;
 import utils.AMouseController;
 
+/**
+ * TODO: Add description
+ */
 public class ControlsModel {
 
     private AKeyController keyController;
     private AMouseController mouseController;
 
     public enum Directionals {LEFT, RIGHT, UP, DOWN}
+
     public enum Actions {ESCAPE, ENTER}
+
     public enum Abilities {JUMP, DASH}
-    public enum AbilityStates{JUMP_PRESSED, DASH_PRESSED}
+
+    public enum AbilityStates {JUMP_PRESSED, DASH_PRESSED}
 
     boolean[] directionals = new boolean[Directionals.values().length];
     boolean[] actions = new boolean[Actions.values().length];

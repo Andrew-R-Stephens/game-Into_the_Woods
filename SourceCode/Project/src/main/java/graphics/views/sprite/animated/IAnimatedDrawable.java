@@ -4,6 +4,9 @@ import utils.IDrawable;
 
 import java.awt.*;
 
+/**
+ * TODO: Add description
+ */
 public interface IAnimatedDrawable extends IDrawable {
 
     @Override

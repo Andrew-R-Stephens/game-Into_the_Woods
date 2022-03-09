@@ -5,6 +5,9 @@ import viewmodels.game.GameModel;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Game Canvas extends JPanel. The canvas renders game objects using the scale of chosen window dimensions against the standard dimensions.
+ */
 public class GameCanvas extends JPanel {
 
     private GameModel gameModel;

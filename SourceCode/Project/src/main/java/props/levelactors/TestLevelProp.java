@@ -5,6 +5,9 @@ import proptypes.types.actor.AActor;
 
 import java.awt.*;
 
+/**
+ * TODO: Add description
+ */
 public class TestLevelProp extends ALevelProp {
 
     public TestLevelProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {
@@ -13,7 +16,7 @@ public class TestLevelProp extends ALevelProp {
 
     @Override
     public boolean hasCollision(AActor a) {
-        if(super.hasCollision(a)) {
+        if (super.hasCollision(a)) {
             c = Color.RED;
             return true;
         }

@@ -1,10 +1,12 @@
 package props.gameactors;
 
-import data.PreferenceData;
 import proptypes.types.actor.pawn.APawn;
 
 import java.awt.*;
 
+/**
+ * TODO: Add description
+ */
 public class TestActor extends APawn {
 
     public TestActor(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {

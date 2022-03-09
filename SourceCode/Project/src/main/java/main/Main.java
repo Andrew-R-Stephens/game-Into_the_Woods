@@ -7,15 +7,6 @@ import utils.PreferencesXMLParser;
 import viewmodels.controls.ControlsModel;
 import viewmodels.game.GameModel;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.security.CodeSource;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
 /**
  * The type main.Main.
  */

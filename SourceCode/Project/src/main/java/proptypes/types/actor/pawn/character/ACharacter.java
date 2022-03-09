@@ -21,13 +21,15 @@ public abstract class ACharacter extends APawn implements IDrawable {
     private final float MAX_ALLOWED_WALLRIDE_TIME = .7f;
     private float wallrideTime = MAX_ALLOWED_JUMP_TIME;
 
-    protected ACharacter(ControlsModel cModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {
+    protected ACharacter(ControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
+                         boolean hasGravity, float mass) {
         super(x, y, w, h, vx, vy, hasGravity, mass);
         this.controlsModel = cModel;
     }
 
     /**
      * The overloaded call to the parent class update method
+     *
      * @param delta - The ratio of current update rate vs targetted framerate
      */
     protected void update(double delta) {
@@ -55,20 +57,20 @@ public abstract class ACharacter extends APawn implements IDrawable {
         isUserControlled = directionals[0] || directionals[1] || directionals[2] || directionals[3];
 
         // If control direction goes against character movement direction, slow velocity down
-        if(vX * xDir < 0) {
+        if (vX * xDir < 0) {
             vX *= .85; //.95
         }
 
         // Handle wall collisions with control input considered
-        if((xDir < 0 && isWallCollisionLeft) || (xDir > 0 && isWallCollisionRight)) {
+        if ((xDir < 0 && isWallCollisionLeft) || (xDir > 0 && isWallCollisionRight)) {
             //Decrement y velocity using time
             vY -= (vY * wallrideTime);
-            if(wallrideTime > 0) {
+            if (wallrideTime > 0) {
                 wallrideTime -= .05f;
             }
         } else {
             // If jumping, reset the wallride
-            if(isJumpLocked) {
+            if (isJumpLocked) {
                 wallrideTime = MAX_ALLOWED_WALLRIDE_TIME;
             }
         }
@@ -85,13 +87,13 @@ public abstract class ACharacter extends APawn implements IDrawable {
 
         boolean[] abilities = controlsModel.getAbilities();
 
-        if(jumpTime > 0) {
+        if (jumpTime > 0) {
             jumpTime--;
         }
 
-        if(abilities[0]) {
+        if (abilities[0]) {
 
-            if(isJumpLocked) {
+            if (isJumpLocked) {
                 return;
             }
 
@@ -101,9 +103,9 @@ public abstract class ACharacter extends APawn implements IDrawable {
 
                 vY = -50;
 
-                if(isFloorCollision) {
+                if (isFloorCollision) {
 
-                    if(!isUserControlled) {
+                    if (!isUserControlled) {
                         vX *= .25;
                     }
                     isFloorCollision = false;

@@ -1,5 +1,8 @@
 package data;
 
+/**
+ * Preference Data stores the fundamental information of user-defined preferences.
+ */
 public class PreferenceData {
 
     public static int DEFAULT_WINDOW_WIDTH = 0;

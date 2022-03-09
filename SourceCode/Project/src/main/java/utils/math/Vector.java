@@ -1,5 +1,8 @@
 package utils.math;
 
+/**
+ * TODO: Add description
+ */
 public class Vector {
 
     public double x, y;

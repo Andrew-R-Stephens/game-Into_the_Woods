@@ -7,8 +7,9 @@ import viewmodels.game.WorldModel;
 
 import java.awt.*;
 
+
 /**
- *
+ * TODO: Add description
  */
 public abstract class AActor extends APhysics implements IDrawable {
 
@@ -32,12 +33,12 @@ public abstract class AActor extends APhysics implements IDrawable {
     @Override
     public void draw(Graphics g) {
 
-        double offsetX = ((x*PreferenceData.scaledW) + (WorldModel.offX));
-        double offsetY = ((y*PreferenceData.scaledH) + (WorldModel.offY));
+        double offsetX = ((x * PreferenceData.scaledW) + (WorldModel.offX));
+        double offsetY = ((y * PreferenceData.scaledH) + (WorldModel.offY));
 
         double scaledW = w * PreferenceData.scaledW;
         double scaledH = h * PreferenceData.scaledH;
 
-        g.drawRect((int)((offsetX)), (int)(offsetY), (int)(scaledW), (int)(scaledH));
+        g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
     }
 }

@@ -4,6 +4,9 @@ import proptypes.types.actor.AActor;
 
 import java.awt.*;
 
+/**
+ * TODO: Add description
+ */
 public class ALevelProp extends AActor {
 
     protected ALevelProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {

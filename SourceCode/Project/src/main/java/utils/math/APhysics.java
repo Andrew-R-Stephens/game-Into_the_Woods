@@ -2,6 +2,10 @@ package utils.math;
 
 import proptypes.types.actor.AActor;
 import viewmodels.game.LevelModel;
+
+/**
+ * TODO: Add description
+ */
 public abstract class APhysics {
 
     protected boolean hasGravity = true;
@@ -42,7 +46,7 @@ public abstract class APhysics {
     }
 
     private void calculateGravity(double delta) {
-        if(hasGravity) {
+        if (hasGravity) {
             vY += (LevelModel.GRAVITY / delta) * mass;
         }
     }
@@ -54,14 +58,14 @@ public abstract class APhysics {
         vY += vY * accelerationRate;
         vX += vY * accelerationRate;
 
-        if(vY > 100f) {
+        if (vY > 100f) {
             vY = 100f;
-        } else if(vY < -100f) {
+        } else if (vY < -100f) {
             vY = -100f;
         }
-        if(vX > 100f) {
+        if (vX > 100f) {
             vX = 100f;
-        } else if(vX < -100f) {
+        } else if (vX < -100f) {
             vX = -100f;
         }
 
@@ -98,15 +102,15 @@ public abstract class APhysics {
 
         if (hitTop || hitBottom) {
 
-            if(isWallBoundedLeft) {
+            if (isWallBoundedLeft) {
                 a.isWallCollisionLeft = true;
             }
-            if(isWallBoundedRight) {
+            if (isWallBoundedRight) {
                 a.isWallCollisionRight = true;
             }
         }
 
-        if((hitBottom || hitTop) && (hitLeft || hitRight)) {
+        if ((hitBottom || hitTop) && (hitLeft || hitRight)) {
 
             // Determine the side that the object should rebound off of
             float distX, distY;
@@ -121,27 +125,25 @@ public abstract class APhysics {
                 distX = Math.abs(a.left() - right());
             }
 
-            if(distX > distY) {
-                if(hitTop) {
+            if (distX > distY) {
+                if (hitTop) {
                     a.y = top() - a.h;
 
                     a.isFloorCollision = true;
 
-                    if(!a.isUserControlled) {
+                    if (!a.isUserControlled) {
                         a.vX *= .9f;
                     }
-                }
-                else {
+                } else {
                     a.y = bottom();
                 }
                 a.vY = 0;
 
-            } else if (distX < distY){
-                if(hitRight) {
+            } else if (distX < distY) {
+                if (hitRight) {
                     a.x = right();
                     a.isWallCollisionLeft = true;
-                }
-                else {
+                } else {
                     a.x = left() - a.w;
                     a.isWallCollisionRight = true;
                 }
@@ -158,7 +160,7 @@ public abstract class APhysics {
     }
 
     private void setAcceleration() {
-        accelerationRate = .2f  * mass;
+        accelerationRate = .2f * mass;
     }
 
     private void setPosition(float x, float y) {
@@ -204,13 +206,17 @@ public abstract class APhysics {
         return left() + bufferHoriz;
     }
 
-    protected float leftBufferOuter() { return left() - bufferHoriz; }
+    protected float leftBufferOuter() {
+        return left() - bufferHoriz;
+    }
 
     protected float rightBufferInner() {
         return right() + bufferHoriz;
     }
 
-    protected float rightBufferOuter() { return right() - bufferHoriz; }
+    protected float rightBufferOuter() {
+        return right() - bufferHoriz;
+    }
 
     protected float bottomBufferInner() {
         return bottom() - bufferVert;

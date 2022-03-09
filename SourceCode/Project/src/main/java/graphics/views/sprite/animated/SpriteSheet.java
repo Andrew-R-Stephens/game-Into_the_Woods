@@ -8,6 +8,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 
+/**
+ * TODO: Add description
+ */
 public class SpriteSheet extends AFileLoader implements IImageLoader, ISpriteSheetParser {
 
     private BufferedImage sheet;

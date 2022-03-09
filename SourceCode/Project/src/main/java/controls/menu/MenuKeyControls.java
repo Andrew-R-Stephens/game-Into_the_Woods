@@ -6,6 +6,9 @@ import viewmodels.game.GameModel;
 
 import java.awt.event.KeyEvent;
 
+/**
+ * Menu Key Controls define the controls for Main Manu or Pause Menu navigation with Key input.
+ */
 public class MenuKeyControls extends AKeyController {
 
     private ControlsModel controlsViewModel;

@@ -5,6 +5,9 @@ import utils.IDrawable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * TODO: Add description
+ */
 public class Sprite implements IDrawable {
 
     private BufferedImage img;
