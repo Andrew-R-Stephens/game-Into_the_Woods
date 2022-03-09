@@ -13,10 +13,9 @@ import java.util.LinkedList;
 public class GameWindow extends JFrame {
 
     private final JFrame thisFrame = this;
-    private int updates = 0, frames = 0, lastFPS = Integer.MAX_VALUE;
+    private int updates = 0, frames = 0, lastUpdates = Integer.MAX_VALUE, lastFrames = Integer.MAX_VALUE;
     private double avgFrames;
     private boolean isRunning;
-
 
     private double fpsWindowScale = 1;
 
@@ -91,7 +90,7 @@ public class GameWindow extends JFrame {
                 if(delta >= 1) {
                     Thread t = new Thread(() -> {
                         //double frameRatio = (double) lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT;
-                        double frameRatio = lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT;
+                        double frameRatio = lastUpdates / (double) PreferenceData.FRAMERATE_DEFAULT;
                         gameCanvas.update(frameRatio);
                         updates++;
                     });
@@ -110,12 +109,13 @@ public class GameWindow extends JFrame {
 
                 if(System.currentTimeMillis() - timer > 1000) {
                     timer += 1000; // add a thousand to timer
-                    lastFPS = frames;
-                    avgFrames = .5 * (lastFPS + avgFrames);
+                    lastUpdates = updates;
+                    lastFrames = frames;
+                    avgFrames = .5 * (lastUpdates + avgFrames);
                     updates = 0;
                     frames = 0;
 
-                    fpsPoints.addLast((int)avgFrames);
+                    fpsPoints.addLast(lastUpdates);
                     if(fpsPoints.size()* fpsWindowScale > (fpspanel.getWidth())) {
                         fpsPoints.removeFirst();
                     }
