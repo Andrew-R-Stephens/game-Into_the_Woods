@@ -1,8 +1,8 @@
 package main;
 
 import data.PreferenceData;
-import graphics.ui.GameCanvas;
-import graphics.ui.GameWindow;
+import graphics.ui.game.GameCanvas;
+import graphics.ui.game.GameWindow;
 import utils.PreferencesXMLParser;
 import viewmodels.controls.ControlsModel;
 import viewmodels.game.GameModel;

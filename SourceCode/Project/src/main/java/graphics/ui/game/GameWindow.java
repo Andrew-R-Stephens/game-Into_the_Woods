@@ -1,6 +1,7 @@
-package graphics.ui;
+package graphics.ui.game;
 
 import data.PreferenceData;
+import graphics.ui.menu.MenuCanvas;
 import viewmodels.controls.ControlsModel;
 
 import javax.swing.*;
@@ -14,7 +15,6 @@ public class GameWindow extends JFrame {
 
     private final JFrame thisFrame = this;
     private int updates = 0, frames = 0, lastUpdates = Integer.MAX_VALUE, lastFrames = Integer.MAX_VALUE;
-    private double avgFrames;
     private boolean isRunning;
 
     private double fpsWindowScale = 1;
@@ -32,27 +32,27 @@ public class GameWindow extends JFrame {
         Thread gameThread = new Thread(() -> {
 
             long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
-            final short targetFPS = preferences.getFrameRate();
+            final short targetFPS = PreferenceData.GAME_UPDATE_RATE;
             double ns = 1000000000 / (float)targetFPS, delta = 0;
-            avgFrames = targetFPS;
 
             LinkedList<Integer> fpsPoints = new LinkedList<>();
-
 
             // FRAMERATE DISPLAY
 
             JFrame fpsframe = new JFrame();
             fpsframe.setAlwaysOnTop(true);
             fpsframe.setPreferredSize(new Dimension(200, thisFrame.getHeight()));
+
             JPanel fpspanel = new JPanel(){
-                int secondX = 0;
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
-                    int x = 0, prevPoint = targetFPS;
+
                     g.fillRect(0,0,getWidth(), getHeight());
+                    g.setColor(Color.GREEN);
+
+                    int x = 0, prevPoint = targetFPS;
                     for (Integer point : fpsPoints) {
-                        g.setColor(Color.GREEN);
                         g.drawLine(
                                 (int)(x * fpsWindowScale),
                                 getHeight() - (int)(fpsWindowScale * point),
@@ -61,18 +61,18 @@ public class GameWindow extends JFrame {
                         prevPoint = point;
                         x++;
                     }
-                    g.setColor(Color.RED);
+
+                    g.setColor(Color.GREEN);
+
                     if(!fpsPoints.isEmpty()) {
                         g.drawString(fpsPoints.getLast() + "", 0, 20);
                     } else {
                         g.drawString(String.valueOf(targetFPS), 0, 20);
                     }
-                    secondX ++;
                 }
             };
-            fpspanel.addMouseWheelListener(e -> {
-                fpsWindowScale -= e.getWheelRotation() * .1;
-            });
+
+            fpspanel.addMouseWheelListener(e -> fpsWindowScale -= e.getWheelRotation() * .1);
             fpsframe.add(fpspanel);
             fpsframe.pack();
             fpsframe.setVisible(true);
@@ -89,9 +89,9 @@ public class GameWindow extends JFrame {
 
                 if(delta >= 1) {
                     Thread t = new Thread(() -> {
-                        //double frameRatio = (double) lastFPS / (double) PreferenceData.FRAMERATE_DEFAULT;
-                        double frameRatio = lastUpdates / (double) PreferenceData.FRAMERATE_DEFAULT;
+                        float frameRatio = lastUpdates / (float) PreferenceData.GAME_UPDATE_RATE;
                         gameCanvas.update(frameRatio);
+                        //gameCanvas.update(.5f);
                         updates++;
                     });
                     t.start();
@@ -102,16 +102,16 @@ public class GameWindow extends JFrame {
                     Thread t = new Thread(() -> {
                         gameCanvas.render();
                         frames++;
-                    }
-                    );
+                    });
                     t.start();
                 }
 
                 if(System.currentTimeMillis() - timer > 1000) {
-                    timer += 1000; // add a thousand to timer
+                    timer += 1000;
+
                     lastUpdates = updates;
                     lastFrames = frames;
-                    avgFrames = .5 * (lastUpdates + avgFrames);
+
                     updates = 0;
                     frames = 0;
 

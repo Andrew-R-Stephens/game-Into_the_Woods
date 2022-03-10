@@ -1,5 +1,6 @@
 package viewmodels.game;
 
+import data.PreferenceData;
 import proptypes.actors.levelactors.animated.ALevelProp;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  */
 public class LevelModel {
 
-    public static final float GRAVITY = 9.8f;
+    public static final float GRAVITY = 9.8f / (float)PreferenceData.GAME_UPDATE_RATE;
 
     private final ArrayList<ALevelProp> levelProps = new ArrayList<>();
 

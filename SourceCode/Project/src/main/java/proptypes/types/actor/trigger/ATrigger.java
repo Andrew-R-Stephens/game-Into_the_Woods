@@ -7,12 +7,12 @@ import proptypes.types.actor.pawn.APawn;
  */
 public abstract class ATrigger extends APawn {
 
-    protected ATrigger(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {
-        super(x, y, w, h, vx, vy, hasGravity, mass);
+    protected ATrigger(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
+        super(x, y, w, h, vx, vy, hasGravity);
     }
 
     @Override
-    public void update(double delta) {
+    public void update(float delta) {
 
 
     }

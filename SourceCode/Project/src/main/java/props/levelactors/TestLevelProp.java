@@ -10,13 +10,13 @@ import java.awt.*;
  */
 public class TestLevelProp extends ALevelProp {
 
-    public TestLevelProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {
-        super(x, y, w, h, vx, vy, hasGravity, mass);
+    public TestLevelProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
+        super(x, y, w, h, vx, vy, hasGravity);
     }
 
     @Override
-    public boolean hasCollision(AActor a) {
-        if (super.hasCollision(a)) {
+    public boolean hasCollision(AActor a, float delta) {
+        if (super.hasCollision(a, delta)) {
             c = Color.RED;
             return true;
         }
@@ -25,7 +25,7 @@ public class TestLevelProp extends ALevelProp {
     }
 
     @Override
-    public void update(double delta) {
+    public void update(float delta) {
         super.update(delta);
     }
 

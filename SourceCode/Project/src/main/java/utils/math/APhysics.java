@@ -1,5 +1,6 @@
 package utils.math;
 
+import data.PreferenceData;
 import proptypes.types.actor.AActor;
 import viewmodels.game.LevelModel;
 
@@ -10,7 +11,7 @@ public abstract class APhysics {
 
     protected boolean hasGravity = true;
 
-    protected float accelerationRate = .2f, mass = 1;
+    protected float accelerationRate = .2f;
     protected float vX, vY;
     protected float x, y, w, h;
 
@@ -24,18 +25,16 @@ public abstract class APhysics {
             float x, float y,
             float w, float h,
             float vX, float vY,
-            boolean hasGravity, float mass) {
+            boolean hasGravity) {
 
         setPosition(x, y);
         setSize(w, h);
         setVelocity(vX, vY);
-        setMass(mass);
-        setAcceleration();
         hasGravity(hasGravity);
 
     }
 
-    protected void update(double delta) {
+    protected void update(float delta) {
         isFloorCollision = false;
         isWallCollisionLeft = false;
         isWallCollisionRight = false;
@@ -45,19 +44,20 @@ public abstract class APhysics {
         updateVelocity(delta);
     }
 
-    private void calculateGravity(double delta) {
+    private void calculateGravity(float delta) {
         if (hasGravity) {
-            vY += (LevelModel.GRAVITY / delta) * mass;
+            vY += (LevelModel.GRAVITY / delta);
         }
     }
 
-    private void updateVelocity(double delta) {
+    private void updateVelocity(float delta) {
 
-        accelerationRate /= delta;
+        float acc = accelerationRate / (float)PreferenceData.GAME_UPDATE_RATE / delta;
 
-        vY += vY * accelerationRate;
-        vX += vY * accelerationRate;
+        vY *= 1-acc;
+        vX *= 1-acc;
 
+        /*
         if (vY > 100f) {
             vY = 100f;
         } else if (vY < -100f) {
@@ -68,10 +68,11 @@ public abstract class APhysics {
         } else if (vX < -100f) {
             vX = -100f;
         }
+        */
 
     }
 
-    public boolean hasCollision(AActor a) {
+    public boolean hasCollision(AActor a, float delta) {
 
         boolean isFloorBounded = ((a.bottomBufferOuter()) >= top()) && (a.bottomBufferInner() <= bottom());
 
@@ -132,7 +133,7 @@ public abstract class APhysics {
                     a.isFloorCollision = true;
 
                     if (!a.isUserControlled) {
-                        a.vX *= .9f;
+                        a.vX *= .9f; // / (float)PreferenceData.GAME_UPDATE_RATE / delta;
                     }
                 } else {
                     a.y = bottom();
@@ -159,10 +160,6 @@ public abstract class APhysics {
 
     }
 
-    private void setAcceleration() {
-        accelerationRate = .2f * mass;
-    }
-
     private void setPosition(float x, float y) {
         this.x = x;
         this.y = y;
@@ -171,10 +168,6 @@ public abstract class APhysics {
     private void setSize(float w, float h) {
         this.w = w;
         this.h = h;
-    }
-
-    private void setMass(float mass) {
-        this.mass = mass;
     }
 
     protected void hasGravity(boolean hasGravity) {

@@ -101,6 +101,15 @@ public class PreferencesXMLParser extends AFileReader {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
 
+                    short gameUpdateRate = Short.parseShort(eElement
+                            .getElementsByTagName("gameUpdateRate")
+                            .item(0)
+                            .getTextContent());
+                    preferences.setGameUpdateRate(gameUpdateRate);
+
+                    System.out.println("Game Update Rate = "
+                            + gameUpdateRate);
+
                     short frameRateDefault = Short.parseShort(eElement
                             .getElementsByTagName("frameRateDefault")
                             .item(0)

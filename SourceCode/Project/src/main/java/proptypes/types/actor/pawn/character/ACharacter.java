@@ -1,5 +1,6 @@
 package proptypes.types.actor.pawn.character;
 
+import data.PreferenceData;
 import proptypes.types.actor.pawn.APawn;
 import utils.IDrawable;
 import viewmodels.controls.ControlsModel;
@@ -14,6 +15,8 @@ public abstract class ACharacter extends APawn implements IDrawable {
     /* Dictates whether or not the character has attempted to jump or not. This resets if the character collides with
      * an ALevelProp or presses the Jump button.
      */
+    private final float BASE_MOVEMENT_SPEED = 10f;
+
     private boolean isJumpLocked = false;
     private final int MAX_ALLOWED_JUMP_TIME = 10;
     private int jumpTime = MAX_ALLOWED_JUMP_TIME;
@@ -22,8 +25,8 @@ public abstract class ACharacter extends APawn implements IDrawable {
     private float wallrideTime = MAX_ALLOWED_JUMP_TIME;
 
     protected ACharacter(ControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
-                         boolean hasGravity, float mass) {
-        super(x, y, w, h, vx, vy, hasGravity, mass);
+                         boolean hasGravity) {
+        super(x, y, w, h, vx, vy, hasGravity);
         this.controlsModel = cModel;
     }
 
@@ -32,33 +35,35 @@ public abstract class ACharacter extends APawn implements IDrawable {
      *
      * @param delta - The ratio of current update rate vs targetted framerate
      */
-    protected void update(double delta) {
+    protected void update(float delta) {
         super.update(delta);
     }
 
     /**
      * The direct call to movement and ability handlers
      */
-    public void control() {
-        doAbilitiy();
-        doMove();
+    public void control(float delta) {
+        doAbilitiy(delta);
+        doMove(delta);
     }
 
     /**
      * This handles most conditions directly pertaining to Character movement based on User Input
      */
-    public void doMove() {
+    public void doMove(float delta) {
 
         boolean[] directionals = controlsModel.getDirectionals();
 
         int xDir = (directionals[0] ? -1 : 0) + (directionals[1] ? 1 : 0);
-        int yDir = (directionals[2] ? -1 : 0) + (directionals[3] ? 1 : 0);
+        //int yDir = (directionals[2] ? -1 : 0) + (directionals[3] ? 1 : 0);
+
+        xDir *= BASE_MOVEMENT_SPEED;
 
         isUserControlled = directionals[0] || directionals[1] || directionals[2] || directionals[3];
 
         // If control direction goes against character movement direction, slow velocity down
         if (vX * xDir < 0) {
-            vX *= .85; //.95
+            vX *= .85 / (float)PreferenceData.GAME_UPDATE_RATE / delta; //.95
         }
 
         // Handle wall collisions with control input considered
@@ -76,14 +81,14 @@ public abstract class ACharacter extends APawn implements IDrawable {
         }
 
         // Increment by a specific velocity from control input
-        vX += xDir;
-        vY += yDir;
+        vX += xDir / (float)PreferenceData.GAME_UPDATE_RATE / delta;
+        //vY += yDir / (float)PreferenceData.GAME_UPDATE_RATE;
     }
 
     /**
      * This handles most conditions pertaining to Character Abilities based on User Input
      */
-    protected void doAbilitiy() {
+    protected void doAbilitiy(float delta) {
 
         boolean[] abilities = controlsModel.getAbilities();
 
@@ -97,31 +102,23 @@ public abstract class ACharacter extends APawn implements IDrawable {
                 return;
             }
 
-            if (jumpTime > 0 && (isFloorCollision || isWallCollisionLeft || isWallCollisionRight)) {
+            if (jumpTime > 0) {
 
                 lockJumpState(true);
 
-                vY = -50;
-
                 if (isFloorCollision) {
-
-                    if (!isUserControlled) {
-                        vX *= .25;
-                    }
+                    vY = -7;
                     isFloorCollision = false;
-
                 }
                 if (isWallCollisionLeft) {
-
-                    vX = 10;
+                    vY = -5;
+                    vX = 5;
                     isWallCollisionLeft = false;
-
                 }
                 if (isWallCollisionRight) {
-
-                    vX = -10;
+                    vY = -5;
+                    vX = -5;
                     isWallCollisionRight = false;
-
                 }
             }
 

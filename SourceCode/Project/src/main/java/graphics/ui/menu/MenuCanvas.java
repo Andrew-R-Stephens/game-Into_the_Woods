@@ -1,37 +1,36 @@
-package graphics.ui;
+package graphics.ui.menu;
 
 import viewmodels.game.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Game Canvas extends JPanel. The canvas renders game objects using the scale of chosen window dimensions against the standard dimensions.
  */
-public class GameCanvas extends JPanel {
+public class MenuCanvas extends JPanel {
 
-    private GameModel gameModel;
+    ArrayList<MenuButton> buttons = new ArrayList<>();
 
-    private boolean isUpdated = true;
-
-    public GameCanvas() {
+    public MenuCanvas() {
         // TODO: Nothing yet
+        buttons.add(new MenuButton());
     }
 
     public void init(GameModel gameModel) {
-        this.gameModel = gameModel;
+
     }
 
-    public void update(double updateRate) {
-        //System.out.println("Updating");
-        gameModel.update(updateRate);
-        isUpdated = true;
+    public void update(float updateRate) {
+        //loop through all buttons in menu
+            //if a button is within bounds on mouse click
+            // execute action
     }
 
     public void render() {
         //System.out.println("Rendering");
         repaint();
-        isUpdated = false;
     }
 
     @Override
@@ -46,12 +45,6 @@ public class GameCanvas extends JPanel {
         g2d.setColor(new Color(255, 255, 255));
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
-        // Draw test objects
-        gameModel.renderGameObjects(g);
-
     }
 
-    public boolean isRenderReady() {
-        return isUpdated;
-    }
 }

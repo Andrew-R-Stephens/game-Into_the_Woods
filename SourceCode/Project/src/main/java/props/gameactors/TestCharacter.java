@@ -16,13 +16,13 @@ public class TestCharacter extends ACharacter {
     protected Color c = Color.BLUE;
 
     public TestCharacter(ControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
-                         boolean hasGravity, float mass) {
-        super(cModel, x, y, w, h, vx, vy, hasGravity, mass);
+                         boolean hasGravity) {
+        super(cModel, x, y, w, h, vx, vy, hasGravity);
     }
 
     @Override
-    public boolean hasCollision(AActor a) {
-        if (super.hasCollision(a)) {
+    public boolean hasCollision(AActor a, float delta) {
+        if (super.hasCollision(a, delta)) {
             c = Color.RED;
             return true;
         }
@@ -31,7 +31,7 @@ public class TestCharacter extends ACharacter {
     }
 
     @Override
-    public void update(double delta) {
+    public void update(float delta) {
         super.update(delta);
 
         WorldModel.offX =
@@ -59,6 +59,10 @@ public class TestCharacter extends ACharacter {
         g.drawRect((int) (centerX), (int) (centerY), (int) (scaleW), (int) (scaleH));
         g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
 
+    }
+
+    public String toString() {
+        return "TC:  VX= " + (int)vX + ", VY= " + (int)vY + ", ACC= " + (int)accelerationRate;
     }
 
 }

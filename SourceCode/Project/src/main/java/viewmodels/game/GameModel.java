@@ -34,69 +34,69 @@ public class GameModel {
                 200, 50,
                 50, 50,
                 0, 0,
-                true,
-                1f
+                true
         ));
 
         // Wall
-        levelModel.addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false));
         // Climbing Walls
-        levelModel.addProp(new TestLevelPropStatic(320, -150, 50, 200, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(500, 0, 50, 200, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(320, 220, 50, 200, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(500, 360, 50, 200, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(320, 500, 50, 200, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(320, -150, 50, 200, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(500, 0, 50, 200, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(320, 220, 50, 200, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(500, 360, 50, 200, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(320, 500, 50, 200, 0, 0, false));
 
-        levelModel.addProp(new TestLevelPropStatic(9000, 0, 100, 1080, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(9000, 0, 100, 1080, 0, 0, false));
         // Floor
-        levelModel.addProp(new TestLevelPropStatic(0, 980, 10000, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(0, 980, 10000, 100, 0, 0, false));
 
         // Other Props
-        levelModel.addProp(new TestLevelPropStatic(1800, 100, 500, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(70, 800, 500, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(500, 700, 500, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(1100, 600, 500, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(1800, 100, 500, 100, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(70, 800, 500, 100, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(500, 700, 500, 100, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(1100, 600, 500, 100, 0, 0, false));
 
-        levelModel.addProp(new TestLevelPropStatic(1800, 600, 500, 50, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(2000, 650, 220, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(3500, 750, 500, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(4000, 780, 200, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(1800, 600, 500, 50, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(2000, 650, 220, 100, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(3500, 750, 500, 100, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(4000, 780, 200, 100, 0, 0, false));
 
-        levelModel.addProp(new TestLevelPropStatic(6800, 400, 500, 50, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(2500, 720, 220, 100, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(3000, 700, 500, 50, 0, 0, false, 0));
-        levelModel.addProp(new TestLevelPropStatic(3200, 650, 100, 100, 0, 0, false, 0));
+        levelModel.addProp(new TestLevelPropStatic(6800, 400, 500, 50, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(2500, 720, 220, 100, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(3000, 700, 500, 50, 0, 0, false));
+        levelModel.addProp(new TestLevelPropStatic(3200, 650, 100, 100, 0, 0, false));
     }
 
     public void addGameObject(AActor gameObject) {
         gameObjects.add(gameObject);
     }
 
-    public synchronized void update(double delta) {
+    public synchronized void update(float delta) {
 
         // Mouse Input (Adding Game Objects)
         AMouseController mouseController = controlsViewModel.getMouseController();
         if (mouseController instanceof GameMouseControls) {
 
             GameMouseControls gmc = (GameMouseControls) mouseController;
+
+
             if (gmc.isLeftPressed()) {
-                int count = (int) (1 / delta);
+                int count = (int) (10 / delta);
                 if (count < 1) {
                     count = 1;
                 }
                 for (int i = 0; i < count; i++) {
                     addGameObject(
-                            new TestActor(
-                                    (float) (PreferenceData.window_width_actual - (WorldModel.offX / PreferenceData.scaledW) + (gmc.getPos()[0] * .5)),
-                                    (float) (PreferenceData.window_height_actual - (WorldModel.offY / PreferenceData.scaledH) + (gmc.getPos()[1] * .5)),
-                                    50f,
-                                    50f,
-                                    new Random().nextFloat(-100, 100),
-                                    new Random().nextFloat(-100, 100),
-                                    true,
-                                    1f
-                            )
+                        new TestActor(
+                            (float) ((-WorldModel.offX/PreferenceData.scaledW) + (gmc.getPos()[0]/PreferenceData.scaledW)),
+                            (float) ((-WorldModel.offY/PreferenceData.scaledW) + (gmc.getPos()[1]/PreferenceData.scaledH)),
+                            50f,
+                            50f,
+                            new Random().nextFloat(-5, 5),
+                            new Random().nextFloat(-5, 5),
+                            true
+                        )
                     );
                 }
             }
@@ -106,34 +106,35 @@ public class GameModel {
         updateGameObjects(delta);
 
         // Check Game Object Collisions with Level Props
-        checkCollisions();
+        checkCollisions(delta);
 
     }
 
-    public void updateGameObjects(double updateRate) {
+    public void updateGameObjects(float delta) {
 
         // Update all Actors
         for (AActor gameObject : gameObjects) {
 
             // Update TestActors
             if (gameObject instanceof TestActor a) {
-                a.update(updateRate);
+                a.update(delta);
             }
 
             // Update Characters
             if (gameObject instanceof TestCharacter tc) {
-                tc.control();
-                tc.update(updateRate);
+                tc.control(delta);
+                tc.update(delta);
+                //System.out.println(tc);
             }
 
         }
 
     }
 
-    private void checkCollisions() {
+    private void checkCollisions(float delta) {
         for (ALevelProp p : levelModel.getLevelProps()) {
             for (AActor a : gameObjects) {
-                p.hasCollision(a);
+                p.hasCollision(a, delta);
             }
         }
     }
@@ -141,22 +142,16 @@ public class GameModel {
     public synchronized void renderGameObjects(Graphics g) {
         for (AActor gameObject : gameObjects) {
             if (gameObject instanceof TestCharacter o) {
-                //if(o.isInFrameBounds()) {
                 o.draw(g);
-                //}
             }
             if (gameObject instanceof TestActor o) {
-                //if(o.isInFrameBounds()) {
                 o.draw(g);
-                //}
             }
         }
 
         for (AActor levelProps : levelModel.getLevelProps()) {
             if (levelProps instanceof ALevelProp p) {
-                //if(p.isInFrameBounds()) {
                 p.draw(g);
-                //}
             }
         }
     }

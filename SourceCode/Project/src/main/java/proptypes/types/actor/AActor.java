@@ -18,15 +18,14 @@ public abstract class AActor extends APhysics implements IDrawable {
     protected AActor(float x, float y,
                      float w, float h,
                      float vx, float vy,
-                     boolean hasGravity,
-                     float mass) {
+                     boolean hasGravity) {
 
-        super(x, y, w, h, vx, vy, hasGravity, mass);
+        super(x, y, w, h, vx, vy, hasGravity);
 
     }
 
     @Override
-    protected void update(double delta) {
+    protected void update(float delta) {
         super.update(delta);
     }
 

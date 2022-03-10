@@ -9,12 +9,12 @@ import java.awt.*;
  */
 public class TestActor extends APawn {
 
-    public TestActor(float x, float y, float w, float h, float vx, float vy, boolean hasGravity, float mass) {
-        super(x, y, w, h, vx, vy, hasGravity, mass);
+    public TestActor(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
+        super(x, y, w, h, vx, vy, hasGravity);
     }
 
     @Override
-    public void update(double delta) {
+    public void update(float delta) {
         super.update(delta);
 
     }
@@ -22,10 +22,5 @@ public class TestActor extends APawn {
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-
-        /*double sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
-
-        g.setColor(Color.RED);
-        g.drawRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)(h*sH));*/
     }
 }

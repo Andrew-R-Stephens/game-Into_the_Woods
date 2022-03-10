@@ -14,29 +14,23 @@ public class PreferenceData {
     public static int window_width_actual = 0;
     public static int window_height_actual = 0;
 
-    private static WindowType window_type = WindowType.WINDOWED;
-
-    public static short FRAMERATE_DEFAULT = 60;
-    public static short frameRate = 60;
-
     public static double scaledW = 1;
     public static double scaledH = 1;
 
+    private static WindowType window_type = WindowType.WINDOWED;
+
+    public static short GAME_UPDATE_RATE = 60;
+    public static short FRAME_RATE_DEFAULT = 60;
+    public static short frameRate = 60;
+
+
     public void calcResScale() {
-        /*
-        scaledW = (double) window_width_selected / DEFAULT_WINDOW_WIDTH;
-        scaledH = (double) window_height_selected / DEFAULT_WINDOW_HEIGHT;
-        */
-        /*
-        scaledW = (double) DEFAULT_WINDOW_WIDTH / (double)window_width_actual;
-        scaledH = (double) DEFAULT_WINDOW_HEIGHT / (double)window_height_actual;
-        */
         scaledW = (double)window_width_actual / (double) DEFAULT_WINDOW_WIDTH;
         scaledH = (double)window_height_actual / (double) DEFAULT_WINDOW_HEIGHT;
     }
 
     public void setWindowWidthSelected(int width) {
-        this.window_width_selected = width;
+        window_width_selected = width;
     }
 
     public int getWindowWidthSelected() {
@@ -44,7 +38,7 @@ public class PreferenceData {
     }
 
     public void setWindowHeightSelected(int height) {
-        this.window_height_selected = height;
+        window_height_selected = height;
     }
 
     public int getWindowHeightSelected() {
@@ -60,19 +54,23 @@ public class PreferenceData {
     }
 
     public void setWindowWidthDefault(int width) {
-        this.DEFAULT_WINDOW_WIDTH = width;
+        DEFAULT_WINDOW_WIDTH = width;
     }
 
     public void setWindowHeightDefault(int height) {
-        this.DEFAULT_WINDOW_HEIGHT = height;
+        DEFAULT_WINDOW_HEIGHT = height;
     }
 
     public void setWindowType(int type) {
-        this.window_type = WindowType.values()[type];
+        window_type = WindowType.values()[type];
     }
 
     public WindowType getWindowType() {
         return window_type;
+    }
+
+    public void setGameUpdateRate(short updateRate) {
+        GAME_UPDATE_RATE = updateRate;
     }
 
     public void setFrameRate(short frameRate) {
@@ -84,7 +82,7 @@ public class PreferenceData {
     }
 
     public void setFrameRateDefault(short framerateDefault) {
-        FRAMERATE_DEFAULT = framerateDefault;
+        FRAME_RATE_DEFAULT = framerateDefault;
     }
 
 
