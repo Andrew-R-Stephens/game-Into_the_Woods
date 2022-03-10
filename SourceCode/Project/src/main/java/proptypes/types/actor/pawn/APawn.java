@@ -1,6 +1,5 @@
 package proptypes.types.actor.pawn;
 
-import data.PreferenceData;
 import proptypes.types.actor.AActor;
 import utils.IDrawable;
 

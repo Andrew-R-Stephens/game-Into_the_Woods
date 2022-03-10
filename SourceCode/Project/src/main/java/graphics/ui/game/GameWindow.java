@@ -1,7 +1,6 @@
 package graphics.ui.game;
 
 import data.PreferenceData;
-import graphics.ui.menu.MenuCanvas;
 import viewmodels.controls.ControlsModel;
 
 import javax.swing.*;

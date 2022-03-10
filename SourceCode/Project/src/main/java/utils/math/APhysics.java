@@ -11,6 +11,8 @@ public abstract class APhysics {
 
     protected boolean hasGravity = true;
 
+    protected float MAX_VEL = 10f;
+
     protected float accelerationRate = .2f;
     protected float vX, vY;
     protected float x, y, w, h;
@@ -57,18 +59,17 @@ public abstract class APhysics {
         vY *= 1-acc;
         vX *= 1-acc;
 
-        /*
-        if (vY > 100f) {
-            vY = 100f;
-        } else if (vY < -100f) {
-            vY = -100f;
+
+        if (vY > MAX_VEL) {
+            vY = MAX_VEL;
+        } else if (vY < -MAX_VEL) {
+            vY = -MAX_VEL;
         }
-        if (vX > 100f) {
-            vX = 100f;
-        } else if (vX < -100f) {
-            vX = -100f;
+        if (vX > MAX_VEL) {
+            vX = MAX_VEL;
+        } else if (vX < -MAX_VEL) {
+            vX = -MAX_VEL;
         }
-        */
 
     }
 

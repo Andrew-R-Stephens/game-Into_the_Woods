@@ -80,7 +80,6 @@ public class GameModel {
 
             GameMouseControls gmc = (GameMouseControls) mouseController;
 
-
             if (gmc.isLeftPressed()) {
                 int count = (int) (10 / delta);
                 if (count < 1) {
@@ -102,11 +101,11 @@ public class GameModel {
             }
         }
 
+        // Check Game Object Collisions with Level Props
+        checkCollisions(delta);
         // Update the Game Objects
         updateGameObjects(delta);
 
-        // Check Game Object Collisions with Level Props
-        checkCollisions(delta);
 
     }
 

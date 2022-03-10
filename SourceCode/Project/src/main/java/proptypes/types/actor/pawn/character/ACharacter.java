@@ -54,17 +54,19 @@ public abstract class ACharacter extends APawn implements IDrawable {
 
         boolean[] directionals = controlsModel.getDirectionals();
 
+        // SET xDir TO ZERO, NEGATIVE, OR POSITIVE BASED ON CONTROL DIRECTION
         int xDir = (directionals[0] ? -1 : 0) + (directionals[1] ? 1 : 0);
         //int yDir = (directionals[2] ? -1 : 0) + (directionals[3] ? 1 : 0);
-
-        xDir *= BASE_MOVEMENT_SPEED;
 
         isUserControlled = directionals[0] || directionals[1] || directionals[2] || directionals[3];
 
         // If control direction goes against character movement direction, slow velocity down
         if (vX * xDir < 0) {
-            vX *= .85 / (float)PreferenceData.GAME_UPDATE_RATE / delta; //.95
+            vX *= .85; //.95
         }
+
+        // MULTIPLY BASE MOVEMENT SPEED BY DIRECTION MOVED
+        xDir *= BASE_MOVEMENT_SPEED;
 
         // Handle wall collisions with control input considered
         if ((xDir < 0 && isWallCollisionLeft) || (xDir > 0 && isWallCollisionRight)) {
@@ -105,21 +107,28 @@ public abstract class ACharacter extends APawn implements IDrawable {
             if (jumpTime > 0) {
 
                 lockJumpState(true);
+                System.out.println(isFloorCollision + " " + isWallCollisionLeft + " " + isWallCollisionRight);
 
                 if (isFloorCollision) {
                     vY = -7;
                     isFloorCollision = false;
+
+                    System.out.println("Floor Jump");
                 }
                 if (isWallCollisionLeft) {
-                    vY = -5;
                     vX = 5;
+
                     isWallCollisionLeft = false;
+                    System.out.println("Wall Left Jump");
                 }
                 if (isWallCollisionRight) {
-                    vY = -5;
                     vX = -5;
+
                     isWallCollisionRight = false;
+                    System.out.println("Wall Right Jump");
                 }
+
+
             }
 
         } else {
