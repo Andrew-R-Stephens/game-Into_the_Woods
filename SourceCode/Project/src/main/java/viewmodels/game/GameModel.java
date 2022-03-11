@@ -32,7 +32,7 @@ public class GameModel {
         gameObjects.add(new TestCharacter(
                 controlsViewModel,
                 200, 50,
-                50, 50,
+                25, 50,
                 0, 0,
                 true
         ));

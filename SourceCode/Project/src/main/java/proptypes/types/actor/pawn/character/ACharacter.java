@@ -111,23 +111,26 @@ public abstract class ACharacter extends APawn implements IDrawable {
 
                 if (isFloorCollision) {
                     vY = -7;
-                    isFloorCollision = false;
 
                     System.out.println("Floor Jump");
-                }
-                if (isWallCollisionLeft) {
-                    vX = 5;
+                } else {
+                    if (isWallCollisionLeft) {
+                        vY = -7;
+                        vX = 5;
 
-                    isWallCollisionLeft = false;
-                    System.out.println("Wall Left Jump");
-                }
-                if (isWallCollisionRight) {
-                    vX = -5;
+                        isWallCollisionLeft = false;
+                        System.out.println("Wall Left Jump");
+                    } else
+                    if (isWallCollisionRight) {
+                        vY = -7;
+                        vX = -5;
 
-                    isWallCollisionRight = false;
-                    System.out.println("Wall Right Jump");
+                        isWallCollisionRight = false;
+                        System.out.println("Wall Right Jump");
+                    }
                 }
 
+                isFloorCollision = false;
 
             }
 

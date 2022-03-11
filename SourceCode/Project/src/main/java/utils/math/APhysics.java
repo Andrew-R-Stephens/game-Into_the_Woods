@@ -11,7 +11,8 @@ public abstract class APhysics {
 
     protected boolean hasGravity = true;
 
-    protected float MAX_VEL = 10f;
+    protected float MAX_VEL_X = 10f;
+    protected float MAX_VEL_Y = 18f;
 
     protected float accelerationRate = .2f;
     protected float vX, vY;
@@ -60,15 +61,15 @@ public abstract class APhysics {
         vX *= 1-acc;
 
 
-        if (vY > MAX_VEL) {
-            vY = MAX_VEL;
-        } else if (vY < -MAX_VEL) {
-            vY = -MAX_VEL;
+        if (vY > MAX_VEL_Y) {
+            vY = MAX_VEL_Y;
+        } else if (vY < -MAX_VEL_Y) {
+            vY = -MAX_VEL_Y;
         }
-        if (vX > MAX_VEL) {
-            vX = MAX_VEL;
-        } else if (vX < -MAX_VEL) {
-            vX = -MAX_VEL;
+        if (vX > MAX_VEL_X) {
+            vX = MAX_VEL_X;
+        } else if (vX < -MAX_VEL_X) {
+            vX = -MAX_VEL_X;
         }
 
     }
@@ -97,10 +98,13 @@ public abstract class APhysics {
         boolean hitRight =
                 ((a.left() <= right()) && (a.left() >= left())) ||
                         ((right() >= a.left()) && (right() <= a.right()));
+/*
 
-        if ((hitRight || hitLeft) && isFloorBounded) {
+        if ((hitRight || hitLeft) && hitBottom) {
+            System.out.println("set floor coll 1");
             a.isFloorCollision = true;
         }
+*/
 
         if (hitTop || hitBottom) {
 
@@ -132,9 +136,10 @@ public abstract class APhysics {
                     a.y = top() - a.h;
 
                     a.isFloorCollision = true;
+                    //System.out.println("set floor coll 2");
 
                     if (!a.isUserControlled) {
-                        a.vX *= .9f; // / (float)PreferenceData.GAME_UPDATE_RATE / delta;
+                        a.vX *= .9f;
                     }
                 } else {
                     a.y = bottom();
