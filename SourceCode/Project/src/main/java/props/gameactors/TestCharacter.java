@@ -4,7 +4,7 @@ import data.PreferenceData;
 import proptypes.types.actor.AActor;
 import proptypes.types.actor.pawn.character.ACharacter;
 import viewmodels.controls.ControlsModel;
-import viewmodels.game.WorldModel;
+import viewmodels.game.Camera;
 
 import java.awt.*;
 
@@ -34,23 +34,25 @@ public class TestCharacter extends ACharacter {
     public void update(float delta) {
         super.update(delta);
 
-        WorldModel.offX =
-                ((PreferenceData.window_width_actual * .5) - (w * PreferenceData.scaledW)) - (x * PreferenceData.scaledW);
-        WorldModel.offY =
-                ((PreferenceData.window_height_actual * .5) - (h * PreferenceData.scaledH)) - (y * PreferenceData.scaledH);
+        float tx =
+                (float)(((PreferenceData.window_width_actual * .5) - (w * PreferenceData.scaledW)) - (x * PreferenceData.scaledW));
+        float ty =
+                (float)(((PreferenceData.window_height_actual * .5) - (h * PreferenceData.scaledH)) - (y * PreferenceData.scaledH));
+
+        Camera.moveTo(tx, ty);
     }
 
     @Override
     public void draw(Graphics g) {
         super.draw(g);
 
-        //Half window width
-        double centerX = PreferenceData.window_width_actual * .5;
-        double centerY = PreferenceData.window_height_actual * .5;
-
         // Scaled size
         double scaleW = w * PreferenceData.scaledW;
         double scaleH = h * PreferenceData.scaledH;
+
+        //Half window width
+        double centerX = (x * PreferenceData.scaledW) + (Camera.x * PreferenceData.scaledW) + scaleW; //(PreferenceData.window_width_actual * .5);
+        double centerY = (y * PreferenceData.scaledH) + (Camera.y * PreferenceData.scaledH) + scaleH; //(PreferenceData.window_height_actual * .5);
 
         centerX -= scaleW;
         centerY -= scaleH;

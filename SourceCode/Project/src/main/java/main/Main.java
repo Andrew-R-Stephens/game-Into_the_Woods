@@ -6,6 +6,9 @@ import graphics.ui.game.GameWindow;
 import utils.PreferencesXMLParser;
 import viewmodels.controls.ControlsModel;
 import viewmodels.game.GameModel;
+import viewmodels.game.LevelModel;
+import viewmodels.game.levels.TestLevel;
+import viewmodels.game.levels.TestLevel2;
 
 /**
  * The type main.Main.
@@ -15,6 +18,8 @@ public class Main {
     private static PreferenceData preferences;
 
     private static ControlsModel controlsViewModel;
+
+    private static LevelModel levelModel;
     private static GameModel gameViewModel;
 
     private static GameCanvas gameCanvas;
@@ -40,6 +45,8 @@ public class Main {
         controlsViewModel = new ControlsModel();
         gameViewModel = new GameModel();
 
+        levelModel = new LevelModel();
+
         preferences = new PreferenceData();
 
         gameCanvas = new GameCanvas();
@@ -52,7 +59,10 @@ public class Main {
      */
     public static void init() {
 
-        gameViewModel.init(controlsViewModel);
+        levelModel.setLevel(new TestLevel2());
+
+        gameViewModel.init(controlsViewModel, levelModel);
+
         controlsViewModel.init();
 
         PreferencesXMLParser preferencesXMLParser =

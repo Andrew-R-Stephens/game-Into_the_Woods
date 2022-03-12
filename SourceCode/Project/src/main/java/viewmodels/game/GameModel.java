@@ -4,7 +4,6 @@ import controls.game.GameMouseControls;
 import data.PreferenceData;
 import props.gameactors.TestActor;
 import props.gameactors.TestCharacter;
-import props.levelactors.TestLevelPropStatic;
 import proptypes.actors.levelactors.animated.ALevelProp;
 import proptypes.types.actor.AActor;
 import utils.AMouseController;
@@ -19,14 +18,18 @@ import java.util.Random;
  */
 public class GameModel {
 
-    private final LevelModel levelModel = new LevelModel();
-
     private ControlsModel controlsViewModel;
+
+    private Camera camera = new Camera();
+
+    private LevelModel levelModel = new LevelModel();
 
     private final ArrayList<AActor> gameObjects = new ArrayList<>();
 
-    public void init(ControlsModel controlsViewModel) {
-        this.controlsViewModel = controlsViewModel;
+    public void init(ControlsModel controlsViewModel, LevelModel levelModel) {
+
+        setControlsViewModel(controlsViewModel);
+        setLevelModel(levelModel);
 
         // Main Test Character
         gameObjects.add(new TestCharacter(
@@ -36,41 +39,21 @@ public class GameModel {
                 0, 0,
                 true
         ));
-
-        // Wall
-        levelModel.addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false));
-        // Climbing Walls
-        levelModel.addProp(new TestLevelPropStatic(320, -150, 50, 200, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(500, 0, 50, 200, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(320, 220, 50, 200, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(500, 360, 50, 200, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(320, 500, 50, 200, 0, 0, false));
-
-        levelModel.addProp(new TestLevelPropStatic(9000, 0, 100, 1080, 0, 0, false));
-        // Floor
-        levelModel.addProp(new TestLevelPropStatic(0, 980, 10000, 100, 0, 0, false));
-
-        // Other Props
-        levelModel.addProp(new TestLevelPropStatic(1800, 100, 500, 100, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(70, 800, 500, 100, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(500, 700, 500, 100, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(1100, 600, 500, 100, 0, 0, false));
-
-        levelModel.addProp(new TestLevelPropStatic(1800, 600, 500, 50, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(2000, 650, 220, 100, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(3500, 750, 500, 100, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(4000, 780, 200, 100, 0, 0, false));
-
-        levelModel.addProp(new TestLevelPropStatic(6800, 400, 500, 50, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(2500, 720, 220, 100, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(3000, 700, 500, 50, 0, 0, false));
-        levelModel.addProp(new TestLevelPropStatic(3200, 650, 100, 100, 0, 0, false));
     }
+
+    public void setControlsViewModel(ControlsModel controlsViewModel) {
+        this.controlsViewModel = controlsViewModel;
+    }
+
+    public void setLevelModel(LevelModel levelModel) {
+        this.levelModel = levelModel;
+    }
+
 
     public void addGameObject(AActor gameObject) {
         gameObjects.add(gameObject);
     }
+
 
     public synchronized void update(float delta) {
 
@@ -88,8 +71,8 @@ public class GameModel {
                 for (int i = 0; i < count; i++) {
                     addGameObject(
                         new TestActor(
-                            (float) ((-WorldModel.offX/PreferenceData.scaledW) + (gmc.getPos()[0]/PreferenceData.scaledW)),
-                            (float) ((-WorldModel.offY/PreferenceData.scaledW) + (gmc.getPos()[1]/PreferenceData.scaledH)),
+                            (float) ((-Camera.x /PreferenceData.scaledW) + (gmc.getPos()[0]/PreferenceData.scaledW)),
+                            (float) ((-Camera.y /PreferenceData.scaledW) + (gmc.getPos()[1]/PreferenceData.scaledH)),
                             50f,
                             50f,
                             new Random().nextFloat(-5, 5),
@@ -123,7 +106,6 @@ public class GameModel {
             if (gameObject instanceof TestCharacter tc) {
                 tc.control(delta);
                 tc.update(delta);
-                //System.out.println(tc);
             }
 
         }
@@ -154,5 +136,4 @@ public class GameModel {
             }
         }
     }
-
 }

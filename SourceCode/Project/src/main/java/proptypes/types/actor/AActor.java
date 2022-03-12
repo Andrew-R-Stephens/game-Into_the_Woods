@@ -3,7 +3,7 @@ package proptypes.types.actor;
 import data.PreferenceData;
 import utils.IDrawable;
 import utils.math.APhysics;
-import viewmodels.game.WorldModel;
+import viewmodels.game.Camera;
 
 import java.awt.*;
 
@@ -32,8 +32,8 @@ public abstract class AActor extends APhysics implements IDrawable {
     @Override
     public void draw(Graphics g) {
 
-        double offsetX = ((x * PreferenceData.scaledW) + (WorldModel.offX));
-        double offsetY = ((y * PreferenceData.scaledH) + (WorldModel.offY));
+        double offsetX = ((x * PreferenceData.scaledW) + (Camera.x));
+        double offsetY = ((y * PreferenceData.scaledH) + (Camera.y));
 
         double scaledW = w * PreferenceData.scaledW;
         double scaledH = h * PreferenceData.scaledH;
