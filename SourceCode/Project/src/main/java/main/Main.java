@@ -1,13 +1,15 @@
 package main;
 
-import data.PreferenceData;
 import graphics.ui.game.GameCanvas;
 import graphics.ui.game.GameWindow;
+import graphics.ui.menu.MainMenuCanvas;
 import utils.files.PreferencesXMLParser;
 import viewmodels.controls.ControlsModel;
-import viewmodels.game.GameModel;
-import viewmodels.game.LevelModel;
-import viewmodels.game.levels.TestLevel2;
+import viewmodels.data.PreferenceData;
+import viewmodels.states.game.GameModel;
+import viewmodels.states.game.LevelModel;
+import viewmodels.states.mainmenu.MainMenuModel;
+import viewmodels.states.pausemenumodel.PauseMenuModel;
 
 /**
  * The type main.Main.
@@ -16,12 +18,17 @@ public class Main {
 
     private static PreferenceData preferences;
 
-    private static ControlsModel controlsViewModel;
+    private static ControlsModel controlsModel;
+
+    private static MainMenuModel menuModel;
+    private static PauseMenuModel pauseModel;
+    private static GameModel gameModel;
 
     private static LevelModel levelModel;
-    private static GameModel gameViewModel;
 
+    private static MainMenuCanvas mainMenuCanvas;
     private static GameCanvas gameCanvas;
+
     private static GameWindow gameWindow;
 
     /**
@@ -41,14 +48,22 @@ public class Main {
 
     public static void create() {
 
-        controlsViewModel = new ControlsModel();
-        gameViewModel = new GameModel();
+        // Create Preferences
+        preferences = new PreferenceData();
+
+        // Create Models
+        controlsModel = new ControlsModel();
+
+        menuModel = new MainMenuModel();
+        gameModel = new GameModel();
 
         levelModel = new LevelModel();
 
-        preferences = new PreferenceData();
-
+        // Create State Canvases
+        mainMenuCanvas = new MainMenuCanvas();
         gameCanvas = new GameCanvas();
+
+        // Create Window
         gameWindow = new GameWindow();
 
     }
@@ -58,18 +73,16 @@ public class Main {
      */
     public static void init() {
 
-        levelModel.setLevel(new TestLevel2());
+        gameModel.init(controlsModel, levelModel);
 
-        gameViewModel.init(controlsViewModel, levelModel);
-
-        controlsViewModel.init();
+        controlsModel.init();
 
         PreferencesXMLParser preferencesXMLParser =
                 new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
         preferencesXMLParser.read();
 
-        gameCanvas.init(gameViewModel);
-        gameWindow.init(preferences, gameCanvas, controlsViewModel);
+        gameCanvas.init(gameModel);
+        gameWindow.init(preferences, gameCanvas, controlsModel);
 
         preferences.post();
 

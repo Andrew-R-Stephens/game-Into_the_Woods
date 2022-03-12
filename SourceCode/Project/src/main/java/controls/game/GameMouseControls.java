@@ -12,9 +12,10 @@ public class GameMouseControls extends AMouseController {
 
     private final ControlsModel controlsViewModel;
 
+    private final int[] mPos = new int[]{ -100, -100 };
+
     private boolean isLeftPressed = false;
     private boolean isRightPressed = false;
-    private final int[] mPos = new int[]{ -100, -100 };
 
     public GameMouseControls(ControlsModel controlsViewModel) {
         this.controlsViewModel = controlsViewModel;

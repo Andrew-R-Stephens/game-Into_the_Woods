@@ -1,8 +1,7 @@
 package utils.physics;
 
-import data.PreferenceData;
-import proptypes.types.actor.AActor;
-import viewmodels.game.LevelModel;
+import props.prototypes.types.actor.AActor;
+import viewmodels.states.game.LevelModel;
 
 /**
  * TODO: Add description
@@ -11,10 +10,10 @@ public abstract class APhysics {
 
     protected boolean hasGravity = true;
 
-    protected float MAX_VEL_X = 10f;
-    protected float MAX_VEL_Y = 18f;
+    protected float MAX_VEL_X = 9.8f;
+    protected float MAX_VEL_Y = 9.8f;
 
-    protected float accelerationRate = .2f;
+    protected float friction = .2f;
     protected float vX, vY;
     protected float x, y, w, h;
 
@@ -33,14 +32,12 @@ public abstract class APhysics {
         setPosition(x, y);
         setSize(w, h);
         setVelocity(vX, vY);
-        hasGravity(hasGravity);
+        setGravity(hasGravity);
 
     }
 
     protected void update(float delta) {
         resetCollisions();
-
-        calculateGravity(delta);
 
         updateVelocity(delta);
     }
@@ -59,11 +56,20 @@ public abstract class APhysics {
 
     private void updateVelocity(float delta) {
 
-        float acc = accelerationRate / (float)PreferenceData.GAME_UPDATE_RATE / delta;
+        calculateGravity(delta);
 
-        vY *= 1-acc;
-        vX *= 1-acc;
+        /*
+        float acc = friction / (float)PreferenceData.GAME_UPDATE_RATE / delta;
+        */
 
+        //vY *= 1-acc;
+        //vX *= 1-acc;
+
+        limitVelocity();
+
+    }
+
+    public void limitVelocity() {
         if (vY > MAX_VEL_Y) {
             vY = MAX_VEL_Y;
         } else if (vY < -MAX_VEL_Y) {
@@ -74,7 +80,6 @@ public abstract class APhysics {
         } else if (vX < -MAX_VEL_X) {
             vX = -MAX_VEL_X;
         }
-
     }
 
     public boolean hasCollision(AActor a, float delta) {
@@ -100,14 +105,8 @@ public abstract class APhysics {
         boolean hitRight =
                 ((a.left() <= right()) && (a.left() >= left())) ||
                         ((right() >= a.left()) && (right() <= a.right()));
-/*
 
-        if ((hitRight || hitLeft) && hitBottom) {
-            System.out.println("set floor coll 1");
-            a.isFloorCollision = true;
-        }
-*/
-
+        /*
         if (hitTop || hitBottom) {
 
             if (isWallBoundedLeft) {
@@ -117,6 +116,7 @@ public abstract class APhysics {
                 a.isWallCollisionRight = true;
             }
         }
+        */
 
         if ((hitBottom || hitTop) && (hitLeft || hitRight)) {
 
@@ -178,7 +178,7 @@ public abstract class APhysics {
         this.h = h;
     }
 
-    protected void hasGravity(boolean hasGravity) {
+    protected void setGravity(boolean hasGravity) {
         this.hasGravity = hasGravity;
     }
 

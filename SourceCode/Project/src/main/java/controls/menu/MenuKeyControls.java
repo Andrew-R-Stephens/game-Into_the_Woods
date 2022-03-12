@@ -2,7 +2,7 @@ package controls.menu;
 
 import utils.controllers.AKeyController;
 import viewmodels.controls.ControlsModel;
-import viewmodels.game.GameModel;
+import viewmodels.states.game.GameModel;
 
 import java.awt.event.KeyEvent;
 

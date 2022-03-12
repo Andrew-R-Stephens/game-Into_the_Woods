@@ -1,6 +1,6 @@
 package graphics.ui.game;
 
-import viewmodels.game.GameModel;
+import viewmodels.states.game.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
