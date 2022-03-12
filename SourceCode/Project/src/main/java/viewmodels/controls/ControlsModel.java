@@ -2,8 +2,8 @@ package viewmodels.controls;
 
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
-import utils.AKeyController;
-import utils.AMouseController;
+import utils.controllers.AKeyController;
+import utils.controllers.AMouseController;
 
 /**
  * TODO: Add description

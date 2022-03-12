@@ -1,4 +1,4 @@
-package utils;
+package utils.files;
 
 import data.PreferenceData;
 import org.w3c.dom.Document;

@@ -2,7 +2,7 @@ package proptypes.types.actor.pawn.character;
 
 import data.PreferenceData;
 import proptypes.types.actor.pawn.APawn;
-import utils.IDrawable;
+import utils.drawables.IDrawable;
 import viewmodels.controls.ControlsModel;
 
 /**
@@ -107,7 +107,6 @@ public abstract class ACharacter extends APawn implements IDrawable {
             if (jumpTime > 0) {
 
                 lockJumpState(true);
-                System.out.println(isFloorCollision + " " + isWallCollisionLeft + " " + isWallCollisionRight);
 
                 if (isFloorCollision) {
                     vY = -7;
@@ -129,15 +128,10 @@ public abstract class ACharacter extends APawn implements IDrawable {
                         System.out.println("Wall Right Jump");
                     }
                 }
-
                 isFloorCollision = false;
-
             }
-
         } else {
-
             lockJumpState(false);
-
         }
 
     }

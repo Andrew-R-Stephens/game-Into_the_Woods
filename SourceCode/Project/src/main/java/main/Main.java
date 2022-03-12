@@ -3,11 +3,10 @@ package main;
 import data.PreferenceData;
 import graphics.ui.game.GameCanvas;
 import graphics.ui.game.GameWindow;
-import utils.PreferencesXMLParser;
+import utils.files.PreferencesXMLParser;
 import viewmodels.controls.ControlsModel;
 import viewmodels.game.GameModel;
 import viewmodels.game.LevelModel;
-import viewmodels.game.levels.TestLevel;
 import viewmodels.game.levels.TestLevel2;
 
 /**

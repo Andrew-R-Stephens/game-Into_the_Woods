@@ -1,8 +1,8 @@
 package proptypes.types.actor;
 
 import data.PreferenceData;
-import utils.IDrawable;
-import utils.math.APhysics;
+import utils.drawables.IDrawable;
+import utils.physics.APhysics;
 import viewmodels.game.Camera;
 
 import java.awt.*;

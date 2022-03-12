@@ -1,8 +1,8 @@
 package graphics.views.sprite.animated;
 
-import utils.AFileLoader;
-import utils.IImageLoader;
-import utils.ISpriteSheetParser;
+import utils.files.AFileLoader;
+import utils.drawables.IImageLoader;
+import utils.drawables.ISpriteSheetParser;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

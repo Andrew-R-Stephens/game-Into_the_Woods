@@ -1,6 +1,6 @@
 package controls.game;
 
-import utils.AMouseController;
+import utils.controllers.AMouseController;
 import viewmodels.controls.ControlsModel;
 
 import java.awt.event.MouseEvent;

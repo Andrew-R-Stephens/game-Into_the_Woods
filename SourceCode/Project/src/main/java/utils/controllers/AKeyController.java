@@ -1,4 +1,4 @@
-package utils;
+package utils.controllers;
 
 import java.awt.event.KeyListener;
 

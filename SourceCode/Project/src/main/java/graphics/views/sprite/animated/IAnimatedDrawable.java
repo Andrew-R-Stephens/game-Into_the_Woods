@@ -1,6 +1,6 @@
 package graphics.views.sprite.animated;
 
-import utils.IDrawable;
+import utils.drawables.IDrawable;
 
 import java.awt.*;
 

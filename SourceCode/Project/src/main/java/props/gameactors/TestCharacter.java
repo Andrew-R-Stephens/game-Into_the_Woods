@@ -51,8 +51,8 @@ public class TestCharacter extends ACharacter {
         double scaleH = h * PreferenceData.scaledH;
 
         //Half window width
-        double centerX = (x * PreferenceData.scaledW) + (Camera.x * PreferenceData.scaledW) + scaleW; //(PreferenceData.window_width_actual * .5);
-        double centerY = (y * PreferenceData.scaledH) + (Camera.y * PreferenceData.scaledH) + scaleH; //(PreferenceData.window_height_actual * .5);
+        double centerX = (x * PreferenceData.scaledW) + (Camera.x) + scaleW;
+        double centerY = (y * PreferenceData.scaledH) + (Camera.y) + scaleH;
 
         centerX -= scaleW;
         centerY -= scaleH;

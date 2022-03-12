@@ -10,10 +10,10 @@
         1600×900 / 1920×1080
         2560×1440 / 3840×2160
         -->
-        <resolutionWidthDefault>1920</resolutionWidthDefault>
-        <resolutionHeightDefault>1080</resolutionHeightDefault>
-        <resolutionWidth>1920</resolutionWidth>
-        <resolutionHeight>1080</resolutionHeight>
+        <resolutionWidthDefault>3840</resolutionWidthDefault>
+        <resolutionHeightDefault>2160</resolutionHeightDefault>
+        <resolutionWidth>3840</resolutionWidth>
+        <resolutionHeight>2160</resolutionHeight>
 
         <!--
         0 = Windowed, 1 = Windowed Fullscreen Borderless, 2 = Exclusive Fullscreen

@@ -1,6 +1,6 @@
 package controls.menu;
 
-import utils.AKeyController;
+import utils.controllers.AKeyController;
 import viewmodels.controls.ControlsModel;
 import viewmodels.game.GameModel;
 

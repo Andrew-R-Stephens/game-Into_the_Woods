@@ -1,4 +1,4 @@
-package utils.math;
+package utils.physics;
 
 import data.PreferenceData;
 import proptypes.types.actor.AActor;
@@ -38,13 +38,17 @@ public abstract class APhysics {
     }
 
     protected void update(float delta) {
-        isFloorCollision = false;
-        isWallCollisionLeft = false;
-        isWallCollisionRight = false;
+        resetCollisions();
 
         calculateGravity(delta);
 
         updateVelocity(delta);
+    }
+
+    private void resetCollisions() {
+        isFloorCollision = false;
+        isWallCollisionLeft = false;
+        isWallCollisionRight = false;
     }
 
     private void calculateGravity(float delta) {
@@ -59,7 +63,6 @@ public abstract class APhysics {
 
         vY *= 1-acc;
         vX *= 1-acc;
-
 
         if (vY > MAX_VEL_Y) {
             vY = MAX_VEL_Y;
@@ -82,13 +85,12 @@ public abstract class APhysics {
                 !isFloorBounded && ((a.leftBufferOuter() >= right()) && (a.leftBufferInner() <= left()));
 
         boolean isWallBoundedRight =
-                !isFloorBounded && ((a.rightBufferInner() >= left()) && (a.rightBufferOuter() <= right()));
+                !isFloorBounded && ((a.rightBufferInner() <= left()) && (a.rightBufferOuter() >= right()));
 
         // Determine the conditions of the object collision
         boolean hitBottom =
                 ((a.top() <= bottom()) && (a.top() >= top())) ||
                         ((bottom() >= a.top()) && (bottom() <= a.bottom()));
-
         boolean hitTop =
                 ((a.bottom() >= top()) && (a.bottom() <= bottom())) ||
                         ((top() <= a.bottom()) && (top() >= a.top()));

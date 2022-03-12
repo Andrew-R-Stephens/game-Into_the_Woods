@@ -1,4 +1,4 @@
-package utils;
+package utils.drawables;
 
 import java.awt.*;
 

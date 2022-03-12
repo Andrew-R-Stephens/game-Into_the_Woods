@@ -1,7 +1,7 @@
 package proptypes.types.actor.pawn;
 
 import proptypes.types.actor.AActor;
-import utils.IDrawable;
+import utils.drawables.IDrawable;
 
 import java.awt.*;
 
@@ -18,8 +18,8 @@ public abstract class APawn extends AActor implements IDrawable {
     protected void update(float delta) {
         super.update(delta);
 
-        x += vX;// / PreferenceData.GAME_UPDATE_RATE / delta;
-        y += vY;// / PreferenceData.GAME_UPDATE_RATE / delta;
+        x += vX;
+        y += vY;
 
     }
 

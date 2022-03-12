@@ -4,7 +4,9 @@ import data.PreferenceData;
 import props.levelactors.TestLevelPropStatic;
 import proptypes.actors.levelactors.animated.ALevelProp;
 import proptypes.level.ALevel;
+import proptypes.types.actor.AActor;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -24,12 +26,16 @@ public class LevelModel {
         this.level = level;
     }
 
-    public void addProp(ALevelProp prop) {
-        level.addProp(prop);
-    }
-
     public ArrayList<ALevelProp> getLevelProps() {
         return level.getLevelProps();
+    }
+
+    public void render(Graphics g) {
+        for (AActor levelProps : getLevelProps()) {
+            if (levelProps instanceof ALevelProp p) {
+                p.draw(g);
+            }
+        }
     }
 
 }

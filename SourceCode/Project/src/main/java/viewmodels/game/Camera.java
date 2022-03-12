@@ -5,13 +5,13 @@ import data.PreferenceData;
 public class Camera {
 
     public static float zoomLevel = 1;
-    public static float offX, offY;
     public static float x = 0, y = 0;
 
     public static double acceleration = .05;
 
     public Camera() {
-
+        x = PreferenceData.window_width_actual * .5f;
+        y = PreferenceData.window_height_actual * .5f;
     }
 
     public static void moveTo(float x2, float y2) {
