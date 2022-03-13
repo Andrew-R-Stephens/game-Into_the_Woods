@@ -1,4 +1,4 @@
-package props.prototypes.types.actor;
+package props.prototypes.actor;
 
 import utils.drawables.IDrawable;
 import utils.physics.APhysics;

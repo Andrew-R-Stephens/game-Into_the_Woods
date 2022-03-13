@@ -1,6 +1,6 @@
 package props.objects.gameactors;
 
-import props.prototypes.types.actor.pawn.APawn;
+import props.prototypes.actor.pawn.APawn;
 
 import java.awt.*;
 

@@ -2,9 +2,9 @@ package viewmodels.states.game;
 
 import props.objects.levels.TestLevel;
 import props.objects.levels.TestLevel2;
-import props.prototypes.actors.levelactors.animated.ALevelProp;
+import props.prototypes.actor.AActor;
 import props.prototypes.level.ALevel;
-import props.prototypes.types.actor.AActor;
+import props.prototypes.level.prop.ALevelProp;
 import viewmodels.data.PreferenceData;
 
 import java.awt.*;

@@ -1,5 +1,7 @@
 package graphics.views;
 
+import utils.drawables.IAnimatedDrawable;
+
 import java.awt.*;
 
 /**

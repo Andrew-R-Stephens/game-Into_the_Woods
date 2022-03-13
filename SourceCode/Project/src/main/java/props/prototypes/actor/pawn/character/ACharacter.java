@@ -1,6 +1,6 @@
-package props.prototypes.types.actor.pawn.character;
+package props.prototypes.actor.pawn.character;
 
-import props.prototypes.types.actor.pawn.APawn;
+import props.prototypes.actor.pawn.APawn;
 import utils.drawables.IDrawable;
 import viewmodels.controls.ControlsModel;
 import viewmodels.data.PreferenceData;

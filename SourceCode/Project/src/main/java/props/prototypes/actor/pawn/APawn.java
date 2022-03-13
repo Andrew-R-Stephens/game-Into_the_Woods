@@ -1,6 +1,6 @@
-package props.prototypes.types.actor.pawn;
+package props.prototypes.actor.pawn;
 
-import props.prototypes.types.actor.AActor;
+import props.prototypes.actor.AActor;
 import utils.drawables.IDrawable;
 
 import java.awt.*;

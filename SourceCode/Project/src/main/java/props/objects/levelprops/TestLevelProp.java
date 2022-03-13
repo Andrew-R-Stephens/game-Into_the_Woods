@@ -1,7 +1,7 @@
 package props.objects.levelprops;
 
-import props.prototypes.actors.levelactors.animated.ALevelProp;
-import props.prototypes.types.actor.AActor;
+import props.prototypes.actor.AActor;
+import props.prototypes.level.prop.ALevelProp;
 
 import java.awt.*;
 

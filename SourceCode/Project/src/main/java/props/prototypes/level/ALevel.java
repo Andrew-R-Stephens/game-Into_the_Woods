@@ -1,6 +1,6 @@
 package props.prototypes.level;
 
-import props.prototypes.actors.levelactors.animated.ALevelProp;
+import props.prototypes.level.prop.ALevelProp;
 
 import java.util.ArrayList;
 

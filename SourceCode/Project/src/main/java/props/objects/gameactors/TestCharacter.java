@@ -1,7 +1,7 @@
 package props.objects.gameactors;
 
-import props.prototypes.types.actor.AActor;
-import props.prototypes.types.actor.pawn.character.ACharacter;
+import props.prototypes.actor.AActor;
+import props.prototypes.actor.pawn.character.ACharacter;
 import viewmodels.camera.Camera;
 import viewmodels.controls.ControlsModel;
 import viewmodels.data.PreferenceData;

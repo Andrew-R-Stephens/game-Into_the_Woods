@@ -1,6 +1,6 @@
 package utils.physics;
 
-import props.prototypes.types.actor.AActor;
+import props.prototypes.actor.AActor;
 import viewmodels.states.game.LevelModel;
 
 /**

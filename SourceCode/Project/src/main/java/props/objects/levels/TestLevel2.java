@@ -1,8 +1,8 @@
 package props.objects.levels;
 
 import props.objects.levelprops.TestLevelPropStatic;
-import props.prototypes.actors.levelactors.animated.ALevelProp;
 import props.prototypes.level.ALevel;
+import props.prototypes.level.prop.ALevelProp;
 
 import java.util.ArrayList;
 

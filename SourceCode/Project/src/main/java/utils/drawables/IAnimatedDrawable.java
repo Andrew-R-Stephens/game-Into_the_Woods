@@ -1,6 +1,4 @@
-package graphics.views;
-
-import utils.drawables.IDrawable;
+package utils.drawables;
 
 import java.awt.*;
 

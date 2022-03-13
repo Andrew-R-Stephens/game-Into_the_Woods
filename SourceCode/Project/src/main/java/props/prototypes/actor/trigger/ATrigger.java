@@ -1,6 +1,6 @@
-package props.prototypes.types.actor.trigger;
+package props.prototypes.actor.trigger;
 
-import props.prototypes.types.actor.pawn.APawn;
+import props.prototypes.actor.pawn.APawn;
 
 /**
  * TODO: Add description
