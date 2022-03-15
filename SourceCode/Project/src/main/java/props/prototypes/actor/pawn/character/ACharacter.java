@@ -1,9 +1,9 @@
 package props.prototypes.actor.pawn.character;
 
+import models.controls.ControlsModel;
+import models.data.PreferenceData;
 import props.prototypes.actor.pawn.APawn;
 import utils.drawables.IDrawable;
-import viewmodels.controls.ControlsModel;
-import viewmodels.data.PreferenceData;
 
 /**
  * This is an abstract class for a controllable Actor object. Allows for direct control from User Controls.

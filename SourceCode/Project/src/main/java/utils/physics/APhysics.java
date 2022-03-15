@@ -1,7 +1,7 @@
 package utils.physics;
 
+import models.states.game.LevelList;
 import props.prototypes.actor.AActor;
-import viewmodels.states.game.LevelModel;
 
 /**
  * TODO: Add description
@@ -50,7 +50,7 @@ public abstract class APhysics {
 
     private void calculateGravity(float delta) {
         if (hasGravity) {
-            vY += (LevelModel.GRAVITY / delta);
+            vY += (LevelList.GRAVITY / delta);
         }
     }
 

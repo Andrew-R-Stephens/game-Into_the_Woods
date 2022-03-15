@@ -1,15 +1,14 @@
 package main;
 
+import graphics.ui.MainWindow;
 import graphics.ui.game.GameCanvas;
-import graphics.ui.game.GameWindow;
-import graphics.ui.menu.MainMenuCanvas;
+import graphics.ui.menu.MenuCanvas;
+import models.controls.ControlsModel;
+import models.data.PreferenceData;
+import models.states.game.GameModel;
+import models.states.game.LevelList;
+import models.states.menus.mainmenu.MenuModel;
 import utils.files.PreferencesXMLParser;
-import viewmodels.controls.ControlsModel;
-import viewmodels.data.PreferenceData;
-import viewmodels.states.game.GameModel;
-import viewmodels.states.game.LevelModel;
-import viewmodels.states.mainmenu.MainMenuModel;
-import viewmodels.states.pausemenumodel.PauseMenuModel;
 
 /**
  * The type main.Main.
@@ -20,16 +19,15 @@ public class Main {
 
     private static ControlsModel controlsModel;
 
-    private static MainMenuModel menuModel;
-    private static PauseMenuModel pauseModel;
+    private static MenuModel menuModel;
     private static GameModel gameModel;
 
-    private static LevelModel levelModel;
+    private static LevelList levelsModel;
 
-    private static MainMenuCanvas mainMenuCanvas;
+    private static MenuCanvas menuCanvas;
     private static GameCanvas gameCanvas;
 
-    private static GameWindow gameWindow;
+    private static MainWindow window;
 
     /**
      * The entry point of application.
@@ -54,17 +52,17 @@ public class Main {
         // Create Models
         controlsModel = new ControlsModel();
 
-        menuModel = new MainMenuModel();
+        levelsModel = new LevelList(); // List of Levels
+
+        menuModel = new MenuModel();
         gameModel = new GameModel();
 
-        levelModel = new LevelModel();
-
         // Create State Canvases
-        mainMenuCanvas = new MainMenuCanvas();
+        menuCanvas = new MenuCanvas();
         gameCanvas = new GameCanvas();
 
         // Create Window
-        gameWindow = new GameWindow();
+        window = new MainWindow();
 
     }
 
@@ -72,17 +70,21 @@ public class Main {
      * Init game objects.
      */
     public static void init() {
-
-        gameModel.init(controlsModel, levelModel);
+        PreferencesXMLParser preferencesParser =
+                new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
+        preferencesParser.read();
 
         controlsModel.init();
 
-        PreferencesXMLParser preferencesXMLParser =
-                new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
-        preferencesXMLParser.read();
+        gameModel.init(controlsModel, levelsModel); // Needs to communicate with current environment
 
         gameCanvas.init(gameModel);
-        gameWindow.init(preferences, gameCanvas, controlsModel);
+        menuCanvas.init(menuModel);
+
+        window.init(preferences, controlsModel);
+        window.addEnvironmentWithCanvas(gameModel, gameCanvas);
+        window.addEnvironmentWithCanvas(menuModel, menuCanvas);
+        window.initEnvironmentAndCanvas(0);
 
         preferences.post();
 

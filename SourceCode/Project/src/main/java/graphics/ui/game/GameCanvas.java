@@ -1,14 +1,16 @@
 package graphics.ui.game;
 
-import viewmodels.states.game.GameModel;
+import graphics.ui.ACanvas;
+import models.states.game.GameModel;
+import threads.gameloop.GameRenderRunnable;
+import threads.gameloop.GameUpdateRunnable;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
  * Game Canvas extends JPanel. The canvas renders game objects using the scale of chosen window dimensions against the standard dimensions.
  */
-public class GameCanvas extends JPanel {
+public class GameCanvas extends ACanvas {
 
     private GameModel gameModel;
 
@@ -47,9 +49,10 @@ public class GameCanvas extends JPanel {
         // Draw test objects
         gameModel.renderGameObjects(g);
 
+        g.setColor(Color.RED);
+        g.drawString("FPS: " + GameRenderRunnable.lastFrames, 10, 10);
+        g.drawString("Ticks: " + GameUpdateRunnable.lastUpdates, 10, 30);
+
     }
 
-    public boolean isRenderReady() {
-        return isUpdated;
-    }
 }

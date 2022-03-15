@@ -1,9 +1,9 @@
 package props.prototypes.actor;
 
+import models.camera.Camera;
+import models.data.PreferenceData;
 import utils.drawables.IDrawable;
 import utils.physics.APhysics;
-import viewmodels.camera.Camera;
-import viewmodels.data.PreferenceData;
 
 import java.awt.*;
 

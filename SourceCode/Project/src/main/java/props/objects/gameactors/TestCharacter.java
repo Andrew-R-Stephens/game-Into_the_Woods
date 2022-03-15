@@ -1,10 +1,10 @@
 package props.objects.gameactors;
 
+import models.camera.Camera;
+import models.controls.ControlsModel;
+import models.data.PreferenceData;
 import props.prototypes.actor.AActor;
 import props.prototypes.actor.pawn.character.ACharacter;
-import viewmodels.camera.Camera;
-import viewmodels.controls.ControlsModel;
-import viewmodels.data.PreferenceData;
 
 import java.awt.*;
 
