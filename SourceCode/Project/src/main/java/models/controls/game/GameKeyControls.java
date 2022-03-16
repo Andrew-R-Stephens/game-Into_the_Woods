@@ -1,7 +1,7 @@
 package models.controls.game;
 
 import models.controls.ControlsModel;
-import utils.controllers.AKeyController;
+import props.prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
 

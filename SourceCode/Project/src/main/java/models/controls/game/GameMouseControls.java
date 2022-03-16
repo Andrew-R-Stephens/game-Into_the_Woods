@@ -1,7 +1,7 @@
 package models.controls.game;
 
 import models.controls.ControlsModel;
-import utils.controllers.AMouseController;
+import props.prototypes.controls.AMouseController;
 
 import java.awt.event.MouseEvent;
 

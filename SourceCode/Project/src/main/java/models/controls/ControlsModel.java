@@ -2,8 +2,8 @@ package models.controls;
 
 import models.controls.game.GameKeyControls;
 import models.controls.game.GameMouseControls;
-import utils.controllers.AKeyController;
-import utils.controllers.AMouseController;
+import props.prototypes.controls.AKeyController;
+import props.prototypes.controls.AMouseController;
 
 /**
  * TODO: Add description

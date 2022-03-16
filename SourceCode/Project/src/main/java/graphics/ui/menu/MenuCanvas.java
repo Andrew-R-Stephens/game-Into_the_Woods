@@ -1,7 +1,7 @@
 package graphics.ui.menu;
 
-import graphics.ui.ACanvas;
-import models.states.menus.mainmenu.MenuModel;
+import props.prototypes.window.ACanvas;
+import models.environments.menus.MenuModel;
 
 import java.awt.*;
 

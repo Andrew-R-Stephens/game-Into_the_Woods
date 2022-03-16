@@ -1,6 +1,6 @@
 package utils.physics;
 
-import models.states.game.LevelList;
+import props.objects.levels.LevelList;
 import props.prototypes.actor.AActor;
 
 /**

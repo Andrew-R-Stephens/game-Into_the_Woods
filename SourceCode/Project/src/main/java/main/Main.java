@@ -1,13 +1,12 @@
 package main;
 
-import graphics.ui.MainWindow;
 import graphics.ui.game.GameCanvas;
 import graphics.ui.menu.MenuCanvas;
 import models.controls.ControlsModel;
 import models.data.PreferenceData;
-import models.states.game.GameModel;
-import models.states.game.LevelList;
-import models.states.menus.mainmenu.MenuModel;
+import models.environments.game.GameModel;
+import props.objects.levels.LevelList;
+import models.environments.menus.MenuModel;
 import utils.files.PreferencesXMLParser;
 
 /**

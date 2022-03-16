@@ -1,8 +1,8 @@
 package models.controls.menu;
 
 import models.controls.ControlsModel;
-import models.states.game.GameModel;
-import utils.controllers.AKeyController;
+import models.environments.game.GameModel;
+import props.prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
 
