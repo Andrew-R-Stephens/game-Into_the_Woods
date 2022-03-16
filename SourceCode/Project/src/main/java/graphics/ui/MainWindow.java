@@ -88,13 +88,13 @@ public class MainWindow extends AWindow {
         if(updates != null && renders != null) {
             updates.start();
             renders.start();
-
+            /*
             try {
                 updates.join();
                 renders.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 

@@ -36,7 +36,6 @@ public class GameRenderRunnable extends ARenderRunnable {
                 timer += 1000;
 
                 lastFrames = frames;
-                System.out.println(lastFrames);
                 frames = 0;
             }
 

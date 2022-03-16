@@ -8,6 +8,7 @@ import models.states.AEnvironment;
 import props.objects.gameactors.TestActor;
 import props.objects.gameactors.TestCharacter;
 import props.prototypes.actor.AActor;
+import props.prototypes.actor.pawn.character.ACharacter;
 import props.prototypes.level.prop.ALevelProp;
 import utils.controllers.AMouseController;
 
@@ -25,6 +26,8 @@ public class GameModel extends AEnvironment {
     private LevelList levelModel;
 
     private final ArrayList<AActor> gameObjects = new ArrayList<>();
+
+    private boolean isGc = false;
 
     /**
      * Initializes Game Model with values
@@ -75,7 +78,7 @@ public class GameModel extends AEnvironment {
      *
      * @param delta - The ratio of current framerate against standard update frequency
      */
-    public synchronized void update(float delta) {
+    public void update(float delta) {
 
         // ======
         // Performance testing by adding Numerous Objects via Mouse Input
@@ -93,7 +96,7 @@ public class GameModel extends AEnvironment {
      *
      * @param delta - The ratio of current framerate against standard update frequency
      */
-    private void testAddingActors(float delta) {
+    private synchronized void testAddingActors(float delta) {
         AMouseController mouseController = controlsViewModel.getMouseController();
         if (mouseController instanceof GameMouseControls) {
 
@@ -177,4 +180,19 @@ public class GameModel extends AEnvironment {
         // Render Level Props
         levelModel.render(g);
     }
+
+    public void gc() {
+
+        if(!isGc) {
+            isGc = true;
+            for (int i = 0; i < 1000; i++) {
+                AActor a = gameObjects.get(i);
+                if (!(a instanceof ALevelProp) && !(a instanceof ACharacter)) {
+                    gameObjects.remove(a);
+                }
+            }
+            isGc = false;
+        }
+    }
+
 }

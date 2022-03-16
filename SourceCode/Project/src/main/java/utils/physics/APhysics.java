@@ -106,17 +106,6 @@ public abstract class APhysics {
                 ((a.left() <= right()) && (a.left() >= left())) ||
                         ((right() >= a.left()) && (right() <= a.right()));
 
-        /*
-        if (hitTop || hitBottom) {
-
-            if (isWallBoundedLeft) {
-                a.isWallCollisionLeft = true;
-            }
-            if (isWallBoundedRight) {
-                a.isWallCollisionRight = true;
-            }
-        }
-        */
 
         if ((hitBottom || hitTop) && (hitLeft || hitRight)) {
 
@@ -138,7 +127,6 @@ public abstract class APhysics {
                     a.y = top() - a.h;
 
                     a.isFloorCollision = true;
-                    //System.out.println("set floor coll 2");
 
                     if (!a.isUserControlled) {
                         a.vX *= .9f;

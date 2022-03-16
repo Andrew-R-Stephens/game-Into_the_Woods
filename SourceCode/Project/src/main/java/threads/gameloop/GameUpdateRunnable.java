@@ -15,8 +15,8 @@ public class GameUpdateRunnable extends AUpdateRunnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
-        final short targetFPS = PreferenceData.GAME_UPDATE_RATE;
-        double ns = 1000000000 / (float)targetFPS, delta = 0;
+        final short targetTicks = PreferenceData.GAME_UPDATE_RATE;
+        double ns = 1000000000 / (float) targetTicks, delta = 0;
         float updateRatio = 1;
 
                 // GAME LOOP
@@ -39,8 +39,13 @@ public class GameUpdateRunnable extends AUpdateRunnable {
                 timer += 1000;
 
                 lastUpdates = updates;
-
+                System.out.println(lastUpdates);
                 updates = 0;
+
+                if(lastUpdates < (targetTicks*.8)) {
+                    System.out.println("Calling GC");
+                    gameModel.gc();
+                }
             }
 
         }

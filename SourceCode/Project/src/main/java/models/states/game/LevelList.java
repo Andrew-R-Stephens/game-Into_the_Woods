@@ -3,6 +3,7 @@ package models.states.game;
 import models.data.PreferenceData;
 import props.objects.levels.TestLevel;
 import props.objects.levels.TestLevel2;
+import props.objects.levels.TestLevel3;
 import props.prototypes.actor.AActor;
 import props.prototypes.level.ALevel;
 import props.prototypes.level.prop.ALevelProp;
@@ -23,9 +24,8 @@ public class LevelList {
     public LevelList() {
         addLevel(new TestLevel());
         addLevel(new TestLevel2());
+        addLevel(new TestLevel3());
 
-        System.out.println(setCurrentLevel(1));
-        System.out.println(setCurrentLevel(0));
         System.out.println(setCurrentLevel(2));
     }
 
