@@ -26,7 +26,7 @@ public class LevelList {
         addLevel(new TestLevel2());
         addLevel(new TestLevel3());
 
-        System.out.println(setCurrentLevel(2));
+        System.out.println(setCurrentLevel(0));
     }
 
     public void addLevel(ALevel level){

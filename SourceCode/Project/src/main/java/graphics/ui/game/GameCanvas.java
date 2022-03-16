@@ -1,5 +1,6 @@
 package graphics.ui.game;
 
+import models.environments.game.hud.HUDModel;
 import props.prototypes.window.ACanvas;
 import models.environments.game.GameModel;
 import props.threads.gameloop.GameRenderRunnable;
@@ -14,8 +15,6 @@ public class GameCanvas extends ACanvas {
 
     private GameModel gameModel;
 
-    private boolean isUpdated = true;
-
     public GameCanvas() {
         // TODO: Nothing yet
     }
@@ -24,14 +23,8 @@ public class GameCanvas extends ACanvas {
         this.gameModel = gameModel;
     }
 
-    public void update(float updateRate) {
-        gameModel.update(updateRate);
-        isUpdated = true;
-    }
-
     public void render() {
         repaint();
-        isUpdated = false;
     }
 
     @Override
@@ -52,7 +45,6 @@ public class GameCanvas extends ACanvas {
         g.setColor(Color.RED);
         g.drawString("FPS: " + GameRenderRunnable.lastFrames, 10, 10);
         g.drawString("Ticks: " + GameUpdateRunnable.lastUpdates, 10, 30);
-
     }
 
 }

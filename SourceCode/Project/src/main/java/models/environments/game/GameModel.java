@@ -4,6 +4,7 @@ import models.camera.Camera;
 import models.controls.ControlsModel;
 import models.controls.game.GameMouseControls;
 import models.data.PreferenceData;
+import models.environments.game.hud.HUDModel;
 import props.objects.levels.LevelList;
 import props.prototypes.window.environments.AEnvironment;
 import props.objects.gameactors.TestActor;
@@ -23,6 +24,8 @@ import java.util.Random;
 public class GameModel extends AEnvironment {
 
     private ControlsModel controlsViewModel;
+
+    private HUDModel hudModel = new HUDModel(this);
 
     private LevelList levelModel;
 
@@ -91,7 +94,13 @@ public class GameModel extends AEnvironment {
         checkCollisions(delta);
         // Update the Game Objects
         updateGameObjects(delta);
+        
+        updateHUD(delta);
 
+    }
+
+    private void updateHUD(float delta) {
+        hudModel.update(delta);
     }
 
     /**
@@ -112,6 +121,8 @@ public class GameModel extends AEnvironment {
 
         // Render Level Props
         levelModel.render(g);
+
+        hudModel.draw(g);
     }
 
     /**

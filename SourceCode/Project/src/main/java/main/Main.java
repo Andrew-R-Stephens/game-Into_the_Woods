@@ -75,7 +75,7 @@ public class Main {
 
         controlsModel.init();
 
-        gameModel.init(controlsModel, levelsModel); // Needs to communicate with current environment
+        gameModel.init(controlsModel, levelsModel);
 
         gameCanvas.init(gameModel);
         menuCanvas.init(menuModel);
