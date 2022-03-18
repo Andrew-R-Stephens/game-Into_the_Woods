@@ -7,6 +7,6 @@ import java.util.ArrayList;
 
 public abstract class AMenu extends AEnvironment {
 
-    ArrayList<MenuButton> menuButtons = new ArrayList<>();
+    protected ArrayList<MenuButton> menuButtons = new ArrayList<>();
 
 }

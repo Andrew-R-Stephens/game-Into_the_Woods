@@ -6,7 +6,7 @@ import models.controls.ControlsModel;
 import models.data.PreferenceData;
 import models.environments.game.GameModel;
 import props.objects.levels.LevelList;
-import models.environments.menus.MenuModel;
+import models.environments.menus.MenusModel;
 import utils.files.PreferencesXMLParser;
 
 /**
@@ -18,7 +18,7 @@ public class Main {
 
     private static ControlsModel controlsModel;
 
-    private static MenuModel menuModel;
+    private static MenusModel menuModel;
     private static GameModel gameModel;
 
     private static LevelList levelsModel;
@@ -35,12 +35,18 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        loadAssets();
+
         // Create Objects
         create();
 
         // Initialize Objects
         init();
 
+    }
+
+    public static void loadAssets() {
+        
     }
 
     public static void create() {
@@ -51,10 +57,10 @@ public class Main {
         // Create Models
         controlsModel = new ControlsModel();
 
-        levelsModel = new LevelList(); // List of Levels
-
-        menuModel = new MenuModel();
+        menuModel = new MenusModel();
         gameModel = new GameModel();
+
+        levelsModel = new LevelList();
 
         // Create State Canvases
         menuCanvas = new MenuCanvas();
@@ -69,22 +75,27 @@ public class Main {
      * Init game objects.
      */
     public static void init() {
+
+        // Initialize Preferences
         PreferencesXMLParser preferencesParser =
                 new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
         preferencesParser.read();
 
+        // Initialize Models
         controlsModel.init();
-
         gameModel.init(controlsModel, levelsModel);
 
+        // Initialize Canvases
         gameCanvas.init(gameModel);
         menuCanvas.init(menuModel);
 
+        // Initialize Window
         window.init(preferences, controlsModel);
         window.addEnvironmentWithCanvas(gameModel, gameCanvas);
         window.addEnvironmentWithCanvas(menuModel, menuCanvas);
-        window.initEnvironmentAndCanvas(0);
+        window.initEnvironmentAndCanvas(1);
 
+        // Confirm and Apply scaling
         preferences.post();
 
     }

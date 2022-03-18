@@ -5,6 +5,7 @@ import models.controls.ControlsModel;
 import models.controls.game.GameMouseControls;
 import models.data.PreferenceData;
 import models.environments.game.hud.HUDModel;
+import models.environments.menus.pausemenumodel.PauseMenuModel;
 import props.objects.levels.LevelList;
 import props.prototypes.window.environments.AEnvironment;
 import props.objects.gameactors.TestActor;
@@ -26,10 +27,12 @@ public class GameModel extends AEnvironment {
     private ControlsModel controlsViewModel;
 
     private HUDModel hudModel = new HUDModel(this);
+    private PauseMenuModel pauseMenuModel = new PauseMenuModel();
+    private boolean isPaused = false;
 
     private LevelList levelModel;
 
-    private final ArrayList<AActor> gameObjects = new ArrayList<>();
+    private final ArrayList<AActor> actors = new ArrayList<>();
 
     private boolean isGc = false;
 
@@ -45,7 +48,7 @@ public class GameModel extends AEnvironment {
         setLevelModel(levelModel);
 
         // Main Test Character
-        gameObjects.add(new TestCharacter(
+        actors.add(new TestCharacter(
                 controlsViewModel,
                 200, 50,
                 55, 70,
@@ -75,7 +78,7 @@ public class GameModel extends AEnvironment {
      * @param actor - The actor added to the list of current Game Objects
      */
     public void addGameObject(AActor actor) {
-        gameObjects.add(actor);
+        actors.add(actor);
     }
 
     /**
@@ -94,7 +97,8 @@ public class GameModel extends AEnvironment {
         checkCollisions(delta);
         // Update the Game Objects
         updateGameObjects(delta);
-        
+
+        // Update HUD overlay
         updateHUD(delta);
 
     }
@@ -104,12 +108,12 @@ public class GameModel extends AEnvironment {
     }
 
     /**
-     *
+     *  Only deals with Render processing calls
      */
     @Override
     public void draw(Graphics g) {
         // Render Game Actors
-        for (AActor gameObject : gameObjects) {
+        for (AActor gameObject : actors) {
             if (gameObject instanceof TestCharacter o) {
                 o.draw(g);
             }
@@ -120,9 +124,13 @@ public class GameModel extends AEnvironment {
         }
 
         // Render Level Props
-        levelModel.render(g);
+        levelModel.draw(g);
 
-        hudModel.draw(g);
+        if(!isPaused) {
+            hudModel.draw(g);
+        } else {
+            pauseMenuModel.draw(g);
+        }
     }
 
     /**
@@ -164,7 +172,7 @@ public class GameModel extends AEnvironment {
     public void updateGameObjects(float delta) {
 
         // Update all Actors
-        for (AActor gameObject : gameObjects) {
+        for (AActor gameObject : actors) {
 
             // Update TestActors
             if (gameObject instanceof TestActor a) {
@@ -182,25 +190,29 @@ public class GameModel extends AEnvironment {
     }
 
     /**
-     * Check Prop collisions against Actors
+     * Check Prop collisions against all Actor objects
      * @param delta - The ratio of current framerate against standard update frequency
      */
     private void checkCollisions(float delta) {
         for (ALevelProp p : levelModel.getLevelProps()) {
-            for (AActor a : gameObjects) {
+            for (AActor a : actors) {
                 p.hasCollision(a, delta);
             }
         }
     }
 
+    /**
+     * Attempt at Garbage collection
+     * Should be used to destroy objects that are old or aren't being utilized.
+     */
     public void gc() {
 
         if(!isGc) {
             isGc = true;
             for (int i = 0; i < 1000; i++) {
-                AActor a = gameObjects.get(i);
+                AActor a = actors.get(i);
                 if (!(a instanceof ALevelProp) && !(a instanceof ACharacter)) {
-                    gameObjects.remove(a);
+                    actors.remove(a);
                 }
             }
             isGc = false;

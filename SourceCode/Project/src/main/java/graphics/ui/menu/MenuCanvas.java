@@ -1,7 +1,7 @@
 package graphics.ui.menu;
 
 import props.prototypes.window.ACanvas;
-import models.environments.menus.MenuModel;
+import models.environments.menus.MenusModel;
 
 import java.awt.*;
 
@@ -10,9 +10,9 @@ import java.awt.*;
  */
 public class MenuCanvas extends ACanvas {
 
-    MenuModel menuModel;
+    private MenusModel menuModel;
 
-    public void init(MenuModel menuModel) {
+    public void init(MenusModel menuModel) {
         this.menuModel = menuModel;
     }
 
@@ -24,7 +24,7 @@ public class MenuCanvas extends ACanvas {
     @Override
     protected void paintComponent(Graphics g) {
 
-        super.paintComponent(g);
+        //super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D)g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -32,6 +32,8 @@ public class MenuCanvas extends ACanvas {
         // Fill background
         g2d.setColor(new Color(255, 255, 255));
         g2d.fillRect(0, 0, getWidth(), getHeight());
+
+        menuModel.draw(g);
 
     }
 

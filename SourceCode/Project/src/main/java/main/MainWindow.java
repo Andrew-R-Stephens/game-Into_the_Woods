@@ -1,14 +1,18 @@
 package main;
 
 import graphics.ui.game.GameCanvas;
+import graphics.ui.menu.MenuCanvas;
 import models.controls.ControlsModel;
 import models.data.PreferenceData;
+import models.environments.menus.MenusModel;
 import props.prototypes.window.environments.AEnvironment;
 import models.environments.game.GameModel;
 import props.prototypes.window.ACanvas;
 import props.prototypes.window.AWindow;
 import props.threads.gameloop.GameRenderRunnable;
 import props.threads.gameloop.GameUpdateRunnable;
+import props.threads.menuloop.MenuRenderRunnable;
+import props.threads.menuloop.MenuUpdateRunnable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,6 +88,13 @@ public class MainWindow extends AWindow {
 
             if(canvases.get(currentState) instanceof GameCanvas c) {
                 renders = new Thread(new GameRenderRunnable(c));
+            }
+        } else
+        if(environments.get(currentState) instanceof MenusModel m) {
+            updates = new Thread(new MenuUpdateRunnable(m));
+
+            if(canvases.get(currentState) instanceof MenuCanvas c) {
+                renders = new Thread(new MenuRenderRunnable(c));
             }
         }
 

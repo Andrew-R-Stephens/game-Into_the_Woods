@@ -1,9 +1,6 @@
 package props.objects.levels;
 
 import models.data.PreferenceData;
-import props.objects.levels.TestLevel;
-import props.objects.levels.TestLevel2;
-import props.objects.levels.TestLevel3;
 import props.prototypes.actor.AActor;
 import props.prototypes.level.ALevel;
 import props.prototypes.level.prop.ALevelProp;
@@ -47,7 +44,7 @@ public class LevelList {
         return levels.get(currentLevel).getLevelProps();
     }
 
-    public void render(Graphics g) {
+    public void draw(Graphics g) {
 
         for (AActor levelProps : getLevelProps()) {
             if (levelProps instanceof ALevelProp p) {
