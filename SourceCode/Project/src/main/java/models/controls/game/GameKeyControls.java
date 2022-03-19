@@ -1,6 +1,6 @@
 package models.controls.game;
 
-import models.controls.ControlsModel;
+import props.prototypes.controls.AControlsModel;
 import props.prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
@@ -10,10 +10,10 @@ import java.awt.event.KeyEvent;
  */
 public class GameKeyControls extends AKeyController {
 
-    private final ControlsModel controlsViewModel;
+    private final GameControlsModel controlsViewModel;
 
-    public GameKeyControls(ControlsModel controlsViewModel) {
-        this.controlsViewModel = controlsViewModel;
+    public GameKeyControls(AControlsModel controlsViewModel) {
+        this.controlsViewModel = (GameControlsModel) controlsViewModel;
     }
 
     @Override
@@ -29,20 +29,20 @@ public class GameKeyControls extends AKeyController {
             }
 
             case KeyEvent.VK_A -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.LEFT, true);
+                controlsViewModel.setDirectional(GameControlsModel.Directionals.LEFT, true);
             }
             case KeyEvent.VK_D -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.RIGHT, true);
+                controlsViewModel.setDirectional(GameControlsModel.Directionals.RIGHT, true);
             }
             case KeyEvent.VK_W -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.UP, false);
+                controlsViewModel.setDirectional(GameControlsModel.Directionals.UP, false);
             }
             case KeyEvent.VK_S -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.DOWN, true);
+                controlsViewModel.setDirectional(GameControlsModel.Directionals.DOWN, true);
             }
 
             case KeyEvent.VK_SPACE -> {
-                controlsViewModel.setAbility(ControlsModel.Abilities.JUMP, true);
+                controlsViewModel.setAbility(GameControlsModel.Abilities.JUMP, true);
             }
         }
     }
@@ -51,20 +51,20 @@ public class GameKeyControls extends AKeyController {
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_A -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.LEFT, false);
+                controlsViewModel.setDirectional(GameControlsModel.Directionals.LEFT, false);
             }
             case KeyEvent.VK_D -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.RIGHT, false);
+                controlsViewModel.setDirectional(GameControlsModel.Directionals.RIGHT, false);
             }
             case KeyEvent.VK_W -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.UP, false);
+                controlsViewModel.setDirectional(GameControlsModel.Directionals.UP, false);
             }
             case KeyEvent.VK_S -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.DOWN, false);
+                controlsViewModel.setDirectional(GameControlsModel.Directionals.DOWN, false);
             }
 
             case KeyEvent.VK_SPACE -> {
-                controlsViewModel.setAbility(ControlsModel.Abilities.JUMP, false);
+                controlsViewModel.setAbility(GameControlsModel.Abilities.JUMP, false);
             }
         }
     }

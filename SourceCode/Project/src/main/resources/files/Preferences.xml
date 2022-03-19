@@ -16,7 +16,10 @@
         <resolutionHeight>1080</resolutionHeight>
 
         <!--
-        0 = Windowed, 1 = Windowed Fullscreen Borderless, 2 = Exclusive Fullscreen
+        0 = Windowed,
+        1 = Windowed Borderless,
+        2 = Windowed Fullscreen,
+        3 = Exclusive Fullscreen
         -->
         <windowType>0</windowType>
 

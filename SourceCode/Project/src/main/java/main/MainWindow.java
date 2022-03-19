@@ -2,13 +2,12 @@ package main;
 
 import graphics.ui.game.GameCanvas;
 import graphics.ui.menu.MenuCanvas;
-import models.controls.ControlsModel;
 import models.data.PreferenceData;
-import models.environments.menus.MenusModel;
-import props.prototypes.window.environments.AEnvironment;
 import models.environments.game.GameModel;
+import models.environments.menus.mainmenu.MainMenuModel;
 import props.prototypes.window.ACanvas;
 import props.prototypes.window.AWindow;
+import props.prototypes.window.environments.AEnvironment;
 import props.threads.gameloop.GameRenderRunnable;
 import props.threads.gameloop.GameUpdateRunnable;
 import props.threads.menuloop.MenuRenderRunnable;
@@ -26,18 +25,10 @@ public class MainWindow extends AWindow {
     private final ArrayList<AEnvironment> environments = new ArrayList<>();
     private final ArrayList<ACanvas> canvases = new ArrayList<>();
 
-    private ControlsModel controlsModel;
+    private int currentEnvironmentState = 0;
 
-    private int currentState = 0;
-
-    public void init(PreferenceData preferences, ControlsModel controlsModel){
+    public void init(PreferenceData preferences){
         constructWindowAndDimensions(preferences);
-
-        setControlsModel(controlsModel);
-    }
-
-    private void setControlsModel(ControlsModel controlsModel) {
-        this.controlsModel = controlsModel;
     }
 
     private void constructWindowAndDimensions(PreferenceData preferences) {
@@ -54,6 +45,16 @@ public class MainWindow extends AWindow {
                 setPreferredSize(new Dimension(width, height));
                 setUndecorated(true);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }
+            case WINDOWED_BORDERLESS -> {
+                int width = preferences.getWindowWidthSelected();
+                int height = preferences.getWindowHeightSelected();
+                preferences.setWindowWidthActual(width);
+                preferences.setWindowHeightActual(height);
+
+                setUndecorated(true);
+
+                setPreferredSize(new Dimension(width, height));
             }
             case WINDOWED_FULLSCREEN -> {
                 int width = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -81,19 +82,21 @@ public class MainWindow extends AWindow {
     }
 
     private void initThreads() {
+
         Thread updates = null;
         Thread renders = null;
-        if(environments.get(currentState) instanceof GameModel m) {
+
+        if(environments.get(currentEnvironmentState) instanceof GameModel m) {
             updates = new Thread(new GameUpdateRunnable(m));
 
-            if(canvases.get(currentState) instanceof GameCanvas c) {
+            if(canvases.get(currentEnvironmentState) instanceof GameCanvas c) {
                 renders = new Thread(new GameRenderRunnable(c));
             }
         } else
-        if(environments.get(currentState) instanceof MenusModel m) {
+        if(environments.get(currentEnvironmentState) instanceof MainMenuModel m) {
             updates = new Thread(new MenuUpdateRunnable(m));
 
-            if(canvases.get(currentState) instanceof MenuCanvas c) {
+            if(canvases.get(currentEnvironmentState) instanceof MenuCanvas c) {
                 renders = new Thread(new MenuRenderRunnable(c));
             }
         }
@@ -121,23 +124,14 @@ public class MainWindow extends AWindow {
         canvases.add(canvas);
     }
 
-    //TODO: Set enums for environment types
-    public void initEnvironmentAndCanvas(AEnvironment type) {
-
-    }
-
     public void initEnvironmentAndCanvas(int currentState) {
-        this.currentState = currentState;
+        this.currentEnvironmentState = currentState;
 
-        //this.removeAll();
+        addKeyListener(environments.get(currentState).getKeyController());
+        getContentPane().addMouseListener(environments.get(currentState).getMouseController());
+        getContentPane().addMouseMotionListener(environments.get(currentState).getMouseController());
 
-        addKeyListener(controlsModel.getKeyController());
-        addMouseListener(controlsModel.getMouseController());
-        addMouseMotionListener(controlsModel.getMouseController());
         add(canvases.get(currentState));
-
-        System.out.println(currentState);
-
         pack();
 
         initThreads();

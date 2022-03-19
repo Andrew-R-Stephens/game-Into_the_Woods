@@ -2,11 +2,16 @@ package main;
 
 import graphics.ui.game.GameCanvas;
 import graphics.ui.menu.MenuCanvas;
-import models.controls.ControlsModel;
+import models.controls.game.GameControlsModel;
+import models.controls.game.GameKeyControls;
+import models.controls.game.GameMouseControls;
+import models.controls.menu.MenuControlsModel;
+import models.controls.menu.MenuKeyControls;
+import models.controls.menu.MenuMouseControls;
 import models.data.PreferenceData;
 import models.environments.game.GameModel;
+import models.environments.menus.mainmenu.MainMenuModel;
 import props.objects.levels.LevelList;
-import models.environments.menus.MenusModel;
 import utils.files.PreferencesXMLParser;
 
 /**
@@ -16,9 +21,10 @@ public class Main {
 
     private static PreferenceData preferences;
 
-    private static ControlsModel controlsModel;
+    private static GameControlsModel gameControlsModel;
+    private static MenuControlsModel menuControlsModel;
 
-    private static MenusModel menuModel;
+    private static MainMenuModel mainMenuModel;
     private static GameModel gameModel;
 
     private static LevelList levelsModel;
@@ -55,12 +61,16 @@ public class Main {
         preferences = new PreferenceData();
 
         // Create Models
-        controlsModel = new ControlsModel();
+        gameControlsModel = new GameControlsModel();
+        menuControlsModel = new MenuControlsModel();
 
-        menuModel = new MenusModel();
-        gameModel = new GameModel();
+        // Create Menu Models
+        mainMenuModel = new MainMenuModel();
+        //menusListModel = new MenusListModel();
 
+        // Create Game Models
         levelsModel = new LevelList();
+        gameModel = new GameModel();
 
         // Create State Canvases
         menuCanvas = new MenuCanvas();
@@ -76,24 +86,31 @@ public class Main {
      */
     public static void init() {
 
+
         // Initialize Preferences
         PreferencesXMLParser preferencesParser =
                 new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
         preferencesParser.read();
 
         // Initialize Models
-        controlsModel.init();
-        gameModel.init(controlsModel, levelsModel);
+        gameControlsModel.init(new GameMouseControls(gameControlsModel), new GameKeyControls(gameControlsModel));
+        menuControlsModel.init(new MenuMouseControls(menuControlsModel), new MenuKeyControls(menuControlsModel));
+
+        mainMenuModel.init(menuControlsModel);
+        //pauseMenuModel.init(menuControlsModel);
+
+        gameModel.init(gameControlsModel, levelsModel);
+        //menusListModel.init(mainMenuModel);
 
         // Initialize Canvases
+        menuCanvas.init(mainMenuModel);
         gameCanvas.init(gameModel);
-        menuCanvas.init(menuModel);
 
         // Initialize Window
-        window.init(preferences, controlsModel);
+        window.init(preferences);
+        window.addEnvironmentWithCanvas(mainMenuModel, menuCanvas);
         window.addEnvironmentWithCanvas(gameModel, gameCanvas);
-        window.addEnvironmentWithCanvas(menuModel, menuCanvas);
-        window.initEnvironmentAndCanvas(1);
+        window.initEnvironmentAndCanvas(0);
 
         // Confirm and Apply scaling
         preferences.post();

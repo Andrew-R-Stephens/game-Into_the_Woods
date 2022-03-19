@@ -1,19 +1,19 @@
 package models.environments.game;
 
 import models.camera.Camera;
-import models.controls.ControlsModel;
+import models.controls.game.GameControlsModel;
 import models.controls.game.GameMouseControls;
 import models.data.PreferenceData;
 import models.environments.game.hud.HUDModel;
-import models.environments.menus.pausemenumodel.PauseMenuModel;
-import props.objects.levels.LevelList;
-import props.prototypes.window.environments.AEnvironment;
 import props.objects.gameactors.TestActor;
 import props.objects.gameactors.TestCharacter;
+import props.objects.levels.LevelList;
 import props.prototypes.actor.AActor;
 import props.prototypes.actor.pawn.character.ACharacter;
 import props.prototypes.level.prop.ALevelProp;
-import props.prototypes.controls.AMouseController;
+import props.prototypes.window.environments.AEnvironment;
+import props.threads.gameloop.GameRenderRunnable;
+import props.threads.gameloop.GameUpdateRunnable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -24,10 +24,7 @@ import java.util.Random;
  */
 public class GameModel extends AEnvironment {
 
-    private ControlsModel controlsViewModel;
-
     private HUDModel hudModel = new HUDModel(this);
-    private PauseMenuModel pauseMenuModel = new PauseMenuModel();
     private boolean isPaused = false;
 
     private LevelList levelModel;
@@ -42,9 +39,11 @@ public class GameModel extends AEnvironment {
      * @param controlsViewModel - The controls View Model for the Game state
      * @param levelModel - The Level Model that contains all levels
      */
-    public void init(ControlsModel controlsViewModel, LevelList levelModel) {
+    public void init(GameControlsModel controlsViewModel, LevelList levelModel) {
 
-        setControlsViewModel(controlsViewModel);
+        keyController = controlsViewModel.getKeyController();
+        mouseController = controlsViewModel.getMouseController();
+
         setLevelModel(levelModel);
 
         // Main Test Character
@@ -55,14 +54,6 @@ public class GameModel extends AEnvironment {
                 0, 0,
                 true
         ));
-    }
-
-    /**
-     *
-     * @param controlsViewModel - The controls View Model for the Game state
-     */
-    public void setControlsViewModel(ControlsModel controlsViewModel) {
-        this.controlsViewModel = controlsViewModel;
     }
 
     /**
@@ -128,9 +119,12 @@ public class GameModel extends AEnvironment {
 
         if(!isPaused) {
             hudModel.draw(g);
-        } else {
-            pauseMenuModel.draw(g);
         }
+
+        g.setColor(Color.RED);
+        float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
+        g.drawString("FPS: " + GameRenderRunnable.lastFrames, (int)(20 * sW), (int)(1010 * sH));
+        g.drawString("Ticks: " + GameUpdateRunnable.lastUpdates, (int)(20 * sW), (int)(1030 * sH));
     }
 
     /**
@@ -138,7 +132,6 @@ public class GameModel extends AEnvironment {
      * @param delta - The ratio of current framerate against standard update frequency
      */
     private synchronized void testAddingActors(float delta) {
-        AMouseController mouseController = controlsViewModel.getMouseController();
         if (mouseController instanceof GameMouseControls) {
 
             GameMouseControls gmc = (GameMouseControls) mouseController;

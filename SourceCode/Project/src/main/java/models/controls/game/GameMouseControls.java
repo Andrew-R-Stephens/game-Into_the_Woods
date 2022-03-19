@@ -1,6 +1,6 @@
 package models.controls.game;
 
-import models.controls.ControlsModel;
+import props.prototypes.controls.AControlsModel;
 import props.prototypes.controls.AMouseController;
 
 import java.awt.event.MouseEvent;
@@ -10,15 +10,15 @@ import java.awt.event.MouseEvent;
  */
 public class GameMouseControls extends AMouseController {
 
-    private final ControlsModel controlsViewModel;
+    private final GameControlsModel controlsViewModel;
 
     private final int[] mPos = new int[]{ -100, -100 };
 
     private boolean isLeftPressed = false;
     private boolean isRightPressed = false;
 
-    public GameMouseControls(ControlsModel controlsViewModel) {
-        this.controlsViewModel = controlsViewModel;
+    public GameMouseControls(AControlsModel controlsViewModel) {
+        this.controlsViewModel = (GameControlsModel) controlsViewModel;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class GameMouseControls extends AMouseController {
             }
         }
 
-        System.out.println("Pressed!");
+        System.out.println("Game Pressed!");
     }
 
     @Override
@@ -60,7 +60,7 @@ public class GameMouseControls extends AMouseController {
             }
         }
 
-        System.out.println("Released!");
+        System.out.println("Game Released!");
 
     }
 

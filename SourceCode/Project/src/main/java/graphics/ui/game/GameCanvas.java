@@ -1,10 +1,7 @@
 package graphics.ui.game;
 
-import models.environments.game.hud.HUDModel;
-import props.prototypes.window.ACanvas;
 import models.environments.game.GameModel;
-import props.threads.gameloop.GameRenderRunnable;
-import props.threads.gameloop.GameUpdateRunnable;
+import props.prototypes.window.ACanvas;
 
 import java.awt.*;
 
@@ -41,10 +38,6 @@ public class GameCanvas extends ACanvas {
 
         // Draw test objects
         gameModel.draw(g);
-
-        g.setColor(Color.RED);
-        g.drawString("FPS: " + GameRenderRunnable.lastFrames, 10, 10);
-        g.drawString("Ticks: " + GameUpdateRunnable.lastUpdates, 10, 30);
     }
 
 }

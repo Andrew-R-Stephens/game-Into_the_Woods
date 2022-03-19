@@ -1,14 +1,14 @@
 package props.threads.menuloop;
 
 import models.data.PreferenceData;
-import models.environments.menus.MenusModel;
+import models.environments.menus.mainmenu.MainMenuModel;
 import props.prototypes.threading.AUpdateRunnable;
 
 public class MenuUpdateRunnable extends AUpdateRunnable {
 
-    private MenusModel menuModel;
+    private MainMenuModel menuModel;
 
-    public MenuUpdateRunnable(MenusModel menuModel) {
+    public MenuUpdateRunnable(MainMenuModel menuModel) {
         this.menuModel = menuModel;
     }
 

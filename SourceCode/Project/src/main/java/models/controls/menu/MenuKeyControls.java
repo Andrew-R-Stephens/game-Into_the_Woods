@@ -1,7 +1,5 @@
 package models.controls.menu;
 
-import models.controls.ControlsModel;
-import models.environments.game.GameModel;
 import props.prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
@@ -11,12 +9,10 @@ import java.awt.event.KeyEvent;
  */
 public class MenuKeyControls extends AKeyController {
 
-    private ControlsModel controlsViewModel;
-    private GameModel gameViewModel;
+    private final MenuControlsModel controlsViewModel;
 
-    public MenuKeyControls(ControlsModel controlsViewModel, GameModel gameViewModel) {
+    public MenuKeyControls(MenuControlsModel controlsViewModel) {
         this.controlsViewModel = controlsViewModel;
-        this.gameViewModel = gameViewModel;
     }
 
     @Override
@@ -27,22 +23,24 @@ public class MenuKeyControls extends AKeyController {
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE -> {
-                controlsViewModel.setAction(ControlsModel.Actions.ESCAPE, true);
+                System.out.println("Quitting");
+                System.exit(1);
+                //controlsViewModel.setAction(MenuControlsModel.Actions.ESCAPE, true);
             }case KeyEvent.VK_ENTER -> {
-                controlsViewModel.setAction(ControlsModel.Actions.ENTER, true);
+                controlsViewModel.setAction(MenuControlsModel.Actions.ENTER, true);
             }
 
             case KeyEvent.VK_LEFT -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.LEFT, true);
+                controlsViewModel.setDirectional(MenuControlsModel.Directionals.LEFT, true);
             }
             case KeyEvent.VK_RIGHT -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.RIGHT, true);
+                controlsViewModel.setDirectional(MenuControlsModel.Directionals.RIGHT, true);
             }
             case KeyEvent.VK_UP -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.UP, true);
+                controlsViewModel.setDirectional(MenuControlsModel.Directionals.UP, true);
             }
             case KeyEvent.VK_DOWN -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.DOWN, true);
+                controlsViewModel.setDirectional(MenuControlsModel.Directionals.DOWN, true);
             }
 
 
@@ -53,23 +51,23 @@ public class MenuKeyControls extends AKeyController {
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE -> {
-                controlsViewModel.setAction(ControlsModel.Actions.ESCAPE, false);
+                controlsViewModel.setAction(MenuControlsModel.Actions.ESCAPE, false);
             }
             case KeyEvent.VK_ENTER -> {
-                controlsViewModel.setAction(ControlsModel.Actions.ENTER, false);
+                controlsViewModel.setAction(MenuControlsModel.Actions.ENTER, false);
             }
 
             case KeyEvent.VK_LEFT -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.LEFT, false);
+                controlsViewModel.setDirectional(MenuControlsModel.Directionals.LEFT, false);
             }
             case KeyEvent.VK_RIGHT -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.RIGHT, false);
+                controlsViewModel.setDirectional(MenuControlsModel.Directionals.RIGHT, false);
             }
             case KeyEvent.VK_UP -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.UP, false);
+                controlsViewModel.setDirectional(MenuControlsModel.Directionals.UP, false);
             }
             case KeyEvent.VK_DOWN -> {
-                controlsViewModel.setDirectional(ControlsModel.Directionals.DOWN, false);
+                controlsViewModel.setDirectional(MenuControlsModel.Directionals.DOWN, false);
             }
         }
     }

@@ -1,6 +1,6 @@
 package props.prototypes.actor.pawn.character;
 
-import models.controls.ControlsModel;
+import models.controls.game.GameControlsModel;
 import models.data.PreferenceData;
 import props.prototypes.actor.pawn.APawn;
 import utils.drawables.IDrawable;
@@ -10,7 +10,7 @@ import utils.drawables.IDrawable;
  */
 public abstract class ACharacter extends APawn implements IDrawable {
 
-    private final ControlsModel controlsModel;
+    private final GameControlsModel controlsModel;
 
     /* Dictates whether or not the character has attempted to jump or not. This resets if the character collides with
      * an ALevelProp or presses the Jump button.
@@ -23,7 +23,7 @@ public abstract class ACharacter extends APawn implements IDrawable {
     private final float MAX_ALLOWED_WALLRIDE_TIME = .7f;
     private float wallrideTime = MAX_ALLOWED_JUMP_TIME;
 
-    protected ACharacter(ControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
+    protected ACharacter(GameControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
                          boolean hasGravity) {
         super(x, y, w, h, vx, vy, hasGravity);
         this.controlsModel = cModel;

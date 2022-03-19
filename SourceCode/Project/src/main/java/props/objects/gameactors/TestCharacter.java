@@ -1,7 +1,7 @@
 package props.objects.gameactors;
 
 import models.camera.Camera;
-import models.controls.ControlsModel;
+import models.controls.game.GameControlsModel;
 import models.data.PreferenceData;
 import props.prototypes.actor.AActor;
 import props.prototypes.actor.pawn.character.ACharacter;
@@ -15,19 +15,14 @@ public class TestCharacter extends ACharacter {
 
     protected Color c = Color.BLUE;
 
-    public TestCharacter(ControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
+    public TestCharacter(GameControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
                          boolean hasGravity) {
         super(cModel, x, y, w, h, vx, vy, hasGravity);
     }
 
     @Override
     public boolean hasCollision(AActor a, float delta) {
-        if (super.hasCollision(a, delta)) {
-            c = Color.RED;
-            return true;
-        }
-        c = Color.BLUE;
-        return false;
+        return super.hasCollision(a, delta);
     }
 
     @Override
@@ -44,7 +39,7 @@ public class TestCharacter extends ACharacter {
 
     @Override
     public void draw(Graphics g) {
-        super.draw(g);
+        //super.draw(g);
 
         // Scaled size
         double scaleW = w * PreferenceData.scaledW;
@@ -58,7 +53,7 @@ public class TestCharacter extends ACharacter {
         centerY -= scaleH;
 
         g.setColor(c);
-        g.drawRect((int) (centerX), (int) (centerY), (int) (scaleW), (int) (scaleH));
+        g.fillRect((int) (centerX), (int) (centerY), (int) (scaleW), (int) (scaleH));
         g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
 
     }

@@ -14,8 +14,8 @@ public class PreferenceData {
     public static int window_width_actual = 0;
     public static int window_height_actual = 0;
 
-    public static double scaledW = 1;
-    public static double scaledH = 1;
+    public static float scaledW = 1;
+    public static float scaledH = 1;
 
     private static WindowType window_type = WindowType.WINDOWED;
 
@@ -25,8 +25,8 @@ public class PreferenceData {
 
 
     public void calcResScale() {
-        scaledW = (double)window_width_actual / (double) DEFAULT_WINDOW_WIDTH;
-        scaledH = (double)window_height_actual / (double) DEFAULT_WINDOW_HEIGHT;
+        scaledW = (float)window_width_actual / (float) DEFAULT_WINDOW_WIDTH;
+        scaledH = (float)window_height_actual / (float) DEFAULT_WINDOW_HEIGHT;
     }
 
     public void setWindowWidthSelected(int width) {
@@ -88,7 +88,10 @@ public class PreferenceData {
 
 
     public enum WindowType {
-        WINDOWED(0, "Windowed"), WINDOWED_FULLSCREEN(1, "Windowed Fullscreen"), FULLSCREEN(2, "Fullscreen");
+        WINDOWED(0, "Windowed"),
+        WINDOWED_BORDERLESS(1, "Windowed Borderless"),
+        WINDOWED_FULLSCREEN(2, "Windowed Fullscreen"),
+        FULLSCREEN(3, "Fullscreen");
 
         private int type;
         private String name;

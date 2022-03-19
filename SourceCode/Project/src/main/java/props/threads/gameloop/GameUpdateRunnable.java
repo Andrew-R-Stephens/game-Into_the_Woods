@@ -39,7 +39,6 @@ public class GameUpdateRunnable extends AUpdateRunnable {
                 timer += 1000;
 
                 lastUpdates = updates;
-                System.out.println(lastUpdates);
                 updates = 0;
 
                 if(lastUpdates < (targetTicks*.8)) {

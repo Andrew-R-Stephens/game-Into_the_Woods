@@ -31,6 +31,7 @@ public abstract class AActor extends APhysics implements IDrawable {
 
     @Override
     public void draw(Graphics g) {
+        g.setColor(Color.CYAN);
 
         double offsetX = ((x * PreferenceData.scaledW) + (Camera.x));
         double offsetY = ((y * PreferenceData.scaledH) + (Camera.y));
@@ -38,6 +39,6 @@ public abstract class AActor extends APhysics implements IDrawable {
         double scaledW = w * PreferenceData.scaledW;
         double scaledH = h * PreferenceData.scaledH;
 
-        g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
+        g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
     }
 }

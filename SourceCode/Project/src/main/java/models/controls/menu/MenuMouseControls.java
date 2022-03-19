@@ -1,6 +1,6 @@
 package models.controls.menu;
 
-import models.controls.ControlsModel;
+import props.prototypes.controls.AControlsModel;
 import props.prototypes.controls.AMouseController;
 
 import java.awt.event.MouseEvent;
@@ -10,15 +10,15 @@ import java.awt.event.MouseEvent;
  */
 public class MenuMouseControls extends AMouseController {
 
-    private final ControlsModel controlsViewModel;
+    private final MenuControlsModel controlsViewModel;
 
     private final int[] mPos = new int[]{-100, -100};
 
     private boolean isLeftPressed = false;
     private boolean isRightPressed = false;
 
-    public MenuMouseControls(ControlsModel controlsViewModel) {
-        this.controlsViewModel = controlsViewModel;
+    public MenuMouseControls(AControlsModel controlsViewModel) {
+        this.controlsViewModel = (MenuControlsModel) controlsViewModel;
     }
 
     @Override
@@ -33,15 +33,17 @@ public class MenuMouseControls extends AMouseController {
                 isLeftPressed = true;
                 mPos[0] = e.getX();
                 mPos[1] = e.getY();
+                //controlsViewModel.isAwaitingRelease = true;
             }
             case MouseEvent.BUTTON2 -> {
                 isRightPressed = true;
                 mPos[0] = e.getX();
                 mPos[1] = e.getY();
+                //controlsViewModel.isAwaitingRelease = true;
             }
         }
 
-        System.out.println("Pressed!");
+        System.out.println("Menu Pressed!");
     }
 
     @Override
@@ -52,15 +54,17 @@ public class MenuMouseControls extends AMouseController {
                 isLeftPressed = false;
                 mPos[0] = -100;
                 mPos[1] = -100;
+                //controlsViewModel.isAwaitingRelease = false;
             }
             case MouseEvent.BUTTON2 -> {
                 isRightPressed = false;
                 mPos[0] = -100;
                 mPos[1] = -100;
+                //controlsViewModel.isAwaitingRelease = false;
             }
         }
 
-        System.out.println("Released!");
+        System.out.println("Menu Released!");
 
     }
 
@@ -74,6 +78,7 @@ public class MenuMouseControls extends AMouseController {
     public void mouseDragged(MouseEvent e) {
         mPos[0] = e.getX();
         mPos[1] = e.getY();
+        resetInput();
     }
 
     @Override
@@ -87,11 +92,17 @@ public class MenuMouseControls extends AMouseController {
     }
 
     public boolean isRightPressed() {
-        return isRightPressed;
+        return isRightPressed && !controlsViewModel.isAwaitingRelease;
     }
 
     public int[] getPos() {
         return mPos;
+    }
+
+    public void resetInput() {
+        isLeftPressed = false;
+        isRightPressed = false;
+        controlsViewModel.isAwaitingRelease = false;
     }
 
 }
