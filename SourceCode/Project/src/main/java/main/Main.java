@@ -39,7 +39,7 @@ public class Main {
     private static MenuUpdateRunnable menuUpdateRunnable;
     private static MenuRenderRunnable menuRenderRunnable;
 
-    private static LevelList levelsModel;
+    private static LevelList levelsListModel;
 
     private static MenuCanvas mainMenuCanvas;
     private static GameCanvas gameCanvas;
@@ -53,6 +53,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        // Load Images, Files, etc
         loadAssets();
 
         // Create Objects
@@ -72,9 +73,10 @@ public class Main {
         // Create Preferences
         preferences = new PreferenceData();
 
-        // Create Models
+        // Create AEnvironment Model Container
         environmentsModel = new EnvironmentsModel();
 
+        // Create AEnvironment Models
         gameControlsModel = new GameControlsModel();
         menuControlsModel = new MenuControlsModel();
 
@@ -83,7 +85,7 @@ public class Main {
         //menusListModel = new MenusListModel();
 
         // Create Game Models
-        levelsModel = new LevelList();
+        levelsListModel = new LevelList();
         gameModel = new GameModel();
 
         // Create State Canvases
@@ -105,23 +107,24 @@ public class Main {
      */
     public static void init() {
 
-
         // Initialize Preferences
         PreferencesXMLParser preferencesParser =
                 new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
         preferencesParser.read();
-
 
         // Initialize Control Models
         gameControlsModel.init(new GameMouseControls(gameControlsModel), new GameKeyControls(gameControlsModel));
         menuControlsModel.init(new MenuMouseControls(menuControlsModel), new MenuKeyControls(menuControlsModel));
 
         // Initialize Levels
-        levelsModel.init(gameModel);
+        levelsListModel.init(gameModel);
+
+        // Initialize AEnvironment Model Container
+        environmentsModel.init(window);
 
         // Initialize AEnvironment Models
-        mainMenuModel.init(menuControlsModel);
-        gameModel.init(gameControlsModel, levelsModel);
+        mainMenuModel.init(environmentsModel, menuControlsModel);
+        gameModel.init(environmentsModel, gameControlsModel, levelsListModel);
 
         // Initialize Canvases
         mainMenuCanvas.init(mainMenuModel);
@@ -141,7 +144,7 @@ public class Main {
 
         // Initialize Window's Environment
         window.initEnvironmentsModel(environmentsModel);
-        window.initEnvironmentAndCanvas(EnvironmentsModel.EnvironmentType.MAIN_MENU);
+        window.applyEnvironmentAndCanvas(EnvironmentsModel.EnvironmentType.MAIN_MENU);
 
         // Confirm and Apply scaling
         preferences.post();

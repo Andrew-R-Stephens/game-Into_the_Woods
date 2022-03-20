@@ -1,5 +1,6 @@
 package models.environments.menus.mainmenu.children;
 
+import main.EnvironmentsModel;
 import props.prototypes.window.environments.menu.AMenu;
 import props.prototypes.window.environments.menu.AMenuModel;
 import props.prototypes.window.environments.menu.components.AMenuButton;
@@ -18,6 +19,9 @@ public class NewGamePage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
+
+                parentMenuModel.parentEnvironmentsModel.setCurrentEnvironment(EnvironmentsModel.EnvironmentType.GAME);
+                parentMenuModel.parentEnvironmentsModel.applyEnvironment();
 
                 return true;
             }

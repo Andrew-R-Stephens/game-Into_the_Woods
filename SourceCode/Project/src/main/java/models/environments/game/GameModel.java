@@ -1,5 +1,6 @@
 package models.environments.game;
 
+import main.EnvironmentsModel;
 import models.camera.Camera;
 import models.controls.game.GameControlsModel;
 import models.controls.game.GameMouseControls;
@@ -39,11 +40,10 @@ public class GameModel extends AEnvironment {
      * @param controlsViewModel - The controls View Model for the Game state
      * @param levelModel - The Level Model that contains all levels
      */
-    public void init(GameControlsModel controlsViewModel, LevelList levelModel) {
+    public void init(EnvironmentsModel parentEnvironmentsModel, GameControlsModel controlsViewModel, LevelList levelModel) {
 
-        keyController = controlsViewModel.getKeyController();
-        mouseController = controlsViewModel.getMouseController();
-
+        super.init(parentEnvironmentsModel, controlsViewModel.getKeyController(), controlsViewModel.getMouseController());
+        
         setLevelModel(levelModel);
 
         // Main Test Character

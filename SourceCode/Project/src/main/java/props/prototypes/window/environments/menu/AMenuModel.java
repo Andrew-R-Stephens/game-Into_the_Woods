@@ -1,5 +1,6 @@
 package props.prototypes.window.environments.menu;
 
+import main.EnvironmentsModel;
 import models.controls.menu.MenuControlsModel;
 import props.prototypes.window.environments.AEnvironment;
 
@@ -10,10 +11,9 @@ public abstract class AMenuModel extends AEnvironment {
 
     private final Stack<AMenu> menuStack = new Stack<>();
 
-    public void init(MenuControlsModel controlsModel) {
+    public void init(EnvironmentsModel parentEnvironmentsModel, MenuControlsModel controlsModel) {
 
-        keyController = controlsModel.getKeyController();
-        mouseController = controlsModel.getMouseController();
+        super.init(parentEnvironmentsModel, controlsModel.getKeyController(), controlsModel.getMouseController());
 
     }
 

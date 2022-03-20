@@ -14,12 +14,12 @@ public abstract class AMenu extends AEnvironment {
     public ArrayList<AMenuButton> buttons = new ArrayList<>();
     public MenuBundle bundle = new MenuBundle();
 
-    public AMenu(AMenuModel parentModel) {
+    public AMenu(AMenuModel parentMenuModel) {
 
-        parentMenuModel = parentModel;
+        this.parentMenuModel = parentMenuModel;
 
-        keyController = parentModel.getKeyController();
-        mouseController = parentModel.getMouseController();
+        keyController = parentMenuModel.getKeyController();
+        mouseController = parentMenuModel.getMouseController();
     }
 
     @Override

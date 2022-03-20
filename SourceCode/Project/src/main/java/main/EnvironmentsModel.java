@@ -9,13 +9,19 @@ import java.util.ArrayList;
 
 public class EnvironmentsModel {
 
-    enum EnvironmentType { MAIN_MENU, GAME }
+    private MainWindow parentComponent;
+
+    public enum EnvironmentType { MAIN_MENU, GAME }
     private EnvironmentType currentEnvironment = EnvironmentType.MAIN_MENU;
 
     private final ArrayList<AEnvironment> environments = new ArrayList<>();
     private final ArrayList<ACanvas> canvases = new ArrayList<>();
     private final ArrayList<AUpdateRunnable> updateRunnables = new ArrayList<>();
     private final ArrayList<ARenderRunnable> renderRunnables = new ArrayList<>();
+
+    public void init(MainWindow parentComponent) {
+        this.parentComponent = parentComponent;
+    }
 
     public void addPair(AEnvironment model, ACanvas canvas, AUpdateRunnable uRunnable, ARenderRunnable rRunnable) {
         environments.add(model);
@@ -43,4 +49,9 @@ public class EnvironmentsModel {
     public Runnable getCurrentRenderRunnable() {
         return renderRunnables.get(currentEnvironment.ordinal());
     }
+
+    public void applyEnvironment() {
+        parentComponent.applyEnvironmentAndCanvas();
+    }
+
 }

@@ -1,15 +1,7 @@
 package main;
 
-import graphics.ui.game.GameCanvas;
-import graphics.ui.menu.MenuCanvas;
 import models.data.PreferenceData;
-import models.environments.game.GameModel;
-import models.environments.menus.mainmenu.MainMenuModel;
 import props.prototypes.window.AWindow;
-import props.threads.gameloop.GameRenderRunnable;
-import props.threads.gameloop.GameUpdateRunnable;
-import props.threads.menuloop.MenuRenderRunnable;
-import props.threads.menuloop.MenuUpdateRunnable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -100,8 +92,15 @@ public class MainWindow extends AWindow {
         rendersThread.start();
     }
 
-    public void initEnvironmentAndCanvas(EnvironmentsModel.EnvironmentType environmentType) {
+    public void applyEnvironmentAndCanvas(EnvironmentsModel.EnvironmentType environmentType) {
         environmentsModel.setCurrentEnvironment(environmentType);
+
+        applyEnvironmentAndCanvas();
+    }
+
+    public void applyEnvironmentAndCanvas() {
+        getContentPane().removeAll();
+        repaint();
 
         addKeyListener(environmentsModel.getCurrentEnvironment().getKeyController());
         getContentPane().addMouseListener(environmentsModel.getCurrentEnvironment().getMouseController());
