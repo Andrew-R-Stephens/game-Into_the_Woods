@@ -5,8 +5,8 @@ package models.data;
  */
 public class PreferenceData {
 
-    public static int DEFAULT_WINDOW_WIDTH = 0;
-    public static int DEFAULT_WINDOW_HEIGHT = 0;
+    public static int DEFAULT_WINDOW_WIDTH = 1920;
+    public static int DEFAULT_WINDOW_HEIGHT = 1080;
 
     public static int window_width_selected = 0;
     public static int window_height_selected = 0;
@@ -57,8 +57,16 @@ public class PreferenceData {
         DEFAULT_WINDOW_WIDTH = width;
     }
 
+    public int getWindowWidthDefault() {
+        return DEFAULT_WINDOW_WIDTH;
+    }
+
     public void setWindowHeightDefault(int height) {
         DEFAULT_WINDOW_HEIGHT = height;
+    }
+
+    public int getWindowHeightDefault() {
+        return DEFAULT_WINDOW_HEIGHT;
     }
 
     public void setWindowType(int type) {

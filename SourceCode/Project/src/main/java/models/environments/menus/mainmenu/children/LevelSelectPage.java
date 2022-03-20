@@ -11,9 +11,37 @@ public class LevelSelectPage extends AMenu {
     public LevelSelectPage(AMenuModel parentModel) {
         super(parentModel);
 
+        AMenuButton button_char1 = new AMenuButton(parentModel,500, 500, 200, 50) {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+
+                parentMenuModel.pop();
+
+                return true;
+            }
+        };
+        button_char1.setText("Character 1");
+
+        AMenuButton button_char2 = new AMenuButton(parentModel,500, 500, 200, 50) {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+
+                parentMenuModel.pop();
+
+                return true;
+            }
+        };
+        button_char2.setText("Character 2");
+
         AMenuButton button_back = new AMenuButton(parentModel,500, 500, 200, 50) {
             @Override
-            public boolean onClick(int x, int y) {
+            public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
@@ -24,6 +52,10 @@ public class LevelSelectPage extends AMenu {
             }
         };
         button_back.setText("Back");
+
+        buttons.add(button_char1);
+        buttons.add(button_char2);
+
         buttons.add(button_back);
     }
 

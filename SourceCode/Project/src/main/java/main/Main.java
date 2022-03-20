@@ -12,6 +12,10 @@ import models.data.PreferenceData;
 import models.environments.game.GameModel;
 import models.environments.menus.mainmenu.MainMenuModel;
 import props.objects.levels.LevelList;
+import props.threads.gameloop.GameRenderRunnable;
+import props.threads.gameloop.GameUpdateRunnable;
+import props.threads.menuloop.MenuRenderRunnable;
+import props.threads.menuloop.MenuUpdateRunnable;
 import utils.files.PreferencesXMLParser;
 
 /**
@@ -21,15 +25,23 @@ public class Main {
 
     private static PreferenceData preferences;
 
+    private static EnvironmentsModel environmentsModel;
+
     private static GameControlsModel gameControlsModel;
     private static MenuControlsModel menuControlsModel;
 
     private static MainMenuModel mainMenuModel;
     private static GameModel gameModel;
 
+    private static GameUpdateRunnable gameUpdateRunnable;
+    private static GameRenderRunnable gameRenderRunnable;
+
+    private static MenuUpdateRunnable menuUpdateRunnable;
+    private static MenuRenderRunnable menuRenderRunnable;
+
     private static LevelList levelsModel;
 
-    private static MenuCanvas menuCanvas;
+    private static MenuCanvas mainMenuCanvas;
     private static GameCanvas gameCanvas;
 
     private static MainWindow window;
@@ -61,6 +73,8 @@ public class Main {
         preferences = new PreferenceData();
 
         // Create Models
+        environmentsModel = new EnvironmentsModel();
+
         gameControlsModel = new GameControlsModel();
         menuControlsModel = new MenuControlsModel();
 
@@ -73,8 +87,13 @@ public class Main {
         gameModel = new GameModel();
 
         // Create State Canvases
-        menuCanvas = new MenuCanvas();
+        mainMenuCanvas = new MenuCanvas();
         gameCanvas = new GameCanvas();
+
+        gameUpdateRunnable = new GameUpdateRunnable();
+        gameRenderRunnable = new GameRenderRunnable();
+        menuUpdateRunnable = new MenuUpdateRunnable();
+        menuRenderRunnable = new MenuRenderRunnable();
 
         // Create Window
         window = new MainWindow();
@@ -92,25 +111,37 @@ public class Main {
                 new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
         preferencesParser.read();
 
-        // Initialize Models
+
+        // Initialize Control Models
         gameControlsModel.init(new GameMouseControls(gameControlsModel), new GameKeyControls(gameControlsModel));
         menuControlsModel.init(new MenuMouseControls(menuControlsModel), new MenuKeyControls(menuControlsModel));
 
-        mainMenuModel.init(menuControlsModel);
-        //pauseMenuModel.init(menuControlsModel);
+        // Initialize Levels
+        levelsModel.init(gameModel);
 
+        // Initialize AEnvironment Models
+        mainMenuModel.init(menuControlsModel);
         gameModel.init(gameControlsModel, levelsModel);
-        //menusListModel.init(mainMenuModel);
 
         // Initialize Canvases
-        menuCanvas.init(mainMenuModel);
+        mainMenuCanvas.init(mainMenuModel);
         gameCanvas.init(gameModel);
 
-        // Initialize Window
+        gameUpdateRunnable.init(gameModel);
+        gameRenderRunnable.init(gameCanvas);
+        menuUpdateRunnable.init(mainMenuModel);
+        menuRenderRunnable.init(mainMenuCanvas);
+
+        // Initialize Environments Model with Main Menu and Game AEnvironments
+        environmentsModel.addPair(mainMenuModel, mainMenuCanvas, menuUpdateRunnable, menuRenderRunnable);
+        environmentsModel.addPair(gameModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
+
+        // Initialize Window with Preference Data
         window.init(preferences);
-        window.addEnvironmentWithCanvas(mainMenuModel, menuCanvas);
-        window.addEnvironmentWithCanvas(gameModel, gameCanvas);
-        window.initEnvironmentAndCanvas(0);
+
+        // Initialize Window's Environment
+        window.initEnvironmentsModel(environmentsModel);
+        window.initEnvironmentAndCanvas(EnvironmentsModel.EnvironmentType.MAIN_MENU);
 
         // Confirm and Apply scaling
         preferences.post();

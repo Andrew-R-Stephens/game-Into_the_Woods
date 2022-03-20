@@ -33,4 +33,5 @@ public class TestLevelProp extends ALevelProp {
     public void draw(Graphics g) {
         super.draw(g);
     }
+
 }

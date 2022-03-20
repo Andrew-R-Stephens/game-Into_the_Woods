@@ -6,14 +6,17 @@ import props.prototypes.window.environments.menu.AMenuModel;
 import utils.drawables.IDrawable;
 import utils.updates.IUpdatable;
 
+import javax.swing.*;
 import java.awt.*;
 
 public abstract class AMenuButton implements IUpdatable, IDrawable {
 
     protected AMenuModel parentMenuModel;
 
-    private String text = "NA";
-    private int x, y, w, h;
+    JButton b;
+
+    private String text = "";
+    private final int x, y, w, h;
 
     public AMenuButton(AMenuModel parentMenuModel, int x, int y, int w, int h) {
         this.parentMenuModel = parentMenuModel;
@@ -24,9 +27,9 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
         this.h = h;
     }
 
-    protected boolean isInBounds(int mx, int my) {
-        mx *= PreferenceData.scaledW;
-        my *= PreferenceData.scaledH;
+    protected boolean isInBounds(float mx, float my) {
+        mx /= PreferenceData.scaledW;
+        my /= PreferenceData.scaledH;
 
         boolean horizBound = (mx >= x && mx <= (x + w));
         boolean vertBound = (my >= y && my <= (y + h));
@@ -34,7 +37,7 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
         return horizBound && vertBound;
     }
 
-    public abstract boolean onClick(int x, int y);
+    public abstract boolean onClick(float x, float y);
 
     @Override
     public void draw(Graphics g) {
@@ -51,13 +54,13 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
 
     public void registerInput() {
         if(parentMenuModel.getMouseController() instanceof MenuMouseControls mc) {
+
             if (mc.isLeftPressed()) {
                 if(onClick(mc.getPos()[0], mc.getPos()[1])) {
-                    System.out.println("Is in bounds");
-
                     mc.resetInput();
                 }
             }
+
         }
     }
 

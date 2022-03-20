@@ -58,9 +58,7 @@ public abstract class APhysics {
 
         calculateGravity(delta);
 
-        /*
-        float acc = friction / (float)PreferenceData.GAME_UPDATE_RATE / delta;
-        */
+        //float acc = friction / PreferenceData.GAME_UPDATE_RATE / delta;
 
         //vY *= 1-acc;
         //vX *= 1-acc;
@@ -83,6 +81,10 @@ public abstract class APhysics {
     }
 
     public boolean hasCollision(AActor a, float delta) {
+        return hasCollision(a, delta, true);
+    }
+
+    public boolean hasCollision(AActor a, float delta, boolean moveToBounds) {
 
         boolean isFloorBounded = ((a.bottomBufferOuter()) >= top()) && (a.bottomBufferInner() <= bottom());
 
@@ -106,8 +108,11 @@ public abstract class APhysics {
                 ((a.left() <= right()) && (a.left() >= left())) ||
                         ((right() >= a.left()) && (right() <= a.right()));
 
-
         if ((hitBottom || hitTop) && (hitLeft || hitRight)) {
+
+            if(!moveToBounds) {
+                return true;
+            }
 
             // Determine the side that the object should rebound off of
             float distX, distY;

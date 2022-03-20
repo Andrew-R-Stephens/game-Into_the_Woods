@@ -13,7 +13,7 @@ public class OptionsPage extends AMenu {
 
         AMenuButton button_back = new AMenuButton(parentModel,500, 500, 200, 50) {
             @Override
-            public boolean onClick(int x, int y) {
+            public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
                     return false;
                 }

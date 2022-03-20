@@ -5,9 +5,7 @@ import graphics.ui.menu.MenuCanvas;
 import models.data.PreferenceData;
 import models.environments.game.GameModel;
 import models.environments.menus.mainmenu.MainMenuModel;
-import props.prototypes.window.ACanvas;
 import props.prototypes.window.AWindow;
-import props.prototypes.window.environments.AEnvironment;
 import props.threads.gameloop.GameRenderRunnable;
 import props.threads.gameloop.GameUpdateRunnable;
 import props.threads.menuloop.MenuRenderRunnable;
@@ -15,17 +13,16 @@ import props.threads.menuloop.MenuUpdateRunnable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * The Application Window contains the Canvas which is currently active.
  */
 public class MainWindow extends AWindow {
 
-    private final ArrayList<AEnvironment> environments = new ArrayList<>();
-    private final ArrayList<ACanvas> canvases = new ArrayList<>();
+    private EnvironmentsModel environmentsModel;
 
-    private int currentEnvironmentState = 0;
+    private Thread updatesThread = null;
+    private Thread rendersThread = null;
 
     public void init(PreferenceData preferences){
         constructWindowAndDimensions(preferences);
@@ -81,57 +78,36 @@ public class MainWindow extends AWindow {
         setVisible(true);
     }
 
+    public void initEnvironmentsModel(EnvironmentsModel environmentsModel) {
+        this.environmentsModel = environmentsModel;
+    }
+
     private void initThreads() {
 
-        Thread updates = null;
-        Thread renders = null;
-
-        if(environments.get(currentEnvironmentState) instanceof GameModel m) {
-            updates = new Thread(new GameUpdateRunnable(m));
-
-            if(canvases.get(currentEnvironmentState) instanceof GameCanvas c) {
-                renders = new Thread(new GameRenderRunnable(c));
-            }
-        } else
-        if(environments.get(currentEnvironmentState) instanceof MainMenuModel m) {
-            updates = new Thread(new MenuUpdateRunnable(m));
-
-            if(canvases.get(currentEnvironmentState) instanceof MenuCanvas c) {
-                renders = new Thread(new MenuRenderRunnable(c));
-            }
+        if(updatesThread != null) {
+            updatesThread.interrupt();
+            updatesThread = null;
+        }
+        if(rendersThread != null) {
+            rendersThread.interrupt();
+            rendersThread = null;
         }
 
-        if(updates != null && renders != null) {
-            updates.start();
-            renders.start();
-            /*
-            try {
-                updates.join();
-                renders.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
-        }
+        updatesThread = new Thread(environmentsModel.getCurrentUpdateRunnable());
+        rendersThread = new Thread(environmentsModel.getCurrentRenderRunnable());
+
+        updatesThread.start();
+        rendersThread.start();
     }
 
-    @Override
-    public void setDefaultCloseOperation(int operation) {
-        super.setDefaultCloseOperation(operation);
-    }
+    public void initEnvironmentAndCanvas(EnvironmentsModel.EnvironmentType environmentType) {
+        environmentsModel.setCurrentEnvironment(environmentType);
 
-    public void addEnvironmentWithCanvas(AEnvironment model, ACanvas canvas) {
-        environments.add(model);
-        canvases.add(canvas);
-    }
+        addKeyListener(environmentsModel.getCurrentEnvironment().getKeyController());
+        getContentPane().addMouseListener(environmentsModel.getCurrentEnvironment().getMouseController());
+        getContentPane().addMouseMotionListener(environmentsModel.getCurrentEnvironment().getMouseController());
 
-    public void initEnvironmentAndCanvas(int currentState) {
-        this.currentEnvironmentState = currentState;
-
-        addKeyListener(environments.get(currentState).getKeyController());
-        getContentPane().addMouseListener(environments.get(currentState).getMouseController());
-        getContentPane().addMouseMotionListener(environments.get(currentState).getMouseController());
-
-        add(canvases.get(currentState));
+        add(environmentsModel.getCurrentCanvas());
         pack();
 
         initThreads();

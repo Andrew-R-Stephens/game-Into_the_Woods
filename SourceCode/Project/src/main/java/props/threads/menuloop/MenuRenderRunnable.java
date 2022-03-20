@@ -8,7 +8,7 @@ public class MenuRenderRunnable extends ARenderRunnable {
 
     private MenuCanvas canvas;
 
-    public MenuRenderRunnable(MenuCanvas canvas) {
+    public void init(MenuCanvas canvas) {
         this.canvas = canvas;
     }
 

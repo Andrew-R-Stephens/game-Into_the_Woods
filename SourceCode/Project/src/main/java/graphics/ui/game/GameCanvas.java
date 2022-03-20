@@ -33,7 +33,7 @@ public class GameCanvas extends ACanvas {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Fill background
-        g2d.setColor(new Color(255, 255, 255));
+        g2d.setColor(Color.LIGHT_GRAY);
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
         // Draw test objects

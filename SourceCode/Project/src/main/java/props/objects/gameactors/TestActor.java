@@ -23,4 +23,5 @@ public class TestActor extends APawn {
     public void draw(Graphics g) {
         super.draw(g);
     }
+
 }

@@ -33,7 +33,6 @@ public abstract class AMenu extends AEnvironment {
 
     @Override
     public void update(float delta) {
-        System.out.println(buttons.size());
         for(AMenuButton b: buttons) {
             b.registerInput();
             b.update(delta);

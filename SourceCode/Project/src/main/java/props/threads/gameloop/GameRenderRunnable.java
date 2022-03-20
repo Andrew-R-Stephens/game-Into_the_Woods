@@ -8,7 +8,7 @@ public class GameRenderRunnable extends ARenderRunnable {
 
     private GameCanvas canvas;
 
-    public GameRenderRunnable(GameCanvas canvas) {
+    public void init(GameCanvas canvas) {
         this.canvas = canvas;
     }
 

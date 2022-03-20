@@ -1,6 +1,7 @@
 package props.objects.levels;
 
 import models.data.PreferenceData;
+import models.environments.game.GameModel;
 import props.prototypes.actor.AActor;
 import props.prototypes.level.ALevel;
 import props.prototypes.level.prop.ALevelProp;
@@ -18,10 +19,10 @@ public class LevelList {
     private final ArrayList<ALevel> levels = new ArrayList<>();
     private int currentLevel = 0;
 
-    public LevelList() {
-        addLevel(new TestLevel());
-        addLevel(new TestLevel2());
-        addLevel(new TestLevel3());
+    public void init(GameModel gameModel) {
+        addLevel(new TestLevel1(gameModel));
+        addLevel(new TestLevel2(gameModel));
+        addLevel(new TestLevel3(gameModel));
 
         System.out.println(setCurrentLevel(0));
     }

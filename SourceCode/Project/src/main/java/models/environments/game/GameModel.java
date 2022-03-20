@@ -16,8 +16,7 @@ import props.threads.gameloop.GameRenderRunnable;
 import props.threads.gameloop.GameUpdateRunnable;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 /**
  * TODO: Add description
@@ -30,6 +29,7 @@ public class GameModel extends AEnvironment {
     private LevelList levelModel;
 
     private final ArrayList<AActor> actors = new ArrayList<>();
+    private Queue<AActor> actorsQueue = new LinkedList<>();
 
     private boolean isGc = false;
 
@@ -92,6 +92,9 @@ public class GameModel extends AEnvironment {
         // Update HUD overlay
         updateHUD(delta);
 
+        while(!actorsQueue.isEmpty()) {
+            addGameObject(actorsQueue.remove());
+        }
     }
 
     private void updateHUD(float delta) {
@@ -142,12 +145,12 @@ public class GameModel extends AEnvironment {
                     count = 1;
                 }
                 for (int i = 0; i < count; i++) {
-                    addGameObject(
+                    queueAddGameObject(
                             new TestActor(
-                                    (float) ((-Camera.x /PreferenceData.scaledW) + (gmc.getPos()[0]/PreferenceData.scaledW)),
-                                    (float) ((-Camera.y /PreferenceData.scaledW) + (gmc.getPos()[1]/PreferenceData.scaledH)),
-                                    50f,
-                                    50f,
+                                    (-Camera.x /PreferenceData.scaledW) + (gmc.getPos()[0]/PreferenceData.scaledW),
+                                    (-Camera.y /PreferenceData.scaledW) + (gmc.getPos()[1]/PreferenceData.scaledH),
+                                    10f,
+                                    10f,
                                     new Random().nextFloat(-5, 5),
                                     new Random().nextFloat(-5, 5),
                                     true
@@ -212,4 +215,7 @@ public class GameModel extends AEnvironment {
         }
     }
 
+    public void queueAddGameObject(AActor a) {
+        actorsQueue.add(a);
+    }
 }

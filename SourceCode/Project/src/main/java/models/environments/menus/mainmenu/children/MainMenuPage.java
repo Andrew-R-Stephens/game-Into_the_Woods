@@ -1,5 +1,6 @@
 package models.environments.menus.mainmenu.children;
 
+import models.data.PreferenceData;
 import props.prototypes.window.environments.menu.AMenu;
 import props.prototypes.window.environments.menu.AMenuModel;
 import props.prototypes.window.environments.menu.components.AMenuButton;
@@ -17,9 +18,18 @@ public class MainMenuPage extends AMenu {
         pages.add(new HelpPage(parentMenuModel));
         pages.add(new QuitPage(parentMenuModel));
 
-        AMenuButton button_newGame = new AMenuButton(parentMenuModel,500, 50, 200, 50) {
+        float centerHoriz = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
+        //float centerVert = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
+        int buttonW = 200, buttonH = 50;
+
+        AMenuButton button_newGame = new AMenuButton(
+                parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                50,
+                buttonW,
+                buttonH) {
             @Override
-            public boolean onClick(int x, int y) {
+            public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
@@ -31,9 +41,14 @@ public class MainMenuPage extends AMenu {
         };
         button_newGame.setText("New Game");
 
-        AMenuButton button_continueGame = new AMenuButton(parentMenuModel,500, 100, 200, 50) {
+        AMenuButton button_continueGame = new AMenuButton(
+                parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                125,
+                buttonW,
+                buttonH) {
             @Override
-            public boolean onClick(int x, int y) {
+            public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
@@ -45,9 +60,14 @@ public class MainMenuPage extends AMenu {
         };
         button_continueGame.setText("Continue Game");
 
-        AMenuButton button_options = new AMenuButton(parentMenuModel,500, 150, 200, 50) {
+        AMenuButton button_options = new AMenuButton(
+                parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                200,
+                buttonW,
+                buttonH) {
             @Override
-            public boolean onClick(int x, int y) {
+            public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
@@ -59,9 +79,14 @@ public class MainMenuPage extends AMenu {
         };
         button_options.setText("Options");
 
-        AMenuButton button_help = new AMenuButton(parentMenuModel,500, 200, 200, 50) {
+        AMenuButton button_help = new AMenuButton(
+                parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                275,
+                buttonW,
+                buttonH) {
             @Override
-            public boolean onClick(int x, int y) {
+            public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
@@ -73,9 +98,13 @@ public class MainMenuPage extends AMenu {
         };
         button_help.setText("Help");
 
-        AMenuButton button_quit = new AMenuButton(parentMenuModel,500, 300, 200, 50) {
+        AMenuButton button_quit = new AMenuButton(parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                375,
+                buttonW,
+                buttonH) {
             @Override
-            public boolean onClick(int x, int y) {
+            public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
                     return false;
                 }

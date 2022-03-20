@@ -1,5 +1,6 @@
 package props.objects.levels;
 
+import models.environments.game.GameModel;
 import props.objects.levelprops.TestLevelPropStatic;
 import props.prototypes.level.ALevel;
 import props.prototypes.level.prop.ALevelProp;
@@ -11,7 +12,8 @@ public class TestLevel2 extends ALevel {
 
     private final ArrayList<ALevelProp> levelProps = new ArrayList<>();
 
-    public TestLevel2() {
+    public TestLevel2(GameModel gameModel) {
+        super(gameModel);
 
         // Wall
         addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false));

@@ -8,7 +8,7 @@ public class MenuUpdateRunnable extends AUpdateRunnable {
 
     private MainMenuModel menuModel;
 
-    public MenuUpdateRunnable(MainMenuModel menuModel) {
+    public void init(MainMenuModel menuModel) {
         this.menuModel = menuModel;
     }
 

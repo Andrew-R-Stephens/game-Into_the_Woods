@@ -8,7 +8,7 @@ public class GameUpdateRunnable extends AUpdateRunnable {
 
     private GameModel gameModel;
 
-    public GameUpdateRunnable(GameModel gameModel) {
+    public void init(GameModel gameModel) {
         this.gameModel = gameModel;
     }
 

@@ -1,31 +1,35 @@
 package props.objects.levels;
 
+import models.environments.game.GameModel;
+import props.objects.gametriggers.TestTrigger;
 import props.objects.levelprops.TestLevelPropStatic;
+import props.prototypes.actor.trigger.ATrigger;
 import props.prototypes.level.ALevel;
 import props.prototypes.level.prop.ALevelProp;
 
 import java.util.ArrayList;
 
 
-public class TestLevel extends ALevel {
+public class TestLevel1 extends ALevel {
 
     private final ArrayList<ALevelProp> levelProps = new ArrayList<>();
 
-    public TestLevel() {
+    public TestLevel1(GameModel gameModel) {
+        super(gameModel);
 
-        // Wall
+        // Walls
         addProp(new TestLevelPropStatic(-500, 0, 500, 1080, 0, 0, false));
-        addProp(new TestLevelPropStatic(-500, 0, 500, 1080, 0, 0, false));
+        addProp(new TestLevelPropStatic(9000, 0, 100, 1080, 0, 0, false));
+
+        // Floor
+        addProp(new TestLevelPropStatic(0, 980, 10000, 100, 0, 0, false));
+
         // Climbing Walls
         addProp(new TestLevelPropStatic(320, -150, 50, 200, 0, 0, false));
         addProp(new TestLevelPropStatic(500, 0, 50, 200, 0, 0, false));
         addProp(new TestLevelPropStatic(320, 220, 50, 200, 0, 0, false));
         addProp(new TestLevelPropStatic(500, 360, 50, 200, 0, 0, false));
         addProp(new TestLevelPropStatic(320, 500, 50, 200, 0, 0, false));
-
-        addProp(new TestLevelPropStatic(9000, 0, 100, 1080, 0, 0, false));
-        // Floor
-        addProp(new TestLevelPropStatic(0, 980, 10000, 100, 0, 0, false));
 
         // Other Props
         addProp(new TestLevelPropStatic(1800, 100, 500, 100, 0, 0, false));
@@ -43,6 +47,10 @@ public class TestLevel extends ALevel {
         addProp(new TestLevelPropStatic(3000, 700, 500, 50, 0, 0, false));
         addProp(new TestLevelPropStatic(3200, 650, 100, 100, 0, 0, false));
 
+        addProp(new TestTrigger(gameModel, 700, 880, 100, 100, 0, 0, false, false));
+        addProp(new TestTrigger(gameModel, 300, 580, 100, 100, 0, 0, false, false));
+        addProp(new TestTrigger(gameModel, 1000, 280, 100, 100, 0, 0, false, false));
+        addProp(new TestTrigger(gameModel, 100, 680, 100, 100, 0, 0, false, false));
     }
 
 
