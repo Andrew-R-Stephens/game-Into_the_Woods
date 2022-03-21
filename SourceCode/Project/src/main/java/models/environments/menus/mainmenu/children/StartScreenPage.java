@@ -9,6 +9,7 @@ import java.awt.*;
 public class StartScreenPage extends AMenu {
 
 
+<<<<<<< HEAD
     /**
      * Instantiates a new A menu.
      *
@@ -17,4 +18,6 @@ public class StartScreenPage extends AMenu {
     public StartScreenPage(AMenuModel parentMenuModel) {
         super(parentMenuModel);
     }
+=======
+>>>>>>> 6178d573dfefb8e80557b468a96d451f2778e882
 }
