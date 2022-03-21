@@ -105,7 +105,7 @@ public class MainMenuPage extends AMenu {
                 return true;
             }
         };
-        button_help.setText("Help");
+        button_help.setText("Help mEEEEE");
 
         AMenuButton button_quit = new AMenuButton(parentMenuModel,
                 (int)(centerHoriz - (buttonW * .5f)),
@@ -136,8 +136,8 @@ public class MainMenuPage extends AMenu {
     public void draw(Graphics g) {
         super.draw(g);
 
-        g.setColor(Color.red);
-        g.drawString("Landing Page!", 50, 60);
+        g.setColor(Color.blue);
+        g.drawString("Landing Page!", 50, 50);
     }
 
 }
