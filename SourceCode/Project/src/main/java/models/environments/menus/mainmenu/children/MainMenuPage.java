@@ -135,8 +135,8 @@ public class MainMenuPage extends AMenu {
     public void draw(Graphics g) {
         super.draw(g);
 
-        g.setColor(Color.red);
-        g.drawString("Landing Page!", 50, 60);
+        g.setColor(Color.blue);
+        g.drawString("Landing Page!", 50, 50);
     }
 
 }
