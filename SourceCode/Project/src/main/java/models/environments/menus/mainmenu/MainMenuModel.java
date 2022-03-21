@@ -18,7 +18,8 @@ public class MainMenuModel extends AMenuModel {
      */
     public MainMenuModel() {
 
-        landingPage = new MainMenuPage(this);
+        //landingPage = new MainMenuPage(this);
+        landingPage = new StartScreenPage(this);
 
         initPage(landingPage);
 

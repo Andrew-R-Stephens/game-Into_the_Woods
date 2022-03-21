@@ -15,6 +15,27 @@ public class StartScreenPage extends AMenu {
      */
     public StartScreenPage(AMenuModel parentMenuModel) {
         super(parentMenuModel);
+
+        AMenuButton startButton = new AMenuButton(parentMenuModel, 200, 300, 250, 300) {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)){
+                    return false;
+                }
+                parentMenuModel.push(new MainMenuPage(parentMenuModel));
+                return true;
+            }
+        };
+        buttons.add(startButton);
     }
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+
+        g.setColor(Color.green);
+        g.drawString("Start screen!", 50, 50);
+    }
+
+
 
 }
