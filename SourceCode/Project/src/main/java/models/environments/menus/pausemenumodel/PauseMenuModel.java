@@ -1,12 +1,18 @@
 package models.environments.menus.pausemenumodel;
 
-import props.prototypes.window.environments.menu.AMenu;
-import props.prototypes.window.environments.menu.AMenuModel;
+import prototypes.window.environments.menu.AMenu;
+import prototypes.window.environments.menu.AMenuModel;
 
 import java.awt.*;
 
+/**
+ * The type Pause menu model.
+ */
 public class PauseMenuModel extends AMenuModel {
 
+    /**
+     * Instantiates a new Pause menu model.
+     */
     public PauseMenuModel() {
         AMenu landingMenu = new AMenu(this) {
             @Override

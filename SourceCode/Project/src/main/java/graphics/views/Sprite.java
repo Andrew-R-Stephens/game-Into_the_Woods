@@ -12,6 +12,11 @@ public class Sprite implements IDrawable {
 
     private BufferedImage img;
 
+    /**
+     * Instantiates a new Sprite.
+     *
+     * @param img the img
+     */
     public Sprite(BufferedImage img) {
         this.img = img;
     }

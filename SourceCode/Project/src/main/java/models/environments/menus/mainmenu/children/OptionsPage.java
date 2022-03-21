@@ -1,13 +1,21 @@
 package models.environments.menus.mainmenu.children;
 
-import props.prototypes.window.environments.menu.AMenu;
-import props.prototypes.window.environments.menu.AMenuModel;
-import props.prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.AMenu;
+import prototypes.window.environments.menu.AMenuModel;
+import prototypes.window.environments.menu.components.AMenuButton;
 
 import java.awt.*;
 
+/**
+ * The type Options page.
+ */
 public class OptionsPage extends AMenu {
 
+    /**
+     * Instantiates a new Options page.
+     *
+     * @param parentModel the parent model
+     */
     public OptionsPage(AMenuModel parentModel) {
         super(parentModel);
 

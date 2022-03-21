@@ -4,18 +4,29 @@ import models.environments.game.GameModel;
 import models.environments.game.hud.components.MapOverlay;
 import models.environments.game.hud.components.PlayerStatsOverlay;
 import models.environments.game.hud.components.TimeKeeperOverlay;
-import props.prototypes.window.environments.AEnvironment;
+import prototypes.window.environments.AEnvironment;
 
 import java.awt.*;
 
+/**
+ * The type Hud model.
+ */
 public class HUDModel extends AEnvironment {
 
+    /**
+     * The Game model.
+     */
     protected GameModel gameModel;
 
     private MapOverlay map;
     private PlayerStatsOverlay stats;
     private TimeKeeperOverlay timer;
 
+    /**
+     * Instantiates a new Hud model.
+     *
+     * @param gameModel the game model
+     */
     public HUDModel(GameModel gameModel) {
         this.gameModel = gameModel;
 

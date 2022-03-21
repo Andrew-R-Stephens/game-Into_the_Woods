@@ -1,22 +1,30 @@
 package models.environments.menus.mainmenu.children;
 
 import models.data.PreferenceData;
-import props.prototypes.window.environments.menu.AMenu;
-import props.prototypes.window.environments.menu.AMenuModel;
-import props.prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.AMenu;
+import prototypes.window.environments.menu.AMenuModel;
+import prototypes.window.environments.menu.components.AMenuButton;
 
 import java.awt.*;
 
+/**
+ * The type Main menu page.
+ */
 public class MainMenuPage extends AMenu {
 
+    /**
+     * Instantiates a new Main menu page.
+     *
+     * @param parentModel the parent model
+     */
     public MainMenuPage(AMenuModel parentModel) {
         super(parentModel);
 
-        pages.add(new NewGamePage(parentMenuModel));
-        pages.add(new LevelSelectPage(parentMenuModel));
-        pages.add(new OptionsPage(parentMenuModel));
-        pages.add(new HelpPage(parentMenuModel));
-        pages.add(new QuitPage(parentMenuModel));
+        bundle.addPage(new NewGamePage(parentMenuModel));
+        bundle.addPage(new LevelSelectPage(parentMenuModel));
+        bundle.addPage(new OptionsPage(parentMenuModel));
+        bundle.addPage(new HelpPage(parentMenuModel));
+        bundle.addPage(new QuitPage(parentMenuModel));
 
         float centerHoriz = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
         //float centerVert = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
@@ -34,7 +42,7 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(pages.get(0));
+                parentMenuModel.push(bundle.getPage(0));
 
                 return true;
             }
@@ -53,7 +61,7 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(pages.get(1));
+                parentMenuModel.push(bundle.getPage(1));
 
                 return true;
             }
@@ -72,7 +80,7 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(pages.get(2));
+                parentMenuModel.push(bundle.getPage(2));
 
                 return true;
             }
@@ -91,7 +99,7 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(pages.get(3));
+                parentMenuModel.push(bundle.getPage(3));
 
                 return true;
             }

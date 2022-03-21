@@ -1,7 +1,8 @@
 package models.controls.game;
 
-import props.prototypes.controls.AControlsModel;
-import props.prototypes.controls.AKeyController;
+import models.controls.GameControlsModel;
+import prototypes.controls.AControlsModel;
+import prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
 
@@ -12,6 +13,11 @@ public class GameKeyControls extends AKeyController {
 
     private final GameControlsModel controlsViewModel;
 
+    /**
+     * Instantiates a new Game key controls.
+     *
+     * @param controlsViewModel the controls view model
+     */
     public GameKeyControls(AControlsModel controlsViewModel) {
         this.controlsViewModel = (GameControlsModel) controlsViewModel;
     }

@@ -1,7 +1,8 @@
 package main;
 
 import models.data.PreferenceData;
-import props.prototypes.window.AWindow;
+import models.environments.EnvironmentsModel;
+import prototypes.window.AWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,11 @@ public class MainWindow extends AWindow {
     private Thread updatesThread = null;
     private Thread rendersThread = null;
 
+    /**
+     * Init.
+     *
+     * @param preferences the preferences
+     */
     public void init(PreferenceData preferences){
         constructWindowAndDimensions(preferences);
     }
@@ -24,8 +30,11 @@ public class MainWindow extends AWindow {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        /*
+         * Case1: Fullscreen
+         */
         switch (preferences.getWindowType()) {
-            case FULLSCREEN -> {
+            case FULLSCREEN_EXCLUSIVE -> {
                 int width = Toolkit.getDefaultToolkit().getScreenSize().width;
                 int height = Toolkit.getDefaultToolkit().getScreenSize().height;
                 preferences.setWindowWidthActual(width);
@@ -35,6 +44,14 @@ public class MainWindow extends AWindow {
                 setUndecorated(true);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
             }
+            case WINDOWED_FULLSCREEN -> {
+                int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+                int height =Toolkit.getDefaultToolkit().getScreenSize().height;
+                preferences.setWindowWidthActual(width);
+                preferences.setWindowHeightActual(height);
+
+                setPreferredSize(new Dimension(width, height));
+            }
             case WINDOWED_BORDERLESS -> {
                 int width = preferences.getWindowWidthSelected();
                 int height = preferences.getWindowHeightSelected();
@@ -42,14 +59,6 @@ public class MainWindow extends AWindow {
                 preferences.setWindowHeightActual(height);
 
                 setUndecorated(true);
-
-                setPreferredSize(new Dimension(width, height));
-            }
-            case WINDOWED_FULLSCREEN -> {
-                int width = Toolkit.getDefaultToolkit().getScreenSize().width;
-                int height =Toolkit.getDefaultToolkit().getScreenSize().height;
-                preferences.setWindowWidthActual(width);
-                preferences.setWindowHeightActual(height);
 
                 setPreferredSize(new Dimension(width, height));
             }
@@ -70,6 +79,11 @@ public class MainWindow extends AWindow {
         setVisible(true);
     }
 
+    /**
+     * Init environments model.
+     *
+     * @param environmentsModel the environments model
+     */
     public void initEnvironmentsModel(EnvironmentsModel environmentsModel) {
         this.environmentsModel = environmentsModel;
     }
@@ -92,12 +106,20 @@ public class MainWindow extends AWindow {
         rendersThread.start();
     }
 
+    /**
+     * Apply environment and canvas.
+     *
+     * @param environmentType the environment type
+     */
     public void applyEnvironmentAndCanvas(EnvironmentsModel.EnvironmentType environmentType) {
         environmentsModel.setCurrentEnvironment(environmentType);
 
         applyEnvironmentAndCanvas();
     }
 
+    /**
+     * Apply environment and canvas.
+     */
     public void applyEnvironmentAndCanvas() {
         getContentPane().removeAll();
         repaint();

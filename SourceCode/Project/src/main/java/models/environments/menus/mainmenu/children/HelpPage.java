@@ -1,13 +1,21 @@
 package models.environments.menus.mainmenu.children;
 
-import props.prototypes.window.environments.menu.AMenu;
-import props.prototypes.window.environments.menu.AMenuModel;
-import props.prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.AMenu;
+import prototypes.window.environments.menu.AMenuModel;
+import prototypes.window.environments.menu.components.AMenuButton;
 
 import java.awt.*;
 
+/**
+ * The type Help page.
+ */
 public class HelpPage extends AMenu {
 
+    /**
+     * Instantiates a new Help page.
+     *
+     * @param parentModel the parent model
+     */
     public HelpPage(AMenuModel parentModel) {
         super(parentModel);
 

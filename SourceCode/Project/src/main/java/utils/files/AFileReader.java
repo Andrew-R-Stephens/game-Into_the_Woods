@@ -7,8 +7,18 @@ import java.io.*;
  */
 public abstract class AFileReader {
 
+    /**
+     * The File.
+     */
     protected File file;
 
+    /**
+     * Instantiates a new A file reader.
+     *
+     * @param filePath the file path
+     * @param fileName the file name
+     * @param fileType the file type
+     */
     public AFileReader(String filePath, String fileName, String fileType) {
 
         try {
@@ -27,7 +37,7 @@ public abstract class AFileReader {
             FileWriter writer = new FileWriter(file);
             String line;
             while (((line = r.readLine())) != null) {
-                System.out.println(line);
+                //System.out.println(line);
                 writer.write(line + "\n");
             }
 
@@ -42,6 +52,11 @@ public abstract class AFileReader {
 
     }
 
+    /**
+     * Read boolean.
+     *
+     * @return the boolean
+     */
     public abstract boolean read();
 
 

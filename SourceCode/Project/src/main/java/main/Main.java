@@ -2,13 +2,14 @@ package main;
 
 import graphics.ui.game.GameCanvas;
 import graphics.ui.menu.MenuCanvas;
-import models.controls.game.GameControlsModel;
+import models.controls.GameControlsModel;
 import models.controls.game.GameKeyControls;
 import models.controls.game.GameMouseControls;
-import models.controls.menu.MenuControlsModel;
+import models.controls.MenuControlsModel;
 import models.controls.menu.MenuKeyControls;
 import models.controls.menu.MenuMouseControls;
 import models.data.PreferenceData;
+import models.environments.EnvironmentsModel;
 import models.environments.game.GameModel;
 import models.environments.menus.mainmenu.MainMenuModel;
 import props.objects.levels.LevelList;
@@ -64,10 +65,16 @@ public class Main {
 
     }
 
+    /**
+     * Load assets.
+     */
     public static void loadAssets() {
         
     }
 
+    /**
+     * Create.
+     */
     public static void create() {
 
         // Create Preferences
@@ -111,13 +118,15 @@ public class Main {
         PreferencesXMLParser preferencesParser =
                 new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
         preferencesParser.read();
+        System.out.println(preferences.toString());
 
         // Initialize Control Models
         gameControlsModel.init(new GameMouseControls(gameControlsModel), new GameKeyControls(gameControlsModel));
         menuControlsModel.init(new MenuMouseControls(menuControlsModel), new MenuKeyControls(menuControlsModel));
 
         // Initialize Levels
-        levelsListModel.init(gameModel);
+        int defaultLevel = 0;
+        levelsListModel.init(gameModel, defaultLevel);
 
         // Initialize AEnvironment Model Container
         environmentsModel.init(window);

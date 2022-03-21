@@ -2,12 +2,20 @@ package props.threads.menuloop;
 
 import graphics.ui.menu.MenuCanvas;
 import models.data.PreferenceData;
-import props.prototypes.threading.ARenderRunnable;
+import prototypes.threading.ARenderRunnable;
 
+/**
+ * The type Menu render runnable.
+ */
 public class MenuRenderRunnable extends ARenderRunnable {
 
     private MenuCanvas canvas;
 
+    /**
+     * Init.
+     *
+     * @param canvas the canvas
+     */
     public void init(MenuCanvas canvas) {
         this.canvas = canvas;
     }

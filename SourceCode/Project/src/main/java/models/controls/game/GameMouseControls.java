@@ -1,7 +1,8 @@
 package models.controls.game;
 
-import props.prototypes.controls.AControlsModel;
-import props.prototypes.controls.AMouseController;
+import models.controls.GameControlsModel;
+import prototypes.controls.AControlsModel;
+import prototypes.controls.AMouseController;
 
 import java.awt.event.MouseEvent;
 
@@ -17,6 +18,11 @@ public class GameMouseControls extends AMouseController {
     private boolean isLeftPressed = false;
     private boolean isRightPressed = false;
 
+    /**
+     * Instantiates a new Game mouse controls.
+     *
+     * @param controlsViewModel the controls view model
+     */
     public GameMouseControls(AControlsModel controlsViewModel) {
         this.controlsViewModel = (GameControlsModel) controlsViewModel;
     }
@@ -82,14 +88,29 @@ public class GameMouseControls extends AMouseController {
         mPos[1] = e.getY();
     }
 
+    /**
+     * Is left pressed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isLeftPressed() {
         return isLeftPressed;
     }
 
+    /**
+     * Is right pressed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRightPressed() {
         return isRightPressed;
     }
 
+    /**
+     * Get pos int [ ].
+     *
+     * @return the int [ ]
+     */
     public int[] getPos() {
         return mPos;
     }

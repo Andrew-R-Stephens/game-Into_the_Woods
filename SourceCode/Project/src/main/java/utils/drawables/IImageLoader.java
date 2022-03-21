@@ -5,6 +5,11 @@ package utils.drawables;
  */
 public interface IImageLoader {
 
+    /**
+     * Load image.
+     *
+     * @throws Exception the exception
+     */
     void loadImage() throws Exception;
 
 }

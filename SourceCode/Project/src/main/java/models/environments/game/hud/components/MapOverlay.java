@@ -1,12 +1,23 @@
 package models.environments.game.hud.components;
 
 import models.data.PreferenceData;
-import props.prototypes.window.environments.game.AOverlayComponent;
+import prototypes.window.environments.game.AOverlayComponent;
 
 import java.awt.*;
 
+/**
+ * The type Map overlay.
+ */
 public class MapOverlay extends AOverlayComponent {
 
+    /**
+     * Instantiates a new Map overlay.
+     *
+     * @param x the x
+     * @param y the y
+     * @param w the w
+     * @param h the h
+     */
     public MapOverlay(int x, int y, int w, int h) {
         super(x, y, w, h);
     }

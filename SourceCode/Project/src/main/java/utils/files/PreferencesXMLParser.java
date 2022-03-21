@@ -12,10 +12,21 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
+/**
+ * The type Preferences xml parser.
+ */
 public class PreferencesXMLParser extends AFileReader {
 
     private final PreferenceData preferences;
 
+    /**
+     * Instantiates a new Preferences xml parser.
+     *
+     * @param preferences the preferences
+     * @param filePath    the file path
+     * @param fileName    the file name
+     * @param fileType    the file type
+     */
     public PreferencesXMLParser(PreferenceData preferences, String filePath, String fileName, String fileType) {
         super(filePath, fileName, fileType);
 
@@ -40,13 +51,13 @@ public class PreferencesXMLParser extends AFileReader {
             doc = dBuilder.parse(file);
 
             doc.getDocumentElement().normalize();
-            System.out.println("Root element = " + doc.getDocumentElement().getNodeName());
+            //System.out.println("Root element = " + doc.getDocumentElement().getNodeName());
             NodeList windowNodes = doc.getElementsByTagName("Window");
-            System.out.println("----------------------------");
+            //System.out.println("----------------------------");
 
             for (int temp = 0; temp < windowNodes.getLength(); temp++) {
                 Node nNode = windowNodes.item(temp);
-                System.out.println("\nCurrent Element = " + nNode.getNodeName());
+                //System.out.println("\nCurrent Element = " + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
@@ -81,6 +92,7 @@ public class PreferencesXMLParser extends AFileReader {
                             .getTextContent());
                     preferences.setWindowType(windowType);
 
+                    /*
                     System.out.println("Resolution Width = "
                             + width);
 
@@ -89,14 +101,15 @@ public class PreferencesXMLParser extends AFileReader {
 
                     System.out.println("Window Type = "
                             + windowType);
+                    */
                 }
             }
 
             NodeList performanceNodes = doc.getElementsByTagName("Performance");
-            System.out.println("----------------------------");
+            //System.out.println("----------------------------");
             for (int temp = 0; temp < performanceNodes.getLength(); temp++) {
                 Node nNode = performanceNodes.item(temp);
-                System.out.println("\nCurrent Element = " + nNode.getNodeName());
+                //System.out.println("\nCurrent Element = " + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
@@ -107,17 +120,11 @@ public class PreferencesXMLParser extends AFileReader {
                             .getTextContent());
                     preferences.setGameUpdateRate(gameUpdateRate);
 
-                    System.out.println("Game Update Rate = "
-                            + gameUpdateRate);
-
                     short frameRateDefault = Short.parseShort(eElement
                             .getElementsByTagName("frameRateDefault")
                             .item(0)
                             .getTextContent());
                     preferences.setFrameRateDefault(frameRateDefault);
-
-                    System.out.println("Frame Rate Default= "
-                            + frameRateDefault);
 
                     short frameRate = Short.parseShort(eElement
                             .getElementsByTagName("frameRate")
@@ -125,8 +132,14 @@ public class PreferencesXMLParser extends AFileReader {
                             .getTextContent());
                     preferences.setFrameRate(frameRate);
 
+                    /*
+                    System.out.println("Game Update Rate = "
+                            + gameUpdateRate);
+                    System.out.println("Frame Rate Default= "
+                            + frameRateDefault);
                     System.out.println("Frame Rate = "
                             + frameRate);
+                    */
                 }
             }
         } catch (SAXException | IOException e) {

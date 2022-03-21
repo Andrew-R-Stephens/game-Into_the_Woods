@@ -1,29 +1,41 @@
 package graphics.ui.game;
 
+import models.data.PreferenceData;
 import models.environments.game.GameModel;
-import props.prototypes.window.ACanvas;
+import prototypes.window.ACanvas;
+import props.threads.gameloop.GameRenderRunnable;
+import props.threads.gameloop.GameUpdateRunnable;
 
 import java.awt.*;
 
 /**
- * Game Canvas extends JPanel. The canvas renders game objects using the scale of chosen window dimensions against the standard dimensions.
+ * Game Canvas is what is drawn on to represent the Game Model.
+ * The canvas renders game objects using the scale of chosen window dimensions against the standard dimensions.
  */
 public class GameCanvas extends ACanvas {
 
     private GameModel gameModel;
 
-    public GameCanvas() {
-        // TODO: Nothing yet
-    }
-
+    /**
+     * Init.
+     *
+     * @param gameModel the game model
+     */
     public void init(GameModel gameModel) {
         this.gameModel = gameModel;
     }
 
+    /**
+     * Render.
+     */
     public void render() {
         repaint();
     }
 
+    /**
+     *
+     * @param g The parent Graphics that come from the JPanel's Canvas
+     */
     @Override
     protected void paintComponent(Graphics g) {
 
@@ -38,6 +50,11 @@ public class GameCanvas extends ACanvas {
 
         // Draw test objects
         gameModel.draw(g);
+
+        g.setColor(Color.RED);
+        float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
+        g.drawString("FPS: " + GameRenderRunnable.lastFrames, (int)(20 * sW), (PreferenceData.window_height_actual - 70));
+        g.drawString("Ticks: " + GameUpdateRunnable.lastUpdates, (int)(20 * sW), (PreferenceData.window_height_actual - 50));
     }
 
 }

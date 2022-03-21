@@ -1,28 +1,87 @@
 package utils.physics;
 
 import props.objects.levels.LevelList;
-import props.prototypes.actor.AActor;
+import prototypes.actor.AActor;
 
 /**
  * TODO: Add description
  */
 public abstract class APhysics {
 
+    /**
+     * The Has gravity.
+     */
     protected boolean hasGravity = true;
 
+    /**
+     * The Max vel x.
+     */
     protected float MAX_VEL_X = 9.8f;
+    /**
+     * The Max vel y.
+     */
     protected float MAX_VEL_Y = 9.8f;
 
+    /**
+     * The Friction.
+     */
     protected float friction = .2f;
-    protected float vX, vY;
-    protected float x, y, w, h;
+    /**
+     * The V x.
+     */
+    protected float vX, /**
+     * The V y.
+     */
+    vY;
+    /**
+     * The X.
+     */
+    protected float x, /**
+     * The Y.
+     */
+    y, /**
+     * The W.
+     */
+    w, /**
+     * The H.
+     */
+    h;
 
-    protected float bufferVert = 5, bufferHoriz = 5;
+    /**
+     * The Buffer vert.
+     */
+    protected float bufferVert = 5, /**
+     * The Buffer horiz.
+     */
+    bufferHoriz = 5;
 
-    protected boolean isFloorCollision, isWallCollisionLeft, isWallCollisionRight;
+    /**
+     * The Is floor collision.
+     */
+    protected boolean isFloorCollision, /**
+     * The Is wall collision left.
+     */
+    isWallCollisionLeft, /**
+     * The Is wall collision right.
+     */
+    isWallCollisionRight;
 
+    /**
+     * The Is user controlled.
+     */
     protected boolean isUserControlled;
 
+    /**
+     * Instantiates a new A physics.
+     *
+     * @param x          the x
+     * @param y          the y
+     * @param w          the w
+     * @param h          the h
+     * @param vX         the v x
+     * @param vY         the v y
+     * @param hasGravity the has gravity
+     */
     protected APhysics(
             float x, float y,
             float w, float h,
@@ -36,6 +95,11 @@ public abstract class APhysics {
 
     }
 
+    /**
+     * Update.
+     *
+     * @param delta the delta
+     */
     protected void update(float delta) {
         resetCollisions();
 
@@ -49,7 +113,7 @@ public abstract class APhysics {
     }
 
     private void calculateGravity(float delta) {
-        if (hasGravity) {
+        if (hasGravity && !isFloorCollision) {
             vY += (LevelList.GRAVITY / delta);
         }
     }
@@ -67,9 +131,12 @@ public abstract class APhysics {
 
     }
 
+    /**
+     * Limit velocity.
+     */
     public void limitVelocity() {
-        if (vY > MAX_VEL_Y) {
-            vY = MAX_VEL_Y;
+        if (vY > MAX_VEL_Y * 5f) {
+            vY = MAX_VEL_Y * 100f;
         } else if (vY < -MAX_VEL_Y) {
             vY = -MAX_VEL_Y;
         }
@@ -80,19 +147,36 @@ public abstract class APhysics {
         }
     }
 
+    /**
+     * Has collision boolean.
+     *
+     * @param a     the a
+     * @param delta the delta
+     * @return the boolean
+     */
     public boolean hasCollision(AActor a, float delta) {
         return hasCollision(a, delta, true);
     }
 
+    /**
+     * Has collision boolean.
+     *
+     * @param a            the a
+     * @param delta        the delta
+     * @param moveToBounds the move to bounds
+     * @return the boolean
+     */
     public boolean hasCollision(AActor a, float delta, boolean moveToBounds) {
 
         boolean isFloorBounded = ((a.bottomBufferOuter()) >= top()) && (a.bottomBufferInner() <= bottom());
 
+        /*
         boolean isWallBoundedLeft =
                 !isFloorBounded && ((a.leftBufferOuter() >= right()) && (a.leftBufferInner() <= left()));
 
         boolean isWallBoundedRight =
                 !isFloorBounded && ((a.rightBufferInner() <= left()) && (a.rightBufferOuter() >= right()));
+        */
 
         // Determine the conditions of the object collision
         boolean hitBottom =
@@ -171,51 +255,112 @@ public abstract class APhysics {
         this.h = h;
     }
 
+    /**
+     * Sets gravity.
+     *
+     * @param hasGravity the has gravity
+     */
     protected void setGravity(boolean hasGravity) {
         this.hasGravity = hasGravity;
     }
 
+    /**
+     * Sets velocity.
+     *
+     * @param velocityX the velocity x
+     * @param velocityY the velocity y
+     */
     protected void setVelocity(float velocityX, float velocityY) {
         this.vX = velocityX;
         this.vY = velocityY;
     }
 
+    /**
+     * Top float.
+     *
+     * @return the float
+     */
     protected float top() {
         return y;
     }
 
+    /**
+     * Bottom float.
+     *
+     * @return the float
+     */
     protected float bottom() {
         return top() + h;
     }
 
+    /**
+     * Left float.
+     *
+     * @return the float
+     */
     protected float left() {
         return x;
     }
 
+    /**
+     * Right float.
+     *
+     * @return the float
+     */
     protected float right() {
         return left() + w;
     }
 
+    /**
+     * Left buffer inner float.
+     *
+     * @return the float
+     */
     protected float leftBufferInner() {
         return left() + bufferHoriz;
     }
 
+    /**
+     * Left buffer outer float.
+     *
+     * @return the float
+     */
     protected float leftBufferOuter() {
         return left() - bufferHoriz;
     }
 
+    /**
+     * Right buffer inner float.
+     *
+     * @return the float
+     */
     protected float rightBufferInner() {
         return right() + bufferHoriz;
     }
 
+    /**
+     * Right buffer outer float.
+     *
+     * @return the float
+     */
     protected float rightBufferOuter() {
         return right() - bufferHoriz;
     }
 
+    /**
+     * Bottom buffer inner float.
+     *
+     * @return the float
+     */
     protected float bottomBufferInner() {
         return bottom() - bufferVert;
     }
 
+    /**
+     * Bottom buffer outer float.
+     *
+     * @return the float
+     */
     protected float bottomBufferOuter() {
         return bottom() + bufferVert;
     }

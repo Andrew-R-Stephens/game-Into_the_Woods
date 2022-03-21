@@ -1,13 +1,21 @@
 package models.environments.menus.mainmenu.children;
 
-import props.prototypes.window.environments.menu.AMenu;
-import props.prototypes.window.environments.menu.AMenuModel;
-import props.prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.AMenu;
+import prototypes.window.environments.menu.AMenuModel;
+import prototypes.window.environments.menu.components.AMenuButton;
 
 import java.awt.*;
 
+/**
+ * The type Level select page.
+ */
 public class LevelSelectPage extends AMenu {
 
+    /**
+     * Instantiates a new Level select page.
+     *
+     * @param parentModel the parent model
+     */
     public LevelSelectPage(AMenuModel parentModel) {
         super(parentModel);
 

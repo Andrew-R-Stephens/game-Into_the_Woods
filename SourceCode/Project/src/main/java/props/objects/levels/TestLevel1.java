@@ -3,17 +3,24 @@ package props.objects.levels;
 import models.environments.game.GameModel;
 import props.objects.gametriggers.TestTrigger;
 import props.objects.levelprops.TestLevelPropStatic;
-import props.prototypes.actor.trigger.ATrigger;
-import props.prototypes.level.ALevel;
-import props.prototypes.level.prop.ALevelProp;
+import prototypes.level.ALevel;
+import prototypes.level.prop.ALevelProp;
 
 import java.util.ArrayList;
 
 
+/**
+ * The type Test level 1.
+ */
 public class TestLevel1 extends ALevel {
 
     private final ArrayList<ALevelProp> levelProps = new ArrayList<>();
 
+    /**
+     * Instantiates a new Test level 1.
+     *
+     * @param gameModel the game model
+     */
     public TestLevel1(GameModel gameModel) {
         super(gameModel);
 

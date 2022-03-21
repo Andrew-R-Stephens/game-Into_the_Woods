@@ -2,12 +2,20 @@ package props.threads.gameloop;
 
 import graphics.ui.game.GameCanvas;
 import models.data.PreferenceData;
-import props.prototypes.threading.ARenderRunnable;
+import prototypes.threading.ARenderRunnable;
 
+/**
+ * The type Game render runnable.
+ */
 public class GameRenderRunnable extends ARenderRunnable {
 
     private GameCanvas canvas;
 
+    /**
+     * Init.
+     *
+     * @param canvas the canvas
+     */
     public void init(GameCanvas canvas) {
         this.canvas = canvas;
     }

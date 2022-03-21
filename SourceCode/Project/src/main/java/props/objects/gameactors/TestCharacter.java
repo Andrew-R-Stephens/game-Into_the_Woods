@@ -1,10 +1,10 @@
 package props.objects.gameactors;
 
 import models.camera.Camera;
-import models.controls.game.GameControlsModel;
+import models.controls.GameControlsModel;
 import models.data.PreferenceData;
-import props.prototypes.actor.AActor;
-import props.prototypes.actor.pawn.character.ACharacter;
+import prototypes.actor.AActor;
+import prototypes.actor.pawn.character.ACharacter;
 
 import java.awt.*;
 
@@ -13,8 +13,23 @@ import java.awt.*;
  */
 public class TestCharacter extends ACharacter {
 
+    /**
+     * The C.
+     */
     protected Color c = Color.BLUE;
 
+    /**
+     * Instantiates a new Test character.
+     *
+     * @param cModel     the c model
+     * @param x          the x
+     * @param y          the y
+     * @param w          the w
+     * @param h          the h
+     * @param vx         the vx
+     * @param vy         the vy
+     * @param hasGravity the has gravity
+     */
     public TestCharacter(GameControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
                          boolean hasGravity) {
         super(cModel, x, y, w, h, vx, vy, hasGravity);

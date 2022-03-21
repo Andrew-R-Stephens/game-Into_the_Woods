@@ -17,6 +17,12 @@ public class SpriteSheet extends AFileLoader implements IImageLoader, ISpriteShe
 
     private int keyFrameWidth = 0, getKeyFrameHeight = 0;
 
+    /**
+     * Instantiates a new Sprite sheet.
+     *
+     * @param filename the filename
+     * @throws FileNotFoundException the file not found exception
+     */
     public SpriteSheet(String filename) throws FileNotFoundException {
         setFile(filename);
     }

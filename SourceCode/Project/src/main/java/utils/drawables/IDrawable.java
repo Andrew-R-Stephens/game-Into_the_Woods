@@ -7,6 +7,11 @@ import java.awt.*;
  */
 public interface IDrawable {
 
+    /**
+     * Draw.
+     *
+     * @param g the g
+     */
     void draw(Graphics g);
 
 }

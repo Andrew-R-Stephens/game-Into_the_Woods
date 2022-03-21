@@ -1,7 +1,7 @@
 package graphics.ui.menu;
 
 import models.environments.menus.mainmenu.MainMenuModel;
-import props.prototypes.window.ACanvas;
+import prototypes.window.ACanvas;
 
 import java.awt.*;
 
@@ -12,10 +12,18 @@ public class MenuCanvas extends ACanvas {
 
     private MainMenuModel menuModel;
 
+    /**
+     * Init.
+     *
+     * @param menuModel the menu model
+     */
     public void init(MainMenuModel menuModel) {
         this.menuModel = menuModel;
     }
 
+    /**
+     * Render.
+     */
     public void render() {
         //System.out.println("Rendering");
         repaint();

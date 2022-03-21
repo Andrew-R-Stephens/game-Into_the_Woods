@@ -8,8 +8,18 @@ import java.io.FileNotFoundException;
  */
 public abstract class AFileLoader {
 
+    /**
+     * The File.
+     */
     protected File file;
 
+    /**
+     * Sets file.
+     *
+     * @param filename the filename
+     * @throws NullPointerException  the null pointer exception
+     * @throws FileNotFoundException the file not found exception
+     */
     protected void setFile(String filename) throws NullPointerException, FileNotFoundException {
         if (filename == null) {
             throw new NullPointerException("File name cannot be null");

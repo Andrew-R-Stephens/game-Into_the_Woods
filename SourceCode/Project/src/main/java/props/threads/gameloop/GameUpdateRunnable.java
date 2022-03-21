@@ -2,12 +2,20 @@ package props.threads.gameloop;
 
 import models.data.PreferenceData;
 import models.environments.game.GameModel;
-import props.prototypes.threading.AUpdateRunnable;
+import prototypes.threading.AUpdateRunnable;
 
+/**
+ * The type Game update runnable.
+ */
 public class GameUpdateRunnable extends AUpdateRunnable {
 
     private GameModel gameModel;
 
+    /**
+     * Init.
+     *
+     * @param gameModel the game model
+     */
     public void init(GameModel gameModel) {
         this.gameModel = gameModel;
     }

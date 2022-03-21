@@ -2,14 +2,30 @@ package props.objects.gametriggers;
 
 import models.environments.game.GameModel;
 import props.objects.gameactors.TestActor;
-import props.prototypes.actor.AActor;
-import props.prototypes.actor.trigger.ATrigger;
+import prototypes.actor.AActor;
+import prototypes.actor.trigger.ATrigger;
 
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * The type Test trigger.
+ */
 public class TestTrigger extends ATrigger {
 
+    /**
+     * Instantiates a new Test trigger.
+     *
+     * @param gameModel          the game model
+     * @param x                  the x
+     * @param y                  the y
+     * @param w                  the w
+     * @param h                  the h
+     * @param vx                 the vx
+     * @param vy                 the vy
+     * @param hasGravity         the has gravity
+     * @param canMoveOnCollision the can move on collision
+     */
     public TestTrigger(GameModel gameModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, boolean canMoveOnCollision) {
         super(gameModel, x, y, w, h, vx, vy, hasGravity, canMoveOnCollision);
     }

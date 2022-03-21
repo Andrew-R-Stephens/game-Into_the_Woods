@@ -1,26 +1,25 @@
 package models.environments.game;
 
-import main.EnvironmentsModel;
+import models.environments.EnvironmentsModel;
 import models.camera.Camera;
-import models.controls.game.GameControlsModel;
+import models.controls.GameControlsModel;
 import models.controls.game.GameMouseControls;
 import models.data.PreferenceData;
 import models.environments.game.hud.HUDModel;
 import props.objects.gameactors.TestActor;
 import props.objects.gameactors.TestCharacter;
 import props.objects.levels.LevelList;
-import props.prototypes.actor.AActor;
-import props.prototypes.actor.pawn.character.ACharacter;
-import props.prototypes.level.prop.ALevelProp;
-import props.prototypes.window.environments.AEnvironment;
-import props.threads.gameloop.GameRenderRunnable;
-import props.threads.gameloop.GameUpdateRunnable;
+import prototypes.actor.AActor;
+import prototypes.actor.pawn.character.ACharacter;
+import prototypes.level.prop.ALevelProp;
+import prototypes.window.environments.AEnvironment;
 
 import java.awt.*;
 import java.util.*;
 
 /**
- * TODO: Add description
+ * The Game Model derives from the AEnvironment class. It's what encapsulates all data that the Game requires to run.
+ * Relevant data includes: Levels, Level Objects, Entity Objects, Player HUD
  */
 public class GameModel extends AEnvironment {
 
@@ -35,18 +34,20 @@ public class GameModel extends AEnvironment {
     private boolean isGc = false;
 
     /**
-     * Initializes Game Model with values
+     * Initializes Game Model
      *
-     * @param controlsViewModel - The controls View Model for the Game state
-     * @param levelModel - The Level Model that contains all levels
+     * @param parentEnvironmentsModel - Contains references to the GameModel and MenuModel Environments
+     * @param controlsViewModel       - The controls for the Game
+     * @param levelModel              - Contains a list of all possible levels
      */
     public void init(EnvironmentsModel parentEnvironmentsModel, GameControlsModel controlsViewModel, LevelList levelModel) {
 
         super.init(parentEnvironmentsModel, controlsViewModel.getKeyController(), controlsViewModel.getMouseController());
-        
+
+
         setLevelModel(levelModel);
 
-        // Main Test Character
+        // Add in the Main Test Character
         actors.add(new TestCharacter(
                 controlsViewModel,
                 200, 50,
@@ -56,26 +57,7 @@ public class GameModel extends AEnvironment {
         ));
     }
 
-    /**
-     *
-     * @param levelModel - The Level Model that contains all levels
-     */
-    public void setLevelModel(LevelList levelModel) {
-        this.levelModel = levelModel;
-    }
 
-    /**
-     *
-     * @param actor - The actor added to the list of current Game Objects
-     */
-    public void addGameObject(AActor actor) {
-        actors.add(actor);
-    }
-
-    /**
-     *
-     * @param delta - The ratio of current framerate against standard update frequency
-     */
     @Override
     public void update(float delta) {
 
@@ -97,12 +79,8 @@ public class GameModel extends AEnvironment {
         }
     }
 
-    private void updateHUD(float delta) {
-        hudModel.update(delta);
-    }
-
     /**
-     *  Only deals with Render processing calls
+     *  Only deals with draw calls of all objects contained within the Game Model
      */
     @Override
     public void draw(Graphics g) {
@@ -124,13 +102,38 @@ public class GameModel extends AEnvironment {
             hudModel.draw(g);
         }
 
-        g.setColor(Color.RED);
-        float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
-        g.drawString("FPS: " + GameRenderRunnable.lastFrames, (int)(20 * sW), (int)(1010 * sH));
-        g.drawString("Ticks: " + GameUpdateRunnable.lastUpdates, (int)(20 * sW), (int)(1030 * sH));
+    }
+
+
+    /**
+     * Sets the List of Levels into this local scope.
+     *
+     * @param levelModel - The Level Model that contains all levels
+     */
+    public void setLevelModel(LevelList levelModel) {
+        this.levelModel = levelModel;
     }
 
     /**
+     * Add game object.
+     *
+     * @param actor - The actor added to the list of current Game Objects
+     */
+    public void addGameObject(AActor actor) {
+        actors.add(actor);
+    }
+
+    /**
+     * Updates the Player HUD to reflect specific information contained within Game Model
+     * @param delta
+     */
+    private void updateHUD(float delta) {
+        hudModel.update(delta);
+    }
+
+    /**
+     * Adds new TestActor objects to a holding Queue.
+     * The holding Queue will inject these objects at the next available juncture.
      *
      * @param delta - The ratio of current framerate against standard update frequency
      */
@@ -162,6 +165,7 @@ public class GameModel extends AEnvironment {
     }
 
     /**
+     * Updates all game objects.
      *
      * @param delta - The ratio of current framerate against standard update frequency
      */
@@ -186,7 +190,7 @@ public class GameModel extends AEnvironment {
     }
 
     /**
-     * Check Prop collisions against all Actor objects
+     * Check Level Prop object collisions against all AActor objects
      * @param delta - The ratio of current framerate against standard update frequency
      */
     private void checkCollisions(float delta) {
@@ -200,6 +204,7 @@ public class GameModel extends AEnvironment {
     /**
      * Attempt at Garbage collection
      * Should be used to destroy objects that are old or aren't being utilized.
+     * Might remove later.
      */
     public void gc() {
 
@@ -215,6 +220,11 @@ public class GameModel extends AEnvironment {
         }
     }
 
+    /**
+     * Used to temporarily store new game objects into a Linked List Queue.
+     *
+     * @param a the AActor to add
+     */
     public void queueAddGameObject(AActor a) {
         actorsQueue.add(a);
     }

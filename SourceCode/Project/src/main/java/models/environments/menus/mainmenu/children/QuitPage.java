@@ -1,13 +1,21 @@
 package models.environments.menus.mainmenu.children;
 
-import props.prototypes.window.environments.menu.AMenu;
-import props.prototypes.window.environments.menu.AMenuModel;
-import props.prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.AMenu;
+import prototypes.window.environments.menu.AMenuModel;
+import prototypes.window.environments.menu.components.AMenuButton;
 
 import java.awt.*;
 
+/**
+ * The type Quit page.
+ */
 public class QuitPage extends AMenu {
 
+    /**
+     * Instantiates a new Quit page.
+     *
+     * @param parentModel the parent model
+     */
     public QuitPage(AMenuModel parentModel) {
         super(parentModel);
 

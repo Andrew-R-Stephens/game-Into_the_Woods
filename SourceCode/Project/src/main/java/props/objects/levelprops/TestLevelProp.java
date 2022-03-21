@@ -1,7 +1,7 @@
 package props.objects.levelprops;
 
-import props.prototypes.actor.AActor;
-import props.prototypes.level.prop.ALevelProp;
+import prototypes.actor.AActor;
+import prototypes.level.prop.ALevelProp;
 
 import java.awt.*;
 
@@ -10,6 +10,17 @@ import java.awt.*;
  */
 public class TestLevelProp extends ALevelProp {
 
+    /**
+     * Instantiates a new Test level prop.
+     *
+     * @param x          the x
+     * @param y          the y
+     * @param w          the w
+     * @param h          the h
+     * @param vx         the vx
+     * @param vy         the vy
+     * @param hasGravity the has gravity
+     */
     public TestLevelProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(x, y, w, h, vx, vy, hasGravity);
     }

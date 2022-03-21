@@ -1,7 +1,8 @@
 package models.controls.menu;
 
-import props.prototypes.controls.AControlsModel;
-import props.prototypes.controls.AMouseController;
+import models.controls.MenuControlsModel;
+import prototypes.controls.AControlsModel;
+import prototypes.controls.AMouseController;
 
 import java.awt.event.MouseEvent;
 
@@ -17,6 +18,11 @@ public class MenuMouseControls extends AMouseController {
     private boolean isLeftPressed = false;
     private boolean isRightPressed = false;
 
+    /**
+     * Instantiates a new Menu mouse controls.
+     *
+     * @param controlsViewModel the controls view model
+     */
     public MenuMouseControls(AControlsModel controlsViewModel) {
         this.controlsViewModel = (MenuControlsModel) controlsViewModel;
     }
@@ -87,18 +93,36 @@ public class MenuMouseControls extends AMouseController {
         mPos[1] = e.getY();
     }
 
+    /**
+     * Is left pressed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isLeftPressed() {
         return isLeftPressed;
     }
 
+    /**
+     * Is right pressed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRightPressed() {
         return isRightPressed && !controlsViewModel.isAwaitingRelease;
     }
 
+    /**
+     * Get pos int [ ].
+     *
+     * @return the int [ ]
+     */
     public int[] getPos() {
         return mPos;
     }
 
+    /**
+     * Reset input.
+     */
     public void resetInput() {
         isLeftPressed = false;
         isRightPressed = false;

@@ -1,6 +1,7 @@
 package models.controls.menu;
 
-import props.prototypes.controls.AKeyController;
+import models.controls.MenuControlsModel;
+import prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
 
@@ -11,6 +12,11 @@ public class MenuKeyControls extends AKeyController {
 
     private final MenuControlsModel controlsViewModel;
 
+    /**
+     * Instantiates a new Menu key controls.
+     *
+     * @param controlsViewModel the controls view model
+     */
     public MenuKeyControls(MenuControlsModel controlsViewModel) {
         this.controlsViewModel = controlsViewModel;
     }
