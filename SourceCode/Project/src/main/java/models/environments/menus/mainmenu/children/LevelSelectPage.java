@@ -33,7 +33,7 @@ public class LevelSelectPage extends AMenu {
         };
         button_char1.setText("Character 1");
 
-        AMenuButton button_char2 = new AMenuButton(parentModel,500, 500, 200, 50) {
+        AMenuButton button_char2 = new AMenuButton(parentModel,500, 400, 200, 50) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {

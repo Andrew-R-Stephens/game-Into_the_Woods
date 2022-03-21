@@ -36,6 +36,7 @@ public class MainMenuPage extends AMenu {
                 50,
                 buttonW,
                 buttonH) {
+
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
