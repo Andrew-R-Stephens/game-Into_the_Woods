@@ -4,12 +4,7 @@ import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuButton;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class StartScreenPage extends AMenu {
 
@@ -34,7 +29,8 @@ public class StartScreenPage extends AMenu {
             }
         };
 
-        startButton.setImageScaling(AMenuButton.ImageScale.CENTER_CROP);
+        startButton.setText("Start button");
+        startButton.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         buttons.add(startButton);
 

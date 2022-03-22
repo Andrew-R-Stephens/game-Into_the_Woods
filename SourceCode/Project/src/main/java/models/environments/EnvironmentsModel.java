@@ -5,7 +5,7 @@ import prototypes.threading.ARenderRunnable;
 import prototypes.threading.AUpdateRunnable;
 import prototypes.window.ACanvas;
 import prototypes.window.environments.AEnvironment;
-import utils.files.R;
+import utils.files.Resources;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class EnvironmentsModel {
 
-    private R imageBank;
+    private Resources imageBank;
 
     private MainWindow parentComponent;
 

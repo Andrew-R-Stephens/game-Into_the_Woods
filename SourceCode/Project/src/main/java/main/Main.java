@@ -18,6 +18,7 @@ import props.threads.gameloop.GameUpdateRunnable;
 import props.threads.menuloop.MenuRenderRunnable;
 import props.threads.menuloop.MenuUpdateRunnable;
 import utils.files.PreferencesXMLParser;
+import utils.files.Resources;
 
 /**
  * The type main.Main.
@@ -69,7 +70,8 @@ public class Main {
      * Load assets.
      */
     public static void loadAssets() {
-        
+        Resources resources = new Resources();
+        resources.init();
     }
 
     /**
