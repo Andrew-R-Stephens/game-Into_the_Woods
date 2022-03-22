@@ -5,6 +5,7 @@ import prototypes.threading.ARenderRunnable;
 import prototypes.threading.AUpdateRunnable;
 import prototypes.window.ACanvas;
 import prototypes.window.environments.AEnvironment;
+import utils.files.R;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,8 @@ import java.util.ArrayList;
  * The type Environments model.
  */
 public class EnvironmentsModel {
+
+    private R imageBank;
 
     private MainWindow parentComponent;
 

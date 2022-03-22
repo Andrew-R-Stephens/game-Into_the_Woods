@@ -7,6 +7,7 @@ import utils.drawables.IDrawable;
 import utils.updates.IUpdatable;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * The abstract type AMenuButton. Implements IUpdatable and IDrawable.
@@ -16,6 +17,10 @@ import java.awt.*;
  */
 public abstract class AMenuButton implements IUpdatable, IDrawable {
 
+    ImageScale scaleType = ImageScale.FILL_XY;
+    public enum ImageScale { FIT_CENTERED, CENTER_CROP, FILL_XY }
+
+
     // The Parent menu model which holds all pages and subpages.
     protected AMenuModel parentMenuModel;
 
@@ -24,6 +29,9 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
 
     private final int x, y; // Coordinates on the 2D space, relative to the default screen size
     private final int w, h; // The width of the component
+
+    private BufferedImage backgroundImage;
+
 
     /**
      * Instantiates a new A menu button.
@@ -84,6 +92,44 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
         float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
         g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
 
+        if(backgroundImage != null) {
+            switch (scaleType) {
+                case FIT_CENTERED -> {
+                    float sBW = w / (float)backgroundImage.getWidth();
+                    float sBH = h / (float)backgroundImage.getHeight();
+                    float s = Math.min(sBW, sBH);
+                    g.drawImage(backgroundImage,
+                            (int)((x + (w * .5f)) - (backgroundImage.getWidth() * s * .5f)),
+                            (int)((y + (h * .5f)) - (backgroundImage.getHeight() * s * .5f)),
+                            (int)(backgroundImage.getWidth() * s),
+                            (int)(backgroundImage.getHeight() * s),
+                            null);
+                }
+
+                case CENTER_CROP -> {
+                    float sBW = w / (float)backgroundImage.getWidth();
+                    float sBH = h / (float)backgroundImage.getHeight();
+                    float s = Math.min(sBW, sBH);
+                    int     nx = (int)((backgroundImage.getWidth() - (backgroundImage.getWidth() * s)) * .5f),
+                            nw = (int)(backgroundImage.getWidth() * s);
+                    BufferedImage croppedImage =
+                            backgroundImage.getSubimage(
+                                    nx, 0,
+                                    nw, backgroundImage.getHeight()
+                            );
+                    g.drawImage(croppedImage,
+                            x,
+                            y,
+                            w,
+                            h,
+                            null);
+                }
+                default -> {
+                    g.drawImage(backgroundImage, x, y, w, h, null);
+                }
+            }
+        }
+
         g.drawString(text, (int)((x * sW) + (5 * sW)), (int)((y * sH) + (20 * sH)));
     }
 
@@ -116,4 +162,13 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
     public void setText(String s) {
         text = s;
     }
+
+    public void setBackgroundImage(BufferedImage backgroundImage) {
+        this.backgroundImage = backgroundImage;
+    }
+
+    public void setImageScaling(ImageScale scaleType) {
+        this.scaleType = scaleType;
+    }
+
 }
