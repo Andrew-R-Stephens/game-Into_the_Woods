@@ -228,4 +228,8 @@ public class GameModel extends AEnvironment {
     public void queueAddGameObject(AActor a) {
         actorsQueue.add(a);
     }
+
+    public void setCurrentLevel(int levelIndex) {
+        levelModel.setCurrentLevel(levelIndex);
+    }
 }
