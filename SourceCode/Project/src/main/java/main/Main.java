@@ -153,6 +153,8 @@ public class Main {
         // Initialize Window with Preference Data
         window.init(preferences);
 
+        mainMenuModel.init();
+
         // Initialize Window's Environment
         window.initEnvironmentsModel(environmentsModel);
         window.applyEnvironmentAndCanvas(EnvironmentsModel.EnvironmentType.MAIN_MENU);

@@ -11,18 +11,17 @@ import java.awt.*;
  */
 public class MainMenuModel extends AMenuModel {
 
-    private final AMenu landingPage;
+    private AMenu landingPage;
 
-    /**
-     * Instantiates a new Main menu model.
-     */
-    public MainMenuModel() {
+    /*public MainMenuModel() {
 
+    }*/
+
+    public void init() {
         //landingPage = new MainMenuPage(this);
         landingPage = new StartScreenPage(this);
 
         initPage(landingPage);
-
     }
 
     @Override
@@ -30,11 +29,12 @@ public class MainMenuModel extends AMenuModel {
         super.draw(g);
 
         g.setColor(Color.RED);
-        g.drawString("Main Menu!", 20, 20);
+        g.drawString("Main Menu!", 20, 30);
     }
 
     @Override
     public void update(float delta) {
         super.update(delta);
     }
+
 }

@@ -9,21 +9,9 @@ public class PreferenceData {
      * The enum Window type.
      */
     public enum WindowType {
-        /**
-         * Windowed window type.
-         */
         WINDOWED                (0, "Windowed"),
-        /**
-         * The Windowed borderless.
-         */
         WINDOWED_BORDERLESS     (1, "Windowed Borderless"),
-        /**
-         * The Windowed fullscreen.
-         */
         WINDOWED_FULLSCREEN     (2, "Windowed Fullscreen"),
-        /**
-         * Fullscreen exclusive window type.
-         */
         FULLSCREEN_EXCLUSIVE    (3, "Fullscreen");
 
         private int type;
@@ -40,32 +28,20 @@ public class PreferenceData {
     /**
      * The constant DEFAULT_WINDOW_WIDTH.
      */
-    public static int DEFAULT_WINDOW_WIDTH = 1920, /**
-     * The Default window height.
-     */
-    DEFAULT_WINDOW_HEIGHT = 1080;
+    public static int DEFAULT_WINDOW_WIDTH = 1920, DEFAULT_WINDOW_HEIGHT = 1080;
     /**
      * The constant window_width_selected.
      */
-    public static int window_width_selected = 0, /**
-     * The Window height selected.
-     */
-    window_height_selected = 0;
+    public static int window_width_selected = 0, window_height_selected = 0;
     /**
      * The constant window_width_actual.
      */
-    public static int window_width_actual = 0, /**
-     * The Window height actual.
-     */
-    window_height_actual = 0;
+    public static int window_width_actual = 0, window_height_actual = 0;
 
     /**
      * The constant scaledW.
      */
-    public static float scaledW = 1f, /**
-     * The Scaled h.
-     */
-    scaledH = 1f;
+    public static float scaledW = 1f,  scaledH = 1f;
 
 
     /**

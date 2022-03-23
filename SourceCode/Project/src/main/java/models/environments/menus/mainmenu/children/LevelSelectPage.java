@@ -1,5 +1,6 @@
 package models.environments.menus.mainmenu.children;
 
+import models.data.PreferenceData;
 import models.environments.EnvironmentsModel;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
@@ -20,7 +21,13 @@ public class LevelSelectPage extends AMenu {
     public LevelSelectPage(AMenuModel parentModel) {
         super(parentModel);
 
-        AMenuButton button_char1 = new AMenuButton(parentModel,500, 500, 200, 50) {
+        float mx = PreferenceData.window_width_actual * .5f;
+        float my = PreferenceData.window_height_actual * .5f;
+
+        AMenuButton button_level1 = new AMenuButton(
+                parentModel,
+                (int) (mx - (200 * .5f)) - 150, 300,
+                200, 200) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -35,9 +42,12 @@ public class LevelSelectPage extends AMenu {
                 return true;
             }
         };
-        button_char1.setText("Character 1");
+        button_level1.setText("Level 1");
 
-        AMenuButton button_char2 = new AMenuButton(parentModel,500, 300, 200, 50) {
+        AMenuButton button_level2 = new AMenuButton(
+                parentModel,
+                (int) (mx - (200 * .5f)) + 150, 300,
+                200, 200) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -45,16 +55,19 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 //parentMenuModel.pop();
-                parentMenuModel.parentEnvironmentsModel.getGameModel().setCurrentLevel(1);
+                parentMenuModel.parentEnvironmentsModel.getGameModel().setCurrentLevel(2);
                 parentMenuModel.parentEnvironmentsModel.setCurrentEnvironment(EnvironmentsModel.EnvironmentType.GAME);
                 parentMenuModel.parentEnvironmentsModel.applyEnvironment();
 
                 return true;
             }
         };
-        button_char2.setText("Character 2");
+        button_level2.setText("Level 2");
 
-        AMenuButton button_back = new AMenuButton(parentModel,500, 400, 200, 50) {
+        AMenuButton button_back = new AMenuButton(
+                parentModel,
+                (int) (mx - (200 * .5f)), 600,
+                200, 50) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -68,8 +81,8 @@ public class LevelSelectPage extends AMenu {
         };
         button_back.setText("Back");
 
-        buttons.add(button_char1);
-        buttons.add(button_char2);
+        buttons.add(button_level1);
+        buttons.add(button_level2);
 
         buttons.add(button_back);
     }

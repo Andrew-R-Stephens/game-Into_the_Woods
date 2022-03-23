@@ -30,9 +30,6 @@ public class MainWindow extends AWindow {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        /*
-         * Case1: Fullscreen
-         */
         switch (preferences.getWindowType()) {
             case FULLSCREEN_EXCLUSIVE -> {
                 int width = Toolkit.getDefaultToolkit().getScreenSize().width;

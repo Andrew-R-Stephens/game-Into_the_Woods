@@ -1,5 +1,6 @@
 package models.environments.menus.mainmenu.children;
 
+import models.data.PreferenceData;
 import models.environments.EnvironmentsModel;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
@@ -21,7 +22,11 @@ public class NewGamePage extends AMenu {
         super(parentModel);
 
         bundle.addPage(new CharacterSelectPage(parentModel));
-        AMenuButton button_characterCreate = new AMenuButton(parentModel,500, 125, 200, 50) {
+
+        float mx = PreferenceData.window_width_actual * .5f;
+        float my = PreferenceData.window_height_actual * .5f;
+
+        AMenuButton button_characterCreate = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 125, 200, 50) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -37,7 +42,7 @@ public class NewGamePage extends AMenu {
         buttons.add(button_characterCreate);
 
 
-        AMenuButton button_characterConfirm = new AMenuButton(parentModel,500, 200, 200, 50) {
+        AMenuButton button_characterConfirm = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 200, 200, 50) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -53,7 +58,7 @@ public class NewGamePage extends AMenu {
         button_characterConfirm.setText("Confirm Character");
         buttons.add(button_characterConfirm);
 
-        AMenuButton button_back = new AMenuButton(parentModel,500, 500, 200, 50) {
+        AMenuButton button_back = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 500, 200, 50) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {

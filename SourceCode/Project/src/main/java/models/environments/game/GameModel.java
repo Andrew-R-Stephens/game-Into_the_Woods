@@ -207,7 +207,7 @@ public class GameModel extends AEnvironment {
      * Might remove later.
      */
     public void gc() {
-
+        /*
         if(!isGc) {
             isGc = true;
             for (int i = 0; i < 1000; i++) {
@@ -218,6 +218,7 @@ public class GameModel extends AEnvironment {
             }
             isGc = false;
         }
+        */
     }
 
     /**

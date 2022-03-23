@@ -26,7 +26,7 @@ public class MainMenuPage extends AMenu {
         bundle.addPage(new HelpPage(parentMenuModel));
         bundle.addPage(new QuitPage(parentMenuModel));
 
-        float centerHoriz = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
+        float centerHoriz = PreferenceData.window_width_actual * .5f;
         //float centerVert = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
         int buttonW = 200, buttonH = 50;
 
@@ -35,7 +35,8 @@ public class MainMenuPage extends AMenu {
                 (int)(centerHoriz - (buttonW * .5f)),
                 50,
                 buttonW,
-                buttonH) {
+                buttonH)
+        {
 
             @Override
             public boolean onClick(float x, float y) {
@@ -105,7 +106,7 @@ public class MainMenuPage extends AMenu {
                 return true;
             }
         };
-        button_help.setText("Help mEEEEE");
+        button_help.setText("Help");
 
         AMenuButton button_quit = new AMenuButton(parentMenuModel,
                 (int)(centerHoriz - (buttonW * .5f)),
