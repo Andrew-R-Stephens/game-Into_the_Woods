@@ -14,11 +14,6 @@ import java.awt.*;
 public class TestCharacter extends ACharacter {
 
     /**
-     * The C.
-     */
-    protected Color c = Color.BLUE;
-
-    /**
      * Instantiates a new Test character.
      *
      * @param cModel     the c model

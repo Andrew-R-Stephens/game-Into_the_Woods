@@ -28,6 +28,7 @@ public class GameModel extends AEnvironment {
 
     private LevelList levelModel;
 
+    private TestCharacter character;
     private final ArrayList<AActor> actors = new ArrayList<>();
     private Queue<AActor> actorsQueue = new LinkedList<>();
 
@@ -48,13 +49,14 @@ public class GameModel extends AEnvironment {
         setLevelModel(levelModel);
 
         // Add in the Main Test Character
-        actors.add(new TestCharacter(
+        character = new TestCharacter(
                 controlsViewModel,
                 200, 50,
                 55, 70,
                 0, 0,
                 true
-        ));
+        );
+        actors.add(character);
     }
 
 
@@ -233,4 +235,9 @@ public class GameModel extends AEnvironment {
     public void setCurrentLevel(int levelIndex) {
         levelModel.setCurrentLevel(levelIndex);
     }
+
+    public ACharacter getCharacter() {
+        return character;
+    }
+
 }

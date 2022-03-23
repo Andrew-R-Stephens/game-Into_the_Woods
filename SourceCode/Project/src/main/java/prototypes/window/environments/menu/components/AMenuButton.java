@@ -120,8 +120,8 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
                     float sBH = h / (float)backgroundImage.getHeight();
                     float s = Math.min(sBW, sBH);
                     g.drawImage(backgroundImage,
-                            (int)((x + (w * .5f)) - (backgroundImage.getWidth() * s * .5f)),
-                            (int)((y + (h * .5f)) - (backgroundImage.getHeight() * s * .5f)),
+                            (int)(((x * sW) + (w * .5f)) - (backgroundImage.getWidth() * s * .5f)),
+                            (int)(((y * sH) + (h * .5f)) - (backgroundImage.getHeight() * s * .5f)),
                             (int)(backgroundImage.getWidth() * s),
                             (int)(backgroundImage.getHeight() * s),
                             null);
@@ -139,14 +139,14 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
                                     nw, backgroundImage.getHeight()
                             );
                     g.drawImage(croppedImage,
-                            x,
-                            y,
-                            w,
-                            h,
+                            (int)(x * sW),
+                            (int)(y * sH),
+                            (int)(w * sH),
+                            (int)(h * sH),
                             null);
                 }
                 default -> {
-                    g.drawImage(backgroundImage, x, y, w, h, null);
+                    g.drawImage(backgroundImage, (int)(x * sW), (int)(y * sW), (int)(w * sH), (int)(h * sH), null);
                 }
             }
         }

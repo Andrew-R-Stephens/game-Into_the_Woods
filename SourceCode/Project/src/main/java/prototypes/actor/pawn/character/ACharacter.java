@@ -5,6 +5,8 @@ import models.data.PreferenceData;
 import prototypes.actor.pawn.APawn;
 import utils.drawables.IDrawable;
 
+import java.awt.*;
+
 /**
  * This is an abstract class for a controllable Actor object. Allows for direct control from User Controls.
  */
@@ -15,6 +17,12 @@ public abstract class ACharacter extends APawn implements IDrawable {
     /* Dictates whether or not the character has attempted to jump or not. This resets if the character collides with
      * an ALevelProp or presses the Jump button.
      */
+
+    protected Type characterType;
+
+    public enum Type {CHAR1, CHAR2}
+
+    protected Color c = Color.BLUE;
 
     private boolean isJumpLocked = false;
     private final int MAX_ALLOWED_JUMP_TIME = 10;
@@ -171,6 +179,16 @@ public abstract class ACharacter extends APawn implements IDrawable {
         isJumpLocked = state;
 
         jumpTime = MAX_ALLOWED_JUMP_TIME;
+    }
+
+    public void setCharacterType(Type type) {
+        this.characterType = type;
+
+        if(type == Type.CHAR1) {
+            c = Color.BLUE;
+        } else {
+            c = Color.PINK;
+        }
     }
 
 }

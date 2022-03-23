@@ -23,8 +23,8 @@ public class NewGamePage extends AMenu {
 
         bundle.addPage(new CharacterSelectPage(parentModel));
 
-        float mx = PreferenceData.window_width_actual * .5f;
-        float my = PreferenceData.window_height_actual * .5f;
+        float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
+        float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         AMenuButton button_characterCreate = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 125, 200, 50) {
             @Override

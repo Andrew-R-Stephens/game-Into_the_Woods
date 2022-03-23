@@ -21,8 +21,8 @@ public class LevelSelectPage extends AMenu {
     public LevelSelectPage(AMenuModel parentModel) {
         super(parentModel);
 
-        float mx = PreferenceData.window_width_actual * .5f;
-        float my = PreferenceData.window_height_actual * .5f;
+        float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
+        float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         AMenuButton button_level1 = new AMenuButton(
                 parentModel,

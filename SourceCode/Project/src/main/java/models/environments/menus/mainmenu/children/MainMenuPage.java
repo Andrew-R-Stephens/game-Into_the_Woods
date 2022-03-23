@@ -26,7 +26,7 @@ public class MainMenuPage extends AMenu {
         bundle.addPage(new HelpPage(parentMenuModel));
         bundle.addPage(new QuitPage(parentMenuModel));
 
-        float centerHoriz = PreferenceData.window_width_actual * .5f;
+        float centerHoriz = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
         //float centerVert = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
         int buttonW = 200, buttonH = 50;
 

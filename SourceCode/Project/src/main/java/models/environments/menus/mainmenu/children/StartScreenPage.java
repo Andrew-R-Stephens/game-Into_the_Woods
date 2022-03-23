@@ -19,8 +19,8 @@ public class StartScreenPage extends AMenu {
 
         super(parentMenuModel);
 
-        float mx = PreferenceData.window_width_actual * .5f;
-        float my = PreferenceData.window_height_actual * .5f;
+        float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
+        float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         AMenuButton startButton = new AMenuButton(
                 parentMenuModel,
@@ -43,7 +43,7 @@ public class StartScreenPage extends AMenu {
 
         startButton.setText("Start button");
         startButton.setBackgroundImage(Resources.imagesFiles.get("testbutton"));
-        startButton.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        startButton.setImageScaling(AMenuButton.ImageScale.CENTER_CROP);
 
         buttons.add(startButton);
 
