@@ -69,11 +69,15 @@ public class MainWindow extends AWindow {
             }
         }
 
-        float dScalingX = (float) getContentPane().getGraphicsConfiguration().getDefaultTransform().getScaleX();
-        float dScalingY = (float) getContentPane().getGraphicsConfiguration().getDefaultTransform().getScaleX();
+        float dScalingX = (float) getGraphicsConfiguration().getDefaultTransform().getScaleX();
+        float dScalingY = (float) getGraphicsConfiguration().getDefaultTransform().getScaleY();
+
+        System.out.println(dScalingX + " " + dScalingY);
 
         PreferenceData.scaledW = PreferenceData.scaledW / dScalingX;
-        PreferenceData.scaledW = PreferenceData.scaledW / dScalingY;
+        PreferenceData.scaledH = PreferenceData.scaledH / dScalingY;
+
+        System.out.println(PreferenceData.scaledW + " " + PreferenceData.scaledH);
 
         setAlwaysOnTop(true);
         setResizable(false);
