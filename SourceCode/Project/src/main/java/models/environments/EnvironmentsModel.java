@@ -1,11 +1,11 @@
 package models.environments;
 
 import main.MainWindow;
+import models.environments.game.GameModel;
 import prototypes.threading.ARenderRunnable;
 import prototypes.threading.AUpdateRunnable;
 import prototypes.window.ACanvas;
 import prototypes.window.environments.AEnvironment;
-import utils.files.Resources;
 
 import java.util.ArrayList;
 
@@ -13,8 +13,6 @@ import java.util.ArrayList;
  * The type Environments model.
  */
 public class EnvironmentsModel {
-
-    private Resources imageBank;
 
     private MainWindow parentComponent;
 
@@ -77,6 +75,10 @@ public class EnvironmentsModel {
      */
     public AEnvironment getCurrentEnvironment() {
         return environments.get(currentEnvironment.ordinal());
+    }
+
+    public GameModel getGameModel() {
+        return (GameModel) environments.get(EnvironmentType.GAME.ordinal());
     }
 
     /**

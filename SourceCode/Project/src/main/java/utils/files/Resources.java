@@ -1,7 +1,6 @@
 package utils.files;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
@@ -17,9 +16,9 @@ import java.util.Map;
  */
 public class Resources {
 
-    private final Map<String, BufferedImage> imagesFiles = new HashMap<>();
-    private final Map<String, Clip> audioFiles = new HashMap<>();
-    private final Map<String, File> textFiles = new HashMap<>();
+    public static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
+    public static final Map<String, Clip> audioFiles = new HashMap<>();
+    public static final Map<String, File> textFiles = new HashMap<>();
 
     public Resources() {
     }
@@ -34,8 +33,11 @@ public class Resources {
 
     }
 
-
+    /**
+     * Loads a list of Image Resources listed from File
+     */
     public void loadImageFiles() {
+
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
                 "testbutton.png",
@@ -68,7 +70,9 @@ public class Resources {
     }
 
 
-
+    /**
+     * Loads a list of Audio Resources listed from File
+     */
     public void loadAudioFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
@@ -105,7 +109,9 @@ public class Resources {
         return clip;
     }
 
-
+    /**
+     * Loads a list of TextFile Resources listed from File
+     */
     public void loadTextFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
@@ -127,6 +133,10 @@ public class Resources {
         return new File(fileName);
     }
 
+    /**
+     * Displays the items read from storage
+     * @return
+     */
     public String toString() {
         String s = "Image Files:\n";
         for(String key: imagesFiles.keySet()) {

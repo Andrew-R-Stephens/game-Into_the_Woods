@@ -17,21 +17,22 @@ import java.awt.image.BufferedImage;
  */
 public abstract class AMenuButton implements IUpdatable, IDrawable {
 
-    ImageScale scaleType = ImageScale.FILL_XY;
+    private ImageScale scaleType = ImageScale.FILL_XY;
     public enum ImageScale { FIT_CENTERED, CENTER_CROP, FILL_XY }
 
+    private BufferedImage backgroundImage;
 
     // The Parent menu model which holds all pages and subpages.
     protected AMenuModel parentMenuModel;
 
+    // Text to be displayed.
     // Will be removed if we add actual images in place of awt graphics.
     private String text = "";
 
     private final int x, y; // Coordinates on the 2D space, relative to the default screen size
     private final int w, h; // The width of the component
 
-    private BufferedImage backgroundImage;
-
+    private boolean isFocused = false;
 
     /**
      * Instantiates a new A menu button.
@@ -51,6 +52,21 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
     }
 
     /**
+     * Instantiates a new A menu button. Defaults the width and height to 200 x 50, scaled to the window size.
+     * @param parentMenuModel the menu Model
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    public AMenuButton(AMenuModel parentMenuModel, int x, int y) {
+        this.parentMenuModel = parentMenuModel;
+
+        this.x = x;
+        this.y = y;
+        this.w = 200;
+        this.h = 50;
+    }
+
+    /**
      * Checks if the passed coordinates are within the bounds of the component.
      * Takes screen scale into consideration.
      *
@@ -65,14 +81,18 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
         boolean horizBound = (mx >= x && mx <= (x + w));
         boolean vertBound = (my >= y && my <= (y + h));
 
+        setIsFocused(horizBound && vertBound);
+
         return horizBound && vertBound;
     }
 
-    // TODO : To be used for activating animations or changing colors of the component
-    //      Must be defined and implemented.
-    //      Must define a global state variable to hold the passed value.
-    protected void setActiveState(boolean isActive) {
-
+    /**
+     * If the object is allowed to have a focused state, this will cause the button to react when the user
+     * mouses over it.
+     * @param isFocused - if the component is focused on.
+     */
+    protected void setIsFocused(boolean isFocused) {
+        this.isFocused = isFocused;
     }
 
     /**
@@ -82,12 +102,13 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
      *
      * @param x the x
      * @param y the y
-     * @return Returns true if the button registers as clicked. Use IsInBounds() in the definition to test this.
+     * @return Returns true if the button registers as clicked. Use IsInBounds() within the definition to test this.
      */
     public abstract boolean onClick(float x, float y);
 
     @Override
     public void draw(Graphics g) {
+
         g.setColor(Color.RED);
         float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
         g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
@@ -131,6 +152,11 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
         }
 
         g.drawString(text, (int)((x * sW) + (5 * sW)), (int)((y * sH) + (20 * sH)));
+
+        if(isFocused) {
+            g.setColor(new Color(255, 255, 255, 50));
+            g.fillRect((int) (x * sW), (int) (y * sH), (int) (w * sW), (int) (h * sH));
+        }
     }
 
     @Override
@@ -144,11 +170,12 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
      */
     public void registerInput() {
         if(parentMenuModel.getMouseController() instanceof MenuMouseControls mc) {
-
             if (mc.isLeftPressed()) {
                 if(onClick(mc.getPos()[0], mc.getPos()[1])) {
                     mc.resetInput();
                 }
+            } else {
+                isInBounds(mc.getPos()[0], mc.getPos()[1]);
             }
         }
     }

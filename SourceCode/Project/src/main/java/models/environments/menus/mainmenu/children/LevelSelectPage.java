@@ -1,5 +1,6 @@
 package models.environments.menus.mainmenu.children;
 
+import models.environments.EnvironmentsModel;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuButton;
@@ -26,7 +27,10 @@ public class LevelSelectPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.pop();
+                //parentMenuModel.pop();
+                parentMenuModel.parentEnvironmentsModel.getGameModel().setCurrentLevel(0);
+                parentMenuModel.parentEnvironmentsModel.setCurrentEnvironment(EnvironmentsModel.EnvironmentType.GAME);
+                parentMenuModel.parentEnvironmentsModel.applyEnvironment();
 
                 return true;
             }
@@ -40,7 +44,10 @@ public class LevelSelectPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.pop();
+                //parentMenuModel.pop();
+                parentMenuModel.parentEnvironmentsModel.getGameModel().setCurrentLevel(1);
+                parentMenuModel.parentEnvironmentsModel.setCurrentEnvironment(EnvironmentsModel.EnvironmentType.GAME);
+                parentMenuModel.parentEnvironmentsModel.applyEnvironment();
 
                 return true;
             }

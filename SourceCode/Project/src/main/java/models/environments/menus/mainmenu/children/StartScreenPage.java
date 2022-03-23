@@ -3,6 +3,7 @@ package models.environments.menus.mainmenu.children;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuButton;
+import utils.files.Resources;
 
 import java.awt.*;
 
@@ -30,7 +31,8 @@ public class StartScreenPage extends AMenu {
         };
 
         startButton.setText("Start button");
-        startButton.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        startButton.setBackgroundImage(Resources.imagesFiles.get("testbutton"));
+        startButton.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         buttons.add(startButton);
 
