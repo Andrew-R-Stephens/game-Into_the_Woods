@@ -11,48 +11,27 @@ public class GameControlsModel extends AControlsModel {
      * The enum Directionals.
      */
     public enum Directionals {
-        /**
-         * Left directionals.
-         */
         LEFT,
-        /**
-         * Right directionals.
-         */
         RIGHT,
-        /**
-         * Up directionals.
-         */
         UP,
-        /**
-         * Down directionals.
-         */
-        DOWN}
+        DOWN
+    }
 
     /**
      * The enum Actions.
      */
     public enum Actions {
-        /**
-         * Escape actions.
-         */
         ESCAPE,
-        /**
-         * Enter actions.
-         */
-        ENTER}
+        ENTER
+    }
 
     /**
      * The enum Abilities.
      */
     public enum Abilities {
-        /**
-         * Jump abilities.
-         */
         JUMP,
-        /**
-         * Dash abilities.
-         */
-        DASH}
+        DASH
+    }
 
     /**
      * The Directionals.
@@ -103,6 +82,14 @@ public class GameControlsModel extends AControlsModel {
      */
     public boolean[] getActions() {
         return actions;
+    }
+
+    public boolean getAction(Actions action) {
+        return actions[action.ordinal()];
+    }
+
+    public void resetAction(Actions action) {
+        actions[action.ordinal()] = false;
     }
 
     /**

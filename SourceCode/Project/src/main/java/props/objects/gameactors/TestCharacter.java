@@ -2,7 +2,7 @@ package props.objects.gameactors;
 
 import models.camera.Camera;
 import models.controls.GameControlsModel;
-import models.data.PreferenceData;
+import utils.config.PreferenceData;
 import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
 

@@ -1,8 +1,12 @@
 package prototypes.window.environments.menu;
 
-import models.environments.menus.MenuBundle;
+import models.environments.menu.MenuBundle;
+import prototypes.controls.AKeyController;
+import prototypes.controls.AMouseController;
 import prototypes.window.environments.AEnvironment;
 import prototypes.window.environments.menu.components.AMenuComponent;
+import utils.drawables.IDrawable;
+import utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,7 +19,7 @@ import java.util.ArrayList;
  * Contains a list of AMenus by the variable name "bundle", which are used as references to branching sub-AMenus.
  * Contains a list of AMenuButtons that define navigation and function of the page.
  */
-public abstract class AMenu extends AEnvironment {
+public abstract class AMenu implements IUpdatable, IDrawable {
 
     /**
      * The Parent menu model.
@@ -29,6 +33,9 @@ public abstract class AMenu extends AEnvironment {
      * The Bundle of sub page AMenu objects.
      */
     public MenuBundle bundle = new MenuBundle();
+
+    protected AKeyController keyController;
+    protected AMouseController mouseController;
 
     /**
      * Instantiates a new A menu.
@@ -45,8 +52,6 @@ public abstract class AMenu extends AEnvironment {
 
     @Override
     public void draw(Graphics g) {
-
-
 
         for(AMenuComponent c: components) {
             c.draw(g);

@@ -1,8 +1,8 @@
 package prototypes.actor.trigger;
 
 import models.camera.Camera;
-import models.data.PreferenceData;
-import models.environments.game.GameModel;
+import utils.config.PreferenceData;
+import models.environments.game.GameEnvironment;
 import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
 import prototypes.level.prop.ALevelProp;
@@ -17,7 +17,7 @@ public abstract class ATrigger extends ALevelProp {
     /**
      * The Game model.
      */
-    protected GameModel gameModel;
+    protected GameEnvironment gameModel;
 
     /**
      * The Can move on collision.
@@ -46,7 +46,7 @@ public abstract class ATrigger extends ALevelProp {
      * @param hasGravity         the has gravity
      * @param canMoveOnCollision the can move on collision
      */
-    protected ATrigger(GameModel gameModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, boolean canMoveOnCollision) {
+    protected ATrigger(GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, boolean canMoveOnCollision) {
         super(x, y, w, h, vx, vy, hasGravity);
 
         this.gameModel = gameModel;

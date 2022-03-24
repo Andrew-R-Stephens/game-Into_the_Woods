@@ -1,6 +1,6 @@
 package props.objects.levels;
 
-import models.environments.game.GameModel;
+import models.environments.game.GameEnvironment;
 import props.objects.levelprops.TestLevelPropStatic;
 import prototypes.level.ALevel;
 import prototypes.level.prop.ALevelProp;
@@ -20,7 +20,7 @@ public class TestLevel2 extends ALevel {
      *
      * @param gameModel the game model
      */
-    public TestLevel2(GameModel gameModel) {
+    public TestLevel2(GameEnvironment gameModel) {
         super(gameModel);
 
         // Wall

@@ -1,6 +1,6 @@
 package props.objects.gametriggers;
 
-import models.environments.game.GameModel;
+import models.environments.game.GameEnvironment;
 import props.objects.gameactors.TestActor;
 import prototypes.actor.AActor;
 import prototypes.actor.trigger.ATrigger;
@@ -26,7 +26,7 @@ public class TestTrigger extends ATrigger {
      * @param hasGravity         the has gravity
      * @param canMoveOnCollision the can move on collision
      */
-    public TestTrigger(GameModel gameModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, boolean canMoveOnCollision) {
+    public TestTrigger(GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, boolean canMoveOnCollision) {
         super(gameModel, x, y, w, h, vx, vy, hasGravity, canMoveOnCollision);
     }
 

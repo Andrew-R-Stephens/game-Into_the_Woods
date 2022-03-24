@@ -1,6 +1,6 @@
 package prototypes.level;
 
-import models.environments.game.GameModel;
+import models.environments.game.GameEnvironment;
 import prototypes.level.prop.ALevelProp;
 
 import java.util.ArrayList;
@@ -13,14 +13,18 @@ public abstract class ALevel {
     /**
      * The Game model.
      */
-    protected GameModel gameModel;
+    protected GameEnvironment gameModel;
+    protected int[] startOrigin = new int[2];
+
+    protected final ArrayList<ALevelProp> levelProps = new ArrayList<>();
+
 
     /**
      * Instantiates a new A level.
      *
      * @param gameModel the game model
      */
-    public ALevel(GameModel gameModel) {
+    public ALevel(GameEnvironment gameModel) {
         this.gameModel = gameModel;
     }
 
@@ -37,4 +41,13 @@ public abstract class ALevel {
      * @return the level props
      */
     public abstract ArrayList<ALevelProp> getLevelProps();
+
+    public int[] getCharacterOrigin() {
+        return startOrigin;
+    }
+
+    public void reset() {
+        levelProps.clear();
+    }
+
 }

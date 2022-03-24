@@ -3,7 +3,7 @@ package prototypes.threading;
 /**
  * The type A update runnable.
  */
-public abstract class AUpdateRunnable implements Runnable {
+public abstract class AUpdateRunnable extends ARunnable {
 
     /**
      * The constant lastUpdates.
@@ -13,9 +13,5 @@ public abstract class AUpdateRunnable implements Runnable {
      * The Updates.
      */
     protected int updates = 0;
-    /**
-     * The Is running.
-     */
-    protected boolean isRunning;
 
 }

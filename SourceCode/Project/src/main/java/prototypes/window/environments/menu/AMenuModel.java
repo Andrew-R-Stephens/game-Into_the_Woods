@@ -1,7 +1,7 @@
 package prototypes.window.environments.menu;
 
 import models.controls.MenuControlsModel;
-import models.environments.EnvironmentsModel;
+import models.environments.EnvironmentsHandler;
 import prototypes.window.environments.AEnvironment;
 
 import java.awt.*;
@@ -24,7 +24,7 @@ public abstract class AMenuModel extends AEnvironment {
      * @param parentEnvironmentsModel the parent environments model
      * @param controlsModel           the controls model
      */
-    public void init(EnvironmentsModel parentEnvironmentsModel, MenuControlsModel controlsModel) {
+    public void init(EnvironmentsHandler parentEnvironmentsModel, MenuControlsModel controlsModel) {
 
         super.init(parentEnvironmentsModel, controlsModel.getKeyController(), controlsModel.getMouseController());
 

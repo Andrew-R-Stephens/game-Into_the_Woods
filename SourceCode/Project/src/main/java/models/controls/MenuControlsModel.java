@@ -16,35 +16,19 @@ public class MenuControlsModel extends AControlsModel {
      * The enum Directionals.
      */
     public enum Directionals {
-        /**
-         * Left directionals.
-         */
         LEFT,
-        /**
-         * Right directionals.
-         */
         RIGHT,
-        /**
-         * Up directionals.
-         */
         UP,
-        /**
-         * Down directionals.
-         */
-        DOWN}
+        DOWN
+    }
 
     /**
      * The enum Actions.
      */
     public enum Actions {
-        /**
-         * Escape actions.
-         */
         ESCAPE,
-        /**
-         * Enter actions.
-         */
-        ENTER}
+        ENTER
+    }
 
     /**
      * The Directionals.

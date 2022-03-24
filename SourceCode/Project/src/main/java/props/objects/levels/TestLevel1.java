@@ -1,6 +1,6 @@
 package props.objects.levels;
 
-import models.environments.game.GameModel;
+import models.environments.game.GameEnvironment;
 import props.objects.gametriggers.TestTrigger;
 import props.objects.levelprops.TestLevelPropStatic;
 import prototypes.level.ALevel;
@@ -14,14 +14,12 @@ import java.util.ArrayList;
  */
 public class TestLevel1 extends ALevel {
 
-    private final ArrayList<ALevelProp> levelProps = new ArrayList<>();
-
     /**
      * Instantiates a new Test level 1.
      *
      * @param gameModel the game model
      */
-    public TestLevel1(GameModel gameModel) {
+    public TestLevel1(GameEnvironment gameModel) {
         super(gameModel);
 
         // Walls

@@ -1,22 +1,24 @@
 package models.environments.game.hud;
 
-import models.environments.game.GameModel;
+import models.environments.game.GameEnvironment;
 import models.environments.game.hud.components.MapOverlay;
 import models.environments.game.hud.components.PlayerStatsOverlay;
 import models.environments.game.hud.components.TimeKeeperOverlay;
 import prototypes.window.environments.AEnvironment;
+import utils.drawables.IDrawable;
+import utils.updates.IUpdatable;
 
 import java.awt.*;
 
 /**
  * The type Hud model.
  */
-public class HUDModel extends AEnvironment {
+public class HUDModel implements IDrawable, IUpdatable {
 
     /**
      * The Game model.
      */
-    protected GameModel gameModel;
+    protected GameEnvironment gameModel;
 
     private MapOverlay map;
     private PlayerStatsOverlay stats;
@@ -27,7 +29,7 @@ public class HUDModel extends AEnvironment {
      *
      * @param gameModel the game model
      */
-    public HUDModel(GameModel gameModel) {
+    public HUDModel(GameEnvironment gameModel) {
         this.gameModel = gameModel;
 
         timer = new TimeKeeperOverlay(0, 0, 300, 120);

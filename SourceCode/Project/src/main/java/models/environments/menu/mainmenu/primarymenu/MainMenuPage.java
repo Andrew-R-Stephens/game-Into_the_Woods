@@ -1,0 +1,149 @@
+package models.environments.menu.mainmenu.primarymenu;
+
+import utils.config.PreferenceData;
+import models.environments.menu.mainmenu.primarymenu.continuegame.LevelSelectPage;
+import models.environments.menu.mainmenu.primarymenu.help.HelpPage;
+import models.environments.menu.mainmenu.primarymenu.newgame.NewGamePage;
+import models.environments.menu.mainmenu.primarymenu.options.OptionsPage;
+import models.environments.menu.mainmenu.primarymenu.quit.QuitPage;
+import prototypes.window.environments.menu.AMenu;
+import prototypes.window.environments.menu.AMenuModel;
+import prototypes.window.environments.menu.components.types.AMenuButton;
+
+import java.awt.*;
+
+/**
+ * The type Main menu page.
+ */
+public class MainMenuPage extends AMenu {
+
+    /**
+     * Instantiates a new Main menu page.
+     *
+     * @param parentModel the parent model
+     */
+    public MainMenuPage(AMenuModel parentModel) {
+        super(parentModel);
+
+        bundle.addPage(new NewGamePage(parentMenuModel));
+        bundle.addPage(new LevelSelectPage(parentMenuModel));
+        bundle.addPage(new OptionsPage(parentMenuModel));
+        bundle.addPage(new HelpPage(parentMenuModel));
+        bundle.addPage(new QuitPage(parentMenuModel));
+
+        float centerHoriz = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
+        //float centerVert = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
+        int buttonW = 200, buttonH = 50;
+
+        AMenuButton button_newGame = new AMenuButton(
+                parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                50,
+                buttonW,
+                buttonH)
+        {
+
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+
+                parentMenuModel.push(bundle.getPage(0));
+
+                return true;
+            }
+        };
+        button_newGame.setText("New Game");
+
+        AMenuButton button_continueGame = new AMenuButton(
+                parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                125,
+                buttonW,
+                buttonH) {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+
+                parentMenuModel.push(bundle.getPage(1));
+
+                return true;
+            }
+        };
+        button_continueGame.setText("Continue Game");
+
+        AMenuButton button_options = new AMenuButton(
+                parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                200,
+                buttonW,
+                buttonH) {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+
+                parentMenuModel.push(bundle.getPage(2));
+
+                return true;
+            }
+        };
+        button_options.setText("Options");
+
+        AMenuButton button_help = new AMenuButton(
+                parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                275,
+                buttonW,
+                buttonH) {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+
+                parentMenuModel.push(bundle.getPage(3));
+
+                return true;
+            }
+        };
+        button_help.setText("Help");
+
+        AMenuButton button_quit = new AMenuButton(parentMenuModel,
+                (int)(centerHoriz - (buttonW * .5f)),
+                375,
+                buttonW,
+                buttonH) {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+                System.exit(0);
+
+                return true;
+            }
+        };
+        button_quit.setText("Quit Button");
+
+        components.add(button_newGame);
+        components.add(button_continueGame);
+        components.add(button_options);
+        components.add(button_help);
+        components.add(button_quit);
+
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+
+        g.setColor(Color.blue);
+        g.drawString("Landing Page!", 50, 50);
+    }
+
+}

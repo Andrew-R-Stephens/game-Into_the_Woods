@@ -1,22 +1,23 @@
 package main;
 
-import graphics.ui.game.GameCanvas;
-import graphics.ui.menu.MenuCanvas;
+import graphics.canvas.game.GameCanvas;
+import graphics.canvas.menu.MenuCanvas;
+import graphics.window.MainWindow;
 import models.controls.GameControlsModel;
 import models.controls.MenuControlsModel;
 import models.controls.game.GameKeyControls;
 import models.controls.game.GameMouseControls;
 import models.controls.menu.MenuKeyControls;
 import models.controls.menu.MenuMouseControls;
-import models.data.PreferenceData;
-import models.environments.EnvironmentsModel;
-import models.environments.game.GameModel;
-import models.environments.menus.mainmenu.MainMenuModel;
+import utils.config.PreferenceData;
+import models.environments.EnvironmentsHandler;
+import models.environments.game.GameEnvironment;
+import models.environments.menu.mainmenu.MainMenuEnvironment;
 import props.objects.levels.LevelList;
-import props.threads.gameloop.GameRenderRunnable;
-import props.threads.gameloop.GameUpdateRunnable;
-import props.threads.menuloop.MenuRenderRunnable;
-import props.threads.menuloop.MenuUpdateRunnable;
+import models.runnables.game.GameRenderRunnable;
+import models.runnables.game.GameUpdateRunnable;
+import models.runnables.menu.MenuRenderRunnable;
+import models.runnables.menu.MenuUpdateRunnable;
 import utils.files.PreferencesXMLParser;
 import utils.files.Resources;
 
@@ -27,13 +28,13 @@ public class Main {
 
     private static PreferenceData preferences;
 
-    private static EnvironmentsModel environmentsModel;
+    private static EnvironmentsHandler environmentsModel;
 
     private static GameControlsModel gameControlsModel;
     private static MenuControlsModel menuControlsModel;
 
-    private static MainMenuModel mainMenuModel;
-    private static GameModel gameModel;
+    private static MainMenuEnvironment mainMenuModel;
+    private static GameEnvironment gameModel;
 
     private static GameUpdateRunnable gameUpdateRunnable;
     private static GameRenderRunnable gameRenderRunnable;
@@ -83,20 +84,21 @@ public class Main {
         // Create Preferences
         preferences = new PreferenceData();
 
-        // Create AEnvironment Model Container
-        environmentsModel = new EnvironmentsModel();
+        // Create Environment Handler
+        environmentsModel = new EnvironmentsHandler();
 
-        // Create AEnvironment Models
+        // Create Control Models
         gameControlsModel = new GameControlsModel();
         menuControlsModel = new MenuControlsModel();
 
-        // Create Menu Models
-        mainMenuModel = new MainMenuModel();
-        //menusListModel = new MenusListModel();
+        // Create Menu Environment
+        mainMenuModel = new MainMenuEnvironment();
 
-        // Create Game Models
+        // Create Game Environment
+        gameModel = new GameEnvironment();
+
+        // Create Levels List Model
         levelsListModel = new LevelList();
-        gameModel = new GameModel();
 
         // Create State Canvases
         mainMenuCanvas = new MenuCanvas();
@@ -158,7 +160,7 @@ public class Main {
 
         // Initialize Window's Environment
         window.initEnvironmentsModel(environmentsModel);
-        window.applyEnvironmentAndCanvas(EnvironmentsModel.EnvironmentType.MAIN_MENU);
+        window.applyEnvironmentAndCanvas(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
 
         // Confirm and Apply scaling
         preferences.post();

@@ -1,6 +1,6 @@
 package models.environments.game.hud.components;
 
-import models.data.PreferenceData;
+import utils.config.PreferenceData;
 import prototypes.window.environments.game.AOverlayComponent;
 
 import java.awt.*;

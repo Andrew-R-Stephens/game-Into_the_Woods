@@ -1,6 +1,6 @@
 package prototypes.window.environments.menu.components;
 
-import models.data.PreferenceData;
+import utils.config.PreferenceData;
 import prototypes.window.environments.menu.AMenuModel;
 import utils.drawables.IDrawable;
 import utils.updates.IUpdatable;

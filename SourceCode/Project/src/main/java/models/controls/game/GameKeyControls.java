@@ -30,8 +30,9 @@ public class GameKeyControls extends AKeyController {
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE -> {
-                System.out.println("Quitting");
-                System.exit(1);
+                //System.out.println("Quitting");
+                //System.exit(1);
+                controlsViewModel.setAction(GameControlsModel.Actions.ESCAPE, true);
             }
 
             case KeyEvent.VK_A -> {
@@ -56,6 +57,9 @@ public class GameKeyControls extends AKeyController {
     @Override
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
+            case KeyEvent.VK_ESCAPE -> {
+                controlsViewModel.setAction(GameControlsModel.Actions.ESCAPE, false);
+            }
             case KeyEvent.VK_A -> {
                 controlsViewModel.setDirectional(GameControlsModel.Directionals.LEFT, false);
             }
@@ -73,5 +77,9 @@ public class GameKeyControls extends AKeyController {
                 controlsViewModel.setAbility(GameControlsModel.Abilities.JUMP, false);
             }
         }
+    }
+
+    public GameControlsModel getControlsModel() {
+        return controlsViewModel;
     }
 }

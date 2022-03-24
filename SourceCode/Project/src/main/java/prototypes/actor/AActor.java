@@ -1,7 +1,7 @@
 package prototypes.actor;
 
 import models.camera.Camera;
-import models.data.PreferenceData;
+import utils.config.PreferenceData;
 import utils.drawables.IDrawable;
 import utils.physics.APhysics;
 

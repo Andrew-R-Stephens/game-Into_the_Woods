@@ -1,7 +1,7 @@
 package prototypes.actor.pawn.character;
 
 import models.controls.GameControlsModel;
-import models.data.PreferenceData;
+import utils.config.PreferenceData;
 import prototypes.actor.pawn.APawn;
 import utils.drawables.IDrawable;
 
@@ -27,13 +27,7 @@ public abstract class ACharacter extends APawn implements IDrawable {
      * The enum Type.
      */
     public enum Type {
-        /**
-         * Char 1 type.
-         */
         CHAR1,
-        /**
-         * Char 2 type.
-         */
         CHAR2}
 
     /**
@@ -211,6 +205,12 @@ public abstract class ACharacter extends APawn implements IDrawable {
         } else {
             c = Color.PINK;
         }
+    }
+
+    public void reset(int[] characterOrigin) {
+        setVelocity(0, 0);
+        x = characterOrigin[0];
+        y = characterOrigin[1];
     }
 
 }

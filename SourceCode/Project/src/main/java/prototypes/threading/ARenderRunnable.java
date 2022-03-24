@@ -3,19 +3,19 @@ package prototypes.threading;
 /**
  * The type A render runnable.
  */
-public abstract class ARenderRunnable implements Runnable {
+public abstract class ARenderRunnable extends ARunnable {
 
     /**
      * The constant lastFrames.
      */
-    public static int lastFrames = Integer.MAX_VALUE;
+    protected static int lastFrames = Integer.MAX_VALUE;
     /**
      * The Frames.
      */
     protected int frames = 0;
-    /**
-     * The Is running.
-     */
-    protected boolean isRunning;
+
+    public static int getLastFrames() {
+        return lastFrames;
+    }
 
 }

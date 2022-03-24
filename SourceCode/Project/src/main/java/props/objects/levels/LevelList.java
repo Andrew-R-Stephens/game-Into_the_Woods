@@ -1,7 +1,7 @@
 package props.objects.levels;
 
-import models.data.PreferenceData;
-import models.environments.game.GameModel;
+import utils.config.PreferenceData;
+import models.environments.game.GameEnvironment;
 import prototypes.actor.AActor;
 import prototypes.level.ALevel;
 import prototypes.level.prop.ALevelProp;
@@ -28,7 +28,7 @@ public class LevelList {
      * @param gameModel    the game model
      * @param currentLevel the current level
      */
-    public void init(GameModel gameModel, int currentLevel) {
+    public void init(GameEnvironment gameModel, int currentLevel) {
         addLevel(new TestLevel1(gameModel));
         addLevel(new TestLevel2(gameModel));
         addLevel(new TestLevel3(gameModel));
@@ -61,6 +61,10 @@ public class LevelList {
         return true;
     }
 
+    public ALevel getCurrentLevel() {
+        return levels.get(currentLevel);
+    }
+
     /**
      * Gets level props.
      *
@@ -85,4 +89,7 @@ public class LevelList {
 
     }
 
+    public void reset() {
+        levels.get(currentLevel).reset();
+    }
 }

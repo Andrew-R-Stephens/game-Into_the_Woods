@@ -2,6 +2,7 @@ package utils.physics;
 
 import props.objects.levels.LevelList;
 import prototypes.actor.AActor;
+import utils.config.PreferenceData;
 
 /**
  * TODO: Add description
@@ -120,10 +121,10 @@ public abstract class APhysics {
 
         calculateGravity(delta);
 
-        //float acc = friction / PreferenceData.GAME_UPDATE_RATE / delta;
+        float acc = friction / PreferenceData.GAME_UPDATE_RATE / delta;
 
-        //vY *= 1-acc;
-        //vX *= 1-acc;
+        vY *= 1-acc;
+        vX *= 1-acc;
 
         limitVelocity();
 

@@ -1,6 +1,7 @@
 package prototypes.window.environments;
 
-import models.environments.EnvironmentsModel;
+import models.controls.GameControlsModel;
+import models.environments.EnvironmentsHandler;
 import prototypes.controls.AKeyController;
 import prototypes.controls.AMouseController;
 import utils.drawables.IDrawable;
@@ -14,7 +15,7 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
     /**
      * The Parent environments model.
      */
-    public EnvironmentsModel parentEnvironmentsModel;
+    public EnvironmentsHandler parentEnvironmentsModel;
 
     /**
      * The Key controller.
@@ -32,7 +33,7 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
      * @param keyController           the key controller
      * @param mouseController         the mouse controller
      */
-    protected void init(EnvironmentsModel parentEnvironmentsModel, AKeyController keyController, AMouseController mouseController) {
+    protected void init(EnvironmentsHandler parentEnvironmentsModel, AKeyController keyController, AMouseController mouseController) {
         this.parentEnvironmentsModel = parentEnvironmentsModel;
         this.keyController = keyController;
         this.mouseController = mouseController;
@@ -55,4 +56,6 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
     public AMouseController getMouseController() {
         return mouseController;
     }
+
+    public abstract void reset();
 }
