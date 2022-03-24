@@ -4,7 +4,7 @@ import models.data.PreferenceData;
 import models.environments.EnvironmentsModel;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
-import prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.components.types.AMenuButton;
 
 import java.awt.*;
 
@@ -39,7 +39,7 @@ public class NewGamePage extends AMenu {
             }
         };
         button_characterCreate.setText("Create Character");
-        buttons.add(button_characterCreate);
+        components.add(button_characterCreate);
 
 
         AMenuButton button_characterConfirm = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 200, 200, 50) {
@@ -56,7 +56,7 @@ public class NewGamePage extends AMenu {
             }
         };
         button_characterConfirm.setText("Confirm Character");
-        buttons.add(button_characterConfirm);
+        components.add(button_characterConfirm);
 
         AMenuButton button_back = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 500, 200, 50) {
             @Override
@@ -71,7 +71,7 @@ public class NewGamePage extends AMenu {
             }
         };
         button_back.setText("Back");
-        buttons.add(button_back);
+        components.add(button_back);
     }
 
     @Override

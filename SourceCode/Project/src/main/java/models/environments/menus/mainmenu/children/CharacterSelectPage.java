@@ -3,7 +3,7 @@ package models.environments.menus.mainmenu.children;
 import prototypes.actor.pawn.character.ACharacter;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
-import prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.components.types.AMenuButton;
 
 /**
  * The type Character create page.
@@ -64,9 +64,9 @@ public class CharacterSelectPage extends AMenu {
         };
         back.setText("Back");
 
-        buttons.add(character1);
-        buttons.add(character2);
-        buttons.add(back);
+        components.add(character1);
+        components.add(character2);
+        components.add(back);
     }
 
 

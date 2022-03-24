@@ -18,10 +18,27 @@ public abstract class ACharacter extends APawn implements IDrawable {
      * an ALevelProp or presses the Jump button.
      */
 
+    /**
+     * The Character type.
+     */
     protected Type characterType;
 
-    public enum Type {CHAR1, CHAR2}
+    /**
+     * The enum Type.
+     */
+    public enum Type {
+        /**
+         * Char 1 type.
+         */
+        CHAR1,
+        /**
+         * Char 2 type.
+         */
+        CHAR2}
 
+    /**
+     * The C.
+     */
     protected Color c = Color.BLUE;
 
     private boolean isJumpLocked = false;
@@ -181,6 +198,11 @@ public abstract class ACharacter extends APawn implements IDrawable {
         jumpTime = MAX_ALLOWED_JUMP_TIME;
     }
 
+    /**
+     * Sets character type.
+     *
+     * @param type the type
+     */
     public void setCharacterType(Type type) {
         this.characterType = type;
 

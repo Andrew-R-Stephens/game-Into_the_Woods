@@ -3,7 +3,7 @@ package models.environments.menus.mainmenu.children;
 import models.data.PreferenceData;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
-import prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.components.types.AMenuButton;
 
 import java.awt.*;
 
@@ -125,11 +125,11 @@ public class MainMenuPage extends AMenu {
         };
         button_quit.setText("Quit Button");
 
-        buttons.add(button_newGame);
-        buttons.add(button_continueGame);
-        buttons.add(button_options);
-        buttons.add(button_help);
-        buttons.add(button_quit);
+        components.add(button_newGame);
+        components.add(button_continueGame);
+        components.add(button_options);
+        components.add(button_help);
+        components.add(button_quit);
 
     }
 

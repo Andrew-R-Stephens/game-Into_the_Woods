@@ -21,6 +21,12 @@ public class MenuBundle {
         pages.add(page);
     }
 
+    /**
+     * Gets page.
+     *
+     * @param pageNumber the page number
+     * @return the page
+     */
     public AMenu getPage(int pageNumber) {
         if(pageNumber < pages.size()) {
             return pages.get(pageNumber);

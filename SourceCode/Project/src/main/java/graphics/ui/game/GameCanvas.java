@@ -2,9 +2,9 @@ package graphics.ui.game;
 
 import models.data.PreferenceData;
 import models.environments.game.GameModel;
-import prototypes.window.ACanvas;
 import props.threads.gameloop.GameRenderRunnable;
 import props.threads.gameloop.GameUpdateRunnable;
+import prototypes.window.ACanvas;
 
 import java.awt.*;
 

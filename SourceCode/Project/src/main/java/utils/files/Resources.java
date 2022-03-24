@@ -5,7 +5,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,13 +18,32 @@ import java.util.Map;
  */
 public class Resources {
 
-    public static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
-    public static final Map<String, Clip> audioFiles = new HashMap<>();
-    public static final Map<String, File> textFiles = new HashMap<>();
+    /**
+     * The constant imagesFiles.
+     */
+    private static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
+    /**
+     * The constant audioFiles.
+     */
+    private static final Map<String, Clip> audioFiles = new HashMap<>();
+    /**
+     * The constant textFiles.
+     */
+    private static final Map<String, File> textFiles = new HashMap<>();
 
+    /**
+     * Instantiates a new Resources.
+     */
     public Resources() {
     }
 
+    public static BufferedImage getImage(String imageKey) {
+        return imagesFiles.get(imageKey);
+    }
+
+    /**
+     * Init.
+     */
     public void init() {
 
         loadImageFiles();
@@ -55,6 +76,12 @@ public class Resources {
         }
     }
 
+    /**
+     * Load image file buffered image.
+     *
+     * @param fileName the file name
+     * @return the buffered image
+     */
     public BufferedImage loadImageFile(String fileName) {
         InputStream resourceBuff = Resources.class.getResourceAsStream("/images/" + fileName);
         try {
@@ -92,6 +119,12 @@ public class Resources {
 
     }
 
+    /**
+     * Load audio file clip.
+     *
+     * @param fileName the file name
+     * @return the clip
+     */
     public Clip loadAudioFile(String fileName) {
 
         Clip clip = null;
@@ -124,6 +157,12 @@ public class Resources {
 
     }
 
+    /**
+     * Load text file file.
+     *
+     * @param fileName the file name
+     * @return the file
+     */
     public File loadTextFile(String fileName) {
 
         if (fileName == null) {

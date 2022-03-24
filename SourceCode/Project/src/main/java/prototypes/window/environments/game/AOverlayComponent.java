@@ -10,7 +10,19 @@ import java.awt.*;
  */
 public abstract class AOverlayComponent implements IUpdatable, IDrawable {
 
-    protected int x, y, w, h;
+    /**
+     * The X.
+     */
+    protected int x, /**
+     * The Y.
+     */
+    y, /**
+     * The W.
+     */
+    w, /**
+     * The H.
+     */
+    h;
 
     /**
      * Instantiates a new A overlay component.

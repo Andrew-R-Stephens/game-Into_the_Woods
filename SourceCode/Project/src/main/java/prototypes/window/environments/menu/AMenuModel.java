@@ -1,7 +1,7 @@
 package prototypes.window.environments.menu;
 
-import models.environments.EnvironmentsModel;
 import models.controls.MenuControlsModel;
+import models.environments.EnvironmentsModel;
 import prototypes.window.environments.AEnvironment;
 
 import java.awt.*;
@@ -10,8 +10,6 @@ import java.util.Stack;
 /**
  * The abstract class AMenuModel derives from an AEnvironment for the draw() and update() methods as well as to allow
  * for an easier time with type-referencing passed variables.
- *
- *
  */
 public abstract class AMenuModel extends AEnvironment {
 

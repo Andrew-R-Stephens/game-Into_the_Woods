@@ -2,7 +2,7 @@ package models.environments.menus.mainmenu.children;
 
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
-import prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.components.types.AMenuButton;
 
 import java.awt.*;
 
@@ -32,7 +32,7 @@ public class QuitPage extends AMenu {
             }
         };
         button_back.setText("Back");
-        buttons.add(button_back);
+        components.add(button_back);
     }
 
     @Override

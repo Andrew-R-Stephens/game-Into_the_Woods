@@ -7,21 +7,9 @@ import models.data.PreferenceData;
  */
 public class Camera {
 
-    /**
-     * The constant zoomLevel.
-     */
     public static float zoomLevel = 1;
-    /**
-     * The constant x.
-     */
-    public static float x = 0, /**
-     * The Y.
-     */
-    y = 0;
+    public static float x = 0, y = 0;
 
-    /**
-     * The constant acceleration.
-     */
     public static double acceleration = .05;
 
     /**

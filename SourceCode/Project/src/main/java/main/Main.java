@@ -3,9 +3,9 @@ package main;
 import graphics.ui.game.GameCanvas;
 import graphics.ui.menu.MenuCanvas;
 import models.controls.GameControlsModel;
+import models.controls.MenuControlsModel;
 import models.controls.game.GameKeyControls;
 import models.controls.game.GameMouseControls;
-import models.controls.MenuControlsModel;
 import models.controls.menu.MenuKeyControls;
 import models.controls.menu.MenuMouseControls;
 import models.data.PreferenceData;
@@ -71,6 +71,7 @@ public class Main {
      */
     public static void loadAssets() {
         Resources resources = new Resources();
+
         resources.init();
     }
 

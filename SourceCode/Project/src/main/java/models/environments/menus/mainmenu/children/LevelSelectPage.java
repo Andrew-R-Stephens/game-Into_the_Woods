@@ -4,9 +4,13 @@ import models.data.PreferenceData;
 import models.environments.EnvironmentsModel;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
-import prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.components.AMenuComponent;
+import prototypes.window.environments.menu.components.types.AMenuButton;
+import prototypes.window.environments.menu.components.types.AMenuImage;
+import utils.files.Resources;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * The type Level select page.
@@ -24,10 +28,23 @@ public class LevelSelectPage extends AMenu {
         float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
 
+        BufferedImage img_title = Resources.getImage("testbutton");
+        AMenuImage imageView_label = new AMenuImage(
+                parentModel,
+                (int) (mx - (img_title.getWidth() * .5f)),
+                100,
+                img_title.getWidth(),
+                img_title.getHeight(),
+                img_title,
+                AMenuComponent.ImageScale.FILL_XY
+        );
+
         AMenuButton button_level1 = new AMenuButton(
                 parentModel,
-                (int) (mx - (200 * .5f)) - 150, 300,
-                200, 200) {
+                (int) (mx - (200 * .5f)) - 150,
+                300,
+                200,
+                200) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -81,10 +98,10 @@ public class LevelSelectPage extends AMenu {
         };
         button_back.setText("Back");
 
-        buttons.add(button_level1);
-        buttons.add(button_level2);
-
-        buttons.add(button_back);
+        components.add(imageView_label);
+        components.add(button_level1);
+        components.add(button_level2);
+        components.add(button_back);
     }
 
     @Override

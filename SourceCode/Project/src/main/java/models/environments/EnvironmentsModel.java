@@ -77,6 +77,11 @@ public class EnvironmentsModel {
         return environments.get(currentEnvironment.ordinal());
     }
 
+    /**
+     * Gets game model.
+     *
+     * @return the game model
+     */
     public GameModel getGameModel() {
         return (GameModel) environments.get(EnvironmentType.GAME.ordinal());
     }

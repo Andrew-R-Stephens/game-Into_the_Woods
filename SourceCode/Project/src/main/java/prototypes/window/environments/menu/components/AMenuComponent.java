@@ -1,6 +1,5 @@
 package prototypes.window.environments.menu.components;
 
-import models.controls.menu.MenuMouseControls;
 import models.data.PreferenceData;
 import prototypes.window.environments.menu.AMenuModel;
 import utils.drawables.IDrawable;
@@ -11,59 +10,47 @@ import java.awt.image.BufferedImage;
 
 /**
  * The abstract type AMenuButton. Implements IUpdatable and IDrawable.
- *
+ * <p>
  * This is to be used for the creation of anonymous buttons.
  * This can also be used as a parent class for specific AMenuButton types.
  */
-public abstract class AMenuButton implements IUpdatable, IDrawable {
+public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
-    private ImageScale scaleType = ImageScale.FILL_XY;
-    public enum ImageScale { FIT_CENTERED, CENTER_CROP, FILL_XY }
+    protected ImageScale scaleType = ImageScale.FILL_XY;
 
-    private BufferedImage backgroundImage;
+    /**
+     * The enum Image scale.
+     */
+    public enum ImageScale {
+        FIT_CENTERED,
+        CENTER_CROP,
+        FILL_XY
+    }
 
+    protected BufferedImage backgroundImage;
+
+    /**
+     * The Parent menu model.
+     */
     // The Parent menu model which holds all pages and subpages.
     protected AMenuModel parentMenuModel;
 
     // Text to be displayed.
     // Will be removed if we add actual images in place of awt graphics.
-    private String text = "";
+    protected String text = "";
 
-    private final int x, y; // Coordinates on the 2D space, relative to the default screen size
-    private final int w, h; // The width of the component
+    protected int x, y; // Coordinates on the 2D space, relative to the default screen size
+    protected int w, h; // The width of the component
 
-    private boolean isFocused = false;
-
-    /**
-     * Instantiates a new A menu button.
-     * @param parentMenuModel the menu Model
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param w the width
-     * @param h the height
-     */
-    public AMenuButton(AMenuModel parentMenuModel, int x, int y, int w, int h) {
-        this.parentMenuModel = parentMenuModel;
-
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-    }
+    protected boolean isFocused = false;
 
     /**
-     * Instantiates a new A menu button. Defaults the width and height to 200 x 50, scaled to the window size.
+     * Instantiates a new AComponent.
+     *
      * @param parentMenuModel the menu Model
-     * @param x the x coordinate
-     * @param y the y coordinate
      */
-    public AMenuButton(AMenuModel parentMenuModel, int x, int y) {
+    public AMenuComponent(AMenuModel parentMenuModel) {
         this.parentMenuModel = parentMenuModel;
-
-        this.x = x;
-        this.y = y;
-        this.w = 200;
-        this.h = 50;
     }
 
     /**
@@ -89,26 +76,18 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
     /**
      * If the object is allowed to have a focused state, this will cause the button to react when the user
      * mouses over it.
+     *
      * @param isFocused - if the component is focused on.
      */
     protected void setIsFocused(boolean isFocused) {
         this.isFocused = isFocused;
     }
 
-    /**
-     * The abstract method which is defined either upon instantiation or within a deriving class.
-     * It is used to define actions that the button will execute.
-     * This method is called automatically through the registerInput() method every time the Menu updates.
-     *
-     * @param x the x
-     * @param y the y
-     * @return Returns true if the button registers as clicked. Use IsInBounds() within the definition to test this.
-     */
     public abstract boolean onClick(float x, float y);
 
     @Override
     public void draw(Graphics g) {
-
+        /*
         g.setColor(Color.RED);
         float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
         g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
@@ -157,6 +136,7 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
             g.setColor(new Color(255, 255, 255, 50));
             g.fillRect((int) (x * sW), (int) (y * sH), (int) (w * sW), (int) (h * sH));
         }
+        */
     }
 
     @Override
@@ -168,32 +148,22 @@ public abstract class AMenuButton implements IUpdatable, IDrawable {
      * Checked every update.
      * Registers the input from the parent MainMenuModel class. That class is defined locally as parentMenuModel.
      */
-    public void registerInput() {
-        if(parentMenuModel.getMouseController() instanceof MenuMouseControls mc) {
-            if (mc.isLeftPressed()) {
-                if(onClick(mc.getPos()[0], mc.getPos()[1])) {
-                    mc.resetInput();
-                }
-            } else {
-                isInBounds(mc.getPos()[0], mc.getPos()[1]);
-            }
-        }
-    }
+    public abstract void registerInput();
 
     /**
-     * Sets text of the button.
-     * Should be removed once we add image sources.
+     * Sets background image.
      *
-     * @param s - the String of text
+     * @param backgroundImage the background image
      */
-    public void setText(String s) {
-        text = s;
-    }
-
     public void setBackgroundImage(BufferedImage backgroundImage) {
         this.backgroundImage = backgroundImage;
     }
 
+    /**
+     * Sets image scaling.
+     *
+     * @param scaleType the scale type
+     */
     public void setImageScaling(ImageScale scaleType) {
         this.scaleType = scaleType;
     }

@@ -3,11 +3,14 @@ package models.environments.menus.mainmenu.children;
 import models.data.PreferenceData;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
-import prototypes.window.environments.menu.components.AMenuButton;
+import prototypes.window.environments.menu.components.types.AMenuButton;
 import utils.files.Resources;
 
 import java.awt.*;
 
+/**
+ * The type Start screen page.
+ */
 public class StartScreenPage extends AMenu {
 
     /**
@@ -42,10 +45,10 @@ public class StartScreenPage extends AMenu {
 
 
         startButton.setText("Start button");
-        startButton.setBackgroundImage(Resources.imagesFiles.get("testbutton"));
+        startButton.setBackgroundImage(Resources.getImage("testbutton"));
         startButton.setImageScaling(AMenuButton.ImageScale.CENTER_CROP);
 
-        buttons.add(startButton);
+        components.add(startButton);
 
     }
 

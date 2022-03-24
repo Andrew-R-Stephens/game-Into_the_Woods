@@ -1,10 +1,10 @@
 package models.environments.game;
 
-import models.environments.EnvironmentsModel;
 import models.camera.Camera;
 import models.controls.GameControlsModel;
 import models.controls.game.GameMouseControls;
 import models.data.PreferenceData;
+import models.environments.EnvironmentsModel;
 import models.environments.game.hud.HUDModel;
 import props.objects.gameactors.TestActor;
 import props.objects.gameactors.TestCharacter;
@@ -15,7 +15,10 @@ import prototypes.level.prop.ALevelProp;
 import prototypes.window.environments.AEnvironment;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
 
 /**
  * The Game Model derives from the AEnvironment class. It's what encapsulates all data that the Game requires to run.
@@ -232,10 +235,20 @@ public class GameModel extends AEnvironment {
         actorsQueue.add(a);
     }
 
+    /**
+     * Sets current level.
+     *
+     * @param levelIndex the level index
+     */
     public void setCurrentLevel(int levelIndex) {
         levelModel.setCurrentLevel(levelIndex);
     }
 
+    /**
+     * Gets character.
+     *
+     * @return the character
+     */
     public ACharacter getCharacter() {
         return character;
     }

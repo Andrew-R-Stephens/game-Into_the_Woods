@@ -7,6 +7,9 @@ import javax.swing.*;
  */
 public abstract class ACanvas extends JPanel {
 
+    /**
+     * Render.
+     */
     public abstract void render();
 
 }

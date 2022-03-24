@@ -1,6 +1,6 @@
 package models.environments.menus.mainmenu;
 
-import models.environments.menus.mainmenu.children.*;
+import models.environments.menus.mainmenu.children.StartScreenPage;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 
@@ -17,6 +17,9 @@ public class MainMenuModel extends AMenuModel {
 
     }*/
 
+    /**
+     * Init.
+     */
     public void init() {
         //landingPage = new MainMenuPage(this);
         landingPage = new StartScreenPage(this);
