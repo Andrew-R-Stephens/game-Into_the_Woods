@@ -66,6 +66,12 @@ public abstract class AMenuModel extends AEnvironment {
         return menuStack.pop();
     }
 
+    public void popToFirst() {
+        while(menuStack.size() > 1) {
+            menuStack.pop();
+        }
+    }
+
     @Override
     public void draw(Graphics g) {
         menuStack.peek().draw(g);

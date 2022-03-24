@@ -37,6 +37,6 @@ public class MainMenuEnvironment extends AMenuModel {
 
     @Override
     public void reset() {
-
+        popToFirst();
     }
 }
