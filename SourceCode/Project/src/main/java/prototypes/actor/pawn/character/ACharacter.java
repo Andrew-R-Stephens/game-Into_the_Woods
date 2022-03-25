@@ -1,8 +1,8 @@
 package prototypes.actor.pawn.character;
 
 import models.controls.GameControlsModel;
-import utils.config.PreferenceData;
 import prototypes.actor.pawn.APawn;
+import utils.config.PreferenceData;
 import utils.drawables.IDrawable;
 
 import java.awt.*;

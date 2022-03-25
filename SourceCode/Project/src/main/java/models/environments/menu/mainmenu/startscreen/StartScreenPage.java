@@ -1,10 +1,10 @@
 package models.environments.menu.mainmenu.startscreen;
 
-import utils.config.PreferenceData;
 import models.environments.menu.mainmenu.primarymenu.MainMenuPage;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.types.AMenuButton;
+import utils.config.PreferenceData;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -43,11 +43,9 @@ public class StartScreenPage extends AMenu {
 
             }
         };
-
-
         startButton.setText("Start button");
         startButton.setBackgroundImage(Resources.getImage("testbutton"));
-        startButton.setImageScaling(AMenuButton.ImageScale.CENTER_CROP);
+        startButton.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         components.add(startButton);
 

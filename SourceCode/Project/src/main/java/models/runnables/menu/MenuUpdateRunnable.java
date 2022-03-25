@@ -1,8 +1,8 @@
 package models.runnables.menu;
 
-import utils.config.PreferenceData;
 import models.environments.menu.mainmenu.MainMenuEnvironment;
 import prototypes.threading.AUpdateRunnable;
+import utils.config.PreferenceData;
 
 /**
  * The type Menu update runnable.

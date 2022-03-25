@@ -1,8 +1,8 @@
 package models.runnables.game;
 
 import graphics.canvas.game.GameCanvas;
-import utils.config.PreferenceData;
 import prototypes.threading.ARenderRunnable;
+import utils.config.PreferenceData;
 
 /**
  * The type Game render runnable.

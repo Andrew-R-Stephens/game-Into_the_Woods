@@ -1,8 +1,8 @@
 package prototypes.window.environments.menu.components.types;
 
-import utils.config.PreferenceData;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuComponent;
+import utils.config.PreferenceData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

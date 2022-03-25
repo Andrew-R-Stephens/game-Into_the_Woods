@@ -3,7 +3,6 @@ package prototypes.window.environments.menu;
 import models.environments.menu.MenuBundle;
 import prototypes.controls.AKeyController;
 import prototypes.controls.AMouseController;
-import prototypes.window.environments.AEnvironment;
 import prototypes.window.environments.menu.components.AMenuComponent;
 import utils.drawables.IDrawable;
 import utils.updates.IUpdatable;

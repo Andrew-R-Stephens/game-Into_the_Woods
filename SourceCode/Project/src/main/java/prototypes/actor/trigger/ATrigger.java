@@ -1,11 +1,11 @@
 package prototypes.actor.trigger;
 
 import models.camera.Camera;
-import utils.config.PreferenceData;
 import models.environments.game.GameEnvironment;
 import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
 import prototypes.level.prop.ALevelProp;
+import utils.config.PreferenceData;
 
 import java.awt.*;
 

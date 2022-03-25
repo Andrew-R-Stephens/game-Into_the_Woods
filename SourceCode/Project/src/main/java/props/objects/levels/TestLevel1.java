@@ -22,6 +22,8 @@ public class TestLevel1 extends ALevel {
     public TestLevel1(GameEnvironment gameModel) {
         super(gameModel);
 
+        setStartOrigin(200, 50);
+
         // Walls
         addProp(new TestLevelPropStatic(-500, 0, 500, 1080, 0, 0, false));
         addProp(new TestLevelPropStatic(9000, 0, 100, 1080, 0, 0, false));
@@ -66,4 +68,5 @@ public class TestLevel1 extends ALevel {
     public ArrayList<ALevelProp> getLevelProps() {
         return levelProps;
     }
+
 }

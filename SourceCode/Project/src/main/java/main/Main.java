@@ -9,15 +9,15 @@ import models.controls.game.GameKeyControls;
 import models.controls.game.GameMouseControls;
 import models.controls.menu.MenuKeyControls;
 import models.controls.menu.MenuMouseControls;
-import utils.config.PreferenceData;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
 import models.environments.menu.mainmenu.MainMenuEnvironment;
-import props.objects.levels.LevelList;
 import models.runnables.game.GameRenderRunnable;
 import models.runnables.game.GameUpdateRunnable;
 import models.runnables.menu.MenuRenderRunnable;
 import models.runnables.menu.MenuUpdateRunnable;
+import props.objects.levels.LevelList;
+import utils.config.PreferenceData;
 import utils.files.PreferencesXMLParser;
 import utils.files.Resources;
 

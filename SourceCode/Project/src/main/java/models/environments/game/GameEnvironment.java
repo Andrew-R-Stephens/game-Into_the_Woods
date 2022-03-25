@@ -4,7 +4,6 @@ import models.camera.Camera;
 import models.controls.GameControlsModel;
 import models.controls.game.GameKeyControls;
 import models.controls.game.GameMouseControls;
-import utils.config.PreferenceData;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
 import props.objects.gameactors.TestActor;
@@ -14,6 +13,7 @@ import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
 import prototypes.level.prop.ALevelProp;
 import prototypes.window.environments.AEnvironment;
+import utils.config.PreferenceData;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -49,7 +49,6 @@ public class GameEnvironment extends AEnvironment {
 
         super.init(parentEnvironmentsModel, controlsViewModel.getKeyController(), controlsViewModel.getMouseController());
 
-
         setLevelModel(levelModel);
 
         // Add in the Main Test Character
@@ -64,6 +63,9 @@ public class GameEnvironment extends AEnvironment {
 
     }
 
+    public void build() {
+
+    }
 
     @Override
     public void update(float delta) {
@@ -71,7 +73,7 @@ public class GameEnvironment extends AEnvironment {
         if(keyController instanceof GameKeyControls kc) {
             if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
                 kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
-                parentEnvironmentsModel.setCurrentEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
+                parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
                 parentEnvironmentsModel.applyEnvironment();
             }
         }
@@ -89,10 +91,9 @@ public class GameEnvironment extends AEnvironment {
         // Update HUD overlay
         updateHUD(delta);
 
-        while(!actorsQueue.isEmpty()) {
+        for(int i = 0; i < 10 && actorsQueue.size() >= 1; i++) {
             addGameObject(actorsQueue.remove());
         }
-
     }
 
     /**
@@ -267,6 +268,8 @@ public class GameEnvironment extends AEnvironment {
 
     @Override
     public void reset() {
+        actors.clear();
+        actors.add(character);
         character.reset(levelModel.getCurrentLevel().getCharacterOrigin());
         levelModel.reset();
     }

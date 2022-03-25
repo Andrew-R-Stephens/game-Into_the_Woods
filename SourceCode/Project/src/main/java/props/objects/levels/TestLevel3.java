@@ -23,6 +23,8 @@ public class TestLevel3 extends ALevel {
     public TestLevel3(GameEnvironment gameModel) {
         super(gameModel);
 
+        setStartOrigin(200, 50);
+
         for(int i = 0; i < 1000; i++) {
             addProp(new TestLevelPropStatic(i*20, 500+(-5*i*.8f), 20, 20, 0, 0, false));
         }
@@ -40,4 +42,5 @@ public class TestLevel3 extends ALevel {
     public ArrayList<ALevelProp> getLevelProps() {
         return levelProps;
     }
+
 }

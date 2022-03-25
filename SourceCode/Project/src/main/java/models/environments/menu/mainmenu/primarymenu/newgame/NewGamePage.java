@@ -1,10 +1,12 @@
 package models.environments.menu.mainmenu.primarymenu.newgame;
 
-import utils.config.PreferenceData;
 import models.environments.EnvironmentsHandler;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
+import prototypes.window.environments.menu.components.AMenuComponent;
 import prototypes.window.environments.menu.components.types.AMenuButton;
+import utils.config.PreferenceData;
+import utils.files.Resources;
 
 import java.awt.*;
 
@@ -39,7 +41,9 @@ public class NewGamePage extends AMenu {
             }
         };
         button_characterCreate.setText("Create Character");
-        components.add(button_characterCreate);
+        button_characterCreate.setBackgroundImage(Resources.getImage("testbutton"));
+        button_characterCreate.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+
 
 
         AMenuButton button_characterConfirm = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 200, 200, 50) {
@@ -56,7 +60,9 @@ public class NewGamePage extends AMenu {
             }
         };
         button_characterConfirm.setText("Confirm Character");
-        components.add(button_characterConfirm);
+        button_characterConfirm.setBackgroundImage(Resources.getImage("testbutton"));
+        button_characterConfirm.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+
 
         AMenuButton button_back = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 500, 200, 50) {
             @Override
@@ -71,6 +77,11 @@ public class NewGamePage extends AMenu {
             }
         };
         button_back.setText("Back");
+        button_back.setBackgroundImage(Resources.getImage("testbutton"));
+        button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+
+        components.add(button_characterCreate);
+        components.add(button_characterConfirm);
         components.add(button_back);
     }
 

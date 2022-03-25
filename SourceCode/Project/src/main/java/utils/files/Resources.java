@@ -37,10 +37,6 @@ public class Resources {
     public Resources() {
     }
 
-    public static BufferedImage getImage(String imageKey) {
-        return imagesFiles.get(imageKey);
-    }
-
     /**
      * Init.
      */
@@ -148,11 +144,12 @@ public class Resources {
     public void loadTextFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
+                "Preferences.xml",
                 "SaveData.xml"
         };
 
         for(String fileName: fileNames) {
-            textFiles.put(fileName, loadTextFile(fileName));
+            textFiles.put(fileName.split("\\.")[0], loadTextFile(fileName));
         }
 
     }
@@ -171,6 +168,17 @@ public class Resources {
 
         return new File(fileName);
     }
+
+
+    public static BufferedImage getImage(String imageKey) {
+        return imagesFiles.get(imageKey);
+    }
+
+    public static File getFile(String fileKey) {
+        System.out.println(textFiles.get(fileKey));
+        return textFiles.get(fileKey);
+    }
+
 
     /**
      * Displays the items read from storage

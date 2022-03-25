@@ -46,8 +46,11 @@ public abstract class ALevel {
         return startOrigin;
     }
 
+    public void setStartOrigin(int x, int y) {
+        startOrigin = new int[]{x, y};
+    }
+
     public void reset() {
-        levelProps.clear();
     }
 
 }

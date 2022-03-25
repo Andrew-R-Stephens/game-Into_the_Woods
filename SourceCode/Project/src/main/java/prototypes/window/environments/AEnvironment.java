@@ -1,6 +1,5 @@
 package prototypes.window.environments;
 
-import models.controls.GameControlsModel;
 import models.environments.EnvironmentsHandler;
 import prototypes.controls.AKeyController;
 import prototypes.controls.AMouseController;

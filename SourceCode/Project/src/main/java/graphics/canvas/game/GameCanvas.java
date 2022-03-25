@@ -1,10 +1,10 @@
 package graphics.canvas.game;
 
-import utils.config.PreferenceData;
 import models.environments.game.GameEnvironment;
 import models.runnables.game.GameRenderRunnable;
 import models.runnables.game.GameUpdateRunnable;
 import prototypes.window.ACanvas;
+import utils.config.PreferenceData;
 
 import java.awt.*;
 

@@ -3,6 +3,7 @@ package models.environments.menu.mainmenu.primarymenu.quit;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.types.AMenuButton;
+import utils.files.Resources;
 
 import java.awt.*;
 
@@ -32,6 +33,9 @@ public class QuitPage extends AMenu {
             }
         };
         button_back.setText("Back");
+        button_back.setBackgroundImage(Resources.getImage("testbutton"));
+        button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+
         components.add(button_back);
     }
 

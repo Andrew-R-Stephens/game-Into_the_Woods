@@ -1,8 +1,6 @@
 package graphics.canvas.menu;
 
 import models.environments.menu.mainmenu.MainMenuEnvironment;
-import models.runnables.game.GameRenderRunnable;
-import models.runnables.game.GameUpdateRunnable;
 import models.runnables.menu.MenuRenderRunnable;
 import models.runnables.menu.MenuUpdateRunnable;
 import prototypes.window.ACanvas;

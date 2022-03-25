@@ -1,12 +1,12 @@
 package models.environments.menu.mainmenu.primarymenu.continuegame;
 
-import utils.config.PreferenceData;
 import models.environments.EnvironmentsHandler;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuComponent;
 import prototypes.window.environments.menu.components.types.AMenuButton;
 import prototypes.window.environments.menu.components.types.AMenuImage;
+import utils.config.PreferenceData;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -60,6 +60,8 @@ public class LevelSelectPage extends AMenu {
             }
         };
         button_level1.setText("Level 1");
+        button_level1.setBackgroundImage(Resources.getImage("testbutton"));
+        button_level1.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_level2 = new AMenuButton(
                 parentModel,
@@ -80,6 +82,8 @@ public class LevelSelectPage extends AMenu {
             }
         };
         button_level2.setText("Level 2");
+        button_level2.setBackgroundImage(Resources.getImage("testbutton"));
+        button_level2.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_back = new AMenuButton(
                 parentModel,
@@ -97,6 +101,8 @@ public class LevelSelectPage extends AMenu {
             }
         };
         button_back.setText("Back");
+        button_back.setBackgroundImage(Resources.getImage("testbutton"));
+        button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         components.add(imageView_label);
         components.add(button_level1);

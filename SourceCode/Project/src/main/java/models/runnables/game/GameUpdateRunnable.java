@@ -1,8 +1,8 @@
 package models.runnables.game;
 
-import utils.config.PreferenceData;
 import models.environments.game.GameEnvironment;
 import prototypes.threading.AUpdateRunnable;
+import utils.config.PreferenceData;
 
 /**
  * The type Game update runnable.

@@ -1,8 +1,8 @@
 package prototypes.level.prop;
 
 import models.camera.Camera;
-import utils.config.PreferenceData;
 import prototypes.actor.AActor;
+import utils.config.PreferenceData;
 
 import java.awt.*;
 

@@ -2,9 +2,9 @@ package props.objects.gameactors;
 
 import models.camera.Camera;
 import models.controls.GameControlsModel;
-import utils.config.PreferenceData;
 import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
+import utils.config.PreferenceData;
 
 import java.awt.*;
 

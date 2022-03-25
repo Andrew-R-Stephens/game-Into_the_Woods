@@ -29,6 +29,9 @@ public class Camera {
     public static void moveTo(float x2, float y2) {
         x += (x2 - x) * acceleration;
         y += (y2 - y) * acceleration;
+
+        //x += (x2 - x) * Math.abs(((x2 - x) / x2));
+        //y += (y2 - y) * Math.abs(((y2 - y) / y2));
     }
 
     /**

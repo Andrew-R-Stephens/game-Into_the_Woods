@@ -1,9 +1,9 @@
 package prototypes.window.environments.menu.components.types;
 
 import models.controls.menu.MenuMouseControls;
-import utils.config.PreferenceData;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuComponent;
+import utils.config.PreferenceData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -56,7 +56,7 @@ public abstract class AMenuButton extends AMenuComponent {
         g.setColor(Color.RED);
         float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
 
-        g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
+        //g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
 
         if(backgroundImage != null) {
             switch (scaleType) {
@@ -65,10 +65,10 @@ public abstract class AMenuButton extends AMenuComponent {
                     float sBH = h / (float)backgroundImage.getHeight();
                     float s = Math.min(sBW, sBH);
                     g.drawImage(backgroundImage,
-                            (int)(((x * sW) + (w * sW * .5f)) - (backgroundImage.getWidth() * s * .5f)),
-                            (int)(((y * sH) + (h * sH * .5f)) - (backgroundImage.getHeight() * s * .5f)),
-                            (int)(backgroundImage.getWidth() * s),
-                            (int)(backgroundImage.getHeight() * s),
+                            (int)(((x * sW) + (w * sW * .5f)) - (backgroundImage.getWidth() * sW * s * .5f)),
+                            (int)(((y * sH) + (h * sH * .5f)) - (backgroundImage.getHeight() * sH * s * .5f)),
+                            (int)(backgroundImage.getWidth() * sW * s),
+                            (int)(backgroundImage.getHeight() * sH * s),
                             null);
                 }
 
@@ -96,7 +96,11 @@ public abstract class AMenuButton extends AMenuComponent {
             }
         }
 
-        g.drawString(text, (int)((x * sW) + (5 * sW)), (int)((y * sH) + (20 * sH)));
+        int strWidth = g.getFontMetrics().stringWidth(text);
+        g.drawString(
+                text,
+                (int)((x * sW) + (w * sW * .5) - (strWidth * sW * .5)),
+                (int)((y * sH) + (h * sH * .5)));
 
         if(isFocused) {
             g.setColor(new Color(255, 255, 255, 50));

@@ -1,8 +1,8 @@
 package models.runnables.menu;
 
 import graphics.canvas.menu.MenuCanvas;
-import utils.config.PreferenceData;
 import prototypes.threading.ARenderRunnable;
+import utils.config.PreferenceData;
 
 /**
  * The type Menu render runnable.

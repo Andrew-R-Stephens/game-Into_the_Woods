@@ -12,8 +12,8 @@
         -->
         <resolutionWidthDefault>1920</resolutionWidthDefault>
         <resolutionHeightDefault>1080</resolutionHeightDefault>
-        <resolutionWidth>1024</resolutionWidth>
-        <resolutionHeight>576</resolutionHeight>
+        <resolutionWidth>1920</resolutionWidth>
+        <resolutionHeight>1080</resolutionHeight>
 
         <!--
         0 = Windowed,

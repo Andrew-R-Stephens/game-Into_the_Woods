@@ -1,8 +1,8 @@
 package graphics.window;
 
-import utils.config.PreferenceData;
 import models.environments.EnvironmentsHandler;
 import prototypes.window.AWindow;
+import utils.config.PreferenceData;
 
 import javax.swing.*;
 import java.awt.*;
