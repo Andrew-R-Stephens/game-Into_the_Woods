@@ -12,10 +12,8 @@ import models.controls.menu.MenuMouseControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
 import models.environments.menu.mainmenu.MainMenuEnvironment;
-import models.runnables.game.GameRenderRunnable;
-import models.runnables.game.GameUpdateRunnable;
-import models.runnables.menu.MenuRenderRunnable;
-import models.runnables.menu.MenuUpdateRunnable;
+import models.runnables.RenderRunnable;
+import models.runnables.UpdateRunnable;
 import props.objects.levels.LevelList;
 import utils.config.PreferenceData;
 import utils.files.PreferencesXMLParser;
@@ -36,11 +34,11 @@ public class Main {
     private static MainMenuEnvironment mainMenuModel;
     private static GameEnvironment gameModel;
 
-    private static GameUpdateRunnable gameUpdateRunnable;
-    private static GameRenderRunnable gameRenderRunnable;
+    private static UpdateRunnable gameUpdateRunnable;
+    private static RenderRunnable gameRenderRunnable;
 
-    private static MenuUpdateRunnable menuUpdateRunnable;
-    private static MenuRenderRunnable menuRenderRunnable;
+    private static UpdateRunnable menuUpdateRunnable;
+    private static RenderRunnable menuRenderRunnable;
 
     private static LevelList levelsListModel;
 
@@ -104,10 +102,10 @@ public class Main {
         mainMenuCanvas = new MenuCanvas();
         gameCanvas = new GameCanvas();
 
-        gameUpdateRunnable = new GameUpdateRunnable();
-        gameRenderRunnable = new GameRenderRunnable();
-        menuUpdateRunnable = new MenuUpdateRunnable();
-        menuRenderRunnable = new MenuRenderRunnable();
+        gameUpdateRunnable = new UpdateRunnable();
+        gameRenderRunnable = new RenderRunnable();
+        menuUpdateRunnable = new UpdateRunnable();
+        menuRenderRunnable = new RenderRunnable();
 
         // Create Window
         window = new MainWindow();

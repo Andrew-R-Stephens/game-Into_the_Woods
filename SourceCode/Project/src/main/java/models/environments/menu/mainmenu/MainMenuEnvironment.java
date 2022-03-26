@@ -11,13 +11,13 @@ import java.awt.*;
  */
 public class MainMenuEnvironment extends AMenuModel {
 
-    private AMenu landingPage;
+    //private AMenu landingPage;
 
     /**
      * Init.
      */
     public void init() {
-        landingPage = new StartScreenPage(this);
+        AMenu landingPage = new StartScreenPage(this);
 
         initPage(landingPage);
     }

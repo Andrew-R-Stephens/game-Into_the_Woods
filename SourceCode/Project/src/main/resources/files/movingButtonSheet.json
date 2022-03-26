@@ -1,0 +1,54 @@
+{ "frames": [
+   {
+    "filename": "Sprite-0004 0.",
+    "frame": { "x": 5, "y": 5, "w": 1000, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 300 },
+    "sourceSize": { "w": 1000, "h": 300 },
+    "duration": 100
+   },
+   {
+    "filename": "Sprite-0004 1.",
+    "frame": { "x": 1010, "y": 5, "w": 1000, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 300 },
+    "sourceSize": { "w": 1000, "h": 300 },
+    "duration": 100
+   },
+   {
+    "filename": "Sprite-0004 2.",
+    "frame": { "x": 2015, "y": 5, "w": 1000, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 300 },
+    "sourceSize": { "w": 1000, "h": 300 },
+    "duration": 100
+   },
+   {
+    "filename": "Sprite-0004 3.",
+    "frame": { "x": 3020, "y": 5, "w": 1000, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 300 },
+    "sourceSize": { "w": 1000, "h": 300 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.34.1-x64",
+  "image": "movingButtonSheet.png",
+  "format": "RGBA8888",
+  "size": { "w": 4025, "h": 310 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Flattened", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

@@ -1,8 +1,8 @@
 package graphics.canvas.game;
 
 import models.environments.game.GameEnvironment;
-import models.runnables.game.GameRenderRunnable;
-import models.runnables.game.GameUpdateRunnable;
+import models.runnables.RenderRunnable;
+import models.runnables.UpdateRunnable;
 import prototypes.window.ACanvas;
 import utils.config.PreferenceData;
 
@@ -53,8 +53,7 @@ public class GameCanvas extends ACanvas {
 
         g.setColor(Color.RED);
         float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
-        g.drawString("FPS: " + GameRenderRunnable.getLastFrames(), (int)(20 * sW), (PreferenceData.window_height_actual - 70));
-        g.drawString("Ticks: " + GameUpdateRunnable.lastUpdates, (int)(20 * sW), (PreferenceData.window_height_actual - 50));
+
     }
 
 }

@@ -1,22 +1,22 @@
-package models.runnables.game;
+package models.runnables;
 
-import graphics.canvas.game.GameCanvas;
-import prototypes.threading.ARenderRunnable;
+import prototypes.threading.ARunnable;
+import prototypes.window.ACanvas;
 import utils.config.PreferenceData;
 
 /**
  * The type Game render runnable.
  */
-public class GameRenderRunnable extends ARenderRunnable {
+public class RenderRunnable extends ARunnable {
 
-    private GameCanvas canvas;
+    private ACanvas canvas;
 
     /**
      * Init.
      *
      * @param canvas the canvas
      */
-    public void init(GameCanvas canvas) {
+    public void init(ACanvas canvas) {
         this.canvas = canvas;
     }
 
@@ -35,7 +35,7 @@ public class GameRenderRunnable extends ARenderRunnable {
             lastTime = now;
 
             if(delta >= 1) {
-                frames++;
+                updates++;
                 canvas.render();
                 delta--;
             }
@@ -43,9 +43,9 @@ public class GameRenderRunnable extends ARenderRunnable {
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
 
-                System.out.println("Game Rendering");
-                lastFrames = frames;
-                frames = 0;
+                System.out.println("Rendering");
+                lastUpdates = updates;
+                updates = 0;
             }
 
         }

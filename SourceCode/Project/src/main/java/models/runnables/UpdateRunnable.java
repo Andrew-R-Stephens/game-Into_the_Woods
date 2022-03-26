@@ -1,33 +1,33 @@
-package models.runnables.menu;
+package models.runnables;
 
-import models.environments.menu.mainmenu.MainMenuEnvironment;
-import prototypes.threading.AUpdateRunnable;
+import prototypes.threading.ARunnable;
+import prototypes.window.environments.AEnvironment;
 import utils.config.PreferenceData;
 
 /**
- * The type Menu update runnable.
+ * The type Game update runnable.
  */
-public class MenuUpdateRunnable extends AUpdateRunnable {
+public class UpdateRunnable extends ARunnable {
 
-    private MainMenuEnvironment menuModel;
+    private AEnvironment environment;
 
     /**
      * Init.
      *
-     * @param menuModel the menu model
+     * @param environment the game model
      */
-    public void init(MainMenuEnvironment menuModel) {
-        this.menuModel = menuModel;
+    public void init(AEnvironment environment) {
+        this.environment = environment;
     }
 
     @Override
     public void run() {
         long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
-        final short targetFPS = PreferenceData.GAME_UPDATE_RATE;
-        double ns = 1000000000 / (float)targetFPS, delta = 0;
+        final short targetTicks = PreferenceData.GAME_UPDATE_RATE;
+        double ns = 1000000000 / (float) targetTicks, delta = 0;
         float updateRatio = 1;
 
-        // GAME LOOP
+                // GAME LOOP
 
         isRunning = true;
         while(isRunning) {
@@ -37,7 +37,7 @@ public class MenuUpdateRunnable extends AUpdateRunnable {
 
             if(delta >= 1) {
                 updateRatio = lastUpdates / (float) PreferenceData.GAME_UPDATE_RATE;
-                menuModel.update(updateRatio);
+                environment.update(updateRatio);
                 updates++;
 
                 delta--;
@@ -46,10 +46,10 @@ public class MenuUpdateRunnable extends AUpdateRunnable {
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
 
-                System.out.println("Menu Updating");
+                System.out.println("Updating");
                 lastUpdates = updates;
-
                 updates = 0;
+
             }
 
         }

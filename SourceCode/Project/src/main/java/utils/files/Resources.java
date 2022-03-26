@@ -145,7 +145,8 @@ public class Resources {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
                 "Preferences.xml",
-                "SaveData.xml"
+                "SaveData.xml",
+                "movingButtonSheet.json"
         };
 
         for(String fileName: fileNames) {

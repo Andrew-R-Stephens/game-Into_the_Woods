@@ -2,9 +2,7 @@ package models.environments;
 
 import graphics.window.MainWindow;
 import models.environments.game.GameEnvironment;
-import prototypes.threading.ARenderRunnable;
 import prototypes.threading.ARunnable;
-import prototypes.threading.AUpdateRunnable;
 import prototypes.window.ACanvas;
 import prototypes.window.environments.AEnvironment;
 
@@ -48,7 +46,7 @@ public class EnvironmentsHandler {
      * @param uRunnable the u runnable
      * @param rRunnable the r runnable
      */
-    public void addPair(AEnvironment model, ACanvas canvas, AUpdateRunnable uRunnable, ARenderRunnable rRunnable) {
+    public void addPair(AEnvironment model, ACanvas canvas, ARunnable uRunnable, ARunnable rRunnable) {
         environments.add(model);
         canvases.add(canvas);
         updateRunnables.add(uRunnable);

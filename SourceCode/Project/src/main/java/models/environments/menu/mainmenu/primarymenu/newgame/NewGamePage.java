@@ -3,7 +3,6 @@ package models.environments.menu.mainmenu.primarymenu.newgame;
 import models.environments.EnvironmentsHandler;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
-import prototypes.window.environments.menu.components.AMenuComponent;
 import prototypes.window.environments.menu.components.types.AMenuButton;
 import utils.config.PreferenceData;
 import utils.files.Resources;
