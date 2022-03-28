@@ -12,6 +12,7 @@ import utils.config.PreferenceData;
 import utils.files.Resources;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * The type Main menu page.
@@ -31,6 +32,8 @@ public class MainMenuPage extends AMenu {
         bundle.addPage(new OptionsPage(parentMenuModel));
         bundle.addPage(new HelpPage(parentMenuModel));
         bundle.addPage(new QuitPage(parentMenuModel));
+
+        BufferedImage img_button = Resources.getImage("testbutton2");
 
         float centerHoriz = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
         int buttonW = 200, buttonH = 50;
@@ -55,7 +58,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_newGame.setText("New Game");
-        button_newGame.setBackgroundImage(Resources.getImage("testbutton"));
+        button_newGame.setBackgroundImage(img_button);
         button_newGame.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_continueGame = new AMenuButton(
@@ -76,7 +79,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_continueGame.setText("Continue Game");
-        button_continueGame.setBackgroundImage(Resources.getImage("testbutton"));
+        button_continueGame.setBackgroundImage(img_button);
         button_continueGame.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_options = new AMenuButton(
@@ -97,7 +100,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_options.setText("Options");
-        button_options.setBackgroundImage(Resources.getImage("testbutton"));
+        button_options.setBackgroundImage(img_button);
         button_options.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_help = new AMenuButton(
@@ -118,7 +121,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_help.setText("Help");
-        button_help.setBackgroundImage(Resources.getImage("testbutton"));
+        button_help.setBackgroundImage(img_button);
         button_help.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_quit = new AMenuButton(parentMenuModel,
@@ -137,7 +140,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_quit.setText("Quit Button");
-        button_quit.setBackgroundImage(Resources.getImage("testbutton"));
+        button_quit.setBackgroundImage(img_button);
         button_quit.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         components.add(button_newGame);

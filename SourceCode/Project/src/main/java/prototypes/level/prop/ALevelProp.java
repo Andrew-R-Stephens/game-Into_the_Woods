@@ -3,6 +3,7 @@ package prototypes.level.prop;
 import models.camera.Camera;
 import prototypes.actor.AActor;
 import utils.config.PreferenceData;
+import utils.files.Resources;
 
 import java.awt.*;
 
@@ -36,7 +37,9 @@ public abstract class ALevelProp extends AActor {
         double scaledW = w * PreferenceData.scaledW;
         double scaledH = h * PreferenceData.scaledH;
 
-        g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
+        //g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
+        g.drawImage(Resources.getImage("dirt"), (int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH),
+                null);
     }
 
 }

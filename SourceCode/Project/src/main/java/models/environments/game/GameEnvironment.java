@@ -104,13 +104,9 @@ public class GameEnvironment extends AEnvironment {
 
         // Render Game Actors
         for (AActor gameObject : actors) {
-            if (gameObject instanceof TestCharacter o) {
-                o.draw(g);
-            }
-
-            if (gameObject instanceof TestActor o) {
-                o.draw(g);
-            }
+            //if (gameObject instanceof TestCharacter o) {
+                gameObject.draw(g);
+            //}
         }
 
         // Render Level Props

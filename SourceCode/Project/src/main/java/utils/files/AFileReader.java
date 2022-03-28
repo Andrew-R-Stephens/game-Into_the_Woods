@@ -12,6 +12,10 @@ public abstract class AFileReader {
      */
     protected File file;
 
+    public AFileReader(String fullPath) {
+
+    }
+
     /**
      * Instantiates a new A file reader.
      *

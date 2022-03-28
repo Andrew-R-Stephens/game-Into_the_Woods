@@ -6,6 +6,7 @@ import prototypes.window.environments.menu.components.types.AMenuButton;
 import utils.files.Resources;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * The type Help page.
@@ -20,6 +21,8 @@ public class HelpPage extends AMenu {
     public HelpPage(AMenuModel parentModel) {
         super(parentModel);
 
+        BufferedImage img_button = Resources.getImage("img_button2");
+
         AMenuButton button_back = new AMenuButton(parentModel,500, 500, 200, 50) {
             @Override
             public boolean onClick(float x, float y) {
@@ -33,7 +36,7 @@ public class HelpPage extends AMenu {
             }
         };
         button_back.setText("Back");
-        button_back.setBackgroundImage(Resources.getImage("testbutton"));
+        button_back.setBackgroundImage(img_button);
         button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         components.add(button_back);

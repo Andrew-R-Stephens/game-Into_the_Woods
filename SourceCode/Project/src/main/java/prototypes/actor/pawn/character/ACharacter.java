@@ -12,7 +12,7 @@ import java.awt.*;
  */
 public abstract class ACharacter extends APawn implements IDrawable {
 
-    private final GameControlsModel controlsModel;
+    protected final GameControlsModel controlsModel;
 
     /* Dictates whether or not the character has attempted to jump or not. This resets if the character collides with
      * an ALevelProp or presses the Jump button.

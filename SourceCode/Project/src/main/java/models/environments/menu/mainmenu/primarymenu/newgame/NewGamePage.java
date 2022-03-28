@@ -8,6 +8,7 @@ import utils.config.PreferenceData;
 import utils.files.Resources;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * The type New game page.
@@ -27,6 +28,8 @@ public class NewGamePage extends AMenu {
         float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
 
+        BufferedImage img_button = Resources.getImage("img_button2");
+
         AMenuButton button_characterCreate = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 125, 200, 50) {
             @Override
             public boolean onClick(float x, float y) {
@@ -40,7 +43,7 @@ public class NewGamePage extends AMenu {
             }
         };
         button_characterCreate.setText("Create Character");
-        button_characterCreate.setBackgroundImage(Resources.getImage("testbutton"));
+        button_characterCreate.setBackgroundImage(img_button);
         button_characterCreate.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
 
@@ -59,7 +62,7 @@ public class NewGamePage extends AMenu {
             }
         };
         button_characterConfirm.setText("Confirm Character");
-        button_characterConfirm.setBackgroundImage(Resources.getImage("testbutton"));
+        button_characterConfirm.setBackgroundImage(img_button);
         button_characterConfirm.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
 
@@ -76,7 +79,7 @@ public class NewGamePage extends AMenu {
             }
         };
         button_back.setText("Back");
-        button_back.setBackgroundImage(Resources.getImage("testbutton"));
+        button_characterConfirm.setBackgroundImage(img_button);
         button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         components.add(button_characterCreate);

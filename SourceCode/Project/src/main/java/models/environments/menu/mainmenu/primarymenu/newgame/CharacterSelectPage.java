@@ -6,6 +6,8 @@ import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.types.AMenuButton;
 import utils.files.Resources;
 
+import java.awt.image.BufferedImage;
+
 /**
  * The type Character create page.
  */
@@ -21,6 +23,8 @@ public class CharacterSelectPage extends AMenu {
     public CharacterSelectPage(AMenuModel parentModel) {
         super(parentModel);
 
+        BufferedImage img_button = Resources.getImage("testbutton2");
+
         AMenuButton character1 = new AMenuButton(parentModel, 500, 500) {
             @Override
             public boolean onClick(float x, float y) {
@@ -35,7 +39,7 @@ public class CharacterSelectPage extends AMenu {
             }
         };
         character1.setText("Blue Guy");
-        character1.setBackgroundImage(Resources.getImage("testbutton"));
+        character1.setBackgroundImage(img_button);
         character1.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton character2 = new AMenuButton(parentModel, 900, 500) {
@@ -52,7 +56,7 @@ public class CharacterSelectPage extends AMenu {
             }
         };
         character2.setText("Pink Girl");
-        character2.setBackgroundImage(Resources.getImage("testbutton"));
+        character2.setBackgroundImage(img_button);
         character2.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_back = new AMenuButton(parentModel, 700, 700) {
@@ -68,7 +72,7 @@ public class CharacterSelectPage extends AMenu {
             }
         };
         button_back.setText("Back");
-        button_back.setBackgroundImage(Resources.getImage("testbutton"));
+        button_back.setBackgroundImage(img_button);
         button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         components.add(character1);

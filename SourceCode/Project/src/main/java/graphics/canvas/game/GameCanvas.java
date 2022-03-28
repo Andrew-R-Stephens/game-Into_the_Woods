@@ -1,8 +1,6 @@
 package graphics.canvas.game;
 
 import models.environments.game.GameEnvironment;
-import models.runnables.RenderRunnable;
-import models.runnables.UpdateRunnable;
 import prototypes.window.ACanvas;
 import utils.config.PreferenceData;
 

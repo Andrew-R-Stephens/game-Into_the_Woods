@@ -43,7 +43,7 @@ public class RenderRunnable extends ARunnable {
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
 
-                System.out.println("Rendering");
+                System.out.println("Rendering" + canvas.getClass());
                 lastUpdates = updates;
                 updates = 0;
             }

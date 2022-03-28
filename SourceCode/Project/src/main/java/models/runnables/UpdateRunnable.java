@@ -46,7 +46,7 @@ public class UpdateRunnable extends ARunnable {
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
 
-                System.out.println("Updating");
+                System.out.println("Updating" + environment.getClass());
                 lastUpdates = updates;
                 updates = 0;
 

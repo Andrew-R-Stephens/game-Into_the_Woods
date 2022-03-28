@@ -8,6 +8,7 @@ import utils.config.PreferenceData;
 import utils.files.Resources;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * The type Start screen page.
@@ -22,6 +23,8 @@ public class StartScreenPage extends AMenu {
     public StartScreenPage(AMenuModel parentMenuModel) {
 
         super(parentMenuModel);
+
+        BufferedImage img_button = Resources.getImage("testbutton2");
 
         float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
@@ -43,8 +46,9 @@ public class StartScreenPage extends AMenu {
 
             }
         };
+
         startButton.setText("Start button");
-        startButton.setBackgroundImage(Resources.getImage("testbutton"));
+        startButton.setBackgroundImage(img_button);
         startButton.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         components.add(startButton);

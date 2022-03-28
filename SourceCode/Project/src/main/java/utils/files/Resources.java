@@ -5,9 +5,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,7 +55,9 @@ public class Resources {
 
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
+                "dirt.png",
                 "testbutton.png",
+                "testbutton2.png",
                 "avatar.png",
                 "backgroundImage.png"};
 
@@ -65,11 +65,6 @@ public class Resources {
             imagesFiles.put(fileName.split("\\.")[0], loadImageFile(fileName));
         }
 
-        for(String fileName: fileNames) {
-            if(imagesFiles.get(fileName) != null) {
-                System.out.println(imagesFiles.get(fileName.split("\\.")[0]).getWidth());
-            }
-        }
     }
 
     /**
@@ -105,12 +100,6 @@ public class Resources {
         for(String fileName: fileNames) {
             String rawName = fileName.split("\\.")[0];
             audioFiles.put(rawName, loadAudioFile(fileName));
-        }
-
-        for(String fileName: fileNames) {
-            if(audioFiles.get(fileName) != null) {
-                System.out.println(audioFiles.keySet());
-            }
         }
 
     }
@@ -150,7 +139,7 @@ public class Resources {
         };
 
         for(String fileName: fileNames) {
-            textFiles.put(fileName.split("\\.")[0], loadTextFile(fileName));
+            textFiles.put(fileName, loadTextFile(fileName));
         }
 
     }
@@ -162,12 +151,35 @@ public class Resources {
      * @return the file
      */
     public File loadTextFile(String fileName) {
+        String  name = fileName.split("\\.")[0],
+                type = fileName.split("\\.")[1];
 
-        if (fileName == null) {
-            throw new NullPointerException("File name cannot be null");
+        File file = null;
+        try {
+
+            file = File.createTempFile(name, type);
+            InputStream is =
+                    AFileReader.class.getClassLoader().getResourceAsStream("files/" + fileName);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader r = new BufferedReader(isr);
+
+            // Create Write stream and parse through
+            FileWriter writer = new FileWriter(file);
+            String line;
+            while (((line = r.readLine())) != null) {
+                writer.write(line + "\n");
+            }
+
+            writer.close();
+            r.close();
+            isr.close();
+            is.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        return new File(fileName);
+        return file;
     }
 
 
@@ -175,8 +187,7 @@ public class Resources {
         return imagesFiles.get(imageKey);
     }
 
-    public static File getFile(String fileKey) {
-        System.out.println(textFiles.get(fileKey));
+    public static File getTextFile(String fileKey) {
         return textFiles.get(fileKey);
     }
 
@@ -188,16 +199,17 @@ public class Resources {
     public String toString() {
         String s = "Image Files:\n";
         for(String key: imagesFiles.keySet()) {
-            s += "\t" + key + " " + (imagesFiles.get(key) != null) + "\n";
+            s +=    "\t" + key + " " + (imagesFiles.get(key) != null) + "\n";
         }
 
         s += "Audio Files:\n";
         for(String key: audioFiles.keySet()) {
-            s += "\t" + key + " " + (audioFiles.get(key) != null) + "\n";
+            s +=    "\t" + key + " " + (audioFiles.get(key) != null) + "\n";
         }
         s += "Text Files:\n";
         for(String key: textFiles.keySet()) {
-            s += "\t" + key + " " + (textFiles.get(key) != null) + "\n";
+            s +=    "\t" + key + " " +
+                    (textFiles.get(key) != null) + " " + "\n";
         }
 
         return s;

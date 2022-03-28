@@ -2,7 +2,6 @@ package prototypes.window.environments.menu;
 
 import models.controls.MenuControlsModel;
 import models.environments.EnvironmentsHandler;
-import models.environments.menu.mainmenu.startscreen.StartScreenPage;
 import prototypes.window.environments.AEnvironment;
 
 import java.awt.*;

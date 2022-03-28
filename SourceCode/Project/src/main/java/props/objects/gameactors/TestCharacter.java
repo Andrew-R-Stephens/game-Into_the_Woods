@@ -5,6 +5,7 @@ import models.controls.GameControlsModel;
 import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
 import utils.config.PreferenceData;
+import utils.files.Resources;
 
 import java.awt.*;
 
@@ -44,6 +45,12 @@ public class TestCharacter extends ACharacter {
         float ty =
                 (float)(((PreferenceData.window_height_actual * .5) - (h * PreferenceData.scaledH)) - (y * PreferenceData.scaledH));
 
+        if(vX < 0) {
+            facing = Facing.LEFT;
+        } else if (vX > 0) {
+            facing = Facing.RIGHT;
+        }
+
         Camera.moveTo(tx, ty);
     }
 
@@ -62,8 +69,18 @@ public class TestCharacter extends ACharacter {
         centerX -= scaleW;
         centerY -= scaleH;
 
+        if (facing == Facing.RIGHT) {
+            centerX += scaleW;
+            scaleW *= -1;
+        }
+
         g.setColor(c);
-        g.fillRect((int) (centerX), (int) (centerY), (int) (scaleW), (int) (scaleH));
+        //g.fillRect((int) (centerX), (int) (centerY), (int) (scaleW), (int) (scaleH));
+        g.drawImage(
+                Resources.getImage("avatar"),
+                (int) (centerX), (int) (centerY),
+                (int) (scaleW), (int) (scaleH),
+                null);
         g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
 
     }

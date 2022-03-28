@@ -1,29 +1,38 @@
 package graphics.views;
 
-import utils.drawables.IDrawable;
-
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
  * TODO: Add description
  */
-public class Sprite implements IDrawable {
+public class Sprite {
 
-    private BufferedImage img;
+    private String filename;
+    private int x, y, w, h;
+    private int duration = 100;
 
     /**
-     * Instantiates a new Sprite.
-     *
-     * @param img the img
+     * "filename": "Sprite-0004 0.",
+     *     "frame": { "x": 5, "y": 5, "w": 1000, "h": 300 },
+     *     "rotated": false,
+     *     "trimmed": false,
+     *     "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 300 },
+     *     "sourceSize": { "w": 1000, "h": 300 },
+     *     "duration": 100
      */
-    public Sprite(BufferedImage img) {
-        this.img = img;
+
+    public Sprite(int x, int y, int w, int h, int duration) {
+        this.x = x;
+        this.y = y;
+
+        this.w = w;
+        this.h = h;
+
+        this.duration = duration;
     }
 
-    @Override
-    public void draw(Graphics g) {
-        g.drawImage(img, 0, 0, null);
+    public BufferedImage getSubImage(BufferedImage spritesheet) {
+        return spritesheet.getSubimage(x, y, w, h);
     }
 
 }
