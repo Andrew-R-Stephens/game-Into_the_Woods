@@ -13,11 +13,6 @@ public class MenuMouseControls extends AMouseController {
 
     private final MenuControlsModel controlsViewModel;
 
-    private final int[] mPos = new int[]{-100, -100};
-
-    private boolean isLeftPressed = false;
-    private boolean isRightPressed = false;
-
     /**
      * Instantiates a new Menu mouse controls.
      *
@@ -93,40 +88,6 @@ public class MenuMouseControls extends AMouseController {
         mPos[1] = e.getY();
     }
 
-    /**
-     * Is left pressed boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isLeftPressed() {
-        return isLeftPressed;
-    }
 
-    /**
-     * Is right pressed boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isRightPressed() {
-        return isRightPressed && !controlsViewModel.isAwaitingRelease;
-    }
-
-    /**
-     * Get pos int [ ].
-     *
-     * @return the int [ ]
-     */
-    public int[] getPos() {
-        return mPos;
-    }
-
-    /**
-     * Reset input.
-     */
-    public void resetInput() {
-        isLeftPressed = false;
-        isRightPressed = false;
-        controlsViewModel.isAwaitingRelease = false;
-    }
 
 }

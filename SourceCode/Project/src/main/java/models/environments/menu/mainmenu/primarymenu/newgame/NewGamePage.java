@@ -28,7 +28,7 @@ public class NewGamePage extends AMenu {
         float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
 
-        BufferedImage img_button = Resources.getImage("img_button2");
+        BufferedImage img_button = Resources.getImage("testbutton2");
 
         AMenuButton button_characterCreate = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 125, 200, 50) {
             @Override
@@ -79,7 +79,7 @@ public class NewGamePage extends AMenu {
             }
         };
         button_back.setText("Back");
-        button_characterConfirm.setBackgroundImage(img_button);
+        button_back.setBackgroundImage(img_button);
         button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         components.add(button_characterCreate);

@@ -1,5 +1,8 @@
 package prototypes.window.environments.menu;
 
+import models.controls.MenuControlsModel;
+import models.controls.menu.MenuKeyControls;
+import models.controls.menu.MenuMouseControls;
 import models.environments.menu.MenuBundle;
 import prototypes.controls.AKeyController;
 import prototypes.controls.AMouseController;
@@ -49,6 +52,15 @@ public abstract class AMenu implements IUpdatable, IDrawable {
         mouseController = parentMenuModel.getMouseController();
     }
 
+    public void registerInput() {
+        if(parentMenuModel.getKeyController() instanceof MenuKeyControls kc) {
+            if(kc.isAction(MenuControlsModel.Actions.ESCAPE)) {
+                kc.resetInput();
+                parentMenuModel.pop();
+            }
+        }
+    }
+
     @Override
     public void draw(Graphics g) {
 
@@ -60,6 +72,9 @@ public abstract class AMenu implements IUpdatable, IDrawable {
 
     @Override
     public void update(float delta) {
+
+        registerInput();
+
         for(AMenuComponent c: components) {
             c.update(delta);
         }

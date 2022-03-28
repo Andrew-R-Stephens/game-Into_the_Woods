@@ -29,9 +29,7 @@ public class MenuKeyControls extends AKeyController {
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE -> {
-                System.out.println("Quitting");
-                System.exit(1);
-                //controlsViewModel.setAction(MenuControlsModel.Actions.ESCAPE, true);
+                controlsViewModel.setAction(MenuControlsModel.Actions.ESCAPE, true);
             }case KeyEvent.VK_ENTER -> {
                 controlsViewModel.setAction(MenuControlsModel.Actions.ENTER, true);
             }
@@ -76,6 +74,14 @@ public class MenuKeyControls extends AKeyController {
                 controlsViewModel.setDirectional(MenuControlsModel.Directionals.DOWN, false);
             }
         }
+    }
+
+    public boolean isAction(MenuControlsModel.Actions type) {
+        return controlsViewModel.isAction(type);
+    }
+
+    public void resetInput() {
+        controlsViewModel.resetInput();
     }
 
 }

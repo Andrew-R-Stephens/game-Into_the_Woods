@@ -63,7 +63,10 @@ public abstract class AMenuModel extends AEnvironment {
      * @return the a menu
      */
     public AMenu pop() {
-        return menuStack.pop();
+        if(menuStack.size() > 1)
+            return menuStack.pop();
+
+        return null;
     }
 
     public void popToFirst() {

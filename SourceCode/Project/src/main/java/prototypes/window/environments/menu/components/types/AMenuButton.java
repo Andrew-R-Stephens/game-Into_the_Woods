@@ -1,6 +1,7 @@
 package prototypes.window.environments.menu.components.types;
 
 import models.controls.menu.MenuMouseControls;
+import prototypes.controls.AMouseController;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuComponent;
 import utils.config.PreferenceData;
@@ -118,14 +119,13 @@ public abstract class AMenuButton extends AMenuComponent {
      * Registers the input from the parent MainMenuModel class. That class is defined locally as parentMenuModel.
      */
     public void registerInput() {
-        if(parentMenuModel.getMouseController() instanceof MenuMouseControls mc) {
-            if (mc.isLeftPressed()) {
-                if(onClick(mc.getPos()[0], mc.getPos()[1])) {
-                    mc.resetInput();
-                }
-            } else {
-                isInBounds(mc.getPos()[0], mc.getPos()[1]);
+        AMouseController mc = parentMenuModel.getMouseController();
+        if (mc.isLeftPressed()) {
+            if(onClick(mc.getPos()[0], mc.getPos()[1])) {
+                mc.resetInput();
             }
+        } else {
+            isInBounds(mc.getPos()[0], mc.getPos()[1]);
         }
     }
 

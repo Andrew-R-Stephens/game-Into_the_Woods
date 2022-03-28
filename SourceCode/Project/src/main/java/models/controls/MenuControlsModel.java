@@ -2,15 +2,12 @@ package models.controls;
 
 import prototypes.controls.AControlsModel;
 
+import java.util.Arrays;
+
 /**
  * TODO: Add description
  */
 public class MenuControlsModel extends AControlsModel {
-
-    /**
-     * The Is awaiting release.
-     */
-    public boolean isAwaitingRelease = false;
 
     /**
      * The enum Directionals.
@@ -68,6 +65,10 @@ public class MenuControlsModel extends AControlsModel {
         actions[type.ordinal()] = state;
     }
 
+    public boolean isAction(Actions type) {
+        return actions[type.ordinal()];
+    }
+
     /**
      * Get actions boolean [ ].
      *
@@ -75,6 +76,11 @@ public class MenuControlsModel extends AControlsModel {
      */
     public boolean[] getActions() {
         return actions;
+    }
+
+    public void resetInput() {
+        Arrays.fill(directionals, false);
+        Arrays.fill(actions, false);
     }
 
 }

@@ -21,7 +21,7 @@ public class HelpPage extends AMenu {
     public HelpPage(AMenuModel parentModel) {
         super(parentModel);
 
-        BufferedImage img_button = Resources.getImage("img_button2");
+        BufferedImage img_button = Resources.getImage("testbutton2");
 
         AMenuButton button_back = new AMenuButton(parentModel,500, 500, 200, 50) {
             @Override
