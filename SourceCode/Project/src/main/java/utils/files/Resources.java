@@ -16,17 +16,14 @@ import java.util.Map;
  */
 public class Resources {
 
-    /**
-     * The constant imagesFiles.
-     */
+    private final String PATH_META_INF = "META_INF.xml";
+
+    private final String path_images = "/images/";
+    private final String path_audio = "/audio/";
+    private final String path_textFile = "files/";
+
     private static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
-    /**
-     * The constant audioFiles.
-     */
     private static final Map<String, Clip> audioFiles = new HashMap<>();
-    /**
-     * The constant textFiles.
-     */
     private static final Map<String, File> textFiles = new HashMap<>();
 
     /**
@@ -40,6 +37,8 @@ public class Resources {
      */
     public void init() {
 
+        loadMetaInf();
+
         loadImageFiles();
         loadAudioFiles();
         loadTextFiles();
@@ -51,7 +50,7 @@ public class Resources {
     /**
      * Loads a list of Image Resources listed from File
      */
-    public void loadImageFiles() {
+    private void loadImageFiles() {
 
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
@@ -74,7 +73,7 @@ public class Resources {
      * @return the buffered image
      */
     public BufferedImage loadImageFile(String fileName) {
-        InputStream resourceBuff = Resources.class.getResourceAsStream("/images/" + fileName);
+        InputStream resourceBuff = Resources.class.getResourceAsStream(path_images + fileName);
         try {
             if(resourceBuff != null) {
                 return ImageIO.read(resourceBuff);
@@ -91,7 +90,7 @@ public class Resources {
     /**
      * Loads a list of Audio Resources listed from File
      */
-    public void loadAudioFiles() {
+    private void loadAudioFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
                 "buttonclick.wav"
@@ -114,7 +113,7 @@ public class Resources {
 
         Clip clip = null;
 
-        InputStream resourceBuff = Resources.class.getResourceAsStream("/audio/" + fileName);
+        InputStream resourceBuff = Resources.class.getResourceAsStream(path_audio + fileName);
 
         if (resourceBuff != null) {
             try {
@@ -127,15 +126,20 @@ public class Resources {
         return clip;
     }
 
+    private void loadMetaInf() {
+        loadTextFile(PATH_META_INF);
+    }
+
     /**
      * Loads a list of TextFile Resources listed from File
      */
-    public void loadTextFiles() {
+    private void loadTextFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
                 "Preferences.xml",
                 "SaveData.xml",
-                "movingButtonSheet.json"
+                "movingButtonSheet.json",
+                "hfafsadi.xml"
         };
 
         for(String fileName: fileNames) {
@@ -156,15 +160,17 @@ public class Resources {
 
         File file = null;
         try {
-
             file = File.createTempFile(name, type);
+
             InputStream is =
-                    AFileReader.class.getClassLoader().getResourceAsStream("files/" + fileName);
+                    AFileReader.class.getClassLoader().getResourceAsStream(path_textFile + fileName);
+            if(is == null) {
+                return null;
+            }
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader r = new BufferedReader(isr);
-
-            // Create Write stream and parse through
             FileWriter writer = new FileWriter(file);
+
             String line;
             while (((line = r.readLine())) != null) {
                 writer.write(line + "\n");
@@ -206,6 +212,12 @@ public class Resources {
         for(String key: audioFiles.keySet()) {
             s +=    "\t" + key + " " + (audioFiles.get(key) != null) + "\n";
         }
+        s += "Text Files:\n";
+        for(String key: textFiles.keySet()) {
+            s +=    "\t" + key + " " +
+                    (textFiles.get(key) != null) + " " + "\n";
+        }
+
         s += "Text Files:\n";
         for(String key: textFiles.keySet()) {
             s +=    "\t" + key + " " +

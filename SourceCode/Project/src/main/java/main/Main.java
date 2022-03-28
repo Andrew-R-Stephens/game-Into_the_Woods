@@ -77,7 +77,6 @@ public class Main {
 
         resources.init();
 
-        testReadTextFiles();
     }
 
     /**
@@ -168,25 +167,6 @@ public class Main {
 
         // Confirm and Apply scaling
         preferences.post();
-
-    }
-
-    public static void testReadTextFiles() {
-        BufferedReader br;
-        try {
-            br = new BufferedReader(new FileReader(Resources.getTextFile("movingButtonSheet.json")));
-
-            String line;
-            while((line = br.readLine()) != null)
-            {
-                System.out.print(line);
-            }
-
-            br.close();
-        }
-        catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
 
     }
 
