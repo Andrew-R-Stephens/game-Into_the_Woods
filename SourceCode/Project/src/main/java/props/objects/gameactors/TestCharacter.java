@@ -4,7 +4,7 @@ import models.camera.Camera;
 import models.controls.GameControlsModel;
 import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -41,9 +41,9 @@ public class TestCharacter extends ACharacter {
         super.update(delta);
 
         float tx =
-                (float)(((PreferenceData.window_width_actual * .5) - (w * PreferenceData.scaledW)) - (x * PreferenceData.scaledW));
+                (float)(((ConfigData.window_width_actual * .5) - (w * ConfigData.scaledW)) - (x * ConfigData.scaledW));
         float ty =
-                (float)(((PreferenceData.window_height_actual * .5) - (h * PreferenceData.scaledH)) - (y * PreferenceData.scaledH));
+                (float)(((ConfigData.window_height_actual * .5) - (h * ConfigData.scaledH)) - (y * ConfigData.scaledH));
 
         if(vX < 0) {
             facing = Facing.LEFT;
@@ -59,12 +59,12 @@ public class TestCharacter extends ACharacter {
         //super.draw(g);
 
         // Scaled size
-        double scaleW = w * PreferenceData.scaledW;
-        double scaleH = h * PreferenceData.scaledH;
+        double scaleW = w * ConfigData.scaledW;
+        double scaleH = h * ConfigData.scaledH;
 
         //Half window width
-        double centerX = (x * PreferenceData.scaledW) + (Camera.x) + scaleW;
-        double centerY = (y * PreferenceData.scaledH) + (Camera.y) + scaleH;
+        double centerX = (x * ConfigData.scaledW) + (Camera.x) + scaleW;
+        double centerY = (y * ConfigData.scaledH) + (Camera.y) + scaleH;
 
         centerX -= scaleW;
         centerY -= scaleH;

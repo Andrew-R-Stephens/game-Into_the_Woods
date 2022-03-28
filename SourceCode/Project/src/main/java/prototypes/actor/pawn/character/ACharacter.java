@@ -2,7 +2,7 @@ package prototypes.actor.pawn.character;
 
 import models.controls.GameControlsModel;
 import prototypes.actor.pawn.APawn;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.drawables.IDrawable;
 
 import java.awt.*;
@@ -117,7 +117,7 @@ public abstract class ACharacter extends APawn implements IDrawable {
         }
 
         // Increment by a specific velocity from control input
-        vX += xDir / (float)PreferenceData.GAME_UPDATE_RATE / delta;
+        vX += xDir / (float) ConfigData.GAME_UPDATE_RATE / delta;
         //vY += yDir / (float)PreferenceData.GAME_UPDATE_RATE;
     }
 

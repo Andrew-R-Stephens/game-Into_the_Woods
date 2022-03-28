@@ -4,7 +4,7 @@ import models.environments.menu.mainmenu.primarymenu.MainMenuPage;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.types.AMenuButton;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -24,10 +24,12 @@ public class StartScreenPage extends AMenu {
 
         super(parentMenuModel);
 
+        backgroundImage = Resources.getImage("menubackground");
+
         BufferedImage img_button = Resources.getImage("testbutton2");
 
-        float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
+        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
+        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         AMenuButton startButton = new AMenuButton(
                 parentMenuModel,

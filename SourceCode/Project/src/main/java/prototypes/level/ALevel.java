@@ -1,6 +1,7 @@
 package prototypes.level;
 
 import models.environments.game.GameEnvironment;
+import props.objects.levels.inventory.LevelCollectibles;
 import prototypes.level.prop.ALevelProp;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public abstract class ALevel {
 
     protected final ArrayList<ALevelProp> levelProps = new ArrayList<>();
 
+    protected LevelCollectibles collectibles;
 
     /**
      * Instantiates a new A level.

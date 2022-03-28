@@ -1,9 +1,9 @@
-package props.objects.gametriggers;
+package props.objects.levelprops.gametriggers.interactibles;
 
 import models.environments.game.GameEnvironment;
 import props.objects.gameactors.TestActor;
 import prototypes.actor.AActor;
-import prototypes.actor.trigger.ATrigger;
+import prototypes.level.prop.trigger.ATrigger;
 
 import java.awt.*;
 import java.util.Random;
@@ -16,7 +16,7 @@ public class TestTrigger extends ATrigger {
     /**
      * Instantiates a new Test trigger.
      *
-     * @param gameModel          the game model
+     * @param gameEnvironment    the game model
      * @param x                  the x
      * @param y                  the y
      * @param w                  the w
@@ -26,21 +26,27 @@ public class TestTrigger extends ATrigger {
      * @param hasGravity         the has gravity
      * @param canMoveOnCollision the can move on collision
      */
-    public TestTrigger(GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, boolean canMoveOnCollision) {
-        super(gameModel, x, y, w, h, vx, vy, hasGravity, canMoveOnCollision);
+    public TestTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, boolean canMoveOnCollision) {
+        super(gameEnvironment, x, y, w, h, vx, vy, 1, hasGravity, canMoveOnCollision);
     }
 
     @Override
     public boolean hasCollision(AActor a, float delta) {
-        boolean hasCollision = super.hasCollision(a, delta);
 
-        if(hasCollision && (currentCycles < MAX_CYCLES)) {
+        boolean hasCollision = super.hasCollision(a, delta);
+        if(MAX_CYCLES != -1) {
+            if (currentCycles > MAX_CYCLES) {
+                return false;
+            }
+        }
+
+        if(hasCollision) {
             System.out.println("Triggered!");
 
             doAction();
-
             currentCycles++;
         }
+
 
         return hasCollision;
     }
@@ -48,7 +54,7 @@ public class TestTrigger extends ATrigger {
     @Override
     public void doAction() {
         for(int i = 0; i < 10; i++) {
-            gameModel.queueAddGameObject(new TestActor(
+            gameEnvironment.queueAddGameObject(new TestActor(
                     x, y,
                     10,
                     10,
@@ -57,7 +63,6 @@ public class TestTrigger extends ATrigger {
             );
         }
     }
-
 
     @Override
     public void update(float delta) {

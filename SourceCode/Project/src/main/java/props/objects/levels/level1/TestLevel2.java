@@ -1,4 +1,4 @@
-package props.objects.levels;
+package props.objects.levels.level1;
 
 import models.environments.game.GameEnvironment;
 import props.objects.levelprops.TestLevelPropStatic;

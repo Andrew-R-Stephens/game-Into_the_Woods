@@ -1,8 +1,9 @@
-package props.objects.levels;
+package props.objects.levels.level1;
 
 import models.environments.game.GameEnvironment;
-import props.objects.gametriggers.TestTrigger;
 import props.objects.levelprops.TestLevelPropStatic;
+import props.objects.levelprops.gametriggers.interactibles.SpringTrigger;
+import props.objects.levelprops.gametriggers.interactibles.TestTrigger;
 import prototypes.level.ALevel;
 import prototypes.level.prop.ALevelProp;
 
@@ -22,7 +23,7 @@ public class TestLevel1 extends ALevel {
     public TestLevel1(GameEnvironment gameModel) {
         super(gameModel);
 
-        setStartOrigin(200, 50);
+        setStartOrigin(300, 900);
 
         // Walls
         addProp(new TestLevelPropStatic(-500, 0, 500, 1080, 0, 0, false));
@@ -58,6 +59,13 @@ public class TestLevel1 extends ALevel {
         addProp(new TestTrigger(gameModel, 300, 580, 100, 100, 0, 0, false, false));
         addProp(new TestTrigger(gameModel, 1000, 280, 100, 100, 0, 0, false, false));
         addProp(new TestTrigger(gameModel, 100, 680, 100, 100, 0, 0, false, false));
+
+        addProp(new SpringTrigger(gameModel, 1000, 280, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameModel, 1200, 280, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameModel, 1400, 280, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameModel, 300, 580, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameModel, 1000, 280, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameModel, 100, 680, 100, 20, 0, 0, false, false));
     }
 
 

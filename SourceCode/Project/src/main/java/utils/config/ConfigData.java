@@ -3,27 +3,15 @@ package utils.config;
 /**
  * Preference Data stores the fundamental information of user-defined preferences.
  */
-public class PreferenceData {
+public class ConfigData {
 
     /**
      * The enum Window type.
      */
     public enum WindowType {
-        /**
-         * Windowed window type.
-         */
         WINDOWED                (0, "Windowed"),
-        /**
-         * The Windowed borderless.
-         */
         WINDOWED_BORDERLESS     (1, "Windowed Borderless"),
-        /**
-         * The Windowed fullscreen.
-         */
         WINDOWED_FULLSCREEN     (2, "Windowed Fullscreen"),
-        /**
-         * Fullscreen exclusive window type.
-         */
         FULLSCREEN_EXCLUSIVE    (3, "Fullscreen");
 
         private int type;
@@ -37,50 +25,14 @@ public class PreferenceData {
 
     private static WindowType window_type = WindowType.WINDOWED;
 
-    /**
-     * The constant DEFAULT_WINDOW_WIDTH.
-     */
-    public static int DEFAULT_WINDOW_WIDTH = 1920, /**
-     * The Default window height.
-     */
-    DEFAULT_WINDOW_HEIGHT = 1080;
-    /**
-     * The constant window_width_selected.
-     */
-    public static int window_width_selected = 0, /**
-     * The Window height selected.
-     */
-    window_height_selected = 0;
-    /**
-     * The constant window_width_actual.
-     */
-    public static int window_width_actual = 0, /**
-     * The Window height actual.
-     */
-    window_height_actual = 0;
+    public static int DEFAULT_WINDOW_WIDTH = 1920, DEFAULT_WINDOW_HEIGHT = 1080;
+    public static int window_width_selected = 0, window_height_selected = 0;
+    public static int window_width_actual = 0, window_height_actual = 0;
+    public static float scaledW = 1f, scaledH = 1f;
 
-    /**
-     * The constant scaledW.
-     */
-    public static float scaledW = 1f, /**
-     * The Scaled h.
-     */
-    scaledH = 1f;
-
-
-    /**
-     * The constant GAME_UPDATE_RATE.
-     */
     public static short GAME_UPDATE_RATE = 60;
-    /**
-     * The constant FRAME_RATE_DEFAULT.
-     */
     public static short FRAME_RATE_DEFAULT = 60;
-    /**
-     * The constant frameRate.
-     */
     public static short frameRate = 60;
-
 
     /**
      * Calc resolution scale.
@@ -150,7 +102,7 @@ public class PreferenceData {
      * @param width the width
      */
     public void setWindowWidthDefault(int width) {
-        PreferenceData.DEFAULT_WINDOW_WIDTH = width;
+        ConfigData.DEFAULT_WINDOW_WIDTH = width;
     }
 
     /**
@@ -159,7 +111,7 @@ public class PreferenceData {
      * @param height the height
      */
     public void setWindowHeightDefault(int height) {
-        PreferenceData.DEFAULT_WINDOW_HEIGHT = height;
+        ConfigData.DEFAULT_WINDOW_HEIGHT = height;
     }
 
     /**
@@ -195,7 +147,7 @@ public class PreferenceData {
      * @param frameRate the frame rate
      */
     public void setFrameRate(short frameRate) {
-        PreferenceData.frameRate = frameRate;
+        ConfigData.frameRate = frameRate;
     }
 
     /**

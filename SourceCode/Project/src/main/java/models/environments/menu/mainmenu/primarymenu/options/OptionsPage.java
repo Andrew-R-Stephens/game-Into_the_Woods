@@ -21,6 +21,8 @@ public class OptionsPage extends AMenu {
     public OptionsPage(AMenuModel parentModel) {
         super(parentModel);
 
+        backgroundImage = Resources.getImage("menubackground");
+
         BufferedImage img_button = Resources.getImage("img_button2");
 
         AMenuButton button_back = new AMenuButton(parentModel,500, 500, 200, 50) {

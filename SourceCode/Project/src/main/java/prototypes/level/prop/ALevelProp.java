@@ -2,7 +2,7 @@ package prototypes.level.prop;
 
 import models.camera.Camera;
 import prototypes.actor.AActor;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -31,11 +31,11 @@ public abstract class ALevelProp extends AActor {
     public void draw(Graphics g) {
         g.setColor(Color.DARK_GRAY);
 
-        double offsetX = ((x * PreferenceData.scaledW) + (Camera.x));
-        double offsetY = ((y * PreferenceData.scaledH) + (Camera.y));
+        double offsetX = ((x * ConfigData.scaledW) + (Camera.x));
+        double offsetY = ((y * ConfigData.scaledH) + (Camera.y));
 
-        double scaledW = w * PreferenceData.scaledW;
-        double scaledH = h * PreferenceData.scaledH;
+        double scaledW = w * ConfigData.scaledW;
+        double scaledH = h * ConfigData.scaledH;
 
         //g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
         g.drawImage(Resources.getImage("dirt"), (int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH),

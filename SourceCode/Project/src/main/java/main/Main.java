@@ -15,20 +15,16 @@ import models.environments.menu.mainmenu.MainMenuEnvironment;
 import models.runnables.RenderRunnable;
 import models.runnables.UpdateRunnable;
 import props.objects.levels.LevelList;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.files.PreferencesXMLParser;
 import utils.files.Resources;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * The type main.Main.
  */
 public class Main {
 
-    private static PreferenceData preferences;
+    private static ConfigData preferences;
 
     private static EnvironmentsHandler environmentsModel;
 
@@ -76,7 +72,6 @@ public class Main {
         Resources resources = new Resources();
 
         resources.init();
-
     }
 
     /**
@@ -85,7 +80,7 @@ public class Main {
     public static void create() {
 
         // Create Preferences
-        preferences = new PreferenceData();
+        preferences = new ConfigData();
 
         // Create Environment Handler
         environmentsModel = new EnvironmentsHandler();
@@ -163,7 +158,7 @@ public class Main {
 
         // Initialize Window's Environment
         window.initEnvironmentsModel(environmentsModel);
-        window.applyEnvironmentAndCanvas(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
+        window.applyEnvironmentAndCanvas(EnvironmentsHandler.EnvironmentType.GAME);
 
         // Confirm and Apply scaling
         preferences.post();

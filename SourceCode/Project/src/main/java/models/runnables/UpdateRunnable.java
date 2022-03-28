@@ -2,7 +2,7 @@ package models.runnables;
 
 import prototypes.threading.ARunnable;
 import prototypes.window.environments.AEnvironment;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 /**
  * The type Game update runnable.
@@ -23,7 +23,7 @@ public class UpdateRunnable extends ARunnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
-        final short targetTicks = PreferenceData.GAME_UPDATE_RATE;
+        final short targetTicks = ConfigData.GAME_UPDATE_RATE;
         double ns = 1000000000 / (float) targetTicks, delta = 0;
         float updateRatio = 1;
 
@@ -36,7 +36,7 @@ public class UpdateRunnable extends ARunnable {
             lastTime = now;
 
             if(delta >= 1) {
-                updateRatio = lastUpdates / (float) PreferenceData.GAME_UPDATE_RATE;
+                updateRatio = lastUpdates / (float) ConfigData.GAME_UPDATE_RATE;
                 environment.update(updateRatio);
                 updates++;
 

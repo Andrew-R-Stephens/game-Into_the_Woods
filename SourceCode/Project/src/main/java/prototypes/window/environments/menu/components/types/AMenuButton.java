@@ -1,10 +1,9 @@
 package prototypes.window.environments.menu.components.types;
 
-import models.controls.menu.MenuMouseControls;
 import prototypes.controls.AMouseController;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuComponent;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -55,7 +54,7 @@ public abstract class AMenuButton extends AMenuComponent {
     public void draw(Graphics g) {
 
         g.setColor(Color.RED);
-        float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
+        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
         //g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
 

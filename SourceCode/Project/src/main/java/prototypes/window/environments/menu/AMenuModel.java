@@ -25,9 +25,7 @@ public abstract class AMenuModel extends AEnvironment {
      * @param controlsModel           the controls model
      */
     public void init(EnvironmentsHandler parentEnvironmentsModel, MenuControlsModel controlsModel) {
-
         super.init(parentEnvironmentsModel, controlsModel.getKeyController(), controlsModel.getMouseController());
-
     }
 
     /**

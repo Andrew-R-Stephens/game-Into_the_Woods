@@ -1,7 +1,7 @@
 package prototypes.window.environments.menu.components;
 
 import prototypes.window.environments.menu.AMenuModel;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.drawables.IDrawable;
 import utils.updates.IUpdatable;
 
@@ -62,8 +62,8 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
      * @return if the passed coordinates are within the bounds of the object.
      */
     protected boolean isInBounds(float mx, float my) {
-        mx /= PreferenceData.scaledW;
-        my /= PreferenceData.scaledH;
+        mx /= ConfigData.scaledW;
+        my /= ConfigData.scaledH;
 
         boolean horizBound = (mx >= x && mx <= (x + w));
         boolean vertBound = (my >= y && my <= (y + h));

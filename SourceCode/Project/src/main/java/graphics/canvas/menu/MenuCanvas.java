@@ -2,7 +2,7 @@ package graphics.canvas.menu;
 
 import models.environments.menu.mainmenu.MainMenuEnvironment;
 import prototypes.window.ACanvas;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import java.awt.*;
 
@@ -44,7 +44,7 @@ public class MenuCanvas extends ACanvas {
         menuModel.draw(g);
 
         g.setColor(Color.RED);
-        float sW = PreferenceData.scaledW;
+        float sW = ConfigData.scaledW;
 
     }
 

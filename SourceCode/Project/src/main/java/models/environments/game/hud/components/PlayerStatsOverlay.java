@@ -1,7 +1,7 @@
 package models.environments.game.hud.components;
 
 import prototypes.window.environments.game.AOverlayComponent;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import java.awt.*;
 
@@ -26,7 +26,7 @@ public class PlayerStatsOverlay extends AOverlayComponent {
     public void draw(Graphics g) {
         super.draw(g);
 
-        float sW = (float) PreferenceData.scaledW, sH = (float)PreferenceData.scaledH;
+        float sW = (float) ConfigData.scaledW, sH = (float) ConfigData.scaledH;
 
         g.setColor(Color.PINK);
         g.fillRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));

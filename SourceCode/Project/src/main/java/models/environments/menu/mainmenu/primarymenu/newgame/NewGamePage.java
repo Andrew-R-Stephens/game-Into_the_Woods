@@ -4,7 +4,7 @@ import models.environments.EnvironmentsHandler;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.types.AMenuButton;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -23,10 +23,12 @@ public class NewGamePage extends AMenu {
     public NewGamePage(AMenuModel parentModel) {
         super(parentModel);
 
+        backgroundImage = Resources.getImage("menubackground");
+
         bundle.addPage(new CharacterSelectPage(parentModel));
 
-        float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
+        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
+        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         BufferedImage img_button = Resources.getImage("testbutton2");
 

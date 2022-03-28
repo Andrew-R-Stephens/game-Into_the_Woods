@@ -1,10 +1,13 @@
 package props.objects.levels;
 
 import models.environments.game.GameEnvironment;
+import props.objects.levels.level1.TestLevel1;
+import props.objects.levels.level1.TestLevel2;
+import props.objects.levels.level1.TestLevel3;
 import prototypes.actor.AActor;
 import prototypes.level.ALevel;
 import prototypes.level.prop.ALevelProp;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ public class LevelList {
     /**
      * The constant GRAVITY.
      */
-    public static final float GRAVITY = 9.8f / (float)PreferenceData.GAME_UPDATE_RATE;
+    public static final float GRAVITY = 9.8f / (float) ConfigData.GAME_UPDATE_RATE;
 
     private final ArrayList<ALevel> levels = new ArrayList<>();
     private int currentLevel = 0;

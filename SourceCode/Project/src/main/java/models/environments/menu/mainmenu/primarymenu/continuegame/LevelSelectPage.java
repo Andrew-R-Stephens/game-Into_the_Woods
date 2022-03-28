@@ -6,7 +6,7 @@ import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuComponent;
 import prototypes.window.environments.menu.components.types.AMenuButton;
 import prototypes.window.environments.menu.components.types.AMenuImage;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -25,8 +25,10 @@ public class LevelSelectPage extends AMenu {
     public LevelSelectPage(AMenuModel parentModel) {
         super(parentModel);
 
-        float mx = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = PreferenceData.DEFAULT_WINDOW_HEIGHT * .5f;
+        backgroundImage = Resources.getImage("menubackground");
+
+        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
+        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         BufferedImage img_title = Resources.getImage("testbutton");
         BufferedImage img_button = Resources.getImage("testbutton2");

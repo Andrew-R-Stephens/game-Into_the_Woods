@@ -23,6 +23,8 @@ public class CharacterSelectPage extends AMenu {
     public CharacterSelectPage(AMenuModel parentModel) {
         super(parentModel);
 
+        backgroundImage = Resources.getImage("menubackground");
+
         BufferedImage img_button = Resources.getImage("testbutton2");
 
         AMenuButton character1 = new AMenuButton(parentModel, 500, 500) {

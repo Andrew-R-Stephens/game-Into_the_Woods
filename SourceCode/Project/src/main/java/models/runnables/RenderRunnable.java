@@ -2,7 +2,7 @@ package models.runnables;
 
 import prototypes.threading.ARunnable;
 import prototypes.window.ACanvas;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 /**
  * The type Game render runnable.
@@ -23,7 +23,7 @@ public class RenderRunnable extends ARunnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
-        final short targetFPS = PreferenceData.frameRate;
+        final short targetFPS = ConfigData.frameRate;
         double ns = 1000000000 / (float)targetFPS, delta = 0;
 
         // GAME LOOP

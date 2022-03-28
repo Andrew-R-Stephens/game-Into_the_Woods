@@ -8,7 +8,7 @@ import models.environments.menu.mainmenu.primarymenu.quit.QuitPage;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.types.AMenuButton;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -27,6 +27,8 @@ public class MainMenuPage extends AMenu {
     public MainMenuPage(AMenuModel parentModel) {
         super(parentModel);
 
+        backgroundImage = Resources.getImage("menubackground");
+
         bundle.addPage(new NewGamePage(parentMenuModel));
         bundle.addPage(new LevelSelectPage(parentMenuModel));
         bundle.addPage(new OptionsPage(parentMenuModel));
@@ -35,7 +37,7 @@ public class MainMenuPage extends AMenu {
 
         BufferedImage img_button = Resources.getImage("testbutton2");
 
-        float centerHoriz = PreferenceData.DEFAULT_WINDOW_WIDTH * .5f;
+        float centerHoriz = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
         int buttonW = 200, buttonH = 50;
 
         AMenuButton button_newGame = new AMenuButton(

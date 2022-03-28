@@ -2,7 +2,7 @@ package graphics.window;
 
 import models.environments.EnvironmentsHandler;
 import prototypes.window.AWindow;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,11 +25,11 @@ public class MainWindow extends AWindow {
      *
      * @param preferences the preferences
      */
-    public void init(PreferenceData preferences){
+    public void init(ConfigData preferences){
         constructWindowAndDimensions(preferences);
     }
 
-    private void constructWindowAndDimensions(PreferenceData preferences) {
+    private void constructWindowAndDimensions(ConfigData preferences) {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -77,10 +77,10 @@ public class MainWindow extends AWindow {
 
         System.out.println(dScalingX + " " + dScalingY);
 
-        PreferenceData.scaledW = PreferenceData.scaledW / dScalingX;
-        PreferenceData.scaledH = PreferenceData.scaledH / dScalingY;
+        ConfigData.scaledW = ConfigData.scaledW / dScalingX;
+        ConfigData.scaledH = ConfigData.scaledH / dScalingY;
 
-        System.out.println(PreferenceData.scaledW + " " + PreferenceData.scaledH);
+        System.out.println(ConfigData.scaledW + " " + ConfigData.scaledH);
 
         setAlwaysOnTop(true);
         setResizable(false);

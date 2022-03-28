@@ -1,6 +1,6 @@
 package models.camera;
 
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 /**
  * The type Camera.
@@ -16,8 +16,8 @@ public class Camera {
      * Instantiates a new Camera.
      */
     public Camera() {
-        x = PreferenceData.window_width_actual * .5f;
-        y = PreferenceData.window_height_actual * .5f;
+        x = ConfigData.window_width_actual * .5f;
+        y = ConfigData.window_height_actual * .5f;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Camera {
      * @return the off x
      */
     public static double getOffX(double ox, double ow) {
-        return ((PreferenceData.window_width_actual * .5) - (ow * PreferenceData.scaledW)) - (ox * PreferenceData.scaledW);
+        return ((ConfigData.window_width_actual * .5) - (ow * ConfigData.scaledW)) - (ox * ConfigData.scaledW);
     }
 
 }

@@ -1,7 +1,7 @@
 package prototypes.actor;
 
 import models.camera.Camera;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 import utils.drawables.IDrawable;
 import utils.physics.APhysics;
 
@@ -50,11 +50,11 @@ public abstract class AActor extends APhysics implements IDrawable {
     public void draw(Graphics g) {
         g.setColor(Color.CYAN);
 
-        double offsetX = ((x * PreferenceData.scaledW) + (Camera.x));
-        double offsetY = ((y * PreferenceData.scaledH) + (Camera.y));
+        double offsetX = ((x * ConfigData.scaledW) + (Camera.x));
+        double offsetY = ((y * ConfigData.scaledH) + (Camera.y));
 
-        double scaledW = w * PreferenceData.scaledW;
-        double scaledH = h * PreferenceData.scaledH;
+        double scaledW = w * ConfigData.scaledW;
+        double scaledH = h * ConfigData.scaledH;
 
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
     }

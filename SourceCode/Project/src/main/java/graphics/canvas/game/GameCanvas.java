@@ -2,7 +2,7 @@ package graphics.canvas.game;
 
 import models.environments.game.GameEnvironment;
 import prototypes.window.ACanvas;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import java.awt.*;
 
@@ -50,7 +50,7 @@ public class GameCanvas extends ACanvas {
         gameModel.draw(g);
 
         g.setColor(Color.RED);
-        float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
+        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
     }
 

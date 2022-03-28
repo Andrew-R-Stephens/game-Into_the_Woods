@@ -2,7 +2,7 @@ package utils.physics;
 
 import props.objects.levels.LevelList;
 import prototypes.actor.AActor;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 /**
  * TODO: Add description
@@ -121,7 +121,7 @@ public abstract class APhysics {
 
         calculateGravity(delta);
 
-        float acc = friction / PreferenceData.GAME_UPDATE_RATE / delta;
+        float acc = friction / ConfigData.GAME_UPDATE_RATE / delta;
 
         vY *= 1-acc;
         vX *= 1-acc;
@@ -269,9 +269,17 @@ public abstract class APhysics {
      * @param velocityX the velocity x
      * @param velocityY the velocity y
      */
-    protected void setVelocity(float velocityX, float velocityY) {
+    public void setVelocity(float velocityX, float velocityY) {
         this.vX = velocityX;
         this.vY = velocityY;
+    }
+
+    public void setVelocityX(int vX) {
+        this.vX = vX;
+    }
+
+    public void setVelocityY(int vY) {
+        this.vY = vY;
     }
 
     /**

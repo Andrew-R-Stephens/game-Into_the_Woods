@@ -5,7 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class PreferencesXMLParser extends AFileReader {
 
-    private final PreferenceData preferences;
+    private final ConfigData preferences;
 
     /**
      * Instantiates a new Preferences xml parser.
@@ -27,7 +27,7 @@ public class PreferencesXMLParser extends AFileReader {
      * @param fileName    the file name
      * @param fileType    the file type
      */
-    public PreferencesXMLParser(PreferenceData preferences, String filePath, String fileName, String fileType) {
+    public PreferencesXMLParser(ConfigData preferences, String filePath, String fileName, String fileType) {
         super(filePath, fileName, fileType);
 
         this.preferences = preferences;

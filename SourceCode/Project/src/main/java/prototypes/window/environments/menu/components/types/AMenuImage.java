@@ -2,7 +2,7 @@ package prototypes.window.environments.menu.components.types;
 
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuComponent;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -69,7 +69,7 @@ public class AMenuImage extends AMenuComponent {
     public void draw(Graphics g) {
 
         g.setColor(new Color(255, 0, 0, 100));
-        float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
+        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
         g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
 

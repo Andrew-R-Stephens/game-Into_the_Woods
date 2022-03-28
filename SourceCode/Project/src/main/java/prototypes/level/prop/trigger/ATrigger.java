@@ -1,11 +1,11 @@
-package prototypes.actor.trigger;
+package prototypes.level.prop.trigger;
 
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
 import prototypes.level.prop.ALevelProp;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import java.awt.*;
 
@@ -17,7 +17,7 @@ public abstract class ATrigger extends ALevelProp {
     /**
      * The Game model.
      */
-    protected GameEnvironment gameModel;
+    protected GameEnvironment gameEnvironment;
 
     /**
      * The Can move on collision.
@@ -27,7 +27,7 @@ public abstract class ATrigger extends ALevelProp {
     /**
      * The Max cycles.
      */
-    protected int MAX_CYCLES = 1;
+    protected int MAX_CYCLES = -1;
     /**
      * The Current cycles.
      */
@@ -36,7 +36,7 @@ public abstract class ATrigger extends ALevelProp {
     /**
      * Instantiates a new A trigger.
      *
-     * @param gameModel          the game model
+     * @param gameEnvironment    the game model
      * @param x                  the x
      * @param y                  the y
      * @param w                  the w
@@ -46,10 +46,12 @@ public abstract class ATrigger extends ALevelProp {
      * @param hasGravity         the has gravity
      * @param canMoveOnCollision the can move on collision
      */
-    protected ATrigger(GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, boolean canMoveOnCollision) {
+    protected ATrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
         super(x, y, w, h, vx, vy, hasGravity);
 
-        this.gameModel = gameModel;
+        this.gameEnvironment = gameEnvironment;
+
+        this.MAX_CYCLES = MAX_CYCLES;
         this.canMoveOnCollision = canMoveOnCollision;
     }
 
@@ -70,11 +72,11 @@ public abstract class ATrigger extends ALevelProp {
     @Override
     public void draw(Graphics g) {
 
-        double offsetX = ((x * PreferenceData.scaledW) + (Camera.x));
-        double offsetY = ((y * PreferenceData.scaledH) + (Camera.y));
+        double offsetX = ((x * ConfigData.scaledW) + (Camera.x));
+        double offsetY = ((y * ConfigData.scaledH) + (Camera.y));
 
-        double scaledW = w * PreferenceData.scaledW;
-        double scaledH = h * PreferenceData.scaledH;
+        double scaledW = w * ConfigData.scaledW;
+        double scaledH = h * ConfigData.scaledH;
 
         g.setColor(new Color(0, 255, 0, 50));
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));

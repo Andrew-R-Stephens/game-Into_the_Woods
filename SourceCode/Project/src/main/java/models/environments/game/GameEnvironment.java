@@ -6,6 +6,7 @@ import models.controls.game.GameKeyControls;
 import models.controls.game.GameMouseControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
+import models.environments.game.playerinventory.PlayerInventory;
 import props.objects.gameactors.TestActor;
 import props.objects.gameactors.TestCharacter;
 import props.objects.levels.LevelList;
@@ -13,7 +14,7 @@ import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
 import prototypes.level.prop.ALevelProp;
 import prototypes.window.environments.AEnvironment;
-import utils.config.PreferenceData;
+import utils.config.ConfigData;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -33,6 +34,9 @@ public class GameEnvironment extends AEnvironment {
     private LevelList levelModel;
 
     private TestCharacter character;
+
+    private PlayerInventory inventory;
+
     private final ArrayList<AActor> actors = new ArrayList<>();
     private Queue<AActor> actorsQueue = new LinkedList<>();
 
@@ -51,10 +55,11 @@ public class GameEnvironment extends AEnvironment {
 
         setLevelModel(levelModel);
 
+        int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
         // Add in the Main Test Character
         character = new TestCharacter(
                 controlsViewModel,
-                200, 50,
+                startPos[0] - 55, startPos[1] - 70,
                 55, 70,
                 0, 0,
                 true
@@ -164,8 +169,8 @@ public class GameEnvironment extends AEnvironment {
                 for (int i = 0; i < count; i++) {
                     queueAddGameObject(
                             new TestActor(
-                                    (-Camera.x /PreferenceData.scaledW) + (gmc.getPos()[0]/PreferenceData.scaledW),
-                                    (-Camera.y /PreferenceData.scaledW) + (gmc.getPos()[1]/PreferenceData.scaledH),
+                                    (-Camera.x / ConfigData.scaledW) + (gmc.getPos()[0]/ ConfigData.scaledW),
+                                    (-Camera.y / ConfigData.scaledW) + (gmc.getPos()[1]/ ConfigData.scaledH),
                                     10f,
                                     10f,
                                     new Random().nextFloat(-5, 5),
@@ -268,5 +273,9 @@ public class GameEnvironment extends AEnvironment {
         actors.add(character);
         character.reset(levelModel.getCurrentLevel().getCharacterOrigin());
         levelModel.reset();
+    }
+
+    public PlayerInventory getPlayerInventory() {
+        return inventory;
     }
 }

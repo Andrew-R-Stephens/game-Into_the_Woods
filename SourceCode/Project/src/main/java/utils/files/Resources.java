@@ -58,7 +58,8 @@ public class Resources {
                 "testbutton.png",
                 "testbutton2.png",
                 "avatar.png",
-                "backgroundImage.png"};
+                "menubackground.png"
+        };
 
         for(String fileName : fileNames) {
             imagesFiles.put(fileName.split("\\.")[0], loadImageFile(fileName));
