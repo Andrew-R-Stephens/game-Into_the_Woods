@@ -3,6 +3,7 @@ package models.environments.menu.mainmenu.startscreen;
 import models.environments.menu.mainmenu.primarymenu.MainMenuPage;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
+import prototypes.window.environments.menu.components.AMenuComponent;
 import prototypes.window.environments.menu.components.types.AMenuButton;
 import utils.config.ConfigData;
 import utils.files.Resources;
@@ -31,14 +32,14 @@ public class StartScreenPage extends AMenu {
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
-        float btn_width = 400;
+        int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         AMenuButton startButton = new AMenuButton(
                 parentMenuModel,
                 (int)(mx - (btn_width * .5f)),
-                (int)(my - (50 * .5f)),
-                250,
-                50) {
+                (int)(my - (btn_height * .5f)),
+                btn_width,
+                btn_height) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)){
@@ -53,7 +54,7 @@ public class StartScreenPage extends AMenu {
 
         startButton.setText("Start button");
         startButton.setBackgroundImage(img_button);
-        startButton.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        startButton.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         components.add(startButton);
 

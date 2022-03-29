@@ -3,6 +3,7 @@ package models.environments.menu.mainmenu.primarymenu.options;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.types.AMenuButton;
+import utils.config.ConfigData;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -23,9 +24,16 @@ public class OptionsPage extends AMenu {
 
         backgroundImage = Resources.getImage("menubackground");
 
-        BufferedImage img_button = Resources.getImage("img_button2");
+        BufferedImage img_button = Resources.getImage("testbutton2");
 
-        AMenuButton button_back = new AMenuButton(parentModel,500, 500, 200, 50) {
+        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
+        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
+
+        int btn_width = 400, btn_height = (int)(btn_width * .25);
+
+        AMenuButton button_back = new AMenuButton(parentModel,500, 500, btn_width,
+                btn_height
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -39,7 +47,7 @@ public class OptionsPage extends AMenu {
         };
         button_back.setText("Back");
         button_back.setBackgroundImage(img_button);
-        button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         components.add(button_back);
     }

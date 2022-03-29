@@ -74,6 +74,7 @@ public abstract class AMenuButton extends AMenuComponent {
                             (int)(backgroundImage.getWidth() * sW * s),
                             (int)(backgroundImage.getHeight() * sH * s),
                             null);
+                    /*
                     if(tint != null) {
                         g.drawImage(tint,
                                 (int)(((x * sW) + (w * sW * .5f)) - (backgroundImage.getWidth() * sW * s * .5f)),
@@ -82,6 +83,7 @@ public abstract class AMenuButton extends AMenuComponent {
                                 (int)(backgroundImage.getHeight() * sH * s),
                                 null);
                     }
+                    */
                 }
                 case CENTER_CROP -> {
                     float sBW = w / (float)backgroundImage.getWidth();
@@ -103,9 +105,11 @@ public abstract class AMenuButton extends AMenuComponent {
                 }
                 default -> {
                     g.drawImage(backgroundImage, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
+                    /*
                     if(tint != null) {
                         g.drawImage(tint, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
                     }
+                    */
                 }
 
             }
@@ -119,7 +123,7 @@ public abstract class AMenuButton extends AMenuComponent {
         int strWidth = g.getFontMetrics().stringWidth(text.toUpperCase());
         g.drawString(
                 text.toUpperCase(),
-                (int)((x * sW) + (w * sW * .5) - (strWidth * sW * .5)),
+                (int)((x * sW) + (w * sW * .5) - (strWidth * .5)),
                 (int)((y * sH) + (h * sH * .5)));
 
         if(isFocused) {

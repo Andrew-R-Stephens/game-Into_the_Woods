@@ -27,12 +27,19 @@ public class NewGamePage extends AMenu {
 
         bundle.addPage(new CharacterSelectPage(parentModel));
 
+        BufferedImage img_button = Resources.getImage("testbutton2");
+
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
-        BufferedImage img_button = Resources.getImage("testbutton2");
+        int btn_width = 400, btn_height = (int)(btn_width * .25);
 
-        AMenuButton button_characterCreate = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 125, 200, 50) {
+        AMenuButton button_characterCreate = new AMenuButton(
+                parentModel,
+                (int)(mx - (200 * .5f)),
+                125,
+                btn_width,
+                btn_height) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -46,11 +53,16 @@ public class NewGamePage extends AMenu {
         };
         button_characterCreate.setText("Create Character");
         button_characterCreate.setBackgroundImage(img_button);
-        button_characterCreate.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_characterCreate.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
 
 
-        AMenuButton button_characterConfirm = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 200, 200, 50) {
+        AMenuButton button_characterConfirm = new AMenuButton(
+                parentModel,
+                (int)(mx - (200 * .5f)),
+                200,
+                btn_width,
+                btn_height) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -65,10 +77,15 @@ public class NewGamePage extends AMenu {
         };
         button_characterConfirm.setText("Confirm Character");
         button_characterConfirm.setBackgroundImage(img_button);
-        button_characterConfirm.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_characterConfirm.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
 
-        AMenuButton button_back = new AMenuButton(parentModel,(int)(mx - (200 * .5f)), 500, 200, 50) {
+        AMenuButton button_back = new AMenuButton(
+                parentModel,
+                (int)(mx - (200 * .5f)),
+                500,
+                btn_width, btn_height
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {

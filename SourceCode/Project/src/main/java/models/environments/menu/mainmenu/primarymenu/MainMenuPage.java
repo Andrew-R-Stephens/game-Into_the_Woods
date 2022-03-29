@@ -38,6 +38,7 @@ public class MainMenuPage extends AMenu {
         BufferedImage img_button = Resources.getImage("testbutton2");
 
         float centerHoriz = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
+
         int buttonW = 400, buttonH = (int)(buttonW * .25);
 
         AMenuButton button_newGame = new AMenuButton(
@@ -62,7 +63,7 @@ public class MainMenuPage extends AMenu {
         button_newGame.setText("New Game");
         button_newGame.setBackgroundImage(img_button);
         button_newGame.setTint("#F1FFEC10");
-        button_newGame.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_newGame.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         AMenuButton button_continueGame = new AMenuButton(
                 parentMenuModel,
@@ -83,7 +84,7 @@ public class MainMenuPage extends AMenu {
         };
         button_continueGame.setText("Continue Game");
         button_continueGame.setBackgroundImage(img_button);
-        button_continueGame.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_continueGame.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         AMenuButton button_options = new AMenuButton(
                 parentMenuModel,
@@ -104,7 +105,7 @@ public class MainMenuPage extends AMenu {
         };
         button_options.setText("Options");
         button_options.setBackgroundImage(img_button);
-        button_options.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_options.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         AMenuButton button_help = new AMenuButton(
                 parentMenuModel,
@@ -125,7 +126,7 @@ public class MainMenuPage extends AMenu {
         };
         button_help.setText("Help");
         button_help.setBackgroundImage(img_button);
-        button_help.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_help.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         AMenuButton button_quit = new AMenuButton(parentMenuModel,
                 (int)(centerHoriz - (buttonW * .5f)),
@@ -144,7 +145,7 @@ public class MainMenuPage extends AMenu {
         };
         button_quit.setText("Quit Button");
         button_quit.setBackgroundImage(img_button);
-        button_quit.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_quit.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         components.add(button_newGame);
         components.add(button_continueGame);

@@ -7,6 +7,7 @@ import models.controls.game.GameMouseControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
 import models.environments.game.playerinventory.PlayerInventory;
+import models.environments.menu.mainmenu.MainMenuEnvironment;
 import props.objects.gameactors.TestActor;
 import props.objects.gameactors.TestCharacter;
 import props.objects.levels.LevelList;
@@ -15,8 +16,10 @@ import prototypes.actor.pawn.character.ACharacter;
 import prototypes.level.prop.ALevelProp;
 import prototypes.window.environments.AEnvironment;
 import utils.config.ConfigData;
+import utils.files.Resources;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -27,6 +30,8 @@ import java.util.Random;
  * Relevant data includes: Levels, Level Objects, Entity Objects, Player HUD
  */
 public class GameEnvironment extends AEnvironment {
+
+    private BufferedImage backgroundImage;
 
     private HUDModel hudModel = new HUDModel(this);
     private boolean isPaused = false;
@@ -65,6 +70,8 @@ public class GameEnvironment extends AEnvironment {
                 true
         );
         actors.add(character);
+
+        backgroundImage = Resources.getImage("menubackground");
 
     }
 
@@ -106,6 +113,13 @@ public class GameEnvironment extends AEnvironment {
      */
     @Override
     public void draw(Graphics g) {
+        g.drawImage(
+                backgroundImage,
+                0,
+                0,
+                ConfigData.window_width_actual,
+                ConfigData.window_height_actual,
+                null);
 
         // Render Game Actors
         for (AActor gameObject : actors) {

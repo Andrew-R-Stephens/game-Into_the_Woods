@@ -27,11 +27,14 @@ public class LevelSelectPage extends AMenu {
 
         backgroundImage = Resources.getImage("menubackground");
 
-        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         BufferedImage img_title = Resources.getImage("testbutton");
         BufferedImage img_button = Resources.getImage("testbutton2");
+
+        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
+        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
+
+        int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         AMenuImage imageView_label = new AMenuImage(
                 parentModel,
@@ -70,7 +73,8 @@ public class LevelSelectPage extends AMenu {
         AMenuButton button_level2 = new AMenuButton(
                 parentModel,
                 (int) (mx - (200 * .5f)) + 150, 300,
-                200, 200) {
+                200, 200
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -91,8 +95,11 @@ public class LevelSelectPage extends AMenu {
 
         AMenuButton button_back = new AMenuButton(
                 parentModel,
-                (int) (mx - (200 * .5f)), 600,
-                200, 50) {
+                (int) (mx - (btn_width * .5f)),
+                600,
+                btn_width,
+                btn_height
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -106,7 +113,7 @@ public class LevelSelectPage extends AMenu {
         };
         button_back.setText("Back");
         button_back.setBackgroundImage(img_button);
-        button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         components.add(imageView_label);
         components.add(button_level1);
