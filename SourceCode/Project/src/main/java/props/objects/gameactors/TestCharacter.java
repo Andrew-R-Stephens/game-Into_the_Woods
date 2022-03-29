@@ -46,9 +46,9 @@ public class TestCharacter extends ACharacter {
                 (float)(((ConfigData.window_height_actual * .5) - (h * ConfigData.scaledH)) - (y * ConfigData.scaledH));
 
         if(vX < 0) {
-            facing = Facing.LEFT;
-        } else if (vX > 0) {
             facing = Facing.RIGHT;
+        } else if (vX > 0) {
+            facing = Facing.LEFT;
         }
 
         Camera.moveTo(tx, ty);
