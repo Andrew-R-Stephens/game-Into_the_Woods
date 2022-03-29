@@ -47,15 +47,13 @@ public class SpringTrigger extends ATrigger {
             currentCycles++;
         }
 
-
         return hasCollision;
     }
-
 
     @Override
     public void doAction() {
         System.out.println("Triggered");
-        lastActor.setVelocityY(-50);
+        lastActor.setVY(-100);
     }
 
     @Override
