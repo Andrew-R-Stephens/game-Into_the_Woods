@@ -38,12 +38,12 @@ public class MainMenuPage extends AMenu {
         BufferedImage img_button = Resources.getImage("testbutton2");
 
         float centerHoriz = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-        int buttonW = 200, buttonH = 50;
+        int buttonW = 400, buttonH = (int)(buttonW * .25);
 
         AMenuButton button_newGame = new AMenuButton(
                 parentMenuModel,
                 (int)(centerHoriz - (buttonW * .5f)),
-                50,
+                175,
                 buttonW,
                 buttonH)
         {
@@ -61,12 +61,13 @@ public class MainMenuPage extends AMenu {
         };
         button_newGame.setText("New Game");
         button_newGame.setBackgroundImage(img_button);
+        button_newGame.setTint("#F1FFEC10");
         button_newGame.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_continueGame = new AMenuButton(
                 parentMenuModel,
                 (int)(centerHoriz - (buttonW * .5f)),
-                125,
+                290,
                 buttonW,
                 buttonH) {
             @Override
@@ -87,7 +88,7 @@ public class MainMenuPage extends AMenu {
         AMenuButton button_options = new AMenuButton(
                 parentMenuModel,
                 (int)(centerHoriz - (buttonW * .5f)),
-                200,
+                405,
                 buttonW,
                 buttonH) {
             @Override
@@ -108,7 +109,7 @@ public class MainMenuPage extends AMenu {
         AMenuButton button_help = new AMenuButton(
                 parentMenuModel,
                 (int)(centerHoriz - (buttonW * .5f)),
-                275,
+                520,
                 buttonW,
                 buttonH) {
             @Override
@@ -128,7 +129,7 @@ public class MainMenuPage extends AMenu {
 
         AMenuButton button_quit = new AMenuButton(parentMenuModel,
                 (int)(centerHoriz - (buttonW * .5f)),
-                375,
+                800,
                 buttonW,
                 buttonH) {
             @Override

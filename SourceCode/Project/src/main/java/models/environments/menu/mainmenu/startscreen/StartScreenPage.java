@@ -31,9 +31,11 @@ public class StartScreenPage extends AMenu {
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
+        float btn_width = 400;
+
         AMenuButton startButton = new AMenuButton(
                 parentMenuModel,
-                (int)(mx - (250 * .5f)),
+                (int)(mx - (btn_width * .5f)),
                 (int)(my - (50 * .5f)),
                 250,
                 50) {

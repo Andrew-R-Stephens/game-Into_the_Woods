@@ -4,9 +4,12 @@ import prototypes.controls.AMouseController;
 import prototypes.window.environments.menu.AMenuModel;
 import prototypes.window.environments.menu.components.AMenuComponent;
 import utils.config.ConfigData;
+import utils.files.Resources;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.Locale;
 
 /**
  * The abstract type AMenuButton. Implements IUpdatable and IDrawable.
@@ -53,13 +56,14 @@ public abstract class AMenuButton extends AMenuComponent {
     @Override
     public void draw(Graphics g) {
 
-        g.setColor(Color.RED);
+        //g.setColor(Color.RED);
         float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
         //g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
 
         if(backgroundImage != null) {
             switch (scaleType) {
+
                 case FIT_CENTERED -> {
                     float sBW = w / (float)backgroundImage.getWidth();
                     float sBH = h / (float)backgroundImage.getHeight();
@@ -70,8 +74,15 @@ public abstract class AMenuButton extends AMenuComponent {
                             (int)(backgroundImage.getWidth() * sW * s),
                             (int)(backgroundImage.getHeight() * sH * s),
                             null);
+                    if(tint != null) {
+                        g.drawImage(tint,
+                                (int)(((x * sW) + (w * sW * .5f)) - (backgroundImage.getWidth() * sW * s * .5f)),
+                                (int)(((y * sH) + (h * sH * .5f)) - (backgroundImage.getHeight() * sH * s * .5f)),
+                                (int)(backgroundImage.getWidth() * sW * s),
+                                (int)(backgroundImage.getHeight() * sH * s),
+                                null);
+                    }
                 }
-
                 case CENTER_CROP -> {
                     float sBW = w / (float)backgroundImage.getWidth();
                     float sBH = h / (float)backgroundImage.getHeight();
@@ -92,13 +103,22 @@ public abstract class AMenuButton extends AMenuComponent {
                 }
                 default -> {
                     g.drawImage(backgroundImage, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
+                    if(tint != null) {
+                        g.drawImage(tint, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
+                    }
                 }
+
             }
         }
 
-        int strWidth = g.getFontMetrics().stringWidth(text);
+        g.setColor(Color.BLACK);
+        g.setFont(
+                Resources.getFont("bahnschrift")
+                        .deriveFont(AffineTransform.getScaleInstance(.8, 1))
+                        .deriveFont(Font.PLAIN, 36 * sW));
+        int strWidth = g.getFontMetrics().stringWidth(text.toUpperCase());
         g.drawString(
-                text,
+                text.toUpperCase(),
                 (int)((x * sW) + (w * sW * .5) - (strWidth * sW * .5)),
                 (int)((y * sH) + (h * sH * .5)));
 

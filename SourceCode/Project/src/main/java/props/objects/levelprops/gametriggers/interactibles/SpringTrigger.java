@@ -7,6 +7,9 @@ import prototypes.level.prop.trigger.ATrigger;
 import java.awt.*;
 
 public class SpringTrigger extends ATrigger {
+
+    AActor lastActor;
+
     /**
      * Instantiates a new LevelSpring.
      *
@@ -29,13 +32,21 @@ public class SpringTrigger extends ATrigger {
     public boolean hasCollision(AActor a, float delta) {
         boolean hasCollision = super.hasCollision(a, delta);
 
-        if(hasCollision && (currentCycles < MAX_CYCLES)) {
+        if(MAX_CYCLES != -1) {
+            if (currentCycles > MAX_CYCLES) {
+                return false;
+            }
+        }
+
+        if(hasCollision) {
             System.out.println("Triggered!");
 
-            doAction();
+            lastActor = a;
 
+            doAction();
             currentCycles++;
         }
+
 
         return hasCollision;
     }
@@ -44,7 +55,7 @@ public class SpringTrigger extends ATrigger {
     @Override
     public void doAction() {
         System.out.println("Triggered");
-        gameEnvironment.getCharacter().setVelocityY(-50);
+        lastActor.setVelocityY(-50);
     }
 
     @Override

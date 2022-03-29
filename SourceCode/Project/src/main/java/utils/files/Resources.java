@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.HashMap;
@@ -21,10 +22,12 @@ public class Resources {
     private final String path_images = "/images/";
     private final String path_audio = "/audio/";
     private final String path_textFile = "files/";
+    private final String path_font = "fonts/";
 
     private static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
     private static final Map<String, Clip> audioFiles = new HashMap<>();
     private static final Map<String, File> textFiles = new HashMap<>();
+    private static final Map<String, Font> fontFiles = new HashMap<>();
 
     /**
      * Instantiates a new Resources.
@@ -42,6 +45,7 @@ public class Resources {
         loadImageFiles();
         loadAudioFiles();
         loadTextFiles();
+        loadFontFiles();
 
         System.out.println(this);
 
@@ -137,6 +141,7 @@ public class Resources {
     private void loadTextFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
+                "colors.xml",
                 "Preferences.xml",
                 "SaveData.xml",
                 "movingButtonSheet.json",
@@ -189,6 +194,45 @@ public class Resources {
         return file;
     }
 
+    private void loadFontFiles() {
+        //TODO : Create list of files with image resource names instead of this hardcoding
+        String[] fileNames = {
+                "bahnschrift.ttf"
+        };
+
+        for(String fileName: fileNames) {
+            String rawName = fileName.split("\\.")[0];
+            fontFiles.put(rawName, loadFontFile(fileName));
+        }
+    }
+
+    /**
+     * Load text file file.
+     *
+     * @param fileName the file name
+     * @return the file
+     */
+    public Font loadFontFile(String fileName) {
+        InputStream is = AFileReader.class.getClassLoader().getResourceAsStream(path_font + fileName);
+        if(is == null) {
+            return null;
+        }
+
+        Font font = null;
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return font;
+    }
 
     public static BufferedImage getImage(String imageKey) {
         return imagesFiles.get(imageKey);
@@ -198,6 +242,9 @@ public class Resources {
         return textFiles.get(fileKey);
     }
 
+    public static Font getFont(String fileKey) {
+        return fontFiles.get(fileKey);
+    }
 
     /**
      * Displays the items read from storage
@@ -223,6 +270,12 @@ public class Resources {
         for(String key: textFiles.keySet()) {
             s +=    "\t" + key + " " +
                     (textFiles.get(key) != null) + " " + "\n";
+        }
+
+        s += "Font Files:\n";
+        for(String key: fontFiles.keySet()) {
+            s +=    "\t" + key + " " +
+                    (fontFiles.get(key) != null) + " " + "\n";
         }
 
         return s;

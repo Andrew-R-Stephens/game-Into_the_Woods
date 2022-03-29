@@ -32,7 +32,6 @@ public class TestTrigger extends ATrigger {
 
     @Override
     public boolean hasCollision(AActor a, float delta) {
-
         boolean hasCollision = super.hasCollision(a, delta);
         if(MAX_CYCLES != -1) {
             if (currentCycles > MAX_CYCLES) {
@@ -44,6 +43,7 @@ public class TestTrigger extends ATrigger {
             System.out.println("Triggered!");
 
             doAction();
+
             currentCycles++;
         }
 

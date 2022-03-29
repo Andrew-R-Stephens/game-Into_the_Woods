@@ -28,6 +28,7 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     }
 
     protected BufferedImage backgroundImage;
+    protected BufferedImage tint;
 
     /**
      * The Parent menu model.
@@ -87,56 +88,7 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     @Override
     public void draw(Graphics g) {
-        /*
-        g.setColor(Color.RED);
-        float sW = PreferenceData.scaledW, sH = PreferenceData.scaledH;
-        g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
 
-        if(backgroundImage != null) {
-            switch (scaleType) {
-                case FIT_CENTERED -> {
-                    float sBW = w / (float)backgroundImage.getWidth();
-                    float sBH = h / (float)backgroundImage.getHeight();
-                    float s = Math.min(sBW, sBH);
-                    g.drawImage(backgroundImage,
-                            (int)(((x * sW) + (w * .5f)) - (backgroundImage.getWidth() * s * .5f)),
-                            (int)(((y * sH) + (h * .5f)) - (backgroundImage.getHeight() * s * .5f)),
-                            (int)(backgroundImage.getWidth() * s),
-                            (int)(backgroundImage.getHeight() * s),
-                            null);
-                }
-
-                case CENTER_CROP -> {
-                    float sBW = w / (float)backgroundImage.getWidth();
-                    float sBH = h / (float)backgroundImage.getHeight();
-                    float s = Math.min(sBW, sBH);
-                    int     nx = (int)((backgroundImage.getWidth() - (backgroundImage.getWidth() * s)) * .5f),
-                            nw = (int)(backgroundImage.getWidth() * s);
-                    BufferedImage croppedImage =
-                            backgroundImage.getSubimage(
-                                    nx, 0,
-                                    nw, backgroundImage.getHeight()
-                            );
-                    g.drawImage(croppedImage,
-                            (int)(x * sW),
-                            (int)(y * sH),
-                            (int)(w * sH),
-                            (int)(h * sH),
-                            null);
-                }
-                default -> {
-                    g.drawImage(backgroundImage, (int)(x * sW), (int)(y * sW), (int)(w * sH), (int)(h * sH), null);
-                }
-            }
-        }
-
-        g.drawString(text, (int)((x * sW) + (5 * sW)), (int)((y * sH) + (20 * sH)));
-
-        if(isFocused) {
-            g.setColor(new Color(255, 255, 255, 50));
-            g.fillRect((int) (x * sW), (int) (y * sH), (int) (w * sW), (int) (h * sH));
-        }
-        */
     }
 
     @Override
@@ -166,6 +118,50 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
      */
     public void setImageScaling(ImageScale scaleType) {
         this.scaleType = scaleType;
+    }
+
+    public void setTint(String colorHex)
+    {
+        Color c = new Color(
+                Integer.valueOf( colorHex.substring( 1, 3 ), 16 ),
+                Integer.valueOf( colorHex.substring( 3, 5 ), 16 ),
+                Integer.valueOf( colorHex.substring( 5, 7 ), 16 ),
+                Integer.valueOf( colorHex.substring( 7, 9 ), 16 )
+        );
+
+        BufferedImage tintedSprite =
+                new BufferedImage(backgroundImage.getWidth(), backgroundImage.getHeight(), BufferedImage.TRANSLUCENT);
+        Graphics2D graphics = tintedSprite.createGraphics();
+        graphics.drawImage(backgroundImage, 0, 0, null);
+        graphics.dispose();
+
+        System.out.println("Alpha is " + c.getAlpha());
+        System.out.println("Red is " + c.getRed());
+        System.out.println("Green is " + c.getGreen());
+        System.out.println("Blue is " + c.getBlue());
+
+        for (int i = 0; i < tintedSprite.getWidth(); i++)
+        {
+            for (int j = 0; j < tintedSprite.getHeight(); j++)
+            {
+                int ax = tintedSprite.getColorModel().getAlpha(tintedSprite.getRaster().
+                        getDataElements(i, j, null));
+                int rx = tintedSprite.getColorModel().getRed(tintedSprite.getRaster().
+                        getDataElements(i, j, null));
+                int gx = tintedSprite.getColorModel().getGreen(tintedSprite.getRaster().
+                        getDataElements(i, j, null));
+                int bx = tintedSprite.getColorModel().getBlue(tintedSprite.getRaster().
+                        getDataElements(i, j, null));
+                rx *= c.getRed();
+                gx *= c.getGreen();
+                bx *= c.getBlue();
+                ax *= c.getAlpha();
+                tintedSprite.setRGB(i, j, (ax << 24) | (rx << 16) | (gx << 8) | (bx));
+            }
+        }
+
+        tint = tintedSprite;
+
     }
 
 }

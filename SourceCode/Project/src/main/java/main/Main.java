@@ -158,7 +158,7 @@ public class Main {
 
         // Initialize Window's Environment
         window.initEnvironmentsModel(environmentsModel);
-        window.applyEnvironmentAndCanvas(EnvironmentsHandler.EnvironmentType.GAME);
+        window.applyEnvironmentAndCanvas(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
 
         // Confirm and Apply scaling
         preferences.post();
