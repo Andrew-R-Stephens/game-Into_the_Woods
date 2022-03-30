@@ -9,65 +9,18 @@ import utils.config.ConfigData;
  */
 public abstract class APhysics {
 
-    /**
-     * The Has gravity.
-     */
     protected boolean hasGravity = true;
-    /**
-     * The Max vel x.
-     */
+    protected float x, y, w, h;
+
     protected float MAX_VEL_X = 9.8f;
-    /**
-     * The Max vel y.
-     */
     protected float MAX_VEL_Y = 9.8f;
-    /**
-     * The Friction.
-     */
     protected float friction = .2f;
-    /**
-     * The V x.
-     */
-    protected float vX, /**
-     * The V y.
-     */
-    vY;
-    /**
-     * The X.
-     */
-    protected float x, /**
-     * The Y.
-     */
-    y, /**
-     * The W.
-     */
-    w, /**
-     * The H.
-     */
-    h;
+    protected float vX, vY;
 
-    /**
-     * The Buffer vert.
-     */
-    protected float bufferVert = 5, /**
-     * The Buffer horiz.
-     */
-    bufferHoriz = 5;
+    protected float bufferVert = 5, bufferHoriz = 5;
 
-    /**
-     * The Is floor collision.
-     */
-    protected boolean isFloorCollision, /**
-     * The Is wall collision left.
-     */
-    isWallCollisionLeft, /**
-     * The Is wall collision right.
-     */
-    isWallCollisionRight;
+    protected boolean isFloorCollision,  isWallCollisionLeft, isWallCollisionRight;
 
-    /**
-     * The Is user controlled.
-     */
     protected boolean isUserControlled;
 
     /**
@@ -222,6 +175,7 @@ public abstract class APhysics {
                 } else {
                     a.y = bottom();
                 }
+
                 a.vY = 0;
 
             } else if (distX < distY) {
@@ -274,11 +228,11 @@ public abstract class APhysics {
         this.vY = velocityY;
     }
 
-    public void setVelocityX(int vX) {
+    public void setVX(int vX) {
         this.vX = vX;
     }
 
-    public void setVelocityY(int vY) {
+    public void setVY(int vY) {
         this.vY = vY;
     }
 
