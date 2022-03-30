@@ -106,6 +106,7 @@ public class GameEnvironment extends AEnvironment {
         for(int i = 0; i < 10 && actorsQueue.size() >= 1; i++) {
             addGameObject(actorsQueue.remove());
         }
+
     }
 
     /**

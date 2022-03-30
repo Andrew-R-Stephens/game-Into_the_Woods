@@ -24,16 +24,15 @@ import java.util.ArrayList;
  */
 public abstract class AMenu implements IUpdatable, IDrawable {
 
-    protected AMenuModel parentMenuModel; // The parent Menu Model
+    // The Parent Menu Model
+    protected AMenuModel parentMenuModel;
     // Controllers
     protected AKeyController keyController;
     protected AMouseController mouseController;
-
+    // Background Image
     protected BufferedImage backgroundImage;
 
-    /**
-     * The Menu Buttons.
-     */
+    // The Menu Buttons.
     public ArrayList<AMenuComponent> components = new ArrayList<>();
 
     /**
@@ -41,20 +40,21 @@ public abstract class AMenu implements IUpdatable, IDrawable {
      */
     public MenuBundle bundle = new MenuBundle();
 
-
     /**
      * Instantiates a new A menu.
      *
      * @param parentMenuModel the parent menu model
      */
     public AMenu(AMenuModel parentMenuModel) {
-
         this.parentMenuModel = parentMenuModel;
 
         keyController = parentMenuModel.getKeyController();
         mouseController = parentMenuModel.getMouseController();
     }
 
+    /**
+     *
+     */
     public void registerInput() {
         if (parentMenuModel.getKeyController() instanceof MenuKeyControls kc) {
             if (kc.isAction(MenuControlsModel.Actions.ESCAPE)) {
