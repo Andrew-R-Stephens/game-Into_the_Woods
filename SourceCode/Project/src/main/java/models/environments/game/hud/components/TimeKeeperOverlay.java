@@ -26,10 +26,8 @@ public class TimeKeeperOverlay extends AOverlayComponent {
     public void draw(Graphics g) {
         super.draw(g);
 
-        float sW = (float) ConfigData.scaledW, sH = (float) ConfigData.scaledH;
+        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
-        g.setColor(Color.PINK);
-        g.fillRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
         g.setColor(Color.white);
         g.drawString("Time Overlay", (int)((x * sW) + (20 * sW)), (int)((y * sH) + (20 * sH)));
     }

@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
  */
 public class CharacterSelectPage extends AMenu {
 
-    private int chosenCharacter = 0;
+    private final int chosenCharacter = 0;
 
     /**
      * Instantiates a new Character create page.
@@ -26,66 +26,70 @@ public class CharacterSelectPage extends AMenu {
 
         backgroundImage = Resources.getImage("menubackground");
 
-        BufferedImage img_button = Resources.getImage("testbutton2");
+        BufferedImage img_rectbutton = Resources.getImage("testbutton2");
+        BufferedImage img_sqbutton = Resources.getImage("squareButton");
 
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
-        AMenuButton character1 = new AMenuButton(
+        //Level 1 Button
+        AMenuButton button_avatar1 = new AMenuButton(
                 parentModel,
-                500,
-                500,
-                btn_width,
-                btn_height) {
+                (int) (mx - (200 * .5f)) - 250,
+                300,
+                200,
+                200) {
             @Override
             public boolean onClick(float x, float y) {
-                if(!isInBounds(x, y)){
+                if(!isInBounds(x, y)) {
                     return false;
                 }
 
                 parentMenuModel.parentEnvironmentsModel.
-                        getGameModel().getCharacter().setCharacterType(ACharacter.Type.CHAR1);
+                        getGameEnvironment().getPlayerAvatar().setCharacterType(ACharacter.CharacterType.MALE);
 
                 return true;
             }
         };
-        character1.setText("Blue Guy");
-        character1.setBackgroundImage(img_button);
-        character1.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_avatar1.setText("TEO");
+        button_avatar1.setBackgroundImage(img_sqbutton);
+        button_avatar1.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
-        AMenuButton character2 = new AMenuButton(
+        //Level 3 Button
+        AMenuButton button_avatar2 = new AMenuButton(
                 parentModel,
-                900,
-                500,
-                btn_width,
-                btn_height) {
+                (int) (mx - (200 * .5f) + 250),
+                300,
+                200,
+                200) {
             @Override
             public boolean onClick(float x, float y) {
-                if(!isInBounds(x, y)){
+                if(!isInBounds(x, y)) {
                     return false;
                 }
 
                 parentMenuModel.parentEnvironmentsModel.
-                        getGameModel().getCharacter().setCharacterType(ACharacter.Type.CHAR2);
+                        getGameEnvironment().getPlayerAvatar().setCharacterType(ACharacter.CharacterType.FEMALE);
 
                 return true;
             }
         };
-        character2.setText("Pink Girl");
-        character2.setBackgroundImage(img_button);
-        character2.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_avatar2.setText("MELYNN");
+        button_avatar2.setBackgroundImage(img_sqbutton);
+        button_avatar2.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_back = new AMenuButton(
                 parentModel,
-                700,
-                700,
+                (int) (mx - (btn_width * .5f)),
+                800,
                 btn_width,
-                btn_height) {
+                btn_height
+        ) {
             @Override
             public boolean onClick(float x, float y) {
-                if(!isInBounds(x, y)){
+                if(!isInBounds(x, y)) {
                     return false;
                 }
 
@@ -95,11 +99,11 @@ public class CharacterSelectPage extends AMenu {
             }
         };
         button_back.setText("Back");
-        button_back.setBackgroundImage(img_button);
+        button_back.setBackgroundImage(img_rectbutton);
         button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
-        components.add(character1);
-        components.add(character2);
+        components.add(button_avatar1);
+        components.add(button_avatar2);
         components.add(button_back);
     }
 

@@ -7,19 +7,17 @@ import models.controls.game.GameMouseControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
 import models.environments.game.playerinventory.PlayerInventory;
-import models.environments.menu.mainmenu.MainMenuEnvironment;
+import models.environments.menu.pausemenumodel.PauseMenuModel;
+import props.objects.gameactors.PlayerAvatar;
 import props.objects.gameactors.TestActor;
-import props.objects.gameactors.TestCharacter;
-import props.objects.levels.LevelList;
+import props.objects.levels.LevelsList;
 import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
 import prototypes.level.prop.ALevelProp;
 import prototypes.window.environments.AEnvironment;
 import utils.config.ConfigData;
-import utils.files.Resources;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -31,80 +29,57 @@ import java.util.Random;
  */
 public class GameEnvironment extends AEnvironment {
 
-    private BufferedImage backgroundImage;
+    private PauseMenuModel pauseMenuModel;
 
-    private HUDModel hudModel = new HUDModel(this);
-    private boolean isPaused = false;
+    private LevelsList levelModel;
 
-    private LevelList levelModel;
-
-    private TestCharacter character;
-
+    private final HUDModel hudModel = new HUDModel(this);
     private PlayerInventory inventory;
 
     private final ArrayList<AActor> actors = new ArrayList<>();
-    private Queue<AActor> actorsQueue = new LinkedList<>();
+    private final Queue<AActor> actorsQueue = new LinkedList<>();
 
-    private boolean isGc = false;
+    private PlayerAvatar character;
+
+    private boolean isPaused = false;
 
     /**
      * Initializes Game Model
-     *
-     * @param parentEnvironmentsModel - Contains references to the GameModel and MenuModel Environments
-     * @param controlsViewModel       - The controls for the Game
+     *  @param parentEnvironmentsHandler - Contains references to the GameModel and MenuModel Environments
+     * @param pauseMenuModel
+     * @param controlsModel       - The controls for the Game
      * @param levelModel              - Contains a list of all possible levels
      */
-    public void init(EnvironmentsHandler parentEnvironmentsModel, GameControlsModel controlsViewModel, LevelList levelModel) {
+    public void init(EnvironmentsHandler parentEnvironmentsHandler,
+                     PauseMenuModel pauseMenuModel,
+                     GameControlsModel controlsModel,
+                     LevelsList levelModel) {
 
-        super.init(parentEnvironmentsModel, controlsViewModel.getKeyController(), controlsViewModel.getMouseController());
+        super.init(parentEnvironmentsHandler, controlsModel.getKeyController(),
+                controlsModel.getMouseController());
+
+        setPauseMenuModel(pauseMenuModel);
 
         setLevelModel(levelModel);
 
-        int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
-        // Add in the Main Test Character
-        character = new TestCharacter(
-                controlsViewModel,
-                startPos[0] - 55, startPos[1] - 70,
-                55, 70,
-                0, 0,
-                true
-        );
-        actors.add(character);
-
-        backgroundImage = Resources.getImage("menubackground");
-
+        build(controlsModel);
     }
 
-    public void build() {
+    private void setPauseMenuModel(PauseMenuModel pauseMenuModel) {
+        this.pauseMenuModel = pauseMenuModel;
+    }
 
+    public void build(GameControlsModel controlsModel) {
+        setPlayerAvatar(controlsModel, levelModel);
     }
 
     @Override
     public void update(float delta) {
 
-        if(keyController instanceof GameKeyControls kc) {
-            if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
-                kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
-                parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
-                parentEnvironmentsModel.applyEnvironment();
-            }
-        }
-
-        // ======
-        // Performance testing by adding Numerous Objects via Mouse Input
-        testAddingActors(delta);
-        // ======
-
-        // Check Game Object Collisions with Level Props
-        checkCollisions(delta);
-        // Update the Game Objects
-        updateGameObjects(delta);
-
-        // Update HUD overlay
-        updateHUD(delta);
-
-        for(int i = 0; i < 10 && actorsQueue.size() >= 1; i++) {
-            addGameObject(actorsQueue.remove());
+        if(!isPaused) {
+            doGameUpdates(delta);
+        } else {
+            doPauseMenuUpdates(delta);
         }
 
     }
@@ -114,48 +89,96 @@ public class GameEnvironment extends AEnvironment {
      */
     @Override
     public void draw(Graphics g) {
-        g.drawImage(
-                backgroundImage,
-                0,
-                0,
-                ConfigData.window_width_actual,
-                ConfigData.window_height_actual,
-                null);
-
-        // Render Game Actors
-        for (AActor gameObject : actors) {
-            //if (gameObject instanceof TestCharacter o) {
-                gameObject.draw(g);
-            //}
-        }
 
         // Render Level Props
         levelModel.draw(g);
+
+        // Render Game Actors
+        for (AActor gameObject : actors) {
+            gameObject.draw(g);
+        }
 
         if(!isPaused) {
             hudModel.draw(g);
         }
 
+        if(isPaused) {
+            //Draw Pause Menu
+            pauseMenuModel.draw(g);
+        }
     }
 
+    public void doGameUpdates(float delta) {
+
+        doGameControls();
+
+        //testAddingActors(delta); // TODO: Delete this (testing purposes only)
+
+        detectCollisions(delta); // Check Game Object Collisions with Level Props
+
+        insertQueuedActors(); // Dequeue queued actors and add them to list of actors
+
+        updateActors(delta); // Update the Game Objects
+        updateHUD(delta); // Update HUD overlay
+    }
+
+    public void doPauseMenuUpdates(float delta) {
+        doPauseMenuControls();
+    }
+
+    private void doGameControls() {
+        if(keyController instanceof GameKeyControls kc) {
+            if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
+                kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
+                isPaused = true;
+                //parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
+                //parentEnvironmentsModel.applyEnvironment();
+            }
+        }
+    }
+
+    public void doPauseMenuControls() {
+        if(keyController instanceof GameKeyControls kc) {
+            if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
+                kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
+                isPaused = false;
+                //parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
+                //parentEnvironmentsModel.applyEnvironment();
+            }
+        }
+    }
 
     /**
      * Sets the List of Levels into this local scope.
      *
      * @param levelModel - The Level Model that contains all levels
      */
-    public void setLevelModel(LevelList levelModel) {
+    public void setLevelModel(LevelsList levelModel) {
         this.levelModel = levelModel;
     }
 
     /**
-     * Add game object.
+     * setPlayerAvatar
      *
-     * @param actor - The actor added to the list of current Game Objects
+     * Obtains the appropriate start location for the player based on the current Level.
+     *
+     * @param controlsViewModel
+     * @param levelModel
      */
-    public void addGameObject(AActor actor) {
-        actors.add(actor);
+    private void setPlayerAvatar(GameControlsModel controlsViewModel, LevelsList levelModel) {
+        int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
+        // Add in the Main Test Character
+        character = new PlayerAvatar (
+                controlsViewModel,
+                startPos[0],
+                startPos[1],
+                28, 70,
+                0, 0,
+                true
+        );
+        actors.add(character);
     }
+
 
     /**
      * Updates the Player HUD to reflect specific information contained within Game Model
@@ -182,7 +205,7 @@ public class GameEnvironment extends AEnvironment {
                     count = 1;
                 }
                 for (int i = 0; i < count; i++) {
-                    queueAddGameObject(
+                    queueActor(
                             new TestActor(
                                     (-Camera.x / ConfigData.scaledW) + (gmc.getPos()[0]/ ConfigData.scaledW),
                                     (-Camera.y / ConfigData.scaledW) + (gmc.getPos()[1]/ ConfigData.scaledH),
@@ -203,7 +226,7 @@ public class GameEnvironment extends AEnvironment {
      *
      * @param delta - The ratio of current framerate against standard update frequency
      */
-    public void updateGameObjects(float delta) {
+    public void updateActors(float delta) {
 
         // Update all Actors
         for (AActor gameObject : actors) {
@@ -214,7 +237,7 @@ public class GameEnvironment extends AEnvironment {
             }
 
             // Update Characters
-            if (gameObject instanceof TestCharacter tc) {
+            if (gameObject instanceof PlayerAvatar tc) {
                 tc.control(delta);
                 tc.update(delta);
             }
@@ -227,32 +250,18 @@ public class GameEnvironment extends AEnvironment {
      * Check Level Prop object collisions against all AActor objects
      * @param delta - The ratio of current framerate against standard update frequency
      */
-    private void checkCollisions(float delta) {
-        for (ALevelProp p : levelModel.getLevelProps()) {
+    private void detectCollisions(float delta) {
+        for (ALevelProp p : levelModel.getCurrentLevel().getLevelProps()) {
             for (AActor a : actors) {
                 p.hasCollision(a, delta);
             }
         }
     }
 
-    /**
-     * Attempt at Garbage collection
-     * Should be used to destroy objects that are old or aren't being utilized.
-     * Might remove later.
-     */
-    public void gc() {
-        /*
-        if(!isGc) {
-            isGc = true;
-            for (int i = 0; i < 1000; i++) {
-                AActor a = actors.get(i);
-                if (!(a instanceof ALevelProp) && !(a instanceof ACharacter)) {
-                    actors.remove(a);
-                }
-            }
-            isGc = false;
+    private void insertQueuedActors() {
+        for(int i = 0; i < 10 && actorsQueue.size() >= 1; i++) {
+            addActor(actorsQueue.remove());
         }
-        */
     }
 
     /**
@@ -260,8 +269,17 @@ public class GameEnvironment extends AEnvironment {
      *
      * @param a the AActor to add
      */
-    public void queueAddGameObject(AActor a) {
+    public void queueActor(AActor a) {
         actorsQueue.add(a);
+    }
+
+    /**
+     * Add game object.
+     *
+     * @param actor - The actor added to the list of current Game Objects
+     */
+    public void addActor(AActor actor) {
+        actors.add(actor);
     }
 
     /**
@@ -278,7 +296,7 @@ public class GameEnvironment extends AEnvironment {
      *
      * @return the character
      */
-    public ACharacter getCharacter() {
+    public ACharacter getPlayerAvatar() {
         return character;
     }
 

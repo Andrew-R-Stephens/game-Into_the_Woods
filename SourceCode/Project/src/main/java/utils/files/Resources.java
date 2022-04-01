@@ -62,7 +62,12 @@ public class Resources {
                 "testbutton.png",
                 "testbutton2.png",
                 "avatar.png",
-                "menubackground.png"
+                "avatar2.png",
+                "spikes.png",
+                "menubackground.png",
+                "menuButtonSheet.png",
+                "squareButton.png",
+                "mockPlatformV2.png"
         };
 
         for(String fileName : fileNames) {

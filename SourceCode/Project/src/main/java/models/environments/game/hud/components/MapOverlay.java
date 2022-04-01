@@ -28,8 +28,6 @@ public class MapOverlay extends AOverlayComponent {
 
         float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
-        g.setColor(Color.PINK);
-        g.fillRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
         g.setColor(Color.white);
         g.drawString("Map Overlay", (int)((x * sW) + (20 * sW)), (int)((y * sH) + (20 * sH)));
     }

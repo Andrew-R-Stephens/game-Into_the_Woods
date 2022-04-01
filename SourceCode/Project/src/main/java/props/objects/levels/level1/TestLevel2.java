@@ -1,7 +1,7 @@
 package props.objects.levels.level1;
 
 import models.environments.game.GameEnvironment;
-import props.objects.levelprops.TestLevelPropStatic;
+import props.objects.levelprops.boundaries.TestLevelPropStatic;
 import prototypes.level.ALevel;
 import prototypes.level.prop.ALevelProp;
 

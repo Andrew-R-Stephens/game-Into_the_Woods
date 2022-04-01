@@ -12,9 +12,10 @@ import models.controls.menu.MenuMouseControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
 import models.environments.menu.mainmenu.MainMenuEnvironment;
+import models.environments.menu.pausemenumodel.PauseMenuModel;
 import models.runnables.RenderRunnable;
 import models.runnables.UpdateRunnable;
-import props.objects.levels.LevelList;
+import props.objects.levels.LevelsList;
 import utils.config.ConfigData;
 import utils.files.PreferencesXMLParser;
 import utils.files.Resources;
@@ -26,13 +27,15 @@ public class Main {
 
     private static ConfigData preferences;
 
-    private static EnvironmentsHandler environmentsModel;
+    private static EnvironmentsHandler environmentsHandler;
 
     private static GameControlsModel gameControlsModel;
     private static MenuControlsModel menuControlsModel;
 
-    private static MainMenuEnvironment mainMenuModel;
-    private static GameEnvironment gameModel;
+    private static MainMenuEnvironment mainMenuEnvironment;
+    private static GameEnvironment gameEnvironment;
+
+    private static PauseMenuModel pauseMenuModel;
 
     private static UpdateRunnable gameUpdateRunnable;
     private static RenderRunnable gameRenderRunnable;
@@ -40,7 +43,7 @@ public class Main {
     private static UpdateRunnable menuUpdateRunnable;
     private static RenderRunnable menuRenderRunnable;
 
-    private static LevelList levelsListModel;
+    private static LevelsList levelsListModel;
 
     private static MenuCanvas mainMenuCanvas;
     private static GameCanvas gameCanvas;
@@ -83,20 +86,22 @@ public class Main {
         preferences = new ConfigData();
 
         // Create Environment Handler
-        environmentsModel = new EnvironmentsHandler();
+        environmentsHandler = new EnvironmentsHandler();
 
         // Create Control Models
         gameControlsModel = new GameControlsModel();
         menuControlsModel = new MenuControlsModel();
 
         // Create Menu Environment
-        mainMenuModel = new MainMenuEnvironment();
-
+        mainMenuEnvironment = new MainMenuEnvironment();
         // Create Game Environment
-        gameModel = new GameEnvironment();
+        gameEnvironment = new GameEnvironment();
+
+        // Create Pause Menu for Game Environment
+        pauseMenuModel = new PauseMenuModel();
 
         // Create Levels List Model
-        levelsListModel = new LevelList();
+        levelsListModel = new LevelsList();
 
         // Create State Canvases
         mainMenuCanvas = new MenuCanvas();
@@ -129,36 +134,36 @@ public class Main {
 
         // Initialize Levels
         int defaultLevel = 0;
-        levelsListModel.init(gameModel, defaultLevel);
+        levelsListModel.init(gameEnvironment, defaultLevel);
 
         // Initialize AEnvironment Model Container
-        environmentsModel.init(window);
+        environmentsHandler.init(window);
 
         // Initialize AEnvironment Models
-        mainMenuModel.init(environmentsModel, menuControlsModel);
-        gameModel.init(environmentsModel, gameControlsModel, levelsListModel);
+        mainMenuEnvironment.init(environmentsHandler, menuControlsModel);
+        gameEnvironment.init(environmentsHandler, pauseMenuModel, gameControlsModel, levelsListModel);
 
         // Initialize Canvases
-        mainMenuCanvas.init(mainMenuModel);
-        gameCanvas.init(gameModel);
+        mainMenuCanvas.init(mainMenuEnvironment);
+        gameCanvas.init(gameEnvironment);
 
-        gameUpdateRunnable.init(gameModel);
+        gameUpdateRunnable.init(gameEnvironment);
         gameRenderRunnable.init(gameCanvas);
-        menuUpdateRunnable.init(mainMenuModel);
+        menuUpdateRunnable.init(mainMenuEnvironment);
         menuRenderRunnable.init(mainMenuCanvas);
 
         // Initialize Environments Model with Main Menu and Game AEnvironments
-        environmentsModel.addPair(mainMenuModel, mainMenuCanvas, menuUpdateRunnable, menuRenderRunnable);
-        environmentsModel.addPair(gameModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
+        environmentsHandler.addEnvironmentPair(mainMenuEnvironment, mainMenuCanvas, menuUpdateRunnable, menuRenderRunnable);
+        environmentsHandler.addEnvironmentPair(gameEnvironment, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
+        environmentsHandler.applyEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
 
         // Initialize Window with Preference Data
-        window.init(preferences);
+        window.init(preferences, environmentsHandler);
 
-        mainMenuModel.init();
+        mainMenuEnvironment.init();
 
         // Initialize Window's Environment
-        window.initEnvironmentsModel(environmentsModel);
-        window.applyEnvironmentAndCanvas(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
+        window.build();
 
         // Confirm and Apply scaling
         preferences.post();

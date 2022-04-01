@@ -14,21 +14,18 @@ public abstract class ACharacter extends APawn implements IDrawable {
 
     protected final GameControlsModel controlsModel;
 
-    /* Dictates whether or not the character has attempted to jump or not. This resets if the character collides with
-     * an ALevelProp or presses the Jump button.
-     */
-
     /**
      * The Character type.
      */
-    protected Type characterType;
+    protected CharacterType characterType;
 
     /**
      * The enum Type.
      */
-    public enum Type {
-        CHAR1,
-        CHAR2}
+    public enum CharacterType {
+        MALE,
+        FEMALE
+    }
 
     /**
      * The C.
@@ -89,8 +86,12 @@ public abstract class ACharacter extends APawn implements IDrawable {
         boolean[] directionals = controlsModel.getDirectionals();
 
         // SET xDir TO ZERO, NEGATIVE, OR POSITIVE BASED ON CONTROL DIRECTION
-        int xDir = (directionals[0] ? -1 : 0) + (directionals[1] ? 1 : 0);
+        float xDir = (directionals[0] ? -1 : 0) + (directionals[1] ? 1 : 0);
         //int yDir = (directionals[2] ? -1 : 0) + (directionals[3] ? 1 : 0);
+
+        if(!(isFloorCollision || isWallCollisionLeft || isWallCollisionRight)) {
+            xDir *= .8;
+        }
 
         isUserControlled = directionals[0] || directionals[1] || directionals[2] || directionals[3];
 
@@ -197,10 +198,10 @@ public abstract class ACharacter extends APawn implements IDrawable {
      *
      * @param type the type
      */
-    public void setCharacterType(Type type) {
+    public void setCharacterType(CharacterType type) {
         this.characterType = type;
 
-        if(type == Type.CHAR1) {
+        if(type == CharacterType.MALE) {
             c = Color.BLUE;
         } else {
             c = Color.PINK;

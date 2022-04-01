@@ -14,7 +14,7 @@ import java.awt.*;
 public abstract class AActor extends APhysics implements IDrawable {
 
     protected Facing facing;
-    public enum Facing { LEFT, RIGHT, UP, DOWN };
+    public enum Facing { LEFT, RIGHT, UP, DOWN }
 
     /**
      * The C.

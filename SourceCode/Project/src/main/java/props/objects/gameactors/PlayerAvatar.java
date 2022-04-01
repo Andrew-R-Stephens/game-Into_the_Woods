@@ -12,7 +12,7 @@ import java.awt.*;
 /**
  * TODO: Add description
  */
-public class TestCharacter extends ACharacter {
+public class PlayerAvatar extends ACharacter {
 
     /**
      * Instantiates a new Test character.
@@ -26,9 +26,9 @@ public class TestCharacter extends ACharacter {
      * @param vy         the vy
      * @param hasGravity the has gravity
      */
-    public TestCharacter(GameControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
-                         boolean hasGravity) {
-        super(cModel, x, y, w, h, vx, vy, hasGravity);
+    public PlayerAvatar(GameControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
+                        boolean hasGravity) {
+        super(cModel, x - w, y - h, w, h, vx, vy, hasGravity);
     }
 
     @Override
@@ -40,16 +40,16 @@ public class TestCharacter extends ACharacter {
     public void update(float delta) {
         super.update(delta);
 
-        float tx =
-                (float)(((ConfigData.window_width_actual * .5) - (w * ConfigData.scaledW)) - (x * ConfigData.scaledW));
-        float ty =
-                (float)(((ConfigData.window_height_actual * .5) - (h * ConfigData.scaledH)) - (y * ConfigData.scaledH));
-
         if(vX < 0) {
             facing = Facing.RIGHT;
         } else if (vX > 0) {
             facing = Facing.LEFT;
         }
+
+        float tx =
+                (float)(((ConfigData.window_width_actual * .5) - (w * ConfigData.scaledW)) - (x * ConfigData.scaledW));
+        float ty =
+                (float)(((ConfigData.window_height_actual * .5) - (h * ConfigData.scaledH)) - (y * ConfigData.scaledH));
 
         Camera.moveTo(tx, ty);
     }
@@ -76,11 +76,20 @@ public class TestCharacter extends ACharacter {
 
         g.setColor(c);
         //g.fillRect((int) (centerX), (int) (centerY), (int) (scaleW), (int) (scaleH));
-        g.drawImage(
-                Resources.getImage("avatar"),
-                (int) (centerX), (int) (centerY),
-                (int) (scaleW), (int) (scaleH),
-                null);
+        if(characterType == CharacterType.MALE) {
+            g.drawImage(
+                    Resources.getImage("avatar"),
+                    (int) (centerX), (int) (centerY),
+                    (int) (scaleW), (int) (scaleH),
+                    null);
+        } else {
+            g.drawImage(
+                    Resources.getImage("avatar2"),
+                    (int) (centerX), (int) (centerY),
+                    (int) (scaleW), (int) (scaleH),
+                    null);
+        }
+
         g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
 
     }

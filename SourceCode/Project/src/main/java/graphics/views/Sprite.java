@@ -8,7 +8,10 @@ import java.awt.image.BufferedImage;
 public class Sprite {
 
     private String filename;
-    private int x, y, w, h;
+    private final int x;
+    private final int y;
+    private final int w;
+    private final int h;
     private int duration = 100;
 
     /**

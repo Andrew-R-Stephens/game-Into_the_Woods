@@ -54,7 +54,7 @@ public class TestTrigger extends ATrigger {
     @Override
     public void doAction() {
         for(int i = 0; i < 10; i++) {
-            gameEnvironment.queueAddGameObject(new TestActor(
+            gameEnvironment.queueActor(new TestActor(
                     x, y,
                     10,
                     10,

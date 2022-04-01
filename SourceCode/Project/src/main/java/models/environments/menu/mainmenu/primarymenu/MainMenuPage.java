@@ -143,7 +143,7 @@ public class MainMenuPage extends AMenu {
                 return true;
             }
         };
-        button_quit.setText("Quit Button");
+        button_quit.setText("Quit to Desktop");
         button_quit.setBackgroundImage(img_button);
         button_quit.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 

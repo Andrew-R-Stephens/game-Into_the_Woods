@@ -1,5 +1,6 @@
 package prototypes.window.environments.game;
 
+import utils.config.ConfigData;
 import utils.drawables.IDrawable;
 import utils.updates.IUpdatable;
 
@@ -41,7 +42,9 @@ public abstract class AOverlayComponent implements IUpdatable, IDrawable {
 
     @Override
     public void draw(Graphics g) {
-
+        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
+        g.setColor(new Color(255, 150, 150, 100));
+        g.fillRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
     }
 
     @Override

@@ -15,17 +15,17 @@ import java.awt.event.MouseMotionListener;
  */
 public class MainWindow extends AWindow {
 
-    private EnvironmentsHandler environmentsModel;
-
-    private Thread updatesThread = null;
-    private Thread rendersThread = null;
+    private EnvironmentsHandler environmentsHandler;
 
     /**
      * Init.
      *
      * @param preferences the preferences
+     * @param environmentsHandler
      */
-    public void init(ConfigData preferences){
+    public void init(ConfigData preferences, EnvironmentsHandler environmentsHandler){
+        this.environmentsHandler = environmentsHandler;
+
         constructWindowAndDimensions(preferences);
     }
 
@@ -89,45 +89,7 @@ public class MainWindow extends AWindow {
         setVisible(true);
     }
 
-    /**
-     * Init environments model.
-     *
-     * @param environmentsModel the environments model
-     */
-    public void initEnvironmentsModel(EnvironmentsHandler environmentsModel) {
-        this.environmentsModel = environmentsModel;
-    }
-
-    private void initThreads() {
-
-        if(updatesThread != null) {
-            updatesThread.interrupt();
-            updatesThread = null;
-        }
-        if(rendersThread != null) {
-            rendersThread.interrupt();
-            rendersThread = null;
-        }
-
-        updatesThread = new Thread(environmentsModel.getCurrentUpdateRunnable());
-        rendersThread = new Thread(environmentsModel.getCurrentRenderRunnable());
-
-        updatesThread.start();
-        rendersThread.start();
-    }
-
-    /**
-     * Apply environment and canvas.
-     *
-     * @param environmentType the environment type
-     */
-    public void applyEnvironmentAndCanvas(EnvironmentsHandler.EnvironmentType environmentType) {
-        environmentsModel.setCurrentEnvironment(environmentType);
-
-        applyEnvironmentAndCanvas();
-    }
-
-    public void clearCurrentEnvironment() {
+    public void clearComponents() {
         for(MouseListener l : getContentPane().getMouseListeners()) {
             getContentPane().removeMouseListener(l);
         }
@@ -145,17 +107,17 @@ public class MainWindow extends AWindow {
     /**
      * Apply environment and canvas.
      */
-    public void applyEnvironmentAndCanvas() {
-        clearCurrentEnvironment();
+    public void build() {
+        clearComponents();
 
-        addKeyListener(environmentsModel.getCurrentEnvironment().getKeyController());
-        getContentPane().addMouseListener(environmentsModel.getCurrentEnvironment().getMouseController());
-        getContentPane().addMouseMotionListener(environmentsModel.getCurrentEnvironment().getMouseController());
+        addKeyListener(environmentsHandler.getCurrentEnvironment().getKeyController());
+        getContentPane().addMouseListener(environmentsHandler.getCurrentEnvironment().getMouseController());
+        getContentPane().addMouseMotionListener(environmentsHandler.getCurrentEnvironment().getMouseController());
 
-        add(environmentsModel.getCurrentCanvas());
+        add(environmentsHandler.getCurrentCanvas());
         pack();
 
-        initThreads();
+        environmentsHandler.initThreads();
     }
 
 }

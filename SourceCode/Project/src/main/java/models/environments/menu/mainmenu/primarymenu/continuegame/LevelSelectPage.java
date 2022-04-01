@@ -3,9 +3,7 @@ package models.environments.menu.mainmenu.primarymenu.continuegame;
 import models.environments.EnvironmentsHandler;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
-import prototypes.window.environments.menu.components.AMenuComponent;
 import prototypes.window.environments.menu.components.types.AMenuButton;
-import prototypes.window.environments.menu.components.types.AMenuImage;
 import utils.config.ConfigData;
 import utils.files.Resources;
 
@@ -27,28 +25,18 @@ public class LevelSelectPage extends AMenu {
 
         backgroundImage = Resources.getImage("menubackground");
 
-
-        BufferedImage img_title = Resources.getImage("testbutton");
-        BufferedImage img_button = Resources.getImage("testbutton2");
+        BufferedImage img_rectbutton = Resources.getImage("testbutton2");
+        BufferedImage img_sqbutton = Resources.getImage("squareButton");
 
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
-        AMenuImage imageView_label = new AMenuImage(
-                parentModel,
-                (int) (mx - (1000 * .5f)),
-                100,
-                1000,
-                200,
-                img_title,
-                AMenuComponent.ImageScale.FILL_XY
-        );
-
+        //Level 1 Button
         AMenuButton button_level1 = new AMenuButton(
                 parentModel,
-                (int) (mx - (200 * .5f)) - 150,
+                (int) (mx - (200 * .5f)) - 250,
                 300,
                 200,
                 200) {
@@ -59,7 +47,7 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 //parentMenuModel.pop();
-                parentMenuModel.parentEnvironmentsModel.getGameModel().setCurrentLevel(0);
+                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(0);
                 parentMenuModel.parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.GAME);
                 parentMenuModel.parentEnvironmentsModel.applyEnvironment();
 
@@ -67,12 +55,13 @@ public class LevelSelectPage extends AMenu {
             }
         };
         button_level1.setText("Level 1");
-        button_level1.setBackgroundImage(img_button);
+        button_level1.setBackgroundImage(img_sqbutton);
         button_level1.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
+        //Level 2 Button
         AMenuButton button_level2 = new AMenuButton(
                 parentModel,
-                (int) (mx - (200 * .5f)) + 150, 300,
+                (int) (mx - (200 * .5f)), 300,
                 200, 200
         ) {
             @Override
@@ -82,7 +71,7 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 //parentMenuModel.pop();
-                parentMenuModel.parentEnvironmentsModel.getGameModel().setCurrentLevel(2);
+                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(2);
                 parentMenuModel.parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.GAME);
                 parentMenuModel.parentEnvironmentsModel.applyEnvironment();
 
@@ -90,13 +79,38 @@ public class LevelSelectPage extends AMenu {
             }
         };
         button_level2.setText("Level 2");
-        button_level2.setBackgroundImage(img_button);
+        button_level2.setBackgroundImage(img_sqbutton);
         button_level2.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+
+        //Level 3 Button
+        AMenuButton button_level3 = new AMenuButton(
+                parentModel,
+                (int) (mx - (200 * .5f) + 250),
+                300,
+                200,
+                200) {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+
+                //parentMenuModel.pop();
+                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(0);
+                parentMenuModel.parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.GAME);
+                parentMenuModel.parentEnvironmentsModel.applyEnvironment();
+
+                return true;
+            }
+        };
+        button_level3.setText("Level 3");
+        button_level3.setBackgroundImage(img_sqbutton);
+        button_level3.setImageScaling(AMenuButton.ImageScale.FILL_XY);
 
         AMenuButton button_back = new AMenuButton(
                 parentModel,
                 (int) (mx - (btn_width * .5f)),
-                600,
+                800,
                 btn_width,
                 btn_height
         ) {
@@ -112,12 +126,14 @@ public class LevelSelectPage extends AMenu {
             }
         };
         button_back.setText("Back");
-        button_back.setBackgroundImage(img_button);
+        button_back.setBackgroundImage(img_rectbutton);
         button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
-        components.add(imageView_label);
+
+        //components.add(imageView_label);
         components.add(button_level1);
         components.add(button_level2);
+        components.add(button_level3);
         components.add(button_back);
     }
 

@@ -9,7 +9,6 @@ import utils.files.Resources;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.util.Locale;
 
 /**
  * The abstract type AMenuButton. Implements IUpdatable and IDrawable.

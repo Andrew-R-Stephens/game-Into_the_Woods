@@ -1,6 +1,6 @@
 package utils.physics;
 
-import props.objects.levels.LevelList;
+import props.objects.levels.LevelsList;
 import prototypes.actor.AActor;
 import utils.config.ConfigData;
 
@@ -14,7 +14,7 @@ public abstract class APhysics {
 
     protected float MAX_VEL_X = 9.8f;
     protected float MAX_VEL_Y = 9.8f;
-    protected float friction = .2f;
+    protected float friction = .5f;
     protected float vX, vY;
 
     protected float bufferVert = 5, bufferHoriz = 5;
@@ -66,7 +66,7 @@ public abstract class APhysics {
 
     private void calculateGravity(float delta) {
         if (hasGravity && !isFloorCollision) {
-            vY += (LevelList.GRAVITY / delta);
+            vY += (LevelsList.GRAVITY / delta);
         }
     }
 
@@ -74,10 +74,10 @@ public abstract class APhysics {
 
         calculateGravity(delta);
 
-        float acc = friction / ConfigData.GAME_UPDATE_RATE / delta;
+        float acc = 1 - (friction / ConfigData.GAME_UPDATE_RATE / delta);
 
-        vY *= 1-acc;
-        vX *= 1-acc;
+        //vY *= acc;
+        vX *= acc;
 
         limitVelocity();
 

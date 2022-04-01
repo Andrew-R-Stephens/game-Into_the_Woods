@@ -19,9 +19,9 @@ public class HUDModel implements IDrawable, IUpdatable {
      */
     protected GameEnvironment gameModel;
 
-    private MapOverlay map;
-    private PlayerStatsOverlay stats;
-    private TimeKeeperOverlay timer;
+    private final MapOverlay map;
+    private final PlayerStatsOverlay stats;
+    private final TimeKeeperOverlay timer;
 
     /**
      * Instantiates a new Hud model.
@@ -47,6 +47,9 @@ public class HUDModel implements IDrawable, IUpdatable {
     //TODO
     @Override
     public void update(float delta) {
+        map.update(delta);
+        stats.update(delta);
+        timer.update(delta);
     }
 
 

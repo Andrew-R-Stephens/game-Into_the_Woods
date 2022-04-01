@@ -3,7 +3,6 @@ package prototypes.level.prop.trigger;
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import prototypes.actor.AActor;
-import prototypes.actor.pawn.character.ACharacter;
 import prototypes.level.prop.ALevelProp;
 import utils.config.ConfigData;
 

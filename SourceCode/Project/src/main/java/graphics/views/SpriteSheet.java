@@ -1,10 +1,7 @@
 package graphics.views;
 
-import utils.drawables.IDrawable;
-import utils.files.AFileLoader;
 import utils.files.AFileReader;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -15,10 +12,10 @@ import java.util.ArrayList;
  */
 public class SpriteSheet {
 
-    private BufferedImage spritesheet;
+    private final BufferedImage spritesheet;
 
-    private ArrayList<Sprite> sprites = new ArrayList<>();
-    private int currentSprite = 0;
+    private final ArrayList<Sprite> sprites = new ArrayList<>();
+    private final int currentSprite = 0;
 
     public SpriteSheet(BufferedImage spritesheet, String jsonFile) {
         this.spritesheet = spritesheet;

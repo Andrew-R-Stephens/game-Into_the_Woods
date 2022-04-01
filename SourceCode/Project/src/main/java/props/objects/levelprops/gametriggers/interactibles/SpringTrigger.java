@@ -39,8 +39,6 @@ public class SpringTrigger extends ATrigger {
         }
 
         if(hasCollision) {
-            System.out.println("Triggered!");
-
             lastActor = a;
 
             doAction();
@@ -52,7 +50,6 @@ public class SpringTrigger extends ATrigger {
 
     @Override
     public void doAction() {
-        System.out.println("Triggered");
         lastActor.setVY(-100);
     }
 

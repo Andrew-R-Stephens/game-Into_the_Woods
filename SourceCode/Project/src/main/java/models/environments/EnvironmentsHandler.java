@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class EnvironmentsHandler {
 
-    private MainWindow parentComponent;
+    private MainWindow parentDisplayWindow;
 
     /**
      * The enum Environment type.
@@ -29,13 +29,16 @@ public class EnvironmentsHandler {
     private final ArrayList<ARunnable> updateRunnables = new ArrayList<>();
     private final ArrayList<ARunnable> renderRunnables = new ArrayList<>();
 
+    private Thread updatesThread;
+    private Thread rendersThread;
+
     /**
      * Init.
      *
-     * @param parentComponent the parent component
+     * @param parentDisplayWindow the parent component
      */
-    public void init(MainWindow parentComponent) {
-        this.parentComponent = parentComponent;
+    public void init(MainWindow parentDisplayWindow) {
+        this.parentDisplayWindow = parentDisplayWindow;
     }
 
     /**
@@ -46,7 +49,7 @@ public class EnvironmentsHandler {
      * @param uRunnable the u runnable
      * @param rRunnable the r runnable
      */
-    public void addPair(AEnvironment model, ACanvas canvas, ARunnable uRunnable, ARunnable rRunnable) {
+    public void addEnvironmentPair(AEnvironment model, ACanvas canvas, ARunnable uRunnable, ARunnable rRunnable) {
         environments.add(model);
         canvases.add(canvas);
         updateRunnables.add(uRunnable);
@@ -59,7 +62,7 @@ public class EnvironmentsHandler {
      * @param environmentType the environment type
      */
     public void setCurrentEnvironment(EnvironmentType environmentType) {
-        pauseCurrentRunnables();
+        pauseThreads();
 
         this.currentEnvironment = environmentType;
     }
@@ -84,7 +87,7 @@ public class EnvironmentsHandler {
      *
      * @return the game model
      */
-    public GameEnvironment getGameModel() {
+    public GameEnvironment getGameEnvironment() {
         return (GameEnvironment) environments.get(EnvironmentType.GAME.ordinal());
     }
 
@@ -119,12 +122,35 @@ public class EnvironmentsHandler {
      * Apply environment.
      */
     public void applyEnvironment() {
-        parentComponent.applyEnvironmentAndCanvas();
+        parentDisplayWindow.build();
     }
 
-    public void pauseCurrentRunnables() {
+    public void applyEnvironment(EnvironmentType environmentType) {
+        setCurrentEnvironment(environmentType);
+    }
+
+    public void pauseThreads() {
         updateRunnables.get(currentEnvironment.ordinal()).setPaused(true);
         renderRunnables.get(currentEnvironment.ordinal()).setPaused(true);
+    }
+
+
+    public void initThreads() {
+
+        if(updatesThread != null) {
+            updatesThread.interrupt();
+            updatesThread = null;
+        }
+        if(rendersThread != null) {
+            rendersThread.interrupt();
+            rendersThread = null;
+        }
+
+        updatesThread = new Thread(getCurrentUpdateRunnable());
+        rendersThread = new Thread(getCurrentRenderRunnable());
+
+        updatesThread.start();
+        rendersThread.start();
     }
 
 }

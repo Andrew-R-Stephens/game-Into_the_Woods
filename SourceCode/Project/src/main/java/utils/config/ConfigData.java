@@ -1,5 +1,7 @@
 package utils.config;
 
+import models.camera.Camera;
+
 /**
  * Preference Data stores the fundamental information of user-defined preferences.
  */
@@ -14,8 +16,8 @@ public class ConfigData {
         WINDOWED_FULLSCREEN     (2, "Windowed Fullscreen"),
         FULLSCREEN_EXCLUSIVE    (3, "Fullscreen");
 
-        private int type;
-        private String name;
+        private final int type;
+        private final String name;
 
         WindowType(int type, String name){
             this.type = type;
@@ -40,6 +42,9 @@ public class ConfigData {
     public void calcResolutionScale() {
         scaledW = (float)window_width_actual / (float) DEFAULT_WINDOW_WIDTH;
         scaledH = (float)window_height_actual / (float) DEFAULT_WINDOW_HEIGHT;
+
+        scaledW *= Camera.zoomLevel;
+        scaledH *= Camera.zoomLevel;
     }
 
     /**

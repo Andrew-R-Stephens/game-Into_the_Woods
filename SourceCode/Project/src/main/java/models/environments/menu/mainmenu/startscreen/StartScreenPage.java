@@ -3,7 +3,6 @@ package models.environments.menu.mainmenu.startscreen;
 import models.environments.menu.mainmenu.primarymenu.MainMenuPage;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
-import prototypes.window.environments.menu.components.AMenuComponent;
 import prototypes.window.environments.menu.components.types.AMenuButton;
 import utils.config.ConfigData;
 import utils.files.Resources;

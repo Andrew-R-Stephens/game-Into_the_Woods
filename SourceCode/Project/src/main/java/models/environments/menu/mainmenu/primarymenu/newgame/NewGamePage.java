@@ -36,7 +36,7 @@ public class NewGamePage extends AMenu {
 
         AMenuButton button_characterCreate = new AMenuButton(
                 parentModel,
-                (int)(mx - (200 * .5f)),
+                (int)(mx - (btn_width * .5f)),
                 125,
                 btn_width,
                 btn_height) {
@@ -56,11 +56,10 @@ public class NewGamePage extends AMenu {
         button_characterCreate.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
 
-
         AMenuButton button_characterConfirm = new AMenuButton(
                 parentModel,
-                (int)(mx - (200 * .5f)),
-                200,
+                (int)(mx - (btn_width * .5f)),
+                250,
                 btn_width,
                 btn_height) {
             @Override
@@ -82,9 +81,10 @@ public class NewGamePage extends AMenu {
 
         AMenuButton button_back = new AMenuButton(
                 parentModel,
-                (int)(mx - (200 * .5f)),
-                500,
-                btn_width, btn_height
+                (int) (mx - (btn_width * .5f)),
+                800,
+                btn_width,
+                btn_height
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -99,7 +99,7 @@ public class NewGamePage extends AMenu {
         };
         button_back.setText("Back");
         button_back.setBackgroundImage(img_button);
-        button_back.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         components.add(button_characterCreate);
         components.add(button_characterConfirm);

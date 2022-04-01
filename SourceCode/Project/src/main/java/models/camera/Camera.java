@@ -7,7 +7,7 @@ import utils.config.ConfigData;
  */
 public class Camera {
 
-    public static float zoomLevel = 1;
+    public static float zoomLevel = 1.0f;
     public static float x = 0, y = 0;
 
     public static double acceleration = .05;
@@ -27,8 +27,9 @@ public class Camera {
      * @param y2 the y 2
      */
     public static void moveTo(float x2, float y2) {
-        x += (x2 - x) * acceleration;
-        y += (y2 - y) * acceleration;
+        // Casting these to int rounds the translation, which helps mitigate render misalignment issues
+        x += ((x2 - x) * acceleration);
+        y += ((y2 - y) * acceleration);
 
         //x += (x2 - x) * Math.abs(((x2 - x) / x2));
         //y += (y2 - y) * Math.abs(((y2 - y) / y2));

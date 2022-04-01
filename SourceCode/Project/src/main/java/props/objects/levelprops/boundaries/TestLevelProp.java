@@ -1,4 +1,4 @@
-package props.objects.levelprops;
+package props.objects.levelprops.boundaries;
 
 import prototypes.actor.AActor;
 import prototypes.level.prop.ALevelProp;

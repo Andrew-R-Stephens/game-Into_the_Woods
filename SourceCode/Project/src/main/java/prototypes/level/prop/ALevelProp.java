@@ -38,7 +38,8 @@ public abstract class ALevelProp extends AActor {
         double scaledH = h * ConfigData.scaledH;
 
         //g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
-        g.drawImage(Resources.getImage("dirt"), (int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH),
+        g.drawImage(Resources.getImage("mockPlatformV2"), (int) ((offsetX)), (int) (offsetY), (int) (scaledW),
+                (int) (scaledH),
                 null);
     }
 

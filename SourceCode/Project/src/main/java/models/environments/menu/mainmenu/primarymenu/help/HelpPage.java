@@ -31,9 +31,10 @@ public class HelpPage extends AMenu {
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
-        AMenuButton button_back = new AMenuButton(parentModel,
-                500,
-                500,
+        AMenuButton button_back = new AMenuButton(
+                parentModel,
+                (int) (mx - (btn_width * .5f)),
+                800,
                 btn_width,
                 btn_height
         ) {

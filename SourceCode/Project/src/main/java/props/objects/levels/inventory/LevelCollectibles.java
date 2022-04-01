@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class LevelCollectibles {
 
-    private ArrayList<LevelKey> keys = new ArrayList<>();
+    private final ArrayList<LevelKey> keys = new ArrayList<>();
 
 
 

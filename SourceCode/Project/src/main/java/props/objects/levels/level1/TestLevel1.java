@@ -1,13 +1,12 @@
 package props.objects.levels.level1;
 
 import models.environments.game.GameEnvironment;
-import props.objects.levelprops.TestLevelPropStatic;
+import props.objects.levelprops.boundaries.PlatformProp;
+import props.objects.levelprops.gametriggers.interactibles.SpikesTrigger;
 import props.objects.levelprops.gametriggers.interactibles.SpringTrigger;
 import props.objects.levelprops.gametriggers.interactibles.TestTrigger;
 import prototypes.level.ALevel;
-import prototypes.level.prop.ALevelProp;
-
-import java.util.ArrayList;
+import utils.files.Resources;
 
 
 /**
@@ -26,55 +25,56 @@ public class TestLevel1 extends ALevel {
         setStartOrigin(300, 900);
 
         // Walls
-        addProp(new TestLevelPropStatic(-500, 0, 500, 1080, 0, 0, false));
-        addProp(new TestLevelPropStatic(9000, 0, 100, 1080, 0, 0, false));
+        addProp(new PlatformProp(-500, 0, 500, 1080, 0, 0, false));
+        addProp(new PlatformProp(9000, 0, 100, 1080, 0, 0, false));
 
         // Floor
-        addProp(new TestLevelPropStatic(0, 980, 10000, 100, 0, 0, false));
+        addProp(new PlatformProp(0, 980, 10000, 100, 0, 0, false));
 
         // Climbing Walls
-        addProp(new TestLevelPropStatic(320, -150, 50, 200, 0, 0, false));
-        addProp(new TestLevelPropStatic(500, 0, 50, 200, 0, 0, false));
-        addProp(new TestLevelPropStatic(320, 220, 50, 200, 0, 0, false));
-        addProp(new TestLevelPropStatic(500, 360, 50, 200, 0, 0, false));
-        addProp(new TestLevelPropStatic(320, 500, 50, 200, 0, 0, false));
+        addProp(new PlatformProp(320, -150, 50, 200, 0, 0, false));
+        addProp(new PlatformProp(500, 0, 50, 200, 0, 0, false));
+        addProp(new PlatformProp(320, 220, 50, 200, 0, 0, false));
+        addProp(new PlatformProp(500, 360, 50, 200, 0, 0, false));
+        addProp(new PlatformProp(320, 500, 50, 200, 0, 0, false));
 
-        // Other Props
-        addProp(new TestLevelPropStatic(1800, 100, 500, 100, 0, 0, false));
-        addProp(new TestLevelPropStatic(70, 800, 500, 100, 0, 0, false));
-        addProp(new TestLevelPropStatic(500, 700, 500, 100, 0, 0, false));
-        addProp(new TestLevelPropStatic(1100, 600, 500, 100, 0, 0, false));
+        // Other Platforms
+        addProp(new PlatformProp(1800, 100, 500, 100, 0, 0, false));
+        addProp(new PlatformProp(70, 800, 500, 100, 0, 0, false));
+        addProp(new PlatformProp(500, 700, 500, 100, 0, 0, false));
+        addProp(new PlatformProp(1100, 600, 500, 100, 0, 0, false));
 
-        addProp(new TestLevelPropStatic(1800, 600, 500, 50, 0, 0, false));
-        addProp(new TestLevelPropStatic(2000, 650, 220, 100, 0, 0, false));
-        addProp(new TestLevelPropStatic(3500, 750, 500, 100, 0, 0, false));
-        addProp(new TestLevelPropStatic(4000, 780, 200, 100, 0, 0, false));
+        addProp(new PlatformProp(1800, 600, 500, 50, 0, 0, false));
+        addProp(new PlatformProp(2000, 650, 220, 100, 0, 0, false));
+        addProp(new PlatformProp(3500, 750, 500, 100, 0, 0, false));
+        addProp(new PlatformProp(4000, 780, 200, 100, 0, 0, false));
 
-        addProp(new TestLevelPropStatic(6800, 400, 500, 50, 0, 0, false));
-        addProp(new TestLevelPropStatic(2500, 720, 220, 100, 0, 0, false));
-        addProp(new TestLevelPropStatic(3000, 700, 500, 50, 0, 0, false));
-        addProp(new TestLevelPropStatic(3200, 650, 100, 100, 0, 0, false));
+        addProp(new PlatformProp(6800, 400, 500, 50, 0, 0, false));
+        addProp(new PlatformProp(2500, 720, 220, 100, 0, 0, false));
+        addProp(new PlatformProp(3000, 700, 500, 50, 0, 0, false));
+        addProp(new PlatformProp(3200, 650, 100, 100, 0, 0, false));
 
+        // Generic Triggers
         addProp(new TestTrigger(gameModel, 700, 880, 100, 100, 0, 0, false, false));
         addProp(new TestTrigger(gameModel, 300, 580, 100, 100, 0, 0, false, false));
         addProp(new TestTrigger(gameModel, 1000, 280, 100, 100, 0, 0, false, false));
         addProp(new TestTrigger(gameModel, 100, 680, 100, 100, 0, 0, false, false));
 
+        // Springs
         addProp(new SpringTrigger(gameModel, 1000, 280, 100, 20, 0, 0, false, false));
         addProp(new SpringTrigger(gameModel, 1200, 280, 100, 20, 0, 0, false, false));
         addProp(new SpringTrigger(gameModel, 1400, 280, 100, 20, 0, 0, false, false));
         addProp(new SpringTrigger(gameModel, 300, 580, 100, 20, 0, 0, false, false));
         addProp(new SpringTrigger(gameModel, 1000, 280, 100, 20, 0, 0, false, false));
         addProp(new SpringTrigger(gameModel, 100, 680, 100, 20, 0, 0, false, false));
+
+        // Spikes
+        addProp(new SpikesTrigger(gameModel, 1000, 280, 100, 20, 0, 0, -1, false, false));
+        addProp(new SpikesTrigger(gameModel, 1200, 280, 100, 20, 0, 0, -1, false, false));
+        addProp(new SpikesTrigger(gameModel, 1400, 280, 100, 20, 0, 0, -1, false, false));
+
+        setBackgroundImage(Resources.getImage("menubackground"));
     }
 
-
-    public void addProp(ALevelProp prop) {
-        levelProps.add(prop);
-    }
-
-    public ArrayList<ALevelProp> getLevelProps() {
-        return levelProps;
-    }
 
 }

@@ -4,9 +4,7 @@ import models.environments.game.GameEnvironment;
 import props.objects.levels.level1.TestLevel1;
 import props.objects.levels.level1.TestLevel2;
 import props.objects.levels.level1.TestLevel3;
-import prototypes.actor.AActor;
 import prototypes.level.ALevel;
-import prototypes.level.prop.ALevelProp;
 import utils.config.ConfigData;
 
 import java.awt.*;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 /**
  * TODO: Add description
  */
-public class LevelList {
+public class LevelsList {
 
     /**
      * The constant GRAVITY.
@@ -68,14 +66,6 @@ public class LevelList {
         return levels.get(currentLevel);
     }
 
-    /**
-     * Gets level props.
-     *
-     * @return the level props
-     */
-    public ArrayList<ALevelProp> getLevelProps() {
-        return levels.get(currentLevel).getLevelProps();
-    }
 
     /**
      * Draw.
@@ -83,13 +73,7 @@ public class LevelList {
      * @param g the g
      */
     public void draw(Graphics g) {
-
-        for (AActor levelProps : getLevelProps()) {
-            if (levelProps instanceof ALevelProp p) {
-                p.draw(g);
-            }
-        }
-
+        getCurrentLevel().draw(g);
     }
 
     public void reset() {

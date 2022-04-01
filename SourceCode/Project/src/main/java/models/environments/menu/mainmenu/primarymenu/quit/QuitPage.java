@@ -33,8 +33,8 @@ public class QuitPage extends AMenu {
 
         AMenuButton button_back = new AMenuButton(
                 parentModel,
-                (int)(mx - (btn_width * .5f)),
-                500,
+                (int) (mx - (btn_width * .5f)),
+                800,
                 btn_width,
                 btn_height
         ) {
