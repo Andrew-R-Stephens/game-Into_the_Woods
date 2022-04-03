@@ -1,5 +1,6 @@
 package prototypes.window.environments.game;
 
+import models.environments.game.GameEnvironment;
 import utils.config.ConfigData;
 import utils.drawables.IDrawable;
 import utils.updates.IUpdatable;
@@ -11,19 +12,12 @@ import java.awt.*;
  */
 public abstract class AOverlayComponent implements IUpdatable, IDrawable {
 
+    protected GameEnvironment gameEnvironment;
+
     /**
      * The X.
      */
-    protected int x, /**
-     * The Y.
-     */
-    y, /**
-     * The W.
-     */
-    w, /**
-     * The H.
-     */
-    h;
+    protected int x, y, w, h;
 
     /**
      * Instantiates a new A overlay component.
@@ -33,7 +27,8 @@ public abstract class AOverlayComponent implements IUpdatable, IDrawable {
      * @param w the width
      * @param h the height
      */
-    protected AOverlayComponent(int x, int y, int w, int h) {
+    protected AOverlayComponent(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
+        this.gameEnvironment = gameEnvironment;
         this.x = x;
         this.y = y;
         this.w = w;

@@ -14,6 +14,7 @@ import props.objects.gameactors.TestActor;
 import props.objects.levels.LevelsList;
 import prototypes.actor.AActor;
 import prototypes.actor.pawn.character.ACharacter;
+import prototypes.level.ALevel;
 import prototypes.level.prop.ALevelProp;
 import prototypes.window.environments.AEnvironment;
 import utils.config.ConfigData;
@@ -34,7 +35,7 @@ public class GameEnvironment extends AEnvironment {
 
     private LevelsList levelModel;
 
-    private final HUDModel hudModel = new HUDModel(this);
+    private HUDModel hudModel;
     private PlayerInventory inventory;
 
     private final ArrayList<AActor> actors = new ArrayList<>();
@@ -51,15 +52,27 @@ public class GameEnvironment extends AEnvironment {
      * @param controlsModel       - The controls for the Game
      * @param levelModel              - Contains a list of all possible levels
      */
-    public void init(EnvironmentsHandler parentEnvironmentsHandler, PauseMenuModel pauseMenuModel,
-                     GameControlsModel controlsModel, LevelsList levelModel) {
+    public void init(EnvironmentsHandler parentEnvironmentsHandler,
+                     PauseMenuModel pauseMenuModel, GameControlsModel controlsModel,
+                     LevelsList levelModel, HUDModel hudModel, PlayerInventory inventory) {
 
         super.init(parentEnvironmentsHandler, controlsModel.getKeyController(),
                 controlsModel.getMouseController());
 
         setPauseMenuModel(pauseMenuModel);
         setLevelModel(levelModel);
+        setHUDModel(hudModel);
+        setPlayerInventory(inventory);
+
         build(controlsModel);
+    }
+
+    private void setPlayerInventory(PlayerInventory inventory) {
+        this.inventory = inventory;
+    }
+
+    private void setHUDModel(HUDModel hudModel) {
+        this.hudModel = hudModel;
     }
 
     private void setPauseMenuModel(PauseMenuModel pauseMenuModel) {
@@ -288,6 +301,10 @@ public class GameEnvironment extends AEnvironment {
      */
     public void setCurrentLevel(int levelIndex) {
         levelModel.setCurrentLevel(levelIndex);
+    }
+
+    public ALevel getCurrentLevel() {
+        return levelModel.getCurrentLevel();
     }
 
     /**

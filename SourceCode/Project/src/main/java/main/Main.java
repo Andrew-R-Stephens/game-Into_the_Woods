@@ -11,6 +11,8 @@ import models.controls.menu.MenuKeyControls;
 import models.controls.menu.MenuMouseControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
+import models.environments.game.hud.HUDModel;
+import models.environments.game.playerinventory.PlayerInventory;
 import models.environments.menu.mainmenu.MainMenuEnvironment;
 import models.environments.menu.pausemenumodel.PauseMenuModel;
 import models.runnables.RenderRunnable;
@@ -28,6 +30,10 @@ public class Main {
     private static ConfigData preferences;
 
     private static EnvironmentsHandler environmentsHandler;
+
+
+    private static HUDModel hudModel;
+    private static PlayerInventory inventory;
 
     private static GameControlsModel gameControlsModel;
     private static MenuControlsModel menuControlsModel;
@@ -92,6 +98,10 @@ public class Main {
         gameControlsModel = new GameControlsModel();
         menuControlsModel = new MenuControlsModel();
 
+        // Create Game Environment Models
+        hudModel = new HUDModel();
+        inventory = new PlayerInventory();
+
         // Create Menu Environment
         mainMenuEnvironment = new MainMenuEnvironment();
         // Create Game Environment
@@ -143,9 +153,13 @@ public class Main {
         pauseMenuModel.init(environmentsHandler, menuControlsModel);
         pauseMenuModel.setGameEnvironment(gameEnvironment);
 
+        hudModel.init(gameEnvironment, inventory);
+
         // Initialize AEnvironment Models
         mainMenuEnvironment.init(environmentsHandler, menuControlsModel);
-        gameEnvironment.init(environmentsHandler, pauseMenuModel, gameControlsModel, levelsListModel);
+        gameEnvironment.init(environmentsHandler,
+                pauseMenuModel, gameControlsModel,
+                levelsListModel, hudModel, inventory);
 
         // Initialize Canvases
         mainMenuCanvas.init(mainMenuEnvironment);

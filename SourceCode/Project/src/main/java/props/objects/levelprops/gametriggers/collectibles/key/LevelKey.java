@@ -1,7 +1,14 @@
 package props.objects.levelprops.gametriggers.collectibles.key;
 
+import models.camera.Camera;
 import models.environments.game.GameEnvironment;
-import props.objects.levelprops.gametriggers.collectibles.ALevelCollectible;
+import props.objects.gameactors.PlayerAvatar;
+import prototypes.actor.AActor;
+import prototypes.level.prop.trigger.collectibles.ALevelCollectible;
+import utils.config.ConfigData;
+import utils.files.Resources;
+
+import java.awt.*;
 
 public class LevelKey extends ALevelCollectible {
     /**
@@ -14,12 +21,39 @@ public class LevelKey extends ALevelCollectible {
      * @param h                  the h
      * @param vx                 the vx
      * @param vy                 the vy
-     * @param hasGravity         the has gravity
-     * @param canMoveOnCollision the can move on collision
      */
-    protected LevelKey(GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy,
-                       boolean hasGravity, boolean canMoveOnCollision) {
-        super(gameModel, x, y, w, h, vx, vy, hasGravity, canMoveOnCollision);
+    public LevelKey(GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy) {
+        super(gameModel, x, y, w, h, vx, vy, false, false);
+    }
+
+    @Override
+    public boolean hasCollision(AActor a, float delta) {
+        return super.hasCollision(a, delta);
+    }
+
+    @Override
+    public void doAction() {
+        super.doAction();
+    }
+
+    @Override
+    protected void update(float delta) {
+        super.update(delta);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        if(!isActive) {
+            return;
+        }
+
+        double offsetX = ((x * ConfigData.scaledW) + (Camera.x));
+        double offsetY = ((y * ConfigData.scaledH) + (Camera.y));
+
+        double scaledW = w * ConfigData.scaledW;
+        double scaledH = h * ConfigData.scaledH;
+
+        g.drawImage(Resources.getImage("key2"), (int)offsetX, (int)offsetY, (int)scaledW, (int)scaledH, null);
     }
 
 }

@@ -1,5 +1,6 @@
 package models.environments.game.hud.components;
 
+import models.environments.game.GameEnvironment;
 import prototypes.window.environments.game.AOverlayComponent;
 import utils.config.ConfigData;
 
@@ -18,8 +19,8 @@ public class TimeKeeperOverlay extends AOverlayComponent {
      * @param w the w
      * @param h the h
      */
-    public TimeKeeperOverlay(int x, int y, int w, int h) {
-        super(x, y, w, h);
+    public TimeKeeperOverlay(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
+        super(gameEnvironment, x, y, w, h);
     }
 
     @Override

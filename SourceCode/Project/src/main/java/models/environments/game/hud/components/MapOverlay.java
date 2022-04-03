@@ -1,5 +1,6 @@
 package models.environments.game.hud.components;
 
+import models.environments.game.GameEnvironment;
 import prototypes.window.environments.game.AOverlayComponent;
 import utils.config.ConfigData;
 
@@ -18,8 +19,13 @@ public class MapOverlay extends AOverlayComponent {
      * @param w the w
      * @param h the h
      */
-    public MapOverlay(int x, int y, int w, int h) {
-        super(x, y, w, h);
+    public MapOverlay(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
+        super(gameEnvironment, x, y, w, h);
+    }
+
+    @Override
+    public void update(float delta) {
+        super.update(delta);
     }
 
     @Override
@@ -28,12 +34,11 @@ public class MapOverlay extends AOverlayComponent {
 
         float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
+        // Render Level Props
+        //gameEnvironment.getCurrentLevel().draw(g);
+
         g.setColor(Color.white);
         g.drawString("Map Overlay", (int)((x * sW) + (20 * sW)), (int)((y * sH) + (20 * sH)));
     }
 
-    @Override
-    public void update(float delta) {
-        super.update(delta);
-    }
 }

@@ -115,10 +115,12 @@ public abstract class AMenuButton extends AMenuComponent {
         }
 
         g.setColor(Color.BLACK);
+
         g.setFont(
                 Resources.getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
                         .deriveFont(Font.PLAIN, 36 * sW));
+
         int strWidth = g.getFontMetrics().stringWidth(text.toUpperCase());
         g.drawString(
                 text.toUpperCase(),

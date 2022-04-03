@@ -21,12 +21,10 @@ public class SpikesTrigger extends ATrigger {
      * @param vx                 the vx
      * @param vy                 the vy
      * @param MAX_CYCLES
-     * @param hasGravity         the has gravity
-     * @param canMoveOnCollision the can move on collision
      */
     public SpikesTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
-                         int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
+                         int MAX_CYCLES) {
+        super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, false, false);
     }
 
     @Override
