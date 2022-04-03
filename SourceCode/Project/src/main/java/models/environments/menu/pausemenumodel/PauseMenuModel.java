@@ -4,6 +4,7 @@ import models.environments.game.GameEnvironment;
 import models.environments.menu.pausemenumodel.primarymenu.PauseMenuPage;
 import prototypes.window.environments.menu.AMenuModel;
 import utils.config.ConfigData;
+import utils.files.Resources;
 
 import java.awt.*;
 
@@ -33,6 +34,10 @@ public class PauseMenuModel extends AMenuModel {
         g.fillRect(0, 0, ConfigData.window_width_actual, ConfigData.window_height_actual);
 
         super.draw(g);
+    }
+
+    @Override
+    public void startBackgroundAudio() {
     }
 
     @Override

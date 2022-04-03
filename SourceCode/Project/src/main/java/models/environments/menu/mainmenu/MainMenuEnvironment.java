@@ -1,8 +1,12 @@
 package models.environments.menu.mainmenu;
 
+import models.controls.MenuControlsModel;
+import models.environments.EnvironmentsHandler;
 import models.environments.menu.mainmenu.startscreen.StartScreenPage;
 import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
+import utils.files.AudioPlayer;
+import utils.files.Resources;
 
 import java.awt.*;
 
@@ -11,15 +15,24 @@ import java.awt.*;
  */
 public class MainMenuEnvironment extends AMenuModel {
 
-    //private AMenu landingPage;
-
     /**
      * Init.
      */
-    public void init() {
+    public void init(EnvironmentsHandler environmentsHandler, MenuControlsModel menuControlsModel) {
+        super.init(environmentsHandler, menuControlsModel);
+
         AMenu landingPage = new StartScreenPage(this);
 
         initPage(landingPage);
+    }
+
+    public AMenu getTopPage() {
+        return peek();
+    }
+
+    @Override
+    public void startBackgroundAudio() {
+        audioPlayer = Resources.playAudio("mainmenu");
     }
 
     @Override

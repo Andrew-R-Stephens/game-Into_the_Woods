@@ -1,9 +1,8 @@
 package utils.files;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -25,7 +24,7 @@ public class Resources {
     private final String path_font = "fonts/";
 
     private static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
-    private static final Map<String, Clip> audioFiles = new HashMap<>();
+    private static final Map<String, String> audioFiles = new HashMap<>();
     private static final Map<String, File> textFiles = new HashMap<>();
     private static final Map<String, Font> fontFiles = new HashMap<>();
 
@@ -105,7 +104,9 @@ public class Resources {
     private void loadAudioFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
-                "buttonclick.wav"
+                "buttonclick.wav",
+                "mainmenu.wav",
+                "game.wav"
         };
 
         for(String fileName: fileNames) {
@@ -121,12 +122,21 @@ public class Resources {
      * @param fileName the file name
      * @return the clip
      */
-    public Clip loadAudioFile(String fileName) {
+    public String loadAudioFile(String fileName) {
 
-        Clip clip = null;
+        //Clip clip = null;
+        String fullPath = path_audio + fileName;
 
-        InputStream resourceBuff = Resources.class.getResourceAsStream(path_audio + fileName);
+        InputStream resourceBuff = Resources.class.getResourceAsStream(fullPath);
 
+        if(resourceBuff == null) {
+            return null;
+        }
+
+        return fullPath;
+
+        //String fullPath = (path_audio).substring(1) + fileName;
+        /*
         if (resourceBuff != null) {
             try {
                 clip = AudioSystem.getClip();
@@ -134,8 +144,10 @@ public class Resources {
                 e.printStackTrace();
             }
         }
-
         return clip;
+        */
+
+
     }
 
     private void loadMetaInf() {
@@ -151,8 +163,7 @@ public class Resources {
                 "colors.xml",
                 "Preferences.xml",
                 "SaveData.xml",
-                "movingButtonSheet.json",
-                "hfafsadi.xml"
+                "movingButtonSheet.json"
         };
 
         for(String fileName: fileNames) {
@@ -249,8 +260,19 @@ public class Resources {
         return textFiles.get(fileKey);
     }
 
-    public static Font getFont(String fileKey) {
-        return fontFiles.get(fileKey);
+    public static Font getFont(String fontKey) {
+        return fontFiles.get(fontKey);
+    }
+
+    public static synchronized AudioPlayer playAudio(String audioKey) {
+        AudioPlayer player = null;
+        try {
+            player = new AudioPlayer(audioFiles.get(audioKey));
+            player.play();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+        return player;
     }
 
     /**

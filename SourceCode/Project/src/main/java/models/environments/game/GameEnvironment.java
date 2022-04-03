@@ -18,6 +18,7 @@ import prototypes.level.ALevel;
 import prototypes.level.prop.ALevelProp;
 import prototypes.window.environments.AEnvironment;
 import utils.config.ConfigData;
+import utils.files.Resources;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -143,7 +144,7 @@ public class GameEnvironment extends AEnvironment {
             if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
                 kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
                 isPaused = true;
-                parentEnvironmentsModel.swapToEnvironment(
+                parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME_PAUSE_MENU, false).applyEnvironment();
             }
         }
@@ -154,7 +155,7 @@ public class GameEnvironment extends AEnvironment {
             if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
                 kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
                 isPaused = false;
-                parentEnvironmentsModel.swapToEnvironment(
+                parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment();
             }
         }
@@ -314,6 +315,11 @@ public class GameEnvironment extends AEnvironment {
      */
     public ACharacter getPlayerAvatar() {
         return character;
+    }
+
+    @Override
+    public void startBackgroundAudio() {
+        audioPlayer = Resources.playAudio("game");
     }
 
     @Override

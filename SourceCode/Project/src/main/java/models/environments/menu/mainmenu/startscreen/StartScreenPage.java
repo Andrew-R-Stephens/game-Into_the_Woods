@@ -45,7 +45,7 @@ public class StartScreenPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(new MainMenuPage(parentMenuModel));
+                navigateToDefaultPage();
                 return true;
 
             }
@@ -59,4 +59,7 @@ public class StartScreenPage extends AMenu {
 
     }
 
+    public void navigateToDefaultPage() {
+        parentMenuModel.push(new MainMenuPage(parentMenuModel));
+    }
 }

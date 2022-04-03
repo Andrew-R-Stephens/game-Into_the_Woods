@@ -18,6 +18,8 @@ import java.awt.image.BufferedImage;
  */
 public abstract class AMenuButton extends AMenuComponent {
 
+    private boolean playSound = true;
+
     /**
      * Instantiates a new A menu button.
      *
@@ -50,6 +52,12 @@ public abstract class AMenuButton extends AMenuComponent {
         this.y = y;
         this.w = 200;
         this.h = 50;
+    }
+
+    public void playSound() {
+        if(playSound) {
+            Resources.playAudio("buttonclick");
+        }
     }
 
     @Override
@@ -146,6 +154,7 @@ public abstract class AMenuButton extends AMenuComponent {
         AMouseController mc = parentMenuModel.getMouseController();
         if (mc.isLeftPressed()) {
             if(onClick(mc.getPos()[0], mc.getPos()[1])) {
+                playSound();
                 mc.resetInput();
             }
         } else {

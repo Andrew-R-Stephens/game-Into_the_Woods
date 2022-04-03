@@ -1,6 +1,7 @@
 package models.environments.menu.pausemenumodel.primarymenu;
 
 import models.environments.EnvironmentsHandler;
+import models.environments.menu.mainmenu.startscreen.StartScreenPage;
 import models.environments.menu.pausemenumodel.primarymenu.help.PauseHelpPage;
 import models.environments.menu.pausemenumodel.primarymenu.options.PauseOptionsPage;
 import prototypes.window.environments.menu.AMenu;
@@ -9,7 +10,6 @@ import prototypes.window.environments.menu.components.types.AMenuButton;
 import utils.config.ConfigData;
 import utils.files.Resources;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -48,7 +48,7 @@ public class PauseMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.GAME,
+                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(EnvironmentsHandler.EnvironmentType.GAME,
                         false).applyEnvironment();
 
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setPaused(false);
@@ -113,8 +113,15 @@ public class PauseMenuPage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
-                        EnvironmentsHandler.EnvironmentType.MAIN_MENU, true).applyEnvironment();
+                parentMenuModel.parentEnvironmentsModel.getCurrentEnvironment().onExit();
+                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
+                        EnvironmentsHandler.EnvironmentType.MAIN_MENU, true);
+                parentMenuModel.parentEnvironmentsModel.getCurrentEnvironment().onResume();
+                if(parentMenuModel.parentEnvironmentsModel.getMenuEnvironment().getTopPage()
+                        instanceof StartScreenPage ssp) {
+                    ssp.navigateToDefaultPage();
+                }
+                parentMenuModel.parentEnvironmentsModel.applyEnvironment();
 
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setPaused(false);
 

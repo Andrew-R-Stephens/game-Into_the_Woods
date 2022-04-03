@@ -7,7 +7,6 @@ import prototypes.window.environments.menu.components.types.AMenuButton;
 import utils.config.ConfigData;
 import utils.files.Resources;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -49,7 +48,7 @@ public class LevelSelectPage extends AMenu {
                 //parentMenuModel.pop();
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(0);
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
+                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;
@@ -74,7 +73,7 @@ public class LevelSelectPage extends AMenu {
                 //parentMenuModel.pop();
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(2);
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
+                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;
@@ -100,7 +99,7 @@ public class LevelSelectPage extends AMenu {
                 //parentMenuModel.pop();
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(0);
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
+                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;

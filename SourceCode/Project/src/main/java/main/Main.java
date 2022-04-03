@@ -188,12 +188,12 @@ public class Main {
         environmentsHandler.addEnvironmentPair(mainMenuEnvironment, mainMenuCanvas, menuUpdateRunnable, menuRenderRunnable);
         environmentsHandler.addEnvironmentPair(gameEnvironment, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.addEnvironmentPair(pauseMenuModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
-        environmentsHandler.applyEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
+        environmentsHandler.setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
+        environmentsHandler.getCurrentEnvironment().onResume();
 
-        mainMenuEnvironment.init();
 
         // Initialize Window's Environment
-        window.build();
+        environmentsHandler.applyEnvironment();
 
         // Confirm and Apply scaling
         preferences.post();

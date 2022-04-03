@@ -7,7 +7,6 @@ import prototypes.window.environments.menu.components.types.AMenuButton;
 import utils.config.ConfigData;
 import utils.files.Resources;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -70,7 +69,7 @@ public class NewGamePage extends AMenu {
                 }
 
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
+                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;

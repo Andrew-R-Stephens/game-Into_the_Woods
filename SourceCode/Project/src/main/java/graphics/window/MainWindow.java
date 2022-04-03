@@ -116,8 +116,6 @@ public class MainWindow extends AWindow {
 
         add(environmentsHandler.getCurrentCanvas());
         pack();
-
-        environmentsHandler.initThreads();
     }
 
 }

@@ -2,6 +2,7 @@ package models.environments;
 
 import graphics.window.MainWindow;
 import models.environments.game.GameEnvironment;
+import models.environments.menu.mainmenu.MainMenuEnvironment;
 import prototypes.threading.ARunnable;
 import prototypes.window.ACanvas;
 import prototypes.window.environments.AEnvironment;
@@ -62,18 +63,19 @@ public class EnvironmentsHandler {
      *
      * @param environmentType the environment type
      */
-    public void setCurrentEnvironment(EnvironmentType environmentType) {
-        pauseThreads();
-
+    public void setCurrentEnvironmentType(EnvironmentType environmentType) {
         this.currentEnvironment = environmentType;
     }
 
-    public EnvironmentsHandler swapToEnvironment(EnvironmentType environmentType, boolean resetEnvironment) {
+    public EnvironmentsHandler swapToEnvironmentType(EnvironmentType environmentType, boolean resetEnvironment) {
         if(resetEnvironment) {
+            environments.get(currentEnvironment.ordinal()).onExit();
             environments.get(currentEnvironment.ordinal()).reset();
         }
 
-        setCurrentEnvironment(environmentType);
+        pauseThreads();
+
+        setCurrentEnvironmentType(environmentType);
 
         return this;
     }
@@ -94,6 +96,10 @@ public class EnvironmentsHandler {
      */
     public GameEnvironment getGameEnvironment() {
         return (GameEnvironment) environments.get(EnvironmentType.GAME.ordinal());
+    }
+
+    public MainMenuEnvironment getMenuEnvironment() {
+        return (MainMenuEnvironment) environments.get(EnvironmentType.MAIN_MENU.ordinal());
     }
 
     /**
@@ -128,17 +134,14 @@ public class EnvironmentsHandler {
      */
     public void applyEnvironment() {
         parentDisplayWindow.build();
-    }
 
-    public void applyEnvironment(EnvironmentType environmentType) {
-        setCurrentEnvironment(environmentType);
+        initThreads();
     }
 
     public void pauseThreads() {
         updateRunnables.get(currentEnvironment.ordinal()).setPaused(true);
         renderRunnables.get(currentEnvironment.ordinal()).setPaused(true);
     }
-
 
     public void initThreads() {
 

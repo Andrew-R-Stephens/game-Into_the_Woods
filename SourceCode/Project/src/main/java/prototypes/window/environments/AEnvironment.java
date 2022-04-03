@@ -4,12 +4,20 @@ import models.environments.EnvironmentsHandler;
 import prototypes.controls.AKeyController;
 import prototypes.controls.AMouseController;
 import utils.drawables.IDrawable;
+import utils.files.AudioPlayer;
+import utils.files.Resources;
 import utils.updates.IUpdatable;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 
 /**
  * The type A environment.
  */
 public abstract class AEnvironment implements IUpdatable, IDrawable {
+
+    protected AudioPlayer audioPlayer;
 
     /**
      * The Parent environments model.
@@ -54,6 +62,26 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
      */
     public AMouseController getMouseController() {
         return mouseController;
+    }
+
+    public abstract void startBackgroundAudio();
+
+    protected void stopBackgroundAudio() {
+        if(audioPlayer != null) {
+            try {
+                audioPlayer.stop();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void onResume() {
+        startBackgroundAudio();
+    }
+
+    public void onExit() {
+        stopBackgroundAudio();
     }
 
     public abstract void reset();
