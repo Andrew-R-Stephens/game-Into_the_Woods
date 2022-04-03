@@ -32,7 +32,7 @@ public class MainMenuEnvironment extends AMenuModel {
 
     @Override
     public void startBackgroundAudio() {
-        audioPlayer = Resources.playAudio("mainmenu");
+        audioPlayer = Resources.playAudio("mainmenu_short");
     }
 
     @Override

@@ -105,7 +105,7 @@ public class Resources {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
                 "buttonclick.wav",
-                "mainmenu.wav",
+                "mainmenu_short.wav",
                 "game.wav"
         };
 

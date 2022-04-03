@@ -1,8 +1,10 @@
 package utils.files;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.print.attribute.standard.Media;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -32,8 +34,17 @@ public class AudioPlayer {
             throw new IOException("InputStream is null");
         }
 
+        /*
         audioInputStream =
                 AudioSystem.getAudioInputStream(resourceBuff);
+        */
+
+        audioInputStream =
+                AudioSystem.getAudioInputStream(
+                        new BufferedInputStream(
+                                resourceBuff
+                        )
+                );
 
         this.clip = AudioSystem.getClip();
 
