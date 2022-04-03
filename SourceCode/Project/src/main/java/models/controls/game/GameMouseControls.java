@@ -11,20 +11,13 @@ import java.awt.event.MouseEvent;
  */
 public class GameMouseControls extends AMouseController {
 
-    private final GameControlsModel controlsViewModel;
-
-    private final int[] mPos = new int[]{ -100, -100 };
-
-    private boolean isLeftPressed = false;
-    private boolean isRightPressed = false;
-
     /**
      * Instantiates a new Game mouse controls.
      *
      * @param controlsViewModel the controls view model
      */
     public GameMouseControls(AControlsModel controlsViewModel) {
-        this.controlsViewModel = (GameControlsModel) controlsViewModel;
+        super(controlsViewModel);
     }
 
     @Override

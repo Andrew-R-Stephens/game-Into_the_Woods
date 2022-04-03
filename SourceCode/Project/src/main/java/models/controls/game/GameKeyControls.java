@@ -11,15 +11,13 @@ import java.awt.event.KeyEvent;
  */
 public class GameKeyControls extends AKeyController {
 
-    private final GameControlsModel controlsViewModel;
-
     /**
      * Instantiates a new Game key controls.
      *
      * @param controlsViewModel the controls view model
      */
     public GameKeyControls(AControlsModel controlsViewModel) {
-        this.controlsViewModel = (GameControlsModel) controlsViewModel;
+        super(controlsViewModel);
     }
 
     @Override
@@ -32,24 +30,24 @@ public class GameKeyControls extends AKeyController {
             case KeyEvent.VK_ESCAPE -> {
                 //System.out.println("Quitting");
                 //System.exit(1);
-                controlsViewModel.setAction(GameControlsModel.Actions.ESCAPE, true);
+                controlsModel.setAction(GameControlsModel.Actions.ESCAPE, true);
             }
 
             case KeyEvent.VK_A -> {
-                controlsViewModel.setDirectional(GameControlsModel.Directionals.LEFT, true);
+                controlsModel.setDirectional(GameControlsModel.Directionals.LEFT, true);
             }
             case KeyEvent.VK_D -> {
-                controlsViewModel.setDirectional(GameControlsModel.Directionals.RIGHT, true);
+                controlsModel.setDirectional(GameControlsModel.Directionals.RIGHT, true);
             }
             case KeyEvent.VK_W -> {
-                controlsViewModel.setDirectional(GameControlsModel.Directionals.UP, false);
+                controlsModel.setDirectional(GameControlsModel.Directionals.UP, false);
             }
             case KeyEvent.VK_S -> {
-                controlsViewModel.setDirectional(GameControlsModel.Directionals.DOWN, true);
+                controlsModel.setDirectional(GameControlsModel.Directionals.DOWN, true);
             }
 
             case KeyEvent.VK_SPACE -> {
-                controlsViewModel.setAbility(GameControlsModel.Abilities.JUMP, true);
+                ((GameControlsModel) controlsModel).setAbility(GameControlsModel.Abilities.JUMP, true);
             }
         }
     }
@@ -58,28 +56,25 @@ public class GameKeyControls extends AKeyController {
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE -> {
-                controlsViewModel.setAction(GameControlsModel.Actions.ESCAPE, false);
+                controlsModel.setAction(GameControlsModel.Actions.ESCAPE, false);
             }
             case KeyEvent.VK_A -> {
-                controlsViewModel.setDirectional(GameControlsModel.Directionals.LEFT, false);
+                controlsModel.setDirectional(GameControlsModel.Directionals.LEFT, false);
             }
             case KeyEvent.VK_D -> {
-                controlsViewModel.setDirectional(GameControlsModel.Directionals.RIGHT, false);
+                controlsModel.setDirectional(GameControlsModel.Directionals.RIGHT, false);
             }
             case KeyEvent.VK_W -> {
-                controlsViewModel.setDirectional(GameControlsModel.Directionals.UP, false);
+                controlsModel.setDirectional(GameControlsModel.Directionals.UP, false);
             }
             case KeyEvent.VK_S -> {
-                controlsViewModel.setDirectional(GameControlsModel.Directionals.DOWN, false);
+                controlsModel.setDirectional(GameControlsModel.Directionals.DOWN, false);
             }
 
             case KeyEvent.VK_SPACE -> {
-                controlsViewModel.setAbility(GameControlsModel.Abilities.JUMP, false);
+                ((GameControlsModel) controlsModel).setAbility(GameControlsModel.Abilities.JUMP, false);
             }
         }
     }
 
-    public GameControlsModel getControlsModel() {
-        return controlsViewModel;
-    }
 }

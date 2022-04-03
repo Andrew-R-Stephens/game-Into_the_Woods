@@ -139,6 +139,10 @@ public class Main {
         // Initialize AEnvironment Model Container
         environmentsHandler.init(window);
 
+        // Initialize Pause Menu
+        pauseMenuModel.init(environmentsHandler, menuControlsModel);
+        pauseMenuModel.setGameEnvironment(gameEnvironment);
+
         // Initialize AEnvironment Models
         mainMenuEnvironment.init(environmentsHandler, menuControlsModel);
         gameEnvironment.init(environmentsHandler, pauseMenuModel, gameControlsModel, levelsListModel);
@@ -155,6 +159,7 @@ public class Main {
         // Initialize Environments Model with Main Menu and Game AEnvironments
         environmentsHandler.addEnvironmentPair(mainMenuEnvironment, mainMenuCanvas, menuUpdateRunnable, menuRenderRunnable);
         environmentsHandler.addEnvironmentPair(gameEnvironment, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
+        environmentsHandler.addEnvironmentPair(pauseMenuModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.applyEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
 
         // Initialize Window with Preference Data

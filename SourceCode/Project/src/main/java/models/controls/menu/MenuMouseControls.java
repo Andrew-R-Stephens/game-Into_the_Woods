@@ -11,15 +11,13 @@ import java.awt.event.MouseEvent;
  */
 public class MenuMouseControls extends AMouseController {
 
-    private final MenuControlsModel controlsViewModel;
-
     /**
      * Instantiates a new Menu mouse controls.
      *
      * @param controlsViewModel the controls view model
      */
     public MenuMouseControls(AControlsModel controlsViewModel) {
-        this.controlsViewModel = (MenuControlsModel) controlsViewModel;
+        super(controlsViewModel);
     }
 
     @Override

@@ -8,11 +8,16 @@ import java.awt.event.MouseMotionListener;
  */
 public abstract class AMouseController implements MouseListener, MouseMotionListener {
 
+    protected AControlsModel controlsViewModel;
+
     protected final int[] mPos = new int[]{-100, -100};
 
     protected boolean isLeftPressed = false;
     protected boolean isRightPressed = false;
 
+    protected AMouseController(AControlsModel controlsViewModel) {
+        this.controlsViewModel = controlsViewModel;
+    }
 
     /**
      * Is left pressed boolean.

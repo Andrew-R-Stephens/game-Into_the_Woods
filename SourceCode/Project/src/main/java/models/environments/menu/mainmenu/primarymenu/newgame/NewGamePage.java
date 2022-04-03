@@ -68,8 +68,8 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.GAME);
-                parentMenuModel.parentEnvironmentsModel.applyEnvironment();
+                parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
+                        EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;
             }

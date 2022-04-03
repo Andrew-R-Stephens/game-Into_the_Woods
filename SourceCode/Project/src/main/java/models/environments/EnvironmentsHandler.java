@@ -20,7 +20,8 @@ public class EnvironmentsHandler {
      */
     public enum EnvironmentType {
         MAIN_MENU,
-        GAME
+        GAME,
+        GAME_PAUSE_MENU
     }
     private EnvironmentType currentEnvironment = EnvironmentType.MAIN_MENU;
 
@@ -67,10 +68,14 @@ public class EnvironmentsHandler {
         this.currentEnvironment = environmentType;
     }
 
-    public void swapToEnvironment(EnvironmentType environmentType) {
-        environments.get(currentEnvironment.ordinal()).reset();
+    public EnvironmentsHandler swapToEnvironment(EnvironmentType environmentType, boolean resetEnvironment) {
+        if(resetEnvironment) {
+            environments.get(currentEnvironment.ordinal()).reset();
+        }
 
         setCurrentEnvironment(environmentType);
+
+        return this;
     }
 
     /**

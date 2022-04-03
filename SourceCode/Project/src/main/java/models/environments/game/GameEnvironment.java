@@ -4,6 +4,7 @@ import models.camera.Camera;
 import models.controls.GameControlsModel;
 import models.controls.game.GameKeyControls;
 import models.controls.game.GameMouseControls;
+import models.controls.menu.MenuKeyControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
 import models.environments.game.playerinventory.PlayerInventory;
@@ -50,18 +51,14 @@ public class GameEnvironment extends AEnvironment {
      * @param controlsModel       - The controls for the Game
      * @param levelModel              - Contains a list of all possible levels
      */
-    public void init(EnvironmentsHandler parentEnvironmentsHandler,
-                     PauseMenuModel pauseMenuModel,
-                     GameControlsModel controlsModel,
-                     LevelsList levelModel) {
+    public void init(EnvironmentsHandler parentEnvironmentsHandler, PauseMenuModel pauseMenuModel,
+                     GameControlsModel controlsModel, LevelsList levelModel) {
 
         super.init(parentEnvironmentsHandler, controlsModel.getKeyController(),
                 controlsModel.getMouseController());
 
         setPauseMenuModel(pauseMenuModel);
-
         setLevelModel(levelModel);
-
         build(controlsModel);
     }
 
@@ -124,6 +121,8 @@ public class GameEnvironment extends AEnvironment {
 
     public void doPauseMenuUpdates(float delta) {
         doPauseMenuControls();
+
+        pauseMenuModel.update(delta);
     }
 
     private void doGameControls() {
@@ -131,19 +130,19 @@ public class GameEnvironment extends AEnvironment {
             if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
                 kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
                 isPaused = true;
-                //parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
-                //parentEnvironmentsModel.applyEnvironment();
+                parentEnvironmentsModel.swapToEnvironment(
+                        EnvironmentsHandler.EnvironmentType.GAME_PAUSE_MENU, false).applyEnvironment();
             }
         }
     }
 
     public void doPauseMenuControls() {
-        if(keyController instanceof GameKeyControls kc) {
+        if(pauseMenuModel.getKeyController() instanceof MenuKeyControls kc) {
             if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
                 kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
                 isPaused = false;
-                //parentEnvironmentsModel.swapToEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
-                //parentEnvironmentsModel.applyEnvironment();
+                parentEnvironmentsModel.swapToEnvironment(
+                        EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment();
             }
         }
     }
@@ -310,5 +309,9 @@ public class GameEnvironment extends AEnvironment {
 
     public PlayerInventory getPlayerInventory() {
         return inventory;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
     }
 }

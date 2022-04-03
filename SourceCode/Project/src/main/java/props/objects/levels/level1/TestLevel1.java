@@ -69,9 +69,9 @@ public class TestLevel1 extends ALevel {
         addProp(new SpringTrigger(gameModel, 100, 680, 100, 20, 0, 0, false, false));
 
         // Spikes
-        addProp(new SpikesTrigger(gameModel, 1000, 280, 100, 20, 0, 0, -1, false, false));
-        addProp(new SpikesTrigger(gameModel, 1200, 280, 100, 20, 0, 0, -1, false, false));
-        addProp(new SpikesTrigger(gameModel, 1400, 280, 100, 20, 0, 0, -1, false, false));
+        addProp(new SpikesTrigger(gameModel, 1000, 930, 100, 50, 0, 0, -1, false, false));
+        addProp(new SpikesTrigger(gameModel, 1200, 960, 100, 20, 0, 0, -1, false, false));
+        addProp(new SpikesTrigger(gameModel, 1400, 905, 100, 75, 0, 0, -1, false, false));
 
         setBackgroundImage(Resources.getImage("menubackground"));
     }
