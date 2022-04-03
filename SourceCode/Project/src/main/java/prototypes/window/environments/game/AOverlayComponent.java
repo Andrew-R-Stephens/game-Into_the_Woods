@@ -19,15 +19,7 @@ public abstract class AOverlayComponent implements IUpdatable, IDrawable {
      */
     protected int x, y, w, h;
 
-    /**
-     * Instantiates a new A overlay component.
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param w the width
-     * @param h the height
-     */
-    protected AOverlayComponent(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
+    public void init(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
         this.gameEnvironment = gameEnvironment;
         this.x = x;
         this.y = y;

@@ -2,7 +2,6 @@ package props.objects.levelprops.gametriggers.collectibles.key;
 
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
-import props.objects.gameactors.PlayerAvatar;
 import prototypes.actor.AActor;
 import prototypes.level.prop.trigger.collectibles.ALevelCollectible;
 import utils.config.ConfigData;

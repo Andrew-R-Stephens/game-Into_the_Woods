@@ -22,4 +22,8 @@ public class PlayerInventory {
         }
         return count;
     }
+
+    public void reset() {
+        collectibles.clear();
+    }
 }

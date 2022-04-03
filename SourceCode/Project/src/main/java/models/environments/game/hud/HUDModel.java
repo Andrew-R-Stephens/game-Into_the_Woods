@@ -10,7 +10,6 @@ import utils.drawables.IDrawable;
 import utils.files.Resources;
 import utils.updates.IUpdatable;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
@@ -29,13 +28,21 @@ public class HUDModel implements IDrawable, IUpdatable {
     private PlayerStatsOverlay stats;
     private TimeKeeperOverlay timer;
 
-    public void init(GameEnvironment gameEnvironment, PlayerInventory inventory) {
+    public void init(GameEnvironment gameEnvironment, PlayerInventory inventory, MapOverlay mapOverlay,
+                     PlayerStatsOverlay playerStatsOverlay, TimeKeeperOverlay timeKeeperOverlay) {
         this.gameEnvironment = gameEnvironment;
         this.inventory = inventory;
+        this.map = mapOverlay;
+        this.stats = playerStatsOverlay;
+        this.timer = timeKeeperOverlay;
 
-        timer = new TimeKeeperOverlay(gameEnvironment,0, 0, 300, 120);
-        stats = new PlayerStatsOverlay(gameEnvironment,301, 0, 200, 120);
-        map = new MapOverlay(gameEnvironment, 1800, 0, 120, 120);
+        map.init(gameEnvironment, ConfigData.DEFAULT_WINDOW_WIDTH - 200, 0, 200, 200);
+        stats.init(gameEnvironment,301, 0, 200, 200);
+        timer.init(gameEnvironment,0, 0, 300, 200);
+    }
+
+    public void reset() {
+        map.reset();
     }
 
     @Override

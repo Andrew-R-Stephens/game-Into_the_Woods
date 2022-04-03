@@ -11,16 +11,8 @@ import java.awt.*;
  */
 public class TimeKeeperOverlay extends AOverlayComponent {
 
-    /**
-     * Instantiates a new Time keeper overlay.
-     *
-     * @param x the x
-     * @param y the y
-     * @param w the w
-     * @param h the h
-     */
-    public TimeKeeperOverlay(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
-        super(gameEnvironment, x, y, w, h);
+    public void init(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
+        super.init(gameEnvironment, x, y, w, h);
     }
 
     @Override

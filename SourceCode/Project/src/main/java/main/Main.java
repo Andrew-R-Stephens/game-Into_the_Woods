@@ -12,6 +12,9 @@ import models.controls.menu.MenuMouseControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
 import models.environments.game.hud.HUDModel;
+import models.environments.game.hud.components.MapOverlay;
+import models.environments.game.hud.components.PlayerStatsOverlay;
+import models.environments.game.hud.components.TimeKeeperOverlay;
 import models.environments.game.playerinventory.PlayerInventory;
 import models.environments.menu.mainmenu.MainMenuEnvironment;
 import models.environments.menu.pausemenumodel.PauseMenuModel;
@@ -31,6 +34,9 @@ public class Main {
 
     private static EnvironmentsHandler environmentsHandler;
 
+    private static MapOverlay mapOverlay;
+    private static PlayerStatsOverlay playerStatsOverlay;
+    private static TimeKeeperOverlay timeKeeperOverlay;
 
     private static HUDModel hudModel;
     private static PlayerInventory inventory;
@@ -98,6 +104,11 @@ public class Main {
         gameControlsModel = new GameControlsModel();
         menuControlsModel = new MenuControlsModel();
 
+        // Create HUD Model Components
+        mapOverlay = new MapOverlay();
+        playerStatsOverlay = new PlayerStatsOverlay();
+        timeKeeperOverlay = new TimeKeeperOverlay();
+
         // Create Game Environment Models
         hudModel = new HUDModel();
         inventory = new PlayerInventory();
@@ -138,6 +149,9 @@ public class Main {
         preferencesParser.read();
         System.out.println(preferences.toString());
 
+        // Initialize Window with Preference Data
+        window.init(preferences, environmentsHandler);
+
         // Initialize Control Models
         gameControlsModel.init(new GameMouseControls(gameControlsModel), new GameKeyControls(gameControlsModel));
         menuControlsModel.init(new MenuMouseControls(menuControlsModel), new MenuKeyControls(menuControlsModel));
@@ -153,7 +167,7 @@ public class Main {
         pauseMenuModel.init(environmentsHandler, menuControlsModel);
         pauseMenuModel.setGameEnvironment(gameEnvironment);
 
-        hudModel.init(gameEnvironment, inventory);
+        hudModel.init(gameEnvironment, inventory, mapOverlay, playerStatsOverlay, timeKeeperOverlay);
 
         // Initialize AEnvironment Models
         mainMenuEnvironment.init(environmentsHandler, menuControlsModel);
@@ -175,9 +189,6 @@ public class Main {
         environmentsHandler.addEnvironmentPair(gameEnvironment, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.addEnvironmentPair(pauseMenuModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.applyEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
-
-        // Initialize Window with Preference Data
-        window.init(preferences, environmentsHandler);
 
         mainMenuEnvironment.init();
 

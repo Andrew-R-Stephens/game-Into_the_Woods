@@ -1,6 +1,5 @@
 package models.controls.game;
 
-import models.controls.GameControlsModel;
 import prototypes.controls.AControlsModel;
 import prototypes.controls.AMouseController;
 

@@ -1,7 +1,12 @@
 package props.objects.levels.level1;
 
 import models.environments.game.GameEnvironment;
+import props.objects.levelprops.boundaries.PlatformProp;
 import props.objects.levelprops.boundaries.TestLevelPropStatic;
+import props.objects.levelprops.gametriggers.collectibles.key.LevelKey;
+import props.objects.levelprops.gametriggers.interactibles.SpikesTrigger;
+import props.objects.levelprops.gametriggers.interactibles.SpringTrigger;
+import props.objects.levelprops.gametriggers.interactibles.TestTrigger;
 import prototypes.level.ALevel;
 import prototypes.level.prop.ALevelProp;
 
@@ -13,8 +18,6 @@ import java.util.ArrayList;
  */
 public class TestLevel2 extends ALevel {
 
-    private final ArrayList<ALevelProp> levelProps = new ArrayList<>();
-
     /**
      * Instantiates a new Test level 2.
      *
@@ -25,6 +28,12 @@ public class TestLevel2 extends ALevel {
 
         setStartOrigin(200, 50);
 
+        build();
+
+    }
+
+    @Override
+    public void build() {
         // Wall
         addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false));
         addProp(new TestLevelPropStatic(0, 0, 100, 1080, 0, 0, false));
@@ -54,16 +63,11 @@ public class TestLevel2 extends ALevel {
         addProp(new TestLevelPropStatic(2500, 720, 220, 100, 0, 0, false));
         addProp(new TestLevelPropStatic(3000, 700, 500, 50, 0, 0, false));
         addProp(new TestLevelPropStatic(3200, 650, 100, 100, 0, 0, false));
-
     }
 
+    @Override
+    public void reset() {
 
-    public void addProp(ALevelProp prop) {
-        levelProps.add(prop);
-    }
-
-    public ArrayList<ALevelProp> getLevelProps() {
-        return levelProps;
     }
 
 }

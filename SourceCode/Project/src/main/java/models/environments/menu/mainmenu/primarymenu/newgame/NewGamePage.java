@@ -34,6 +34,7 @@ public class NewGamePage extends AMenu {
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
+
         AMenuButton button_characterCreate = new AMenuButton(
                 parentModel,
                 (int)(mx - (btn_width * .5f)),
@@ -68,6 +69,7 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
+                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
                 parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
@@ -104,14 +106,6 @@ public class NewGamePage extends AMenu {
         components.add(button_characterCreate);
         components.add(button_characterConfirm);
         components.add(button_back);
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        super.draw(g);
-
-        g.setColor(Color.red);
-        g.drawString("New Game Model!", 50, 60);
     }
 
 }

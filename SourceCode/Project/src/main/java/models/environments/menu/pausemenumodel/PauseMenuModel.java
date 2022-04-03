@@ -2,7 +2,6 @@ package models.environments.menu.pausemenumodel;
 
 import models.environments.game.GameEnvironment;
 import models.environments.menu.pausemenumodel.primarymenu.PauseMenuPage;
-import prototypes.window.environments.menu.AMenu;
 import prototypes.window.environments.menu.AMenuModel;
 import utils.config.ConfigData;
 
@@ -34,14 +33,6 @@ public class PauseMenuModel extends AMenuModel {
         g.fillRect(0, 0, ConfigData.window_width_actual, ConfigData.window_height_actual);
 
         super.draw(g);
-
-        g.setColor(Color.RED);
-        g.drawString("Pause Menu!", 20, 20);
-    }
-
-    @Override
-    public void update(float delta) {
-        super.update(delta);
     }
 
     @Override

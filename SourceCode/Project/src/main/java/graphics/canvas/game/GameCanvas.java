@@ -3,10 +3,8 @@ package graphics.canvas.game;
 import models.environments.game.GameEnvironment;
 import prototypes.window.ACanvas;
 import utils.config.ConfigData;
-import utils.files.Resources;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 /**
  * Game Canvas is what is drawn on to represent the Game Model.

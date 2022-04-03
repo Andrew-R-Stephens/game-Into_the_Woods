@@ -1,6 +1,5 @@
 package models.controls.menu;
 
-import models.controls.MenuControlsModel;
 import prototypes.controls.AControlsModel;
 import prototypes.controls.AMouseController;
 

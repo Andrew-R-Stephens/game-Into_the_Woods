@@ -1,9 +1,6 @@
 package models.environments.menu.pausemenumodel.primarymenu;
 
 import models.environments.EnvironmentsHandler;
-import models.environments.menu.mainmenu.primarymenu.help.HelpPage;
-import models.environments.menu.mainmenu.primarymenu.options.OptionsPage;
-import models.environments.menu.mainmenu.primarymenu.quit.QuitPage;
 import models.environments.menu.pausemenumodel.primarymenu.help.PauseHelpPage;
 import models.environments.menu.pausemenumodel.primarymenu.options.PauseOptionsPage;
 import prototypes.window.environments.menu.AMenu;
@@ -133,14 +130,6 @@ public class PauseMenuPage extends AMenu {
         components.add(button_help);
         components.add(button_quit);
 
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        super.draw(g);
-
-        g.setColor(Color.blue);
-        g.drawString("Pause Page!", 50, 50);
     }
 
 }

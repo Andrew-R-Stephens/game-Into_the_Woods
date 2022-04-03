@@ -1,9 +1,12 @@
 package prototypes.level;
 
 import models.environments.game.GameEnvironment;
+import props.objects.levelprops.gametriggers.collectibles.key.LevelKey;
 import props.objects.levels.inventory.LevelCollectibles;
 import prototypes.actor.AActor;
 import prototypes.level.prop.ALevelProp;
+import prototypes.level.prop.trigger.ATrigger;
+import prototypes.level.prop.trigger.collectibles.ALevelCollectible;
 import utils.config.ConfigData;
 import utils.drawables.IDrawable;
 import utils.updates.IUpdatable;
@@ -64,7 +67,14 @@ public abstract class ALevel implements IDrawable, IUpdatable {
         this.backgroundImage = backgroundImage;
     }
 
+    public abstract void build();
+
     public void reset() {
+        for(ALevelProp p: levelProps) {
+            if(p instanceof ATrigger t) {
+                t.reset();
+            }
+        }
     }
 
     @Override
@@ -87,5 +97,16 @@ public abstract class ALevel implements IDrawable, IUpdatable {
     @Override
     public void update(float delta) {
 
+    }
+
+    public void drawHUD(Graphics g) {
+        g.setColor(new Color(50, 50,50));
+        g.fillRect(0, 0, ConfigData.window_width_actual, ConfigData.window_height_actual);
+
+        for (AActor levelProps : getLevelProps()) {
+            if (levelProps instanceof ALevelProp p) {
+                p.draw(g);
+            }
+        }
     }
 }

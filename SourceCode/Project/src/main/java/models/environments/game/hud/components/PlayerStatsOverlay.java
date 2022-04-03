@@ -3,27 +3,16 @@ package models.environments.game.hud.components;
 import models.environments.game.GameEnvironment;
 import prototypes.window.environments.game.AOverlayComponent;
 import utils.config.ConfigData;
-import utils.files.Resources;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 /**
  * The type Player stats overlay.
  */
 public class PlayerStatsOverlay extends AOverlayComponent {
 
-    /**
-     * Instantiates a new Player stats overlay.
-     *
-     * @param gameEnvironment
-     * @param x the x
-     * @param y the y
-     * @param w the w
-     * @param h the h
-     */
-    public PlayerStatsOverlay(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
-        super(gameEnvironment, x, y, w, h);
+    public void init(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
+        super.init(gameEnvironment, x, y, w, h);
     }
 
     @Override

@@ -54,11 +54,4 @@ public class PauseOptionsPage extends AMenu {
         components.add(button_back);
     }
 
-    @Override
-    public void draw(Graphics g) {
-        super.draw(g);
-
-        g.setColor(Color.red);
-        g.drawString("Options Menu Model!", 50, 60);
-    }
 }

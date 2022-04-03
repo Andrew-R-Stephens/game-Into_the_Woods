@@ -25,6 +25,14 @@ public class TestLevel1 extends ALevel {
 
         setStartOrigin(300, 900);
 
+        build();
+
+        setBackgroundImage(Resources.getImage("menubackground"));
+    }
+
+    @Override
+    public void build() {
+
         // Walls
         addProp(new PlatformProp(-500, 0, 500, 1080, 0, 0, false));
         addProp(new PlatformProp(9000, 0, 100, 1080, 0, 0, false));
@@ -75,9 +83,9 @@ public class TestLevel1 extends ALevel {
         addProp(new SpikesTrigger(gameModel, 1400, 905, 100, 75, 0, 0, -1));
 
         // Keys
-        addProp(new LevelKey(gameModel, 1500, 750, 100, 50, 0, 0));
-
-        setBackgroundImage(Resources.getImage("menubackground"));
+        addProp(new LevelKey(gameModel, 1600, 750, 100, 50, 0, 0));
+        addProp(new LevelKey(gameModel, 2500, 450, 100, 50, 0, 0));
+        addProp(new LevelKey(gameModel, 500, 300, 100, 50, 0, 0));
     }
 
 

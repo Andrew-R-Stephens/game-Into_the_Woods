@@ -36,6 +36,7 @@ public class UpdateRunnable extends ARunnable {
             lastTime = now;
 
             if(delta >= 1) {
+
                 updateRatio = lastUpdates / (float) ConfigData.GAME_UPDATE_RATE;
                 environment.update(updateRatio);
                 updates++;
@@ -46,7 +47,6 @@ public class UpdateRunnable extends ARunnable {
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
 
-                System.out.println("Updating" + environment.getClass());
                 lastUpdates = updates;
                 updates = 0;
 

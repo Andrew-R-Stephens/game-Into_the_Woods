@@ -2,6 +2,7 @@ package props.objects.levelprops.gametriggers.interactibles;
 
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
+import props.objects.gameactors.PlayerAvatar;
 import prototypes.actor.AActor;
 import prototypes.level.prop.trigger.ATrigger;
 import utils.config.ConfigData;
@@ -29,7 +30,7 @@ public class SpikesTrigger extends ATrigger {
 
     @Override
     public void doAction() {
-
+        gameEnvironment.reset();
     }
 
     @Override
@@ -39,7 +40,24 @@ public class SpikesTrigger extends ATrigger {
 
     @Override
     public boolean hasCollision(AActor a, float delta) {
-        return super.hasCollision(a, delta);
+        if(!(a instanceof PlayerAvatar)) {
+            return false;
+        }
+
+        boolean hasCollision = super.hasCollision(a, delta);
+
+        if(MAX_CYCLES != -1) {
+            if (currentCycles > MAX_CYCLES) {
+                return false;
+            }
+        }
+
+        if(hasCollision) {
+            doAction();
+            currentCycles++;
+        }
+
+        return hasCollision;
     }
 
     @Override

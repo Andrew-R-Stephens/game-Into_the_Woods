@@ -54,4 +54,10 @@ public abstract class ALevelCollectible extends ATrigger {
         gameEnvironment.getPlayerInventory().addCollectible(this);
         isActive = false;
     }
+
+    public void reset() {
+        super.reset();
+
+        isActive = true;
+    }
 }

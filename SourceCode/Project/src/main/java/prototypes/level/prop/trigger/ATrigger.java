@@ -69,6 +69,10 @@ public abstract class ATrigger extends ALevelProp {
      */
     public abstract void doAction();
 
+    public void reset() {
+        currentCycles = 0;
+    }
+
     @Override
     public void draw(Graphics g) {
 
@@ -85,4 +89,5 @@ public abstract class ATrigger extends ALevelProp {
         g.setColor(Color.BLACK);
         g.drawString("Trigger Area", (int) (offsetX) + 3, (int) (offsetY) + 12);
     }
+
 }

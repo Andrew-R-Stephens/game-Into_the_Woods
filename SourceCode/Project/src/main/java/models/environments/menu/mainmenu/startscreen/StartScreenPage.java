@@ -59,12 +59,4 @@ public class StartScreenPage extends AMenu {
 
     }
 
-    @Override
-    public void draw(Graphics g) {
-        super.draw(g);
-
-        g.setColor(Color.green);
-        g.drawString("Start screen!", 50, 50);
-    }
-
 }

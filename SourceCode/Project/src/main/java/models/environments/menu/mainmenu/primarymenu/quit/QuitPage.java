@@ -54,12 +54,4 @@ public class QuitPage extends AMenu {
         components.add(button_back);
     }
 
-    @Override
-    public void draw(Graphics g) {
-        super.draw(g);
-
-        g.setColor(Color.red);
-        g.drawString("Quit Menu Model!", 50, 60);
-    }
-
 }

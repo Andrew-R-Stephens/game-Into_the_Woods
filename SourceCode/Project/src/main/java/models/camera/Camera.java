@@ -30,9 +30,6 @@ public class Camera {
         // Casting these to int rounds the translation, which helps mitigate render misalignment issues
         x += ((x2 - x) * acceleration);
         y += ((y2 - y) * acceleration);
-
-        //x += (x2 - x) * Math.abs(((x2 - x) / x2));
-        //y += (y2 - y) * Math.abs(((y2 - y) / y2));
     }
 
     /**

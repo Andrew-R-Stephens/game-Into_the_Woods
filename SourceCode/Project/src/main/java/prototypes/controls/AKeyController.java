@@ -1,7 +1,5 @@
 package prototypes.controls;
 
-import models.controls.GameControlsModel;
-
 import java.awt.event.KeyListener;
 
 /**

@@ -13,8 +13,6 @@ import java.util.ArrayList;
  */
 public class TestLevel3 extends ALevel {
 
-    private final ArrayList<ALevelProp> levelProps = new ArrayList<>();
-
     /**
      * Instantiates a new Test level 3.
      *
@@ -25,22 +23,23 @@ public class TestLevel3 extends ALevel {
 
         setStartOrigin(200, 50);
 
-        for(int i = 0; i < 1000; i++) {
-            addProp(new TestLevelPropStatic(i*20, 500+(-5*i*.8f), 20, 20, 0, 0, false));
-        }
+        build();
 
         // Floor
         addProp(new TestLevelPropStatic(0, 980, 10000, 100, 0, 0, false));
 
     }
 
-
-    public void addProp(ALevelProp prop) {
-        levelProps.add(prop);
+    @Override
+    public void build() {
+        for(int i = 0; i < 1000; i++) {
+            addProp(new TestLevelPropStatic(i*20, 500+(-5*i*.8f), 20, 20, 0, 0, false));
+        }
     }
 
-    public ArrayList<ALevelProp> getLevelProps() {
-        return levelProps;
+    @Override
+    public void reset() {
+
     }
 
 }

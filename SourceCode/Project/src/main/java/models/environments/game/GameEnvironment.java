@@ -318,6 +318,8 @@ public class GameEnvironment extends AEnvironment {
 
     @Override
     public void reset() {
+        hudModel.reset();
+        inventory.reset();
         actors.clear();
         actors.add(character);
         character.reset(levelModel.getCurrentLevel().getCharacterOrigin());

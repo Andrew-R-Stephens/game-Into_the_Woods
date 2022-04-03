@@ -3,10 +3,8 @@ package graphics.canvas.menu;
 import models.environments.menu.mainmenu.MainMenuEnvironment;
 import prototypes.window.ACanvas;
 import utils.config.ConfigData;
-import utils.files.Resources;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 /**
  * Game Canvas extends JPanel. The canvas renders game objects using the scale of chosen window dimensions against the standard dimensions.

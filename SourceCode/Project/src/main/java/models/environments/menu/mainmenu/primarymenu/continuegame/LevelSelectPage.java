@@ -47,6 +47,7 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 //parentMenuModel.pop();
+                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(0);
                 parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
@@ -71,6 +72,7 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 //parentMenuModel.pop();
+                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(2);
                 parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
@@ -96,6 +98,7 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 //parentMenuModel.pop();
+                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(0);
                 parentMenuModel.parentEnvironmentsModel.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
@@ -137,11 +140,4 @@ public class LevelSelectPage extends AMenu {
         components.add(button_back);
     }
 
-    @Override
-    public void draw(Graphics g) {
-        super.draw(g);
-
-        g.setColor(Color.red);
-        g.drawString("Level Select Model!", 50, 60);
-    }
 }
