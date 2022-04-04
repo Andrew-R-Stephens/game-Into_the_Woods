@@ -52,7 +52,7 @@ public class LevelKey extends ALevelCollectible {
         double scaledW = w * ConfigData.scaledW;
         double scaledH = h * ConfigData.scaledH;
 
-        g.drawImage(Resources.getImage("key2"), (int)offsetX, (int)offsetY, (int)scaledW, (int)scaledH, null);
+        g.drawImage(Resources.getImage("key"), (int)offsetX, (int)offsetY, (int)scaledW, (int)scaledH, null);
     }
 
 }

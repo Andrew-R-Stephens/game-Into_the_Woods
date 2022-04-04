@@ -8,7 +8,7 @@ import models.controls.menu.MenuKeyControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
 import models.environments.game.playerinventory.PlayerInventory;
-import models.environments.menu.pausemenumodel.PauseMenuModel;
+import models.environments.menus.pausemenumodel.PauseMenuModel;
 import props.objects.gameactors.PlayerAvatar;
 import props.objects.gameactors.TestActor;
 import props.objects.levels.LevelsList;
@@ -20,6 +20,7 @@ import prototypes.window.environments.AEnvironment;
 import utils.config.ConfigData;
 import utils.files.Resources;
 
+import javax.sound.sampled.FloatControl;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -319,7 +320,7 @@ public class GameEnvironment extends AEnvironment {
 
     @Override
     public void startBackgroundAudio() {
-        audioPlayer = Resources.playAudio("game");
+        audioPlayer = Resources.playAudio_Player("game");
     }
 
     @Override

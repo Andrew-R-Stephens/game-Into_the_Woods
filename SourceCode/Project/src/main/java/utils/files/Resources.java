@@ -1,6 +1,14 @@
 package utils.files;
 
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.decoder.Manager;
+import javazoom.jl.player.AudioDevice;
+import javazoom.jl.player.JavaSoundAudioDevice;
+import javazoom.jl.player.Player;
+
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
@@ -57,18 +65,16 @@ public class Resources {
 
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
-                "dirt.png",
-                "testbutton.png",
-                "testbutton2.png",
                 "avatar.png",
                 "avatar2.png",
+                "key.png",
+                "button_hrect.png",
+                "button_square.png",
+                "mockPlatformV2.png",
+                "dirt.png",
                 "spikes.png",
                 "menubackground.png",
-                "menuButtonSheet.png",
-                "squareButton.png",
-                "mockPlatformV2.png",
-                "key.png",
-                "key2.png"
+                "menuButtonSheet.png"
         };
 
         for(String fileName : fileNames) {
@@ -104,9 +110,10 @@ public class Resources {
     private void loadAudioFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
-                "buttonclick.wav",
-                "mainmenu_short.wav",
-                "game.wav"
+                "buttonclick.mp3",
+                //"mainmenu_short.wav",
+                "mainmenu.mp3",
+                "game.mp3"
         };
 
         for(String fileName: fileNames) {
@@ -264,15 +271,40 @@ public class Resources {
         return fontFiles.get(fontKey);
     }
 
-    public static synchronized AudioPlayer playAudio(String audioKey) {
-        AudioPlayer player = null;
+    public static synchronized Player playAudio_Player(String audioKey) {
+
+        // create AudioInputStream object
+        InputStream resourceBuff = Resources.class.getResourceAsStream(audioFiles.get(audioKey));
+
+        if(resourceBuff == null) {
+            System.out.println("Buffer is null");
+            return null;
+        }
+
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(resourceBuff);
+
+        // Create a Player object that realizes the audio
+        Player p = null;
         try {
-            player = new AudioPlayer(audioFiles.get(audioKey));
-            player.play();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            p = new Player(bufferedInputStream);
+        } catch (JavaLayerException e) {
             e.printStackTrace();
         }
-        return player;
+
+        Player finalP = p;
+        Thread t = new Thread(() -> {
+            try {
+                if (finalP != null) {
+                    finalP.play(); // Start the music
+                }
+            } catch (JavaLayerException e) {
+                e.printStackTrace();
+            }
+        });
+        t.start();
+
+        return p;
+
     }
 
     /**

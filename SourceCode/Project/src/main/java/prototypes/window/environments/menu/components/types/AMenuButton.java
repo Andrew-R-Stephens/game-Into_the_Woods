@@ -56,7 +56,7 @@ public abstract class AMenuButton extends AMenuComponent {
 
     public void playSound() {
         if(playSound) {
-            Resources.playAudio("buttonclick");
+            Resources.playAudio_Player("buttonclick");
         }
     }
 

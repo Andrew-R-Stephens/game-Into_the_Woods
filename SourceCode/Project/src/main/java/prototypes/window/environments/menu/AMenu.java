@@ -2,7 +2,7 @@ package prototypes.window.environments.menu;
 
 import models.controls.MenuControlsModel;
 import models.controls.menu.MenuKeyControls;
-import models.environments.menu.MenuBundle;
+import models.environments.menus.MenuBundle;
 import prototypes.controls.AKeyController;
 import prototypes.controls.AMouseController;
 import prototypes.window.environments.menu.components.AMenuComponent;

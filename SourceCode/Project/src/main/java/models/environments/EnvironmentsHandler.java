@@ -2,7 +2,7 @@ package models.environments;
 
 import graphics.window.MainWindow;
 import models.environments.game.GameEnvironment;
-import models.environments.menu.mainmenu.MainMenuEnvironment;
+import models.environments.menus.mainmenu.MainMenuEnvironment;
 import prototypes.threading.ARunnable;
 import prototypes.window.ACanvas;
 import prototypes.window.environments.AEnvironment;
@@ -72,10 +72,16 @@ public class EnvironmentsHandler {
             environments.get(currentEnvironment.ordinal()).onExit();
             environments.get(currentEnvironment.ordinal()).reset();
         }
-
         pauseThreads();
 
+        EnvironmentType previousEnvironment = currentEnvironment;
         setCurrentEnvironmentType(environmentType);
+
+        if(resetEnvironment &&
+                environments.get(previousEnvironment.ordinal()) != environments.get(currentEnvironment.ordinal())) {
+            environments.get(previousEnvironment.ordinal()).onExit();
+            environments.get(currentEnvironment.ordinal()).onResume();
+        }
 
         return this;
     }

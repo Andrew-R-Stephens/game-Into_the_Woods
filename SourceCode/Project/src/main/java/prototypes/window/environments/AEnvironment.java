@@ -1,23 +1,18 @@
 package prototypes.window.environments;
 
+import javazoom.jl.player.Player;
 import models.environments.EnvironmentsHandler;
 import prototypes.controls.AKeyController;
 import prototypes.controls.AMouseController;
 import utils.drawables.IDrawable;
-import utils.files.AudioPlayer;
-import utils.files.Resources;
 import utils.updates.IUpdatable;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
 
 /**
  * The type A environment.
  */
 public abstract class AEnvironment implements IUpdatable, IDrawable {
 
-    protected AudioPlayer audioPlayer;
+    protected Player audioPlayer;
 
     /**
      * The Parent environments model.
@@ -68,11 +63,7 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
 
     protected void stopBackgroundAudio() {
         if(audioPlayer != null) {
-            try {
-                audioPlayer.stop();
-            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                e.printStackTrace();
-            }
+            audioPlayer.close();
         }
     }
 

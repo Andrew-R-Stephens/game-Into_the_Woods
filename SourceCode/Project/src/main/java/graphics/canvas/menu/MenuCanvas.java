@@ -1,6 +1,6 @@
 package graphics.canvas.menu;
 
-import models.environments.menu.mainmenu.MainMenuEnvironment;
+import models.environments.menus.mainmenu.MainMenuEnvironment;
 import prototypes.window.ACanvas;
 import utils.config.ConfigData;
 

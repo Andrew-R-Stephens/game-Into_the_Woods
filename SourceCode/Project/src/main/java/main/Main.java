@@ -1,5 +1,6 @@
 package main;
 
+import javax.sound.sampled.*;
 import graphics.canvas.game.GameCanvas;
 import graphics.canvas.menu.MenuCanvas;
 import graphics.window.MainWindow;
@@ -16,14 +17,16 @@ import models.environments.game.hud.components.MapOverlay;
 import models.environments.game.hud.components.PlayerStatsOverlay;
 import models.environments.game.hud.components.TimeKeeperOverlay;
 import models.environments.game.playerinventory.PlayerInventory;
-import models.environments.menu.mainmenu.MainMenuEnvironment;
-import models.environments.menu.pausemenumodel.PauseMenuModel;
+import models.environments.menus.mainmenu.MainMenuEnvironment;
+import models.environments.menus.pausemenumodel.PauseMenuModel;
 import models.runnables.RenderRunnable;
 import models.runnables.UpdateRunnable;
 import props.objects.levels.LevelsList;
 import utils.config.ConfigData;
 import utils.files.PreferencesXMLParser;
 import utils.files.Resources;
+
+import java.io.File;
 
 /**
  * The type main.Main.
@@ -184,13 +187,13 @@ public class Main {
         menuUpdateRunnable.init(mainMenuEnvironment);
         menuRenderRunnable.init(mainMenuCanvas);
 
-        // Initialize Environments Model with Main Menu and Game AEnvironments
-        environmentsHandler.addEnvironmentPair(mainMenuEnvironment, mainMenuCanvas, menuUpdateRunnable, menuRenderRunnable);
+        // Initialize Environments Model with both Main Menu, Pause Game and Game AEnvironments
+        environmentsHandler.addEnvironmentPair(
+                mainMenuEnvironment, mainMenuCanvas, menuUpdateRunnable, menuRenderRunnable);
         environmentsHandler.addEnvironmentPair(gameEnvironment, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.addEnvironmentPair(pauseMenuModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
         environmentsHandler.getCurrentEnvironment().onResume();
-
 
         // Initialize Window's Environment
         environmentsHandler.applyEnvironment();
