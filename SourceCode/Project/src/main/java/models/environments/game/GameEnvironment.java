@@ -182,11 +182,21 @@ public class GameEnvironment extends AEnvironment {
     private void setPlayerAvatar(GameControlsModel controlsViewModel, LevelsList levelModel) {
         int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
         // Add in the Main Test Character
+        /*
         character = new PlayerAvatar (
                 controlsViewModel,
                 startPos[0],
                 startPos[1],
                 28, 70,
+                0, 0,
+                true
+        );
+        */
+        character = new PlayerAvatar (
+                controlsViewModel,
+                startPos[0],
+                startPos[1],
+                56, 56,
                 0, 0,
                 true
         );

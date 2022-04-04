@@ -89,7 +89,7 @@ public class Main {
 
         resources.init();
 
-        SpriteSheetParser sheet = new SpriteSheetParser("files/button_spritesheet.json");
+        Resources.loadSpriteSheet("button_spritesheet");
     }
 
     /**

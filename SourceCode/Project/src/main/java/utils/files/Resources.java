@@ -1,16 +1,11 @@
 package utils.files;
 
+import graphics.views.SpriteSheet;
+import graphics.views.SpriteSheetParser;
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.decoder.Manager;
-import javazoom.jl.player.AudioDevice;
-import javazoom.jl.player.JavaSoundAudioDevice;
 import javazoom.jl.player.Player;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -28,7 +23,7 @@ public class Resources {
 
     private final String path_images = "/images/";
     private final String path_audio = "/audio/";
-    private final String path_textFile = "files/";
+    private static final String path_textFile = "files/";
     private final String path_font = "fonts/";
 
     private static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
@@ -54,8 +49,6 @@ public class Resources {
         loadTextFiles();
         loadFontFiles();
 
-        parseSpriteSheets();
-
         System.out.println(this);
 
     }
@@ -76,7 +69,7 @@ public class Resources {
                 "dirt.png",
                 "spikes.png",
                 "menubackground.png",
-                "menuButtonSheet.png"
+                "button_spritesheet.png"
         };
 
         for(String fileName : fileNames) {
@@ -113,7 +106,6 @@ public class Resources {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
                 "buttonclick.mp3",
-                //"mainmenu_short.wav",
                 "mainmenu.mp3",
                 "game.mp3"
         };
@@ -144,19 +136,6 @@ public class Resources {
 
         return fullPath;
 
-        //String fullPath = (path_audio).substring(1) + fileName;
-        /*
-        if (resourceBuff != null) {
-            try {
-                clip = AudioSystem.getClip();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
-        }
-        return clip;
-        */
-
-
     }
 
     private void loadMetaInf() {
@@ -169,10 +148,10 @@ public class Resources {
     private void loadTextFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
+                "button_spritesheet.json",
                 "colors.xml",
                 "Preferences.xml",
-                "SaveData.xml",
-                "button_spritesheet.json"
+                "SaveData.xml"
         };
 
         for(String fileName: fileNames) {
@@ -261,8 +240,20 @@ public class Resources {
         return font;
     }
 
-    private void parseSpriteSheets() {
+    public static SpriteSheet loadSpriteSheet(String name) {
+        String fileName = name + ".json";
+        if(textFiles.get(fileName) == null) {
+            System.out.println("No spritesheet data file of that name!");
+        }
+        if(imagesFiles.get(name) == null) {
+            System.out.println("No spritesheet image file of that name!");
+        }
 
+        SpriteSheetParser parser = new SpriteSheetParser(path_textFile + fileName);
+        SpriteSheet spriteSheet = parser.getSpriteSheet();
+        spriteSheet.addReferenceImage(getImage(name));
+
+        return spriteSheet;
     }
 
     public static BufferedImage getImage(String imageKey) {

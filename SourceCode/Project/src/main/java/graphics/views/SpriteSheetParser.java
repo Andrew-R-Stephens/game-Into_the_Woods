@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import utils.files.AFileReader;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -15,16 +16,22 @@ import java.util.Collection;
  */
 public class SpriteSheetParser {
 
-    @SerializedName(value = "frames")
     private SpriteSheet spriteSheet;
 
+    private final String jsonFile;
+
     public SpriteSheetParser(String jsonFile) {
+        this.jsonFile = jsonFile;
+
+        spriteSheet = processSpriteSheet();
+    }
+
+    private SpriteSheet processSpriteSheet() {
 
         AFileReader reader = new AFileReader(jsonFile) {
             @Override
             public boolean read() {
                 try {
-
                     // Initialize temp file
                     file = File.createTempFile(jsonFile.split("\\.")[0], ".json");
 
@@ -34,18 +41,6 @@ public class SpriteSheetParser {
                             AFileReader.class.getClassLoader().getResourceAsStream(jsonFile);
                     InputStreamReader isr = new InputStreamReader(is);
                     BufferedReader r = new BufferedReader(isr);
-
-                    // Create Write stream and parse through
-                    /*
-                    FileWriter writer = new FileWriter(file);
-                    String line;
-                    while (((line = r.readLine())) != null) {
-                        System.out.println(line);
-                        writer.write(line + "\n");
-                    }
-
-                    writer.close();
-                    */
 
                     ArrayList<Sprite> sprites = new ArrayList<>();
 
@@ -97,7 +92,6 @@ public class SpriteSheetParser {
                     }
 
                     spriteSheet = new SpriteSheet(sprites);
-                    System.out.println(spriteSheet);
 
                     r.close();
                     isr.close();
@@ -110,5 +104,11 @@ public class SpriteSheetParser {
             }
         };
         reader.read();
+
+        return spriteSheet;
+    }
+
+    public SpriteSheet getSpriteSheet() {
+        return spriteSheet;
     }
 }

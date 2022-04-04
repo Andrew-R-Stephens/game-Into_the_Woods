@@ -32,17 +32,20 @@ public class Sprite {
                 frame[0], frame[1], frame[2], frame[3]);
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
     @Override
     public String toString() {
-        return "Sprite{" +
+        return "Sprite: \t" +
                 "filename='" + filename + '\'' +
                 ", frame=" + Arrays.toString(frame) +
                 ", rotated=" + rotated +
                 ", trimmed=" + trimmed +
                 ", spriteSourceSize=" + Arrays.toString(spriteSourceSize) +
                 ", sourceSize=" + Arrays.toString(sourceSize) +
-                ", duration=" + duration +
-                '}';
+                ", duration=" + duration;
     }
 
 }

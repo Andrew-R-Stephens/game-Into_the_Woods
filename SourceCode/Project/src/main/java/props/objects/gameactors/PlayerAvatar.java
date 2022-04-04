@@ -29,6 +29,8 @@ public class PlayerAvatar extends ACharacter {
     public PlayerAvatar(GameControlsModel cModel, float x, float y, float w, float h, float vx, float vy,
                         boolean hasGravity) {
         super(cModel, x - w, y - h, w, h, vx, vy, hasGravity);
+
+        spriteSheet = Resources.loadSpriteSheet("button_spritesheet");
     }
 
     @Override
@@ -52,6 +54,8 @@ public class PlayerAvatar extends ACharacter {
                 (float)(((ConfigData.window_height_actual * .5) - (h * ConfigData.scaledH)) - (y * ConfigData.scaledH));
 
         Camera.moveTo(tx, ty);
+
+        spriteSheet.update(delta);
     }
 
     @Override
@@ -59,12 +63,12 @@ public class PlayerAvatar extends ACharacter {
         //super.draw(g);
 
         // Scaled size
-        double scaleW = w * ConfigData.scaledW;
-        double scaleH = h * ConfigData.scaledH;
+        float scaleW = w * ConfigData.scaledW;
+        float scaleH = h * ConfigData.scaledH;
 
         //Half window width
-        double centerX = (x * ConfigData.scaledW) + (Camera.x) + scaleW;
-        double centerY = (y * ConfigData.scaledH) + (Camera.y) + scaleH;
+        float centerX = (x * ConfigData.scaledW) + (Camera.x) + scaleW;
+        float centerY = (y * ConfigData.scaledH) + (Camera.y) + scaleH;
 
         centerX -= scaleW;
         centerY -= scaleH;
@@ -74,8 +78,9 @@ public class PlayerAvatar extends ACharacter {
             scaleW *= -1;
         }
 
-        g.setColor(c);
         //g.fillRect((int) (centerX), (int) (centerY), (int) (scaleW), (int) (scaleH));
+        // TODO: RE-ENABLE THE FOLLOWING
+        /*
         if(characterType == CharacterType.MALE) {
             g.drawImage(
                     Resources.getImage("avatar"),
@@ -89,8 +94,11 @@ public class PlayerAvatar extends ACharacter {
                     (int) (scaleW), (int) (scaleH),
                     null);
         }
+        */
 
-        g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
+        spriteSheet.draw(g, (int)centerX, (int)centerY, (int)scaleW, (int)scaleH);
+
+        //g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
 
     }
 

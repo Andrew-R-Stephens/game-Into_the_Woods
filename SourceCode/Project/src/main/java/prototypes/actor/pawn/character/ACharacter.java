@@ -1,5 +1,6 @@
 package prototypes.actor.pawn.character;
 
+import graphics.views.SpriteSheet;
 import models.controls.GameControlsModel;
 import prototypes.actor.pawn.APawn;
 import utils.config.ConfigData;
@@ -38,6 +39,8 @@ public abstract class ACharacter extends APawn implements IDrawable {
 
     private final float MAX_ALLOWED_WALLRIDE_TIME = .7f;
     private float wallrideTime = MAX_ALLOWED_JUMP_TIME;
+
+    protected SpriteSheet spriteSheet;
 
     /**
      * Instantiates a new A character.
@@ -200,12 +203,6 @@ public abstract class ACharacter extends APawn implements IDrawable {
      */
     public void setCharacterType(CharacterType type) {
         this.characterType = type;
-
-        if(type == CharacterType.MALE) {
-            c = Color.BLUE;
-        } else {
-            c = Color.PINK;
-        }
     }
 
     public void reset(int[] characterOrigin) {
