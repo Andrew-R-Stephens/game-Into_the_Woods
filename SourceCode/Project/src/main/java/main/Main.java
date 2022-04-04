@@ -1,8 +1,8 @@
 package main;
 
-import javax.sound.sampled.*;
 import graphics.canvas.game.GameCanvas;
 import graphics.canvas.menu.MenuCanvas;
+import graphics.views.SpriteSheetParser;
 import graphics.window.MainWindow;
 import models.controls.GameControlsModel;
 import models.controls.MenuControlsModel;
@@ -25,8 +25,6 @@ import props.objects.levels.LevelsList;
 import utils.config.ConfigData;
 import utils.files.PreferencesXMLParser;
 import utils.files.Resources;
-
-import java.io.File;
 
 /**
  * The type main.Main.
@@ -90,6 +88,8 @@ public class Main {
         Resources resources = new Resources();
 
         resources.init();
+
+        SpriteSheetParser sheet = new SpriteSheetParser("files/button_spritesheet.json");
     }
 
     /**

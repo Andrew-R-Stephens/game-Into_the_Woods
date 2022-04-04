@@ -54,6 +54,8 @@ public class Resources {
         loadTextFiles();
         loadFontFiles();
 
+        parseSpriteSheets();
+
         System.out.println(this);
 
     }
@@ -170,7 +172,7 @@ public class Resources {
                 "colors.xml",
                 "Preferences.xml",
                 "SaveData.xml",
-                "movingButtonSheet.json"
+                "button_spritesheet.json"
         };
 
         for(String fileName: fileNames) {
@@ -257,6 +259,10 @@ public class Resources {
         }
 
         return font;
+    }
+
+    private void parseSpriteSheets() {
+
     }
 
     public static BufferedImage getImage(String imageKey) {

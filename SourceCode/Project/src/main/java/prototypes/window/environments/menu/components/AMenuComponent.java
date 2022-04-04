@@ -135,10 +135,12 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         graphics.drawImage(backgroundImage, 0, 0, null);
         graphics.dispose();
 
+        /*
         System.out.println("Alpha is " + c.getAlpha());
         System.out.println("Red is " + c.getRed());
         System.out.println("Green is " + c.getGreen());
         System.out.println("Blue is " + c.getBlue());
+        */
 
         for (int i = 0; i < tintedSprite.getWidth(); i++)
         {

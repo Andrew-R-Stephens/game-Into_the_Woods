@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class AnimatedSprite implements IAnimatedDrawable {
 
-    private SpriteSheet spriteSheet;
+    private SpriteSheetParser spriteSheet;
 
     @Override
     public void draw(Graphics g) {

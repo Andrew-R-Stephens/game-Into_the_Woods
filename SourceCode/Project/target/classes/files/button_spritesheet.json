@@ -1,4 +1,5 @@
-{ "frames": [
+{
+   "frames": [
    {
     "filename": "Sprite-0004 0.",
     "frame": { "x": 5, "y": 5, "w": 1000, "h": 300 },
