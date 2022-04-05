@@ -4,6 +4,7 @@ import graphics.views.SpriteSheet;
 import models.camera.Camera;
 import prototypes.actor.AActor;
 import utils.config.ConfigData;
+import utils.drawables.IHUDDrawable;
 import utils.files.Resources;
 
 import java.awt.*;
@@ -11,7 +12,7 @@ import java.awt.*;
 /**
  * TODO: Add description
  */
-public abstract class ALevelProp extends AActor {
+public abstract class ALevelProp extends AActor implements IHUDDrawable {
 
     protected SpriteSheet spriteSheet;
 
@@ -44,6 +45,20 @@ public abstract class ALevelProp extends AActor {
         g.drawImage(Resources.getImage("mockPlatformV2"), (int) ((offsetX)), (int) (offsetY), (int) (scaledW),
                 (int) (scaledH),
                 null);
+    }
+
+    public void drawAsHUD(Graphics g) {
+
+        g.setColor(Color.WHITE);
+
+        double offsetX = ((x * ConfigData.scaledW * .75f) + (Camera.x * .75f));
+        double offsetY = ((y * ConfigData.scaledH * .75f) + (Camera.y * .75f));
+
+        double scaledW = w * ConfigData.scaledW * .75f;
+        double scaledH = h * ConfigData.scaledH * .75f;
+
+        g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
+
     }
 
     @Override

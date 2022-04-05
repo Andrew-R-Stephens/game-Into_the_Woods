@@ -1,13 +1,17 @@
 package props.objects.levels.level;
 
 import models.environments.game.GameEnvironment;
+import props.objects.gameactors.TestActor;
 import props.objects.levelprops.boundaries.PlatformProp;
 import props.objects.levelprops.gametriggers.collectibles.key.LevelKey;
 import props.objects.levelprops.gametriggers.interactibles.SpikesTrigger;
 import props.objects.levelprops.gametriggers.interactibles.SpringTrigger;
 import props.objects.levelprops.gametriggers.interactibles.TestTrigger;
 import prototypes.level.ALevel;
+import prototypes.level.prop.trigger.ATrigger;
 import utils.files.Resources;
+
+import java.util.Random;
 
 
 /**
@@ -64,10 +68,12 @@ public class TestLevel1 extends ALevel {
         addProp(new PlatformProp(3200, 650, 100, 100, 0, 0, false));
 
         // Generic Triggers
+        /*
         addProp(new TestTrigger(gameModel, 700, 880, 100, 100, 0, 0, false, false));
         addProp(new TestTrigger(gameModel, 300, 580, 100, 100, 0, 0, false, false));
         addProp(new TestTrigger(gameModel, 1000, 280, 100, 100, 0, 0, false, false));
         addProp(new TestTrigger(gameModel, 100, 680, 100, 100, 0, 0, false, false));
+        */
 
         // Springs
         addProp(new SpringTrigger(gameModel, 1000, 280, 100, 20, 0, 0, false, false));

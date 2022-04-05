@@ -46,8 +46,6 @@ public class TestTrigger extends ATrigger {
 
             currentCycles++;
         }
-
-
         return hasCollision;
     }
 

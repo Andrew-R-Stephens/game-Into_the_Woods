@@ -58,11 +58,6 @@ public abstract class ATrigger extends ALevelProp {
 
     @Override
     public boolean hasCollision(AActor a, float delta) {
-        /*
-        if(!(a instanceof ACharacter)) {
-            return false;
-        }
-        */
         return super.hasCollision(a, delta, canMoveOnCollision);
     }
 

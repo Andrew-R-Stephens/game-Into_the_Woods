@@ -6,11 +6,13 @@ import props.objects.gameactors.PlayerAvatar;
 import prototypes.actor.AActor;
 import prototypes.level.prop.trigger.ATrigger;
 import utils.config.ConfigData;
+import utils.drawables.IDrawable;
+import utils.drawables.IHUDDrawable;
 import utils.files.Resources;
 
 import java.awt.*;
 
-public class SpikesTrigger extends ATrigger {
+public class SpikesTrigger extends ATrigger implements IDrawable, IHUDDrawable {
     /**
      * Instantiates a new A trigger.
      *

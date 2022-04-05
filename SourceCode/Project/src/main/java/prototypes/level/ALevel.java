@@ -1,15 +1,13 @@
 package prototypes.level;
 
 import models.environments.game.GameEnvironment;
-import props.objects.levelprops.gametriggers.collectibles.key.LevelKey;
-import props.objects.levelprops.gametriggers.interactibles.SpringTrigger;
 import props.objects.levels.inventory.LevelCollectibles;
 import prototypes.actor.AActor;
 import prototypes.level.prop.ALevelProp;
 import prototypes.level.prop.trigger.ATrigger;
-import prototypes.level.prop.trigger.collectibles.ALevelCollectible;
 import utils.config.ConfigData;
 import utils.drawables.IDrawable;
+import utils.drawables.IHUDDrawable;
 import utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 /**
  * The type A level.
  */
-public abstract class ALevel implements IDrawable, IUpdatable {
+public abstract class ALevel implements IDrawable, IUpdatable, IHUDDrawable {
 
     protected BufferedImage backgroundImage;
 
@@ -106,13 +104,14 @@ public abstract class ALevel implements IDrawable, IUpdatable {
         */
     }
 
-    public void drawHUD(Graphics g) {
+    @Override
+    public void drawAsHUD(Graphics g) {
         g.setColor(new Color(50, 50,50));
         g.fillRect(0, 0, ConfigData.window_width_actual, ConfigData.window_height_actual);
 
         for (AActor levelProps : getLevelProps()) {
             if (levelProps instanceof ALevelProp p) {
-                p.draw(g);
+                p.drawAsHUD(g);
             }
         }
     }

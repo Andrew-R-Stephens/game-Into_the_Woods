@@ -5,11 +5,13 @@ import models.environments.game.GameEnvironment;
 import prototypes.actor.AActor;
 import prototypes.level.prop.trigger.ATrigger;
 import utils.config.ConfigData;
+import utils.drawables.IDrawable;
+import utils.drawables.IHUDDrawable;
 import utils.files.Resources;
 
 import java.awt.*;
 
-public class SpringTrigger extends ATrigger {
+public class SpringTrigger extends ATrigger implements IDrawable, IHUDDrawable {
 
     AActor lastActor;
 

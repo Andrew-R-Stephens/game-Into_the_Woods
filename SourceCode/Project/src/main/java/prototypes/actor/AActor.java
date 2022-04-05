@@ -3,6 +3,7 @@ package prototypes.actor;
 import models.camera.Camera;
 import utils.config.ConfigData;
 import utils.drawables.IDrawable;
+import utils.drawables.IHUDDrawable;
 import utils.physics.APhysics;
 
 import java.awt.*;

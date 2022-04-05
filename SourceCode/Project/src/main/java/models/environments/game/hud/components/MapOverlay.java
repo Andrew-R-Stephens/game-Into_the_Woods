@@ -4,7 +4,6 @@ import models.environments.game.GameEnvironment;
 import prototypes.window.environments.game.AOverlayComponent;
 import utils.config.ConfigData;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -38,7 +37,7 @@ public class MapOverlay extends AOverlayComponent {
 
         float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
-        gameEnvironment.getCurrentLevel().drawHUD(overlay.getGraphics());
+        gameEnvironment.getCurrentLevel().drawAsHUD(overlay.getGraphics());
         g.drawImage(overlay, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
 
         g.setColor(Color.white);
