@@ -32,6 +32,8 @@ public abstract class ATrigger extends ALevelProp {
      */
     protected int currentCycles = 0;
 
+    protected boolean isActivated = false;
+
     /**
      * Instantiates a new A trigger.
      *

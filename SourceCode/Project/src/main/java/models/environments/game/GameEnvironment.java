@@ -130,6 +130,9 @@ public class GameEnvironment extends AEnvironment {
         insertQueuedActors(); // Dequeue queued actors and add them to list of actors
 
         updateActors(delta); // Update the Game Objects
+
+        updateLevel(delta); // Update level props
+
         updateHUD(delta); // Update HUD overlay
     }
 
@@ -202,6 +205,10 @@ public class GameEnvironment extends AEnvironment {
         hudModel.update(delta);
     }
 
+    private void updateLevel(float delta) {
+        levelModel.getCurrentLevel().update(delta);
+    }
+
     /**
      * Adds new TestActor objects to a holding Queue.
      * The holding Queue will inject these objects at the next available juncture.
@@ -254,6 +261,7 @@ public class GameEnvironment extends AEnvironment {
             if (gameObject instanceof PlayerAvatar tc) {
                 tc.control(delta);
                 tc.update(delta);
+                System.out.println(tc.actionState);
             }
 
         }

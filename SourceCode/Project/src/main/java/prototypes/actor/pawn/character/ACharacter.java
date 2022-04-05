@@ -7,6 +7,7 @@ import utils.config.ConfigData;
 import utils.drawables.IDrawable;
 
 import java.awt.*;
+import java.util.HashMap;
 
 /**
  * This is an abstract class for a controllable Actor object. Allows for direct control from User Controls.
@@ -19,13 +20,19 @@ public abstract class ACharacter extends APawn implements IDrawable {
      * The Character type.
      */
     protected CharacterType characterType;
-
-    /**
-     * The enum Type.
-     */
     public enum CharacterType {
         MALE,
         FEMALE
+    }
+
+    public ActionType actionState = ActionType.FLOOR_IDLE;
+    public enum ActionType {
+        FLOOR_IDLE,
+        FLOOR_WALKING,
+        FLOOR_RUNNING,
+        FLOOR_JUMPING,
+        WALL_CLIMBING,
+        WALL_JUMPING
     }
 
     /**
@@ -40,7 +47,7 @@ public abstract class ACharacter extends APawn implements IDrawable {
     private final float MAX_ALLOWED_WALLRIDE_TIME = .7f;
     private float wallrideTime = MAX_ALLOWED_JUMP_TIME;
 
-    protected SpriteSheet spriteSheet;
+    protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 
     /**
      * Instantiates a new A character.
@@ -66,6 +73,8 @@ public abstract class ACharacter extends APawn implements IDrawable {
      * @param delta - The ratio of current update rate vs targetted framerate
      */
     protected void update(float delta) {
+        setActionType();
+
         super.update(delta);
     }
 
@@ -150,20 +159,23 @@ public abstract class ACharacter extends APawn implements IDrawable {
 
                 if (isFloorCollision) {
                     vY = -5;
+                    actionState = ActionType.FLOOR_JUMPING;
 
-                    System.out.println("Floor Jump");
+                    //System.out.println("Floor Jump");
                 } else {
                     if (isWallCollisionLeft) {
                         doWallJump(5, -5);
 
                         isWallCollisionLeft = false;
-                        System.out.println("Wall Left Jump");
+                        //System.out.println("Wall Left Jump");
+                        actionState = ActionType.WALL_JUMPING;
                     } else
                     if (isWallCollisionRight) {
                         doWallJump(-5, -5);
 
                         isWallCollisionRight = false;
-                        System.out.println("Wall Right Jump");
+                        //System.out.println("Wall Right Jump");
+                        actionState = ActionType.WALL_JUMPING;
                     }
                 }
                 isFloorCollision = false;
@@ -203,6 +215,19 @@ public abstract class ACharacter extends APawn implements IDrawable {
      */
     public void setCharacterType(CharacterType type) {
         this.characterType = type;
+    }
+
+    private void setActionType() {
+        if(isFloorCollision) {
+            if (!isUserControlled) {
+                actionState = ActionType.FLOOR_IDLE;
+            } else {
+                actionState = ActionType.FLOOR_RUNNING;
+            }
+        }
+        if(isWallCollisionRight || isWallCollisionLeft) {
+            actionState = ActionType.WALL_CLIMBING;
+        }
     }
 
     public void reset(int[] characterOrigin) {

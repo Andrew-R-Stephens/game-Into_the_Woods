@@ -1,0 +1,679 @@
+@startuml
+
+title __PROJECT's Class Diagram__\n
+
+  namespace graphics.ui.game {
+    class graphics.ui.game.GameCanvas {
+    }
+  }
+  
+
+  namespace graphics.ui.menu {
+    class graphics.ui.menu.MenuCanvas {
+    }
+  }
+  
+
+  namespace graphics.views {
+    class graphics.views.AnimatedSprite {
+    }
+  }
+  
+
+  namespace graphics.views {
+    class graphics.views.Sprite {
+    }
+  }
+  
+
+  namespace graphics.views {
+    class graphics.views.SpriteSheet {
+    }
+  }
+  
+
+  namespace main {
+    class main.Main {
+    }
+  }
+  
+
+  namespace main {
+    class main.MainWindow {
+    }
+  }
+  
+
+  namespace models.camera {
+    class models.camera.Camera {
+    }
+  }
+  
+
+  namespace models.controls {
+    class models.controls.GameControlsModel {
+    }
+  }
+  
+
+  namespace models.controls {
+    class models.controls.MenuControlsModel {
+    }
+  }
+  
+
+  namespace models.controls {
+    namespace game {
+      class models.controls.game.GameKeyControls {
+      }
+    }
+  }
+  
+
+  namespace models.controls {
+    namespace game {
+      class models.controls.game.GameMouseControls {
+      }
+    }
+  }
+  
+
+  namespace models.controls {
+    namespace menu {
+      class models.controls.menu.MenuKeyControls {
+      }
+    }
+  }
+  
+
+  namespace models.controls {
+    namespace menu {
+      class models.controls.menu.MenuMouseControls {
+      }
+    }
+  }
+  
+
+  namespace models.data {
+    class models.data.PreferenceData {
+    }
+  }
+  
+
+  namespace models.data {
+    class models.data.SaveGameData {
+    }
+  }
+  
+
+  namespace models.environments {
+    class models.environments.EnvironmentsModel {
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace game {
+      class models.environments.game.GameModel {
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace game {
+      namespace hud {
+        class models.environments.game.hud.HUDModel {
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace game {
+      namespace hud {
+        namespace components {
+          class models.environments.game.hud.components.MapOverlay {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace game {
+      namespace hud {
+        namespace components {
+          class models.environments.game.hud.components.PlayerStatsOverlay {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace game {
+      namespace hud {
+        namespace components {
+          class models.environments.game.hud.components.TimeKeeperOverlay {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      class models.environments.menus.MenuBundle {
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace mainmenu {
+        class models.environments.menus.mainmenu.MainMenuModel {
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace mainmenu {
+        namespace children {
+          class models.environments.menus.mainmenu.children.CharacterSelectPage {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace mainmenu {
+        namespace children {
+          class models.environments.menus.mainmenu.children.HelpPage {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace mainmenu {
+        namespace children {
+          class models.environments.menus.mainmenu.children.LevelSelectPage {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace mainmenu {
+        namespace children {
+          class models.environments.menus.mainmenu.children.MainMenuPage {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace mainmenu {
+        namespace children {
+          class models.environments.menus.mainmenu.children.NewGamePage {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace mainmenu {
+        namespace children {
+          class models.environments.menus.mainmenu.children.OptionsPage {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace mainmenu {
+        namespace children {
+          class models.environments.menus.mainmenu.children.QuitPage {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace mainmenu {
+        namespace children {
+          class models.environments.menus.mainmenu.children.StartScreenPage {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace models.environments {
+    namespace menus {
+      namespace pausemenumodel {
+        class models.environments.menus.pausemenumodel.PauseMenuModel {
+        }
+      }
+    }
+  }
+  
+
+  namespace props.objects.gameactors {
+    class props.objects.gameactors.TestActor {
+    }
+  }
+  
+
+  namespace props.objects.gameactors {
+    class props.objects.gameactors.TestCharacter {
+    }
+  }
+  
+
+  namespace props.objects.gametriggers {
+    class props.objects.gametriggers.TestTrigger {
+    }
+  }
+  
+
+  namespace props.objects.levelprops {
+    class props.objects.levelprops.TestLevelProp {
+    }
+  }
+  
+
+  namespace props.objects.levelprops {
+    class props.objects.levelprops.TestLevelPropStatic {
+    }
+  }
+  
+
+  namespace props.objects.levels {
+    class props.objects.levels.LevelList {
+    }
+  }
+  
+
+  namespace props.objects.levels {
+    class props.objects.levels.TestLevel1 {
+    }
+  }
+  
+
+  namespace props.objects.levels {
+    class props.objects.levels.TestLevel2 {
+    }
+  }
+  
+
+  namespace props.objects.levels {
+    class props.objects.levels.TestLevel3 {
+    }
+  }
+  
+
+  namespace props.threads.gameloop {
+    class props.threads.gameloop.GameRenderRunnable {
+    }
+  }
+  
+
+  namespace props.threads.gameloop {
+    class props.threads.gameloop.GameUpdateRunnable {
+    }
+  }
+  
+
+  namespace props.threads.menuloop {
+    class props.threads.menuloop.MenuRenderRunnable {
+    }
+  }
+  
+
+  namespace props.threads.menuloop {
+    class props.threads.menuloop.MenuUpdateRunnable {
+    }
+  }
+  
+
+  namespace prototypes.actor {
+    abstract class prototypes.actor.AActor {
+    }
+  }
+  
+
+  namespace prototypes.actor {
+    namespace pawn {
+      abstract class prototypes.actor.pawn.APawn {
+      }
+    }
+  }
+  
+
+  namespace prototypes.actor {
+    namespace pawn {
+      namespace character {
+        abstract class prototypes.actor.pawn.character.ACharacter {
+        }
+      }
+    }
+  }
+  
+
+  namespace prototypes.actor {
+    namespace trigger {
+      abstract class prototypes.actor.trigger.ATrigger {
+      }
+    }
+  }
+  
+
+  namespace prototypes.controls {
+    abstract class prototypes.controls.AControlsModel {
+    }
+  }
+  
+
+  namespace prototypes.controls {
+    abstract class prototypes.controls.AKeyController {
+    }
+  }
+  
+
+  namespace prototypes.controls {
+    abstract class prototypes.controls.AMouseController {
+    }
+  }
+  
+
+  namespace prototypes.level {
+    abstract class prototypes.level.ALevel {
+    }
+  }
+  
+
+  namespace prototypes.level {
+    namespace prop {
+      abstract class prototypes.level.prop.ALevelProp {
+      }
+    }
+  }
+  
+
+  namespace prototypes.threading {
+    abstract class prototypes.threading.ARenderRunnable {
+    }
+  }
+  
+
+  namespace prototypes.threading {
+    abstract class prototypes.threading.AUpdateRunnable {
+    }
+  }
+  
+
+  namespace prototypes.window {
+    abstract class prototypes.window.ACanvas {
+    }
+  }
+  
+
+  namespace prototypes.window {
+    abstract class prototypes.window.AWindow {
+    }
+  }
+  
+
+  namespace prototypes.window {
+    namespace environments {
+      abstract class prototypes.window.environments.AEnvironment {
+      }
+    }
+  }
+  
+
+  namespace prototypes.window {
+    namespace environments {
+      namespace game {
+        abstract class prototypes.window.environments.game.AOverlayComponent {
+        }
+      }
+    }
+  }
+  
+
+  namespace prototypes.window {
+    namespace environments {
+      namespace menu {
+        abstract class prototypes.window.environments.menu.AMenu {
+        }
+      }
+    }
+  }
+  
+
+  namespace prototypes.window {
+    namespace environments {
+      namespace menu {
+        abstract class prototypes.window.environments.menu.AMenuModel {
+        }
+      }
+    }
+  }
+  
+
+  namespace prototypes.window {
+    namespace environments {
+      namespace menu {
+        namespace components {
+          abstract class prototypes.window.environments.menu.components.AMenuButton {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace utils.drawables {
+    interface utils.drawables.IAnimatedDrawable {
+    }
+  }
+  
+
+  namespace utils.drawables {
+    interface utils.drawables.IDrawable {
+    }
+  }
+  
+
+  namespace utils.drawables {
+    interface utils.drawables.IImageLoader {
+    }
+  }
+  
+
+  namespace utils.drawables {
+    interface utils.drawables.ISpriteSheetParser {
+    }
+  }
+  
+
+  namespace utils.files {
+    abstract class utils.files.AFileLoader {
+    }
+  }
+  
+
+  namespace utils.files {
+    abstract class utils.files.AFileReader {
+    }
+  }
+  
+
+  namespace utils.files {
+    class utils.files.PreferencesXMLParser {
+    }
+  }
+  
+
+  namespace utils.files {
+    class utils.files.Resources {
+    }
+  }
+  
+
+  namespace utils.physics {
+    abstract class utils.physics.APhysics {
+    }
+  }
+  
+
+  namespace utils.updates {
+    interface utils.updates.IUpdatable {
+    }
+  }
+  
+
+  graphics.ui.game.GameCanvas -up-|> prototypes.window.ACanvas
+  graphics.ui.game.GameCanvas o-- models.environments.game.GameModel : gameModel
+  graphics.ui.menu.MenuCanvas -up-|> prototypes.window.ACanvas
+  graphics.ui.menu.MenuCanvas o-- models.environments.menus.mainmenu.MainMenuModel : menuModel
+  graphics.views.AnimatedSprite .up.|> utils.drawables.IAnimatedDrawable
+  graphics.views.AnimatedSprite o-- graphics.views.SpriteSheet : spriteSheet
+  graphics.views.Sprite .up.|> utils.drawables.IDrawable
+  graphics.views.SpriteSheet .up.|> utils.drawables.IImageLoader
+  graphics.views.SpriteSheet .up.|> utils.drawables.ISpriteSheetParser
+  graphics.views.SpriteSheet -up-|> utils.files.AFileLoader
+  main.MainWindow -up-|> prototypes.window.AWindow
+  main.MainWindow o-- models.environments.EnvironmentsModel : environmentsModel
+  models.controls.GameControlsModel -up-|> prototypes.controls.AControlsModel
+  models.controls.MenuControlsModel -up-|> prototypes.controls.AControlsModel
+  models.controls.game.GameKeyControls -up-|> prototypes.controls.AKeyController
+  models.controls.game.GameKeyControls o-- models.controls.GameControlsModel : controlsViewModel
+  models.controls.game.GameMouseControls -up-|> prototypes.controls.AMouseController
+  models.controls.game.GameMouseControls o-- models.controls.GameControlsModel : controlsViewModel
+  models.controls.menu.MenuKeyControls -up-|> prototypes.controls.AKeyController
+  models.controls.menu.MenuKeyControls o-- models.controls.MenuControlsModel : controlsViewModel
+  models.controls.menu.MenuMouseControls -up-|> prototypes.controls.AMouseController
+  models.controls.menu.MenuMouseControls o-- models.controls.MenuControlsModel : controlsViewModel
+  models.environments.EnvironmentsModel o-- models.environments.EnvironmentsModel.EnvironmentType : currentEnvironment
+  models.environments.EnvironmentsModel o-- main.MainWindow : parentComponent
+  models.environments.game.GameModel -up-|> prototypes.window.environments.AEnvironment
+  models.environments.game.GameModel o-- props.objects.gameactors.TestCharacter : character
+  models.environments.game.GameModel o-- models.environments.game.hud.HUDModel : hudModel
+  models.environments.game.GameModel o-- props.objects.levels.LevelList : levelModel
+  models.environments.game.hud.HUDModel -up-|> prototypes.window.environments.AEnvironment
+  models.environments.game.hud.HUDModel o-- models.environments.game.GameModel : gameModel
+  models.environments.game.hud.HUDModel o-- models.environments.game.hud.components.MapOverlay : map
+  models.environments.game.hud.HUDModel o-- models.environments.game.hud.components.PlayerStatsOverlay : stats
+  models.environments.game.hud.HUDModel o-- models.environments.game.hud.components.TimeKeeperOverlay : timer
+  models.environments.game.hud.components.MapOverlay -up-|> prototypes.window.environments.game.AOverlayComponent
+  models.environments.game.hud.components.PlayerStatsOverlay -up-|> prototypes.window.environments.game.AOverlayComponent
+  models.environments.game.hud.components.TimeKeeperOverlay -up-|> prototypes.window.environments.game.AOverlayComponent
+  models.environments.menus.mainmenu.MainMenuModel -up-|> prototypes.window.environments.menu.AMenuModel
+  models.environments.menus.mainmenu.MainMenuModel o-- prototypes.window.environments.menu.AMenu : landingPage
+  models.environments.menus.mainmenu.children.CharacterSelectPage -up-|> prototypes.window.environments.menu.AMenu
+  models.environments.menus.mainmenu.children.HelpPage -up-|> prototypes.window.environments.menu.AMenu
+  models.environments.menus.mainmenu.children.LevelSelectPage -up-|> prototypes.window.environments.menu.AMenu
+  models.environments.menus.mainmenu.children.MainMenuPage -up-|> prototypes.window.environments.menu.AMenu
+  models.environments.menus.mainmenu.children.NewGamePage -up-|> prototypes.window.environments.menu.AMenu
+  models.environments.menus.mainmenu.children.OptionsPage -up-|> prototypes.window.environments.menu.AMenu
+  models.environments.menus.mainmenu.children.QuitPage -up-|> prototypes.window.environments.menu.AMenu
+  models.environments.menus.mainmenu.children.StartScreenPage -up-|> prototypes.window.environments.menu.AMenu
+  models.environments.menus.pausemenumodel.PauseMenuModel -up-|> prototypes.window.environments.menu.AMenuModel
+  props.objects.gameactors.TestActor -up-|> prototypes.actor.pawn.APawn
+  props.objects.gameactors.TestCharacter -up-|> prototypes.actor.pawn.character.ACharacter
+  props.objects.gametriggers.TestTrigger -up-|> prototypes.actor.trigger.ATrigger
+  props.objects.levelprops.TestLevelProp -up-|> prototypes.level.prop.ALevelProp
+  props.objects.levelprops.TestLevelPropStatic -up-|> props.objects.levelprops.TestLevelProp
+  props.objects.levels.TestLevel1 -up-|> prototypes.level.ALevel
+  props.objects.levels.TestLevel2 -up-|> prototypes.level.ALevel
+  props.objects.levels.TestLevel3 -up-|> prototypes.level.ALevel
+  props.threads.gameloop.GameRenderRunnable -up-|> prototypes.threading.ARenderRunnable
+  props.threads.gameloop.GameRenderRunnable o-- graphics.ui.game.GameCanvas : canvas
+  props.threads.gameloop.GameUpdateRunnable -up-|> prototypes.threading.AUpdateRunnable
+  props.threads.gameloop.GameUpdateRunnable o-- models.environments.game.GameModel : gameModel
+  props.threads.menuloop.MenuRenderRunnable -up-|> prototypes.threading.ARenderRunnable
+  props.threads.menuloop.MenuRenderRunnable o-- graphics.ui.menu.MenuCanvas : canvas
+  props.threads.menuloop.MenuUpdateRunnable -up-|> prototypes.threading.AUpdateRunnable
+  props.threads.menuloop.MenuUpdateRunnable o-- models.environments.menus.mainmenu.MainMenuModel : menuModel
+  prototypes.actor.AActor .up.|> utils.drawables.IDrawable
+  prototypes.actor.AActor -up-|> utils.physics.APhysics
+  prototypes.actor.pawn.APawn .up.|> utils.drawables.IDrawable
+  prototypes.actor.pawn.APawn -up-|> prototypes.actor.AActor
+  prototypes.actor.pawn.character.ACharacter .up.|> utils.drawables.IDrawable
+  prototypes.actor.pawn.character.ACharacter -up-|> prototypes.actor.pawn.APawn
+  prototypes.actor.pawn.character.ACharacter o-- prototypes.actor.pawn.character.ACharacter.Type : characterType
+  prototypes.actor.pawn.character.ACharacter o-- models.controls.GameControlsModel : controlsModel
+  prototypes.actor.trigger.ATrigger -up-|> prototypes.level.prop.ALevelProp
+  prototypes.actor.trigger.ATrigger o-- models.environments.game.GameModel : gameModel
+  prototypes.controls.AControlsModel o-- prototypes.controls.AKeyController : keyController
+  prototypes.controls.AControlsModel o-- prototypes.controls.AMouseController : mouseController
+  prototypes.controls.AKeyController .up.|> java.awt.event.KeyListener
+  prototypes.controls.AMouseController .up.|> java.awt.event.MouseListener
+  prototypes.controls.AMouseController .up.|> java.awt.event.MouseMotionListener
+  prototypes.level.ALevel o-- models.environments.game.GameModel : gameModel
+  prototypes.level.prop.ALevelProp -up-|> prototypes.actor.AActor
+  prototypes.threading.ARenderRunnable .up.|> java.lang.Runnable
+  prototypes.threading.AUpdateRunnable .up.|> java.lang.Runnable
+  prototypes.window.ACanvas -up-|> javax.swing.JPanel
+  prototypes.window.AWindow -up-|> javax.swing.JFrame
+  prototypes.window.environments.AEnvironment .up.|> utils.drawables.IDrawable
+  prototypes.window.environments.AEnvironment .up.|> utils.updates.IUpdatable
+  prototypes.window.environments.AEnvironment o-- models.environments.EnvironmentsModel : parentEnvironmentsModel
+  prototypes.window.environments.AEnvironment o-- prototypes.controls.AKeyController : keyController
+  prototypes.window.environments.AEnvironment o-- prototypes.controls.AMouseController : mouseController
+  prototypes.window.environments.game.AOverlayComponent .up.|> utils.drawables.IDrawable
+  prototypes.window.environments.game.AOverlayComponent .up.|> utils.updates.IUpdatable
+  prototypes.window.environments.menu.AMenu -up-|> prototypes.window.environments.AEnvironment
+  prototypes.window.environments.menu.AMenu o-- models.environments.menus.MenuBundle : bundle
+  prototypes.window.environments.menu.AMenu o-- prototypes.window.environments.menu.AMenuModel : parentMenuModel
+  prototypes.window.environments.menu.AMenuModel -up-|> prototypes.window.environments.AEnvironment
+  prototypes.window.environments.menu.components.AMenuButton .up.|> utils.drawables.IDrawable
+  prototypes.window.environments.menu.components.AMenuButton .up.|> utils.updates.IUpdatable
+  prototypes.window.environments.menu.components.AMenuButton o-- prototypes.window.environments.menu.AMenuModel : parentMenuModel
+  prototypes.window.environments.menu.components.AMenuButton o-- prototypes.window.environments.menu.components.AMenuButton.ImageScale : scaleType
+  utils.files.PreferencesXMLParser -up-|> utils.files.AFileReader
+  utils.files.PreferencesXMLParser o-- models.data.PreferenceData : preferences
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -30,7 +30,12 @@ public class PlayerAvatar extends ACharacter {
                         boolean hasGravity) {
         super(cModel, x - w, y - h, w, h, vx, vy, hasGravity);
 
-        spriteSheet = Resources.loadSpriteSheet("avatarrun_spritesheet2");
+        spriteSheets.put(ActionType.FLOOR_IDLE, Resources.loadSpriteSheet("avatarrun_spritesheet"));
+        spriteSheets.put(ActionType.FLOOR_WALKING, Resources.loadSpriteSheet("avatarrun_spritesheet"));
+        spriteSheets.put(ActionType.FLOOR_RUNNING, Resources.loadSpriteSheet("avatarrun_spritesheet2"));
+        spriteSheets.put(ActionType.FLOOR_JUMPING, Resources.loadSpriteSheet("button_spritesheet"));
+        spriteSheets.put(ActionType.WALL_CLIMBING, Resources.loadSpriteSheet("avatarrun_spritesheet2"));
+        spriteSheets.put(ActionType.WALL_JUMPING, Resources.loadSpriteSheet("avatarrun_spritesheet2"));
     }
 
     @Override
@@ -57,10 +62,12 @@ public class PlayerAvatar extends ACharacter {
 
         float tickRate = delta;
         if(vX != 0) {
-            tickRate *= (MAX_VEL_X*.5f/(Math.abs(vX) + (MAX_VEL_X * .5)));
+            tickRate *= ((MAX_VEL_X*.5f)/(Math.abs(vX) + (MAX_VEL_X * .5)));
         }
         if(isUserControlled) {
-            spriteSheet.update(tickRate * (MAX_VEL_X * .5f / Math.abs(vX)));
+            spriteSheets.get(actionState).update(tickRate * (MAX_VEL_X * .5f / Math.abs(vX)));
+        } else {
+            spriteSheets.get(actionState).setCurrentFrame(0);
         }
     }
 
@@ -102,7 +109,7 @@ public class PlayerAvatar extends ACharacter {
         }
         */
 
-        spriteSheet.draw(g, (int)centerX, (int)centerY, (int)scaleW, (int)scaleH);
+        spriteSheets.get(actionState).draw(g, (int)centerX, (int)centerY, (int)scaleW, (int)scaleH);
 
         //g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
 

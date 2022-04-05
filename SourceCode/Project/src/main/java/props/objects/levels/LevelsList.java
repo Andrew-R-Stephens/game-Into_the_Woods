@@ -1,9 +1,9 @@
 package props.objects.levels;
 
 import models.environments.game.GameEnvironment;
-import props.objects.levels.level1.TestLevel1;
-import props.objects.levels.level1.TestLevel2;
-import props.objects.levels.level1.TestLevel3;
+import props.objects.levels.level.TestLevel1;
+import props.objects.levels.level.TestLevel2;
+import props.objects.levels.level.TestLevel3;
 import prototypes.level.ALevel;
 import utils.config.ConfigData;
 

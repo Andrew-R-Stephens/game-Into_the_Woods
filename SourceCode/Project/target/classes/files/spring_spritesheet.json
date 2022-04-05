@@ -1,0 +1,92 @@
+{ "frames": [
+   {
+    "filename": "Spring 0.ase",
+    "frame": { "x": 0, "y": 0, "w": 180, "h": 175 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
+    "sourceSize": { "w": 200, "h": 200 },
+    "duration": 100
+   },
+   {
+    "filename": "Spring 1.ase",
+    "frame": { "x": 180, "y": 0, "w": 180, "h": 175 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
+    "sourceSize": { "w": 200, "h": 200 },
+    "duration": 100
+   },
+   {
+    "filename": "Spring 2.ase",
+    "frame": { "x": 360, "y": 0, "w": 180, "h": 175 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
+    "sourceSize": { "w": 200, "h": 200 },
+    "duration": 100
+   },
+   {
+    "filename": "Spring 3.ase",
+    "frame": { "x": 540, "y": 0, "w": 180, "h": 175 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
+    "sourceSize": { "w": 200, "h": 200 },
+    "duration": 100
+   },
+   {
+    "filename": "Spring 4.ase",
+    "frame": { "x": 720, "y": 0, "w": 180, "h": 175 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
+    "sourceSize": { "w": 200, "h": 200 },
+    "duration": 100
+   },
+   {
+    "filename": "Spring 5.ase",
+    "frame": { "x": 900, "y": 0, "w": 180, "h": 175 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
+    "sourceSize": { "w": 200, "h": 200 },
+    "duration": 100
+   },
+   {
+    "filename": "Spring 6.ase",
+    "frame": { "x": 1080, "y": 0, "w": 180, "h": 175 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
+    "sourceSize": { "w": 200, "h": 200 },
+    "duration": 100
+   },
+   {
+    "filename": "Spring 7.ase",
+    "frame": { "x": 1260, "y": 0, "w": 180, "h": 175 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
+    "sourceSize": { "w": 200, "h": 200 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.34.1-x64",
+  "image": "Spring.png",
+  "format": "RGBA8888",
+  "size": { "w": 1440, "h": 175 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

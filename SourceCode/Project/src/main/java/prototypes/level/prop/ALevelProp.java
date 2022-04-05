@@ -1,5 +1,6 @@
 package prototypes.level.prop;
 
+import graphics.views.SpriteSheet;
 import models.camera.Camera;
 import prototypes.actor.AActor;
 import utils.config.ConfigData;
@@ -11,6 +12,8 @@ import java.awt.*;
  * TODO: Add description
  */
 public abstract class ALevelProp extends AActor {
+
+    protected SpriteSheet spriteSheet;
 
     /**
      * Instantiates a new A level prop.
@@ -43,4 +46,8 @@ public abstract class ALevelProp extends AActor {
                 null);
     }
 
+    @Override
+    public void update(float delta) {
+        super.update(delta);
+    }
 }

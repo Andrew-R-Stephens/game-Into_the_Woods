@@ -70,6 +70,7 @@ public class Resources {
                 "spikes.png",
                 "menubackground.png",
                 "button_spritesheet.png",
+                "spring_spritesheet.png",
                 "avatarrun_spritesheet.png",
                 "avatarrun_spritesheet2.png"
         };
@@ -152,6 +153,7 @@ public class Resources {
         String[] fileNames = {
                 "avatarrun_spritesheet.json",
                 "avatarrun_spritesheet2.json",
+                "spring_spritesheet.json",
                 "button_spritesheet.json",
                 "colors.xml",
                 "Preferences.xml",

@@ -57,4 +57,17 @@ public class SpriteSheet implements IUpdatable {
         return s + "";
     }
 
+    public void setCurrentFrame(int i) {
+        if(i >= frames.size()) {
+            i = frames.size()-1;
+        } else if (i < 0) {
+            i = 0;
+        }
+
+        currentFrame = i;
+    }
+
+    public boolean isLastFrame() {
+        return currentFrame == frames.size()-1;
+    }
 }

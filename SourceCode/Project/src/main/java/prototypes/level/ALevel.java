@@ -2,6 +2,7 @@ package prototypes.level;
 
 import models.environments.game.GameEnvironment;
 import props.objects.levelprops.gametriggers.collectibles.key.LevelKey;
+import props.objects.levelprops.gametriggers.interactibles.SpringTrigger;
 import props.objects.levels.inventory.LevelCollectibles;
 import prototypes.actor.AActor;
 import prototypes.level.prop.ALevelProp;
@@ -96,7 +97,13 @@ public abstract class ALevel implements IDrawable, IUpdatable {
 
     @Override
     public void update(float delta) {
-
+        /*
+        for(ALevelProp p: levelProps) {
+            if(p instanceof SpringTrigger s) {
+                s.update(delta);
+            }
+        }
+        */
     }
 
     public void drawHUD(Graphics g) {
