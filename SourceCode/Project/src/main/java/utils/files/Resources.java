@@ -69,7 +69,9 @@ public class Resources {
                 "dirt.png",
                 "spikes.png",
                 "menubackground.png",
-                "button_spritesheet.png"
+                "button_spritesheet.png",
+                "avatarrun_spritesheet.png",
+                "avatarrun_spritesheet2.png"
         };
 
         for(String fileName : fileNames) {
@@ -148,6 +150,8 @@ public class Resources {
     private void loadTextFiles() {
         //TODO : Create list of files with image resource names instead of this hardcoding
         String[] fileNames = {
+                "avatarrun_spritesheet.json",
+                "avatarrun_spritesheet2.json",
                 "button_spritesheet.json",
                 "colors.xml",
                 "Preferences.xml",

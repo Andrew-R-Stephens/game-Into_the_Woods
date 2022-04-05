@@ -1,0 +1,93 @@
+{ "frames": [
+   {
+    "filename": "mockRunSprite 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 70
+   },
+   {
+    "filename": "mockRunSprite 1.aseprite",
+    "frame": { "x": 110, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 70
+   },
+   {
+    "filename": "mockRunSprite 2.aseprite",
+    "frame": { "x": 220, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 70
+   },
+   {
+    "filename": "mockRunSprite 3.aseprite",
+    "frame": { "x": 330, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 70
+   },
+   {
+    "filename": "mockRunSprite 4.aseprite",
+    "frame": { "x": 440, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 70
+   },
+   {
+    "filename": "mockRunSprite 5.aseprite",
+    "frame": { "x": 550, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 70
+   },
+   {
+    "filename": "mockRunSprite 6.aseprite",
+    "frame": { "x": 660, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 70
+   },
+   {
+    "filename": "mockRunSprite 7.aseprite",
+    "frame": { "x": 770, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 70
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.34.1-x64",
+  "image": "mockRunSpriteT.png",
+  "format": "RGBA8888",
+  "size": { "w": 880, "h": 140 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Group 1" },
+   { "name": "Layer 4", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 9", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

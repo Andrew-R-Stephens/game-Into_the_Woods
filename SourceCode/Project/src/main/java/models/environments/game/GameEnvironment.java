@@ -20,7 +20,6 @@ import prototypes.window.environments.AEnvironment;
 import utils.config.ConfigData;
 import utils.files.Resources;
 
-import javax.sound.sampled.FloatControl;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -182,25 +181,16 @@ public class GameEnvironment extends AEnvironment {
     private void setPlayerAvatar(GameControlsModel controlsViewModel, LevelsList levelModel) {
         int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
         // Add in the Main Test Character
-        /*
+
         character = new PlayerAvatar (
                 controlsViewModel,
                 startPos[0],
                 startPos[1],
-                28, 70,
+                55, 70,
                 0, 0,
                 true
         );
-        */
-        character = new PlayerAvatar (
-                controlsViewModel,
-                startPos[0],
-                startPos[1],
-                56, 56,
-                0, 0,
-                true
-        );
-        actors.add(character);
+
     }
 
 

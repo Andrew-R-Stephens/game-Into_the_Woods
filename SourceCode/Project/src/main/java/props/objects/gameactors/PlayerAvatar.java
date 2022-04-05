@@ -30,7 +30,7 @@ public class PlayerAvatar extends ACharacter {
                         boolean hasGravity) {
         super(cModel, x - w, y - h, w, h, vx, vy, hasGravity);
 
-        spriteSheet = Resources.loadSpriteSheet("button_spritesheet");
+        spriteSheet = Resources.loadSpriteSheet("avatarrun_spritesheet2");
     }
 
     @Override
@@ -55,7 +55,13 @@ public class PlayerAvatar extends ACharacter {
 
         Camera.moveTo(tx, ty);
 
-        spriteSheet.update(delta);
+        float tickRate = delta;
+        if(vX != 0) {
+            tickRate *= (MAX_VEL_X*.5f/(Math.abs(vX) + (MAX_VEL_X * .5)));
+        }
+        if(isUserControlled) {
+            spriteSheet.update(tickRate * (MAX_VEL_X * .5f / Math.abs(vX)));
+        }
     }
 
     @Override
