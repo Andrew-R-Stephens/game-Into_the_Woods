@@ -35,11 +35,6 @@ public abstract class ACharacter extends APawn implements IDrawable {
         WALL_JUMPING
     }
 
-    /**
-     * The C.
-     */
-    protected Color c = Color.BLUE;
-
     private boolean isJumpLocked = false;
     private final int MAX_ALLOWED_JUMP_TIME = 10;
     private int jumpTime = MAX_ALLOWED_JUMP_TIME;

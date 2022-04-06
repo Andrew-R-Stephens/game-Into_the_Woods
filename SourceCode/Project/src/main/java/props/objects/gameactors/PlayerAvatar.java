@@ -30,12 +30,12 @@ public class PlayerAvatar extends ACharacter {
                         boolean hasGravity) {
         super(cModel, x - w, y - h, w, h, vx, vy, hasGravity);
 
-        spriteSheets.put(ActionType.FLOOR_IDLE, Resources.loadSpriteSheet("avatarrun_spritesheet"));
-        spriteSheets.put(ActionType.FLOOR_WALKING, Resources.loadSpriteSheet("avatarrun_spritesheet"));
-        spriteSheets.put(ActionType.FLOOR_RUNNING, Resources.loadSpriteSheet("avatarrun_spritesheet2"));
-        spriteSheets.put(ActionType.FLOOR_JUMPING, Resources.loadSpriteSheet("button_spritesheet"));
-        spriteSheets.put(ActionType.WALL_CLIMBING, Resources.loadSpriteSheet("avatarrun_spritesheet2"));
-        spriteSheets.put(ActionType.WALL_JUMPING, Resources.loadSpriteSheet("avatarrun_spritesheet2"));
+        spriteSheets.put(ActionType.FLOOR_IDLE, Resources.loadSpriteSheet("avatarrun_spritesheet").setLoopOnLast(true));
+        spriteSheets.put(ActionType.FLOOR_WALKING, Resources.loadSpriteSheet("avatarrun_spritesheet").setLoopOnLast(true));
+        spriteSheets.put(ActionType.FLOOR_RUNNING, Resources.loadSpriteSheet("avatarrun_spritesheet2").setLoopOnLast(true));
+        spriteSheets.put(ActionType.FLOOR_JUMPING, Resources.loadSpriteSheet("avatarjump_spritesheet").setLoopOnLast(false));
+        spriteSheets.put(ActionType.WALL_JUMPING, Resources.loadSpriteSheet("avatarjump_spritesheet").setLoopOnLast(false));
+        spriteSheets.put(ActionType.WALL_CLIMBING, Resources.loadSpriteSheet("avatarrun_spritesheet2").setLoopOnLast(true));
     }
 
     @Override
@@ -61,14 +61,51 @@ public class PlayerAvatar extends ACharacter {
         Camera.moveTo(tx, ty);
 
         float tickRate = delta;
-        if(vX != 0) {
-            tickRate *= ((MAX_VEL_X*.5f)/(Math.abs(vX) + (MAX_VEL_X * .5)));
+
+        switch(actionState) {
+            case FLOOR_RUNNING -> {
+                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
+                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
+                spriteSheets.get(ActionType.WALL_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
+                if(vX != 0) {
+                    tickRate *= ((MAX_VEL_X*.5f)/(Math.abs(vX) + (MAX_VEL_X * .5)));
+                }
+            }
+            case WALL_CLIMBING -> {
+                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
+                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
+                spriteSheets.get(ActionType.WALL_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
+                if(vX != 0) {
+                    tickRate *= ((MAX_VEL_X*.5f)/(Math.abs(vX) + (MAX_VEL_X * .5)));
+                }
+            }
+            case FLOOR_JUMPING -> {
+                spriteSheets.get(ActionType.WALL_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
+                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
+                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
+                tickRate *=  (-vY) / MAX_VEL_Y;
+            }
+            case WALL_JUMPING -> {
+                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
+                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
+                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
+                tickRate *=  (-vY) / MAX_VEL_Y;
+            }
+            case FLOOR_IDLE -> {
+                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
+                spriteSheets.get(ActionType.WALL_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
+                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
+            }
         }
-        if(isUserControlled) {
-            spriteSheets.get(actionState).update(tickRate * (MAX_VEL_X * .5f / Math.abs(vX)));
-        } else {
-            spriteSheets.get(actionState).setCurrentFrame(0);
-        }
+
+        spriteSheets.get(actionState).update(tickRate);
+
+        System.out.println(actionState);
     }
 
     @Override

@@ -16,12 +16,16 @@ public class SpriteSheet implements IUpdatable {
 
     private int ticks = 0;
 
+    private boolean loopOnLastFrame = true;
+
     public SpriteSheet(ArrayList<Sprite> spritelist) {
         frames.addAll(spritelist);
     }
 
-    public void addReferenceImage(BufferedImage referenceImage) {
+    public SpriteSheet addReferenceImage(BufferedImage referenceImage) {
         this.referenceImage = referenceImage;
+
+        return this;
     }
 
     @Override
@@ -30,11 +34,8 @@ public class SpriteSheet implements IUpdatable {
 
         int newFrame = currentFrame;
         if(ticks > frames.get(currentFrame).getDuration()) {
-            newFrame += 1;
-            if(newFrame >= frames.size()) {
-                newFrame = 0;
-            }
-            currentFrame = newFrame;
+            setCurrentFrame(newFrame);
+
             ticks = 0;
         }
     }
@@ -58,16 +59,37 @@ public class SpriteSheet implements IUpdatable {
     }
 
     public void setCurrentFrame(int i) {
-        if(i >= frames.size()) {
-            i = frames.size()-1;
-        } else if (i < 0) {
-            i = 0;
-        }
 
+        i ++;
+
+        if(!loopOnLastFrame){
+            if (isLastFrame()) {
+                i = frames.size() - 1;
+            } else if (i < 0) {
+                i = 0;
+            }
+        } else {
+            if (isLastFrame()) {
+                i = 0;
+            } else if (i < 0) {
+                i = frames.size() - 1;
+            }
+        }
         currentFrame = i;
     }
 
     public boolean isLastFrame() {
-        return currentFrame == frames.size()-1;
+        return currentFrame >= frames.size() -1;
+    }
+
+    public void reset() {
+        currentFrame = 0;
+        ticks = 0;
+    }
+
+    public SpriteSheet setLoopOnLast(boolean b) {
+        loopOnLastFrame = b;
+
+        return this;
     }
 }

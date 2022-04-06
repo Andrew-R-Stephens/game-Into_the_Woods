@@ -71,6 +71,7 @@ public class Resources {
                 "menubackground.png",
                 "button_spritesheet.png",
                 "spring_spritesheet.png",
+                "avatarjump_spritesheet.png",
                 "avatarrun_spritesheet.png",
                 "avatarrun_spritesheet2.png"
         };
@@ -155,6 +156,7 @@ public class Resources {
                 "avatarrun_spritesheet2.json",
                 "spring_spritesheet.json",
                 "button_spritesheet.json",
+                "avatarjump_spritesheet.json",
                 "colors.xml",
                 "Preferences.xml",
                 "SaveData.xml"
