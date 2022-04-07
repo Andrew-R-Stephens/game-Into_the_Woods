@@ -50,6 +50,16 @@ public class MapOverlay extends AOverlayComponent {
         g2d.drawRect(
                 (int)((x * sW) - (stroke * .5)), (int)((y * sH) + (stroke * .5)),
                 (int)((w * sW)), (int)((h * sH) ));
+
+        int squareDim = (int)(10 * sW);
+        g.setColor(Color.RED);
+        g.fillRect(
+                (int)((x * sW) + (w * sW * .5) - (squareDim * .5)),
+                (int)((y * sH) + (h * sH * .5) - (squareDim * .5)),
+                squareDim,
+                squareDim
+                );
+
     }
 
 }
