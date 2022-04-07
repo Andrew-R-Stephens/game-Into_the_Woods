@@ -1,24 +1,24 @@
 package models.environments.game;
 
 import models.camera.Camera;
-import models.controls.GameControlsModel;
-import models.controls.game.GameKeyControls;
-import models.controls.game.GameMouseControls;
-import models.controls.menu.MenuKeyControls;
+import controls.GameControls;
+import controls.game.GameKeyControls;
+import controls.game.GameMouseControls;
+import controls.menu.MenuKeyControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
 import models.environments.game.playerinventory.PlayerInventory;
-import models.environments.menus.pausemenumodel.PauseMenuModel;
-import props.objects.gameactors.PlayerAvatar;
-import props.objects.gameactors.TestActor;
-import props.objects.levels.LevelsList;
-import prototypes.actor.AActor;
-import prototypes.actor.pawn.character.ACharacter;
-import prototypes.level.ALevel;
-import prototypes.level.prop.ALevelProp;
-import prototypes.window.environments.AEnvironment;
-import utils.config.ConfigData;
-import utils.files.Resources;
+import models.environments.menus.pausemenumodel.PauseMenuEnvironment;
+import models.actors.gameactors.PlayerAvatar;
+import models.actors.gameactors.TestActor;
+import models.levels.LevelsList;
+import models.prototypes.actor.AActor;
+import models.prototypes.actor.pawn.character.ACharacter;
+import models.prototypes.level.ALevel;
+import models.prototypes.level.prop.ALevelProp;
+import models.prototypes.window.environments.AEnvironment;
+import models.utils.config.ConfigData;
+import models.utils.files.Resources;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import java.util.Random;
  */
 public class GameEnvironment extends AEnvironment {
 
-    private PauseMenuModel pauseMenuModel;
+    private PauseMenuEnvironment pauseMenuModel;
 
     private LevelsList levelModel;
 
@@ -54,7 +54,7 @@ public class GameEnvironment extends AEnvironment {
      * @param levelModel              - Contains a list of all possible levels
      */
     public void init(EnvironmentsHandler parentEnvironmentsHandler,
-                     PauseMenuModel pauseMenuModel, GameControlsModel controlsModel,
+                     PauseMenuEnvironment pauseMenuModel, GameControls controlsModel,
                      LevelsList levelModel, HUDModel hudModel, PlayerInventory inventory) {
 
         super.init(parentEnvironmentsHandler, controlsModel.getKeyController(),
@@ -76,11 +76,11 @@ public class GameEnvironment extends AEnvironment {
         this.hudModel = hudModel;
     }
 
-    private void setPauseMenuModel(PauseMenuModel pauseMenuModel) {
+    private void setPauseMenuModel(PauseMenuEnvironment pauseMenuModel) {
         this.pauseMenuModel = pauseMenuModel;
     }
 
-    public void build(GameControlsModel controlsModel) {
+    public void build(GameControls controlsModel) {
         setPlayerAvatar(controlsModel, levelModel);
     }
 
@@ -131,7 +131,7 @@ public class GameEnvironment extends AEnvironment {
 
         updateActors(delta); // Update the Game Objects
 
-        updateLevel(delta); // Update level props
+        updateLevel(delta); // Update level models.props
 
         updateHUD(delta); // Update HUD overlay
     }
@@ -144,8 +144,8 @@ public class GameEnvironment extends AEnvironment {
 
     private void doGameControls() {
         if(keyController instanceof GameKeyControls kc) {
-            if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
-                kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
+            if(kc.getControlsModel().getAction(GameControls.Actions.ESCAPE)) {
+                kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
                 isPaused = true;
                 parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME_PAUSE_MENU, false).applyEnvironment();
@@ -155,8 +155,8 @@ public class GameEnvironment extends AEnvironment {
 
     public void doPauseMenuControls() {
         if(pauseMenuModel.getKeyController() instanceof MenuKeyControls kc) {
-            if(kc.getControlsModel().getAction(GameControlsModel.Actions.ESCAPE)) {
-                kc.getControlsModel().resetAction(GameControlsModel.Actions.ESCAPE);
+            if(kc.getControlsModel().getAction(GameControls.Actions.ESCAPE)) {
+                kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
                 isPaused = false;
                 parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment();
@@ -181,7 +181,7 @@ public class GameEnvironment extends AEnvironment {
      * @param controlsViewModel
      * @param levelModel
      */
-    private void setPlayerAvatar(GameControlsModel controlsViewModel, LevelsList levelModel) {
+    private void setPlayerAvatar(GameControls controlsViewModel, LevelsList levelModel) {
         int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
         // Add in the Main Test Character
 

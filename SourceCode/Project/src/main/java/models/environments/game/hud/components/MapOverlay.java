@@ -1,8 +1,8 @@
 package models.environments.game.hud.components;
 
 import models.environments.game.GameEnvironment;
-import prototypes.window.environments.game.AOverlayComponent;
-import utils.config.ConfigData;
+import models.prototypes.window.environments.overlays.AOverlayComponent;
+import models.utils.config.ConfigData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

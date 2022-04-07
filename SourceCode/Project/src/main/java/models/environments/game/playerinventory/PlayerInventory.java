@@ -1,7 +1,7 @@
 package models.environments.game.playerinventory;
 
-import props.objects.levelprops.gametriggers.collectibles.key.LevelKey;
-import prototypes.level.prop.trigger.collectibles.ALevelCollectible;
+import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
+import models.prototypes.level.prop.trigger.collectibles.ALevelCollectible;
 
 import java.util.ArrayList;
 

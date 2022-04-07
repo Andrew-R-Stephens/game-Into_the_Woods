@@ -1,0 +1,99 @@
+{ "frames": [
+   {
+    "filename": "IdleSkeleton 0.ase",
+    "frame": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 100
+   },
+   {
+    "filename": "IdleSkeleton 1.ase",
+    "frame": { "x": 110, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 100
+   },
+   {
+    "filename": "IdleSkeleton 2.ase",
+    "frame": { "x": 220, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 100
+   },
+   {
+    "filename": "IdleSkeleton 3.ase",
+    "frame": { "x": 330, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 100
+   },
+   {
+    "filename": "IdleSkeleton 4.ase",
+    "frame": { "x": 440, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 100
+   },
+   {
+    "filename": "IdleSkeleton 5.ase",
+    "frame": { "x": 550, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 100
+   },
+   {
+    "filename": "IdleSkeleton 6.ase",
+    "frame": { "x": 660, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 100
+   },
+   {
+    "filename": "IdleSkeleton 7.ase",
+    "frame": { "x": 770, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 100
+   },
+   {
+    "filename": "IdleSkeleton 8.ase",
+    "frame": { "x": 880, "y": 0, "w": 110, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 140 },
+    "sourceSize": { "w": 110, "h": 140 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.34.1-x64",
+  "image": "IdleSkeleton.png",
+  "format": "RGBA8888",
+  "size": { "w": 990, "h": 140 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

@@ -1,6 +1,6 @@
 package models.environments.menus;
 
-import prototypes.window.environments.menu.AMenu;
+import models.prototypes.window.environments.menu.AMenu;
 
 import java.util.ArrayList;
 

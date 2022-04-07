@@ -1,11 +1,11 @@
 package models.environments.menus.mainmenu;
 
-import models.controls.MenuControlsModel;
+import controls.MenuControls;
 import models.environments.EnvironmentsHandler;
-import models.environments.menus.mainmenu.startscreen.StartScreenPage;
-import prototypes.window.environments.menu.AMenu;
-import prototypes.window.environments.menu.AMenuModel;
-import utils.files.Resources;
+import views.menus.startscreen.StartScreenPage;
+import models.prototypes.window.environments.menu.AMenu;
+import models.prototypes.window.environments.menu.AMenuModel;
+import models.utils.files.Resources;
 
 /**
  * The type Main menu model.
@@ -15,7 +15,7 @@ public class MainMenuEnvironment extends AMenuModel {
     /**
      * Init.
      */
-    public void init(EnvironmentsHandler environmentsHandler, MenuControlsModel menuControlsModel) {
+    public void init(EnvironmentsHandler environmentsHandler, MenuControls menuControlsModel) {
         super.init(environmentsHandler, menuControlsModel);
 
         AMenu landingPage = new StartScreenPage(this);

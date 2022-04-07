@@ -5,10 +5,10 @@ import models.environments.game.hud.components.MapOverlay;
 import models.environments.game.hud.components.PlayerStatsOverlay;
 import models.environments.game.hud.components.TimeKeeperOverlay;
 import models.environments.game.playerinventory.PlayerInventory;
-import utils.config.ConfigData;
-import utils.drawables.IDrawable;
-import utils.files.Resources;
-import utils.updates.IUpdatable;
+import models.utils.config.ConfigData;
+import models.utils.drawables.IDrawable;
+import models.utils.files.Resources;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;

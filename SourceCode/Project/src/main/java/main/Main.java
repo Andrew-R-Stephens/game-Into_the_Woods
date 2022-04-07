@@ -1,15 +1,14 @@
 package main;
 
-import graphics.canvas.game.GameCanvas;
-import graphics.canvas.menu.MenuCanvas;
-import graphics.views.SpriteSheetParser;
-import graphics.window.MainWindow;
-import models.controls.GameControlsModel;
-import models.controls.MenuControlsModel;
-import models.controls.game.GameKeyControls;
-import models.controls.game.GameMouseControls;
-import models.controls.menu.MenuKeyControls;
-import models.controls.menu.MenuMouseControls;
+import views.swing.canvas.game.GameCanvas;
+import views.swing.canvas.menu.MenuCanvas;
+import views.swing.window.MainWindow;
+import controls.GameControls;
+import controls.MenuControls;
+import controls.game.GameKeyControls;
+import controls.game.GameMouseControls;
+import controls.menu.MenuKeyControls;
+import controls.menu.MenuMouseControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
 import models.environments.game.hud.HUDModel;
@@ -18,13 +17,13 @@ import models.environments.game.hud.components.PlayerStatsOverlay;
 import models.environments.game.hud.components.TimeKeeperOverlay;
 import models.environments.game.playerinventory.PlayerInventory;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
-import models.environments.menus.pausemenumodel.PauseMenuModel;
+import models.environments.menus.pausemenumodel.PauseMenuEnvironment;
 import models.runnables.RenderRunnable;
 import models.runnables.UpdateRunnable;
-import props.objects.levels.LevelsList;
-import utils.config.ConfigData;
-import utils.files.PreferencesXMLParser;
-import utils.files.Resources;
+import models.levels.LevelsList;
+import models.utils.config.ConfigData;
+import models.utils.files.PreferencesXMLParser;
+import models.utils.files.Resources;
 
 /**
  * The type main.Main.
@@ -42,13 +41,13 @@ public class Main {
     private static HUDModel hudModel;
     private static PlayerInventory inventory;
 
-    private static GameControlsModel gameControlsModel;
-    private static MenuControlsModel menuControlsModel;
+    private static GameControls gameControlsModel;
+    private static MenuControls menuControlsModel;
 
     private static MainMenuEnvironment mainMenuEnvironment;
     private static GameEnvironment gameEnvironment;
 
-    private static PauseMenuModel pauseMenuModel;
+    private static PauseMenuEnvironment pauseMenuModel;
 
     private static UpdateRunnable gameUpdateRunnable;
     private static RenderRunnable gameRenderRunnable;
@@ -104,8 +103,8 @@ public class Main {
         environmentsHandler = new EnvironmentsHandler();
 
         // Create Control Models
-        gameControlsModel = new GameControlsModel();
-        menuControlsModel = new MenuControlsModel();
+        gameControlsModel = new GameControls();
+        menuControlsModel = new MenuControls();
 
         // Create HUD Model Components
         mapOverlay = new MapOverlay();
@@ -122,7 +121,7 @@ public class Main {
         gameEnvironment = new GameEnvironment();
 
         // Create Pause Menu for Game Environment
-        pauseMenuModel = new PauseMenuModel();
+        pauseMenuModel = new PauseMenuEnvironment();
 
         // Create Levels List Model
         levelsListModel = new LevelsList();

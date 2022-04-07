@@ -1,11 +1,11 @@
 package models.environments;
 
-import graphics.window.MainWindow;
+import views.swing.window.MainWindow;
 import models.environments.game.GameEnvironment;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
-import prototypes.threading.ARunnable;
-import prototypes.window.ACanvas;
-import prototypes.window.environments.AEnvironment;
+import models.prototypes.threading.ARunnable;
+import models.prototypes.window.ACanvas;
+import models.prototypes.window.environments.AEnvironment;
 
 import java.util.ArrayList;
 

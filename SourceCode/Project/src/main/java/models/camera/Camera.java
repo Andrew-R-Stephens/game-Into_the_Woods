@@ -1,6 +1,6 @@
 package models.camera;
 
-import utils.config.ConfigData;
+import models.utils.config.ConfigData;
 
 /**
  * The type Camera.

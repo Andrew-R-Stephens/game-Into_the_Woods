@@ -1,8 +1,8 @@
 package models.runnables;
 
-import prototypes.threading.ARunnable;
-import prototypes.window.environments.AEnvironment;
-import utils.config.ConfigData;
+import models.prototypes.threading.ARunnable;
+import models.prototypes.window.environments.AEnvironment;
+import models.utils.config.ConfigData;
 
 /**
  * The type Game update runnable.
