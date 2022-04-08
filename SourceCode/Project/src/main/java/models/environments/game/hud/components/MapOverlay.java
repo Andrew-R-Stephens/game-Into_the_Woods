@@ -40,9 +40,6 @@ public class MapOverlay extends AOverlayComponent {
         gameEnvironment.getCurrentLevel().drawAsHUD(overlay.getGraphics());
         g.drawImage(overlay, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
 
-        g.setColor(Color.white);
-        g.drawString("Map Overlay", (int)((x * sW) + (20 * sW)), (int)((y * sH) + (20 * sH)));
-
         g.setColor(new Color(75, 25, 75));
         Graphics2D g2d = (Graphics2D)g;
         int stroke = (int)(5 * sW);
@@ -51,7 +48,7 @@ public class MapOverlay extends AOverlayComponent {
                 (int)((x * sW) - (stroke * .5)), (int)((y * sH) + (stroke * .5)),
                 (int)((w * sW)), (int)((h * sH) ));
 
-        int squareDim = (int)(10 * sW);
+        int squareDim = (int)(5 * sW);
         g.setColor(Color.RED);
         g.fillRect(
                 (int)((x * sW) + (w * sW * .5) - (squareDim * .5)),
