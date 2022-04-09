@@ -116,7 +116,7 @@ public class PauseMenuPage extends AMenu {
                 //parentMenuModel.parentEnvironmentsModel.getCurrentEnvironment().onResume();
                 if(parentMenuModel.parentEnvironmentsModel.getMenuEnvironment().getTopPage()
                         instanceof StartScreenPage ssp) {
-                    ssp.navigateToDefaultPage();
+                    ssp.navigateToMainMenuPage();
                 }
                 parentMenuModel.parentEnvironmentsModel.applyEnvironment();
 

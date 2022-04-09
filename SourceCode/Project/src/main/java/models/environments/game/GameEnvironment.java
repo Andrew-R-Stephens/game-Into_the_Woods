@@ -30,7 +30,7 @@ import java.util.Random;
 
 public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 
-    private PauseMenuEnvironment pauseMenuModel;
+    private PauseMenuEnvironment pauseMenuEnvironment;
 
     private LevelsList levelModel;
 
@@ -51,7 +51,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         super.init(parentEnvironmentsHandler, controlsModel.getKeyController(),
                 controlsModel.getMouseController());
 
-        setPauseMenuModel(pauseMenuModel);
+        setPauseMenuEnvironment(pauseMenuModel);
         setLevelModel(levelModel);
         setHUDModel(hudModel);
         setPlayerInventory(inventory);
@@ -67,8 +67,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         this.hudModel = hudModel;
     }
 
-    private void setPauseMenuModel(PauseMenuEnvironment pauseMenuModel) {
-        this.pauseMenuModel = pauseMenuModel;
+    private void setPauseMenuEnvironment(PauseMenuEnvironment pauseMenuEnvironment) {
+        this.pauseMenuEnvironment = pauseMenuEnvironment;
     }
 
     public void build(GameControls controlsModel) {
@@ -103,7 +103,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
         if(isPaused) {
             //Draw Pause Menu
-            pauseMenuModel.draw(g);
+            pauseMenuEnvironment.draw(g);
         }
     }
 
@@ -127,7 +127,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     public void doPauseMenuUpdates(float delta) {
         doPauseMenuControls();
 
-        pauseMenuModel.update(delta);
+        pauseMenuEnvironment.update(delta);
     }
 
     private void doGameControls() {
@@ -142,10 +142,11 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     public void doPauseMenuControls() {
-        if(pauseMenuModel.getKeyController() instanceof MenuKeyControls kc) {
+        if(pauseMenuEnvironment.getKeyController() instanceof MenuKeyControls kc) {
             if(kc.getControlsModel().getAction(GameControls.Actions.ESCAPE)) {
                 kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
                 isPaused = false;
+                pauseMenuEnvironment.onExit();
                 parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment();
             }
@@ -154,6 +155,10 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     public void setLevelModel(LevelsList levelModel) {
         this.levelModel = levelModel;
+    }
+
+    public LevelsList getLevelModel() {
+        return levelModel;
     }
 
     private void setPlayerAvatar(GameControls controlsViewModel, LevelsList levelModel) {
@@ -283,5 +288,11 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     public void setPaused(boolean paused) {
         isPaused = paused;
+    }
+
+    @Override
+    public void onExit() {
+        super.onExit();
+        reset();
     }
 }

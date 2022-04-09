@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class Resources {
 
-    private final String PATH_META = "files/metadata.json";
+    private final String PATH_META = "metadata/metadata.json";
 
     private static String path_textFile;
     private String path_images, path_audio, path_fonts;
@@ -115,10 +115,6 @@ public class Resources {
         }
 
         return fullPath;
-
-    }
-
-    private void loadMetaData() {
 
     }
 

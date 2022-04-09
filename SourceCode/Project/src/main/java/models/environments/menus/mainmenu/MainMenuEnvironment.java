@@ -21,6 +21,22 @@ public class MainMenuEnvironment extends AMenuModel {
         return peek();
     }
 
+    public void popToFirst() {
+        while(getStackDepth() > 1) {
+            pop();
+        }
+    }
+
+    @Override
+    public void onExit() {
+        super.onExit();
+        popToFirst();
+    }
+
+    public void navigateToLevelSelectPage() {
+        ((StartScreenPage)peek()).navigateToMainMenuPage().navigateToLevelSelectPage();
+    }
+
     @Override
     public void startBackgroundAudio() {
         audioPlayer = Resources.playAudio("mainmenu");
@@ -30,4 +46,5 @@ public class MainMenuEnvironment extends AMenuModel {
     public void reset() {
         popToFirst();
     }
+
 }

@@ -25,7 +25,7 @@ public abstract class AMenuModel extends AEnvironment implements IDrawable, IUpd
         menuStack.push(menu);
     }
 
-    protected AMenu peek() {
+    public AMenu peek() {
         return menuStack.peek();
     }
 
@@ -36,10 +36,8 @@ public abstract class AMenuModel extends AEnvironment implements IDrawable, IUpd
         return null;
     }
 
-    public void popToFirst() {
-        while(menuStack.size() > 1) {
-            menuStack.pop();
-        }
+    protected int getStackDepth() {
+        return menuStack.size();
     }
 
     @Override
@@ -51,4 +49,10 @@ public abstract class AMenuModel extends AEnvironment implements IDrawable, IUpd
     public void update(float delta) {
         peek().update(delta);
     }
+
+    @Override
+    public void onExit() {
+        super.onExit();
+    }
+
 }

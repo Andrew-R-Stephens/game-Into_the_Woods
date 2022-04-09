@@ -22,12 +22,24 @@ public class PauseMenuEnvironment extends AMenuModel implements IDrawable {
         this.gameEnvironment = gameEnvironment;
     }
 
+    public void popToFirst() {
+        while(getStackDepth() > 1) {
+            pop();
+        }
+    }
+
     @Override
     public void draw(Graphics g) {
         g.setColor(new Color(0, 0, 0, 150));
         g.fillRect(0, 0, ConfigData.window_width_actual, ConfigData.window_height_actual);
 
         super.draw(g);
+    }
+
+    @Override
+    public void onExit() {
+        super.onExit();
+        popToFirst();
     }
 
     @Override

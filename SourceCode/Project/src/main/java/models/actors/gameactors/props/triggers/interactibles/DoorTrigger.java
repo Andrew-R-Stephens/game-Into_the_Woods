@@ -1,10 +1,9 @@
 package models.actors.gameactors.props.triggers.interactibles;
 
-import models.actors.gameactors.PlayerAvatar;
+import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
+import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.actor.AActor;
-import models.prototypes.actor.pawn.character.ACharacter;
-import models.prototypes.level.prop.trigger.ATrigger;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.sprites.SpriteSheet;
 import models.utils.drawables.IDrawable;
@@ -17,48 +16,39 @@ import java.util.HashMap;
 
 public class DoorTrigger extends APropTrigger implements IDrawable, IHUDDrawable, IUpdatable {
 
-    public ActionType actionState = ActionType.IDLE;
+    public ActionType actionState = ActionType.CLOSED;
     public enum ActionType {
-        IDLE
+        CLOSED, OPEN
     }
 
     protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 
     public DoorTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
-                         boolean hasGravity, boolean canMoveOnCollision) {
-        super(gameEnvironment, x, y, w, h, vx, vy, -1, hasGravity, canMoveOnCollision);
+                         int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
+        super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
 
-        spriteSheets.put(actionState, Resources.getSpriteSheet("spring_spritesheet"));
+        spriteSheets.put(actionState, Resources.getSpriteSheet("door_spritesheet"));
     }
 
     @Override
     public boolean hasCollision(AActor a, float delta) {
-        boolean hasCollision = super.hasCollision(a, delta);
-
-        if(MAX_CYCLES != -1) {
-            if (currentCycles > MAX_CYCLES) {
-                return false;
-            }
-        }
-
-        if(hasCollision) {
-            lastActor = a;
-
-            doAction();
-            currentCycles++;
-        }
-
-        return hasCollision;
+        return super.hasCollision(a, delta);
     }
 
     @Override
     public void doAction() {
-        //isActivated = true;
-        lastActor.setVY(-100);
-        if(lastActor instanceof PlayerAvatar p) {
-            p.actionState = ACharacter.ActionType.FLOOR_JUMPING;
-            p.spriteSheets.get(p.actionState).reset();
+
+        boolean success = gameEnvironment.getLevelModel().navigateNextLevel();
+        if(success) {
+            gameEnvironment.reset();
+        } else {
+            gameEnvironment.reset();
+            MainMenuEnvironment mainMenuEnvironment = gameEnvironment.parentEnvironmentsModel
+                    .swapToEnvironmentType(EnvironmentsHandler.EnvironmentType.MAIN_MENU, true).getMenuEnvironment();
+            mainMenuEnvironment.navigateToLevelSelectPage();
+            gameEnvironment.parentEnvironmentsModel.applyEnvironment();
         }
+
     }
 
     @Override
@@ -85,6 +75,8 @@ public class DoorTrigger extends APropTrigger implements IDrawable, IHUDDrawable
         double scaledH = h * ConfigData.scaledH;
         spriteSheet.draw(g, (int)offsetX, (int)offsetY, (int)scaledW, (int)scaledH);
         */
+
+
         super.draw(g);
     }
 }

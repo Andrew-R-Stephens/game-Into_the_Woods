@@ -3,6 +3,7 @@ package models.levels.level;
 import models.actors.gameactors.TestActor;
 import models.actors.gameactors.props.platforms.PlatformProp;
 import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
+import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
 import models.actors.gameactors.props.triggers.interactibles.SpikesTrigger;
 import models.actors.gameactors.props.triggers.interactibles.SpringTrigger;
 import models.environments.game.GameEnvironment;
@@ -74,7 +75,7 @@ public class TestLevel1 extends ALevel {
 
         // TRIGGERS
         addProp(new APropTrigger(gameEnvironment, 700, 880, 100, 100,
-                0, 0, -1,false, false) {
+                0, 0, 1,false, false) {
             @Override
             public void doAction() {
                 gameEnvironment.queueActor(new TestActor(this.x, this.y,
@@ -145,12 +146,12 @@ public class TestLevel1 extends ALevel {
         });
 
         // Springs
-        addProp(new SpringTrigger(gameEnvironment, 1000, 280, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameEnvironment, 1200, 280, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameEnvironment, 1400, 280, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameEnvironment, 300, 580, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameEnvironment, 1000, 180, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameEnvironment, 100, 680, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameEnvironment, 1000, 280, 100, 20, 0, 0, -1,false, false));
+        addProp(new SpringTrigger(gameEnvironment, 1200, 280, 100, 20, 0, 0, -1,false, false));
+        addProp(new SpringTrigger(gameEnvironment, 1400, 280, 100, 20, 0, 0, -1,false, false));
+        addProp(new SpringTrigger(gameEnvironment, 300, 580, 100, 20, 0, 0, -1,false, false));
+        addProp(new SpringTrigger(gameEnvironment, 1000, 180, 100, 20, 0, 0, -1,false, false));
+        addProp(new SpringTrigger(gameEnvironment, 100, 680, 100, 20, 0, 0, -1,false, false));
 
         // Spikes
         addProp(new SpikesTrigger(gameEnvironment, 1000, 930, 100, 50, 0, 0, -1));
@@ -161,6 +162,9 @@ public class TestLevel1 extends ALevel {
         addProp(new LevelKey(gameEnvironment, 1600, 750, 100, 50, 0, 0));
         addProp(new LevelKey(gameEnvironment, 2500, 450, 100, 50, 0, 0));
         addProp(new LevelKey(gameEnvironment, 500, 300, 100, 50, 0, 0));
+
+        addProp(new DoorTrigger(gameEnvironment, 75, 850, 100, 100,
+                0, 0, 1, false, false));
     }
 
 

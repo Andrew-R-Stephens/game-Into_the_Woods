@@ -44,6 +44,18 @@ public class LevelsList implements IDrawable {
         return levels.get(currentLevel);
     }
 
+    public boolean navigateNextLevel() {
+        int tempCurrLevel = currentLevel;
+        tempCurrLevel++;
+
+        if(tempCurrLevel >= levels.size()) {
+            return false;
+        }
+
+        currentLevel = tempCurrLevel;
+        return true;
+    }
+
     @Override
     public void draw(Graphics g) {
         getCurrentLevel().draw(g);

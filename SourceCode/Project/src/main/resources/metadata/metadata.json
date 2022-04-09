@@ -8,6 +8,7 @@
       "avatarrun_spritesheet2.json",
       "button_spritesheet.json",
       "spring_spritesheet.json",
+      "door_spritesheet.json",
       "colors.xml",
       "Preferences.xml",
       "SaveData.xml"
@@ -24,6 +25,7 @@
       "avatarrun_spritesheet2.png",
       "button_spritesheet.png",
       "spring_spritesheet.png",
+      "door_spritesheet.png",
       "button_hrect.png",
       "button_square.png",
       "dirt.png",

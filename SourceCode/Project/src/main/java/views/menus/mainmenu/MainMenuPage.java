@@ -68,7 +68,7 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(bundle.getPage(1));
+                navigateToLevelSelectPage();
 
                 return true;
             }
@@ -144,6 +144,10 @@ public class MainMenuPage extends AMenu {
         components.add(button_help);
         components.add(button_quit);
 
+    }
+
+    public void navigateToLevelSelectPage() {
+        parentMenuModel.push(bundle.getPage(1));
     }
 
 }
