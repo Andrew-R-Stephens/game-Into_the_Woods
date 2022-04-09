@@ -1,8 +1,8 @@
 package models.utils.resources;
 
-import models.sprites.SpriteSheet;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import models.sprites.SpriteSheet;
 import models.utils.files.AFileReader;
 import models.utils.files.MetaDataParser;
 import models.utils.files.SpriteSheetParser;

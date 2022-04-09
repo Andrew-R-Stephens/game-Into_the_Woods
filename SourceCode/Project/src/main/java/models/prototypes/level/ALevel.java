@@ -1,9 +1,8 @@
 package models.prototypes.level;
 
 import models.environments.game.GameEnvironment;
-import models.levels.inventory.LevelCollectibles;
 import models.prototypes.actor.AActor;
-import models.prototypes.level.prop.ALevelProp;
+import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.ATrigger;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
@@ -16,25 +15,23 @@ import java.util.ArrayList;
 
 public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
+
+    protected GameEnvironment gameEnvironment;
+
     protected BufferedImage backgroundImage;
-
-    protected GameEnvironment gameModel;
-
     protected int[] startOrigin = new int[2];
+    protected final ArrayList<AProp> levelProps = new ArrayList<>();
 
-    protected final ArrayList<ALevelProp> levelProps = new ArrayList<>();
 
-    protected LevelCollectibles collectibles;
-
-    public ALevel(GameEnvironment gameModel) {
-        this.gameModel = gameModel;
+    public ALevel(GameEnvironment gameEnvironment) {
+        this.gameEnvironment = gameEnvironment;
     }
 
-    protected void addProp(ALevelProp prop) {
+    protected void addProp(AProp prop) {
         levelProps.add(prop);
     }
 
-    public ArrayList<ALevelProp> getLevelProps() {
+    public ArrayList<AProp> getLevelProps() {
         return levelProps;
     }
 
@@ -53,7 +50,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     public abstract void build();
 
     public void reset() {
-        for(ALevelProp p: levelProps) {
+        for(AProp p: levelProps) {
             if(p instanceof ATrigger t) {
                 t.reset();
             }
@@ -71,7 +68,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 null);
 
         for (AActor levelProps : getLevelProps()) {
-            if (levelProps instanceof ALevelProp p) {
+            if (levelProps instanceof AProp p) {
                 p.draw(g);
             }
         }
@@ -79,13 +76,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     @Override
     public void update(float delta) {
-        /*
-        for(ALevelProp p: levelProps) {
-            if(p instanceof SpringTrigger s) {
-                s.update(delta);
-            }
-        }
-        */
+
     }
 
     @Override
@@ -94,7 +85,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         g.fillRect(0, 0, ConfigData.window_width_actual, ConfigData.window_height_actual);
 
         for (AActor levelProps : getLevelProps()) {
-            if (levelProps instanceof ALevelProp p) {
+            if (levelProps instanceof AProp p) {
                 p.drawAsHUD(g);
             }
         }

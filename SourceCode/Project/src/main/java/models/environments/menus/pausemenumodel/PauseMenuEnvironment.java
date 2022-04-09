@@ -1,10 +1,10 @@
 package models.environments.menus.pausemenumodel;
 
 import models.environments.game.GameEnvironment;
-import models.utils.drawables.IDrawable;
-import views.menus.pausemenu.PauseMenuPage;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.utils.config.ConfigData;
+import models.utils.drawables.IDrawable;
+import views.menus.pausemenu.PauseMenuPage;
 
 import java.awt.*;
 

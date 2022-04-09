@@ -1,14 +1,14 @@
 package views.menus.pausemenu;
 
 import models.environments.EnvironmentsHandler;
-import views.menus.startscreen.StartScreenPage;
-import views.menus.pausemenu.help.PauseHelpPage;
-import views.menus.pausemenu.options.PauseOptionsPage;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
+import views.menus.pausemenu.help.PauseHelpPage;
+import views.menus.pausemenu.options.PauseOptionsPage;
+import views.menus.startscreen.StartScreenPage;
 
 import java.awt.image.BufferedImage;
 

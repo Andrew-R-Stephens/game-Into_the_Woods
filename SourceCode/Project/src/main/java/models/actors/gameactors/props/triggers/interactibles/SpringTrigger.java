@@ -16,8 +16,6 @@ import java.util.HashMap;
 
 public class SpringTrigger extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
 
-    AActor lastActor;
-
     public ActionType actionState = ActionType.IDLE;
     public enum ActionType {
         IDLE

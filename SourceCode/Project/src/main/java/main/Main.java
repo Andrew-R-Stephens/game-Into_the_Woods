@@ -1,8 +1,5 @@
 package main;
 
-import views.swing.canvas.game.GameCanvas;
-import views.swing.canvas.menu.MenuCanvas;
-import views.swing.window.MainWindow;
 import controls.GameControls;
 import controls.MenuControls;
 import controls.game.GameKeyControls;
@@ -18,12 +15,15 @@ import models.environments.game.hud.components.TimeKeeperOverlay;
 import models.environments.game.playerinventory.PlayerInventory;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.environments.menus.pausemenumodel.PauseMenuEnvironment;
+import models.levels.LevelsList;
 import models.runnables.RenderRunnable;
 import models.runnables.UpdateRunnable;
-import models.levels.LevelsList;
 import models.utils.config.ConfigData;
 import models.utils.files.PreferencesParser;
 import models.utils.resources.Resources;
+import views.swing.canvas.game.GameCanvas;
+import views.swing.canvas.menu.MenuCanvas;
+import views.swing.window.MainWindow;
 
 public class Main {
 

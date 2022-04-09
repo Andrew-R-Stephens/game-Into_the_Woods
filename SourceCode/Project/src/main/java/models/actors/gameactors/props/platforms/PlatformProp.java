@@ -1,7 +1,7 @@
 package models.actors.gameactors.props.platforms;
 
 import models.camera.Camera;
-import models.prototypes.level.prop.ALevelProp;
+import models.prototypes.level.prop.AProp;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
@@ -10,7 +10,7 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class PlatformProp extends ALevelProp implements IDrawable, IUpdatable {
+public class PlatformProp extends AProp implements IDrawable, IUpdatable {
 
     public PlatformProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(x, y, w, h, vx, vy, hasGravity);

@@ -10,12 +10,12 @@ public abstract class APhysics implements IUpdatable {
     protected boolean hasGravity = true;
     protected float x, y, w, h;
 
-    protected float MAX_VEL_X = 9.8f;
-    protected float MAX_VEL_Y = 9.8f;
-    protected float friction = .5f;
+    protected final float MAX_VEL_X = 9.8f;
+    protected final float MAX_VEL_Y = 9.8f;
+    protected final float friction = .5f;
     protected float vX, vY;
 
-    protected float bufferVert = 5, bufferHoriz = 5;
+    protected final float bufferVert = 5, bufferHoriz = 5;
 
     protected boolean isMoving;
     protected boolean isFloorCollision,  isWallCollisionLeft, isWallCollisionRight;

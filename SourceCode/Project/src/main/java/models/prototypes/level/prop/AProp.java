@@ -9,9 +9,9 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
-public abstract class ALevelProp extends AActor implements IDrawable, IHUDDrawable, IUpdatable {
+public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, IUpdatable {
 
-    protected ALevelProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
+    protected AProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(x, y, w, h, vx, vy, hasGravity);
     }
 
@@ -23,8 +23,8 @@ public abstract class ALevelProp extends AActor implements IDrawable, IHUDDrawab
 
         g.setColor(Color.WHITE);
 
-        double offsetX = ((x * ConfigData.scaledW) + (Camera.targX));
-        double offsetY = ((y * ConfigData.scaledH) + (Camera.targY));
+        double offsetX = ((x * ConfigData.scaledW) + (Camera.targX * ConfigData.scaledW));
+        double offsetY = ((y * ConfigData.scaledH) + (Camera.targY * ConfigData.scaledH));
 
         double scaledW = w * ConfigData.scaledW;
         double scaledH = h * ConfigData.scaledH;

@@ -1,12 +1,20 @@
 package models.levels.level;
 
-import models.environments.game.GameEnvironment;
+import models.actors.gameactors.TestActor;
 import models.actors.gameactors.props.platforms.PlatformProp;
 import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
 import models.actors.gameactors.props.triggers.interactibles.SpikesTrigger;
 import models.actors.gameactors.props.triggers.interactibles.SpringTrigger;
+import models.environments.game.GameEnvironment;
+import models.prototypes.actor.AActor;
+import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.level.ALevel;
+import models.prototypes.level.prop.reactor.AReactProp;
+import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.utils.resources.Resources;
+
+import java.awt.*;
+import java.util.Random;
 
 
 public class TestLevel1 extends ALevel {
@@ -54,31 +62,105 @@ public class TestLevel1 extends ALevel {
         addProp(new PlatformProp(3000, 700, 500, 50, 0, 0, false));
         addProp(new PlatformProp(3200, 650, 100, 100, 0, 0, false));
 
-        // Generic Triggers
-        /*
-        addProp(new TestTrigger(gameModel, 700, 880, 100, 100, 0, 0, false, false));
-        addProp(new TestTrigger(gameModel, 300, 580, 100, 100, 0, 0, false, false));
-        addProp(new TestTrigger(gameModel, 1000, 280, 100, 100, 0, 0, false, false));
-        addProp(new TestTrigger(gameModel, 100, 680, 100, 100, 0, 0, false, false));
-        */
+        // REACTION PROP
+        AReactProp reactProp = new AReactProp(gameEnvironment, 75, 500, 100, 100,
+                0, 0, -1,false, false) {
+            @Override
+            public void onReact() {
+                color = new Color(255, 0, 50, 50);
+            }
+        };
+        addProp(reactProp);
+
+        // TRIGGERS
+        addProp(new APropTrigger(gameEnvironment, 700, 880, 100, 100,
+                0, 0, -1,false, false) {
+            @Override
+            public void doAction() {
+                gameEnvironment.queueActor(new TestActor(this.x, this.y,
+                        10, 10, new Random().nextFloat(-10, 10), new Random().nextFloat(-10, 10),
+                        true));
+            }
+
+            @Override
+            public boolean hasCollision(AActor a, float delta) {
+                if(!(a instanceof ACharacter)) {
+                    return false;
+                }
+
+                return super.hasCollision(a, delta);
+            }
+        });
+        addProp(new APropTrigger(gameEnvironment, 300, 580, 100, 100,
+                0, 0, -1,false, false) {
+            @Override
+            public void doAction() {
+                reactProp.onReact();
+            }
+
+            @Override
+            public boolean hasCollision(AActor a, float delta) {
+                if(!(a instanceof ACharacter)) {
+                    return false;
+                }
+
+                return super.hasCollision(a, delta);
+            }
+        });
+        addProp(new APropTrigger(gameEnvironment, 1000, 280, 100, 100,
+                0, 0, -1,false, false) {
+            @Override
+            public void doAction() {
+                gameEnvironment.queueActor(new TestActor(this.x, this.y,
+                        10, 10, new Random().nextFloat(-10, 10), new Random().nextFloat(-10, 10),
+                        true));
+            }
+
+            @Override
+            public boolean hasCollision(AActor a, float delta) {
+                if(!(a instanceof ACharacter)) {
+                    return false;
+                }
+
+                return super.hasCollision(a, delta);
+            }
+        });
+        addProp(new APropTrigger(gameEnvironment, 100, 680, 100, 100,
+                0, 0, -1,false, false) {
+            @Override
+            public void doAction() {
+                gameEnvironment.queueActor(new TestActor(this.x, this.y,
+                        10, 10, new Random().nextFloat(-10, 10), new Random().nextFloat(-10, 10),
+                        true));
+            }
+
+            @Override
+            public boolean hasCollision(AActor a, float delta) {
+                if(!(a instanceof ACharacter)) {
+                    return false;
+                }
+
+                return super.hasCollision(a, delta);
+            }
+        });
 
         // Springs
-        addProp(new SpringTrigger(gameModel, 1000, 280, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameModel, 1200, 280, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameModel, 1400, 280, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameModel, 300, 580, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameModel, 1000, 280, 100, 20, 0, 0, false, false));
-        addProp(new SpringTrigger(gameModel, 100, 680, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameEnvironment, 1000, 280, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameEnvironment, 1200, 280, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameEnvironment, 1400, 280, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameEnvironment, 300, 580, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameEnvironment, 1000, 180, 100, 20, 0, 0, false, false));
+        addProp(new SpringTrigger(gameEnvironment, 100, 680, 100, 20, 0, 0, false, false));
 
         // Spikes
-        addProp(new SpikesTrigger(gameModel, 1000, 930, 100, 50, 0, 0, -1));
-        addProp(new SpikesTrigger(gameModel, 1200, 960, 100, 20, 0, 0, -1));
-        addProp(new SpikesTrigger(gameModel, 1400, 905, 100, 75, 0, 0, -1));
+        addProp(new SpikesTrigger(gameEnvironment, 1000, 930, 100, 50, 0, 0, -1));
+        addProp(new SpikesTrigger(gameEnvironment, 1200, 960, 100, 20, 0, 0, -1));
+        addProp(new SpikesTrigger(gameEnvironment, 1400, 905, 100, 75, 0, 0, -1));
 
         // Keys
-        addProp(new LevelKey(gameModel, 1600, 750, 100, 50, 0, 0));
-        addProp(new LevelKey(gameModel, 2500, 450, 100, 50, 0, 0));
-        addProp(new LevelKey(gameModel, 500, 300, 100, 50, 0, 0));
+        addProp(new LevelKey(gameEnvironment, 1600, 750, 100, 50, 0, 0));
+        addProp(new LevelKey(gameEnvironment, 2500, 450, 100, 50, 0, 0));
+        addProp(new LevelKey(gameEnvironment, 500, 300, 100, 50, 0, 0));
     }
 
 

@@ -1,15 +1,15 @@
 package views.menus.mainmenu;
 
-import views.menus.mainmenu.continuegame.LevelSelectPage;
-import views.menus.mainmenu.help.HelpPage;
-import views.menus.mainmenu.newgame.NewGamePage;
-import views.menus.mainmenu.options.OptionsPage;
-import views.menus.mainmenu.quit.QuitPage;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
+import views.menus.mainmenu.continuegame.LevelSelectPage;
+import views.menus.mainmenu.help.HelpPage;
+import views.menus.mainmenu.newgame.NewGamePage;
+import views.menus.mainmenu.options.OptionsPage;
+import views.menus.mainmenu.quit.QuitPage;
 
 import java.awt.image.BufferedImage;
 

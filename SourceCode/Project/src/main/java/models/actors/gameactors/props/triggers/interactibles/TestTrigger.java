@@ -1,7 +1,7 @@
 package models.actors.gameactors.props.triggers.interactibles;
 
-import models.environments.game.GameEnvironment;
 import models.actors.gameactors.TestActor;
+import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.trigger.ATrigger;
 import models.utils.drawables.IDrawable;
@@ -50,7 +50,7 @@ public class TestTrigger extends ATrigger implements IDrawable, IUpdatable {
 
     @Override
     public void update(float delta) {
-        super.update(delta);
+        //super.update(delta);
     }
 
     @Override

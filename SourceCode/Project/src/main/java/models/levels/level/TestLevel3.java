@@ -1,7 +1,7 @@
 package models.levels.level;
 
-import models.environments.game.GameEnvironment;
 import models.actors.gameactors.props.platforms.TestLevelPropStatic;
+import models.environments.game.GameEnvironment;
 import models.prototypes.level.ALevel;
 
 

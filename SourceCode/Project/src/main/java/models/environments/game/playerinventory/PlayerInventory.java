@@ -1,21 +1,21 @@
 package models.environments.game.playerinventory;
 
 import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
-import models.prototypes.level.prop.trigger.collectibles.ALevelCollectible;
+import models.prototypes.level.prop.trigger.collectibles.ACollectibleTrigger;
 
 import java.util.ArrayList;
 
 public class PlayerInventory {
 
-    protected ArrayList<ALevelCollectible> collectibles = new ArrayList<>();
+    protected ArrayList<ACollectibleTrigger> collectibles = new ArrayList<>();
 
-    public void addCollectible(ALevelCollectible levelCollectible) {
+    public void addCollectible(ACollectibleTrigger levelCollectible) {
         collectibles.add(levelCollectible);
     }
 
     public int getKeysCount() {
         int count = 0;
-        for(ALevelCollectible c: collectibles) {
+        for(ACollectibleTrigger c: collectibles) {
             if(c instanceof LevelKey) {
                 count ++;
             }

@@ -1,14 +1,17 @@
 package models.prototypes.actor.pawn.character;
 
-import models.sprites.SpriteSheet;
 import controls.GameControls;
 import models.prototypes.actor.pawn.APawn;
+import models.sprites.SpriteSheet;
 import models.utils.config.ConfigData;
-import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
 import java.util.HashMap;
 
+/**
+ * The prime function of the ACharacter class is that it represents an AActor object that can be controlled directly
+ * by the player. This includes, but may not be limited to, the PlayerAvatar.
+ */
 public abstract class ACharacter extends APawn implements IUpdatable {
 
     protected final GameControls controlsModel;
@@ -52,7 +55,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     public void control(float delta) {
-        doAbilitiy(delta);
+        doAbilitiy();
         doMove(delta);
     }
 
@@ -64,8 +67,8 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         float xDir = (directionals[0] ? -1 : 0) + (directionals[1] ? 1 : 0);
         //int yDir = (directionals[2] ? -1 : 0) + (directionals[3] ? 1 : 0);
 
-        if(!(isFloorCollision || isWallCollisionLeft || isWallCollisionRight)) {
-            xDir *= .8;
+        if(actionState == ActionType.FLOOR_JUMPING || actionState == ActionType.WALL_JUMPING) {
+            xDir *= .7;
         }
 
         isUserControlled = directionals[0] || directionals[1] || directionals[2] || directionals[3];
@@ -97,7 +100,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         //vY += yDir / (float)PreferenceData.GAME_UPDATE_RATE;
     }
 
-    protected void doAbilitiy(float delta) {
+    protected void doAbilitiy() {
 
         boolean[] abilities = controlsModel.getAbilities();
 
@@ -162,13 +165,16 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     private void setActionType() {
         if(isFloorCollision) {
             if (!isUserControlled) {
-                if(Math.abs(vX) == 0) {
+                if(Math.floor(Math.abs(vX) + Math.abs(vY)) == 0) {
                     actionState = ActionType.FLOOR_IDLE;
                 }
             } else {
                 actionState = ActionType.FLOOR_RUNNING;
             }
+        } else {
+            actionState = ActionType.FLOOR_JUMPING;
         }
+
         if(isWallCollisionRight || isWallCollisionLeft) {
             if(!isFloorCollision) {
                 actionState = ActionType.WALL_CLIMBING;

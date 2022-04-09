@@ -6,6 +6,10 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
+/**
+ * A Simple Game Object which carries ability to move.
+ * It is inherited by classes whos objects must physically move within the world.
+ */
 public abstract class APawn extends AActor implements IDrawable, IUpdatable {
 
     protected APawn(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {

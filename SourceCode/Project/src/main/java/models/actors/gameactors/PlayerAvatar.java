@@ -1,7 +1,7 @@
 package models.actors.gameactors;
 
-import models.camera.Camera;
 import controls.GameControls;
+import models.camera.Camera;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.utils.config.ConfigData;
@@ -28,7 +28,7 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         spriteSheets.put(ActionType.WALL_JUMPING,
                 Resources.getSpriteSheet("avatarjump_spritesheet").setLoopOnLast(false));
         spriteSheets.put(ActionType.WALL_CLIMBING,
-                Resources.getSpriteSheet("avatarrun_spritesheet2").setLoopOnLast(true));
+                Resources.getSpriteSheet("avatarjump_spritesheet").setLoopOnLast(true));
     }
 
     @Override
@@ -53,6 +53,37 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
         Camera.moveTo(tx, ty);
 
+        updateSpriteAnimation(delta);
+
+        System.out.println(actionState);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+
+        // Scaled size
+        float scaleW = w * ConfigData.scaledW;
+        float scaleH = h * ConfigData.scaledH;
+
+        //Half window width
+        float centerX = (x * ConfigData.scaledW) + (Camera.camX) + scaleW;
+        float centerY = (y * ConfigData.scaledH) + (Camera.camY) + scaleH;
+
+        centerX -= scaleW;
+        centerY -= scaleH;
+
+        if (facing == Facing.RIGHT) {
+            centerX += scaleW;
+            scaleW *= -1;
+        }
+
+        spriteSheets.get(actionState).draw(g, (int)centerX, (int)centerY, (int)scaleW, (int)scaleH);
+
+        //g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
+
+    }
+
+    private void updateSpriteAnimation(float delta) {
         float tickRate = delta;
 
         switch(actionState) {
@@ -79,14 +110,14 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
                 spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
                 spriteSheets.get(ActionType.WALL_CLIMBING).reset();
                 spriteSheets.get(ActionType.FLOOR_IDLE).reset();
-                tickRate *= MAX_VEL_Y / (-vY);
+                tickRate *= (-vY);
             }
             case WALL_JUMPING -> {
                 spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
                 spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
                 spriteSheets.get(ActionType.WALL_CLIMBING).reset();
                 spriteSheets.get(ActionType.FLOOR_IDLE).reset();
-                tickRate *= MAX_VEL_Y / (-vY);
+                tickRate *= (-vY);
             }
             case FLOOR_IDLE -> {
                 spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
@@ -97,52 +128,6 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         }
 
         spriteSheets.get(actionState).update(tickRate);
-
-        System.out.println(actionState);
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        //super.draw(g);
-
-        // Scaled size
-        float scaleW = w * ConfigData.scaledW;
-        float scaleH = h * ConfigData.scaledH;
-
-        //Half window width
-        float centerX = (x * ConfigData.scaledW) + (Camera.camX) + scaleW;
-        float centerY = (y * ConfigData.scaledH) + (Camera.camY) + scaleH;
-
-        centerX -= scaleW;
-        centerY -= scaleH;
-
-        if (facing == Facing.RIGHT) {
-            centerX += scaleW;
-            scaleW *= -1;
-        }
-
-        //g.fillRect((int) (centerX), (int) (centerY), (int) (scaleW), (int) (scaleH));
-        // TODO: RE-ENABLE THE FOLLOWING
-        /*
-        if(characterType == CharacterType.MALE) {
-            g.drawImage(
-                    Resources.getImage("avatar"),
-                    (int) (centerX), (int) (centerY),
-                    (int) (scaleW), (int) (scaleH),
-                    null);
-        } else {
-            g.drawImage(
-                    Resources.getImage("avatar2"),
-                    (int) (centerX), (int) (centerY),
-                    (int) (scaleW), (int) (scaleH),
-                    null);
-        }
-        */
-
-        spriteSheets.get(actionState).draw(g, (int)centerX, (int)centerY, (int)scaleW, (int)scaleH);
-
-        //g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
-
     }
 
     public String toString() {

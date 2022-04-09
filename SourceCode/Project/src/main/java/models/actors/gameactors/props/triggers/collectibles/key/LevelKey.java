@@ -3,7 +3,7 @@ package models.actors.gameactors.props.triggers.collectibles.key;
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
-import models.prototypes.level.prop.trigger.collectibles.ALevelCollectible;
+import models.prototypes.level.prop.trigger.collectibles.ACollectibleTrigger;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
@@ -11,9 +11,9 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
-public class LevelKey extends ALevelCollectible implements IDrawable, IUpdatable {
+public class LevelKey extends ACollectibleTrigger implements IDrawable, IUpdatable {
     public LevelKey(GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy) {
-        super(gameModel, x, y, w, h, vx, vy, false, false);
+        super(gameModel, x, y, w, h, vx, vy, 1,false, false);
     }
 
     @Override

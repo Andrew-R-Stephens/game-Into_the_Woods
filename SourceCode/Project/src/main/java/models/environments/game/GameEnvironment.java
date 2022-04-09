@@ -1,21 +1,21 @@
 package models.environments.game;
 
-import models.camera.Camera;
 import controls.GameControls;
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
 import controls.menu.MenuKeyControls;
+import models.actors.gameactors.PlayerAvatar;
+import models.actors.gameactors.TestActor;
+import models.camera.Camera;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
 import models.environments.game.playerinventory.PlayerInventory;
 import models.environments.menus.pausemenumodel.PauseMenuEnvironment;
-import models.actors.gameactors.PlayerAvatar;
-import models.actors.gameactors.TestActor;
 import models.levels.LevelsList;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.level.ALevel;
-import models.prototypes.level.prop.ALevelProp;
+import models.prototypes.level.prop.AProp;
 import models.prototypes.window.environments.AEnvironment;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
@@ -229,7 +229,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     private void detectCollisions(float delta) {
-        for (ALevelProp p : levelModel.getCurrentLevel().getLevelProps()) {
+        for (AProp p : levelModel.getCurrentLevel().getLevelProps()) {
             for (AActor a : actors) {
                 p.hasCollision(a, delta);
             }

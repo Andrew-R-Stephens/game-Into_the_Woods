@@ -3,22 +3,22 @@ package models.prototypes.level.prop.trigger;
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
-import models.prototypes.level.prop.ALevelProp;
+import models.prototypes.level.prop.AProp;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 
 import java.awt.*;
 
-public abstract class ATrigger extends ALevelProp implements IDrawable {
+public abstract class ATrigger extends AProp implements IDrawable {
 
     protected GameEnvironment gameEnvironment;
+
+    protected AActor lastActor;
 
     protected boolean canMoveOnCollision;
 
     protected int MAX_CYCLES = -1;
     protected int currentCycles = 0;
-
-    protected boolean isActivated = false;
 
     protected ATrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
         super(x, y, w, h, vx, vy, hasGravity);

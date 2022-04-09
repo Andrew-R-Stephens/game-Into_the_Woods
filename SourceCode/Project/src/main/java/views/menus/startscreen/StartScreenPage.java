@@ -1,11 +1,11 @@
 package views.menus.startscreen;
 
-import views.menus.mainmenu.MainMenuPage;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
+import views.menus.mainmenu.MainMenuPage;
 
 import java.awt.image.BufferedImage;
 

@@ -4,8 +4,6 @@ import models.environments.EnvironmentsHandler;
 import models.prototypes.window.AWindow;
 import models.utils.config.ConfigData;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;

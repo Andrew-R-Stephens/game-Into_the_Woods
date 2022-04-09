@@ -1,23 +1,19 @@
-package models.prototypes.level.prop.trigger.collectibles;
+package models.prototypes.level.prop.trigger.prop;
 
-import models.environments.game.GameEnvironment;
 import models.actors.gameactors.PlayerAvatar;
+import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.trigger.ATrigger;
 
-public abstract class ALevelCollectible extends ATrigger {
+public abstract class APropTrigger extends ATrigger {
 
-    protected boolean isActive = true;
-
-    protected ALevelCollectible(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
-                                boolean hasGravity, boolean canMoveOnCollision) {
+    protected APropTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h,
+                           float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
         super(gameEnvironment, x, y, w, h, vx, vy, 1, hasGravity, canMoveOnCollision);
     }
 
     @Override
     public boolean hasCollision(AActor a, float delta) {
-        if(!isActive)
-            return false;
 
         if(!(a instanceof PlayerAvatar)) {
             return false;
@@ -37,14 +33,9 @@ public abstract class ALevelCollectible extends ATrigger {
     }
 
     @Override
-    public void doAction() {
-        gameEnvironment.getPlayerInventory().addCollectible(this);
-        isActive = false;
-    }
+    public abstract void doAction();
 
     public void reset() {
         super.reset();
-
-        isActive = true;
     }
 }

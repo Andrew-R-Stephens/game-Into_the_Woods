@@ -1,12 +1,12 @@
 package models.levels.inventory;
 
-import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
+import models.prototypes.level.prop.trigger.collectibles.ACollectibleTrigger;
 
 import java.util.ArrayList;
 
 public class LevelCollectibles {
 
-    private final ArrayList<LevelKey> keys = new ArrayList<>();
+    private final ArrayList<ACollectibleTrigger> collectibles = new ArrayList<>();
 
 
 
