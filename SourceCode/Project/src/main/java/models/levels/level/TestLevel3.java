@@ -5,16 +5,8 @@ import models.actors.gameactors.props.platforms.TestLevelPropStatic;
 import models.prototypes.level.ALevel;
 
 
-/**
- * The type Test level 3.
- */
 public class TestLevel3 extends ALevel {
 
-    /**
-     * Instantiates a new Test level 3.
-     *
-     * @param gameModel the game model
-     */
     public TestLevel3(GameEnvironment gameModel) {
         super(gameModel);
 

@@ -1,22 +1,17 @@
 package models.environments.menus.pausemenumodel;
 
 import models.environments.game.GameEnvironment;
+import models.utils.drawables.IDrawable;
 import views.menus.pausemenu.PauseMenuPage;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.utils.config.ConfigData;
 
 import java.awt.*;
 
-/**
- * The type Pause menu model.
- */
-public class PauseMenuEnvironment extends AMenuModel {
+public class PauseMenuEnvironment extends AMenuModel implements IDrawable {
 
     protected GameEnvironment gameEnvironment;
 
-    /**
-     * Instantiates a new Pause menu model.
-     */
     public PauseMenuEnvironment() {
         PauseMenuPage landingMenu = new PauseMenuPage(this);
 

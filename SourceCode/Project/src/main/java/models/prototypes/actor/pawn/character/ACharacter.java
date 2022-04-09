@@ -5,19 +5,14 @@ import controls.GameControls;
 import models.prototypes.actor.pawn.APawn;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
+import models.utils.updates.IUpdatable;
 
 import java.util.HashMap;
 
-/**
- * This is an abstract class for a controllable Actor object. Allows for direct control from User Controls.
- */
-public abstract class ACharacter extends APawn implements IDrawable {
+public abstract class ACharacter extends APawn implements IUpdatable {
 
     protected final GameControls controlsModel;
 
-    /**
-     * The Character type.
-     */
     protected CharacterType characterType;
     public enum CharacterType {
         MALE,
@@ -43,50 +38,24 @@ public abstract class ACharacter extends APawn implements IDrawable {
 
     public HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 
-    /**
-     * Instantiates a new A character.
-     *
-     * @param cModel     the c model
-     * @param x          the x
-     * @param y          the y
-     * @param w          the w
-     * @param h          the h
-     * @param vx         the vx
-     * @param vy         the vy
-     * @param hasGravity the has gravity
-     */
     protected ACharacter(GameControls cModel, float x, float y, float w, float h, float vx, float vy,
                          boolean hasGravity) {
         super(x, y, w, h, vx, vy, hasGravity);
         this.controlsModel = cModel;
     }
 
-    /**
-     * The overloaded call to the parent class update method
-     *
-     * @param delta - The ratio of current update rate vs targetted framerate
-     */
-    protected void update(float delta) {
+    @Override
+    public void update(float delta) {
         setActionType();
 
         super.update(delta);
     }
 
-    /**
-     * The direct call to movement and ability handlers
-     *
-     * @param delta the delta
-     */
     public void control(float delta) {
         doAbilitiy(delta);
         doMove(delta);
     }
 
-    /**
-     * This handles most conditions directly pertaining to Character movement based on User Input
-     *
-     * @param delta the delta
-     */
     public void doMove(float delta) {
 
         boolean[] directionals = controlsModel.getDirectionals();
@@ -128,11 +97,6 @@ public abstract class ACharacter extends APawn implements IDrawable {
         //vY += yDir / (float)PreferenceData.GAME_UPDATE_RATE;
     }
 
-    /**
-     * This handles most conditions pertaining to Character Abilities based on User Input
-     *
-     * @param delta the delta
-     */
     protected void doAbilitiy(float delta) {
 
         boolean[] abilities = controlsModel.getAbilities();
@@ -180,33 +144,17 @@ public abstract class ACharacter extends APawn implements IDrawable {
 
     }
 
-    /**
-     * Do wall jump.
-     *
-     * @param vX the v x
-     * @param vY the v y
-     */
     public void doWallJump(float vX, float vY) {
         this.vX = vX;
         this.vY = vY;
     }
 
-    /**
-     * Resets the jump window and sets the jump state.
-     *
-     * @param state - if the user is jumping or not
-     */
     private void lockJumpState(boolean state) {
         isJumpLocked = state;
 
         jumpTime = MAX_ALLOWED_JUMP_TIME;
     }
 
-    /**
-     * Sets character type.
-     *
-     * @param type the type
-     */
     public void setCharacterType(CharacterType type) {
         this.characterType = type;
     }
@@ -222,7 +170,9 @@ public abstract class ACharacter extends APawn implements IDrawable {
             }
         }
         if(isWallCollisionRight || isWallCollisionLeft) {
-            actionState = ActionType.WALL_CLIMBING;
+            if(!isFloorCollision) {
+                actionState = ActionType.WALL_CLIMBING;
+            }
         }
     }
 

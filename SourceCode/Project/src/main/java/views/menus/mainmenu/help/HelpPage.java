@@ -4,20 +4,12 @@ import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
-import models.utils.files.Resources;
+import models.utils.resources.Resources;
 
 import java.awt.image.BufferedImage;
 
-/**
- * The type Help page.
- */
 public class HelpPage extends AMenu {
 
-    /**
-     * Instantiates a new Help page.
-     *
-     * @param parentModel the parent model
-     */
     public HelpPage(AMenuModel parentModel) {
         super(parentModel);
 

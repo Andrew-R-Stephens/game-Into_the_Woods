@@ -5,20 +5,12 @@ import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
-import models.utils.files.Resources;
+import models.utils.resources.Resources;
 
 import java.awt.image.BufferedImage;
 
-/**
- * The type Start screen page.
- */
 public class StartScreenPage extends AMenu {
 
-    /**
-     * Instantiates a new A menu.
-     *
-     * @param parentMenuModel the parent menu model
-     */
     public StartScreenPage(AMenuModel parentMenuModel) {
 
         super(parentMenuModel);

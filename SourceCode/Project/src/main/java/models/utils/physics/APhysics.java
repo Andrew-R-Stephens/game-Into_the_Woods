@@ -3,11 +3,9 @@ package models.utils.physics;
 import models.levels.LevelsList;
 import models.prototypes.actor.AActor;
 import models.utils.config.ConfigData;
+import models.utils.updates.IUpdatable;
 
-/**
- * TODO: Add description
- */
-public abstract class APhysics {
+public abstract class APhysics implements IUpdatable {
 
     protected boolean hasGravity = true;
     protected float x, y, w, h;
@@ -24,17 +22,6 @@ public abstract class APhysics {
 
     protected boolean isUserControlled;
 
-    /**
-     * Instantiates a new A physics.
-     *
-     * @param x          the x
-     * @param y          the y
-     * @param w          the w
-     * @param h          the h
-     * @param vX         the v x
-     * @param vY         the v y
-     * @param hasGravity the has gravity
-     */
     protected APhysics(
             float x, float y,
             float w, float h,
@@ -48,12 +35,7 @@ public abstract class APhysics {
 
     }
 
-    /**
-     * Update.
-     *
-     * @param delta the delta
-     */
-    protected void update(float delta) {
+    public void update(float delta) {
         resetCollisions();
 
         updateVelocity(delta);
@@ -88,9 +70,6 @@ public abstract class APhysics {
 
     }
 
-    /**
-     * Limit velocity.
-     */
     public void limitVelocity() {
         if (vY > MAX_VEL_Y * 5f) {
             vY = MAX_VEL_Y * 100f;
@@ -104,25 +83,10 @@ public abstract class APhysics {
         }
     }
 
-    /**
-     * Has collision boolean.
-     *
-     * @param a     the a
-     * @param delta the delta
-     * @return the boolean
-     */
     public boolean hasCollision(AActor a, float delta) {
         return hasCollision(a, delta, true);
     }
 
-    /**
-     * Has collision boolean.
-     *
-     * @param a            the a
-     * @param delta        the delta
-     * @param moveToBounds the move to bounds
-     * @return the boolean
-     */
     public boolean hasCollision(AActor a, float delta, boolean moveToBounds) {
 
         boolean isFloorBounded = ((a.bottomBufferOuter()) >= top()) && (a.bottomBufferInner() <= bottom());
@@ -213,21 +177,10 @@ public abstract class APhysics {
         this.h = h;
     }
 
-    /**
-     * Sets gravity.
-     *
-     * @param hasGravity the has gravity
-     */
     protected void setGravity(boolean hasGravity) {
         this.hasGravity = hasGravity;
     }
 
-    /**
-     * Sets velocity.
-     *
-     * @param velocityX the velocity x
-     * @param velocityY the velocity y
-     */
     public void setVelocity(float velocityX, float velocityY) {
         this.vX = velocityX;
         this.vY = velocityY;
@@ -241,92 +194,42 @@ public abstract class APhysics {
         this.vY = vY;
     }
 
-    /**
-     * Top float.
-     *
-     * @return the float
-     */
     protected float top() {
         return y;
     }
 
-    /**
-     * Bottom float.
-     *
-     * @return the float
-     */
     protected float bottom() {
         return top() + h;
     }
 
-    /**
-     * Left float.
-     *
-     * @return the float
-     */
     protected float left() {
         return x;
     }
 
-    /**
-     * Right float.
-     *
-     * @return the float
-     */
     protected float right() {
         return left() + w;
     }
 
-    /**
-     * Left buffer inner float.
-     *
-     * @return the float
-     */
     protected float leftBufferInner() {
         return left() + bufferHoriz;
     }
 
-    /**
-     * Left buffer outer float.
-     *
-     * @return the float
-     */
     protected float leftBufferOuter() {
         return left() - bufferHoriz;
     }
 
-    /**
-     * Right buffer inner float.
-     *
-     * @return the float
-     */
     protected float rightBufferInner() {
         return right() + bufferHoriz;
     }
 
-    /**
-     * Right buffer outer float.
-     *
-     * @return the float
-     */
     protected float rightBufferOuter() {
         return right() - bufferHoriz;
     }
 
-    /**
-     * Bottom buffer inner float.
-     *
-     * @return the float
-     */
     protected float bottomBufferInner() {
         return bottom() - bufferVert;
     }
 
-    /**
-     * Bottom buffer outer float.
-     *
-     * @return the float
-     */
     protected float bottomBufferOuter() {
         return bottom() + bufferVert;
     }

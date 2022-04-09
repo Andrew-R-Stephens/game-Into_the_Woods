@@ -2,25 +2,13 @@ package models.actors.gameactors.props.platforms;
 
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.ALevelProp;
+import models.utils.drawables.IDrawable;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
-/**
- * TODO: Add description
- */
-public class TestLevelProp extends ALevelProp {
+public class TestLevelProp extends ALevelProp implements IDrawable, IUpdatable {
 
-    /**
-     * Instantiates a new Test level prop.
-     *
-     * @param x          the x
-     * @param y          the y
-     * @param w          the w
-     * @param h          the h
-     * @param vx         the vx
-     * @param vy         the vy
-     * @param hasGravity the has gravity
-     */
     public TestLevelProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(x, y, w, h, vx, vy, hasGravity);
     }

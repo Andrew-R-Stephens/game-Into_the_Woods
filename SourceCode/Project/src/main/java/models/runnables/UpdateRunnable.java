@@ -4,18 +4,10 @@ import models.prototypes.threading.ARunnable;
 import models.prototypes.window.environments.AEnvironment;
 import models.utils.config.ConfigData;
 
-/**
- * The type Game update runnable.
- */
 public class UpdateRunnable extends ARunnable {
 
     private AEnvironment environment;
 
-    /**
-     * Init.
-     *
-     * @param environment the game model
-     */
     public void init(AEnvironment environment) {
         this.environment = environment;
     }

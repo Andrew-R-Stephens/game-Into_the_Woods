@@ -6,26 +6,14 @@ import models.utils.config.ConfigData;
 
 import java.awt.*;
 
-/**
- * Game Canvas extends ACanvas.
- * The canvas renders game objects using the scale of chosen window dimensions against the standard dimensions.
- */
 public class MenuCanvas extends ACanvas {
 
     private MainMenuEnvironment mainMenuEnvironment;
 
-    /**
-     * Init.
-     *
-     * @param mainMenuEnvironment the menu model
-     */
     public void init(MainMenuEnvironment mainMenuEnvironment) {
         this.mainMenuEnvironment = mainMenuEnvironment;
     }
 
-    /**
-     * Render.
-     */
     public void render() {
         repaint();
     }

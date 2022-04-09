@@ -6,19 +6,11 @@ import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
 import models.actors.gameactors.props.triggers.interactibles.SpikesTrigger;
 import models.actors.gameactors.props.triggers.interactibles.SpringTrigger;
 import models.prototypes.level.ALevel;
-import models.utils.files.Resources;
+import models.utils.resources.Resources;
 
 
-/**
- * The type Test level 1.
- */
 public class TestLevel1 extends ALevel {
 
-    /**
-     * Instantiates a new Test level 1.
-     *
-     * @param gameModel the game model
-     */
     public TestLevel1(GameEnvironment gameModel) {
         super(gameModel);
 

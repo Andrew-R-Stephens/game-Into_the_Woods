@@ -1,14 +1,13 @@
-package models.sprites;
+package models.utils.files;
 
 import com.google.gson.*;
+import models.sprites.Sprite;
+import models.sprites.SpriteSheet;
 import models.utils.files.AFileReader;
 
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- * TODO: Add description
- */
 public class SpriteSheetParser {
 
     private SpriteSheet spriteSheet;

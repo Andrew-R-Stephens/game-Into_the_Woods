@@ -7,20 +7,14 @@ import models.environments.game.hud.components.TimeKeeperOverlay;
 import models.environments.game.playerinventory.PlayerInventory;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
-import models.utils.files.Resources;
+import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-/**
- * The type Hud model.
- */
 public class HUDModel implements IDrawable, IUpdatable {
 
-    /**
-     * The Game model.
-     */
     protected GameEnvironment gameEnvironment;
     protected PlayerInventory inventory;
 

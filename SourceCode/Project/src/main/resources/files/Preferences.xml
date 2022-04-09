@@ -21,7 +21,7 @@
         2 = Windowed Fullscreen,
         3 = Exclusive Fullscreen
         -->
-        <windowType>3</windowType>
+        <windowType>1</windowType>
 
     </Window>
 

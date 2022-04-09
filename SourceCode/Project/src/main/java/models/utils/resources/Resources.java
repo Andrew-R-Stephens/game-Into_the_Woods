@@ -1,81 +1,77 @@
-package models.utils.files;
+package models.utils.resources;
 
 import models.sprites.SpriteSheet;
-import models.sprites.SpriteSheetParser;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import models.utils.files.AFileReader;
+import models.utils.files.MetaDataParser;
+import models.utils.files.SpriteSheetParser;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * Will contain references to all resources stored. Id's will be granted to all resources, grouped based on directory
- * type and named based on the file name
+ * Resources class
+ *
+ * First, this class checks for different types of resources along their respective paths. Paths vary between IDE and
+ * Jar environments, so those specified within this class respect the paths of both environments.
+ *
+ * If found, resources are either stored into HashMap lists as objects or as referential paths.
+ *
+ * Resources are called on by reference, ensuring for a singleton instance of the resource existing in memory. This
+ * allows for the system to use that resource multiple times without requiring resource overhead.
  */
 public class Resources {
 
-    private final String PATH_META_INF = "META_INF.xml";
+    private final String PATH_META = "files/metadata.json";
 
-    private final String path_images = "/images/";
-    private final String path_audio = "/audio/";
-    private static final String path_textFile = "files/";
-    private final String path_font = "fonts/";
+    private static String path_textFile;
+    private String path_images, path_audio, path_fonts;
 
     private static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
     private static final Map<String, String> audioFiles = new HashMap<>();
     private static final Map<String, File> textFiles = new HashMap<>();
     private static final Map<String, Font> fontFiles = new HashMap<>();
 
-    /**
-     * Instantiates a new Resources.
-     */
-    public Resources() {
-    }
-
-    /**
-     * Init.
-     */
     public void init() {
 
-        loadMetaInf();
+        // Initialize MetaData
+        MetaDataParser metaData = new MetaDataParser(PATH_META);
+        metaData.init();
 
-        loadImageFiles();
-        loadAudioFiles();
-        loadTextFiles();
-        loadFontFiles();
+        // Register paths
+        path_textFile = metaData.getPath("text");
+        path_images = metaData.getPath("images");
+        path_audio = metaData.getPath("audio");
+        path_fonts = metaData.getPath("fonts");
+        
+        // Register Texts
+        loadTextFiles(registerFiles(metaData, "text"));
+        // Register Images
+        loadImageFiles(registerFiles(metaData, "images"));
+        // Register Audio
+        loadAudioFiles(registerFiles(metaData, "audio"));
+        // Register Fonts
+        loadFontFiles(registerFiles(metaData, "fonts"));
 
         System.out.println(this);
 
     }
 
-    /**
-     * Loads a list of Image Resources listed from File
-     */
-    private void loadImageFiles() {
+    private String[] registerFiles(MetaDataParser metaData, String tag) {
+        ArrayList<String> tempList = metaData.getFileNames(tag);
+        String[] tempArr = new String[tempList.size()];
+        tempList.toArray(tempArr);
 
-        //TODO : Create list of files with image resource names instead of this hardcoding
-        String[] fileNames = {
-                "avatar.png",
-                "avatar2.png",
-                "key.png",
-                "button_hrect.png",
-                "button_square.png",
-                "mockPlatformV2.png",
-                "dirt.png",
-                "spikes.png",
-                "menubackground.png",
-                "button_spritesheet.png",
-                "spring_spritesheet.png",
-                "avataridle_spritesheet.png",
-                "avatarjump_spritesheet.png",
-                "avatarrun_spritesheet.png",
-                "avatarrun_spritesheet2.png"
-        };
+        return tempArr;
+    }
+
+    private void loadImageFiles(String[] fileNames) {
 
         for(String fileName : fileNames) {
             imagesFiles.put(fileName.split("\\.")[0], loadImageFile(fileName));
@@ -83,12 +79,6 @@ public class Resources {
 
     }
 
-    /**
-     * Load image file buffered image.
-     *
-     * @param fileName the file name
-     * @return the buffered image
-     */
     public BufferedImage loadImageFile(String fileName) {
         InputStream resourceBuff = Resources.class.getResourceAsStream(path_images + fileName);
         try {
@@ -104,16 +94,7 @@ public class Resources {
     }
 
 
-    /**
-     * Loads a list of Audio Resources listed from File
-     */
-    private void loadAudioFiles() {
-        //TODO : Create list of files with image resource names instead of this hardcoding
-        String[] fileNames = {
-                "buttonclick.mp3",
-                "mainmenu.mp3",
-                "game.mp3"
-        };
+    private void loadAudioFiles(String[] fileNames) {
 
         for(String fileName: fileNames) {
             String rawName = fileName.split("\\.")[0];
@@ -122,12 +103,6 @@ public class Resources {
 
     }
 
-    /**
-     * Load audio file clip.
-     *
-     * @param fileName the file name
-     * @return the clip
-     */
     public String loadAudioFile(String fileName) {
 
         //Clip clip = null;
@@ -143,26 +118,11 @@ public class Resources {
 
     }
 
-    private void loadMetaInf() {
-        loadTextFile(PATH_META_INF);
+    private void loadMetaData() {
+
     }
 
-    /**
-     * Loads a list of TextFile Resources listed from File
-     */
-    private void loadTextFiles() {
-        //TODO : Create list of files with image resource names instead of this hardcoding
-        String[] fileNames = {
-                "avatarrun_spritesheet.json",
-                "avatarrun_spritesheet2.json",
-                "spring_spritesheet.json",
-                "button_spritesheet.json",
-                "avatarjump_spritesheet.json",
-                "avataridle_spritesheet.json",
-                "colors.xml",
-                "Preferences.xml",
-                "SaveData.xml"
-        };
+    private void loadTextFiles(String[] fileNames) {
 
         for(String fileName: fileNames) {
             textFiles.put(fileName, loadTextFile(fileName));
@@ -170,12 +130,6 @@ public class Resources {
 
     }
 
-    /**
-     * Load text file file.
-     *
-     * @param fileName the file name
-     * @return the file
-     */
     public File loadTextFile(String fileName) {
         String  name = fileName.split("\\.")[0],
                 type = fileName.split("\\.")[1];
@@ -210,11 +164,7 @@ public class Resources {
         return file;
     }
 
-    private void loadFontFiles() {
-        //TODO : Create list of files with image resource names instead of this hardcoding
-        String[] fileNames = {
-                "bahnschrift.ttf"
-        };
+    private void loadFontFiles(String[] fileNames) {
 
         for(String fileName: fileNames) {
             String rawName = fileName.split("\\.")[0];
@@ -222,14 +172,8 @@ public class Resources {
         }
     }
 
-    /**
-     * Load text file file.
-     *
-     * @param fileName the file name
-     * @return the file
-     */
     public Font loadFontFile(String fileName) {
-        InputStream is = AFileReader.class.getClassLoader().getResourceAsStream(path_font + fileName);
+        InputStream is = AFileReader.class.getClassLoader().getResourceAsStream(path_fonts + fileName);
         if(is == null) {
             return null;
         }
@@ -250,7 +194,7 @@ public class Resources {
         return font;
     }
 
-    public static SpriteSheet loadSpriteSheet(String name) {
+    public static SpriteSheet getSpriteSheet(String name) {
         String fileName = name + ".json";
         if(textFiles.get(fileName) == null) {
             System.out.println("No spritesheet data file of that name!");
@@ -278,7 +222,7 @@ public class Resources {
         return fontFiles.get(fontKey);
     }
 
-    public static synchronized Player playAudio_Player(String audioKey) {
+    public static synchronized Player playAudio(String audioKey) {
 
         // create AudioInputStream object
         InputStream resourceBuff = Resources.class.getResourceAsStream(audioFiles.get(audioKey));
@@ -314,10 +258,6 @@ public class Resources {
 
     }
 
-    /**
-     * Displays the items read from storage
-     * @return
-     */
     public String toString() {
         String s = "Image Files:\n";
         for(String key: imagesFiles.keySet()) {
@@ -327,11 +267,6 @@ public class Resources {
         s += "Audio Files:\n";
         for(String key: audioFiles.keySet()) {
             s +=    "\t" + key + " " + (audioFiles.get(key) != null) + "\n";
-        }
-        s += "Text Files:\n";
-        for(String key: textFiles.keySet()) {
-            s +=    "\t" + key + " " +
-                    (textFiles.get(key) != null) + " " + "\n";
         }
 
         s += "Text Files:\n";

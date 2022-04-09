@@ -5,43 +5,30 @@ import controls.GameControls;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.utils.config.ConfigData;
-import models.utils.files.Resources;
+import models.utils.drawables.IDrawable;
+import models.utils.resources.Resources;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
-/**
- * TODO: Add description
- */
-public class PlayerAvatar extends ACharacter {
+public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
-    /**
-     * Instantiates a new Test character.
-     *
-     * @param cModel     the c model
-     * @param x          the x
-     * @param y          the y
-     * @param w          the w
-     * @param h          the h
-     * @param vx         the vx
-     * @param vy         the vy
-     * @param hasGravity the has gravity
-     */
     public PlayerAvatar(GameControls cModel, float x, float y, float w, float h, float vx, float vy,
                         boolean hasGravity) {
         super(cModel, x - w, y - h, w, h, vx, vy, hasGravity);
 
         spriteSheets.put(ActionType.FLOOR_IDLE,
-                Resources.loadSpriteSheet("avataridle_spritesheet").setLoopOnLast(true));
+                Resources.getSpriteSheet("avataridle_spritesheet").setLoopOnLast(true));
         spriteSheets.put(ActionType.FLOOR_WALKING,
-                Resources.loadSpriteSheet("avatarrun_spritesheet").setLoopOnLast(true));
+                Resources.getSpriteSheet("avatarrun_spritesheet").setLoopOnLast(true));
         spriteSheets.put(ActionType.FLOOR_RUNNING,
-                Resources.loadSpriteSheet("avatarrun_spritesheet2").setLoopOnLast(true));
+                Resources.getSpriteSheet("avatarrun_spritesheet2").setLoopOnLast(true));
         spriteSheets.put(ActionType.FLOOR_JUMPING,
-                Resources.loadSpriteSheet("avatarjump_spritesheet").setLoopOnLast(false));
+                Resources.getSpriteSheet("avatarjump_spritesheet").setLoopOnLast(false));
         spriteSheets.put(ActionType.WALL_JUMPING,
-                Resources.loadSpriteSheet("avatarjump_spritesheet").setLoopOnLast(false));
+                Resources.getSpriteSheet("avatarjump_spritesheet").setLoopOnLast(false));
         spriteSheets.put(ActionType.WALL_CLIMBING,
-                Resources.loadSpriteSheet("avatarrun_spritesheet2").setLoopOnLast(true));
+                Resources.getSpriteSheet("avatarrun_spritesheet2").setLoopOnLast(true));
     }
 
     @Override
@@ -123,8 +110,8 @@ public class PlayerAvatar extends ACharacter {
         float scaleH = h * ConfigData.scaledH;
 
         //Half window width
-        float centerX = (x * ConfigData.scaledW) + (Camera.x) + scaleW;
-        float centerY = (y * ConfigData.scaledH) + (Camera.y) + scaleH;
+        float centerX = (x * ConfigData.scaledW) + (Camera.camX) + scaleW;
+        float centerY = (y * ConfigData.scaledH) + (Camera.camY) + scaleH;
 
         centerX -= scaleW;
         centerY -= scaleH;

@@ -22,12 +22,9 @@ import models.runnables.RenderRunnable;
 import models.runnables.UpdateRunnable;
 import models.levels.LevelsList;
 import models.utils.config.ConfigData;
-import models.utils.files.PreferencesXMLParser;
-import models.utils.files.Resources;
+import models.utils.files.PreferencesParser;
+import models.utils.resources.Resources;
 
-/**
- * The type main.Main.
- */
 public class Main {
 
     private static ConfigData preferences;
@@ -63,36 +60,36 @@ public class Main {
     private static MainWindow window;
 
     /**
-     * The entry point of application.
+     * main - The starting point of the program.
      *
-     * @param args the input arguments
+     * First loads all assets from file into a resource pool for later use and ease of access.
+     * Then Creates all permanent static variables for protection against null pointer exceptions.
+     * Then initializes all variables with their necessary reference objects. Assists in MVC cross-object communication.
      */
     public static void main(String[] args) {
 
-        // Load Images, Files, etc
+        // Load in Images, Files, etc into a resource pool.
         loadAssets();
 
-        // Create Objects
+        // Create all permanent Objects
         create();
 
-        // Initialize Objects
+        // Initialize all permanent Objects
         init();
 
     }
 
     /**
-     * Load assets.
+     * loadAssets - loads all assets from file into a resource pool for later use and ease of access.
      */
     public static void loadAssets() {
         Resources resources = new Resources();
 
         resources.init();
-
-        Resources.loadSpriteSheet("button_spritesheet");
     }
 
     /**
-     * Create.
+     * create - Creates all permanent static variables for protection against null pointer exceptions.
      */
     public static void create() {
 
@@ -141,13 +138,14 @@ public class Main {
     }
 
     /**
-     * Init game objects.
+     * init - initializes all variables with their necessary reference objects.
+     * Assists in MVC cross-object referencing.
      */
     public static void init() {
 
         // Initialize Preferences
-        PreferencesXMLParser preferencesParser =
-                new PreferencesXMLParser(preferences, "files/", "Preferences", ".xml");
+        PreferencesParser preferencesParser =
+                new PreferencesParser(preferences, "files/", "Preferences", ".xml");
         preferencesParser.read();
         System.out.println(preferences.toString());
 

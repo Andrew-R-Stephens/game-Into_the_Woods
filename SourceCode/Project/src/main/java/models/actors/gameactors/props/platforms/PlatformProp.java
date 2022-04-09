@@ -3,24 +3,15 @@ package models.actors.gameactors.props.platforms;
 import models.camera.Camera;
 import models.prototypes.level.prop.ALevelProp;
 import models.utils.config.ConfigData;
-import models.utils.files.Resources;
+import models.utils.drawables.IDrawable;
+import models.utils.resources.Resources;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class PlatformProp extends ALevelProp {
+public class PlatformProp extends ALevelProp implements IDrawable, IUpdatable {
 
-    /**
-     * Instantiates a new A level prop.
-     *
-     * @param x          the x
-     * @param y          the y
-     * @param w          the w
-     * @param h          the h
-     * @param vx         the vx
-     * @param vy         the vy
-     * @param hasGravity the has gravity
-     */
     public PlatformProp(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(x, y, w, h, vx, vy, hasGravity);
     }
@@ -36,8 +27,8 @@ public class PlatformProp extends ALevelProp {
 
         g.setColor(Color.DARK_GRAY);
 
-        float offsetX = ((x * ConfigData.scaledW) + (Camera.x));
-        float offsetY = ((y * ConfigData.scaledH) + (Camera.y));
+        float offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
+        float offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
 
         float scaledW = w * ConfigData.scaledW;
         float scaledH = h * ConfigData.scaledH;

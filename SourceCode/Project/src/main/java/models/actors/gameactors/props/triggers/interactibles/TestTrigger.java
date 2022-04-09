@@ -4,28 +4,14 @@ import models.environments.game.GameEnvironment;
 import models.actors.gameactors.TestActor;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.trigger.ATrigger;
+import models.utils.drawables.IDrawable;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.util.Random;
 
-/**
- * The type Test trigger.
- */
-public class TestTrigger extends ATrigger {
+public class TestTrigger extends ATrigger implements IDrawable, IUpdatable {
 
-    /**
-     * Instantiates a new Test trigger.
-     *
-     * @param gameEnvironment    the game model
-     * @param x                  the x
-     * @param y                  the y
-     * @param w                  the w
-     * @param h                  the h
-     * @param vx                 the vx
-     * @param vy                 the vy
-     * @param hasGravity         the has gravity
-     * @param canMoveOnCollision the can move on collision
-     */
     public TestTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy, boolean hasGravity, boolean canMoveOnCollision) {
         super(gameEnvironment, x, y, w, h, vx, vy, 1, hasGravity, canMoveOnCollision);
     }

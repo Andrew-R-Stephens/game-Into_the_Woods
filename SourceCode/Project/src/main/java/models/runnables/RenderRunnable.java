@@ -4,18 +4,10 @@ import models.prototypes.threading.ARunnable;
 import models.prototypes.window.ACanvas;
 import models.utils.config.ConfigData;
 
-/**
- * The type Game render runnable.
- */
 public class RenderRunnable extends ARunnable {
 
     private ACanvas canvas;
 
-    /**
-     * Init.
-     *
-     * @param canvas the canvas
-     */
     public void init(ACanvas canvas) {
         this.canvas = canvas;
     }

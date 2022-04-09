@@ -6,16 +6,8 @@ import models.prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
 
-/**
- * Game Key Controls define the controls for Character navigation and ability with Key input.
- */
 public class GameKeyControls extends AKeyController {
 
-    /**
-     * Instantiates a new Game key controls.
-     *
-     * @param controlsViewModel the controls view model
-     */
     public GameKeyControls(AControlsModel controlsViewModel) {
         super(controlsViewModel);
     }

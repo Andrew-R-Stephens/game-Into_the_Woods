@@ -18,7 +18,9 @@ import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.ALevelProp;
 import models.prototypes.window.environments.AEnvironment;
 import models.utils.config.ConfigData;
-import models.utils.files.Resources;
+import models.utils.drawables.IDrawable;
+import models.utils.resources.Resources;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,11 +28,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-/**
- * The Game Model derives from the AEnvironment class. It's what encapsulates all data that the Game requires to run.
- * Relevant data includes: Levels, Level Objects, Entity Objects, Player HUD
- */
-public class GameEnvironment extends AEnvironment {
+public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 
     private PauseMenuEnvironment pauseMenuModel;
 
@@ -46,13 +44,6 @@ public class GameEnvironment extends AEnvironment {
 
     private boolean isPaused = false;
 
-    /**
-     * Initializes Game Model
-     *  @param parentEnvironmentsHandler - Contains references to the GameModel and MenuModel Environments
-     * @param pauseMenuModel
-     * @param controlsModel       - The controls for the Game
-     * @param levelModel              - Contains a list of all possible levels
-     */
     public void init(EnvironmentsHandler parentEnvironmentsHandler,
                      PauseMenuEnvironment pauseMenuModel, GameControls controlsModel,
                      LevelsList levelModel, HUDModel hudModel, PlayerInventory inventory) {
@@ -95,9 +86,6 @@ public class GameEnvironment extends AEnvironment {
 
     }
 
-    /**
-     *  Only deals with draw calls of all objects contained within the Game Model
-     */
     @Override
     public void draw(Graphics g) {
 
@@ -164,23 +152,10 @@ public class GameEnvironment extends AEnvironment {
         }
     }
 
-    /**
-     * Sets the List of Levels into this local scope.
-     *
-     * @param levelModel - The Level Model that contains all levels
-     */
     public void setLevelModel(LevelsList levelModel) {
         this.levelModel = levelModel;
     }
 
-    /**
-     * setPlayerAvatar
-     *
-     * Obtains the appropriate start location for the player based on the current Level.
-     *
-     * @param controlsViewModel
-     * @param levelModel
-     */
     private void setPlayerAvatar(GameControls controlsViewModel, LevelsList levelModel) {
         int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
         // Add in the Main Test Character
@@ -197,10 +172,6 @@ public class GameEnvironment extends AEnvironment {
     }
 
 
-    /**
-     * Updates the Player HUD to reflect specific information contained within Game Model
-     * @param delta
-     */
     private void updateHUD(float delta) {
         hudModel.update(delta);
     }
@@ -209,12 +180,6 @@ public class GameEnvironment extends AEnvironment {
         levelModel.getCurrentLevel().update(delta);
     }
 
-    /**
-     * Adds new TestActor objects to a holding Queue.
-     * The holding Queue will inject these objects at the next available juncture.
-     *
-     * @param delta - The ratio of current framerate against standard update frequency
-     */
     private synchronized void testAddingActors(float delta) {
         if (mouseController instanceof GameMouseControls) {
 
@@ -228,8 +193,8 @@ public class GameEnvironment extends AEnvironment {
                 for (int i = 0; i < count; i++) {
                     queueActor(
                             new TestActor(
-                                    (-Camera.x / ConfigData.scaledW) + (gmc.getPos()[0]/ ConfigData.scaledW),
-                                    (-Camera.y / ConfigData.scaledW) + (gmc.getPos()[1]/ ConfigData.scaledH),
+                                    (-Camera.camX / ConfigData.scaledW) + (gmc.getPos()[0]/ ConfigData.scaledW),
+                                    (-Camera.camY / ConfigData.scaledW) + (gmc.getPos()[1]/ ConfigData.scaledH),
                                     10f,
                                     10f,
                                     new Random().nextFloat(-5, 5),
@@ -242,11 +207,6 @@ public class GameEnvironment extends AEnvironment {
         }
     }
 
-    /**
-     * Updates all game objects.
-     *
-     * @param delta - The ratio of current framerate against standard update frequency
-     */
     public void updateActors(float delta) {
 
         // Update all Actors
@@ -268,10 +228,6 @@ public class GameEnvironment extends AEnvironment {
 
     }
 
-    /**
-     * Check Level Prop object collisions against all AActor objects
-     * @param delta - The ratio of current framerate against standard update frequency
-     */
     private void detectCollisions(float delta) {
         for (ALevelProp p : levelModel.getCurrentLevel().getLevelProps()) {
             for (AActor a : actors) {
@@ -286,29 +242,14 @@ public class GameEnvironment extends AEnvironment {
         }
     }
 
-    /**
-     * Used to temporarily store new game objects into a Linked List Queue.
-     *
-     * @param a the AActor to add
-     */
     public void queueActor(AActor a) {
         actorsQueue.add(a);
     }
 
-    /**
-     * Add game object.
-     *
-     * @param actor - The actor added to the list of current Game Objects
-     */
     public void addActor(AActor actor) {
         actors.add(actor);
     }
 
-    /**
-     * Sets current level.
-     *
-     * @param levelIndex the level index
-     */
     public void setCurrentLevel(int levelIndex) {
         levelModel.setCurrentLevel(levelIndex);
     }
@@ -317,18 +258,13 @@ public class GameEnvironment extends AEnvironment {
         return levelModel.getCurrentLevel();
     }
 
-    /**
-     * Gets character.
-     *
-     * @return the character
-     */
     public ACharacter getPlayerAvatar() {
         return character;
     }
 
     @Override
     public void startBackgroundAudio() {
-        audioPlayer = Resources.playAudio_Player("game");
+        audioPlayer = Resources.playAudio("game");
     }
 
     @Override

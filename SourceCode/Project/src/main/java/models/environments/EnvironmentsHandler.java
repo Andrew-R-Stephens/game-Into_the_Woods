@@ -9,16 +9,10 @@ import models.prototypes.window.environments.AEnvironment;
 
 import java.util.ArrayList;
 
-/**
- * The type Environments model.
- */
 public class EnvironmentsHandler {
 
     private MainWindow parentDisplayWindow;
 
-    /**
-     * The enum Environment type.
-     */
     public enum EnvironmentType {
         MAIN_MENU,
         GAME,
@@ -34,23 +28,10 @@ public class EnvironmentsHandler {
     private Thread updatesThread;
     private Thread rendersThread;
 
-    /**
-     * Init.
-     *
-     * @param parentDisplayWindow the parent component
-     */
     public void init(MainWindow parentDisplayWindow) {
         this.parentDisplayWindow = parentDisplayWindow;
     }
 
-    /**
-     * Add pair.
-     *
-     * @param model     the model
-     * @param canvas    the canvas
-     * @param uRunnable the u runnable
-     * @param rRunnable the r runnable
-     */
     public void addEnvironmentPair(AEnvironment model, ACanvas canvas, ARunnable uRunnable, ARunnable rRunnable) {
         environments.add(model);
         canvases.add(canvas);
@@ -58,11 +39,6 @@ public class EnvironmentsHandler {
         renderRunnables.add(rRunnable);
     }
 
-    /**
-     * Sets current environment.
-     *
-     * @param environmentType the environment type
-     */
     public void setCurrentEnvironmentType(EnvironmentType environmentType) {
         this.currentEnvironment = environmentType;
     }
@@ -86,20 +62,10 @@ public class EnvironmentsHandler {
         return this;
     }
 
-    /**
-     * Gets current environment.
-     *
-     * @return the current environment
-     */
     public AEnvironment getCurrentEnvironment() {
         return environments.get(currentEnvironment.ordinal());
     }
 
-    /**
-     * Gets game model.
-     *
-     * @return the game model
-     */
     public GameEnvironment getGameEnvironment() {
         return (GameEnvironment) environments.get(EnvironmentType.GAME.ordinal());
     }
@@ -108,36 +74,18 @@ public class EnvironmentsHandler {
         return (MainMenuEnvironment) environments.get(EnvironmentType.MAIN_MENU.ordinal());
     }
 
-    /**
-     * Gets current canvas.
-     *
-     * @return the current canvas
-     */
     public ACanvas getCurrentCanvas() {
         return canvases.get(currentEnvironment.ordinal());
     }
 
-    /**
-     * Gets current update runnable.
-     *
-     * @return the current update runnable
-     */
     public Runnable getCurrentUpdateRunnable() {
         return updateRunnables.get(currentEnvironment.ordinal());
     }
 
-    /**
-     * Gets current render runnable.
-     *
-     * @return the current render runnable
-     */
     public Runnable getCurrentRenderRunnable() {
         return renderRunnables.get(currentEnvironment.ordinal());
     }
 
-    /**
-     * Apply environment.
-     */
     public void applyEnvironment() {
         parentDisplayWindow.build();
 

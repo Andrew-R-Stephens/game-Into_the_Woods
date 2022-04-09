@@ -3,28 +3,14 @@ package models.prototypes.window.environments.menu.components.types;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.prototypes.window.environments.menu.components.AMenuComponent;
 import models.utils.config.ConfigData;
+import models.utils.drawables.IDrawable;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/**
- * The abstract type AMenuButton. Implements IUpdatable and IDrawable.
- * <p>
- * This is to be used for the creation of anonymous buttons.
- * This can also be used as a parent class for specific AMenuButton types.
- */
-public class AMenuImage extends AMenuComponent {
+public class AMenuImage extends AMenuComponent implements IDrawable, IUpdatable {
 
-    /**
-     * Instantiates a new A menu button.
-     * @param parentMenuModel the menu Model
-     * @param x               the x coordinate
-     * @param y               the y coordinate
-     * @param w               the width
-     * @param h               the height
-     * @param bufferedImage   the Image to display
-     * @param scaleType       the Scale type of the image
-     */
     public AMenuImage(AMenuModel parentMenuModel, int x, int y, int w, int h, BufferedImage bufferedImage, ImageScale scaleType) {
         super(parentMenuModel);
 
@@ -38,15 +24,6 @@ public class AMenuImage extends AMenuComponent {
 
     }
 
-    /**
-     * Instantiates a new A menu button. Defaults the width and height to 200 x 50, scaled to the window size.
-     *
-     * @param parentMenuModel the menu Model
-     * @param x               the x coordinate
-     * @param y               the y coordinate
-     * @param bufferedImage   the Image to display
-     * @param scaleType       the Scale type of the image
-     */
     public AMenuImage(AMenuModel parentMenuModel, int x, int y, BufferedImage bufferedImage, ImageScale scaleType) {
         super(parentMenuModel);
 

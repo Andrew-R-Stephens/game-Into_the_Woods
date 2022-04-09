@@ -4,9 +4,6 @@ import models.prototypes.controls.AControlsModel;
 
 import java.util.Arrays;
 
-/**
- * TODO: Add description
- */
 public class MenuControls extends AControlsModel {
 
     public boolean isAction(Actions type) {

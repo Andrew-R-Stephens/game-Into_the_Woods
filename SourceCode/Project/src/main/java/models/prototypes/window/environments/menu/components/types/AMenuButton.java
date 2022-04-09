@@ -4,31 +4,18 @@ import models.prototypes.controls.AMouseController;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.prototypes.window.environments.menu.components.AMenuComponent;
 import models.utils.config.ConfigData;
-import models.utils.files.Resources;
+import models.utils.drawables.IDrawable;
+import models.utils.resources.Resources;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-/**
- * The abstract type AMenuButton. Implements IUpdatable and IDrawable.
- * <p>
- * This is to be used for the creation of anonymous buttons.
- * This can also be used as a parent class for specific AMenuButton types.
- */
-public abstract class AMenuButton extends AMenuComponent {
+public abstract class AMenuButton extends AMenuComponent implements IDrawable, IUpdatable {
 
     private boolean playSound = true;
 
-    /**
-     * Instantiates a new A menu button.
-     *
-     * @param parentMenuModel the menu Model
-     * @param x               the x coordinate
-     * @param y               the y coordinate
-     * @param w               the width
-     * @param h               the height
-     */
     public AMenuButton(AMenuModel parentMenuModel, int x, int y, int w, int h) {
         super(parentMenuModel);
 
@@ -38,13 +25,6 @@ public abstract class AMenuButton extends AMenuComponent {
         this.h = h;
     }
 
-    /**
-     * Instantiates a new A menu button. Defaults the width and height to 200 x 50, scaled to the window size.
-     *
-     * @param parentMenuModel the menu Model
-     * @param x               the x coordinate
-     * @param y               the y coordinate
-     */
     public AMenuButton(AMenuModel parentMenuModel, int x, int y) {
         super(parentMenuModel);
 
@@ -56,7 +36,7 @@ public abstract class AMenuButton extends AMenuComponent {
 
     public void playSound() {
         if(playSound) {
-            Resources.playAudio_Player("buttonclick");
+            Resources.playAudio("buttonclick");
         }
     }
 
@@ -146,10 +126,6 @@ public abstract class AMenuButton extends AMenuComponent {
         super.update(delta);
     }
 
-    /**
-     * Checked every update.
-     * Registers the input from the parent MainMenuModel class. That class is defined locally as parentMenuModel.
-     */
     public void registerInput() {
         AMouseController mc = parentMenuModel.getMouseController();
         if (mc.isLeftPressed()) {
@@ -162,12 +138,6 @@ public abstract class AMenuButton extends AMenuComponent {
         }
     }
 
-    /**
-     * Sets text of the button.
-     * Should be removed once we add image sources.
-     *
-     * @param s - the String of text
-     */
     public void setText(String s) {
         text = s;
     }

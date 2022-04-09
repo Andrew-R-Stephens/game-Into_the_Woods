@@ -2,27 +2,14 @@ package models.utils.files;
 
 import java.io.*;
 
-/**
- * TODO: Add description
- */
 public abstract class AFileReader {
 
-    /**
-     * The File.
-     */
     protected File file;
 
     public AFileReader(String fullPath) {
 
     }
 
-    /**
-     * Instantiates a new A file reader.
-     *
-     * @param filePath the file path
-     * @param fileName the file name
-     * @param fileType the file type
-     */
     public AFileReader(String filePath, String fileName, String fileType) {
 
         try {
@@ -56,11 +43,6 @@ public abstract class AFileReader {
 
     }
 
-    /**
-     * Read boolean.
-     *
-     * @return the boolean
-     */
     public abstract boolean read();
 
 

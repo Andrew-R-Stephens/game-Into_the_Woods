@@ -12,22 +12,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
-/**
- * The type Preferences xml parser.
- */
-public class PreferencesXMLParser extends AFileReader {
+public class PreferencesParser extends AFileReader {
 
     private final ConfigData preferences;
 
-    /**
-     * Instantiates a new Preferences xml parser.
-     *
-     * @param preferences the preferences
-     * @param filePath    the file path
-     * @param fileName    the file name
-     * @param fileType    the file type
-     */
-    public PreferencesXMLParser(ConfigData preferences, String filePath, String fileName, String fileType) {
+    public PreferencesParser(ConfigData preferences, String filePath, String fileName, String fileType) {
         super(filePath, fileName, fileType);
 
         this.preferences = preferences;

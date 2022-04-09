@@ -8,19 +8,10 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/**
- * The abstract type AMenuButton. Implements IUpdatable and IDrawable.
- * <p>
- * This is to be used for the creation of anonymous buttons.
- * This can also be used as a parent class for specific AMenuButton types.
- */
 public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     protected ImageScale scaleType = ImageScale.FILL_XY;
 
-    /**
-     * The enum Image scale.
-     */
     public enum ImageScale {
         FIT_CENTERED,
         CENTER_CROP,
@@ -30,9 +21,6 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     protected BufferedImage backgroundImage;
     protected BufferedImage tint;
 
-    /**
-     * The Parent menu model.
-     */
     // The Parent menu model which holds all pages and subpages.
     protected AMenuModel parentMenuModel;
 
@@ -45,23 +33,10 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     protected boolean isFocused = false;
 
-    /**
-     * Instantiates a new AComponent.
-     *
-     * @param parentMenuModel the menu Model
-     */
     public AMenuComponent(AMenuModel parentMenuModel) {
         this.parentMenuModel = parentMenuModel;
     }
 
-    /**
-     * Checks if the passed coordinates are within the bounds of the component.
-     * Takes screen scale into consideration.
-     *
-     * @param mx the mx
-     * @param my the my
-     * @return if the passed coordinates are within the bounds of the object.
-     */
     protected boolean isInBounds(float mx, float my) {
         mx /= ConfigData.scaledW;
         my /= ConfigData.scaledH;
@@ -74,12 +49,6 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         return horizBound && vertBound;
     }
 
-    /**
-     * If the object is allowed to have a focused state, this will cause the button to react when the user
-     * mouses over it.
-     *
-     * @param isFocused - if the component is focused on.
-     */
     protected void setIsFocused(boolean isFocused) {
         this.isFocused = isFocused;
     }
@@ -96,26 +65,12 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         registerInput();
     }
 
-    /**
-     * Checked every update.
-     * Registers the input from the parent MainMenuModel class. That class is defined locally as parentMenuModel.
-     */
     public abstract void registerInput();
 
-    /**
-     * Sets background image.
-     *
-     * @param backgroundImage the background image
-     */
     public void setBackgroundImage(BufferedImage backgroundImage) {
         this.backgroundImage = backgroundImage;
     }
 
-    /**
-     * Sets image scaling.
-     *
-     * @param scaleType the scale type
-     */
     public void setImageScaling(ImageScale scaleType) {
         this.scaleType = scaleType;
     }

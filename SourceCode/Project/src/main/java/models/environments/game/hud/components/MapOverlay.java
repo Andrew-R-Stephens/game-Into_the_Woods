@@ -3,14 +3,13 @@ package models.environments.game.hud.components;
 import models.environments.game.GameEnvironment;
 import models.prototypes.window.environments.overlays.AOverlayComponent;
 import models.utils.config.ConfigData;
+import models.utils.drawables.IDrawable;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/**
- * The type Map overlay.
- */
-public class MapOverlay extends AOverlayComponent {
+public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatable {
 
     private BufferedImage overlay;
 

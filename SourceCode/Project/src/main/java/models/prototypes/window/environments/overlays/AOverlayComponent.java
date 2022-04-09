@@ -7,16 +7,10 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
-/**
- * The type A overlay component.
- */
 public abstract class AOverlayComponent implements IUpdatable, IDrawable {
 
     protected GameEnvironment gameEnvironment;
 
-    /**
-     * The X.
-     */
     protected int x, y, w, h;
 
     public void init(GameEnvironment gameEnvironment, int x, int y, int w, int h) {

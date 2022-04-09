@@ -6,16 +6,8 @@ import models.prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
 
-/**
- * Menu Key Controls define the controls for Main Manu or Pause Menu navigation with Key input.
- */
 public class MenuKeyControls extends AKeyController{
 
-    /**
-     * Instantiates a new Menu key controls.
-     *
-     * @param controlsModel the controls view model
-     */
     public MenuKeyControls(AControlsModel controlsModel) {
         super(controlsModel);
     }

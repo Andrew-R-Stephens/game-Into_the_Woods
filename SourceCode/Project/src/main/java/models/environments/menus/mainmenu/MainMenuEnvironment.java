@@ -5,16 +5,10 @@ import models.environments.EnvironmentsHandler;
 import views.menus.startscreen.StartScreenPage;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuModel;
-import models.utils.files.Resources;
+import models.utils.resources.Resources;
 
-/**
- * The type Main menu model.
- */
 public class MainMenuEnvironment extends AMenuModel {
 
-    /**
-     * Init.
-     */
     public void init(EnvironmentsHandler environmentsHandler, MenuControls menuControlsModel) {
         super.init(environmentsHandler, menuControlsModel);
 
@@ -29,7 +23,7 @@ public class MainMenuEnvironment extends AMenuModel {
 
     @Override
     public void startBackgroundAudio() {
-        audioPlayer = Resources.playAudio_Player("mainmenu");
+        audioPlayer = Resources.playAudio("mainmenu");
     }
 
     @Override

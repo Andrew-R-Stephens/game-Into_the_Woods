@@ -5,16 +5,8 @@ import models.prototypes.controls.AMouseController;
 
 import java.awt.event.MouseEvent;
 
-/**
- * Game Mouse Controls define the controls for in-game actions with Mouse input.
- */
 public class GameMouseControls extends AMouseController {
 
-    /**
-     * Instantiates a new Game mouse controls.
-     *
-     * @param controlsViewModel the controls view model
-     */
     public GameMouseControls(AControlsModel controlsViewModel) {
         super(controlsViewModel);
     }
@@ -80,29 +72,14 @@ public class GameMouseControls extends AMouseController {
         mPos[1] = e.getY();
     }
 
-    /**
-     * Is left pressed boolean.
-     *
-     * @return the boolean
-     */
     public boolean isLeftPressed() {
         return isLeftPressed;
     }
 
-    /**
-     * Is right pressed boolean.
-     *
-     * @return the boolean
-     */
     public boolean isRightPressed() {
         return isRightPressed;
     }
 
-    /**
-     * Get pos int [ ].
-     *
-     * @return the int [ ]
-     */
     public int[] getPos() {
         return mPos;
     }

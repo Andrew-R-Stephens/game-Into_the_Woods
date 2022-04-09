@@ -5,20 +5,12 @@ import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
-import models.utils.files.Resources;
+import models.utils.resources.Resources;
 
 import java.awt.image.BufferedImage;
 
-/**
- * The type New game page.
- */
 public class NewGamePage extends AMenu {
 
-    /**
-     * Instantiates a new New game page.
-     *
-     * @param parentModel the parent model
-     */
     public NewGamePage(AMenuModel parentModel) {
         super(parentModel);
 

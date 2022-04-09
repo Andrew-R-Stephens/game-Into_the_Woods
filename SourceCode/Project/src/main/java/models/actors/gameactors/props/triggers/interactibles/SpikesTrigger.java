@@ -8,23 +8,12 @@ import models.prototypes.level.prop.trigger.ATrigger;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
-import models.utils.files.Resources;
+import models.utils.resources.Resources;
+import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
-public class SpikesTrigger extends ATrigger implements IDrawable, IHUDDrawable {
-    /**
-     * Instantiates a new A trigger.
-     *
-     * @param gameEnvironment    the game model
-     * @param x                  the x
-     * @param y                  the y
-     * @param w                  the w
-     * @param h                  the h
-     * @param vx                 the vx
-     * @param vy                 the vy
-     * @param MAX_CYCLES
-     */
+public class SpikesTrigger extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
     public SpikesTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
                          int MAX_CYCLES) {
         super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, false, false);
@@ -64,8 +53,8 @@ public class SpikesTrigger extends ATrigger implements IDrawable, IHUDDrawable {
 
     @Override
     public void draw(Graphics g) {
-        double offsetX = ((x * ConfigData.scaledW) + (Camera.x));
-        double offsetY = ((y * ConfigData.scaledH) + (Camera.y));
+        double offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
+        double offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
 
         double scaledW = w * ConfigData.scaledW;
         double scaledH = h * ConfigData.scaledH;

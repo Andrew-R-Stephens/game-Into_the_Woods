@@ -3,9 +3,6 @@ package models.sprites;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
-/**
- * TODO: Add description
- */
 public class Sprite {
 
     private String filename;

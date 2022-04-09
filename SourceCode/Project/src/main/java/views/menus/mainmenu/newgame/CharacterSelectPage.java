@@ -5,22 +5,14 @@ import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
-import models.utils.files.Resources;
+import models.utils.resources.Resources;
 
 import java.awt.image.BufferedImage;
 
-/**
- * The type Character create page.
- */
 public class CharacterSelectPage extends AMenu {
 
     private final int chosenCharacter = 0;
 
-    /**
-     * Instantiates a new Character create page.
-     *
-     * @param parentModel the parent model
-     */
     public CharacterSelectPage(AMenuModel parentModel) {
         super(parentModel);
 

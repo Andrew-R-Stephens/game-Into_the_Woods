@@ -14,16 +14,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/**
- * The type A level.
- */
-public abstract class ALevel implements IDrawable, IUpdatable, IHUDDrawable {
+public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     protected BufferedImage backgroundImage;
 
-    /**
-     * The Game model.
-     */
     protected GameEnvironment gameModel;
 
     protected int[] startOrigin = new int[2];
@@ -32,11 +26,6 @@ public abstract class ALevel implements IDrawable, IUpdatable, IHUDDrawable {
 
     protected LevelCollectibles collectibles;
 
-    /**
-     * Instantiates a new A level.
-     *
-     * @param gameModel the game model
-     */
     public ALevel(GameEnvironment gameModel) {
         this.gameModel = gameModel;
     }
@@ -45,11 +34,6 @@ public abstract class ALevel implements IDrawable, IUpdatable, IHUDDrawable {
         levelProps.add(prop);
     }
 
-    /**
-     * Gets level models.props.
-     *
-     * @return the level models.props
-     */
     public ArrayList<ALevelProp> getLevelProps() {
         return levelProps;
     }
