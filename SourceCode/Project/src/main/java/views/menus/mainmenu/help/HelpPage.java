@@ -13,7 +13,7 @@ public class HelpPage extends AMenu {
     public HelpPage(AMenuModel parentModel) {
         super(parentModel);
 
-        backgroundImage = Resources.getImage("menubackground");
+        image_background = Resources.getImage("menubackground");
 
         BufferedImage img_button = Resources.getImage("button_hrect");
 

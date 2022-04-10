@@ -12,6 +12,7 @@ import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class SpikesTrigger extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
     public SpikesTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
@@ -53,12 +54,38 @@ public class SpikesTrigger extends ATrigger implements IDrawable, IHUDDrawable, 
 
     @Override
     public void draw(Graphics g) {
-        double offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
-        double offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
+        float offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
+        float offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
 
-        double scaledW = w * ConfigData.scaledW;
-        double scaledH = h * ConfigData.scaledH;
+        float scaledW = w * ConfigData.scaledW;
+        float scaledH = h * ConfigData.scaledH;
 
-        g.drawImage(Resources.getImage("spikes"), (int)offsetX, (int)offsetY, (int)scaledW, (int)scaledH, null);
+        BufferedImage img = Resources.getImage("spikes");
+        float imgScaledH = scaledH/img.getHeight();
+
+        if(scaledW < scaledH) {
+            g.drawImage(img,
+                    (int) (offsetX), (int) (offsetY),
+                    (int) (scaledW), (int) (scaledH),
+                    null);
+            return;
+        }
+
+        float imgScaledW = img.getWidth() * imgScaledH;
+        float numImgs = scaledW / imgScaledW;
+        int i;
+        for(i = 0; i < numImgs-1; i++) {
+            g.drawImage(img,
+                    (int) (offsetX + (i * imgScaledW)), (int) (offsetY),
+                    (int) (imgScaledW), (int) (scaledH),
+                    null);
+        }
+        float lastImgScale = numImgs-i;
+        if(lastImgScale > 0) {
+            g.drawImage(img,
+                    (int) (offsetX + (i * imgScaledW)), (int) (offsetY),
+                    (int) (lastImgScale * imgScaledW), (int) (scaledH),
+                    null);
+        }
     }
 }

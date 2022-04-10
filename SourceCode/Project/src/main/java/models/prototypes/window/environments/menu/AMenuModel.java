@@ -7,6 +7,7 @@ import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Stack;
 
 public abstract class AMenuModel extends AEnvironment implements IDrawable, IUpdatable {

@@ -1,6 +1,6 @@
 package models.levels.level;
 
-import models.actors.gameactors.TestActor;
+import models.actors.gameactors.ParticleActor;
 import models.actors.gameactors.props.platforms.PlatformProp;
 import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
 import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
@@ -65,7 +65,7 @@ public class TestLevel1 extends ALevel {
 
         // REACTION PROP
         AReactProp reactProp = new AReactProp(gameEnvironment, 75, 500, 100, 100,
-                0, 0, -1,false, false) {
+                0, 0, 1,false, false) {
             @Override
             public void onReact() {
                 color = new Color(255, 0, 50, 50);
@@ -78,8 +78,8 @@ public class TestLevel1 extends ALevel {
                 0, 0, 1,false, false) {
             @Override
             public void doAction() {
-                gameEnvironment.queueActor(new TestActor(this.x, this.y,
-                        10, 10, new Random().nextFloat(-10, 10), new Random().nextFloat(-10, 10),
+                gameEnvironment.queueActor(new ParticleActor(this.x, this.y, 10, 10,
+                        new Random().nextFloat(-10, 10), new Random().nextFloat(-10, 10),
                         true));
             }
 
@@ -92,57 +92,21 @@ public class TestLevel1 extends ALevel {
                 return super.hasCollision(a, delta);
             }
         });
-        addProp(new APropTrigger(gameEnvironment, 300, 580, 100, 100,
-                0, 0, -1,false, false) {
+
+        // Door
+        door = new DoorTrigger(gameEnvironment, 2000, 0, 50, 100,
+                        0, 0, 1, false, false);
+        addProp(door);
+
+
+        addProp(new APropTrigger(gameEnvironment, 1800, -150, 450, 300,
+                0, 0, 1,false, false) {
             @Override
             public void doAction() {
-                reactProp.onReact();
+                //reactProp.onReact();
+                door.onReact();
             }
 
-            @Override
-            public boolean hasCollision(AActor a, float delta) {
-                if(!(a instanceof ACharacter)) {
-                    return false;
-                }
-
-                return super.hasCollision(a, delta);
-            }
-        });
-        addProp(new APropTrigger(gameEnvironment, 1000, 280, 100, 100,
-                0, 0, -1,false, false) {
-            @Override
-            public void doAction() {
-                gameEnvironment.queueActor(new TestActor(this.x, this.y,
-                        10, 10, new Random().nextFloat(-10, 10), new Random().nextFloat(-10, 10),
-                        true));
-            }
-
-            @Override
-            public boolean hasCollision(AActor a, float delta) {
-                if(!(a instanceof ACharacter)) {
-                    return false;
-                }
-
-                return super.hasCollision(a, delta);
-            }
-        });
-        addProp(new APropTrigger(gameEnvironment, 100, 680, 100, 100,
-                0, 0, -1,false, false) {
-            @Override
-            public void doAction() {
-                gameEnvironment.queueActor(new TestActor(this.x, this.y,
-                        10, 10, new Random().nextFloat(-10, 10), new Random().nextFloat(-10, 10),
-                        true));
-            }
-
-            @Override
-            public boolean hasCollision(AActor a, float delta) {
-                if(!(a instanceof ACharacter)) {
-                    return false;
-                }
-
-                return super.hasCollision(a, delta);
-            }
         });
 
         // Springs
@@ -163,8 +127,8 @@ public class TestLevel1 extends ALevel {
         addProp(new LevelKey(gameEnvironment, 2500, 450, 100, 50, 0, 0));
         addProp(new LevelKey(gameEnvironment, 500, 300, 100, 50, 0, 0));
 
-        addProp(new DoorTrigger(gameEnvironment, 75, 850, 100, 100,
-                0, 0, 1, false, false));
+        super.build();
+
     }
 
 

@@ -60,11 +60,5 @@ public class PlatformProp extends AProp implements IDrawable, IUpdatable {
                     (int) (lastImgScale * imgScaledW), (int) (scaledH),
                     null);
         }
-        /*
-        g.drawImage(img,
-                (int) (offsetX), (int) (offsetY),
-                (int) (scaledW), (int) (scaledH),
-                null);
-        */
     }
 }

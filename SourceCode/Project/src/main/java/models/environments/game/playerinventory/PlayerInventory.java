@@ -13,7 +13,7 @@ public class PlayerInventory {
         collectibles.add(levelCollectible);
     }
 
-    public int getKeysCount() {
+    public int getKeyCount() {
         int count = 0;
         for(ACollectibleTrigger c: collectibles) {
             if(c instanceof LevelKey) {

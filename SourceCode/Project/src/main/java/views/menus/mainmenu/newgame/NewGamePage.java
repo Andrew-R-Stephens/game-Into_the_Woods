@@ -14,7 +14,7 @@ public class NewGamePage extends AMenu {
     public NewGamePage(AMenuModel parentModel) {
         super(parentModel);
 
-        backgroundImage = Resources.getImage("menubackground");
+        image_background = Resources.getImage("menubackground");
 
         bundle.addPage(new CharacterSelectPage(parentModel));
 
@@ -59,7 +59,8 @@ public class NewGamePage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
-
+                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
+                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().getLevelModel().setCurrentLevel(0);
                 parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
                 parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
@@ -70,7 +71,6 @@ public class NewGamePage extends AMenu {
         button_characterConfirm.setText("Confirm Character");
         button_characterConfirm.setBackgroundImage(img_button);
         button_characterConfirm.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
-
 
         AMenuButton button_back = new AMenuButton(
                 parentModel,

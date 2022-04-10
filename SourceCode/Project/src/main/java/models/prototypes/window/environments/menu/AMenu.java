@@ -22,7 +22,7 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     protected AKeyController keyController;
     protected AMouseController mouseController;
     // Background Image
-    protected BufferedImage backgroundImage;
+    protected BufferedImage image_background, image_buttonSq, image_buttonRect;
 
     // The Menu Buttons.
     public ArrayList<AMenuComponent> components = new ArrayList<>();
@@ -49,7 +49,7 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     @Override
     public void draw(Graphics g) {
 
-        g.drawImage(backgroundImage,
+        g.drawImage(image_background,
                 0, 0,
                 ConfigData.window_width_actual, ConfigData.window_height_actual,
                 null);

@@ -17,7 +17,6 @@ public abstract class AReactProp extends AProp implements IDrawable {
 
     protected boolean canMoveOnCollision;
 
-    protected int MAX_CYCLES = -1;
     protected int currentCycles = 0;
 
     protected AReactProp(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
@@ -25,7 +24,6 @@ public abstract class AReactProp extends AProp implements IDrawable {
 
         this.gameEnvironment = gameEnvironment;
 
-        this.MAX_CYCLES = MAX_CYCLES;
         this.canMoveOnCollision = canMoveOnCollision;
     }
 

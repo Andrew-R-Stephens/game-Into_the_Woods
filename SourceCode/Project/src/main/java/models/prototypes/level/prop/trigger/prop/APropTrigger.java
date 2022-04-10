@@ -19,11 +19,11 @@ public abstract class APropTrigger extends ATrigger {
             return false;
         }
 
-        boolean hasCollision = super.hasCollision(a, delta);
-
         if(MAX_CYCLES != -1 && currentCycles > MAX_CYCLES) {
             return false;
         }
+
+        boolean hasCollision = super.hasCollision(a, delta);
 
         if(hasCollision) {
             doAction();

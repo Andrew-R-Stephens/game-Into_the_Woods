@@ -1,5 +1,7 @@
 package models.prototypes.level;
 
+import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
+import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.AProp;
@@ -15,12 +17,14 @@ import java.util.ArrayList;
 
 public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
-
     protected GameEnvironment gameEnvironment;
 
     protected BufferedImage backgroundImage;
     protected int[] startOrigin = new int[2];
     protected final ArrayList<AProp> levelProps = new ArrayList<>();
+    protected DoorTrigger door;
+
+    protected int keyCount = 0;
 
 
     public ALevel(GameEnvironment gameEnvironment) {
@@ -47,7 +51,21 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         this.backgroundImage = backgroundImage;
     }
 
-    public abstract void build();
+    public void countKeys() {
+        for (AActor levelProps : getLevelProps()) {
+            if (levelProps instanceof LevelKey) {
+                this.keyCount++;
+            }
+        }
+    }
+
+    public int getKeyCount() {
+        return keyCount;
+    }
+
+    public void build() {
+        countKeys();
+    }
 
     public void reset() {
         for(AProp p: levelProps) {
@@ -76,7 +94,9 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     @Override
     public void update(float delta) {
-
+        for(AProp p: levelProps) {
+            p.update(delta);
+        }
     }
 
     @Override
@@ -89,5 +109,9 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 p.drawAsHUD(g);
             }
         }
+    }
+
+    public void unlockDoor() {
+        door.unlock();
     }
 }

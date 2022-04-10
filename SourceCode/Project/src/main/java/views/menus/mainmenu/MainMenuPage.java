@@ -18,7 +18,8 @@ public class MainMenuPage extends AMenu {
     public MainMenuPage(AMenuModel parentModel) {
         super(parentModel);
 
-        backgroundImage = Resources.getImage("menubackground");
+        image_background = Resources.getImage("menubackground");
+        image_buttonRect = Resources.getImage("button_hrect");
 
         bundle.addPage(new NewGamePage(parentMenuModel));
         bundle.addPage(new LevelSelectPage(parentMenuModel));
@@ -26,7 +27,6 @@ public class MainMenuPage extends AMenu {
         bundle.addPage(new HelpPage(parentMenuModel));
         bundle.addPage(new QuitPage(parentMenuModel));
 
-        BufferedImage img_button = Resources.getImage("button_hrect");
 
         float centerHoriz = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
 
@@ -52,7 +52,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_newGame.setText("New Game");
-        button_newGame.setBackgroundImage(img_button);
+        button_newGame.setBackgroundImage(image_buttonRect);
         button_newGame.setTint("#F1FFEC10");
         button_newGame.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
@@ -74,7 +74,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_continueGame.setText("Continue Game");
-        button_continueGame.setBackgroundImage(img_button);
+        button_continueGame.setBackgroundImage(image_buttonRect);
         button_continueGame.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         AMenuButton button_options = new AMenuButton(
@@ -95,7 +95,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_options.setText("Options");
-        button_options.setBackgroundImage(img_button);
+        button_options.setBackgroundImage(image_buttonRect);
         button_options.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         AMenuButton button_help = new AMenuButton(
@@ -116,7 +116,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_help.setText("Help");
-        button_help.setBackgroundImage(img_button);
+        button_help.setBackgroundImage(image_buttonRect);
         button_help.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         AMenuButton button_quit = new AMenuButton(parentMenuModel,
@@ -135,7 +135,7 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_quit.setText("Quit to Desktop");
-        button_quit.setBackgroundImage(img_button);
+        button_quit.setBackgroundImage(image_buttonRect);
         button_quit.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         components.add(button_newGame);

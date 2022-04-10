@@ -34,7 +34,7 @@ public class SpriteSheet implements IUpdatable {
 
         int newFrame = currentFrame;
         if(ticks > frames.get(currentFrame).getDuration()) {
-            setCurrentFrame(newFrame);
+            incrementCurrentFrame(newFrame);
 
             ticks = 0;
         }
@@ -58,10 +58,12 @@ public class SpriteSheet implements IUpdatable {
         return s + "";
     }
 
-    public void setCurrentFrame(int i) {
-
+    public void incrementCurrentFrame(int i) {
         i ++;
+        setCurrentFrame(i);
+    }
 
+    public void setCurrentFrame(int i) {
         if(!loopOnLastFrame){
             if (isLastFrame()) {
                 i = frames.size() - 1;
@@ -75,6 +77,7 @@ public class SpriteSheet implements IUpdatable {
                 i = frames.size() - 1;
             }
         }
+
         currentFrame = i;
     }
 

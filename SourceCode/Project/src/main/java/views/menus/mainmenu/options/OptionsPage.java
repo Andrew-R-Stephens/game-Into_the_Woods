@@ -13,7 +13,7 @@ public class OptionsPage extends AMenu {
     public OptionsPage(AMenuModel parentModel) {
         super(parentModel);
 
-        backgroundImage = Resources.getImage("menubackground");
+        image_background = Resources.getImage("menubackground");
 
         BufferedImage img_button = Resources.getImage("button_hrect");
 

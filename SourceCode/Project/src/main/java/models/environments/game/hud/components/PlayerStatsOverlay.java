@@ -23,7 +23,7 @@ public class PlayerStatsOverlay extends AOverlayComponent implements IDrawable, 
         g.setColor(Color.white);
         g.drawString("Stats Overlay", (int)((x * sW) + (20 * sW)), (int)((y * sH) + (20 * sH)));
 
-        g.drawString("Keys: " + gameEnvironment.getPlayerInventory().getKeysCount(), (int)((x * sW) + (20 * sW)),
+        g.drawString("Keys: " + gameEnvironment.getPlayerInventory().getKeyCount(), (int)((x * sW) + (20 * sW)),
                 (int)((y * sH) + (50 * sH)));
     }
 

@@ -5,7 +5,7 @@ import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
 import controls.menu.MenuKeyControls;
 import models.actors.gameactors.PlayerAvatar;
-import models.actors.gameactors.TestActor;
+import models.actors.gameactors.ParticleActor;
 import models.camera.Camera;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
@@ -197,7 +197,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 }
                 for (int i = 0; i < count; i++) {
                     queueActor(
-                            new TestActor(
+                            new ParticleActor(
                                     (-Camera.camX / ConfigData.scaledW) + (gmc.getPos()[0]/ ConfigData.scaledW),
                                     (-Camera.camY / ConfigData.scaledW) + (gmc.getPos()[1]/ ConfigData.scaledH),
                                     10f,
@@ -218,7 +218,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         for (AActor gameObject : actors) {
 
             // Update TestActors
-            if (gameObject instanceof TestActor a) {
+            if (gameObject instanceof ParticleActor a) {
                 a.update(delta);
             }
 

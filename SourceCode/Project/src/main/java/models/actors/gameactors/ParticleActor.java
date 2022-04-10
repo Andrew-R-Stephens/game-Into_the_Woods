@@ -6,9 +6,9 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
-public class TestActor extends APawn implements IDrawable, IUpdatable {
+public class ParticleActor extends APawn implements IDrawable, IUpdatable {
 
-    public TestActor(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
+    public ParticleActor(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(x, y, w, h, vx, vy, hasGravity);
     }
 

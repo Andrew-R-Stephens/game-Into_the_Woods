@@ -15,7 +15,7 @@ public class StartScreenPage extends AMenu {
 
         super(parentMenuModel);
 
-        backgroundImage = Resources.getImage("menubackground");
+        image_background = Resources.getImage("menubackground");
 
         BufferedImage img_button = Resources.getImage("button_hrect");
 

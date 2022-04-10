@@ -24,6 +24,10 @@ public class LevelKey extends ACollectibleTrigger implements IDrawable, IUpdatab
     @Override
     public void doAction() {
         super.doAction();
+
+        if(gameEnvironment.getPlayerInventory().getKeyCount() >= gameEnvironment.getCurrentLevel().getKeyCount()) {
+            gameEnvironment.getLevelModel().getCurrentLevel().unlockDoor();
+        }
     }
 
     @Override

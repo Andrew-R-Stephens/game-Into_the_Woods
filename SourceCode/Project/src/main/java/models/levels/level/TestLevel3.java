@@ -28,6 +28,8 @@ public class TestLevel3 extends ALevel {
 
         addProp(new DoorTrigger(gameEnvironment, 75, 850, 100, 100,
                 0, 0, 1, false, false));
+
+        super.build();
     }
 
     @Override
