@@ -31,6 +31,11 @@ public class LevelKey extends ACollectibleTrigger implements IDrawable, IUpdatab
     }
 
     @Override
+    public void reset() {
+        super.reset();
+    }
+
+    @Override
     public void update(float delta) {
         super.update(delta);
     }

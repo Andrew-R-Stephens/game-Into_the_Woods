@@ -7,7 +7,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 300 },
     "sourceSize": { "w": 1000, "h": 300 },
-    "duration": 100
+    "duration": 50
    },
    {
     "filename": "Sprite-0004 1.",
@@ -16,7 +16,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 300 },
     "sourceSize": { "w": 1000, "h": 300 },
-    "duration": 100
+    "duration": 50
    },
    {
     "filename": "Sprite-0004 2.",
@@ -25,7 +25,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 300 },
     "sourceSize": { "w": 1000, "h": 300 },
-    "duration": 100
+    "duration": 50
    },
    {
     "filename": "Sprite-0004 3.",
@@ -34,7 +34,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 300 },
     "sourceSize": { "w": 1000, "h": 300 },
-    "duration": 100
+    "duration": 50
    }
  ],
  "meta": {

@@ -23,6 +23,8 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
         this.y = y;
         this.w = w;
         this.h = h;
+
+        spritesheet = Resources.getSpriteSheet("button_spritesheet").setLoopOnLast(false);
     }
 
     public AMenuButton(AMenuModel parentMenuModel, int x, int y) {
@@ -32,6 +34,8 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
         this.y = y;
         this.w = 200;
         this.h = 50;
+
+        spritesheet = Resources.getSpriteSheet("button_spritesheet").setLoopOnLast(false);
     }
 
     public void playSound() {
@@ -46,8 +50,6 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
         //g.setColor(Color.RED);
         float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
-        //g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
-
         if(backgroundImage != null) {
             switch (scaleType) {
 
@@ -61,16 +63,7 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
                             (int)(backgroundImage.getWidth() * sW * s),
                             (int)(backgroundImage.getHeight() * sH * s),
                             null);
-                    /*
-                    if(tint != null) {
-                        g.drawImage(tint,
-                                (int)(((x * sW) + (w * sW * .5f)) - (backgroundImage.getWidth() * sW * s * .5f)),
-                                (int)(((y * sH) + (h * sH * .5f)) - (backgroundImage.getHeight() * sH * s * .5f)),
-                                (int)(backgroundImage.getWidth() * sW * s),
-                                (int)(backgroundImage.getHeight() * sH * s),
-                                null);
-                    }
-                    */
+
                 }
                 case CENTER_CROP -> {
                     float sBW = w / (float)backgroundImage.getWidth();
@@ -92,14 +85,12 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
                 }
                 default -> {
                     g.drawImage(backgroundImage, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
-                    /*
-                    if(tint != null) {
-                        g.drawImage(tint, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
-                    }
-                    */
+
                 }
 
             }
+        } else {
+            spritesheet.draw(g, (int) (x * sW), (int) (y * sH), (int) (w * sW), (int) (h * sH));
         }
 
         g.setColor(Color.BLACK);
@@ -107,18 +98,20 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
         g.setFont(
                 Resources.getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
-                        .deriveFont(Font.PLAIN, 36 * sW));
+                        .deriveFont(Font.BOLD, 36 * sW));
 
         int strWidth = g.getFontMetrics().stringWidth(text.toUpperCase());
         g.drawString(
                 text.toUpperCase(),
                 (int)((x * sW) + (w * sW * .5) - (strWidth * .5)),
-                (int)((y * sH) + (h * sH * .5)));
+                (int)((y * sH) + (h * sH * .5) + (h * .2 * sH * (spritesheet.getPercentCompleted()))));
 
+        /*
         if(isFocused) {
             g.setColor(new Color(255, 255, 255, 50));
             g.fillRect((int) (x * sW), (int) (y * sH), (int) (w * sW), (int) (h * sH));
         }
+        */
     }
 
     @Override

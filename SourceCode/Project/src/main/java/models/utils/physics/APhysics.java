@@ -7,6 +7,7 @@ import models.utils.updates.IUpdatable;
 
 public abstract class APhysics implements IUpdatable {
 
+    public static final float GRAVITY = 9.8f / (float) ConfigData.GAME_UPDATE_RATE;
     protected boolean hasGravity = true;
     protected float x, y, w, h;
 
@@ -49,7 +50,7 @@ public abstract class APhysics implements IUpdatable {
 
     private void calculateGravity(float delta) {
         if (hasGravity && !isFloorCollision) {
-            vY += (LevelsList.GRAVITY / delta);
+            vY += (GRAVITY / delta);
         }
     }
 

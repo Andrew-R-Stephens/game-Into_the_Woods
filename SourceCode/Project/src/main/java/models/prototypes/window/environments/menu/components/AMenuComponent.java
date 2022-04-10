@@ -1,14 +1,18 @@
 package models.prototypes.window.environments.menu.components;
 
 import models.prototypes.window.environments.menu.AMenuModel;
+import models.sprites.SpriteSheet;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
+import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class AMenuComponent implements IUpdatable, IDrawable {
+
+    protected SpriteSheet spritesheet;
 
     protected ImageScale scaleType = ImageScale.FILL_XY;
 
@@ -62,7 +66,14 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     @Override
     public void update(float delta) {
+        isFocused = false;
         registerInput();
+
+        if(backgroundImage == null && isFocused) {
+            spritesheet.update(delta);
+        } else {
+            spritesheet.reset();
+        }
     }
 
     public abstract void registerInput();
@@ -77,6 +88,7 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     public void setTint(String colorHex)
     {
+        /*
         Color c = new Color(
                 Integer.valueOf( colorHex.substring( 1, 3 ), 16 ),
                 Integer.valueOf( colorHex.substring( 3, 5 ), 16 ),
@@ -90,12 +102,12 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         graphics.drawImage(backgroundImage, 0, 0, null);
         graphics.dispose();
 
-        /*
+        *//*
         System.out.println("Alpha is " + c.getAlpha());
         System.out.println("Red is " + c.getRed());
         System.out.println("Green is " + c.getGreen());
         System.out.println("Blue is " + c.getBlue());
-        */
+        *//*
 
         for (int i = 0; i < tintedSprite.getWidth(); i++)
         {
@@ -118,7 +130,7 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         }
 
         tint = tintedSprite;
+    */
 
     }
-
 }

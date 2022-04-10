@@ -1,9 +1,11 @@
 package models.levels.level;
 
 import models.actors.gameactors.props.platforms.PlatformProp;
+import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
 import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
 import models.environments.game.GameEnvironment;
 import models.prototypes.level.ALevel;
+import models.prototypes.level.prop.trigger.prop.APropTrigger;
 
 
 public class TestLevel2 extends ALevel {
@@ -49,15 +51,28 @@ public class TestLevel2 extends ALevel {
         addProp(new PlatformProp(3000, 700, 500, 50, 0, 0, false));
         addProp(new PlatformProp(3200, 650, 100, 100, 0, 0, false));
 
-        addProp(new DoorTrigger(gameEnvironment, 900, 850, 100, 100,
-                0, 0, 1, false, false));
+        // Keys
+        addProp(new LevelKey(gameEnvironment, 1600, 930, 100, 50, 0, 0));
+        addProp(new LevelKey(gameEnvironment, 2500, 930, 100, 50, 0, 0));
+        addProp(new LevelKey(gameEnvironment, 500, 930, 100, 50, 0, 0));
+
+        // Door
+        door = new DoorTrigger(gameEnvironment, 2000, 830, 50, 100,
+                0, 0, 1, false, false);
+        addProp(door);
+
+        // Door Listener
+        addProp(new APropTrigger(gameEnvironment, 1800, 700, 450, 300,
+                0, 0, 1,false, false) {
+            @Override
+            public void doAction() {
+                //reactProp.onReact();
+                door.onReact();
+            }
+
+        });
 
         super.build();
-
-    }
-
-    @Override
-    public void reset() {
 
     }
 

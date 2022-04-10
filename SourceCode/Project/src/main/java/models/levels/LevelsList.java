@@ -13,15 +13,17 @@ import java.util.ArrayList;
 
 public class LevelsList implements IDrawable {
 
-    public static final float GRAVITY = 9.8f / (float) ConfigData.GAME_UPDATE_RATE;
+    private GameEnvironment gameEnvironment = null;
 
     private final ArrayList<ALevel> levels = new ArrayList<>();
     private int currentLevel = 0;
 
-    public void init(GameEnvironment gameModel, int currentLevel) {
-        addLevel(new TestLevel1(gameModel));
-        addLevel(new TestLevel2(gameModel));
-        addLevel(new TestLevel3(gameModel));
+    public void init(GameEnvironment gameEnvironment, int currentLevel) {
+        this.gameEnvironment = gameEnvironment;
+
+        addLevel(new TestLevel1(gameEnvironment));
+        addLevel(new TestLevel2(gameEnvironment));
+        addLevel(new TestLevel3(gameEnvironment));
 
         setCurrentLevel(currentLevel);
     }
@@ -45,6 +47,8 @@ public class LevelsList implements IDrawable {
     }
 
     public boolean navigateNextLevel() {
+        gameEnvironment.reset();
+
         int tempCurrLevel = currentLevel;
         tempCurrLevel++;
 
@@ -62,6 +66,6 @@ public class LevelsList implements IDrawable {
     }
 
     public void reset() {
-        levels.get(currentLevel).reset();
+        getCurrentLevel().reset();
     }
 }

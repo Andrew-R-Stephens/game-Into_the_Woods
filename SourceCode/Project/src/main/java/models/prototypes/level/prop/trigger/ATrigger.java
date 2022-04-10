@@ -17,7 +17,7 @@ public abstract class ATrigger extends AProp implements IDrawable {
 
     protected boolean canMoveOnCollision;
 
-    protected int MAX_CYCLES = -1;
+    protected int MAX_CYCLES;
     protected int currentCycles = 0;
 
     protected ATrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {

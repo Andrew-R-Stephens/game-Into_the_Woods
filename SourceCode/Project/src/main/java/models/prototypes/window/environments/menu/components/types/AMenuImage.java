@@ -50,6 +50,7 @@ public class AMenuImage extends AMenuComponent implements IDrawable, IUpdatable 
 
         g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
 
+        /*
         if(backgroundImage != null) {
             switch (scaleType) {
 
@@ -88,6 +89,7 @@ public class AMenuImage extends AMenuComponent implements IDrawable, IUpdatable 
 
             }
         }
+        */
 
         if(isFocused) {
             g.setColor(new Color(255, 255, 255, 50));

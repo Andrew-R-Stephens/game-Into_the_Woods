@@ -98,7 +98,7 @@ public class TestLevel1 extends ALevel {
                         0, 0, 1, false, false);
         addProp(door);
 
-
+        // Door Listener
         addProp(new APropTrigger(gameEnvironment, 1800, -150, 450, 300,
                 0, 0, 1,false, false) {
             @Override

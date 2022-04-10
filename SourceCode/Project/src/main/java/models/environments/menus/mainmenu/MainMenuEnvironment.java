@@ -5,7 +5,7 @@ import models.environments.EnvironmentsHandler;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuModel;
 import models.utils.resources.Resources;
-import views.menus.startscreen.StartScreenPage;
+import models.environments.menus.startscreen.StartScreenPage;
 
 public class MainMenuEnvironment extends AMenuModel {
 

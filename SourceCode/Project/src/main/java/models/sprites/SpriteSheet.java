@@ -95,4 +95,8 @@ public class SpriteSheet implements IUpdatable {
 
         return this;
     }
+
+    public float getPercentCompleted() {
+        return (currentFrame / (float)(frames.size()-1));
+    }
 }
