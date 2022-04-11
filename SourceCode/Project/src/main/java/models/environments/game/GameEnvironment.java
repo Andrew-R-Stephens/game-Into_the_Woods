@@ -1,6 +1,7 @@
 package models.environments.game;
 
 import controls.GameControls;
+import controls.MenuControls;
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
 import controls.menu.MenuKeyControls;
@@ -147,8 +148,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     public void doPauseMenuControls() {
         if(pauseMenuEnvironment.getKeyController() instanceof MenuKeyControls kc) {
-            if(kc.getControlsModel().getAction(GameControls.Actions.ESCAPE)) {
-                kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
+            if(kc.getControlsModel().getAction(MenuControls.Actions.ESCAPE)) {
+                kc.getControlsModel().reset();
                 isPaused = false;
                 pauseMenuEnvironment.onExit();
                 parentEnvironmentsHandler.swapToEnvironment(
@@ -230,7 +231,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
             if (gameObject instanceof PlayerAvatar tc) {
                 tc.control(delta);
                 tc.update(delta);
-                System.out.println(tc.actionState);
+                //System.out.println(tc.actionState);
             }
 
         }

@@ -42,6 +42,8 @@ public class UpdateRunnable extends ARunnable {
                 lastUpdates = updates;
                 updates = 0;
 
+                System.out.println(System.currentTimeMillis() + " : " + lastUpdates);
+
             }
 
         }

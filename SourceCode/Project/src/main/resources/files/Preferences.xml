@@ -12,8 +12,8 @@
         -->
         <resolutionWidthDefault>1920</resolutionWidthDefault>
         <resolutionHeightDefault>1080</resolutionHeightDefault>
-        <resolutionWidth>1920</resolutionWidth>
-        <resolutionHeight>1080</resolutionHeight>
+        <resolutionWidth>1024</resolutionWidth>
+        <resolutionHeight>576</resolutionHeight>
 
         <!--
         0 = Windowed,
@@ -21,7 +21,7 @@
         2 = Windowed Fullscreen,
         3 = Exclusive Fullscreen
         -->
-        <windowType>1</windowType>
+        <windowType>0</windowType>
 
     </Window>
 

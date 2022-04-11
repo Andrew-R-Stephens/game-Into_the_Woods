@@ -55,7 +55,7 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
         updateSpriteAnimation(delta);
 
-        System.out.println(actionState);
+        //System.out.println(actionState);
     }
 
     @Override

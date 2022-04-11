@@ -87,9 +87,15 @@ public class EnvironmentsHandler {
     }
 
     public void applyEnvironment() {
+        applyEnvironment(true);
+    }
+
+    public void applyEnvironment(boolean resetThreads) {
         parentDisplayWindow.build();
 
-        initThreads();
+        if(resetThreads) {
+            initThreads();
+        }
     }
 
     public void pauseThreads() {

@@ -1,6 +1,7 @@
 package models.environments.menus.pausemenumodel;
 
 import models.environments.EnvironmentsHandler;
+import models.environments.game.GameEnvironment;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
@@ -39,11 +40,13 @@ public class PauseMenuPage extends AMenu {
 
                 System.out.println("Pressed");
 
-                parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(EnvironmentsHandler.EnvironmentType.GAME,
-                        false).applyEnvironment();
+                ((PauseMenuEnvironment)parentMenuEnvironment).gameEnvironment.setPaused(false);
                 parentMenuEnvironment.onExit();
-                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().setPaused(false);
-
+                /*parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(
+                        EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment(false);
+*/
+                parentMenuEnvironment.parentEnvironmentsHandler.setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.GAME);
+                parentMenuEnvironment.parentEnvironmentsHandler.applyEnvironment(false);
                 return true;
 
             }
