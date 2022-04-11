@@ -24,7 +24,7 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
         this.w = w;
         this.h = h;
 
-        spritesheet = Resources.getSpriteSheet("button_spritesheet").setLoopOnLast(false);
+        spritesheet = Resources.getSpriteSheet("buttonhrect_spritesheet").setLoopOnLast(false);
     }
 
     public AMenuButton(AMenuEnvironment parentMenuModel, int x, int y) {
@@ -35,7 +35,7 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
         this.w = 200;
         this.h = 50;
 
-        spritesheet = Resources.getSpriteSheet("button_spritesheet").setLoopOnLast(false);
+        spritesheet = Resources.getSpriteSheet("buttonhrect_spritesheet").setLoopOnLast(false);
     }
 
     public void playSound() {

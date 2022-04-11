@@ -77,7 +77,11 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
             scaleW *= -1;
         }
 
-        spriteSheets.get(actionState).draw(g, (int)centerX, (int)centerY, (int)scaleW, (int)scaleH);
+        if(spriteSheets.get(actionState).isTrimmed()) {
+            //x = (x - spriteSheets.get(actionState).getWidth());
+        } else {
+            spriteSheets.get(actionState).draw(g, (int) centerX, (int) centerY, (int) scaleW, (int) scaleH);
+        }
 
         //g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
 

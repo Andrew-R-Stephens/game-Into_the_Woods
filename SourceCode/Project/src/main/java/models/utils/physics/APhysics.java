@@ -1,6 +1,5 @@
 package models.utils.physics;
 
-import models.levels.LevelsList;
 import models.prototypes.actor.AActor;
 import models.utils.config.ConfigData;
 import models.utils.updates.IUpdatable;

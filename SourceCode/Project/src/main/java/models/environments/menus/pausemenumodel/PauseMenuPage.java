@@ -42,9 +42,10 @@ public class PauseMenuPage extends AMenu {
 
                 ((PauseMenuEnvironment)parentMenuEnvironment).gameEnvironment.setPaused(false);
                 parentMenuEnvironment.onExit();
-                /*parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(
+                /*
+                parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment(false);
-*/
+                */
                 parentMenuEnvironment.parentEnvironmentsHandler.setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.GAME);
                 parentMenuEnvironment.parentEnvironmentsHandler.applyEnvironment(false);
                 return true;

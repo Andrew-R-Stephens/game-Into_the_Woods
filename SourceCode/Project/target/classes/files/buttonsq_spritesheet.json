@@ -1,0 +1,54 @@
+{ "frames": [
+   {
+    "filename": "SquareMovingButton 0.aseprite",
+    "frame": { "x": 20, "y": 20, "w": 1040, "h": 1040 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 1000 },
+    "sourceSize": { "w": 1000, "h": 1000 },
+    "duration": 50
+   },
+   {
+    "filename": "SquareMovingButton 1.aseprite",
+    "frame": { "x": 1080, "y": 20, "w": 1040, "h": 1040 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 1000 },
+    "sourceSize": { "w": 1000, "h": 1000 },
+    "duration": 50
+   },
+   {
+    "filename": "SquareMovingButton 2.aseprite",
+    "frame": { "x": 2140, "y": 20, "w": 1040, "h": 1040 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 1000 },
+    "sourceSize": { "w": 1000, "h": 1000 },
+    "duration": 50
+   },
+   {
+    "filename": "SquareMovingButton 3.aseprite",
+    "frame": { "x": 3200, "y": 20, "w": 1040, "h": 1040 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1000, "h": 1000 },
+    "sourceSize": { "w": 1000, "h": 1000 },
+    "duration": 50
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.34.1-x64",
+  "image": "SquareMovingButton.png",
+  "format": "RGBA8888",
+  "size": { "w": 4260, "h": 1080 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Flattened", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

@@ -99,4 +99,8 @@ public class SpriteSheet implements IUpdatable {
     public float getPercentCompleted() {
         return (currentFrame / (float)(frames.size()-1));
     }
+
+    public boolean isTrimmed() {
+        return frames.get(currentFrame).isTrimmed();
+    }
 }

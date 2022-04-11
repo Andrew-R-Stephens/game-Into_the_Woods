@@ -5,13 +5,11 @@ import java.util.Arrays;
 
 public class Sprite {
 
-    private String filename;
+    private final String filename;
 
-    private int[] frame;
-    private boolean rotated, trimmed;
-    private final int[] spriteSourceSize;
-    private final int[] sourceSize;
-    private int duration;
+    private final int[] frame, spriteSourceSize, sourceSize;
+    private final boolean rotated, trimmed;
+    private final int duration;
 
     public Sprite(String filename, int[] frame, boolean rotated, boolean trimmed, int[] spriteSourceSize,
                   int[] sourceSize, int duration) {
@@ -31,6 +29,10 @@ public class Sprite {
 
     public int getDuration() {
         return duration;
+    }
+
+    public boolean isTrimmed() {
+        return trimmed;
     }
 
     @Override

@@ -138,4 +138,8 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         isFocused = false;
     }
 
+    public void setSpritesheet(SpriteSheet spritesheet) {
+        this.spritesheet = spritesheet;
+    }
+
 }
