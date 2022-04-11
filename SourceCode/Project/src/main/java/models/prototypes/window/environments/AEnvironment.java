@@ -11,13 +11,13 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
 
     protected Player audioPlayer;
 
-    public EnvironmentsHandler parentEnvironmentsModel;
+    public EnvironmentsHandler parentEnvironmentsHandler;
 
     protected AKeyController keyController;
     protected AMouseController mouseController;
 
     protected void init(EnvironmentsHandler parentEnvironmentsModel, AKeyController keyController, AMouseController mouseController) {
-        this.parentEnvironmentsModel = parentEnvironmentsModel;
+        this.parentEnvironmentsHandler = parentEnvironmentsModel;
         this.keyController = keyController;
         this.mouseController = mouseController;
     }

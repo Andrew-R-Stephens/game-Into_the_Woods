@@ -1,5 +1,7 @@
 package models.prototypes.controls;
 
+import java.util.Arrays;
+
 public abstract class AControlsModel {
 
     protected AKeyController keyController;
@@ -57,5 +59,9 @@ public abstract class AControlsModel {
         actions[action.ordinal()] = false;
     }
 
+    public void reset() {
+        Arrays.fill(directionals, false);
+        Arrays.fill(actions, false);
+    }
 
 }

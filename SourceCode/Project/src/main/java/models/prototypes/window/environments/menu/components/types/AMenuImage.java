@@ -1,6 +1,6 @@
 package models.prototypes.window.environments.menu.components.types;
 
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.AMenuComponent;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 public class AMenuImage extends AMenuComponent implements IDrawable, IUpdatable {
 
-    public AMenuImage(AMenuModel parentMenuModel, int x, int y, int w, int h, BufferedImage bufferedImage, ImageScale scaleType) {
+    public AMenuImage(AMenuEnvironment parentMenuModel, int x, int y, int w, int h, BufferedImage bufferedImage, ImageScale scaleType) {
         super(parentMenuModel);
 
         setBackgroundImage(bufferedImage);
@@ -24,7 +24,7 @@ public class AMenuImage extends AMenuComponent implements IDrawable, IUpdatable 
 
     }
 
-    public AMenuImage(AMenuModel parentMenuModel, int x, int y, BufferedImage bufferedImage, ImageScale scaleType) {
+    public AMenuImage(AMenuEnvironment parentMenuModel, int x, int y, BufferedImage bufferedImage, ImageScale scaleType) {
         super(parentMenuModel);
 
         setBackgroundImage(bufferedImage);

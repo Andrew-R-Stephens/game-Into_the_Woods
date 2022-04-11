@@ -28,7 +28,7 @@ public abstract class AMouseController implements MouseListener, MouseMotionList
         return mPos;
     }
 
-    public void resetInput() {
+    public void reset() {
         isLeftPressed = false;
         isRightPressed = false;
     }

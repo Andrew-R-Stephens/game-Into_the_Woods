@@ -1,16 +1,14 @@
 package models.environments.menus.mainmenu.options;
 
 import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
 
-import java.awt.image.BufferedImage;
-
 public class OptionsPage extends AMenu {
 
-    public OptionsPage(AMenuModel parentModel) {
+    public OptionsPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
         image_background = Resources.getImage("menubackground");
@@ -35,7 +33,7 @@ public class OptionsPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.pop();
+                parentMenuEnvironment.pop();
 
                 return true;
             }

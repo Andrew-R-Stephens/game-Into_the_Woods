@@ -2,7 +2,7 @@ package models.environments.menus.pausemenumodel;
 
 import models.environments.EnvironmentsHandler;
 import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.environments.menus.pausemenumodel.help.PauseHelpPage;
@@ -11,7 +11,7 @@ import models.environments.menus.startscreen.StartScreenPage;
 
 public class PauseMenuPage extends AMenu {
 
-    public PauseMenuPage(AMenuModel parentMenuModel) {
+    public PauseMenuPage(AMenuEnvironment parentMenuModel) {
         super(parentMenuModel);
 
         bundle.addPage(new PauseOptionsPage(parentMenuModel));
@@ -37,10 +37,12 @@ public class PauseMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(EnvironmentsHandler.EnvironmentType.GAME,
-                        false).applyEnvironment();
+                System.out.println("Pressed");
 
-                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setPaused(false);
+                parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(EnvironmentsHandler.EnvironmentType.GAME,
+                        false).applyEnvironment();
+                parentMenuEnvironment.onExit();
+                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().setPaused(false);
 
                 return true;
 
@@ -64,7 +66,7 @@ public class PauseMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(bundle.getPage(0));
+                parentMenuEnvironment.push(bundle.getPage(0));
 
                 return true;
             }
@@ -86,7 +88,7 @@ public class PauseMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(bundle.getPage(1));
+                parentMenuEnvironment.push(bundle.getPage(1));
 
                 return true;
             }
@@ -107,17 +109,17 @@ public class PauseMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().onExit();
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
+                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().onExit();
+                parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.MAIN_MENU, true);
                 //parentMenuModel.parentEnvironmentsModel.getCurrentEnvironment().onResume();
-                if(parentMenuModel.parentEnvironmentsModel.getMenuEnvironment().getTopPage()
+                if(parentMenuEnvironment.parentEnvironmentsHandler.getMenuEnvironment().getTopPage()
                         instanceof StartScreenPage ssp) {
                     ssp.navigateToMainMenuPage();
                 }
-                parentMenuModel.parentEnvironmentsModel.applyEnvironment();
+                parentMenuEnvironment.parentEnvironmentsHandler.applyEnvironment();
 
-                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setPaused(false);
+                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().setPaused(false);
 
                 return true;
             }

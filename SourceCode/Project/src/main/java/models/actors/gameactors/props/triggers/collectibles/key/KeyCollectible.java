@@ -11,8 +11,8 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
-public class LevelKey extends ACollectibleTrigger implements IDrawable, IUpdatable {
-    public LevelKey(GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy) {
+public class KeyCollectible extends ACollectibleTrigger implements IDrawable, IUpdatable {
+    public KeyCollectible(GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy) {
         super(gameModel, x, y, w, h, vx, vy, 1,false, false);
     }
 
@@ -26,7 +26,7 @@ public class LevelKey extends ACollectibleTrigger implements IDrawable, IUpdatab
         super.doAction();
 
         if(gameEnvironment.getPlayerInventory().getKeyCount() >= gameEnvironment.getCurrentLevel().getKeyCount()) {
-            gameEnvironment.getLevelModel().getCurrentLevel().unlockDoor();
+            gameEnvironment.getLevelsList().getCurrentLevel().unlockDoor();
         }
     }
 

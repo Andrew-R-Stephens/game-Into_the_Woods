@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public abstract class AMenu implements IUpdatable, IDrawable {
 
     // The Parent Menu Model
-    protected AMenuModel parentMenuModel;
+    protected AMenuEnvironment parentMenuModel;
     // Controllers
     protected AKeyController keyController;
     protected AMouseController mouseController;
@@ -30,7 +30,7 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     // The Bundle of sub page AMenu objects.
     public MenuBundle bundle = new MenuBundle();
 
-    public AMenu(AMenuModel parentMenuModel) {
+    public AMenu(AMenuEnvironment parentMenuModel) {
         this.parentMenuModel = parentMenuModel;
 
         keyController = parentMenuModel.getKeyController();
@@ -69,5 +69,11 @@ public abstract class AMenu implements IUpdatable, IDrawable {
             c.update(delta);
         }
 
+    }
+
+    public void reset() {
+        for(AMenuComponent c: components) {
+            c.reset();
+        }
     }
 }

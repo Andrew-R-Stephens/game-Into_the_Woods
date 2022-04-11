@@ -66,11 +66,11 @@ public class DoorTrigger extends APropTrigger implements IDrawable, IHUDDrawable
             return;
         }
 
-        if(!gameEnvironment.getLevelModel().navigateNextLevel()) {
-            MainMenuEnvironment mainMenuEnvironment = gameEnvironment.parentEnvironmentsModel
-                    .swapToEnvironmentType(EnvironmentsHandler.EnvironmentType.MAIN_MENU, true).getMenuEnvironment();
+        if(!gameEnvironment.getLevelsList().navigateNextLevel()) {
+            MainMenuEnvironment mainMenuEnvironment = gameEnvironment.parentEnvironmentsHandler
+                    .swapToEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU, true).getMenuEnvironment();
             mainMenuEnvironment.navigateToLevelSelectPage();
-            gameEnvironment.parentEnvironmentsModel.applyEnvironment();
+            gameEnvironment.parentEnvironmentsHandler.applyEnvironment();
         }
         gameEnvironment.reset();
 

@@ -4,8 +4,8 @@ import controls.GameControls;
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
 import controls.menu.MenuKeyControls;
-import models.actors.gameactors.PlayerAvatar;
-import models.actors.gameactors.ParticleActor;
+import models.actors.gameactors.props.player.PlayerAvatar;
+import models.actors.gameactors.props.particles.ParticleActor;
 import models.camera.Camera;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
@@ -30,9 +30,11 @@ import java.util.Random;
 
 public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 
+    private GameControls gameControls;
+
     private PauseMenuEnvironment pauseMenuEnvironment;
 
-    private LevelsList levelModel;
+    private LevelsList levelsList;
 
     private HUDModel hudModel;
     private PlayerInventory inventory;
@@ -45,18 +47,19 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     private boolean isPaused = false;
 
     public void init(EnvironmentsHandler parentEnvironmentsHandler,
-                     PauseMenuEnvironment pauseMenuModel, GameControls controlsModel,
-                     LevelsList levelModel, HUDModel hudModel, PlayerInventory inventory) {
+                     PauseMenuEnvironment pauseMenuEnvironment, GameControls gameControls,
+                     LevelsList levelsList, HUDModel hudModel, PlayerInventory inventory) {
 
-        super.init(parentEnvironmentsHandler, controlsModel.getKeyController(),
-                controlsModel.getMouseController());
+        super.init(parentEnvironmentsHandler, gameControls.getKeyController(), gameControls.getMouseController());
 
-        setPauseMenuEnvironment(pauseMenuModel);
-        setLevelModel(levelModel);
+        this.gameControls = gameControls;
+
+        setPauseMenuEnvironment(pauseMenuEnvironment);
+        setLevelsList(levelsList);
         setHUDModel(hudModel);
         setPlayerInventory(inventory);
 
-        build(controlsModel);
+        build(gameControls);
     }
 
     private void setPlayerInventory(PlayerInventory inventory) {
@@ -72,7 +75,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     public void build(GameControls controlsModel) {
-        setPlayerAvatar(controlsModel, levelModel);
+        setPlayerAvatar(controlsModel, levelsList);
     }
 
     @Override
@@ -90,7 +93,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     public void draw(Graphics g) {
 
         // Render Level Props
-        levelModel.draw(g);
+        levelsList.draw(g);
 
         // Render Game Actors
         for (AActor gameObject : actors) {
@@ -133,9 +136,10 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     private void doGameControls() {
         if(keyController instanceof GameKeyControls kc) {
             if(kc.getControlsModel().getAction(GameControls.Actions.ESCAPE)) {
-                kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
+                //kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
+                kc.getControlsModel().reset();
                 isPaused = true;
-                parentEnvironmentsModel.swapToEnvironmentType(
+                parentEnvironmentsHandler.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME_PAUSE_MENU, false).applyEnvironment();
             }
         }
@@ -147,18 +151,18 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
                 isPaused = false;
                 pauseMenuEnvironment.onExit();
-                parentEnvironmentsModel.swapToEnvironmentType(
+                parentEnvironmentsHandler.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment();
             }
         }
     }
 
-    public void setLevelModel(LevelsList levelModel) {
-        this.levelModel = levelModel;
+    public void setLevelsList(LevelsList levelsList) {
+        this.levelsList = levelsList;
     }
 
-    public LevelsList getLevelModel() {
-        return levelModel;
+    public LevelsList getLevelsList() {
+        return levelsList;
     }
 
     private void setPlayerAvatar(GameControls controlsViewModel, LevelsList levelModel) {
@@ -182,7 +186,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     private void updateLevel(float delta) {
-        levelModel.getCurrentLevel().update(delta);
+        levelsList.getCurrentLevel().update(delta);
     }
 
     private synchronized void testAddingActors(float delta) {
@@ -234,7 +238,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     private void detectCollisions(float delta) {
-        for (AProp p : levelModel.getCurrentLevel().getLevelProps()) {
+        for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
             for (AActor a : actors) {
                 p.hasCollision(a, delta);
             }
@@ -256,11 +260,11 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     public void setCurrentLevel(int levelIndex) {
-        levelModel.setCurrentLevel(levelIndex);
+        levelsList.setCurrentLevel(levelIndex);
     }
 
     public ALevel getCurrentLevel() {
-        return levelModel.getCurrentLevel();
+        return levelsList.getCurrentLevel();
     }
 
     public ACharacter getPlayerAvatar() {
@@ -274,12 +278,14 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     @Override
     public void reset() {
+        gameControls.reset();
         hudModel.reset();
         inventory.reset();
         actors.clear();
         actors.add(character);
-        character.reset(levelModel.getCurrentLevel().getCharacterOrigin());
-        levelModel.reset();
+        character.reset(levelsList.getCurrentLevel().getCharacterOrigin());
+        levelsList.reset();
+        Camera.reset();
     }
 
     public PlayerInventory getPlayerInventory() {

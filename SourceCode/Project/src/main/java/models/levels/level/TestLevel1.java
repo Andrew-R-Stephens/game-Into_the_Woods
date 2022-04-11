@@ -1,8 +1,8 @@
 package models.levels.level;
 
-import models.actors.gameactors.ParticleActor;
+import models.actors.gameactors.props.particles.ParticleActor;
 import models.actors.gameactors.props.platforms.PlatformProp;
-import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
+import models.actors.gameactors.props.triggers.collectibles.key.KeyCollectible;
 import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
 import models.actors.gameactors.props.triggers.interactibles.SpikesTrigger;
 import models.actors.gameactors.props.triggers.interactibles.SpringTrigger;
@@ -17,7 +17,9 @@ import models.utils.resources.Resources;
 import java.awt.*;
 import java.util.Random;
 
-
+/**
+ * This is TestLevel1 class
+ */
 public class TestLevel1 extends ALevel {
 
     public TestLevel1(GameEnvironment gameModel) {
@@ -123,9 +125,9 @@ public class TestLevel1 extends ALevel {
         addProp(new SpikesTrigger(gameEnvironment, 1400, 905, 100, 75, 0, 0, -1));
 
         // Keys
-        addProp(new LevelKey(gameEnvironment, 1600, 750, 100, 50, 0, 0));
-        addProp(new LevelKey(gameEnvironment, 2500, 450, 100, 50, 0, 0));
-        addProp(new LevelKey(gameEnvironment, 500, 300, 100, 50, 0, 0));
+        addProp(new KeyCollectible(gameEnvironment, 1600, 750, 100, 50, 0, 0));
+        addProp(new KeyCollectible(gameEnvironment, 2500, 450, 100, 50, 0, 0));
+        addProp(new KeyCollectible(gameEnvironment, 500, 300, 100, 50, 0, 0));
 
         super.build();
 

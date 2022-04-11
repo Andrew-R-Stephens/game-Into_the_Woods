@@ -1,6 +1,6 @@
 package models.prototypes.level;
 
-import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
+import models.actors.gameactors.props.triggers.collectibles.key.KeyCollectible;
 import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
@@ -53,7 +53,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     public void countKeys() {
         for (AActor levelProps : getLevelProps()) {
-            if (levelProps instanceof LevelKey) {
+            if (levelProps instanceof KeyCollectible) {
                 this.keyCount++;
             }
         }

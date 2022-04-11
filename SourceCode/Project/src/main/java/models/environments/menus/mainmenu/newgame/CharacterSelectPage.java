@@ -2,7 +2,7 @@ package models.environments.menus.mainmenu.newgame;
 
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
@@ -13,7 +13,7 @@ public class CharacterSelectPage extends AMenu {
 
     private final int chosenCharacter = 0;
 
-    public CharacterSelectPage(AMenuModel parentModel) {
+    public CharacterSelectPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
         image_background = Resources.getImage("menubackground");
@@ -39,8 +39,8 @@ public class CharacterSelectPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.parentEnvironmentsModel.
-                        getGameEnvironment().getPlayerAvatar().setCharacterType(ACharacter.CharacterType.MALE);
+                parentMenuEnvironment.parentEnvironmentsHandler.
+                        getGameEnvironment().getPlayerAvatar().setCharacterType(ACharacter.CharacterType.TEO);
 
                 return true;
             }
@@ -62,8 +62,8 @@ public class CharacterSelectPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.parentEnvironmentsModel.
-                        getGameEnvironment().getPlayerAvatar().setCharacterType(ACharacter.CharacterType.FEMALE);
+                parentMenuEnvironment.parentEnvironmentsHandler.
+                        getGameEnvironment().getPlayerAvatar().setCharacterType(ACharacter.CharacterType.MELYNN);
 
                 return true;
             }
@@ -85,7 +85,7 @@ public class CharacterSelectPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.pop();
+                parentMenuEnvironment.pop();
 
                 return true;
             }

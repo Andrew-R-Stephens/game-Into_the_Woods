@@ -1,16 +1,13 @@
 package models.environments.menus.mainmenu.quit;
 
 import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
-import models.utils.resources.Resources;
-
-import java.awt.image.BufferedImage;
 
 public class QuitPage extends AMenu {
 
-    public QuitPage(AMenuModel parentModel) {
+    public QuitPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
         //BufferedImage img_button = Resources.getImage("button_hrect");
@@ -33,7 +30,7 @@ public class QuitPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.pop();
+                parentMenuEnvironment.pop();
 
                 return true;
             }

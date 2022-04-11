@@ -27,4 +27,10 @@ public class Camera {
         camY += ((y2 - camY) * acceleration);
     }
 
+    public static void reset() {
+        targX = 0;
+        targY = 0;
+        camX = 0;
+        camY = 0;
+    }
 }

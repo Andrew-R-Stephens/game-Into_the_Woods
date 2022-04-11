@@ -1,13 +1,13 @@
 package models.environments.menus.pausemenumodel;
 
 import models.environments.game.GameEnvironment;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 
 import java.awt.*;
 
-public class PauseMenuEnvironment extends AMenuModel implements IDrawable {
+public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable {
 
     protected GameEnvironment gameEnvironment;
 
@@ -38,7 +38,7 @@ public class PauseMenuEnvironment extends AMenuModel implements IDrawable {
     @Override
     public void onExit() {
         super.onExit();
-        popToFirst();
+        reset();
     }
 
     @Override
@@ -47,6 +47,6 @@ public class PauseMenuEnvironment extends AMenuModel implements IDrawable {
 
     @Override
     public void reset() {
-
+        popToFirst();
     }
 }

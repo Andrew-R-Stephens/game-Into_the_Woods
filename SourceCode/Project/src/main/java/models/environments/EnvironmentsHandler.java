@@ -43,7 +43,7 @@ public class EnvironmentsHandler {
         this.currentEnvironment = environmentType;
     }
 
-    public EnvironmentsHandler swapToEnvironmentType(EnvironmentType environmentType, boolean resetEnvironment) {
+    public EnvironmentsHandler swapToEnvironment(EnvironmentType environmentType, boolean resetEnvironment) {
         if(resetEnvironment) {
             environments.get(currentEnvironment.ordinal()).onExit();
             environments.get(currentEnvironment.ordinal()).reset();

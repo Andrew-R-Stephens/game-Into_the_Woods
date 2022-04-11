@@ -1,7 +1,7 @@
 package models.environments.menus.mainmenu;
 
 import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
@@ -13,7 +13,7 @@ import models.environments.menus.mainmenu.quit.QuitPage;
 
 public class MainMenuPage extends AMenu {
 
-    public MainMenuPage(AMenuModel parentModel) {
+    public MainMenuPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
         image_background = Resources.getImage("menubackground");
@@ -45,7 +45,7 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(bundle.getPage(0));
+                parentMenuEnvironment.push(bundle.getPage(0));
 
                 return true;
             }
@@ -88,7 +88,7 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(bundle.getPage(2));
+                parentMenuEnvironment.push(bundle.getPage(2));
 
                 return true;
             }
@@ -109,7 +109,7 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.push(bundle.getPage(3));
+                parentMenuEnvironment.push(bundle.getPage(3));
 
                 return true;
             }

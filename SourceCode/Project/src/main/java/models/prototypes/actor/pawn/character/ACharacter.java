@@ -18,8 +18,8 @@ public abstract class ACharacter extends APawn implements IUpdatable {
 
     protected CharacterType characterType;
     public enum CharacterType {
-        MALE,
-        FEMALE
+        TEO,
+        MELYNN
     }
 
     public ActionType actionState = ActionType.FLOOR_IDLE;
@@ -32,12 +32,13 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         WALL_JUMPING
     }
 
-    private boolean isJumpLocked = false;
     private final int MAX_ALLOWED_JUMP_TIME = 10;
-    private int jumpTime = MAX_ALLOWED_JUMP_TIME;
-
     private final float MAX_ALLOWED_WALLRIDE_TIME = .7f;
-    private float wallrideTime = MAX_ALLOWED_JUMP_TIME;
+
+    private int time_jump = MAX_ALLOWED_JUMP_TIME;
+    private float time_wallride = MAX_ALLOWED_JUMP_TIME;
+
+    private boolean isJumpLocked = false;
 
     public HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 
@@ -55,11 +56,11 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     public void control(float delta) {
-        doAbilitiy();
-        doMove(delta);
+        doAbilities();
+        doMovement(delta);
     }
 
-    public void doMove(float delta) {
+    private void doMovement(float delta) {
 
         boolean[] directionals = controlsModel.getDirectionals();
 
@@ -84,14 +85,14 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         // Handle wall collisions with control input considered
         if ((xDir < 0 && isWallCollisionLeft) || (xDir > 0 && isWallCollisionRight)) {
             //Decrement y velocity using time
-            vY -= (vY * wallrideTime);
-            if (wallrideTime > 0) {
-                wallrideTime -= .05f;
+            vY -= (vY * time_wallride);
+            if (time_wallride > 0) {
+                time_wallride -= .05f;
             }
         } else {
             // If jumping, reset the wallride
             if (isJumpLocked) {
-                wallrideTime = MAX_ALLOWED_WALLRIDE_TIME;
+                time_wallride = MAX_ALLOWED_WALLRIDE_TIME;
             }
         }
 
@@ -100,13 +101,17 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         //vY += yDir / (float)PreferenceData.GAME_UPDATE_RATE;
     }
 
-    protected void doAbilitiy() {
+    private void doAbilities() {
+        doJumps();
+    }
+
+    private void doJumps() {
+
+        if (time_jump > 0) {
+        time_jump--;
+        }
 
         boolean[] abilities = controlsModel.getAbilities();
-
-        if (jumpTime > 0) {
-            jumpTime--;
-        }
 
         if (abilities[0]) {
 
@@ -114,29 +119,22 @@ public abstract class ACharacter extends APawn implements IUpdatable {
                 return;
             }
 
-            if (jumpTime > 0) {
+            if (time_jump > 0) {
 
                 lockJumpState(true);
 
                 if (isFloorCollision) {
-                    vY = -5;
-                    actionState = ActionType.FLOOR_JUMPING;
-
-                    //System.out.println("Floor Jump");
+                    doFloorJump();
                 } else {
                     if (isWallCollisionLeft) {
                         doWallJump(5, -5);
 
                         isWallCollisionLeft = false;
-                        //System.out.println("Wall Left Jump");
-                        actionState = ActionType.WALL_JUMPING;
                     } else
                     if (isWallCollisionRight) {
                         doWallJump(-5, -5);
 
                         isWallCollisionRight = false;
-                        //System.out.println("Wall Right Jump");
-                        actionState = ActionType.WALL_JUMPING;
                     }
                 }
                 isFloorCollision = false;
@@ -144,18 +142,24 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         } else {
             lockJumpState(false);
         }
+    }
 
+    public void doFloorJump() {
+        vY = -5;
+        actionState = ActionType.FLOOR_JUMPING;
     }
 
     public void doWallJump(float vX, float vY) {
         this.vX = vX;
         this.vY = vY;
+
+        actionState = ActionType.WALL_JUMPING;
     }
 
     private void lockJumpState(boolean state) {
         isJumpLocked = state;
 
-        jumpTime = MAX_ALLOWED_JUMP_TIME;
+        time_jump = MAX_ALLOWED_JUMP_TIME;
     }
 
     public void setCharacterType(CharacterType type) {

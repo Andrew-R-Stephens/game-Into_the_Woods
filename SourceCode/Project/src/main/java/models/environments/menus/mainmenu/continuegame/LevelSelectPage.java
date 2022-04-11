@@ -2,8 +2,7 @@ package models.environments.menus.mainmenu.continuegame;
 
 import models.environments.EnvironmentsHandler;
 import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuModel;
-import models.prototypes.window.environments.menu.components.AMenuComponent;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
@@ -12,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 public class LevelSelectPage extends AMenu {
 
-    public LevelSelectPage(AMenuModel parentModel) {
+    public LevelSelectPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
         image_background = Resources.getImage("menubackground");
@@ -39,9 +38,9 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 //parentMenuModel.pop();
-                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
-                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(0);
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
+                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().reset();
+                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().setCurrentLevel(0);
+                parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;
@@ -64,9 +63,9 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 //parentMenuModel.pop();
-                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
-                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(1);
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
+                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().reset();
+                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().setCurrentLevel(1);
+                parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;
@@ -90,9 +89,9 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 //parentMenuModel.pop();
-                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().reset();
-                parentMenuModel.parentEnvironmentsModel.getGameEnvironment().setCurrentLevel(2);
-                parentMenuModel.parentEnvironmentsModel.swapToEnvironmentType(
+                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().reset();
+                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().setCurrentLevel(2);
+                parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;
@@ -115,7 +114,7 @@ public class LevelSelectPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.pop();
+                parentMenuEnvironment.pop();
 
                 return true;
             }

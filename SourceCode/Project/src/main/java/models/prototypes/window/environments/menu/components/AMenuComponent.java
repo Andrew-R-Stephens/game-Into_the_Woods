@@ -1,10 +1,9 @@
 package models.prototypes.window.environments.menu.components;
 
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.sprites.SpriteSheet;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
-import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -26,7 +25,7 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     protected BufferedImage tint;
 
     // The Parent menu model which holds all pages and subpages.
-    protected AMenuModel parentMenuModel;
+    protected AMenuEnvironment parentMenuEnvironment;
 
     // Text to be displayed.
     // Will be removed if we add actual images in place of awt views.graphics.
@@ -37,8 +36,8 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     protected boolean isFocused = false;
 
-    public AMenuComponent(AMenuModel parentMenuModel) {
-        this.parentMenuModel = parentMenuModel;
+    public AMenuComponent(AMenuEnvironment parentMenuModel) {
+        this.parentMenuEnvironment = parentMenuModel;
     }
 
     protected boolean isInBounds(float mx, float my) {
@@ -133,4 +132,10 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     */
 
     }
+
+    public void reset() {
+        spritesheet.reset();
+        isFocused = false;
+    }
+
 }

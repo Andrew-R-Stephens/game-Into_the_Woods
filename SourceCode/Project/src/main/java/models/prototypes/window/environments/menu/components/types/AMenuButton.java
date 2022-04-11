@@ -1,7 +1,7 @@
 package models.prototypes.window.environments.menu.components.types;
 
 import models.prototypes.controls.AMouseController;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.AMenuComponent;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
@@ -16,7 +16,7 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
 
     private boolean playSound = true;
 
-    public AMenuButton(AMenuModel parentMenuModel, int x, int y, int w, int h) {
+    public AMenuButton(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
         super(parentMenuModel);
 
         this.x = x;
@@ -27,7 +27,7 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
         spritesheet = Resources.getSpriteSheet("button_spritesheet").setLoopOnLast(false);
     }
 
-    public AMenuButton(AMenuModel parentMenuModel, int x, int y) {
+    public AMenuButton(AMenuEnvironment parentMenuModel, int x, int y) {
         super(parentMenuModel);
 
         this.x = x;
@@ -120,11 +120,11 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
     }
 
     public void registerInput() {
-        AMouseController mc = parentMenuModel.getMouseController();
+        AMouseController mc = parentMenuEnvironment.getMouseController();
         if (mc.isLeftPressed()) {
             if(onClick(mc.getPos()[0], mc.getPos()[1])) {
+                mc.reset();
                 playSound();
-                mc.resetInput();
             }
         } else {
             isInBounds(mc.getPos()[0], mc.getPos()[1]);

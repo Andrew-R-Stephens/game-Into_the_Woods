@@ -3,11 +3,11 @@ package models.environments.menus.mainmenu;
 import controls.MenuControls;
 import models.environments.EnvironmentsHandler;
 import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.utils.resources.Resources;
 import models.environments.menus.startscreen.StartScreenPage;
 
-public class MainMenuEnvironment extends AMenuModel {
+public class MainMenuEnvironment extends AMenuEnvironment {
 
     public void init(EnvironmentsHandler environmentsHandler, MenuControls menuControlsModel) {
         super.init(environmentsHandler, menuControlsModel);

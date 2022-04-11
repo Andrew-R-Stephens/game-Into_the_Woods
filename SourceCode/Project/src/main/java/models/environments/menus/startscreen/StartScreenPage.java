@@ -1,17 +1,15 @@
 package models.environments.menus.startscreen;
 
 import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
 import models.environments.menus.mainmenu.MainMenuPage;
 
-import java.awt.image.BufferedImage;
-
 public class StartScreenPage extends AMenu {
 
-    public StartScreenPage(AMenuModel parentMenuModel) {
+    public StartScreenPage(AMenuEnvironment parentMenuModel) {
 
         super(parentMenuModel);
 

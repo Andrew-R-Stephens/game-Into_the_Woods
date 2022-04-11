@@ -7,10 +7,9 @@ import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
-import java.util.HashMap;
 import java.util.Stack;
 
-public abstract class AMenuModel extends AEnvironment implements IDrawable, IUpdatable {
+public abstract class AMenuEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 
     private final Stack<AMenu> menuStack = new Stack<>();
 
@@ -23,6 +22,9 @@ public abstract class AMenuModel extends AEnvironment implements IDrawable, IUpd
     }
 
     public void push(AMenu menu){
+        if(!menuStack.isEmpty()) {
+            menuStack.peek().reset();
+        }
         menuStack.push(menu);
     }
 
@@ -56,4 +58,12 @@ public abstract class AMenuModel extends AEnvironment implements IDrawable, IUpd
         super.onExit();
     }
 
+    @Override
+    public void reset() {
+        /*
+        for(AMenu m: menuStack) {
+            m.reset();
+        }
+        */
+    }
 }

@@ -1,4 +1,4 @@
-package models.actors.gameactors;
+package models.actors.gameactors.props.particles;
 
 import models.prototypes.actor.pawn.APawn;
 import models.utils.drawables.IDrawable;

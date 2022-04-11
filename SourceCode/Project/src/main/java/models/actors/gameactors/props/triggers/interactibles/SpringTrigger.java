@@ -1,6 +1,6 @@
 package models.actors.gameactors.props.triggers.interactibles;
 
-import models.actors.gameactors.PlayerAvatar;
+import models.actors.gameactors.props.player.PlayerAvatar;
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;

@@ -1,7 +1,7 @@
 package models.levels.level;
 
 import models.actors.gameactors.props.platforms.PlatformProp;
-import models.actors.gameactors.props.triggers.collectibles.key.LevelKey;
+import models.actors.gameactors.props.triggers.collectibles.key.KeyCollectible;
 import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
 import models.environments.game.GameEnvironment;
 import models.prototypes.level.ALevel;
@@ -52,9 +52,9 @@ public class TestLevel2 extends ALevel {
         addProp(new PlatformProp(3200, 650, 100, 100, 0, 0, false));
 
         // Keys
-        addProp(new LevelKey(gameEnvironment, 1600, 930, 100, 50, 0, 0));
-        addProp(new LevelKey(gameEnvironment, 2500, 930, 100, 50, 0, 0));
-        addProp(new LevelKey(gameEnvironment, 500, 930, 100, 50, 0, 0));
+        addProp(new KeyCollectible(gameEnvironment, 1600, 930, 100, 50, 0, 0));
+        addProp(new KeyCollectible(gameEnvironment, 2500, 930, 100, 50, 0, 0));
+        addProp(new KeyCollectible(gameEnvironment, 500, 930, 100, 50, 0, 0));
 
         // Door
         door = new DoorTrigger(gameEnvironment, 2000, 830, 50, 100,

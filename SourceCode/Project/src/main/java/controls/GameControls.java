@@ -2,6 +2,8 @@ package controls;
 
 import models.prototypes.controls.AControlsModel;
 
+import java.util.Arrays;
+
 public class GameControls extends AControlsModel {
 
     public enum Abilities {
@@ -9,9 +11,7 @@ public class GameControls extends AControlsModel {
         DASH
     }
 
-
     boolean[] abilities = new boolean[Abilities.values().length];
-
 
     public void setAbility(Abilities type, boolean state) {
         abilities[type.ordinal()] = state;
@@ -19,6 +19,11 @@ public class GameControls extends AControlsModel {
 
     public boolean[] getAbilities() {
         return abilities;
+    }
+
+    public void reset() {
+        super.reset();
+        Arrays.fill(abilities, false);
     }
 
 }

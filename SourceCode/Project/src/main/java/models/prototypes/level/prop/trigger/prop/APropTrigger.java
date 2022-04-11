@@ -1,6 +1,6 @@
 package models.prototypes.level.prop.trigger.prop;
 
-import models.actors.gameactors.PlayerAvatar;
+import models.actors.gameactors.props.player.PlayerAvatar;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.trigger.ATrigger;

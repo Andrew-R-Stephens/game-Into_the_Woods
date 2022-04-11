@@ -1,16 +1,13 @@
 package models.environments.menus.pausemenumodel.options;
 
 import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuModel;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
-import models.utils.resources.Resources;
-
-import java.awt.image.BufferedImage;
 
 public class PauseOptionsPage extends AMenu {
 
-    public PauseOptionsPage(AMenuModel parentModel) {
+    public PauseOptionsPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
         //BufferedImage img_button = Resources.getImage("button_hrect");
@@ -33,7 +30,7 @@ public class PauseOptionsPage extends AMenu {
                     return false;
                 }
 
-                parentMenuModel.pop();
+                parentMenuEnvironment.pop();
 
                 return true;
             }

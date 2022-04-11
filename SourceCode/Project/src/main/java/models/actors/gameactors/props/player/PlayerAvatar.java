@@ -1,4 +1,4 @@
-package models.actors.gameactors;
+package models.actors.gameactors.props.player;
 
 import controls.GameControls;
 import models.camera.Camera;
