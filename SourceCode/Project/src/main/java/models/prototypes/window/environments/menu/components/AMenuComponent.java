@@ -31,10 +31,11 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     // Will be removed if we add actual images in place of awt views.graphics.
     protected String text = "";
 
-    protected int x, y; // Coordinates on the 2D space, relative to the default screen size
-    protected int w, h; // The width of the component
+    public int x, y; // Coordinates on the 2D space, relative to the default screen size
+    public int w, h; // The width of the component
 
     protected boolean isFocused = false;
+    public boolean isPressed = false;
 
     public AMenuComponent(AMenuEnvironment parentMenuEnvironment) {
         this.parentMenuEnvironment = parentMenuEnvironment;
@@ -59,20 +60,22 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     public abstract boolean onClick(float x, float y);
 
     @Override
-    public void draw(Graphics g) {
-
-    }
-
-    @Override
     public void update(float delta) {
         isFocused = false;
+        isPressed = false;
         registerInput();
 
-        if(backgroundImage == null && isFocused) {
-            spritesheet.update(delta);
-        } else {
-            spritesheet.reset();
+        if(spritesheet != null) {
+            if (backgroundImage == null && isFocused) {
+                spritesheet.update(delta);
+            } else {
+                spritesheet.reset();
+            }
         }
+    }
+
+    public int right() {
+        return x + w;
     }
 
     public abstract void registerInput();
@@ -86,8 +89,11 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     }
 
     public void reset() {
-        spritesheet.reset();
+        if(spritesheet != null) {
+            spritesheet.reset();
+        }
         isFocused = false;
+        isPressed = false;
     }
 
     public void setSpritesheet(SpriteSheet spritesheet) {

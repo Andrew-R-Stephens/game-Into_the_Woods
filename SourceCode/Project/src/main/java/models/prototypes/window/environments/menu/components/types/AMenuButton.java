@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class AMenuButton extends AMenuComponent implements IDrawable, IUpdatable {
 
-    private boolean playSound = true;
+    public boolean playSound = true;
 
     public AMenuButton(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
         super(parentMenuModel);
@@ -47,7 +47,13 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
     @Override
     public void draw(Graphics g) {
 
-        //g.setColor(Color.RED);
+        g.setColor(Color.RED);
+        g.drawRect(
+                (int)(ConfigData.scaledW * x),
+                (int)(ConfigData.scaledW * y),
+                (int)(ConfigData.scaledW * w),
+                (int)(ConfigData.scaledW * h));
+
         float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
         if(backgroundImage != null) {
@@ -105,13 +111,6 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
                 text.toUpperCase(),
                 (int)((x * sW) + (w * sW * .5) - (strWidth * .5)),
                 (int)((y * sH) + (h * sH * .5) + (h * .2 * sH * (spritesheet.getPercentCompleted()))));
-
-        /*
-        if(isFocused) {
-            g.setColor(new Color(255, 255, 255, 50));
-            g.fillRect((int) (x * sW), (int) (y * sH), (int) (w * sW), (int) (h * sH));
-        }
-        */
     }
 
     @Override
@@ -119,12 +118,20 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
         super.update(delta);
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
     public void registerInput() {
         AMouseController mc = parentMenuEnvironment.getMouseController();
         if (mc.isLeftPressed()) {
-            if(onClick(mc.getPos()[0], mc.getPos()[1])) {
+            isPressed = onClick(mc.getPos()[0], mc.getPos()[1]);
+            if(isPressed) {
                 mc.reset();
                 playSound();
+                playSound = false;
+            } else {
+                playSound = true;
             }
         } else {
             isInBounds(mc.getPos()[0], mc.getPos()[1]);
@@ -133,6 +140,11 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
 
     public void setText(String s) {
         text = s;
+    }
+
+    public void reset() {
+        playSound = true;
+        super.reset();
     }
 
 }

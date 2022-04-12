@@ -14,7 +14,7 @@ public class MenuMouseControls extends AMouseController {
     @Override
     public void mouseDragged(MouseEvent e) {
         setPos(e.getX(), e.getY());
-        reset();
+        //reset();
     }
 
 }

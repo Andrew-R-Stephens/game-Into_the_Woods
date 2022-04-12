@@ -37,13 +37,16 @@ public abstract class AMenu implements IUpdatable, IDrawable {
         mouseController = parentMenuModel.getMouseController();
     }
 
-    public void registerInput() {
+    public boolean registerInput() {
+        boolean isActivated = false;
         if (parentMenuModel.getKeyController() instanceof MenuKeyControls kc) {
-            if (kc.isAction(MenuControls.Actions.ESCAPE)) {
+            isActivated = kc.isAction(MenuControls.Actions.ESCAPE);
+            if (isActivated) {
                 kc.reset();
                 parentMenuModel.pop();
             }
         }
+        return isActivated;
     }
 
     @Override

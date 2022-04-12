@@ -34,11 +34,11 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
     public void draw(Graphics g) {
         g.setColor(Color.CYAN);
 
-        double offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
-        double offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
+        float offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
+        float offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
 
-        double scaledW = w * ConfigData.scaledW;
-        double scaledH = h * ConfigData.scaledH;
+        float scaledW = w * ConfigData.scaledW;
+        float scaledH = h * ConfigData.scaledH;
 
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
     }

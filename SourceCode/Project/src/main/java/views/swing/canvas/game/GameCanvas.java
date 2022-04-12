@@ -34,7 +34,6 @@ public class GameCanvas extends ACanvas {
         gameModel.draw(g);
 
         g.setColor(Color.RED);
-        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 
     }
 

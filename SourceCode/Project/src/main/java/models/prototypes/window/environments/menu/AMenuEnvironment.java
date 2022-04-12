@@ -26,6 +26,7 @@ public abstract class AMenuEnvironment extends AEnvironment implements IDrawable
             menuStack.peek().reset();
         }
         menuStack.push(menu);
+        menuStack.peek().reset();
     }
 
     public AMenu peek() {
