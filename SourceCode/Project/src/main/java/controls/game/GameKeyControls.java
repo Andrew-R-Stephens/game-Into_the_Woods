@@ -1,14 +1,14 @@
 package controls.game;
 
 import controls.GameControls;
-import models.prototypes.controls.AControlsModel;
+import models.prototypes.controls.AControls;
 import models.prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
 
 public class GameKeyControls extends AKeyController {
 
-    public GameKeyControls(AControlsModel controlsViewModel) {
+    public GameKeyControls(AControls controlsViewModel) {
         super(controlsViewModel);
     }
 
@@ -20,11 +20,8 @@ public class GameKeyControls extends AKeyController {
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE -> {
-                //System.out.println("Quitting");
-                //System.exit(1);
                 controlsModel.setAction(GameControls.Actions.ESCAPE, true);
             }
-
             case KeyEvent.VK_A -> {
                 controlsModel.setDirectional(GameControls.Directionals.LEFT, true);
             }
@@ -62,7 +59,6 @@ public class GameKeyControls extends AKeyController {
             case KeyEvent.VK_S -> {
                 controlsModel.setDirectional(GameControls.Directionals.DOWN, false);
             }
-
             case KeyEvent.VK_SPACE -> {
                 ((GameControls) controlsModel).setAbility(GameControls.Abilities.JUMP, false);
             }

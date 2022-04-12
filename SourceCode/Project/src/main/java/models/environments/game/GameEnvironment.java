@@ -139,7 +139,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
             if(kc.getControlsModel().getAction(GameControls.Actions.ESCAPE)) {
                 //kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
                 kc.getControlsModel().reset();
-                isPaused = true;
+                setPaused(true);
                 parentEnvironmentsHandler.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME_PAUSE_MENU, false).applyEnvironment();
             }
@@ -150,7 +150,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         if(pauseMenuEnvironment.getKeyController() instanceof MenuKeyControls kc) {
             if(kc.getControlsModel().getAction(MenuControls.Actions.ESCAPE)) {
                 kc.getControlsModel().reset();
-                isPaused = false;
+                setPaused(false);
                 pauseMenuEnvironment.onExit();
                 parentEnvironmentsHandler.swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment();

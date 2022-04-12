@@ -15,8 +15,6 @@ public class StartScreenPage extends AMenu {
 
         image_background = Resources.getImage("menubackground");
 
-        //BufferedImage img_button = Resources.getImage("button_hrect");
-
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
@@ -41,7 +39,6 @@ public class StartScreenPage extends AMenu {
         };
 
         startButton.setText("Start button");
-        //startButton.setBackgroundImage(img_button);
         startButton.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         components.add(startButton);

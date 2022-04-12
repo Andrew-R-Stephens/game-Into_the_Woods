@@ -19,8 +19,6 @@ public class UpdateRunnable extends ARunnable {
         double ns = 1000000000 / (float) targetTicks, delta = 0;
         float updateRatio = 1;
 
-                // GAME LOOP
-
         isRunning = true;
         while(isRunning) {
             long now = System.nanoTime();
@@ -42,7 +40,6 @@ public class UpdateRunnable extends ARunnable {
                 lastUpdates = updates;
                 updates = 0;
 
-                System.out.println(System.currentTimeMillis() + " : " + lastUpdates);
 
             }
 

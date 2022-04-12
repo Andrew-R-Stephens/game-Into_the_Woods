@@ -1,10 +1,10 @@
 package controls;
 
-import models.prototypes.controls.AControlsModel;
+import models.prototypes.controls.AControls;
 
 import java.util.Arrays;
 
-public class GameControls extends AControlsModel {
+public class GameControls extends AControls {
 
     public enum Abilities {
         JUMP,

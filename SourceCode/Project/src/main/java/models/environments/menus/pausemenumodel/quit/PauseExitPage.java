@@ -10,10 +10,7 @@ public class PauseExitPage extends AMenu {
     public PauseExitPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
-        //BufferedImage img_button = Resources.getImage("button_hrect");
-
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
@@ -36,7 +33,6 @@ public class PauseExitPage extends AMenu {
             }
         };
         button_back.setText("Back");
-        //button_back.setBackgroundImage(img_button);
         button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         components.add(button_back);

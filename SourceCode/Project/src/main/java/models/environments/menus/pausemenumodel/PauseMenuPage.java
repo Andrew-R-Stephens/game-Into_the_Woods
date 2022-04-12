@@ -42,10 +42,6 @@ public class PauseMenuPage extends AMenu {
 
                 ((PauseMenuEnvironment)parentMenuEnvironment).gameEnvironment.setPaused(false);
                 parentMenuEnvironment.onExit();
-                /*
-                parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(
-                        EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment(false);
-                */
                 parentMenuEnvironment.parentEnvironmentsHandler.setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.GAME);
                 parentMenuEnvironment.parentEnvironmentsHandler.applyEnvironment(false);
                 return true;
@@ -54,7 +50,6 @@ public class PauseMenuPage extends AMenu {
         };
         button_resume.setText("Resume Game");
         //button_resume.setBackgroundImage(img_button);
-        button_resume.setTint("#F1FFEC10");
         button_resume.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         // Options button

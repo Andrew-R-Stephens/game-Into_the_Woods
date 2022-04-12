@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class EnvironmentsHandler {
 
-    private MainWindow parentDisplayWindow;
+    private MainWindow parentWindow;
 
     public enum EnvironmentType {
         MAIN_MENU,
@@ -29,7 +29,7 @@ public class EnvironmentsHandler {
     private Thread rendersThread;
 
     public void init(MainWindow parentDisplayWindow) {
-        this.parentDisplayWindow = parentDisplayWindow;
+        this.parentWindow = parentDisplayWindow;
     }
 
     public void addEnvironmentPair(AEnvironment model, ACanvas canvas, ARunnable uRunnable, ARunnable rRunnable) {
@@ -91,7 +91,7 @@ public class EnvironmentsHandler {
     }
 
     public void applyEnvironment(boolean resetThreads) {
-        parentDisplayWindow.build();
+        parentWindow.build();
 
         if(resetThreads) {
             initThreads();

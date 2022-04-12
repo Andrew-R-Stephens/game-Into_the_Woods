@@ -4,13 +4,13 @@ import java.awt.event.KeyListener;
 
 public abstract class AKeyController implements KeyListener {
 
-    protected AControlsModel controlsModel;
+    protected AControls controlsModel;
 
-    public AKeyController(AControlsModel controlsModel) {
+    public AKeyController(AControls controlsModel) {
         this.controlsModel = controlsModel;
     }
 
-    public AControlsModel getControlsModel() {
+    public AControls getControlsModel() {
         return controlsModel;
     }
 

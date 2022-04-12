@@ -2,7 +2,7 @@ package models.prototypes.controls;
 
 import java.util.Arrays;
 
-public abstract class AControlsModel {
+public abstract class AControls {
 
     protected AKeyController keyController;
     protected AMouseController mouseController;

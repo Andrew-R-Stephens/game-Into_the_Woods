@@ -18,8 +18,6 @@ public class RenderRunnable extends ARunnable {
         final short targetFPS = ConfigData.frameRate;
         double ns = 1000000000 / (float)targetFPS, delta = 0;
 
-        // GAME LOOP
-
         isRunning = true;
         while(isRunning) {
             long now = System.nanoTime();

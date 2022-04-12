@@ -36,8 +36,8 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     protected boolean isFocused = false;
 
-    public AMenuComponent(AMenuEnvironment parentMenuModel) {
-        this.parentMenuEnvironment = parentMenuModel;
+    public AMenuComponent(AMenuEnvironment parentMenuEnvironment) {
+        this.parentMenuEnvironment = parentMenuEnvironment;
     }
 
     protected boolean isInBounds(float mx, float my) {
@@ -83,54 +83,6 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     public void setImageScaling(ImageScale scaleType) {
         this.scaleType = scaleType;
-    }
-
-    public void setTint(String colorHex)
-    {
-        /*
-        Color c = new Color(
-                Integer.valueOf( colorHex.substring( 1, 3 ), 16 ),
-                Integer.valueOf( colorHex.substring( 3, 5 ), 16 ),
-                Integer.valueOf( colorHex.substring( 5, 7 ), 16 ),
-                Integer.valueOf( colorHex.substring( 7, 9 ), 16 )
-        );
-
-        BufferedImage tintedSprite =
-                new BufferedImage(backgroundImage.getWidth(), backgroundImage.getHeight(), BufferedImage.TRANSLUCENT);
-        Graphics2D graphics = tintedSprite.createGraphics();
-        graphics.drawImage(backgroundImage, 0, 0, null);
-        graphics.dispose();
-
-        *//*
-        System.out.println("Alpha is " + c.getAlpha());
-        System.out.println("Red is " + c.getRed());
-        System.out.println("Green is " + c.getGreen());
-        System.out.println("Blue is " + c.getBlue());
-        *//*
-
-        for (int i = 0; i < tintedSprite.getWidth(); i++)
-        {
-            for (int j = 0; j < tintedSprite.getHeight(); j++)
-            {
-                int ax = tintedSprite.getColorModel().getAlpha(tintedSprite.getRaster().
-                        getDataElements(i, j, null));
-                int rx = tintedSprite.getColorModel().getRed(tintedSprite.getRaster().
-                        getDataElements(i, j, null));
-                int gx = tintedSprite.getColorModel().getGreen(tintedSprite.getRaster().
-                        getDataElements(i, j, null));
-                int bx = tintedSprite.getColorModel().getBlue(tintedSprite.getRaster().
-                        getDataElements(i, j, null));
-                rx *= c.getRed();
-                gx *= c.getGreen();
-                bx *= c.getBlue();
-                ax *= c.getAlpha();
-                tintedSprite.setRGB(i, j, (ax << 24) | (rx << 16) | (gx << 8) | (bx));
-            }
-        }
-
-        tint = tintedSprite;
-    */
-
     }
 
     public void reset() {

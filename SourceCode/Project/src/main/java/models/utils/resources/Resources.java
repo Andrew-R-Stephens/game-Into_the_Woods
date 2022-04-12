@@ -2,6 +2,7 @@ package models.utils.resources;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import javazoom.jl.player.advanced.AdvancedPlayer;
 import models.sprites.SpriteSheet;
 import models.utils.files.AFileReader;
 import models.utils.files.MetaDataParser;
@@ -34,7 +35,7 @@ public class Resources {
     private String path_images, path_audio, path_fonts;
 
     private static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
-    private static final Map<String, String> audioFiles = new HashMap<>();
+    public static final Map<String, String> audioFiles = new HashMap<>();
     private static final Map<String, File> textFiles = new HashMap<>();
     private static final Map<String, Font> fontFiles = new HashMap<>();
 
@@ -60,6 +61,8 @@ public class Resources {
         loadFontFiles(registerFiles(metaData, "fonts"));
 
         System.out.println(this);
+
+
 
     }
 
@@ -218,7 +221,7 @@ public class Resources {
         return fontFiles.get(fontKey);
     }
 
-    public static synchronized Player playAudio(String audioKey) {
+    public static synchronized AdvancedPlayer playAudio(String audioKey) {
 
         // create AudioInputStream object
         InputStream resourceBuff = Resources.class.getResourceAsStream(audioFiles.get(audioKey));
@@ -231,14 +234,14 @@ public class Resources {
         BufferedInputStream bufferedInputStream = new BufferedInputStream(resourceBuff);
 
         // Create a Player object that realizes the audio
-        Player p = null;
+        AdvancedPlayer p = null;
         try {
-            p = new Player(bufferedInputStream);
+            p = new AdvancedPlayer(bufferedInputStream);
         } catch (JavaLayerException e) {
             e.printStackTrace();
         }
 
-        Player finalP = p;
+        AdvancedPlayer finalP = p;
         Thread t = new Thread(() -> {
             try {
                 if (finalP != null) {

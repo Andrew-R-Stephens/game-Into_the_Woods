@@ -22,7 +22,7 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     protected AKeyController keyController;
     protected AMouseController mouseController;
     // Background Image
-    protected BufferedImage image_background, image_buttonSq, image_buttonRect;
+    protected BufferedImage image_background, image_buttonRect;
 
     // The Menu Buttons.
     public ArrayList<AMenuComponent> components = new ArrayList<>();
@@ -40,7 +40,7 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     public void registerInput() {
         if (parentMenuModel.getKeyController() instanceof MenuKeyControls kc) {
             if (kc.isAction(MenuControls.Actions.ESCAPE)) {
-                kc.resetInput();
+                kc.reset();
                 parentMenuModel.pop();
             }
         }
