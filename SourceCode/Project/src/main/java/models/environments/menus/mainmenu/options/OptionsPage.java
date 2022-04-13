@@ -7,6 +7,8 @@ import models.prototypes.window.environments.menu.components.types.AMenuSlider;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
 
+import java.util.ArrayList;
+
 public class OptionsPage extends AMenu {
 
     public OptionsPage(AMenuEnvironment parentModel) {
@@ -14,19 +16,49 @@ public class OptionsPage extends AMenu {
 
         image_background = Resources.getImage("menubackground");
 
-        //BufferedImage img_button = Resources.getImage("button_hrect");
-
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
-        AMenuSlider slider = new AMenuSlider(
+        AMenuSlider slider_fps = new AMenuSlider(
+                parentMenuModel,
+                (int) (mx - (800 * .5f)),
+                300,
+                800,
+                btn_height) {
+            @Override
+            public void init() {
+                values = new ArrayList<>();
+                for(int i = 30; i <= 144; i++) {
+                    values.add(i);
+                }
+                itemCount = values.size();
+            }
+            @Override
+            public void doSetting() {
+                System.out.println(values.get(current));
+            }
+        };
+
+        AMenuSlider slider_window = new AMenuSlider(
                 parentMenuModel,
                 (int) (mx - (800 * .5f)),
                 400,
                 800,
-                btn_height);
+                btn_height) {
+            @Override
+            public void init() {
+                values = new ArrayList<>();
+                for(int i = 0; i <= 5; i++) {
+                    values.add(i);
+                }
+                itemCount = values.size();
+            }
+            @Override
+            public void doSetting() {
+                System.out.println(values.get(current));
+            }
+        };
 
         AMenuButton button_back = new AMenuButton(
                 parentMenuModel,
@@ -49,7 +81,8 @@ public class OptionsPage extends AMenu {
         button_back.setText("Back");
         button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
-        components.add(slider);
+        components.add(slider_fps);
+        components.add(slider_window);
         components.add(button_back);
     }
 

@@ -8,10 +8,15 @@ import models.utils.resources.Resources;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
-public class AMenuSlider extends AMenuComponent {
+public abstract class AMenuSlider extends AMenuComponent {
 
     private final AMenuButton button;
+
+    protected ArrayList<Integer> values;
+    protected int itemCount = 2;
+    protected int current = 0;
 
     public AMenuSlider(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
         super(parentMenuModel);
@@ -43,7 +48,6 @@ public class AMenuSlider extends AMenuComponent {
                     AMenuSlider.this.isPressed = onClick(mc.getPos()[0], mc.getPos()[1]);
                     if(isPressed) {
                         playSound();
-                        //mc.reset();
                         playSound = false;
                     }
                 } else {
@@ -56,29 +60,48 @@ public class AMenuSlider extends AMenuComponent {
         };
         button.setBackgroundImage(Resources.getImage("button_slider"));
         button.setImageScaling(ImageScale.FIT_CENTERED);
+
+        init();
     }
+
+    public abstract void init();
 
     public void moveToCursor(int x, int y) {
 
         x = (int)(x / ConfigData.scaledW);
-        y = (int)(y / ConfigData.scaledH);
 
+        /*
         if(x + x - button.x + button.w > this.x + this.w) {
             x = this.x + this.w - button.w;
-        }
-
-        System.out.println("moving " + x + " " + y);
-
-        if(x < this.x) {
-            x = this.x;
         }
         if(button.x > (this.x + this.w - button.w)) {
             x = (this.x + this.w) - button.w;
             System.out.println(x);
         }
+        */
 
+        if(x < this.x) {
+            x = this.x;
+        }
+
+        float notchDistance = (w - button.w) / (float)(itemCount -1);
+        int newX = (int)((x - this.x) / notchDistance);
+
+        if(newX > itemCount -1) {
+            newX = itemCount -1;
+        }
+
+        current = newX;
+
+        x = (int)(this.x + (newX * notchDistance));
         button.setX(x);
+
+        doSetting();
+
+        System.out.println((x - this.x) + ", " + (newX + 1) + "/" + (itemCount) + ", " + (int)(newX * notchDistance));
     }
+
+    public abstract void doSetting();
 
     @Override
     public boolean onClick(float x, float y) {
