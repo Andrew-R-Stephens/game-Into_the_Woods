@@ -33,7 +33,7 @@ public class MenuCanvas extends ACanvas {
         mainMenuEnvironment.draw(g);
 
         g.setColor(Color.RED);
-        float sW = ConfigData.scaledW;
+        float sW = ConfigData.scaledW_zoom;
 
     }
 

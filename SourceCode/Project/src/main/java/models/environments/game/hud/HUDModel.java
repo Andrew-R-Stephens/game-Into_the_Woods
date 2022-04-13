@@ -51,7 +51,7 @@ public class HUDModel implements IDrawable, IUpdatable {
         g.setFont(
                 Resources.getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
-                        .deriveFont(Font.PLAIN, 18 * ConfigData.scaledW));
+                        .deriveFont(Font.PLAIN, 18 * ConfigData.scaledW_zoom));
 
         map.draw(g);
         stats.draw(g);

@@ -16,7 +16,7 @@ public class UpdateRunnable extends ARunnable {
     public void run() {
         long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
         final short targetTicks = ConfigData.GAME_UPDATE_RATE;
-        double ns = 1000000000 / (float) targetTicks, delta = 0;
+        float ns = 1000000000 / (float) targetTicks, delta = 0;
         float updateRatio = 1;
 
         isRunning = true;

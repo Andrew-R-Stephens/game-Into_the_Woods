@@ -54,11 +54,11 @@ public class SpikesTrigger extends ATrigger implements IDrawable, IHUDDrawable, 
 
     @Override
     public void draw(Graphics g) {
-        float offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
-        float offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
+        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.camY));
 
-        float scaledW = w * ConfigData.scaledW;
-        float scaledH = h * ConfigData.scaledH;
+        float scaledW = w * ConfigData.scaledW_zoom;
+        float scaledH = h * ConfigData.scaledH_zoom;
 
         BufferedImage img = Resources.getImage("spikes");
         float imgScaledH = scaledH/img.getHeight();

@@ -45,6 +45,8 @@ public class AMenuImage extends AMenuComponent implements IDrawable, IUpdatable 
     @Override
     public void draw(Graphics g) {
 
+        super.draw(g);
+
         g.setColor(new Color(255, 0, 0, 100));
         float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 

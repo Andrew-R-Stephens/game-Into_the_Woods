@@ -24,14 +24,11 @@ public class MainMenuPage extends AMenu {
         bundle.addPage(new HelpPage(parentMenuModel));
         bundle.addPage(new QuitPage(parentMenuModel));
 
-
-        float centerHoriz = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-
         int buttonW = 400, buttonH = (int)(buttonW * .25);
 
         AMenuButton button_newGame = new AMenuButton(
                 parentMenuModel,
-                (int)(centerHoriz - (buttonW * .5f)),
+                (int)(centerW - (buttonW * .5f)),
                 175,
                 buttonW,
                 buttonH)
@@ -53,7 +50,7 @@ public class MainMenuPage extends AMenu {
 
         AMenuButton button_continueGame = new AMenuButton(
                 parentMenuModel,
-                (int)(centerHoriz - (buttonW * .5f)),
+                (int)(centerW - (buttonW * .5f)),
                 290,
                 buttonW,
                 buttonH) {
@@ -73,7 +70,7 @@ public class MainMenuPage extends AMenu {
 
         AMenuButton button_options = new AMenuButton(
                 parentMenuModel,
-                (int)(centerHoriz - (buttonW * .5f)),
+                (int)(centerW - (buttonW * .5f)),
                 405,
                 buttonW,
                 buttonH) {
@@ -93,7 +90,7 @@ public class MainMenuPage extends AMenu {
 
         AMenuButton button_help = new AMenuButton(
                 parentMenuModel,
-                (int)(centerHoriz - (buttonW * .5f)),
+                (int)(centerW - (buttonW * .5f)),
                 520,
                 buttonW,
                 buttonH) {
@@ -112,7 +109,7 @@ public class MainMenuPage extends AMenu {
         button_help.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         AMenuButton button_quit = new AMenuButton(parentMenuModel,
-                (int)(centerHoriz - (buttonW * .5f)),
+                (int)(centerW - (buttonW * .5f)),
                 800,
                 buttonW,
                 buttonH) {

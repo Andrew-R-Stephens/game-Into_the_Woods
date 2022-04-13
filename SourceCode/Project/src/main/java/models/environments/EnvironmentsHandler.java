@@ -5,6 +5,7 @@ import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.threading.ARunnable;
 import models.prototypes.window.ACanvas;
 import models.prototypes.window.environments.AEnvironment;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
 import views.swing.window.MainWindow;
 
 import java.util.ArrayList;
@@ -91,6 +92,12 @@ public class EnvironmentsHandler {
     }
 
     public void applyEnvironment(boolean resetThreads) {
+        if(environments.get(currentEnvironment.ordinal()) instanceof AMenuEnvironment) {
+            parentWindow.buildCursor(true);
+        } else {
+            parentWindow.buildCursor(false);
+        }
+
         parentWindow.build();
 
         if(resetThreads) {

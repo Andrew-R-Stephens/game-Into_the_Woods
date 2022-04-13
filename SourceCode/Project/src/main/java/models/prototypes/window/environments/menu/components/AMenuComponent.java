@@ -74,6 +74,17 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         }
     }
 
+    @Override
+    public void draw(Graphics g) {
+        g.setColor(Color.RED);
+        g.drawRect(
+                (int)(ConfigData.scaledW * x),
+                (int)(ConfigData.scaledW * y),
+                (int)(ConfigData.scaledH * w),
+                (int)(ConfigData.scaledH * h));
+
+    }
+
     public int right() {
         return x + w;
     }

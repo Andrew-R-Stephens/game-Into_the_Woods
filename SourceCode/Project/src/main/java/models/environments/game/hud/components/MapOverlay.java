@@ -47,7 +47,7 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
                 (int)((x * sW) - (stroke * .5)), (int)((y * sH) + (stroke * .5)),
                 (int)((w * sW)), (int)((h * sH) ));
 
-        int squareDim = (int)(5 * sW);
+        int squareDim = (int)(5 * ConfigData.scaledW_zoom);
         g.setColor(Color.RED);
         g.fillRect(
                 (int)((x * sW) + (w * sW * .5) - (squareDim)),

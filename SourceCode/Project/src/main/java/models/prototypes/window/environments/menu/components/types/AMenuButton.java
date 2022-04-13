@@ -47,12 +47,7 @@ public abstract class AMenuButton extends AMenuComponent implements IDrawable, I
     @Override
     public void draw(Graphics g) {
 
-        g.setColor(Color.RED);
-        g.drawRect(
-                (int)(ConfigData.scaledW * x),
-                (int)(ConfigData.scaledW * y),
-                (int)(ConfigData.scaledW * w),
-                (int)(ConfigData.scaledW * h));
+        super.draw(g);
 
         float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
 

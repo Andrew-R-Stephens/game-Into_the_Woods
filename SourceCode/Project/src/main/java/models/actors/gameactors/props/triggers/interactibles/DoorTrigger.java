@@ -92,11 +92,11 @@ public class DoorTrigger extends APropTrigger implements IDrawable, IHUDDrawable
     @Override
     public void draw(Graphics g) {
 
-        double offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
-        double offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
+        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.camY));
 
-        double scaleW = w * ConfigData.scaledW;
-        double scaleH = h * ConfigData.scaledH;
+        float scaleW = w * ConfigData.scaledW_zoom;
+        float scaleH = h * ConfigData.scaledH_zoom;
 
         spriteSheets.get(type).draw(g, (int)offsetX, (int)offsetY, (int)scaleW, (int)scaleH);
 

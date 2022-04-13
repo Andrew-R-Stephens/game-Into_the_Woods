@@ -41,11 +41,11 @@ public abstract class AReactProp extends AProp implements IDrawable {
     @Override
     public void draw(Graphics g) {
 
-        double offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
-        double offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
+        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.camY));
 
-        double scaledW = w * ConfigData.scaledW;
-        double scaledH = h * ConfigData.scaledH;
+        float scaledW = w * ConfigData.scaledW_zoom;
+        float scaledH = h * ConfigData.scaledH_zoom;
 
         g.setColor(color);
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));

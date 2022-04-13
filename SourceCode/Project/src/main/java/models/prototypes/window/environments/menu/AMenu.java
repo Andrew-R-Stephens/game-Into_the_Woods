@@ -30,6 +30,8 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     // The Bundle of sub page AMenu objects.
     public MenuBundle bundle = new MenuBundle();
 
+    protected float centerW = ConfigData.DEFAULT_WINDOW_WIDTH * .5f, centerH = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
+
     public AMenu(AMenuEnvironment parentMenuModel) {
         this.parentMenuModel = parentMenuModel;
 

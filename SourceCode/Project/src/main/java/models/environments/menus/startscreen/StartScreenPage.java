@@ -15,15 +15,12 @@ public class StartScreenPage extends AMenu {
 
         image_background = Resources.getImage("menubackground");
 
-        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
-
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         AMenuButton startButton = new AMenuButton(
                 parentMenuModel,
-                (int)(mx - (btn_width * .5f)),
-                (int)(my - (btn_height * .5f)),
+                (int)(centerW - (btn_width * .5f)),
+                (int)(centerH - (btn_height * .5f)),
                 btn_width,
                 btn_height) {
             @Override

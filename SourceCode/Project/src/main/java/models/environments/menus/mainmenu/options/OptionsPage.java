@@ -7,6 +7,7 @@ import models.prototypes.window.environments.menu.components.types.AMenuSlider;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class OptionsPage extends AMenu {
@@ -16,53 +17,67 @@ public class OptionsPage extends AMenu {
 
         image_background = Resources.getImage("menubackground");
 
-        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         AMenuSlider slider_fps = new AMenuSlider(
                 parentMenuModel,
-                (int) (mx - (800 * .5f)),
+                (int) (centerW - (800 * .5f)),
                 300,
                 800,
                 btn_height) {
             @Override
             public void init() {
                 values = new ArrayList<>();
-                for(int i = 30; i <= 144; i++) {
+
+                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                GraphicsDevice[] gs = ge.getScreenDevices();
+                DisplayMode dm = gs[0].getDisplayMode();
+
+                final int MAX_REFRESH_RATE = dm.getRefreshRate();
+                for(short i = 30; i <= MAX_REFRESH_RATE; i++) {
                     values.add(i);
                 }
                 itemCount = values.size();
+
+                current = itemCount;
+                int i = 0;
+                for(; i < values.size(); i++) {
+                    if(values.get(i) == ConfigData.frameRate) {
+                        current = i;
+                        break;
+                    }
+                }
+
             }
             @Override
             public void doSetting() {
-                System.out.println(values.get(current));
+                ConfigData.frameRate = values.get(current);
             }
         };
 
         AMenuSlider slider_window = new AMenuSlider(
                 parentMenuModel,
-                (int) (mx - (800 * .5f)),
+                (int) (centerW - (800 * .5f)),
                 400,
                 800,
-                btn_height) {
+                (int)(btn_height*.5)) {
             @Override
             public void init() {
                 values = new ArrayList<>();
-                for(int i = 0; i <= 5; i++) {
+                for(short i = 0; i <= 5; i++) {
                     values.add(i);
                 }
                 itemCount = values.size();
             }
             @Override
             public void doSetting() {
-                System.out.println(values.get(current));
+                System.out.println("Setting" + values.get(current));
             }
         };
 
         AMenuButton button_back = new AMenuButton(
                 parentMenuModel,
-                (int) (mx - (btn_width * .5f)),
+                (int) (centerW - (btn_width * .5f)),
                 800,
                 btn_width,
                 btn_height

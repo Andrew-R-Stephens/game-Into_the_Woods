@@ -10,13 +10,11 @@ public class PauseExitPage extends AMenu {
     public PauseExitPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
-        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         AMenuButton button_back = new AMenuButton(
                 parentModel,
-                (int) (mx - (btn_width * .5f)),
+                (int) (centerW - (btn_width * .5f)),
                 800,
                 btn_width,
                 btn_height

@@ -10,16 +10,11 @@ public class QuitPage extends AMenu {
     public QuitPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
-        //BufferedImage img_button = Resources.getImage("button_hrect");
-
-        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
-
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         AMenuButton button_back = new AMenuButton(
                 parentModel,
-                (int) (mx - (btn_width * .5f)),
+                (int) (centerW - (btn_width * .5f)),
                 800,
                 btn_width,
                 btn_height
@@ -36,7 +31,6 @@ public class QuitPage extends AMenu {
             }
         };
         button_back.setText("Exit to Main Menu");
-        //button_back.setBackgroundImage(img_button);
         button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
 
         components.add(button_back);

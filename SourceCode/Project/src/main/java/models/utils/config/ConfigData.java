@@ -24,18 +24,20 @@ public class ConfigData {
     public static int DEFAULT_WINDOW_WIDTH = 1920, DEFAULT_WINDOW_HEIGHT = 1080;
     public static int window_width_selected = 0, window_height_selected = 0;
     public static int window_width_actual = 0, window_height_actual = 0;
+
     public static float scaledW = 1f, scaledH = 1f;
+    public static float scaledW_zoom = 1f, scaledH_zoom = 1f;
 
     public static short GAME_UPDATE_RATE = 60;
     public static short FRAME_RATE_DEFAULT = 60;
     public static short frameRate = 60;
 
-    public void calcResolutionScale() {
+    public static void calcResolutionScale() {
         scaledW = (float)window_width_actual / (float) DEFAULT_WINDOW_WIDTH;
         scaledH = (float)window_height_actual / (float) DEFAULT_WINDOW_HEIGHT;
 
-        scaledW *= Camera.zoomLevel;
-        scaledH *= Camera.zoomLevel;
+        scaledW_zoom = scaledW * Camera.zoomLevel;
+        scaledH_zoom = scaledH * Camera.zoomLevel;
     }
 
     public void setWindowWidthSelected(int width) {

@@ -23,11 +23,11 @@ public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, I
 
         g.setColor(Color.WHITE);
 
-        double offsetX = ((x * ConfigData.scaledW) + (Camera.targX * ConfigData.scaledW));
-        double offsetY = ((y * ConfigData.scaledH) + (Camera.targY * ConfigData.scaledH));
+        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.targX * ConfigData.scaledW_zoom));
+        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.targY * ConfigData.scaledH_zoom));
 
-        double scaledW = w * ConfigData.scaledW;
-        double scaledH = h * ConfigData.scaledH;
+        float scaledW = w * ConfigData.scaledW_zoom;
+        float scaledH = h * ConfigData.scaledH_zoom;
 
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
 

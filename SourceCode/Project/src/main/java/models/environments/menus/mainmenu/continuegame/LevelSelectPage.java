@@ -16,9 +16,6 @@ public class LevelSelectPage extends AMenu {
 
         image_background = Resources.getImage("menubackground");
 
-        //BufferedImage img_rectbutton = Resources.getImage("button_hrect");
-        //BufferedImage img_sqbutton = Resources.getImage("button_square");
-
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 

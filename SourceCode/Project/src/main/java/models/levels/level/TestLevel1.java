@@ -6,6 +6,7 @@ import models.actors.gameactors.props.triggers.collectibles.key.KeyCollectible;
 import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
 import models.actors.gameactors.props.triggers.interactibles.SpikesTrigger;
 import models.actors.gameactors.props.triggers.interactibles.SpringTrigger;
+import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
@@ -75,7 +76,7 @@ public class TestLevel1 extends ALevel {
         };
         addProp(reactProp);
 
-        // TRIGGERS
+        // PARTICLE TRIGGER
         addProp(new APropTrigger(gameEnvironment, 700, 880, 100, 100,
                 0, 0, 1,false, false) {
             @Override
@@ -92,6 +93,29 @@ public class TestLevel1 extends ALevel {
                 }
 
                 return super.hasCollision(a, delta);
+            }
+        });
+
+        // ZOOM TRIGGER
+        addProp(new APropTrigger(gameEnvironment, 0, 0, 800, 1080,
+                0, 0, -1,false, false) {
+            @Override
+            public void doAction() {
+                System.out.println("Zoom triggered");
+                Camera.zoom(2f);
+            }
+
+            @Override
+            public boolean hasCollision(AActor a, float delta) {
+                if(!(a instanceof ACharacter)) {
+                    return false;
+                }
+
+                boolean isColliding = super.hasCollision(a, delta);
+                if(!isColliding) {
+                    Camera.zoom(1.5f);
+                }
+                return isColliding;
             }
         });
 

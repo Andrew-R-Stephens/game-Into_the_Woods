@@ -16,8 +16,9 @@ public class MainWindow extends AWindow {
         this.environmentsHandler = environmentsHandler;
 
         constructWindowAndDimensions(preferences);
-    }
 
+        buildCursor(true);
+    }
 
     public void clearComponents() {
         for(MouseListener l : getContentPane().getMouseListeners()) {

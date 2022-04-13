@@ -12,11 +12,12 @@ import java.util.ArrayList;
 
 public abstract class AMenuSlider extends AMenuComponent {
 
-    private final AMenuButton button;
+    protected final AMenuButton button;
 
-    protected ArrayList<Integer> values;
+    protected ArrayList<Short> values;
     protected int itemCount = 2;
     protected int current = 0;
+    protected float notchDistance = 0;
 
     public AMenuSlider(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
         super(parentMenuModel);
@@ -35,9 +36,7 @@ public abstract class AMenuSlider extends AMenuComponent {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
-
                 isPressed = true;
-
                 return true;
             }
 
@@ -54,7 +53,6 @@ public abstract class AMenuSlider extends AMenuComponent {
                     AMenuSlider.this.isPressed = false;
                     isPressed = false;
                     playSound = true;
-                    isInBounds(mc.getPos()[0], mc.getPos()[1]);
                 }
             }
         };
@@ -62,31 +60,20 @@ public abstract class AMenuSlider extends AMenuComponent {
         button.setImageScaling(ImageScale.FIT_CENTERED);
 
         init();
+
+        build();
     }
 
     public abstract void init();
 
-    public void moveToCursor(int x, int y) {
+    public void moveSliderTo(int x, int y) {
 
         x = (int)(x / ConfigData.scaledW);
-
-        /*
-        if(x + x - button.x + button.w > this.x + this.w) {
-            x = this.x + this.w - button.w;
-        }
-        if(button.x > (this.x + this.w - button.w)) {
-            x = (this.x + this.w) - button.w;
-            System.out.println(x);
-        }
-        */
-
         if(x < this.x) {
             x = this.x;
         }
 
-        float notchDistance = (w - button.w) / (float)(itemCount -1);
         int newX = (int)((x - this.x) / notchDistance);
-
         if(newX > itemCount -1) {
             newX = itemCount -1;
         }
@@ -96,9 +83,6 @@ public abstract class AMenuSlider extends AMenuComponent {
         x = (int)(this.x + (newX * notchDistance));
         button.setX(x);
 
-        doSetting();
-
-        System.out.println((x - this.x) + ", " + (newX + 1) + "/" + (itemCount) + ", " + (int)(newX * notchDistance));
     }
 
     public abstract void doSetting();
@@ -110,19 +94,9 @@ public abstract class AMenuSlider extends AMenuComponent {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.RED);
-        g.drawRect(
-                (int)(ConfigData.scaledW * x),
-                (int)(ConfigData.scaledW * y),
-                (int)(ConfigData.scaledW * w),
-                (int)(ConfigData.scaledW * h));
+        super.draw(g);
 
         button.draw(g);
-    }
-
-    @Override
-    public void update(float delta) {
-        super.update(delta);
     }
 
     @Override
@@ -130,9 +104,15 @@ public abstract class AMenuSlider extends AMenuComponent {
         if(button != null) {
             button.registerInput();
             if(button.isPressed) {
-                moveToCursor(parentMenuEnvironment.getMouseController().getPos()[0], parentMenuEnvironment.getMouseController().getPos()[1]);
+                moveSliderTo(parentMenuEnvironment.getMouseController().getPos()[0], parentMenuEnvironment.getMouseController().getPos()[1]);
+                doSetting();
             }
         }
+    }
+
+    public void build() {
+        notchDistance = (w - button.w) / (float)(itemCount -1);
+        button.x = this.x + (int)(notchDistance*current);
     }
 
     public void setText(String s) {

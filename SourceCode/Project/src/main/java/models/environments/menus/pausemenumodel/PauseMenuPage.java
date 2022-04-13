@@ -1,7 +1,6 @@
 package models.environments.menus.pausemenumodel;
 
 import models.environments.EnvironmentsHandler;
-import models.environments.game.GameEnvironment;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
@@ -18,16 +17,12 @@ public class PauseMenuPage extends AMenu {
         bundle.addPage(new PauseOptionsPage(parentMenuModel));
         bundle.addPage(new PauseHelpPage(parentMenuModel));
 
-        //BufferedImage img_button = Resources.getImage("button_hrect");
-
-        float centerHoriz = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-
         int buttonW = 400, buttonH = (int)(buttonW * .25);
 
         // Resume button
         AMenuButton button_resume = new AMenuButton(
                 parentMenuModel,
-                (int)(centerHoriz - (buttonW * .5f)),
+                (int)(centerW - (buttonW * .5f)),
                 175,
                 buttonW,
                 buttonH)
@@ -55,7 +50,7 @@ public class PauseMenuPage extends AMenu {
         // Options button
         AMenuButton button_options = new AMenuButton(
                 parentMenuModel,
-                (int)(centerHoriz - (buttonW * .5f)),
+                (int)(centerW - (buttonW * .5f)),
                 405,
                 buttonW,
                 buttonH) {
@@ -77,7 +72,7 @@ public class PauseMenuPage extends AMenu {
         // Help button
         AMenuButton button_help = new AMenuButton(
                 parentMenuModel,
-                (int)(centerHoriz - (buttonW * .5f)),
+                (int)(centerW - (buttonW * .5f)),
                 520,
                 buttonW,
                 buttonH) {
@@ -98,7 +93,7 @@ public class PauseMenuPage extends AMenu {
 
         // Quit button
         AMenuButton button_quit = new AMenuButton(parentMenuModel,
-                (int)(centerHoriz - (buttonW * .5f)),
+                (int)(centerW - (buttonW * .5f)),
                 800,
                 buttonW,
                 buttonH) {

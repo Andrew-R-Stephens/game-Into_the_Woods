@@ -13,8 +13,6 @@ public class HelpPage extends AMenu {
 
         image_background = Resources.getImage("menubackground");
 
-        //BufferedImage img_button = Resources.getImage("button_hrect");
-
         float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
         float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
 

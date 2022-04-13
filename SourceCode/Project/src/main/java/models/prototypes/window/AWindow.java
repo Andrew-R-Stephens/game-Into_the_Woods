@@ -1,9 +1,12 @@
 package models.prototypes.window;
 
 import models.utils.config.ConfigData;
+import models.utils.resources.Resources;
 
 import javax.swing.*;
+import javax.tools.Tool;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class AWindow extends JFrame {
 
@@ -55,16 +58,35 @@ public abstract class AWindow extends JFrame {
 
         System.out.println(dScalingX + " " + dScalingY);
 
-        ConfigData.scaledW = ConfigData.scaledW / dScalingX;
-        ConfigData.scaledH = ConfigData.scaledH / dScalingY;
+        ConfigData.scaledW_zoom = ConfigData.scaledW_zoom / dScalingX;
+        ConfigData.scaledH_zoom = ConfigData.scaledH_zoom / dScalingY;
 
-        System.out.println(ConfigData.scaledW + " " + ConfigData.scaledH);
+        System.out.println(ConfigData.scaledW_zoom + " " + ConfigData.scaledH_zoom);
 
         setAlwaysOnTop(true);
         setResizable(false);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void buildCursor(boolean isVisible) {
+        Dimension prefCursorDim = Toolkit.getDefaultToolkit().getBestCursorSize(32, 32);
+        Image scaledImage = null;
+        if(isVisible) {
+             scaledImage = Resources.getImage("cursor")
+                    .getScaledInstance(prefCursorDim.width, prefCursorDim.height, Image.SCALE_SMOOTH);
+        } else {
+            // Transparent 16 x 16 pixel cursor image.
+            scaledImage = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        }
+
+        Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(
+                scaledImage,
+                new Point(0, 0),
+                "customCursor");
+
+        super.setCursor(c);
     }
 
 }

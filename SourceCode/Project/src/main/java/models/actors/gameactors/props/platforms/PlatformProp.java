@@ -27,11 +27,11 @@ public class PlatformProp extends AProp implements IDrawable, IUpdatable {
 
         g.setColor(Color.DARK_GRAY);
 
-        float offsetX = ((x * ConfigData.scaledW) + (Camera.camX));
-        float offsetY = ((y * ConfigData.scaledH) + (Camera.camY));
+        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.camY));
 
-        float scaledW = w * ConfigData.scaledW;
-        float scaledH = h * ConfigData.scaledH;
+        float scaledW = w * ConfigData.scaledW_zoom;
+        float scaledH = h * ConfigData.scaledH_zoom;
 
         BufferedImage img = Resources.getImage("mockPlatformV2");
         float imgScaledH = scaledH/img.getHeight();

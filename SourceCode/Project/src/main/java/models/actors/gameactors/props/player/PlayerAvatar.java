@@ -47,27 +47,25 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         }
 
         float tx =
-                (float)(((ConfigData.window_width_actual * .5) - (w * ConfigData.scaledW)) - (x * ConfigData.scaledW));
+                (float)(((ConfigData.window_width_actual * .5) - (w * ConfigData.scaledW_zoom)) - (x * ConfigData.scaledW_zoom));
         float ty =
-                (float)(((ConfigData.window_height_actual * .5) - (h * ConfigData.scaledH)) - (y * ConfigData.scaledH));
+                (float)(((ConfigData.window_height_actual * .5) - (h * ConfigData.scaledH_zoom)) - (y * ConfigData.scaledH_zoom));
 
         Camera.moveTo(tx, ty);
 
         updateSpriteAnimation(delta);
-
-        //System.out.println(actionState);
     }
 
     @Override
     public void draw(Graphics g) {
 
         // Scaled size
-        float scaleW = w * ConfigData.scaledW;
-        float scaleH = h * ConfigData.scaledH;
+        float scaleW = w * ConfigData.scaledW_zoom;
+        float scaleH = h * ConfigData.scaledH_zoom;
 
         //Half window width
-        float centerX = (x * ConfigData.scaledW) + (Camera.camX) + scaleW;
-        float centerY = (y * ConfigData.scaledH) + (Camera.camY) + scaleH;
+        float centerX = (x * ConfigData.scaledW_zoom) + (Camera.camX) + scaleW;
+        float centerY = (y * ConfigData.scaledH_zoom) + (Camera.camY) + scaleH;
 
         centerX -= scaleW;
         centerY -= scaleH;

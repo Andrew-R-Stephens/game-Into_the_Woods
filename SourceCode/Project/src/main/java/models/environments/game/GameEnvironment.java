@@ -203,8 +203,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 for (int i = 0; i < count; i++) {
                     queueActor(
                             new ParticleActor(
-                                    (-Camera.camX / ConfigData.scaledW) + (gmc.getPos()[0]/ ConfigData.scaledW),
-                                    (-Camera.camY / ConfigData.scaledW) + (gmc.getPos()[1]/ ConfigData.scaledH),
+                                    (-Camera.camX / ConfigData.scaledW_zoom) + (gmc.getPos()[0]/ ConfigData.scaledW_zoom),
+                                    (-Camera.camY / ConfigData.scaledW_zoom) + (gmc.getPos()[1]/ ConfigData.scaledH_zoom),
                                     10f,
                                     10f,
                                     new Random().nextFloat(-5, 5),
