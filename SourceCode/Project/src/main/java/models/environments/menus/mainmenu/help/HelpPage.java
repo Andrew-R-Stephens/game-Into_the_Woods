@@ -1,8 +1,8 @@
 package models.environments.menus.mainmenu.help;
 
-import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuEnvironment;
-import models.prototypes.window.environments.menu.components.types.AMenuButton;
+import models.prototypes.environments.menu.AMenu;
+import models.prototypes.environments.menu.AMenuEnvironment;
+import models.prototypes.environments.menu.components.types.AButtonView;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
 
@@ -18,7 +18,7 @@ public class HelpPage extends AMenu {
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
-        AMenuButton button_back = new AMenuButton(
+        AButtonView button_back = new AButtonView(
                 parentModel,
                 (int) (mx - (btn_width * .5f)),
                 800,
@@ -38,7 +38,7 @@ public class HelpPage extends AMenu {
         };
         button_back.setText("Back");
         //button_back.setBackgroundImage(img_button);
-        button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         components.add(button_back);
     }

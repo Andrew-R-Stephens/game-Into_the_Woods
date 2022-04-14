@@ -12,9 +12,10 @@ import java.awt.*;
 public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
 
     protected Facing facing;
-    public enum Facing { LEFT, RIGHT, UP, DOWN }
+    protected enum Facing { LEFT, RIGHT, UP, DOWN }
 
-    protected Color c = Color.GREEN;
+    protected Color color = new Color(0, 0, 255, 50);
+
 
     protected AActor(float x, float y,
                      float w, float h,

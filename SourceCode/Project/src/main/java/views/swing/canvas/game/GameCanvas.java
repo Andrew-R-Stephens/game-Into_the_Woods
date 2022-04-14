@@ -1,7 +1,7 @@
 package views.swing.canvas.game;
 
 import models.environments.game.GameEnvironment;
-import models.prototypes.window.ACanvas;
+import models.prototypes.views.ACanvas;
 
 import java.awt.*;
 

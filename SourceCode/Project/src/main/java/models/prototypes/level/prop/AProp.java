@@ -19,19 +19,7 @@ public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, I
     public void draw(Graphics g) {
     }
 
-    public void drawAsHUD(Graphics g) {
-
-        g.setColor(Color.WHITE);
-
-        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.targX * ConfigData.scaledW_zoom));
-        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.targY * ConfigData.scaledH_zoom));
-
-        float scaledW = w * ConfigData.scaledW_zoom;
-        float scaledH = h * ConfigData.scaledH_zoom;
-
-        g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
-
-    }
+    public abstract void drawAsHUD(Graphics g);
 
     @Override
     public void update(float delta) {

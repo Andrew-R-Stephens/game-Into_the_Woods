@@ -24,7 +24,7 @@ public class SpriteSheetParser {
 
     private SpriteSheet processSpriteSheet() {
 
-        AFileReader reader = new AFileReader(jsonFile) {
+        new AFileReader() {
             @Override
             public boolean read() {
                 try {
@@ -44,7 +44,6 @@ public class SpriteSheetParser {
                     JsonObject frames = element.getAsJsonObject();
                     JsonElement frameObj = frames.get("frames");
 
-                    //System.out.println(frameObj);
                     if(frameObj.isJsonArray()) {
                         JsonArray frameArray = frameObj.getAsJsonArray();
                         for(int i = 0; i < frameArray.size(); i++) {
@@ -84,7 +83,6 @@ public class SpriteSheetParser {
                                     duration
                             ));
                         }
-                        //System.out.println(frameObj);
                     }
 
                     spriteSheet = new SpriteSheet(sprites);
@@ -99,7 +97,6 @@ public class SpriteSheetParser {
                 return true;
             }
         };
-        reader.read();
 
         return spriteSheet;
     }

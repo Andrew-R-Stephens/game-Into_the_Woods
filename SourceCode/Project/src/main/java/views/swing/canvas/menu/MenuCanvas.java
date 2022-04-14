@@ -1,7 +1,7 @@
 package views.swing.canvas.menu;
 
 import models.environments.menus.mainmenu.MainMenuEnvironment;
-import models.prototypes.window.ACanvas;
+import models.prototypes.views.ACanvas;
 import models.utils.config.ConfigData;
 
 import java.awt.*;

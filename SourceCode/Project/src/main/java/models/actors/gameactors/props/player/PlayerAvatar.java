@@ -137,4 +137,7 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         return "TC:  VX= " + (int)vX + ", VY= " + (int)vY;
     }
 
+    public void setAction(ActionType actionState) {
+        this.actionState = actionState;
+    }
 }

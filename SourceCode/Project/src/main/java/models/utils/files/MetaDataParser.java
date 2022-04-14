@@ -21,7 +21,7 @@ public class MetaDataParser {
 
     public void init() {
 
-        AFileReader reader = new AFileReader(jsonFile) {
+        new AFileReader() {
             @Override
             public boolean read() {
                 try {
@@ -52,7 +52,6 @@ public class MetaDataParser {
                 return true;
             }
         };
-        reader.read();
     }
 
     public String getPath(String type) {

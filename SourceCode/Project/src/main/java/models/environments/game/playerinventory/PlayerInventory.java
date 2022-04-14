@@ -1,6 +1,6 @@
 package models.environments.game.playerinventory;
 
-import models.actors.gameactors.props.triggers.collectibles.key.KeyCollectible;
+import models.actors.gameactors.props.triggers.collectibles.key.DoorKey;
 import models.prototypes.level.prop.trigger.collectibles.ACollectibleTrigger;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class PlayerInventory {
     public int getKeyCount() {
         int count = 0;
         for(ACollectibleTrigger c: collectibles) {
-            if(c instanceof KeyCollectible) {
+            if(c instanceof DoorKey) {
                 count ++;
             }
         }

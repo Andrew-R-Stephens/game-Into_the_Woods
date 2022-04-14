@@ -1,7 +1,7 @@
 package views.swing.window;
 
 import models.environments.EnvironmentsHandler;
-import models.prototypes.window.AWindow;
+import models.prototypes.views.AWindow;
 import models.utils.config.ConfigData;
 
 import java.awt.event.KeyListener;

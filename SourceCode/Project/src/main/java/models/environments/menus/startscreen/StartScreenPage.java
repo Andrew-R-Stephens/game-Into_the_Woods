@@ -1,9 +1,9 @@
 package models.environments.menus.startscreen;
 
 import models.environments.menus.mainmenu.MainMenuPage;
-import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuEnvironment;
-import models.prototypes.window.environments.menu.components.types.AMenuButton;
+import models.prototypes.environments.menu.AMenu;
+import models.prototypes.environments.menu.AMenuEnvironment;
+import models.prototypes.environments.menu.components.types.AButtonView;
 import models.utils.resources.Resources;
 
 public class StartScreenPage extends AMenu {
@@ -16,7 +16,7 @@ public class StartScreenPage extends AMenu {
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
-        AMenuButton startButton = new AMenuButton(
+        AButtonView startButton = new AButtonView(
                 parentMenuModel,
                 (int)(centerW - (btn_width * .5f)),
                 (int)(centerH - (btn_height * .5f)),
@@ -35,7 +35,7 @@ public class StartScreenPage extends AMenu {
         };
 
         startButton.setText("Start button");
-        startButton.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        startButton.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         components.add(startButton);
 

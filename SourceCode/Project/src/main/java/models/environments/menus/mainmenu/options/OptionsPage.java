@@ -1,9 +1,9 @@
 package models.environments.menus.mainmenu.options;
 
-import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuEnvironment;
-import models.prototypes.window.environments.menu.components.types.AMenuButton;
-import models.prototypes.window.environments.menu.components.types.AMenuSlider;
+import models.prototypes.environments.menu.AMenu;
+import models.prototypes.environments.menu.AMenuEnvironment;
+import models.prototypes.environments.menu.components.types.AButtonView;
+import models.prototypes.environments.menu.components.types.ASliderView;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
 
@@ -19,7 +19,7 @@ public class OptionsPage extends AMenu {
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
-        AMenuSlider slider_fps = new AMenuSlider(
+        ASliderView slider_fps = new ASliderView(
                 parentMenuModel,
                 (int) (centerW - (800 * .5f)),
                 300,
@@ -33,8 +33,9 @@ public class OptionsPage extends AMenu {
                 GraphicsDevice[] gs = ge.getScreenDevices();
                 DisplayMode dm = gs[0].getDisplayMode();
 
+                final int MIN_REFRESH_RATE = 1;
                 final int MAX_REFRESH_RATE = dm.getRefreshRate();
-                for(short i = 30; i <= MAX_REFRESH_RATE; i++) {
+                for(short i = MIN_REFRESH_RATE; i <= MAX_REFRESH_RATE; i++) {
                     values.add(i);
                 }
                 itemCount = values.size();
@@ -47,15 +48,17 @@ public class OptionsPage extends AMenu {
                         break;
                     }
                 }
+                System.out.println(current + " / " + itemCount);
 
             }
             @Override
             public void doSetting() {
                 ConfigData.frameRate = values.get(current);
+                System.out.println("Setting framerate: " + ConfigData.frameRate);
             }
         };
 
-        AMenuSlider slider_window = new AMenuSlider(
+        ASliderView slider_window = new ASliderView(
                 parentMenuModel,
                 (int) (centerW - (800 * .5f)),
                 400,
@@ -75,7 +78,7 @@ public class OptionsPage extends AMenu {
             }
         };
 
-        AMenuButton button_back = new AMenuButton(
+        AButtonView button_back = new AButtonView(
                 parentMenuModel,
                 (int) (centerW - (btn_width * .5f)),
                 800,
@@ -94,7 +97,7 @@ public class OptionsPage extends AMenu {
             }
         };
         button_back.setText("Back");
-        button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         components.add(slider_fps);
         components.add(slider_window);

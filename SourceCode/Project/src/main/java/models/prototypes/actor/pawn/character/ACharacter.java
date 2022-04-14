@@ -40,7 +40,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
 
     private boolean isJumpLocked = false;
 
-    public HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
+    protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 
     protected ACharacter(GameControls cModel, float x, float y, float w, float h, float vx, float vy,
                          boolean hasGravity) {
@@ -184,6 +184,10 @@ public abstract class ACharacter extends APawn implements IUpdatable {
                 actionState = ActionType.WALL_CLIMBING;
             }
         }
+    }
+
+    public SpriteSheet getCurrentSpriteSheet() {
+        return spriteSheets.get(actionState);
     }
 
     public void reset(int[] characterOrigin) {

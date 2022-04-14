@@ -5,7 +5,7 @@ import controls.MenuControls;
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
 import controls.menu.MenuKeyControls;
-import models.actors.gameactors.props.particles.ParticleActor;
+import models.actors.gameactors.props.particles.Particle;
 import models.actors.gameactors.props.player.PlayerAvatar;
 import models.camera.Camera;
 import models.environments.EnvironmentsHandler;
@@ -17,7 +17,7 @@ import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.AProp;
-import models.prototypes.window.environments.AEnvironment;
+import models.prototypes.environments.AEnvironment;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
@@ -202,7 +202,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 }
                 for (int i = 0; i < count; i++) {
                     queueActor(
-                            new ParticleActor(
+                            new Particle(
                                     (-Camera.camX / ConfigData.scaledW_zoom) + (gmc.getPos()[0]/ ConfigData.scaledW_zoom),
                                     (-Camera.camY / ConfigData.scaledW_zoom) + (gmc.getPos()[1]/ ConfigData.scaledH_zoom),
                                     10f,
@@ -223,7 +223,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         for (AActor gameObject : actors) {
 
             // Update TestActors
-            if (gameObject instanceof ParticleActor a) {
+            if (gameObject instanceof Particle a) {
                 a.update(delta);
             }
 

@@ -1,7 +1,7 @@
 package models.prototypes.level;
 
-import models.actors.gameactors.props.triggers.collectibles.key.KeyCollectible;
-import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
+import models.actors.gameactors.props.triggers.collectibles.key.DoorKey;
+import models.actors.gameactors.props.triggers.interactibles.Door;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.AProp;
@@ -19,10 +19,10 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     protected GameEnvironment gameEnvironment;
 
-    protected BufferedImage backgroundImage;
+    protected Image backgroundImage;
     protected int[] startOrigin = new int[2];
     protected final ArrayList<AProp> levelProps = new ArrayList<>();
-    protected DoorTrigger door;
+    protected Door door;
 
     protected int keyCount = 0;
 
@@ -48,12 +48,12 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     }
 
     protected void setBackgroundImage(BufferedImage backgroundImage) {
-        this.backgroundImage = backgroundImage;
+        this.backgroundImage = backgroundImage.getScaledInstance(5000, 5000, Image.SCALE_SMOOTH);
     }
 
     public void countKeys() {
         for (AActor levelProps : getLevelProps()) {
-            if (levelProps instanceof KeyCollectible) {
+            if (levelProps instanceof DoorKey) {
                 this.keyCount++;
             }
         }

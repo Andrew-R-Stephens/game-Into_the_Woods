@@ -1,7 +1,7 @@
 package models.environments.menus.pausemenumodel;
 
 import models.environments.game.GameEnvironment;
-import models.prototypes.window.environments.menu.AMenuEnvironment;
+import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 

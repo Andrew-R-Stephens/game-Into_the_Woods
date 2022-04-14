@@ -27,8 +27,8 @@ public class Camera {
         targY = y2 * zoomLevel;
 
         // Casting these to int rounds the translation, which helps mitigate render misalignment issues
-        camX += ((x2 - camX) * acceleration_pan);
-        camY += ((y2 - camY) * acceleration_pan);
+        camX += (((x2 * zoomLevel) - (camX * zoomLevel)) * acceleration_pan);
+        camY += (((y2 * zoomLevel) - (camY * zoomLevel)) * acceleration_pan);
 
         zoomTo();
     }

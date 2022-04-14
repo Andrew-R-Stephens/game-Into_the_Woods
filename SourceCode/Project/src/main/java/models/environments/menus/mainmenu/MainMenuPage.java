@@ -4,10 +4,9 @@ import models.environments.menus.mainmenu.continuegame.LevelSelectPage;
 import models.environments.menus.mainmenu.help.HelpPage;
 import models.environments.menus.mainmenu.newgame.NewGamePage;
 import models.environments.menus.mainmenu.options.OptionsPage;
-import models.environments.menus.mainmenu.quit.QuitPage;
-import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuEnvironment;
-import models.prototypes.window.environments.menu.components.types.AMenuButton;
+import models.prototypes.environments.menu.AMenu;
+import models.prototypes.environments.menu.AMenuEnvironment;
+import models.prototypes.environments.menu.components.types.AButtonView;
 import models.utils.resources.Resources;
 
 public class MainMenuPage extends AMenu {
@@ -17,15 +16,9 @@ public class MainMenuPage extends AMenu {
 
         image_background = Resources.getImage("menubackground");
 
-        bundle.addPage(new NewGamePage(parentMenuModel));
-        bundle.addPage(new LevelSelectPage(parentMenuModel));
-        bundle.addPage(new OptionsPage(parentMenuModel));
-        bundle.addPage(new HelpPage(parentMenuModel));
-        bundle.addPage(new QuitPage(parentMenuModel));
-
         int buttonW = 400, buttonH = (int)(buttonW * .25);
 
-        AMenuButton button_newGame = new AMenuButton(
+        AButtonView button_newGame = new AButtonView(
                 parentMenuModel,
                 (int)(centerW - (buttonW * .5f)),
                 175,
@@ -39,15 +32,15 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuEnvironment.push(bundle.getPage(0));
+                parentMenuEnvironment.push(new NewGamePage(parentMenuModel));
 
                 return true;
             }
         };
         button_newGame.setText("New Game");
-        button_newGame.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_newGame.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
-        AMenuButton button_continueGame = new AMenuButton(
+        AButtonView button_continueGame = new AButtonView(
                 parentMenuModel,
                 (int)(centerW - (buttonW * .5f)),
                 290,
@@ -65,9 +58,9 @@ public class MainMenuPage extends AMenu {
             }
         };
         button_continueGame.setText("Continue Game");
-        button_continueGame.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_continueGame.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
-        AMenuButton button_options = new AMenuButton(
+        AButtonView button_options = new AButtonView(
                 parentMenuModel,
                 (int)(centerW - (buttonW * .5f)),
                 405,
@@ -79,15 +72,15 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuEnvironment.push(bundle.getPage(2));
+                parentMenuEnvironment.push(new OptionsPage(parentMenuModel));
 
                 return true;
             }
         };
         button_options.setText("Options");
-        button_options.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_options.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
-        AMenuButton button_help = new AMenuButton(
+        AButtonView button_help = new AButtonView(
                 parentMenuModel,
                 (int)(centerW - (buttonW * .5f)),
                 520,
@@ -99,15 +92,15 @@ public class MainMenuPage extends AMenu {
                     return false;
                 }
 
-                parentMenuEnvironment.push(bundle.getPage(3));
+                parentMenuEnvironment.push(new HelpPage(parentMenuModel));
 
                 return true;
             }
         };
         button_help.setText("Help");
-        button_help.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_help.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
-        AMenuButton button_quit = new AMenuButton(parentMenuModel,
+        AButtonView button_quit = new AButtonView(parentMenuModel,
                 (int)(centerW - (buttonW * .5f)),
                 800,
                 buttonW,
@@ -124,7 +117,7 @@ public class MainMenuPage extends AMenu {
         };
         button_quit.setText("Quit to Desktop");
         button_quit.setBackgroundImage(image_buttonRect);
-        button_quit.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_quit.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         components.add(button_newGame);
         components.add(button_continueGame);
@@ -135,7 +128,7 @@ public class MainMenuPage extends AMenu {
     }
 
     public void navigateToLevelSelectPage() {
-        parentMenuModel.push(bundle.getPage(1));
+        parentMenuModel.push(new LevelSelectPage(parentMenuModel));
     }
 
 }

@@ -1,7 +1,7 @@
 package models.environments.game.hud.components;
 
 import models.environments.game.GameEnvironment;
-import models.prototypes.window.environments.overlays.AOverlayComponent;
+import models.prototypes.environments.overlays.AOverlayComponent;
 import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;

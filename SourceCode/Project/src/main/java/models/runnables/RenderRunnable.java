@@ -1,7 +1,7 @@
 package models.runnables;
 
 import models.prototypes.threading.ARunnable;
-import models.prototypes.window.ACanvas;
+import models.prototypes.views.ACanvas;
 import models.utils.config.ConfigData;
 
 public class RenderRunnable extends ARunnable {

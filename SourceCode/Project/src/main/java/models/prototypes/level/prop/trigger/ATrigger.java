@@ -16,7 +16,6 @@ public abstract class ATrigger extends AProp implements IDrawable {
     protected AActor lastActor;
 
     protected boolean canMoveOnCollision;
-
     protected int MAX_CYCLES;
     protected int currentCycles = 0;
 
@@ -55,6 +54,10 @@ public abstract class ATrigger extends AProp implements IDrawable {
         g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
         g.setColor(Color.BLACK);
         g.drawString("Trigger Area", (int) (offsetX) + 3, (int) (offsetY) + 12);
+    }
+
+    public void drawAsHUD(Graphics g) {
+
     }
 
 }

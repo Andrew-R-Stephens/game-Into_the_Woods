@@ -2,9 +2,9 @@ package models.environments.menus.mainmenu.newgame;
 
 import models.environments.EnvironmentsHandler;
 import models.prototypes.actor.pawn.character.ACharacter;
-import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuEnvironment;
-import models.prototypes.window.environments.menu.components.types.AMenuButton;
+import models.prototypes.environments.menu.AMenu;
+import models.prototypes.environments.menu.AMenuEnvironment;
+import models.prototypes.environments.menu.components.types.AButtonView;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
 
@@ -48,7 +48,7 @@ public class NewGamePage extends AMenu {
         */
 
         //Level 1 Button
-        AMenuButton button_avatar1 = new AMenuButton(
+        AButtonView button_avatar1 = new AButtonView(
                 parentModel,
                 (int) (mx - (200 * .5f)) - 250,
                 300,
@@ -60,7 +60,7 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
-                parentMenuEnvironment.parentEnvironmentsHandler.
+                parentMenuEnvironment.getParentEnvironmentsHandler().
                         getGameEnvironment().getPlayerAvatar().setCharacterType(ACharacter.CharacterType.TEO);
 
                 return true;
@@ -68,10 +68,10 @@ public class NewGamePage extends AMenu {
         };
         button_avatar1.setText("TEO");
         button_avatar1.setBackgroundImage(img_sqbutton);
-        button_avatar1.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_avatar1.setImageScaling(AButtonView.ImageScale.FILL_XY);
 
         //Level 3 Button
-        AMenuButton button_avatar2 = new AMenuButton(
+        AButtonView button_avatar2 = new AButtonView(
                 parentModel,
                 (int) (mx - (200 * .5f) + 250),
                 300,
@@ -83,7 +83,7 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
-                parentMenuEnvironment.parentEnvironmentsHandler.
+                parentMenuEnvironment.getParentEnvironmentsHandler().
                         getGameEnvironment().getPlayerAvatar().setCharacterType(ACharacter.CharacterType.MELYNN);
 
                 return true;
@@ -91,10 +91,10 @@ public class NewGamePage extends AMenu {
         };
         button_avatar2.setText("MELYNN");
         button_avatar2.setBackgroundImage(img_sqbutton);
-        button_avatar2.setImageScaling(AMenuButton.ImageScale.FILL_XY);
+        button_avatar2.setImageScaling(AButtonView.ImageScale.FILL_XY);
 
 
-        AMenuButton button_characterConfirm = new AMenuButton(
+        AButtonView button_characterConfirm = new AButtonView(
                 parentModel,
                 (int)(mx - (btn_width * .5f)),
                 550,
@@ -106,19 +106,19 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
-                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().reset();
-                parentMenuEnvironment.parentEnvironmentsHandler.getGameEnvironment().getLevelsList().setCurrentLevel(0);
+                parentMenuEnvironment.getParentEnvironmentsHandler().getGameEnvironment().reset();
+                parentMenuEnvironment.getParentEnvironmentsHandler().getGameEnvironment().getLevelsList().setCurrentLevel(0);
 
-                parentMenuEnvironment.parentEnvironmentsHandler.swapToEnvironment(
+                parentMenuEnvironment.getParentEnvironmentsHandler().swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;
             }
         };
         button_characterConfirm.setText("Start New Game");
-        button_characterConfirm.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_characterConfirm.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
-        AMenuButton button_back = new AMenuButton(
+        AButtonView button_back = new AButtonView(
                 parentModel,
                 (int) (mx - (btn_width * .5f)),
                 800,
@@ -138,7 +138,7 @@ public class NewGamePage extends AMenu {
         };
         button_back.setText("Back");
         //button_back.setBackgroundImage(img_button);
-        button_back.setImageScaling(AMenuButton.ImageScale.FIT_CENTERED);
+        button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         components.add(button_avatar1);
         components.add(button_avatar2);

@@ -6,8 +6,8 @@ public abstract class AFileReader {
 
     protected File file;
 
-    public AFileReader(String fullPath) {
-
+    public AFileReader() {
+        read();
     }
 
     public AFileReader(String filePath, String fileName, String fileType) {
