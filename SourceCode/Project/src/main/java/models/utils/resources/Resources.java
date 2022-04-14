@@ -1,7 +1,6 @@
 package models.utils.resources;
 
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import models.sprites.SpriteSheet;
 import models.utils.files.AFileReader;

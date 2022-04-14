@@ -45,7 +45,7 @@ public class TestLevel3 extends ALevel {
             @Override
             public void doAction() {
                 //reactProp.onReact();
-                door.onReact();
+                door.onReceive();
             }
 
         });

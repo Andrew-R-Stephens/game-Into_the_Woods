@@ -2,10 +2,10 @@ package models.environments.menus.mainmenu;
 
 import controls.MenuControls;
 import models.environments.EnvironmentsHandler;
+import models.environments.menus.startscreen.StartScreenPage;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.utils.resources.Resources;
-import models.environments.menus.startscreen.StartScreenPage;
 
 public class MainMenuEnvironment extends AMenuEnvironment {
 

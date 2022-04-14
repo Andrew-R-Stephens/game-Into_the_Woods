@@ -1,7 +1,5 @@
 package models.prototypes.window.environments;
 
-import javazoom.jl.player.JavaSoundAudioDevice;
-import javazoom.jl.player.Player;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import models.environments.EnvironmentsHandler;
 import models.prototypes.controls.AKeyController;

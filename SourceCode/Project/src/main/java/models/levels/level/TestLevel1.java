@@ -1,6 +1,5 @@
 package models.levels.level;
 
-import models.actors.gameactors.props.particles.ParticleActor;
 import models.actors.gameactors.props.platforms.PlatformProp;
 import models.actors.gameactors.props.triggers.collectibles.key.KeyCollectible;
 import models.actors.gameactors.props.triggers.interactibles.DoorTrigger;
@@ -8,15 +7,12 @@ import models.actors.gameactors.props.triggers.interactibles.SpikesTrigger;
 import models.actors.gameactors.props.triggers.interactibles.SpringTrigger;
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
-import models.prototypes.actor.AActor;
-import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.reactor.AReactProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.utils.resources.Resources;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * This is TestLevel1 class
@@ -77,6 +73,7 @@ public class TestLevel1 extends ALevel {
         addProp(reactProp);
 
         // PARTICLE TRIGGER
+        /*
         addProp(new APropTrigger(gameEnvironment, 700, 880, 100, 100,
                 0, 0, 1,false, false) {
             @Override
@@ -96,27 +93,24 @@ public class TestLevel1 extends ALevel {
             }
         });
 
+        */
         // ZOOM TRIGGER
         addProp(new APropTrigger(gameEnvironment, 0, 0, 800, 1080,
                 0, 0, -1,false, false) {
             @Override
             public void doAction() {
                 System.out.println("Zoom triggered");
-                Camera.zoom(2f);
+                Camera.zoomTarget = 2f;
             }
-
+/*
             @Override
             public boolean hasCollision(AActor a, float delta) {
                 if(!(a instanceof ACharacter)) {
                     return false;
                 }
 
-                boolean isColliding = super.hasCollision(a, delta);
-                if(!isColliding) {
-                    Camera.zoom(1.5f);
-                }
-                return isColliding;
-            }
+                return super.hasCollision(a, delta);
+            }*/
         });
 
         // Door
@@ -130,7 +124,7 @@ public class TestLevel1 extends ALevel {
             @Override
             public void doAction() {
                 //reactProp.onReact();
-                door.onReact();
+                door.onReceive();
             }
 
         });

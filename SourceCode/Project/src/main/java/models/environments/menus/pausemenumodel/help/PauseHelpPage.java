@@ -3,7 +3,6 @@ package models.environments.menus.pausemenumodel.help;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
-import models.utils.config.ConfigData;
 
 public class PauseHelpPage extends AMenu {
 

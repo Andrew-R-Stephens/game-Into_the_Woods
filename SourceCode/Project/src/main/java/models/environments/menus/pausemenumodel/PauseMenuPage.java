@@ -1,13 +1,12 @@
 package models.environments.menus.pausemenumodel;
 
 import models.environments.EnvironmentsHandler;
-import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuEnvironment;
-import models.prototypes.window.environments.menu.components.types.AMenuButton;
-import models.utils.config.ConfigData;
 import models.environments.menus.pausemenumodel.help.PauseHelpPage;
 import models.environments.menus.pausemenumodel.options.PauseOptionsPage;
 import models.environments.menus.startscreen.StartScreenPage;
+import models.prototypes.window.environments.menu.AMenu;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
+import models.prototypes.window.environments.menu.components.types.AMenuButton;
 
 public class PauseMenuPage extends AMenu {
 

@@ -5,7 +5,6 @@ import models.levels.level.TestLevel1;
 import models.levels.level.TestLevel2;
 import models.levels.level.TestLevel3;
 import models.prototypes.level.ALevel;
-import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 
 import java.awt.*;

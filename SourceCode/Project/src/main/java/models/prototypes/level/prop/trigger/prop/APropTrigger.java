@@ -9,7 +9,7 @@ public abstract class APropTrigger extends ATrigger {
 
     protected APropTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h,
                            float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(gameEnvironment, x, y, w, h, vx, vy, 1, hasGravity, canMoveOnCollision);
+        super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
     }
 
     @Override

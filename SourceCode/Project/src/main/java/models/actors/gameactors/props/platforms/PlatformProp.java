@@ -39,7 +39,7 @@ public class PlatformProp extends AProp implements IDrawable, IUpdatable {
         if(scaledW < scaledH) {
             g.drawImage(img,
                     (int) (offsetX), (int) (offsetY),
-                    (int) (scaledW), (int) (scaledH),
+                    (int) (scaledW), (int) (scaledH) + 1,
                     null);
             return;
         }
@@ -50,14 +50,14 @@ public class PlatformProp extends AProp implements IDrawable, IUpdatable {
         for(i = 0; i < numImgs-1; i++) {
             g.drawImage(img,
                     (int) (offsetX + (i * imgScaledW)), (int) (offsetY),
-                    (int) (imgScaledW), (int) (scaledH),
+                    (int) (imgScaledW) + 1, (int) (scaledH) + 1,
                     null);
         }
         float lastImgScale = numImgs-i;
         if(lastImgScale > 0) {
             g.drawImage(img,
                     (int) (offsetX + (i * imgScaledW)), (int) (offsetY),
-                    (int) (lastImgScale * imgScaledW), (int) (scaledH),
+                    (int) (lastImgScale * imgScaledW)+1, (int) (scaledH) + 1,
                     null);
         }
     }

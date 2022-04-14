@@ -1,15 +1,14 @@
 package models.environments.menus.mainmenu;
 
-import models.prototypes.window.environments.menu.AMenu;
-import models.prototypes.window.environments.menu.AMenuEnvironment;
-import models.prototypes.window.environments.menu.components.types.AMenuButton;
-import models.utils.config.ConfigData;
-import models.utils.resources.Resources;
 import models.environments.menus.mainmenu.continuegame.LevelSelectPage;
 import models.environments.menus.mainmenu.help.HelpPage;
 import models.environments.menus.mainmenu.newgame.NewGamePage;
 import models.environments.menus.mainmenu.options.OptionsPage;
 import models.environments.menus.mainmenu.quit.QuitPage;
+import models.prototypes.window.environments.menu.AMenu;
+import models.prototypes.window.environments.menu.AMenuEnvironment;
+import models.prototypes.window.environments.menu.components.types.AMenuButton;
+import models.utils.resources.Resources;
 
 public class MainMenuPage extends AMenu {
 

@@ -172,6 +172,18 @@ public abstract class APhysics implements IUpdatable {
         this.y = y;
     }
 
+    public float[] getLocation() {
+        return new float[]{x, y};
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
     private void setSize(float w, float h) {
         this.w = w;
         this.h = h;

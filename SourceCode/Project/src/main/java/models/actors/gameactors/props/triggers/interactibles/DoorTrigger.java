@@ -51,13 +51,12 @@ public class DoorTrigger extends APropTrigger implements IDrawable, IHUDDrawable
         return super.hasCollision(a, delta);
     }
 
-    public void onReact() {
+    public void onReceive() {
         if(state != State.CLOSED) {
             return;
         }
 
         state = State.OPEN;
-        spriteSheets.get(type).setCurrentFrame(state.ordinal());
     }
 
     public void doAction() {
@@ -86,7 +85,9 @@ public class DoorTrigger extends APropTrigger implements IDrawable, IHUDDrawable
 
     @Override
     public void update(float delta) {
-        //super.update(delta);
+        if(state == State.OPEN) {
+            spriteSheets.get(type).update(delta);
+        }
     }
 
     @Override

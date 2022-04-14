@@ -7,8 +7,6 @@ import models.prototypes.window.environments.menu.components.types.AMenuButton;
 import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
 
-import java.awt.image.BufferedImage;
-
 public class LevelSelectPage extends AMenu {
 
     public LevelSelectPage(AMenuEnvironment parentModel) {

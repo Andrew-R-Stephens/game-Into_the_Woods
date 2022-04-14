@@ -28,7 +28,7 @@ public abstract class AMenuSlider extends AMenuComponent {
         this.h = h;
 
         BufferedImage buttonImg = Resources.getImage("button_slider");
-        float scaleW = (float)buttonImg.getHeight() / h;
+        float scaleW = (float)buttonImg.getHeight() / h * .5f;
 
         button = new AMenuButton(parentMenuEnvironment, x, y, (int)(scaleW * h), h) {
             @Override

@@ -6,11 +6,38 @@
     "trimmed": true,
     "spriteSourceSize": { "x": 0, "y": 1, "w": 104, "h": 207 },
     "sourceSize": { "w": 105, "h": 208 },
-    "duration": 100
+    "duration": 50
    },
    {
     "filename": "Door 1.ase",
     "frame": { "x": 104, "y": 0, "w": 104, "h": 207 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 1, "w": 104, "h": 207 },
+    "sourceSize": { "w": 105, "h": 208 },
+    "duration": 50
+   },
+   {
+    "filename": "Door 2.ase",
+    "frame": { "x": 208, "y": 0, "w": 104, "h": 207 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 1, "w": 104, "h": 207 },
+    "sourceSize": { "w": 105, "h": 208 },
+    "duration": 50
+   },
+   {
+    "filename": "Door 3.ase",
+    "frame": { "x": 312, "y": 0, "w": 104, "h": 207 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 1, "w": 104, "h": 207 },
+    "sourceSize": { "w": 105, "h": 208 },
+    "duration": 100
+   },
+   {
+    "filename": "Door 4.ase",
+    "frame": { "x": 416, "y": 0, "w": 104, "h": 207 },
     "rotated": false,
     "trimmed": true,
     "spriteSourceSize": { "x": 0, "y": 1, "w": 104, "h": 207 },
@@ -23,7 +50,7 @@
   "version": "1.2.34.1-x64",
   "image": "door_spritesheet.png",
   "format": "RGBA8888",
-  "size": { "w": 208, "h": 207 },
+  "size": { "w": 520, "h": 207 },
   "scale": "1",
   "frameTags": [
   ],

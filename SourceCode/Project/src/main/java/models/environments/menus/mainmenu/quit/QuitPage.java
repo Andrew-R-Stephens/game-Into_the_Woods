@@ -3,7 +3,6 @@ package models.environments.menus.mainmenu.quit;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
-import models.utils.config.ConfigData;
 
 public class QuitPage extends AMenu {
 

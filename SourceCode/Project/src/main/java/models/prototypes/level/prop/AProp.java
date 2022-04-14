@@ -37,4 +37,5 @@ public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, I
     public void update(float delta) {
         super.update(delta);
     }
+
 }

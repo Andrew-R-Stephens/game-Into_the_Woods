@@ -1,11 +1,10 @@
 package models.environments.menus.startscreen;
 
+import models.environments.menus.mainmenu.MainMenuPage;
 import models.prototypes.window.environments.menu.AMenu;
 import models.prototypes.window.environments.menu.AMenuEnvironment;
 import models.prototypes.window.environments.menu.components.types.AMenuButton;
-import models.utils.config.ConfigData;
 import models.utils.resources.Resources;
-import models.environments.menus.mainmenu.MainMenuPage;
 
 public class StartScreenPage extends AMenu {
 
