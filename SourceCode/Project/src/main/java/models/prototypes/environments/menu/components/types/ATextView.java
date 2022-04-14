@@ -21,14 +21,6 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
         this.y = y;
         this.w = w;
         this.h = h;
-
-        spritesheet = Resources.getSpriteSheet("buttonhrect_spritesheet").setLoopOnLast(false);
-    }
-
-    public void playSound() {
-        if(playSound) {
-            Resources.playAudio("buttonclick");
-        }
     }
 
     @Override
@@ -105,19 +97,7 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
     }
 
     public void registerInput() {
-        AMouseController mc = parentMenuEnvironment.getMouseController();
-        if (mc.isLeftPressed()) {
-            isPressed = onClick(mc.getPos()[0], mc.getPos()[1]);
-            if(isPressed) {
-                mc.reset();
-                playSound();
-                playSound = false;
-            } else {
-                playSound = true;
-            }
-        } else {
-            isInBounds(mc.getPos()[0], mc.getPos()[1]);
-        }
+
     }
 
     public void setText(String s) {

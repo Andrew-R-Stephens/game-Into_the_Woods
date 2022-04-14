@@ -64,8 +64,12 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     public void update(float delta) {
         isFocused = false;
         isPressed = false;
-        registerInput();
 
+        registerInput();
+        updateSpriteSheet(delta);
+    }
+
+    public void updateSpriteSheet(float delta) {
         if(spritesheet != null) {
             if (backgroundImage == null && isFocused) {
                 spritesheet.update(delta);
