@@ -17,6 +17,7 @@ public class Config {
             this.type = type;
             this.name = name;
         }
+
     }
 
     private static WindowType window_type = WindowType.WINDOWED;
