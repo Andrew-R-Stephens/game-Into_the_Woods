@@ -5,7 +5,7 @@ import models.environments.game.hud.components.MapOverlay;
 import models.environments.game.hud.components.PlayerStatsOverlay;
 import models.environments.game.hud.components.TimeKeeperOverlay;
 import models.environments.game.playerinventory.PlayerInventory;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
@@ -30,7 +30,7 @@ public class HUDModel implements IDrawable, IUpdatable {
         this.stats = playerStatsOverlay;
         this.timer = timeKeeperOverlay;
 
-        map.init(gameEnvironment, ConfigData.DEFAULT_WINDOW_WIDTH - 200, 0, 200, 200);
+        map.init(gameEnvironment, Config.DEFAULT_WINDOW_WIDTH - 200, 0, 200, 200);
         stats.init(gameEnvironment,301, 0, 200, 200);
         timer.init(gameEnvironment,0, 0, 300, 200);
     }
@@ -51,7 +51,7 @@ public class HUDModel implements IDrawable, IUpdatable {
         g.setFont(
                 Resources.getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
-                        .deriveFont(Font.PLAIN, 18 * ConfigData.scaledW_zoom));
+                        .deriveFont(Font.PLAIN, 18 * Config.scaledW_zoom));
 
         map.draw(g);
         stats.draw(g);

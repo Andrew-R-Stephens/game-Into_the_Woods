@@ -3,7 +3,7 @@ package models.prototypes.environments.menu.components.types;
 import models.prototypes.controls.AMouseController;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.environments.menu.components.AMenuComponent;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
@@ -36,7 +36,7 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
 
         super.draw(g);
 
-        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
+        float sW = Config.scaledW, sH = Config.scaledH;
 
         if(backgroundImage != null) {
             switch (scaleType) {

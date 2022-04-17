@@ -1,6 +1,6 @@
 package models.camera;
 
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 
 public class Camera {
 
@@ -15,11 +15,7 @@ public class Camera {
     public static float acceleration_zoom = .001f;
 
     public Camera() {
-        targX = ConfigData.window_width_actual * .5f;
-        targY = ConfigData.window_height_actual * .5f;
-
-        camX = ConfigData.window_width_actual * .5f;
-        camY = ConfigData.window_height_actual * .5f;
+        reset();
     }
 
     public static void moveTo(float x2, float y2) {
@@ -38,15 +34,16 @@ public class Camera {
 
         zoomLevel += acceleration_zoom * zoomTarget * (t * t * (3.0f - 2.0f * t));
 
-        ConfigData.calcResolutionScale();
+        Config.calcResolutionScale();
 
         zoomTarget = DEFAULT_ZOOM_LEVEL;
     }
 
     public static void reset() {
-        targX = 0;
-        targY = 0;
-        camX = 0;
-        camY = 0;
+        targX = Config.window_width_actual * .5f;
+        targY = Config.window_height_actual * .5f;
+
+        camX = Config.window_width_actual * .5f;
+        camY = Config.window_height_actual * .5f;
     }
 }

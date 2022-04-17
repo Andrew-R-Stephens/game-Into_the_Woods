@@ -3,7 +3,7 @@ package models.prototypes.actor.pawn.character;
 import controls.GameControls;
 import models.prototypes.actor.pawn.APawn;
 import models.sprites.SpriteSheet;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.updates.IUpdatable;
 
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         MELYNN
     }
 
-    public ActionType actionState = ActionType.FLOOR_IDLE;
+    protected ActionType actionState = ActionType.FLOOR_IDLE;
     public enum ActionType {
         FLOOR_IDLE,
         FLOOR_WALKING,
@@ -32,6 +32,8 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         WALL_JUMPING
     }
 
+    protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
+
     private final int MAX_ALLOWED_JUMP_TIME = 10;
     private final float MAX_ALLOWED_WALLRIDE_TIME = .7f;
 
@@ -40,11 +42,10 @@ public abstract class ACharacter extends APawn implements IUpdatable {
 
     private boolean isJumpLocked = false;
 
-    protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
-
-    protected ACharacter(GameControls cModel, float x, float y, float w, float h, float vx, float vy,
+    protected ACharacter(Resources resources, GameControls cModel, float x, float y, float w, float h, float vx,
+                         float vy,
                          boolean hasGravity) {
-        super(x, y, w, h, vx, vy, hasGravity);
+        super(resources, x, y, w, h, vx, vy, hasGravity);
         this.controlsModel = cModel;
     }
 
@@ -97,7 +98,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         }
 
         // Increment by a specific velocity from control input
-        vX += xDir / (float) ConfigData.GAME_UPDATE_RATE / delta;
+        vX += xDir / (float) Config.GAME_UPDATE_RATE / delta;
         //vY += yDir / (float)PreferenceData.GAME_UPDATE_RATE;
     }
 
@@ -108,7 +109,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     private void doJumps() {
 
         if (time_jump > 0) {
-        time_jump--;
+            time_jump--;
         }
 
         boolean[] abilities = controlsModel.getAbilities();
@@ -192,8 +193,8 @@ public abstract class ACharacter extends APawn implements IUpdatable {
 
     public void reset(int[] characterOrigin) {
         setVelocity(0, 0);
-        x = characterOrigin[0];
-        y = characterOrigin[1];
+        setX(characterOrigin[0]);
+        setY(characterOrigin[1]);
     }
 
 }

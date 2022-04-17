@@ -7,7 +7,7 @@ import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.level.prop.trigger.ATrigger;
 import models.sprites.SpriteSheet;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
@@ -69,11 +69,11 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
 
     @Override
     public void draw(Graphics g) {
-        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.camY));
+        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
 
-        float scaledW = w * ConfigData.scaledW_zoom;
-        float scaledH = h * ConfigData.scaledH_zoom;
+        float scaledW = w * Config.scaledW_zoom;
+        float scaledH = h * Config.scaledH_zoom;
 
         g.setColor(new Color(255, 100, 100, 50));
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));

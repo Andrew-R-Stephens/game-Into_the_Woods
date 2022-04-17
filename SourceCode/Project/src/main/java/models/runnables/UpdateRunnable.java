@@ -2,7 +2,7 @@ package models.runnables;
 
 import models.prototypes.threading.ARunnable;
 import models.prototypes.environments.AEnvironment;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 
 public class UpdateRunnable extends ARunnable {
 
@@ -15,7 +15,7 @@ public class UpdateRunnable extends ARunnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
-        final short targetTicks = ConfigData.GAME_UPDATE_RATE;
+        final short targetTicks = Config.GAME_UPDATE_RATE;
         float ns = 1000000000 / (float) targetTicks, delta = 0;
         float updateRatio = 1;
 
@@ -27,7 +27,7 @@ public class UpdateRunnable extends ARunnable {
 
             if(delta >= 1) {
 
-                updateRatio = lastUpdates / (float) ConfigData.GAME_UPDATE_RATE;
+                updateRatio = lastUpdates / (float) Config.GAME_UPDATE_RATE;
                 environment.update(updateRatio);
                 updates++;
 

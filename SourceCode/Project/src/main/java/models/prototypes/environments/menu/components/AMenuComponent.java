@@ -2,7 +2,7 @@ package models.prototypes.environments.menu.components;
 
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.sprites.SpriteSheet;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
@@ -43,8 +43,8 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     }
 
     protected boolean isInBounds(float mx, float my) {
-        mx /= ConfigData.scaledW;
-        my /= ConfigData.scaledH;
+        mx /= Config.scaledW;
+        my /= Config.scaledH;
 
         boolean horizBound = (mx >= x && mx <= (x + w));
         boolean vertBound = (my >= y && my <= (y + h));
@@ -83,10 +83,10 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     public void draw(Graphics g) {
         g.setColor(Color.RED);
         g.drawRect(
-                (int)(ConfigData.scaledW * x),
-                (int)(ConfigData.scaledW * y),
-                (int)(ConfigData.scaledH * w),
-                (int)(ConfigData.scaledH * h));
+                (int)(Config.scaledW * x),
+                (int)(Config.scaledW * y),
+                (int)(Config.scaledH * w),
+                (int)(Config.scaledH * h));
 
     }
 

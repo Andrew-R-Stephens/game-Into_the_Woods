@@ -3,7 +3,7 @@ package models.prototypes.environments.menu.components.types;
 import models.prototypes.controls.AMouseController;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.environments.menu.components.AMenuComponent;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.resources.Resources;
 
 import java.awt.*;
@@ -68,7 +68,7 @@ public abstract class ASliderView extends AMenuComponent {
 
     public void moveSliderTo(int x, int y) {
 
-        x = (int)(x / ConfigData.scaledW);
+        x = (int)(x / Config.scaledW);
         if(x < this.x) {
             x = this.x;
         }

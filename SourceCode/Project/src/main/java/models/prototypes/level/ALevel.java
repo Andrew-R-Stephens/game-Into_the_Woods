@@ -6,7 +6,7 @@ import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.ATrigger;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.updates.IUpdatable;
@@ -81,8 +81,8 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 backgroundImage,
                 0,
                 0,
-                ConfigData.window_width_actual,
-                ConfigData.window_height_actual,
+                Config.window_width_actual,
+                Config.window_height_actual,
                 null);
 
         for (AActor levelProps : getLevelProps()) {
@@ -102,7 +102,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     @Override
     public void drawAsHUD(Graphics g) {
         g.setColor(new Color(50, 50,50));
-        g.fillRect(0, 0, ConfigData.window_width_actual, ConfigData.window_height_actual);
+        g.fillRect(0, 0, Config.window_width_actual, Config.window_height_actual);
 
         for (AActor levelProps : getLevelProps()) {
             if (levelProps instanceof AProp p) {

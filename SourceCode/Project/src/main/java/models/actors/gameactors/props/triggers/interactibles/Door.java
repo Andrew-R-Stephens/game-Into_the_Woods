@@ -7,7 +7,7 @@ import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.sprites.SpriteSheet;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
@@ -94,11 +94,11 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
     @Override
     public void draw(Graphics g) {
 
-        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.camY));
+        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
 
-        float scaleW = w * ConfigData.scaledW_zoom;
-        float scaleH = h * ConfigData.scaledH_zoom;
+        float scaleW = w * Config.scaledW_zoom;
+        float scaleH = h * Config.scaledH_zoom;
 
         spriteSheets.get(type).draw(g, (int)offsetX, (int)offsetY, (int)scaleW, (int)scaleH);
 

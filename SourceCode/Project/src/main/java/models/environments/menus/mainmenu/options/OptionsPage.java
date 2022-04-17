@@ -4,7 +4,7 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.environments.menu.components.types.AButtonView;
 import models.prototypes.environments.menu.components.types.ASliderView;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.resources.Resources;
 
 import java.awt.*;
@@ -43,7 +43,7 @@ public class OptionsPage extends AMenu {
                 current = itemCount;
                 int i = 0;
                 for(; i < values.size(); i++) {
-                    if(values.get(i) == ConfigData.frameRate) {
+                    if(values.get(i) == Config.frameRate) {
                         current = i;
                         break;
                     }
@@ -53,8 +53,8 @@ public class OptionsPage extends AMenu {
             }
             @Override
             public void doSetting() {
-                ConfigData.frameRate = values.get(current);
-                System.out.println("Setting framerate: " + ConfigData.frameRate);
+                Config.frameRate = values.get(current);
+                System.out.println("Setting framerate: " + Config.frameRate);
             }
         };
 

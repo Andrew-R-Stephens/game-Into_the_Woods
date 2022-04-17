@@ -2,7 +2,7 @@ package models.environments.game.hud.components;
 
 import models.environments.game.GameEnvironment;
 import models.prototypes.environments.overlays.AOverlayComponent;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
@@ -17,12 +17,12 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
         super.init(gameEnvironment, x, y, w, h);
 
         overlay = new BufferedImage(
-                ConfigData.window_width_actual, ConfigData.window_height_actual, BufferedImage.TYPE_INT_ARGB);
+                Config.window_width_actual, Config.window_height_actual, BufferedImage.TYPE_INT_ARGB);
     }
 
     public void reset() {
         overlay = new BufferedImage(
-                ConfigData.window_width_actual, ConfigData.window_height_actual, BufferedImage.TYPE_INT_ARGB);
+                Config.window_width_actual, Config.window_height_actual, BufferedImage.TYPE_INT_ARGB);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
     public void draw(Graphics g) {
         super.draw(g);
 
-        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
+        float sW = Config.scaledW, sH = Config.scaledH;
 
         gameEnvironment.getCurrentLevel().drawAsHUD(overlay.getGraphics());
         g.drawImage(overlay, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
@@ -47,7 +47,7 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
                 (int)((x * sW) - (stroke * .5)), (int)((y * sH) + (stroke * .5)),
                 (int)((w * sW)), (int)((h * sH) ));
 
-        int squareDim = (int)(5 * ConfigData.scaledW_zoom);
+        int squareDim = (int)(5 * Config.scaledW_zoom);
         g.setColor(Color.RED);
         g.fillRect(
                 (int)((x * sW) + (w * sW * .5) - (squareDim)),

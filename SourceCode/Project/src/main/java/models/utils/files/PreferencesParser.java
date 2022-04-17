@@ -1,6 +1,6 @@
 package models.utils.files;
 
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,9 +14,9 @@ import java.io.IOException;
 
 public class PreferencesParser extends AFileReader {
 
-    private final ConfigData preferences;
+    private final Config preferences;
 
-    public PreferencesParser(ConfigData preferences, String filePath, String fileName, String fileType) {
+    public PreferencesParser(Config preferences, String filePath, String fileName, String fileType) {
         super(filePath, fileName, fileType);
 
         this.preferences = preferences;

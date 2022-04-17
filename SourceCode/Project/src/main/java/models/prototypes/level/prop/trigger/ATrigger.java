@@ -4,7 +4,7 @@ import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.AProp;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 
 import java.awt.*;
@@ -42,11 +42,11 @@ public abstract class ATrigger extends AProp implements IDrawable {
     @Override
     public void draw(Graphics g) {
 
-        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.camY));
+        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
 
-        float scaledW = w * ConfigData.scaledW_zoom;
-        float scaledH = h * ConfigData.scaledH_zoom;
+        float scaledW = w * Config.scaledW_zoom;
+        float scaledH = h * Config.scaledH_zoom;
 
         g.setColor(new Color(0, 255, 0, 50));
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));

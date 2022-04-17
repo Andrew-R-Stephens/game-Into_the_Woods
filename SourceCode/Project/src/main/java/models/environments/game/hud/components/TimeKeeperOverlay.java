@@ -2,7 +2,7 @@ package models.environments.game.hud.components;
 
 import models.environments.game.GameEnvironment;
 import models.prototypes.environments.overlays.AOverlayComponent;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
@@ -18,7 +18,7 @@ public class TimeKeeperOverlay extends AOverlayComponent implements IDrawable, I
     public void draw(Graphics g) {
         super.draw(g);
 
-        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
+        float sW = Config.scaledW, sH = Config.scaledH;
 
         g.setColor(Color.white);
         g.drawString("Time Overlay", (int)((x * sW) + (20 * sW)), (int)((y * sH) + (20 * sH)));

@@ -4,7 +4,7 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.environments.menu.components.types.AButtonView;
 import models.prototypes.environments.menu.components.types.ASliderView;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class PauseOptionsPage extends AMenu {
                 current = itemCount;
                 int i = 0;
                 for(; i < itemCount; i++) {
-                    if(values.get(i) == ConfigData.frameRate) {
+                    if(values.get(i) == Config.frameRate) {
                         current = i;
                         break;
                     }
@@ -49,7 +49,7 @@ public class PauseOptionsPage extends AMenu {
             }
             @Override
             public void doSetting() {
-                ConfigData.frameRate = values.get(current);
+                Config.frameRate = values.get(current);
             }
         };
 

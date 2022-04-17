@@ -2,7 +2,7 @@ package models.prototypes.environments.menu.components.types;
 
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.environments.menu.components.AMenuComponent;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
@@ -35,7 +35,7 @@ public class AImageView extends AMenuComponent implements IDrawable, IUpdatable 
         super.draw(g);
 
         g.setColor(new Color(255, 0, 0, 100));
-        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
+        float sW = Config.scaledW, sH = Config.scaledH;
 
         g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
 

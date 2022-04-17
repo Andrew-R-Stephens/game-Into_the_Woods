@@ -4,7 +4,7 @@ import controls.GameControls;
 import models.camera.Camera;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
@@ -13,22 +13,29 @@ import java.awt.*;
 
 public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
-    public PlayerAvatar(GameControls cModel, float x, float y, float w, float h, float vx, float vy,
+    public PlayerAvatar(Resources resources, GameControls cModel, float x, float y, float w, float h, float vx,
+                        float vy,
                         boolean hasGravity) {
-        super(cModel, x - w, y - h, w, h, vx, vy, hasGravity);
+        super(resources, cModel, x - w, y - h, w, h, vx, vy, hasGravity);
 
         spriteSheets.put(ActionType.FLOOR_IDLE,
-                Resources.getSpriteSheet("avataridle_spritesheet").setLoopOnLast(true));
+                Resources.getSpriteSheet("spritesheet_avataridle")
+                        .setLoopOnLast(true).setFrameScale(w, h));
         spriteSheets.put(ActionType.FLOOR_WALKING,
-                Resources.getSpriteSheet("avatarrun_spritesheet").setLoopOnLast(true));
+                Resources.getSpriteSheet("spritesheet_avatarrun2")
+                        .setLoopOnLast(true).setFrameScale(w, h));
         spriteSheets.put(ActionType.FLOOR_RUNNING,
-                Resources.getSpriteSheet("avatarrun_spritesheet2").setLoopOnLast(true));
+                Resources.getSpriteSheet("spritesheet_running_trimmed")
+                        .setLoopOnLast(true).setFrameScale(w, h));
         spriteSheets.put(ActionType.FLOOR_JUMPING,
-                Resources.getSpriteSheet("avatarjump_spritesheet").setLoopOnLast(false));
+                Resources.getSpriteSheet("spritesheet_avatarjump")
+                        .setLoopOnLast(false).setFrameScale(w, h));
         spriteSheets.put(ActionType.WALL_JUMPING,
-                Resources.getSpriteSheet("avatarjump_spritesheet").setLoopOnLast(false));
+                Resources.getSpriteSheet("spritesheet_avatarjump")
+                        .setLoopOnLast(false).setFrameScale(w, h));
         spriteSheets.put(ActionType.WALL_CLIMBING,
-                Resources.getSpriteSheet("avatarjump_spritesheet").setLoopOnLast(true));
+                Resources.getSpriteSheet("spritesheet_avatarjump")
+                        .setLoopOnLast(true).setFrameScale(w, h));
     }
 
     @Override
@@ -40,6 +47,15 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
     public void update(float delta) {
         super.update(delta);
 
+        float[] spriteScale = spriteSheets.get(actionState).getCurrentFrameSize();
+        int[] largest = spriteSheets.get(actionState).getLargestSize();
+
+        w = spriteScale[0];
+        h = spriteScale[1] + spriteSheets.get(actionState).getCurrentFramePos()[1];
+
+        y = (y + (oh - h));
+
+        System.out.println((int)y + " " + (int)h + " " + largest[1]);
         if(vX < 0) {
             facing = Facing.RIGHT;
         } else if (vX > 0) {
@@ -47,9 +63,9 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         }
 
         float tx =
-                (float)(((ConfigData.window_width_actual * .5) - (w * ConfigData.scaledW_zoom)) - (x * ConfigData.scaledW_zoom));
+                (float)(((Config.window_width_actual * .5) - (ow * Config.scaledW_zoom)) - (ox * Config.scaledW_zoom));
         float ty =
-                (float)(((ConfigData.window_height_actual * .5) - (h * ConfigData.scaledH_zoom)) - (y * ConfigData.scaledH_zoom));
+                (float)(((Config.window_height_actual * .5) - (oh * Config.scaledH_zoom)) - (oy * Config.scaledH_zoom));
 
         Camera.moveTo(tx, ty);
 
@@ -60,30 +76,41 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
     public void draw(Graphics g) {
 
         // Scaled size
-        float scaleW = w * ConfigData.scaledW_zoom;
-        float scaleH = h * ConfigData.scaledH_zoom;
+        float scaleW = w * Config.scaledW_zoom;
+        float scaleH = h * Config.scaledH_zoom;
 
         //Half window width
-        float centerX = (x * ConfigData.scaledW_zoom) + (Camera.camX) + scaleW;
-        float centerY = (y * ConfigData.scaledH_zoom) + (Camera.camY) + scaleH;
-
-        centerX -= scaleW;
-        centerY -= scaleH;
+        float centerX = (x * Config.scaledW_zoom) + (Camera.camX);
+        float centerY = (y * Config.scaledH_zoom) + (Camera.camY);
 
         if (facing == Facing.RIGHT) {
             centerX += scaleW;
             scaleW *= -1;
         }
 
-        if(spriteSheets.get(actionState).isTrimmed()) {
-            //x = (x - spriteSheets.get(actionState).getWidth());
-            spriteSheets.get(actionState).draw(g, (int) centerX, (int) centerY, (int) scaleW, (int) scaleH);
-        } else {
-            spriteSheets.get(actionState).draw(g, (int) centerX, (int) centerY, (int) scaleW, (int) scaleH);
-        }
+        /*
+        spriteSheets.get(actionState).draw(g,
+                (int) centerX,
+                (int) centerY,
+                (int) scaleW,
+                (int) scaleH);
+        */
 
-        //g.drawString("TC", (int) (centerX) + 3, (int) (centerY) + 12);
+        spriteSheets.get(actionState).draw(g,
+                (int) centerX,
+                (int) centerY,
+                (int) scaleW,
+                (int) scaleH);
 
+        g.setColor(Color.CYAN);
+
+        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
+
+        float scaledW = w * Config.scaledW_zoom;
+        float scaledH = h * Config.scaledH_zoom;
+
+        g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
     }
 
     private void updateSpriteAnimation(float delta) {

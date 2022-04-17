@@ -1,7 +1,7 @@
 package models.prototypes.actor;
 
 import models.camera.Camera;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.physics.APhysics;
 import models.utils.updates.IUpdatable;
@@ -35,11 +35,11 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
     public void draw(Graphics g) {
         g.setColor(Color.CYAN);
 
-        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.camY));
+        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
 
-        float scaledW = w * ConfigData.scaledW_zoom;
-        float scaledH = h * ConfigData.scaledH_zoom;
+        float scaledW = w * Config.scaledW_zoom;
+        float scaledH = h * Config.scaledH_zoom;
 
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
     }

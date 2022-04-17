@@ -1,26 +1,24 @@
 package models.utils.physics;
 
 import models.prototypes.actor.AActor;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.updates.IUpdatable;
-
 public abstract class APhysics implements IUpdatable {
 
-    public static final float GRAVITY = 9.8f / (float) ConfigData.GAME_UPDATE_RATE;
-    protected boolean hasGravity = true;
-    protected float x, y, w, h;
-
+    public static final float GRAVITY = 9.8f / (float) Config.GAME_UPDATE_RATE;
+    protected final float bufferVert = 5, bufferHoriz = 5;
     protected final float MAX_VEL_X = 9.8f;
     protected final float MAX_VEL_Y = 9.8f;
     protected final float friction = .5f;
+
+    protected float ox, oy, ow, oh;
+    protected float x, y, w, h;
     protected float vX, vY;
 
-    protected final float bufferVert = 5, bufferHoriz = 5;
-
-    protected boolean isMoving;
     protected boolean isFloorCollision,  isWallCollisionLeft, isWallCollisionRight;
-
+    protected boolean hasGravity = true;
     protected boolean isUserControlled;
+    protected boolean isMoving;
 
     protected APhysics(
             float x, float y,
@@ -28,8 +26,11 @@ public abstract class APhysics implements IUpdatable {
             float vX, float vY,
             boolean hasGravity) {
 
+        setOriginalPosition(x, y);
+        setOriginalSize(w, h);
         setPosition(x, y);
         setSize(w, h);
+
         setVelocity(vX, vY);
         setGravity(hasGravity);
 
@@ -39,6 +40,12 @@ public abstract class APhysics implements IUpdatable {
         resetCollisions();
 
         updateVelocity(delta);
+
+        /*
+        if(ox != x || oy != y) {
+            System.out.println("x: " + ox + " != " + x + " / y: " + oy + " != " + y);
+        }
+        */
     }
 
     private void resetCollisions() {
@@ -56,8 +63,13 @@ public abstract class APhysics implements IUpdatable {
     private void updateVelocity(float delta) {
 
         calculateGravity(delta);
+        limitVelocity(delta);
 
-        float acc = 1 - (friction / ConfigData.GAME_UPDATE_RATE / delta);
+    }
+
+    public void limitVelocity(float delta) {
+
+        float acc = 1 - (friction / Config.GAME_UPDATE_RATE / delta);
 
         //vY *= acc;
         vX *= acc;
@@ -66,11 +78,6 @@ public abstract class APhysics implements IUpdatable {
             vX = 0;
         }
 
-        limitVelocity();
-
-    }
-
-    public void limitVelocity() {
         if (vY > MAX_VEL_Y * 5f) {
             vY = MAX_VEL_Y * 100f;
         } else if (vY < -MAX_VEL_Y) {
@@ -134,7 +141,7 @@ public abstract class APhysics implements IUpdatable {
 
             if (distX > distY) {
                 if (hitTop) {
-                    a.y = top() - a.h;
+                    a.setY(top() - a.h);
 
                     a.isFloorCollision = true;
 
@@ -142,17 +149,17 @@ public abstract class APhysics implements IUpdatable {
                         a.vX *= .9f;
                     }
                 } else {
-                    a.y = bottom();
+                    a.setY(bottom());
                 }
 
                 a.vY = 0;
 
             } else if (distX < distY) {
                 if (hitRight) {
-                    a.x = right();
+                    a.setX(right());
                     a.isWallCollisionLeft = true;
                 } else {
-                    a.x = left() - a.w;
+                    a.setX(left() - a.w);
                     a.isWallCollisionRight = true;
                 }
 
@@ -167,9 +174,28 @@ public abstract class APhysics implements IUpdatable {
 
     }
 
+    private void setOriginalSize(float w, float h) {
+        this.ow = w;
+        this.oh = h;
+    }
+
+    private void setOriginalPosition(float x, float y) {
+        this.ox = x;
+        this.oy = y;
+    }
+
+
     private void setPosition(float x, float y) {
-        this.x = x;
-        this.y = y;
+        setX(x);
+        setY(y);
+    }
+
+    public void setX(float x) {
+        this.x = this.ox = x;
+    }
+
+    public void setY(float y) {
+        this.y = this.oy = y;
     }
 
     public float[] getLocation() {

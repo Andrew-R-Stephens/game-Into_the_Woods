@@ -2,7 +2,7 @@ package models.actors.gameactors.props.platforms;
 
 import models.camera.Camera;
 import models.prototypes.level.prop.AProp;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
@@ -27,11 +27,11 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
 
         g.setColor(Color.DARK_GRAY);
 
-        float offsetX = ((x * ConfigData.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * ConfigData.scaledH_zoom) + (Camera.camY));
+        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
 
-        float scaledW = w * ConfigData.scaledW_zoom;
-        float scaledH = h * ConfigData.scaledH_zoom;
+        float scaledW = w * Config.scaledW_zoom;
+        float scaledH = h * Config.scaledH_zoom;
 
         BufferedImage img = Resources.getImage("mockPlatformV2");
         float imgScaledH = scaledH/img.getHeight();
@@ -67,11 +67,11 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
 
         g.setColor(Color.WHITE);
 
-        float offsetX = ((x / ConfigData.scaledW_zoom) + (Camera.targX / ConfigData.scaledW_zoom));
-        float offsetY = ((y / ConfigData.scaledH_zoom) + (Camera.targY / ConfigData.scaledH_zoom));
+        float offsetX = ((x / Config.scaledW_zoom) + (Camera.targX / Config.scaledW_zoom));
+        float offsetY = ((y / Config.scaledH_zoom) + (Camera.targY / Config.scaledH_zoom));
 
-        float scaledW = w * ConfigData.scaledW_zoom;
-        float scaledH = h * ConfigData.scaledH_zoom;
+        float scaledW = w * Config.scaledW_zoom;
+        float scaledH = h * Config.scaledH_zoom;
 
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
 

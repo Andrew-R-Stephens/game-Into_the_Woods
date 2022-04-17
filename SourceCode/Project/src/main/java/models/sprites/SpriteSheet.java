@@ -1,6 +1,6 @@
 package models.sprites;
 
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -30,7 +30,7 @@ public class SpriteSheet implements IUpdatable {
 
     @Override
     public void update(float delta) {
-        ticks += 1000/ (ConfigData.GAME_UPDATE_RATE*delta);
+        ticks += 1000/ (Config.GAME_UPDATE_RATE*delta);
 
         int newFrame = currentFrame;
         if(ticks > frames.get(currentFrame).getDuration()) {

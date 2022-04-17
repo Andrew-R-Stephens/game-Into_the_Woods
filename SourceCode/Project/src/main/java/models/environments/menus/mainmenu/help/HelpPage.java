@@ -3,7 +3,7 @@ package models.environments.menus.mainmenu.help;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.environments.menu.components.types.AButtonView;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.resources.Resources;
 
 public class HelpPage extends AMenu {
@@ -13,8 +13,8 @@ public class HelpPage extends AMenu {
 
         image_background = Resources.getImage("menubackground");
 
-        float mx = ConfigData.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
+        float mx = Config.DEFAULT_WINDOW_WIDTH * .5f;
+        float my = Config.DEFAULT_WINDOW_HEIGHT * .5f;
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 

@@ -5,7 +5,7 @@ import controls.menu.MenuKeyControls;
 import models.prototypes.controls.AKeyController;
 import models.prototypes.controls.AMouseController;
 import models.prototypes.environments.menu.components.AMenuComponent;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
@@ -29,7 +29,7 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     // The Bundle of sub page AMenu objects.
     //public MenuBundle bundle = new MenuBundle();
 
-    protected float centerW = ConfigData.DEFAULT_WINDOW_WIDTH * .5f, centerH = ConfigData.DEFAULT_WINDOW_HEIGHT * .5f;
+    protected float centerW = Config.DEFAULT_WINDOW_WIDTH * .5f, centerH = Config.DEFAULT_WINDOW_HEIGHT * .5f;
 
     public AMenu(AMenuEnvironment parentMenuModel) {
         this.parentMenuModel = parentMenuModel;
@@ -55,7 +55,7 @@ public abstract class AMenu implements IUpdatable, IDrawable {
 
         g.drawImage(image_background,
                 0, 0,
-                ConfigData.window_width_actual, ConfigData.window_height_actual,
+                Config.window_width_actual, Config.window_height_actual,
                 null);
 
         for (AMenuComponent c : components) {

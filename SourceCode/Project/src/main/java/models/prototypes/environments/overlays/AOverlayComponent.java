@@ -1,7 +1,7 @@
 package models.prototypes.environments.overlays;
 
 import models.environments.game.GameEnvironment;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
@@ -23,7 +23,7 @@ public abstract class AOverlayComponent implements IUpdatable, IDrawable {
 
     @Override
     public void draw(Graphics g) {
-        float sW = ConfigData.scaledW, sH = ConfigData.scaledH;
+        float sW = Config.scaledW, sH = Config.scaledH;
         g.setColor(new Color(255, 150, 150, 100));
         g.fillRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
     }

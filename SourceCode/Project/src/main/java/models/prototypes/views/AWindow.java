@@ -1,6 +1,6 @@
 package models.prototypes.views;
 
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.resources.Resources;
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class AWindow extends JFrame {
 
-    protected void constructWindowAndDimensions(ConfigData preferences) {
+    protected void constructWindowAndDimensions(Config preferences) {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -57,10 +57,10 @@ public abstract class AWindow extends JFrame {
 
         System.out.println(dScalingX + " " + dScalingY);
 
-        ConfigData.scaledW_zoom = ConfigData.scaledW_zoom / dScalingX;
-        ConfigData.scaledH_zoom = ConfigData.scaledH_zoom / dScalingY;
+        Config.scaledW_zoom = Config.scaledW_zoom / dScalingX;
+        Config.scaledH_zoom = Config.scaledH_zoom / dScalingY;
 
-        System.out.println(ConfigData.scaledW_zoom + " " + ConfigData.scaledH_zoom);
+        System.out.println(Config.scaledW_zoom + " " + Config.scaledH_zoom);
 
         setAlwaysOnTop(true);
         setResizable(false);

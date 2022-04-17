@@ -2,7 +2,7 @@ package models.utils.config;
 
 import models.camera.Camera;
 
-public class ConfigData {
+public class Config {
 
     public enum WindowType {
         WINDOWED                (0, "Windowed"),
@@ -65,11 +65,11 @@ public class ConfigData {
     }
 
     public void setWindowWidthDefault(int width) {
-        ConfigData.DEFAULT_WINDOW_WIDTH = width;
+        Config.DEFAULT_WINDOW_WIDTH = width;
     }
 
     public void setWindowHeightDefault(int height) {
-        ConfigData.DEFAULT_WINDOW_HEIGHT = height;
+        Config.DEFAULT_WINDOW_HEIGHT = height;
     }
 
     public void setWindowType(int type) {
@@ -85,7 +85,7 @@ public class ConfigData {
     }
 
     public void setFrameRate(short frameRate) {
-        ConfigData.frameRate = frameRate;
+        Config.frameRate = frameRate;
     }
 
     public short getFrameRate() {

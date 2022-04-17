@@ -18,7 +18,7 @@ import models.environments.menus.pausemenumodel.PauseMenuEnvironment;
 import models.levels.LevelsList;
 import models.runnables.RenderRunnable;
 import models.runnables.UpdateRunnable;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.files.PreferencesParser;
 import models.utils.resources.Resources;
 import views.swing.canvas.game.GameCanvas;
@@ -27,7 +27,7 @@ import views.swing.window.MainWindow;
 
 public class Main {
 
-    private static ConfigData preferences;
+    private static Config preferences;
 
     private static EnvironmentsHandler environmentsHandler;
 
@@ -94,7 +94,7 @@ public class Main {
     public static void create() {
 
         // Create Preferences
-        preferences = new ConfigData();
+        preferences = new Config();
 
         // Create Environment Handler
         environmentsHandler = new EnvironmentsHandler();

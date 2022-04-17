@@ -1,8 +1,6 @@
 package models.prototypes.level.prop;
 
-import models.camera.Camera;
 import models.prototypes.actor.AActor;
-import models.utils.config.ConfigData;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.updates.IUpdatable;

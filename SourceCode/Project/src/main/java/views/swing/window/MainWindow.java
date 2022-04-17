@@ -2,7 +2,7 @@ package views.swing.window;
 
 import models.environments.EnvironmentsHandler;
 import models.prototypes.views.AWindow;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -12,7 +12,7 @@ public class MainWindow extends AWindow {
 
     private EnvironmentsHandler environmentsHandler;
 
-    public void init(ConfigData preferences, EnvironmentsHandler environmentsHandler){
+    public void init(Config preferences, EnvironmentsHandler environmentsHandler){
         this.environmentsHandler = environmentsHandler;
 
         constructWindowAndDimensions(preferences);

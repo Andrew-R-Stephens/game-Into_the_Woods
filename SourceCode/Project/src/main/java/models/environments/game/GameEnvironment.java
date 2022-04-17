@@ -18,7 +18,7 @@ import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.environments.AEnvironment;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
@@ -203,8 +203,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 for (int i = 0; i < count; i++) {
                     queueActor(
                             new Particle(
-                                    (-Camera.camX / ConfigData.scaledW_zoom) + (gmc.getPos()[0]/ ConfigData.scaledW_zoom),
-                                    (-Camera.camY / ConfigData.scaledW_zoom) + (gmc.getPos()[1]/ ConfigData.scaledH_zoom),
+                                    (-Camera.camX / Config.scaledW_zoom) + (gmc.getPos()[0]/ Config.scaledW_zoom),
+                                    (-Camera.camY / Config.scaledW_zoom) + (gmc.getPos()[1]/ Config.scaledH_zoom),
                                     10f,
                                     10f,
                                     new Random().nextFloat(-5, 5),

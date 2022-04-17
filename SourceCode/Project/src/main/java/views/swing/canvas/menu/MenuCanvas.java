@@ -2,7 +2,7 @@ package views.swing.canvas.menu;
 
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.views.ACanvas;
-import models.utils.config.ConfigData;
+import models.utils.config.Config;
 
 import java.awt.*;
 
@@ -33,7 +33,7 @@ public class MenuCanvas extends ACanvas {
         mainMenuEnvironment.draw(g);
 
         g.setColor(Color.RED);
-        float sW = ConfigData.scaledW_zoom;
+        float sW = Config.scaledW_zoom;
 
     }
 
