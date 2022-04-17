@@ -49,7 +49,7 @@ public class HUDModel implements IDrawable, IUpdatable {
     @Override
     public void draw(Graphics g) {
         g.setFont(
-                Resources.getFont("bahnschrift")
+                gameEnvironment.getResources().getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
                         .deriveFont(Font.PLAIN, 18 * Config.scaledW_zoom));
 

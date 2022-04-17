@@ -22,12 +22,13 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         this.w = w;
         this.h = h;
 
-        spritesheet = Resources.getSpriteSheet("spritesheet_buttonhrect").setLoopOnLast(false);
+        spritesheet =
+                parentMenuEnvironment.getResources().getSpriteSheet("spritesheet_buttonhrect").setLoopOnLast(false);
     }
 
     public void playSound() {
         if(playSound) {
-            Resources.playAudio("buttonclick");
+            parentMenuEnvironment.getResources().playAudio("buttonclick");
         }
     }
 
@@ -84,7 +85,7 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         g.setColor(Color.BLACK);
 
         g.setFont(
-                Resources.getFont("bahnschrift")
+                parentMenuEnvironment.getResources().getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
                         .deriveFont(Font.BOLD, 36 * sW));
 

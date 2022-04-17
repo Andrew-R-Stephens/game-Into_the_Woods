@@ -4,6 +4,7 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 import models.sprites.SpriteSheet;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
+import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -40,6 +41,10 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     public AMenuComponent(AMenuEnvironment parentMenuEnvironment) {
         this.parentMenuEnvironment = parentMenuEnvironment;
+    }
+
+    public void setSpriteSheet(SpriteSheet spritesheet) {
+        this.spritesheet = spritesheet;
     }
 
     protected boolean isInBounds(float mx, float my) {

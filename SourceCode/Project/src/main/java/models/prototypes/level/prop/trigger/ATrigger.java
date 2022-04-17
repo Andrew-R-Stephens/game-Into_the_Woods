@@ -6,6 +6,7 @@ import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.AProp;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
+import models.utils.resources.Resources;
 
 import java.awt.*;
 
@@ -19,8 +20,11 @@ public abstract class ATrigger extends AProp implements IDrawable {
     protected int MAX_CYCLES;
     protected int currentCycles = 0;
 
-    protected ATrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(x, y, w, h, vx, vy, hasGravity);
+    protected ATrigger(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
+                       float vx,
+                       float vy,
+                       int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
+        super(resources, x, y, w, h, vx, vy, hasGravity);
 
         this.gameEnvironment = gameEnvironment;
 

@@ -2,6 +2,7 @@ package models.utils.physics;
 
 import models.prototypes.actor.AActor;
 import models.utils.config.Config;
+import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 public abstract class APhysics implements IUpdatable {
 
@@ -33,7 +34,6 @@ public abstract class APhysics implements IUpdatable {
 
         setVelocity(vX, vY);
         setGravity(hasGravity);
-
     }
 
     public void update(float delta) {

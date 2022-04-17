@@ -15,9 +15,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
-    public Spikes(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
+    public Spikes(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
                   int MAX_CYCLES) {
-        super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, false, false);
+        super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, false, false);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
         float scaledW = w * Config.scaledW_zoom;
         float scaledH = h * Config.scaledH_zoom;
 
-        BufferedImage img = Resources.getImage("spikes");
+        BufferedImage img = resources.getImage("spikes");
         float imgScaledH = scaledH/img.getHeight();
 
         if(scaledW < scaledH) {

@@ -30,11 +30,12 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
 
     protected HashMap<Type, SpriteSheet> spriteSheets = new HashMap<>();
 
-    public Door(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
+    public Door(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx,
+                float vy,
                 int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
+        super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
 
-        spriteSheets.put(Type.UNDEFINED, Resources.getSpriteSheet("spritesheet_door").setLoopOnLast(false));
+        spriteSheets.put(Type.UNDEFINED, resources.getSpriteSheet("spritesheet_door").setLoopOnLast(false));
     }
 
     public void unlock() {

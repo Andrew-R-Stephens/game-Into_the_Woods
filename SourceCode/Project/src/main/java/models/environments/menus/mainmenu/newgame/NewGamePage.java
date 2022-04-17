@@ -15,7 +15,7 @@ public class NewGamePage extends AMenu {
     public NewGamePage(AMenuEnvironment parentModel) {
         super(parentModel);
 
-        BufferedImage img_sqbutton = Resources.getImage("button_square");
+        BufferedImage img_sqbutton = getResources().getImage("button_square");
 
         float mx = Config.DEFAULT_WINDOW_WIDTH * .5f;
         float my = Config.DEFAULT_WINDOW_HEIGHT * .5f;

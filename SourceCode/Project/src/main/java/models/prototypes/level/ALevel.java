@@ -9,6 +9,7 @@ import models.prototypes.level.prop.trigger.ATrigger;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
+import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -73,6 +74,10 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 t.reset();
             }
         }
+    }
+
+    public Resources getResources() {
+        return gameEnvironment.getResources();
     }
 
     @Override

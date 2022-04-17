@@ -92,8 +92,6 @@ public class Main {
      */
     public static void create() {
 
-        Resources resources = new Resources();
-
         // Create Preferences
         config = new Config();
 
@@ -144,13 +142,17 @@ public class Main {
      */
     public static void init() {
 
-
+        Resources resources = new Resources();
+        resources.init();
+        mainMenuEnvironment.setResources(resources);
+        pauseMenuModel.setResources(resources);
+        gameEnvironment.setResources(resources);
+        window.setResources(resources);
 
         // Initialize Preferences
         PreferencesParser preferencesParser =
                 new PreferencesParser(config, "files/", "Preferences", ".xml");
         preferencesParser.read();
-        System.out.println(config.toString());
 
         // Initialize Window with Preference Data
         window.init(config, environmentsHandler);
@@ -167,8 +169,7 @@ public class Main {
         environmentsHandler.init(window);
 
         // Initialize Pause Menu
-        pauseMenuModel.init(environmentsHandler, menuControlsModel);
-        pauseMenuModel.setGameEnvironment(gameEnvironment);
+        pauseMenuModel.init(environmentsHandler, menuControlsModel, gameEnvironment);
 
         hudModel.init(gameEnvironment, inventory, mapOverlay, playerStatsOverlay, timeKeeperOverlay);
 

@@ -75,7 +75,7 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
         g.setColor(Color.BLACK);
 
         g.setFont(
-                Resources.getFont("bahnschrift")
+                parentMenuEnvironment.getResources().getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
                         .deriveFont(Font.BOLD, 36 * sW));
 

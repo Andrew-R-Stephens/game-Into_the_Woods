@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 
 public class Platform extends AProp implements IDrawable, IUpdatable {
 
-    public Platform(float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
-        super(x, y, w, h, vx, vy, hasGravity);
+    public Platform(Resources resources, float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
+        super(resources, x, y, w, h, vx, vy, hasGravity);
     }
 
     @Override
@@ -23,8 +23,6 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
 
     @Override
     public void draw(Graphics g) {
-        //super.draw(g);
-
         g.setColor(Color.DARK_GRAY);
 
         float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
@@ -33,7 +31,7 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
         float scaledW = w * Config.scaledW_zoom;
         float scaledH = h * Config.scaledH_zoom;
 
-        BufferedImage img = Resources.getImage("mockPlatformV2");
+        BufferedImage img = resources.getImage("mockPlatformV2");
         float imgScaledH = scaledH/img.getHeight();
 
         if(scaledW < scaledH) {

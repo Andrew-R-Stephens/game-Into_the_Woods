@@ -4,6 +4,7 @@ import models.camera.Camera;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.physics.APhysics;
+import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -11,18 +12,23 @@ import java.awt.*;
 
 public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
 
+    protected Resources resources;
+
     protected Facing facing;
     protected enum Facing { LEFT, RIGHT, UP, DOWN }
 
     protected Color color = new Color(0, 0, 255, 50);
 
 
-    protected AActor(float x, float y,
-                     float w, float h,
-                     float vx, float vy,
-                     boolean hasGravity) {
+    protected AActor(
+            Resources resources,
+            float x, float y,
+            float w, float h,
+            float vx, float vy,
+            boolean hasGravity) {
 
         super(x, y, w, h, vx, vy, hasGravity);
+        this.resources = resources;
 
     }
 

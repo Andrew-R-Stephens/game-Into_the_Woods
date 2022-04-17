@@ -13,28 +13,29 @@ import java.awt.*;
 
 public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
-    public PlayerAvatar(GameControls cModel, float x, float y, float w, float h, float vx,
-                        float vy,
-                        boolean hasGravity) {
-        super(cModel, x - w, y - h, w, h, vx, vy, hasGravity);
+    public PlayerAvatar(
+            Resources resources, GameControls cModel, float x, float y, float w, float h, float vx,
+            float vy,
+            boolean hasGravity) {
+        super(resources, cModel, x - w, y - h, w, h, vx, vy, hasGravity);
 
         spriteSheets.put(ActionType.FLOOR_IDLE,
-                Resources.getSpriteSheet("spritesheet_avataridle")
+                resources.getSpriteSheet("spritesheet_avataridle")
                         .setLoopOnLast(true).setFrameScale(w, h));
         spriteSheets.put(ActionType.FLOOR_WALKING,
-                Resources.getSpriteSheet("spritesheet_avatarrun2")
+                resources.getSpriteSheet("spritesheet_avatarrun2")
                         .setLoopOnLast(true).setFrameScale(w, h));
         spriteSheets.put(ActionType.FLOOR_RUNNING,
-                Resources.getSpriteSheet("spritesheet_avatarrun2")
+                resources.getSpriteSheet("spritesheet_avatarrun2")
                         .setLoopOnLast(true).setFrameScale(w, h));
         spriteSheets.put(ActionType.FLOOR_JUMPING,
-                Resources.getSpriteSheet("spritesheet_avatarjump")
+                resources.getSpriteSheet("spritesheet_avatarjump")
                         .setLoopOnLast(false).setFrameScale(w, h));
         spriteSheets.put(ActionType.WALL_JUMPING,
-                Resources.getSpriteSheet("spritesheet_avatarjump")
+                resources.getSpriteSheet("spritesheet_avatarjump")
                         .setLoopOnLast(false).setFrameScale(w, h));
         spriteSheets.put(ActionType.WALL_CLIMBING,
-                Resources.getSpriteSheet("spritesheet_avatarjump")
+                resources.getSpriteSheet("spritesheet_avatarjump")
                         .setLoopOnLast(true).setFrameScale(w, h));
     }
 
@@ -55,7 +56,7 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
         //y = (y + (oh - h));
 
-        System.out.println((int)y + " " + (int)h + " " + largest[1]);
+        //System.out.println((int)y + " " + (int)h + " " + largest[1]);
         if(vX < 0) {
             facing = Facing.RIGHT;
         } else if (vX > 0) {
@@ -87,14 +88,6 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
             centerX += scaleW;
             scaleW *= -1;
         }
-
-        /*
-        spriteSheets.get(actionState).draw(g,
-                (int) centerX,
-                (int) centerY,
-                (int) scaleW,
-                (int) scaleH);
-        */
 
         spriteSheets.get(actionState).draw(g,
                 (int) centerX,

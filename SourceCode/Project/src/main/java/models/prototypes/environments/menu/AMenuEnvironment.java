@@ -61,10 +61,6 @@ public abstract class AMenuEnvironment extends AEnvironment implements IDrawable
 
     @Override
     public void reset() {
-        /*
-        for(AMenu m: menuStack) {
-            m.reset();
-        }
-        */
+        menuStack.empty();
     }
 }

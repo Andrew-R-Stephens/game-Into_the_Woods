@@ -4,14 +4,15 @@ import models.actors.gameactors.props.player.PlayerAvatar;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.trigger.ATrigger;
+import models.utils.resources.Resources;
 
 import java.awt.*;
 
 public abstract class APropTrigger extends ATrigger {
 
-    protected APropTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h,
+    protected APropTrigger(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
                            float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
+        super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
     }
 
     @Override

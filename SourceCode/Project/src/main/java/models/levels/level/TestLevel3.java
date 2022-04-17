@@ -16,31 +16,30 @@ public class TestLevel3 extends ALevel {
         setStartOrigin(200, 50);
 
         build();
-
     }
 
     @Override
     public void build() {
 
         // Floor
-        addProp(new Platform(0, 980, 10000, 100, 0, 0, false));
+        addProp(new Platform(getResources(), 0, 980, 10000, 100, 0, 0, false));
 
         for(int i = 0; i < 10; i++) {
-            addProp(new Platform(i*20, 500+(-5*i*.8f), 20, 20, 0, 0, false));
+            addProp(new Platform(getResources(),i*20, 500+(-5*i*.8f), 20, 20, 0, 0, false));
         }
 
         // Keys
-        addProp(new DoorKey(gameEnvironment, 1600, 930, 100, 50, 0, 0));
-        addProp(new DoorKey(gameEnvironment, 2500, 930, 100, 50, 0, 0));
-        addProp(new DoorKey(gameEnvironment, 500, 930, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), gameEnvironment, 1600, 930, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), gameEnvironment, 2500, 930, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), gameEnvironment, 500, 930, 100, 50, 0, 0));
 
         // Door
-        door = new Door(gameEnvironment, 2000, 830, 50, 100,
+        door = new Door(getResources(), gameEnvironment, 2000, 830, 50, 100,
                 0, 0, 1, false, false);
         addProp(door);
 
         // Door Listener
-        addProp(new APropTrigger(gameEnvironment, 1800, 700, 450, 300,
+        addProp(new APropTrigger(getResources(), gameEnvironment, 1800, 700, 450, 300,
                 0, 0, 1,false, false) {
             @Override
             public void doAction() {

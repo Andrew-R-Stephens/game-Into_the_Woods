@@ -5,13 +5,16 @@ import models.environments.EnvironmentsHandler;
 import models.prototypes.controls.AKeyController;
 import models.prototypes.controls.AMouseController;
 import models.utils.drawables.IDrawable;
+import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 public abstract class AEnvironment implements IUpdatable, IDrawable {
 
-    protected AdvancedPlayer audioPlayer;
-
     protected EnvironmentsHandler parentEnvironmentsHandler;
+
+    private Resources resources;
+
+    protected AdvancedPlayer audioPlayer;
 
     protected AKeyController keyController;
     protected AMouseController mouseController;
@@ -51,5 +54,13 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
 
     public EnvironmentsHandler getParentEnvironmentsHandler() {
         return parentEnvironmentsHandler;
+    }
+
+    public Resources getResources() {
+        return resources;
+    }
+
+    public void setResources(Resources resources) {
+        this.resources = resources;
     }
 }

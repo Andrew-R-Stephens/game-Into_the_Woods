@@ -7,6 +7,7 @@ import models.prototypes.controls.AMouseController;
 import models.prototypes.environments.menu.components.AMenuComponent;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
+import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -48,6 +49,10 @@ public abstract class AMenu implements IUpdatable, IDrawable {
             }
         }
         return isActivated;
+    }
+
+    public Resources getResources() {
+        return parentMenuModel.getResources();
     }
 
     @Override

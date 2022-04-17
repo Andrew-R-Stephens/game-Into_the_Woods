@@ -171,6 +171,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         // Add in the Main Test Character
 
         character = new PlayerAvatar (
+                getResources(),
                 controlsViewModel,
                 startPos[0],
                 startPos[1],
@@ -203,6 +204,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 for (int i = 0; i < count; i++) {
                     queueActor(
                             new Particle(
+                                    getResources(),
                                     (-Camera.camX / Config.scaledW_zoom) + (gmc.getPos()[0]/ Config.scaledW_zoom),
                                     (-Camera.camY / Config.scaledW_zoom) + (gmc.getPos()[1]/ Config.scaledH_zoom),
                                     10f,
@@ -274,7 +276,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     @Override
     public void startBackgroundAudio() {
-        audioPlayer = Resources.playAudio("game");
+        audioPlayer = getResources().playAudio("game");
     }
 
     @Override

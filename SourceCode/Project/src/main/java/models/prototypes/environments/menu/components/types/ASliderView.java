@@ -27,7 +27,7 @@ public abstract class ASliderView extends AMenuComponent {
         this.w = w;
         this.h = h;
 
-        BufferedImage buttonImg = Resources.getImage("button_slider");
+        BufferedImage buttonImg = parentMenuEnvironment.getResources().getImage("button_slider");
         float scaleW = (float)buttonImg.getHeight() / h * .5f;
 
         button = new AButtonView(parentMenuEnvironment, x, y, (int)(scaleW * h), h) {
@@ -56,7 +56,7 @@ public abstract class ASliderView extends AMenuComponent {
                 }
             }
         };
-        button.setBackgroundImage(Resources.getImage("button_slider"));
+        button.setBackgroundImage(parentMenuEnvironment.getResources().getImage("button_slider"));
         button.setImageScaling(ImageScale.FIT_CENTERED);
 
         init();

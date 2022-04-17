@@ -25,11 +25,13 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
 
     protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 
-    public Spring(GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
+    public Spring(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx,
+                  float vy,
                   int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
+        super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity,
+                canMoveOnCollision);
 
-        spriteSheets.put(actionState, Resources.getSpriteSheet("spritesheet_spring"));
+        spriteSheets.put(actionState, resources.getSpriteSheet("spritesheet_spring"));
     }
 
     @Override

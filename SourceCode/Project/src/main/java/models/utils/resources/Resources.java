@@ -28,15 +28,15 @@ import java.util.Map;
  */
 public class Resources {
 
-    private final String PATH_META = "metadata/metadata.json";
+    private String PATH_META = "metadata/metadata.json";
 
-    private static String path_textFile;
+    private String path_textFile;
     private String path_images, path_audio, path_fonts;
 
-    private static final Map<String, BufferedImage> imagesFiles = new HashMap<>();
-    public static final Map<String, String> audioFiles = new HashMap<>();
-    private static final Map<String, File> textFiles = new HashMap<>();
-    private static final Map<String, Font> fontFiles = new HashMap<>();
+    private final Map<String, BufferedImage> imagesFiles = new HashMap<>();
+    public final Map<String, String> audioFiles = new HashMap<>();
+    private final Map<String, File> textFiles = new HashMap<>();
+    private final Map<String, Font> fontFiles = new HashMap<>();
 
     public void init() {
 
@@ -61,8 +61,6 @@ public class Resources {
 
         System.out.println(this);
 
-
-
     }
 
     private String[] registerFiles(MetaDataParser metaData, String tag) {
@@ -74,20 +72,22 @@ public class Resources {
     }
 
     private void loadImageFiles(String[] fileNames) {
-
         for(String fileName : fileNames) {
             imagesFiles.put(fileName.split("\\.")[0], loadImageFile(fileName));
         }
-
     }
 
     public BufferedImage loadImageFile(String fileName) {
         InputStream resourceBuff = Resources.class.getResourceAsStream(path_images + fileName);
-        try {
-            if(resourceBuff != null) {
-                return ImageIO.read(resourceBuff);
 
-            }
+        if(resourceBuff == null) {
+            return null;
+        }
+
+        try {
+            BufferedImage image = ImageIO.read(resourceBuff);
+            resourceBuff.close();
+            return image;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,13 +107,18 @@ public class Resources {
 
     public String loadAudioFile(String fileName) {
 
-        //Clip clip = null;
         String fullPath = path_audio + fileName;
 
         InputStream resourceBuff = Resources.class.getResourceAsStream(fullPath);
 
         if(resourceBuff == null) {
             return null;
+        }
+
+        try {
+            resourceBuff.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return fullPath;
@@ -192,7 +197,7 @@ public class Resources {
         return font;
     }
 
-    public static SpriteSheet getSpriteSheet(String name) {
+    public SpriteSheet getSpriteSheet(String name) {
         String fileName = name + ".json";
         if(textFiles.get(fileName) == null) {
             System.out.println("No spritesheet data file of that name!");
@@ -208,19 +213,19 @@ public class Resources {
         return spriteSheet;
     }
 
-    public static BufferedImage getImage(String imageKey) {
+    public BufferedImage getImage(String imageKey) {
         return imagesFiles.get(imageKey);
     }
 
-    public static File getTextFile(String fileKey) {
+    public File getTextFile(String fileKey) {
         return textFiles.get(fileKey);
     }
 
-    public static Font getFont(String fontKey) {
+    public Font getFont(String fontKey) {
         return fontFiles.get(fontKey);
     }
 
-    public static synchronized AdvancedPlayer playAudio(String audioKey) {
+    public synchronized AdvancedPlayer playAudio(String audioKey) {
 
         // create AudioInputStream object
         InputStream resourceBuff = Resources.class.getResourceAsStream(audioFiles.get(audioKey));
@@ -245,6 +250,13 @@ public class Resources {
             try {
                 if (finalP != null) {
                     finalP.play(); // Start the music
+
+                    try {
+                        resourceBuff.close();
+                        bufferedInputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             } catch (JavaLayerException e) {
                 e.printStackTrace();

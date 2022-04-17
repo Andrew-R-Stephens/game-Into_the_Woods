@@ -1,5 +1,7 @@
 package models.environments.menus.pausemenumodel;
 
+import controls.MenuControls;
+import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
@@ -11,14 +13,15 @@ public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable 
 
     protected GameEnvironment gameEnvironment;
 
-    public PauseMenuEnvironment() {
+    public void init(EnvironmentsHandler parentEnvironmentsModel, MenuControls controlsModel,
+                     GameEnvironment gameEnvironment) {
+        super.init(parentEnvironmentsModel, controlsModel);
+
+        this.gameEnvironment = gameEnvironment;
+
         PauseMenuPage landingMenu = new PauseMenuPage(this);
 
         initPage(landingMenu);
-    }
-
-    public void setGameEnvironment(GameEnvironment gameEnvironment) {
-        this.gameEnvironment = gameEnvironment;
     }
 
     public void popToFirst() {

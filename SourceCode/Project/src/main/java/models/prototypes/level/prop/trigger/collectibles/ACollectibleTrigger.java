@@ -4,14 +4,16 @@ import models.actors.gameactors.props.player.PlayerAvatar;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.trigger.ATrigger;
+import models.utils.resources.Resources;
 
 public abstract class ACollectibleTrigger extends ATrigger {
 
     protected boolean isActive = true;
 
-    protected ACollectibleTrigger(GameEnvironment gameEnvironment, float x, float y, float w, float h,
+    protected ACollectibleTrigger(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w,
+                                  float h,
                                   float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(gameEnvironment, x, y, w, h, vx, vy, 1, hasGravity, canMoveOnCollision);
+        super(resources, gameEnvironment, x, y, w, h, vx, vy, 1, hasGravity, canMoveOnCollision);
     }
 
     @Override

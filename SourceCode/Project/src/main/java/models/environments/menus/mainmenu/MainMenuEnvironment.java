@@ -19,7 +19,7 @@ public class MainMenuEnvironment extends AMenuEnvironment {
     public void init(EnvironmentsHandler environmentsHandler, MenuControls menuControlsModel) {
         super.init(environmentsHandler, menuControlsModel);
 
-        backgroundImage = Resources.getImage("menubackground");
+        backgroundImage = getResources().getImage("menubackground");
         StartScreenPage startPage = new StartScreenPage(this);
         push(startPage);
 
@@ -83,12 +83,13 @@ public class MainMenuEnvironment extends AMenuEnvironment {
 
     @Override
     public void startBackgroundAudio() {
-        audioPlayer = Resources.playAudio("mainmenu");
+        audioPlayer = getResources().playAudio("mainmenu");
     }
 
     @Override
     public void reset() {
         popToFirst();
+        super.reset();
     }
 
 }

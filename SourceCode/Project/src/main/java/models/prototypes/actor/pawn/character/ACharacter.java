@@ -43,10 +43,12 @@ public abstract class ACharacter extends APawn implements IUpdatable {
 
     private boolean isJumpLocked = false;
 
-    protected ACharacter(GameControls cModel, float x, float y, float w, float h, float vx,
-                         float vy,
-                         boolean hasGravity) {
-        super(x, y, w, h, vx, vy, hasGravity);
+    protected ACharacter(
+            Resources resources, GameControls cModel,
+            float x, float y, float w, float h, float vx,
+            float vy,
+            boolean hasGravity) {
+        super(resources, x, y, w, h, vx, vy, hasGravity);
         this.controlsModel = cModel;
     }
 
