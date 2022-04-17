@@ -40,12 +40,6 @@ public abstract class APhysics implements IUpdatable {
         resetCollisions();
 
         updateVelocity(delta);
-
-        /*
-        if(ox != x || oy != y) {
-            System.out.println("x: " + ox + " != " + x + " / y: " + oy + " != " + y);
-        }
-        */
     }
 
     private void resetCollisions() {

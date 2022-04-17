@@ -13,10 +13,10 @@ import java.awt.*;
 
 public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
-    public PlayerAvatar(Resources resources, GameControls cModel, float x, float y, float w, float h, float vx,
+    public PlayerAvatar(GameControls cModel, float x, float y, float w, float h, float vx,
                         float vy,
                         boolean hasGravity) {
-        super(resources, cModel, x - w, y - h, w, h, vx, vy, hasGravity);
+        super(cModel, x - w, y - h, w, h, vx, vy, hasGravity);
 
         spriteSheets.put(ActionType.FLOOR_IDLE,
                 Resources.getSpriteSheet("spritesheet_avataridle")
@@ -25,7 +25,7 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
                 Resources.getSpriteSheet("spritesheet_avatarrun2")
                         .setLoopOnLast(true).setFrameScale(w, h));
         spriteSheets.put(ActionType.FLOOR_RUNNING,
-                Resources.getSpriteSheet("spritesheet_running_trimmed")
+                Resources.getSpriteSheet("spritesheet_avatarrun2")
                         .setLoopOnLast(true).setFrameScale(w, h));
         spriteSheets.put(ActionType.FLOOR_JUMPING,
                 Resources.getSpriteSheet("spritesheet_avatarjump")
@@ -50,10 +50,10 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         float[] spriteScale = spriteSheets.get(actionState).getCurrentFrameSize();
         int[] largest = spriteSheets.get(actionState).getLargestSize();
 
-        w = spriteScale[0];
-        h = spriteScale[1] + spriteSheets.get(actionState).getCurrentFramePos()[1];
+        //w = spriteScale[0];
+        //h = spriteScale[1] + spriteSheets.get(actionState).getCurrentFramePos()[1];
 
-        y = (y + (oh - h));
+        //y = (y + (oh - h));
 
         System.out.println((int)y + " " + (int)h + " " + largest[1]);
         if(vX < 0) {
@@ -63,9 +63,9 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         }
 
         float tx =
-                (float)(((Config.window_width_actual * .5) - (ow * Config.scaledW_zoom)) - (ox * Config.scaledW_zoom));
+                (float)(((Config.window_width_actual * .5) - (w * Config.scaledW_zoom)) - (x * Config.scaledW_zoom));
         float ty =
-                (float)(((Config.window_height_actual * .5) - (oh * Config.scaledH_zoom)) - (oy * Config.scaledH_zoom));
+                (float)(((Config.window_height_actual * .5) - (h * Config.scaledH_zoom)) - (y * Config.scaledH_zoom));
 
         Camera.moveTo(tx, ty);
 

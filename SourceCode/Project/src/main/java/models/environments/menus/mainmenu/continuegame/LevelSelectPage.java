@@ -12,8 +12,6 @@ public class LevelSelectPage extends AMenu {
     public LevelSelectPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
-        image_background = Resources.getImage("menubackground");
-
         float mx = Config.DEFAULT_WINDOW_WIDTH * .5f;
         float my = Config.DEFAULT_WINDOW_HEIGHT * .5f;
 
@@ -43,7 +41,7 @@ public class LevelSelectPage extends AMenu {
         };
         button_level1.setText("Level 1");
         button_level1.setSpritesheet(
-                Resources.getSpriteSheet("buttonsq_spritesheet").setLoopOnLast(false));
+                Resources.getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
         //button_level1.setBackgroundImage(img_sqbutton);
         button_level1.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
@@ -70,7 +68,7 @@ public class LevelSelectPage extends AMenu {
         };
         button_level2.setText("Level 2");
         button_level2.setSpritesheet(
-                Resources.getSpriteSheet("buttonsq_spritesheet").setLoopOnLast(false));
+                Resources.getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
         button_level2.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         //Level 3 Button
@@ -97,7 +95,7 @@ public class LevelSelectPage extends AMenu {
         };
         button_level3.setText("Level 3");
         button_level3.setSpritesheet(
-                Resources.getSpriteSheet("buttonsq_spritesheet").setLoopOnLast(false));
+                Resources.getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
         //button_level3.setBackgroundImage(img_sqbutton);
         button_level3.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 

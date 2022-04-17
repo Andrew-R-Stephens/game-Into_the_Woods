@@ -203,7 +203,7 @@ public class Resources {
 
         SpriteSheetParser parser = new SpriteSheetParser(path_textFile + fileName);
         SpriteSheet spriteSheet = parser.getSpriteSheet();
-        spriteSheet.addReferenceImage(getImage(name));
+        spriteSheet.setReferenceImage(getImage(name));
 
         return spriteSheet;
     }

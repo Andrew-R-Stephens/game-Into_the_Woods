@@ -34,7 +34,7 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
                 int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
         super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
 
-        spriteSheets.put(Type.UNDEFINED, Resources.getSpriteSheet("door_spritesheet").setLoopOnLast(false));
+        spriteSheets.put(Type.UNDEFINED, Resources.getSpriteSheet("spritesheet_door").setLoopOnLast(false));
     }
 
     public void unlock() {

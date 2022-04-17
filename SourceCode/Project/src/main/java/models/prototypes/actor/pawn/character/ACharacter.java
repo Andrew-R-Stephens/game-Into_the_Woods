@@ -4,6 +4,7 @@ import controls.GameControls;
 import models.prototypes.actor.pawn.APawn;
 import models.sprites.SpriteSheet;
 import models.utils.config.Config;
+import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.util.HashMap;
@@ -42,10 +43,10 @@ public abstract class ACharacter extends APawn implements IUpdatable {
 
     private boolean isJumpLocked = false;
 
-    protected ACharacter(Resources resources, GameControls cModel, float x, float y, float w, float h, float vx,
+    protected ACharacter(GameControls cModel, float x, float y, float w, float h, float vx,
                          float vy,
                          boolean hasGravity) {
-        super(resources, x, y, w, h, vx, vy, hasGravity);
+        super(x, y, w, h, vx, vy, hasGravity);
         this.controlsModel = cModel;
     }
 

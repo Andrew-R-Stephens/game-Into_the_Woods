@@ -11,8 +11,6 @@ public class HelpPage extends AMenu {
     public HelpPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
-        image_background = Resources.getImage("menubackground");
-
         float mx = Config.DEFAULT_WINDOW_WIDTH * .5f;
         float my = Config.DEFAULT_WINDOW_HEIGHT * .5f;
 

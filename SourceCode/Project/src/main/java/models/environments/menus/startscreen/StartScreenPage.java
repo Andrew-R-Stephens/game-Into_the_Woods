@@ -12,8 +12,6 @@ public class StartScreenPage extends AMenu {
 
         super(parentMenuModel);
 
-        image_background = Resources.getImage("menubackground");
-
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         AButtonView startButton = new AButtonView(

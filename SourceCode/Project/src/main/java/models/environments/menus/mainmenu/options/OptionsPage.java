@@ -15,8 +15,6 @@ public class OptionsPage extends AMenu {
     public OptionsPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
-        image_background = Resources.getImage("menubackground");
-
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         ASliderView slider_fps = new ASliderView(

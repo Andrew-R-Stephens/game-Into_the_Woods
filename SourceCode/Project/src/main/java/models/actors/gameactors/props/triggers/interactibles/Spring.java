@@ -29,7 +29,7 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
                   int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
         super(gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
 
-        spriteSheets.put(actionState, Resources.getSpriteSheet("spring_spritesheet"));
+        spriteSheets.put(actionState, Resources.getSpriteSheet("spritesheet_spring"));
     }
 
     @Override

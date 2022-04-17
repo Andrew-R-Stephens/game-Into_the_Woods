@@ -14,8 +14,6 @@ public class MainMenuPage extends AMenu {
     public MainMenuPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
-        image_background = Resources.getImage("menubackground");
-
         int buttonW = 400, buttonH = (int)(buttonW * .25);
 
         AButtonView button_newGame = new AButtonView(

@@ -22,7 +22,7 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         this.w = w;
         this.h = h;
 
-        spritesheet = Resources.getSpriteSheet("buttonhrect_spritesheet").setLoopOnLast(false);
+        spritesheet = Resources.getSpriteSheet("spritesheet_buttonhrect").setLoopOnLast(false);
     }
 
     public void playSound() {

@@ -27,7 +27,7 @@ import views.swing.window.MainWindow;
 
 public class Main {
 
-    private static Config preferences;
+    private static Config config;
 
     private static EnvironmentsHandler environmentsHandler;
 
@@ -54,7 +54,7 @@ public class Main {
 
     private static LevelsList levelsListModel;
 
-    private static MenuCanvas mainMenuCanvas;
+    private static MenuCanvas menuCanvas;
     private static GameCanvas gameCanvas;
 
     private static MainWindow window;
@@ -83,9 +83,8 @@ public class Main {
      * loadAssets - loads all assets from file into a resource pool for later use and ease of access.
      */
     public static void loadAssets() {
-        Resources resources = new Resources();
 
-        resources.init();
+        // resources.init();
     }
 
     /**
@@ -93,8 +92,10 @@ public class Main {
      */
     public static void create() {
 
+        Resources resources = new Resources();
+
         // Create Preferences
-        preferences = new Config();
+        config = new Config();
 
         // Create Environment Handler
         environmentsHandler = new EnvironmentsHandler();
@@ -124,7 +125,7 @@ public class Main {
         levelsListModel = new LevelsList();
 
         // Create State Canvases
-        mainMenuCanvas = new MenuCanvas();
+        menuCanvas = new MenuCanvas();
         gameCanvas = new GameCanvas();
 
         gameUpdateRunnable = new UpdateRunnable();
@@ -143,14 +144,16 @@ public class Main {
      */
     public static void init() {
 
+
+
         // Initialize Preferences
         PreferencesParser preferencesParser =
-                new PreferencesParser(preferences, "files/", "Preferences", ".xml");
+                new PreferencesParser(config, "files/", "Preferences", ".xml");
         preferencesParser.read();
-        System.out.println(preferences.toString());
+        System.out.println(config.toString());
 
         // Initialize Window with Preference Data
-        window.init(preferences, environmentsHandler);
+        window.init(config, environmentsHandler);
 
         // Initialize Control Models
         gameControlsModel.init(new GameMouseControls(gameControlsModel), new GameKeyControls(gameControlsModel));
@@ -176,17 +179,17 @@ public class Main {
                 levelsListModel, hudModel, inventory);
 
         // Initialize Canvases
-        mainMenuCanvas.init(mainMenuEnvironment);
+        menuCanvas.init(mainMenuEnvironment);
         gameCanvas.init(gameEnvironment);
 
         gameUpdateRunnable.init(gameEnvironment);
         gameRenderRunnable.init(gameCanvas);
         menuUpdateRunnable.init(mainMenuEnvironment);
-        menuRenderRunnable.init(mainMenuCanvas);
+        menuRenderRunnable.init(menuCanvas);
 
         // Initialize Environments Model with both Main Menu, Pause Game and Game AEnvironments
         environmentsHandler.addEnvironmentPair(
-                mainMenuEnvironment, mainMenuCanvas, menuUpdateRunnable, menuRenderRunnable);
+                mainMenuEnvironment, menuCanvas, menuUpdateRunnable, menuRenderRunnable);
         environmentsHandler.addEnvironmentPair(gameEnvironment, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.addEnvironmentPair(pauseMenuModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
@@ -196,7 +199,7 @@ public class Main {
         environmentsHandler.applyEnvironment();
 
         // Confirm and Apply scaling
-        preferences.post();
+        config.post();
 
     }
 

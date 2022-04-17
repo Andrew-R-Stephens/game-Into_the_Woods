@@ -87,7 +87,6 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
                 (int)(Config.scaledW * y),
                 (int)(Config.scaledH * w),
                 (int)(Config.scaledH * h));
-
     }
 
     public int right() {

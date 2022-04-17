@@ -35,6 +35,9 @@ public class SpriteSheetParser {
                     // Create Input stream
                     InputStream is =
                             AFileReader.class.getClassLoader().getResourceAsStream(jsonFile);
+                    if(is == null) {
+                        return false;
+                    }
                     InputStreamReader isr = new InputStreamReader(is);
                     BufferedReader r = new BufferedReader(isr);
 
