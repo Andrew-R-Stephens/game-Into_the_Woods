@@ -28,7 +28,7 @@ public abstract class APawn extends AActor implements IDrawable, IUpdatable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         super.draw(g);
     }
 

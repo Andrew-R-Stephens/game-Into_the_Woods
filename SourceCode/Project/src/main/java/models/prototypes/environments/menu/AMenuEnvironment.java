@@ -45,7 +45,7 @@ public abstract class AMenuEnvironment extends AEnvironment implements IDrawable
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         menuStack.peek().draw(g);
     }
 

@@ -30,7 +30,7 @@ public class AImageView extends AMenuComponent implements IDrawable, IUpdatable 
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
 
         super.draw(g);
 

@@ -6,7 +6,7 @@ import models.prototypes.environments.AEnvironment;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.threading.ARunnable;
 import models.prototypes.views.ACanvas;
-import views.swing.window.MainWindow;
+import views.window.MainWindow;
 
 import java.util.ArrayList;
 

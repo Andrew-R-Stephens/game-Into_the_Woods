@@ -32,7 +32,7 @@ public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable 
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         g.setColor(new Color(0, 0, 0, 150));
         g.fillRect(0, 0, Config.window_width_actual, Config.window_height_actual);
 

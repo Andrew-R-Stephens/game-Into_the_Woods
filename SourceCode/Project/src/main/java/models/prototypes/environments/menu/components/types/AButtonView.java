@@ -32,7 +32,7 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
 
         super.draw(g);
 

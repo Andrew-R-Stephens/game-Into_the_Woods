@@ -1,10 +1,10 @@
 package models.levels.level;
 
-import models.actors.gameactors.props.platforms.Platform;
-import models.actors.gameactors.props.triggers.collectibles.key.DoorKey;
-import models.actors.gameactors.props.triggers.interactibles.Door;
-import models.actors.gameactors.props.triggers.interactibles.Spikes;
-import models.actors.gameactors.props.triggers.interactibles.Spring;
+import models.actors.platforms.Platform;
+import models.actors.triggers.collectibles.key.DoorKey;
+import models.actors.triggers.interactibles.Door;
+import models.actors.triggers.interactibles.Spikes;
+import models.actors.triggers.interactibles.Spring;
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.level.ALevel;
@@ -25,7 +25,7 @@ public class TestLevel1 extends ALevel {
 
         build();
 
-        setBackgroundImage(getResources().getImage("menubackground"));
+        addBackgroundLayer(getResources().getImage("menubackground"));
     }
 
     @Override

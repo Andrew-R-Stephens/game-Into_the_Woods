@@ -21,9 +21,9 @@ import models.runnables.UpdateRunnable;
 import models.utils.config.Config;
 import models.utils.files.PreferencesParser;
 import models.utils.resources.Resources;
-import views.swing.canvas.game.GameCanvas;
-import views.swing.canvas.menu.MenuCanvas;
-import views.swing.window.MainWindow;
+import views.canvas.game.GameCanvas;
+import views.canvas.menu.MenuCanvas;
+import views.window.MainWindow;
 
 /**
  * The launching class.

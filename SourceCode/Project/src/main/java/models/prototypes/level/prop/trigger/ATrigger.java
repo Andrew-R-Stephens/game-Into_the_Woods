@@ -44,7 +44,7 @@ public abstract class ATrigger extends AProp implements IDrawable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
 
         float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
         float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));

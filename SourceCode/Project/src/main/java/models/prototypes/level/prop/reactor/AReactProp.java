@@ -39,7 +39,7 @@ public abstract class AReactProp extends AProp implements IDrawable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
 
         float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
         float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
@@ -53,5 +53,10 @@ public abstract class AReactProp extends AProp implements IDrawable {
         g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
         g.setColor(Color.BLACK);
         g.drawString("React Area", (int) (offsetX) + 3, (int) (offsetY) + 12);
+    }
+
+    @Override
+    public void drawAsHUD(Graphics2D g) {
+
     }
 }

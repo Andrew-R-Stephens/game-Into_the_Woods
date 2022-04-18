@@ -1,8 +1,8 @@
 package models.levels.level;
 
-import models.actors.gameactors.props.platforms.Platform;
-import models.actors.gameactors.props.triggers.collectibles.key.DoorKey;
-import models.actors.gameactors.props.triggers.interactibles.Door;
+import models.actors.platforms.Platform;
+import models.actors.triggers.collectibles.key.DoorKey;
+import models.actors.triggers.interactibles.Door;
 import models.environments.game.GameEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;

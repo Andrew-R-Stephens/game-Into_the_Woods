@@ -5,8 +5,8 @@ import controls.MenuControls;
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
 import controls.menu.MenuKeyControls;
-import models.actors.gameactors.props.particles.Particle;
-import models.actors.gameactors.props.player.PlayerAvatar;
+import models.actors.particles.Particle;
+import models.actors.player.PlayerAvatar;
 import models.camera.Camera;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.hud.HUDModel;
@@ -98,40 +98,32 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g2d) {
 
         // Render Level Props
-        levelsList.draw(g);
+        levelsList.draw(g2d);
 
         // Render Game Actors
         for (AActor gameObject : actors) {
-            gameObject.draw(g);
-        }
-
-        if(!isPaused) {
-            hudModel.draw(g);
+            gameObject.draw(g2d);
         }
 
         if(isPaused) {
             //Draw Pause Menu
-            pauseMenuEnvironment.draw(g);
+            pauseMenuEnvironment.draw(g2d);
+        } else {
+            hudModel.draw(g2d);
         }
+
     }
 
     public void doGameUpdates(float delta) {
 
         doGameControls();
-
-        //testAddingActors(delta); // TODO: Delete this (testing purposes only)
-
-        detectCollisions(delta); // Check Game Object Collisions with Level Props
-
         insertQueuedActors(); // Dequeue queued actors and add them to list of actors
-
+        detectCollisions(delta); // Check Game Object Collisions with Level Props
         updateActors(delta); // Update the Game Objects
-
         updateLevel(delta); // Update level models.props
-
         updateHUD(delta); // Update HUD overlay
     }
 
@@ -149,7 +141,6 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
         if(keyController instanceof GameKeyControls kc) {
             if(kc.getControlsModel().getAction(GameControls.Actions.ESCAPE)) {
-                //kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
                 kc.getControlsModel().reset();
                 setPaused(true);
                 getParentEnvironmentsHandler().swapToEnvironment(
@@ -204,9 +195,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     private synchronized void testAddingActors(float delta) {
-        if (mouseController instanceof GameMouseControls) {
-
-            GameMouseControls gmc = (GameMouseControls) mouseController;
+        if (mouseController instanceof GameMouseControls gmc) {
 
             if (gmc.isLeftPressed()) {
                 int count = (int) (10 / delta);

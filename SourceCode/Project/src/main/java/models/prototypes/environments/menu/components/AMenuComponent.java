@@ -93,7 +93,7 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         g.setColor(Color.RED);
         g.drawRect(
                 (int)(Config.scaledW * x),

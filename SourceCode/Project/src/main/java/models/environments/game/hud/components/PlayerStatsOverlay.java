@@ -15,7 +15,7 @@ public class PlayerStatsOverlay extends AOverlayComponent implements IDrawable, 
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         super.draw(g);
 
         float sW = Config.scaledW, sH = Config.scaledH;
@@ -29,6 +29,5 @@ public class PlayerStatsOverlay extends AOverlayComponent implements IDrawable, 
 
     @Override
     public void update(float delta) {
-        super.update(delta);
     }
 }

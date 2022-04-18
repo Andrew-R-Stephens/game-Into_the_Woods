@@ -22,7 +22,7 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
 
         super.draw(g);
 

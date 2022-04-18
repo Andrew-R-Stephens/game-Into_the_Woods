@@ -4,6 +4,6 @@ import java.awt.*;
 
 public interface IHUDDrawable {
 
-    void drawAsHUD(Graphics g);
+    void drawAsHUD(Graphics2D g);
 
 }

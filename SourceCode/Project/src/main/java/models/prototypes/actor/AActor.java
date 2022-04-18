@@ -39,7 +39,7 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         g.setColor(Color.CYAN);
 
         float offsetX = ((x * Config.scaledW) + (Camera.targX));

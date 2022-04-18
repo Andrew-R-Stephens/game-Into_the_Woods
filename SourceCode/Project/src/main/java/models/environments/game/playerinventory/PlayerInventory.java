@@ -1,6 +1,6 @@
 package models.environments.game.playerinventory;
 
-import models.actors.gameactors.props.triggers.collectibles.key.DoorKey;
+import models.actors.triggers.collectibles.key.DoorKey;
 import models.prototypes.level.prop.trigger.collectibles.ACollectibleTrigger;
 
 import java.util.ArrayList;

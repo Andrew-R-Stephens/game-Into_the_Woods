@@ -15,10 +15,10 @@ public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, I
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
     }
 
-    public abstract void drawAsHUD(Graphics g);
+    public abstract void drawAsHUD(Graphics2D g);
 
     @Override
     public void update(float delta) {

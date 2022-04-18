@@ -60,8 +60,8 @@ public class LevelsList implements IDrawable {
     }
 
     @Override
-    public void draw(Graphics g) {
-        getCurrentLevel().draw(g);
+    public void draw(Graphics2D g2d) {
+        getCurrentLevel().draw(g2d);
     }
 
     public void reset() {

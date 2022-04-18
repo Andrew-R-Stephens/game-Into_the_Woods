@@ -6,6 +6,9 @@ import models.prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
 
+/**
+ * Dedicated GameEnvironment Controls class that extends the AKeyController.
+ */
 public class GameKeyControls extends AKeyController {
 
     public GameKeyControls(AControls controlsViewModel) {

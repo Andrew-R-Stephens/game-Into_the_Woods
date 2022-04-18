@@ -92,7 +92,7 @@ public abstract class ASliderView extends AMenuComponent {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         super.draw(g);
 
         button.draw(g);

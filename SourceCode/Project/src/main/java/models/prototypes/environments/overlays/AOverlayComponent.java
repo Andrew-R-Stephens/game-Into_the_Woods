@@ -22,7 +22,7 @@ public abstract class AOverlayComponent implements IUpdatable, IDrawable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         float sW = Config.scaledW, sH = Config.scaledH;
         g.setColor(new Color(255, 150, 150, 100));
         g.fillRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));

@@ -1,6 +1,5 @@
 package models.environments.game.hud.components;
 
-import models.actors.gameactors.props.player.PlayerAvatar;
 import models.environments.game.GameEnvironment;
 import models.prototypes.environments.overlays.AOverlayComponent;
 import models.utils.config.Config;
@@ -28,16 +27,16 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
 
     @Override
     public void update(float delta) {
-        super.update(delta);
+
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         super.draw(g);
 
         float sW = Config.scaledW, sH = Config.scaledH;
 
-        gameEnvironment.getCurrentLevel().drawAsHUD(overlay.getGraphics());
+        gameEnvironment.getCurrentLevel().drawAsHUD((Graphics2D) overlay.getGraphics());
         g.drawImage(overlay, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
 
         g.setColor(new Color(75, 25, 75));

@@ -1,7 +1,8 @@
 package models.prototypes.level;
 
-import models.actors.gameactors.props.triggers.collectibles.key.DoorKey;
-import models.actors.gameactors.props.triggers.interactibles.Door;
+import models.actors.triggers.collectibles.key.DoorKey;
+import models.actors.triggers.interactibles.Door;
+import models.camera.ParallaxBackground;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.AProp;
@@ -20,7 +21,9 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     protected GameEnvironment gameEnvironment;
 
-    protected Image backgroundImage;
+    protected BufferedImage backgroundImage;
+    private final ParallaxBackground scrollingBackground = new ParallaxBackground();
+
     protected int[] startOrigin = new int[2];
     protected final ArrayList<AProp> levelProps = new ArrayList<>();
     protected Door door;
@@ -48,8 +51,10 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         startOrigin = new int[]{x, y};
     }
 
-    protected void setBackgroundImage(BufferedImage backgroundImage) {
-        this.backgroundImage = backgroundImage.getScaledInstance(5000, 5000, Image.SCALE_SMOOTH);
+    protected void addBackgroundLayer(BufferedImage backgroundImage) {
+        this.backgroundImage = backgroundImage;
+
+        scrollingBackground.addLayer(backgroundImage);
     }
 
     public void countKeys() {
@@ -81,7 +86,8 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
+        /*
         g.drawImage(
                 backgroundImage,
                 0,
@@ -89,6 +95,9 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 Config.window_width_actual,
                 Config.window_height_actual,
                 null);
+        */
+
+        scrollingBackground.draw(g);
 
         for (AActor levelProps : getLevelProps()) {
             if (levelProps instanceof AProp p) {
@@ -105,7 +114,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     }
 
     @Override
-    public void drawAsHUD(Graphics g) {
+    public void drawAsHUD(Graphics2D g) {
         g.setColor(new Color(50, 50,50));
         g.fillRect(0, 0, Config.window_width_actual, Config.window_height_actual);
 

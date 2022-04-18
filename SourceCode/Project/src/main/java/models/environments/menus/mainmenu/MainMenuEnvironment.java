@@ -47,7 +47,7 @@ public class MainMenuEnvironment extends AMenuEnvironment {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
 
         if(backgroundImage != null) {
             g.drawImage(backgroundImage,

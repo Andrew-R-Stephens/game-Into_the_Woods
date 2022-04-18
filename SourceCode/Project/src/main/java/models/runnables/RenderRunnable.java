@@ -22,7 +22,6 @@ public class RenderRunnable extends ARunnable {
         isRunning = true;
         while(isRunning) {
             long now = System.nanoTime();
-            //delta += (now - lastTime) / ns;
             delta += (now - lastTime) / (1000000000 / (float) Config.frameRate);
             lastTime = now;
 

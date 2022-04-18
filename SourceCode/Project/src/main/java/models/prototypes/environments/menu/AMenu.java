@@ -71,7 +71,7 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         for (AMenuComponent c : components) {
             c.draw(g);
         }
