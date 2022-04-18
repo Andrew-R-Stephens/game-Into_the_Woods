@@ -25,6 +25,12 @@ import views.swing.canvas.game.GameCanvas;
 import views.swing.canvas.menu.MenuCanvas;
 import views.swing.window.MainWindow;
 
+/**
+ * The launching class.
+ *
+ * Includes static references to all root-level objects.
+ * Handles the initialization of all root-level objects.
+ */
 public class Main {
 
     private static Config config;
@@ -61,10 +67,9 @@ public class Main {
     private static MainWindow window;
 
     /**
-     * main - The starting point of the program.
-     *
-     * First loads all assets from file into a resource pool for later use and ease of access.
-     * Then Creates all permanent static variables for protection against null pointer exceptions.
+     * The starting point of the program.<br><br>
+     * First loads all assets from file into a resource pool for later use and ease of access.<br>
+     * Then Creates all permanent static variables for protection against null pointer exceptions.<br>
      * Then initializes all variables with their necessary reference objects. Assists in MVC cross-object communication.
      */
     public static void main(String[] args) {
@@ -81,7 +86,7 @@ public class Main {
     }
 
     /**
-     * loadAssets - loads all assets from file into a resource pool for later use and ease of access.
+     * Handles the loading of all assets from files into a resource pool for later use and ease of access.
      */
     public static void loadAssets() {
 
@@ -94,7 +99,7 @@ public class Main {
     }
 
     /**
-     * create - Creates all permanent static variables for protection against null pointer exceptions.
+     * Creates all permanent static variables for protection against null pointer exceptions.
      */
     public static void create() {
 
@@ -141,7 +146,7 @@ public class Main {
     }
 
     /**
-     * init - initializes all variables with their necessary reference objects.
+     * Handles the initializes all variables with their necessary reference objects.<br>
      * Assists in MVC cross-object referencing.
      */
     public static void init() {
@@ -177,7 +182,8 @@ public class Main {
 
         // Initialize AEnvironment Models
         mainMenuEnvironment.init(environmentsHandler, menuControlsModel);
-        gameEnvironment.init(environmentsHandler,
+        gameEnvironment.init(
+                environmentsHandler,
                 pauseMenuModel, gameControlsModel,
                 levelsListModel, hudModel, inventory);
 
@@ -193,8 +199,10 @@ public class Main {
         // Initialize Environments Model with both Main Menu, Pause Game and Game AEnvironments
         environmentsHandler.addEnvironmentPair(
                 mainMenuEnvironment, menuCanvas, menuUpdateRunnable, menuRenderRunnable);
-        environmentsHandler.addEnvironmentPair(gameEnvironment, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
-        environmentsHandler.addEnvironmentPair(pauseMenuModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
+        environmentsHandler.addEnvironmentPair(
+                gameEnvironment, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
+        environmentsHandler.addEnvironmentPair(
+                pauseMenuModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
         environmentsHandler.getCurrentEnvironment().onResume();
 

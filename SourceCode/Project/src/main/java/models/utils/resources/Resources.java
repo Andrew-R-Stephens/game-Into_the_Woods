@@ -16,13 +16,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Resources class
- *
  * First, this class checks for different types of resources along their respective paths. Paths vary between IDE and
- * Jar environments, so those specified within this class respect the paths of both environments.
- *
- * If found, resources are either stored into HashMap lists as objects or as referential paths.
- *
+ * Jar environments, so those specified within this class respect the paths of both environments.<br>
+ *<br>
+ * If found, resources are either stored into HashMap lists as objects or as referential paths.<br>
+ *<br>
  * Resources are called on by reference, ensuring for a singleton instance of the resource existing in memory. This
  * allows for the system to use that resource multiple times without requiring resource overhead.
  */
@@ -34,10 +32,15 @@ public class Resources {
     private String path_images, path_audio, path_fonts;
 
     private final Map<String, BufferedImage> imagesFiles = new HashMap<>();
-    public final Map<String, String> audioFiles = new HashMap<>();
+    private final Map<String, String> audioFiles = new HashMap<>();
     private final Map<String, File> textFiles = new HashMap<>();
     private final Map<String, Font> fontFiles = new HashMap<>();
 
+    /**
+     * <p>Parses the metadata.json file and registers specified resources locally.</p>
+     * <p>The metadata file referenecs all items in the Resources directory, including path names.</p>
+     * <p>Those files that are specified within the metadata file are stored referentially or by path depending on the resource type.</p>
+     */
     public void init() {
 
         // Initialize MetaData
@@ -63,6 +66,13 @@ public class Resources {
 
     }
 
+    /**
+     * <p>Retrieves file path data held within the MetaDataParser.</p>
+     * <br>
+     * @param metaData - The MetaDataParser object which has processed the metadata already.
+     * @param tag - The key which holds data for a specified file type.
+     * @return An arraylist of file paths.
+     */
     private String[] registerFiles(MetaDataParser metaData, String tag) {
         ArrayList<String> tempList = metaData.getFileNames(tag);
         String[] tempArr = new String[tempList.size()];
@@ -71,12 +81,23 @@ public class Resources {
         return tempArr;
     }
 
+    /**
+     * <p>Registers all image paths, loads image and stores a reference to the image into a Map.</p>
+     * <br>
+     * @param fileNames - The file names of images requested to be stored.
+     */
     private void loadImageFiles(String[] fileNames) {
         for(String fileName : fileNames) {
             imagesFiles.put(fileName.split("\\.")[0], loadImageFile(fileName));
         }
     }
 
+    /**
+     * <p>Loads the specified image file to see if it exists in the Resource directory. If it exists, the file path is not null.</p>
+     * <br>
+     * @param fileName - The specific file name.
+     * @return BufferedImage file located from the Resources directory. Or null if the file could not be found.
+     */
     public BufferedImage loadImageFile(String fileName) {
         InputStream resourceBuff = Resources.class.getResourceAsStream(path_images + fileName);
 
@@ -95,7 +116,11 @@ public class Resources {
         return null;
     }
 
-
+    /**
+     * <p>Registers all audio paths into a Map.</p>
+     * <br>
+     * @param fileNames - The file names of audio requested to be stored.
+     */
     private void loadAudioFiles(String[] fileNames) {
 
         for(String fileName: fileNames) {
@@ -105,6 +130,12 @@ public class Resources {
 
     }
 
+    /**
+     * <p>Loads the specified audio file to see if it exists in the Resource directory. If it exists, the file path is not null.</p>
+     * <br>
+     * @param fileName - The specific file name.
+     * @return the path to the audio file.
+     */
     public String loadAudioFile(String fileName) {
 
         String fullPath = path_audio + fileName;
@@ -122,17 +153,26 @@ public class Resources {
         }
 
         return fullPath;
-
     }
 
+    /**
+     * <p>Registers all text files into a Map.</p>
+     * <br>
+     * @param fileNames - The file names of text files requested to be stored.
+     */
     private void loadTextFiles(String[] fileNames) {
-
         for(String fileName: fileNames) {
             textFiles.put(fileName, loadTextFile(fileName));
         }
-
     }
 
+    /**
+     * <p>Loads the specified text file to see if it exists in the Resource directory. If it exists, the file is not null.</p>
+     * <p>Reads in the text file and stores the data into a temporary file which gets returned.</p>
+     * <br>
+     * @param fileName - The specific text file name.
+     * @return the text file written to memory.
+     */
     public File loadTextFile(String fileName) {
         String  name = fileName.split("\\.")[0],
                 type = fileName.split("\\.")[1];
@@ -167,6 +207,11 @@ public class Resources {
         return file;
     }
 
+    /**
+     * <p>Registers all Font files into a Map.</p>
+     * <br>
+     * @param fileNames - The file names of Font files requested to be stored.
+     */
     private void loadFontFiles(String[] fileNames) {
 
         for(String fileName: fileNames) {
@@ -175,6 +220,12 @@ public class Resources {
         }
     }
 
+    /**
+     * <p>Loads the specified Font file to see if it exists in the Resource directory. If it exists, the Font is not null.</p>
+     * <br>
+     * @param fileName - The specific Font file name.
+     * @return the Font file written to memory.
+     */
     public Font loadFontFile(String fileName) {
         InputStream is = AFileReader.class.getClassLoader().getResourceAsStream(path_fonts + fileName);
         if(is == null) {
@@ -197,36 +248,68 @@ public class Resources {
         return font;
     }
 
-    public SpriteSheet getSpriteSheet(String name) {
-        String fileName = name + ".json";
+    /**
+     * <p>Retrieves a SpriteSheet which is stored in the Map. Uses the references from Text Files and BufferedImage Maps.</p>
+     * <br>
+     * @param spriteSheetName - the non-extension name of the SpriteSheet requested.
+     * @return - A reference to the SpriteSheet requested.
+     */
+    public SpriteSheet getSpriteSheet(String spriteSheetName) {
+        String fileName = spriteSheetName + ".json";
         if(textFiles.get(fileName) == null) {
             System.out.println("No spritesheet data file of that name!");
         }
-        if(imagesFiles.get(name) == null) {
+        if(imagesFiles.get(spriteSheetName) == null) {
             System.out.println("No spritesheet image file of that name!");
         }
 
         SpriteSheetParser parser = new SpriteSheetParser(path_textFile + fileName);
         SpriteSheet spriteSheet = parser.getSpriteSheet();
-        spriteSheet.setReferenceImage(getImage(name));
+        spriteSheet.setReferenceImage(getImage(spriteSheetName));
 
         return spriteSheet;
     }
 
+    /**
+     * <p>Retrieves a BufferedImage which is stored in the Map</p>
+     * <br>
+     * @param imageKey - the non-extension file name of the image requested.
+     * @return - A reference to the BufferedImage requested.
+     */
     public BufferedImage getImage(String imageKey) {
         return imagesFiles.get(imageKey);
     }
 
+    /**
+     * <p>Retrieves a File which is stored in the Map</p>
+     * <br>
+     * @param fileKey - the non-extension file name of the text file requested.
+     * @return - A reference to the File requested.
+     */
     public File getTextFile(String fileKey) {
         return textFiles.get(fileKey);
     }
 
+    /**
+     * <p>Retrieves a Font which is stored in the Map</p>
+     * <br>
+     * @param fontKey - the non-extension file name of the font requested.
+     * @return - A reference to the Font requested.
+     */
     public Font getFont(String fontKey) {
         return fontFiles.get(fontKey);
     }
 
+    /**
+     * Called externally to start a new concurrent audio thread.<br>
+     * <br>
+     * Uses stored audio file paths to in-stream the data as an audio file. Sets the file into an AdvancedPlayer object.<br>
+     * The AdvancedPlayer object is returned for control over object permanence.<br>
+     * <br>
+     * @param audioKey - The audio file name without extension.
+     * @return The AdvancedPlayer that retains data for a specific audio file.
+     */
     public synchronized AdvancedPlayer playAudio(String audioKey) {
-
         // create AudioInputStream object
         InputStream resourceBuff = Resources.class.getResourceAsStream(audioFiles.get(audioKey));
 
@@ -268,30 +351,33 @@ public class Resources {
 
     }
 
+    /**
+     * Checks if all files exist within the Map objects. Files do not exist or could not be found if they are null.<br>
+     * <br>
+     * @return Brief data about the resource file references.
+     */
     public String toString() {
-        String s = "Image Files:\n";
+        StringBuilder s = new StringBuilder("Image Files:\n");
         for(String key: imagesFiles.keySet()) {
-            s +=    "\t" + key + " " + (imagesFiles.get(key) != null) + "\n";
+            s.append("\t").append(key).append(" ").append(imagesFiles.get(key) != null).append("\n");
         }
 
-        s += "Audio Files:\n";
+        s.append("Audio Files:\n");
         for(String key: audioFiles.keySet()) {
-            s +=    "\t" + key + " " + (audioFiles.get(key) != null) + "\n";
+            s.append("\t").append(key).append(" ").append(audioFiles.get(key) != null).append("\n");
         }
 
-        s += "Text Files:\n";
+        s.append("Text Files:\n");
         for(String key: textFiles.keySet()) {
-            s +=    "\t" + key + " " +
-                    (textFiles.get(key) != null) + " " + "\n";
+            s.append("\t").append(key).append(" ").append(textFiles.get(key) != null).append(" ").append("\n");
         }
 
-        s += "Font Files:\n";
+        s.append("Font Files:\n");
         for(String key: fontFiles.keySet()) {
-            s +=    "\t" + key + " " +
-                    (fontFiles.get(key) != null) + " " + "\n";
+            s.append("\t").append(key).append(" ").append(fontFiles.get(key) != null).append(" ").append("\n");
         }
 
-        return s;
+        return s.toString();
     }
 
 }
