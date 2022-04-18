@@ -13,6 +13,9 @@ public abstract class ASliderView extends AMenuComponent {
 
     protected final AButtonView button;
 
+    private final BufferedImage trackImage;
+    private final BufferedImage notchImage;
+
     protected ArrayList<Short> values;
     protected int itemCount = 2;
     protected int current = 0;
@@ -25,6 +28,9 @@ public abstract class ASliderView extends AMenuComponent {
         this.y = y;
         this.w = w;
         this.h = h;
+
+        trackImage = getParentEnvironment().getResources().getImage("slider_track");
+        notchImage = getParentEnvironment().getResources().getImage("slider_notch");
 
         BufferedImage buttonImg = getParentEnvironment().getResources().getImage("button_slider");
         float scaleW = (float)buttonImg.getHeight() / h * .5f;
@@ -94,6 +100,26 @@ public abstract class ASliderView extends AMenuComponent {
     @Override
     public void draw(Graphics2D g) {
         super.draw(g);
+
+        float scaleH = .1f;
+        g.drawImage(
+                trackImage,
+                (int) (x * Config.scaledW),
+                (int)((y * Config.scaledH) + (.5f * h * Config.scaledH) - (.5f *  scaleH * h * Config.scaledH)),
+                (int) (w * Config.scaledW),
+                (int) (scaleH * h * Config.scaledH), null);
+
+        if((Config.scaledW * notchImage.getWidth() * (h / (float)notchImage.getHeight())) > (w / notchDistance)) {
+            for (int i = 0; i < w; i++) {
+                g.drawImage(notchImage,
+                        (int) (((x + i) * Config.scaledW)),
+                        (int) (y * Config.scaledW),
+                        (int) (Config.scaledW * notchImage.getWidth() * h / notchImage.getHeight()),
+                        (int) (h * Config.scaledH),
+                        null);
+                i += notchDistance;
+            }
+        }
 
         button.draw(g);
     }

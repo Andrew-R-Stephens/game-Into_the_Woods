@@ -1,8 +1,8 @@
-package models.camera;
+package models.environments.game.background;
 
+import models.camera.Camera;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
-import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

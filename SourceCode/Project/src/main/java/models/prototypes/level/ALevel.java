@@ -2,8 +2,8 @@ package models.prototypes.level;
 
 import models.actors.triggers.collectibles.key.DoorKey;
 import models.actors.triggers.interactibles.Door;
-import models.camera.ParallaxBackground;
 import models.environments.game.GameEnvironment;
+import models.environments.game.background.ParallaxBackground;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.ATrigger;
