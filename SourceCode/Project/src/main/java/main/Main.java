@@ -28,6 +28,7 @@ import views.swing.window.MainWindow;
 public class Main {
 
     private static Config config;
+    private static Resources resources;
 
     private static EnvironmentsHandler environmentsHandler;
 
@@ -84,7 +85,12 @@ public class Main {
      */
     public static void loadAssets() {
 
-        // resources.init();
+        // Create Preferences
+        config = new Config();
+
+        resources = new Resources();
+        resources.init();
+
     }
 
     /**
@@ -92,8 +98,6 @@ public class Main {
      */
     public static void create() {
 
-        // Create Preferences
-        config = new Config();
 
         // Create Environment Handler
         environmentsHandler = new EnvironmentsHandler();
@@ -142,8 +146,6 @@ public class Main {
      */
     public static void init() {
 
-        Resources resources = new Resources();
-        resources.init();
         mainMenuEnvironment.setResources(resources);
         pauseMenuModel.setResources(resources);
         gameEnvironment.setResources(resources);

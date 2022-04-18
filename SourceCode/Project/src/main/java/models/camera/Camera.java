@@ -11,8 +11,10 @@ public class Camera {
     public static float targX = 0, targY = 0;
     public static float camX = 0, camY = 0;
 
-    public static float acceleration_pan = .05f;
-    public static float acceleration_zoom = .001f;
+    public static float DEFAULT_ZOOM_ACCELERATION = .001f;
+    public static float DEFAULT_PAN_ACCELERATION = .05f;
+    public static float acceleration_pan = DEFAULT_PAN_ACCELERATION;
+    public static float acceleration_zoom = DEFAULT_ZOOM_ACCELERATION;
 
     public Camera() {
         reset();
@@ -37,6 +39,8 @@ public class Camera {
         Config.calcResolutionScale();
 
         zoomTarget = DEFAULT_ZOOM_LEVEL;
+        acceleration_zoom = DEFAULT_ZOOM_ACCELERATION;
+        acceleration_pan = DEFAULT_PAN_ACCELERATION;
     }
 
     public static void reset() {

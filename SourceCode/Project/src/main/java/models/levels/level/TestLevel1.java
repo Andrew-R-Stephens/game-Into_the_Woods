@@ -73,7 +73,7 @@ public class TestLevel1 extends ALevel {
         addProp(reactProp);
 
         // ZOOM TRIGGER
-        addProp(new APropTrigger(getResources(), gameEnvironment, 0, 0, 800, 1080,
+        addProp(new APropTrigger(getResources(), gameEnvironment, 0, -300, 800, 1080,
                 0, 0, -1,false, false) {
             @Override
             public void doAction() {

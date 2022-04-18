@@ -50,11 +50,13 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
         float[] spriteScale = spriteSheets.get(actionState).getCurrentFrameSize();
         int[] largest = spriteSheets.get(actionState).getLargestSize();
+/*
 
-        //w = spriteScale[0];
-        //h = spriteScale[1] + spriteSheets.get(actionState).getCurrentFramePos()[1];
+        ow = spriteScale[0];
+        oh = spriteScale[1] + spriteSheets.get(actionState).getCurrentFramePos()[1];
 
-        //y = (y + (oh - h));
+        setY(y + (oh - h));
+*/
 
         //System.out.println((int)y + " " + (int)h + " " + largest[1]);
         if(vX < 0) {

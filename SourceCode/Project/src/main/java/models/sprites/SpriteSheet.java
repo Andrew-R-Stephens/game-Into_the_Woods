@@ -124,13 +124,15 @@ public class SpriteSheet implements IUpdatable {
     }
 
     public void draw(Graphics g, int x, int y, int w, int h) {
+        BufferedImage croppedImage = frames.get(currentFrame).getSubImage(referenceImage);
         g.drawImage(
-                frames.get(currentFrame).getSubImage(referenceImage),
+                croppedImage,
                 x,
                 y,
                 w,
                 h,
                 null);
+        croppedImage.flush();
     }
 
     public void reset() {

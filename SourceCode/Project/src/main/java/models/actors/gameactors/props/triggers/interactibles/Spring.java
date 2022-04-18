@@ -44,7 +44,7 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
             }
         }
 
-        if(hasCollision) {
+        if(hasCollision && a.isFalling()) {
             lastActor = a;
 
             doAction();

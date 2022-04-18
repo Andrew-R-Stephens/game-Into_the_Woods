@@ -22,8 +22,8 @@ public abstract class APawn extends AActor implements IDrawable, IUpdatable {
     public void update(float delta) {
         super.update(delta);
 
-        x += vX;
-        y += vY;
+        setX(x += vX);
+        setY(y += vY);
 
     }
 

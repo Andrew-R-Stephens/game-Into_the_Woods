@@ -212,6 +212,10 @@ public abstract class APhysics implements IUpdatable {
         return h;
     }
 
+    public boolean isFalling() {
+        return vY >= 0;
+    }
+
     private void setSize(float w, float h) {
         this.w = w;
         this.h = h;
