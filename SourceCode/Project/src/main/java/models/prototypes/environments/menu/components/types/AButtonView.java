@@ -5,7 +5,6 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.environments.menu.components.AMenuComponent;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
-import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -23,12 +22,12 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         this.h = h;
 
         spritesheet =
-                parentMenuEnvironment.getResources().getSpriteSheet("spritesheet_buttonhrect").setLoopOnLast(false);
+                getParentEnvironment().getResources().getSpriteSheet("spritesheet_buttonhrect").setLoopOnLast(false);
     }
 
     public void playSound() {
         if(playSound) {
-            parentMenuEnvironment.getResources().playAudio("buttonclick");
+            getParentEnvironment().getResources().playAudio("buttonclick");
         }
     }
 
@@ -85,7 +84,7 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         g.setColor(Color.BLACK);
 
         g.setFont(
-                parentMenuEnvironment.getResources().getFont("bahnschrift")
+                getParentEnvironment().getResources().getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
                         .deriveFont(Font.BOLD, 36 * sW));
 
@@ -106,7 +105,7 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
     }
 
     public void registerInput() {
-        AMouseController mc = parentMenuEnvironment.getMouseController();
+        AMouseController mc = getParentEnvironment().getMouseController();
         if (mc.isLeftPressed()) {
             isPressed = onClick(mc.getPos()[0], mc.getPos()[1]);
             if(isPressed) {

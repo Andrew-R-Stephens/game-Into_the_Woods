@@ -2,7 +2,6 @@ package models.utils.physics;
 
 import models.prototypes.actor.AActor;
 import models.utils.config.Config;
-import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 public abstract class APhysics implements IUpdatable {
 
@@ -55,10 +54,8 @@ public abstract class APhysics implements IUpdatable {
     }
 
     private void updateVelocity(float delta) {
-
         calculateGravity(delta);
         limitVelocity(delta);
-
     }
 
     public void limitVelocity(float delta) {

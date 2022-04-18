@@ -14,7 +14,7 @@ public abstract class AMenuEnvironment extends AEnvironment implements IDrawable
     private final Stack<AMenu> menuStack = new Stack<>();
 
     public void init(EnvironmentsHandler parentEnvironmentsModel, MenuControls controlsModel) {
-        super.init(parentEnvironmentsModel, controlsModel.getKeyController(), controlsModel.getMouseController());
+        super.init(parentEnvironmentsModel, controlsModel);
     }
 
     public void initPage(AMenu defaultMenu) {

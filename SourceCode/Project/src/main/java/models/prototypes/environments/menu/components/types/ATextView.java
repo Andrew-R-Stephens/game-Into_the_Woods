@@ -4,7 +4,6 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.environments.menu.components.AMenuComponent;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
-import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -75,7 +74,7 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
         g.setColor(Color.BLACK);
 
         g.setFont(
-                parentMenuEnvironment.getResources().getFont("bahnschrift")
+                getParentEnvironment().getResources().getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
                         .deriveFont(Font.BOLD, 36 * sW));
 

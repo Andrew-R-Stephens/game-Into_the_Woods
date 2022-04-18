@@ -1,10 +1,10 @@
 package models.prototypes.environments.menu.components;
 
+import models.environments.EnvironmentsHandler;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.sprites.SpriteSheet;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
-import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -26,7 +26,7 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     protected BufferedImage tint;
 
     // The Parent menu model which holds all pages and subpages.
-    protected AMenuEnvironment parentMenuEnvironment;
+    private final AMenuEnvironment parentMenuEnvironment;
 
     // Text to be displayed.
     // Will be removed if we add actual images in place of awt views.graphics.
@@ -41,6 +41,14 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     public AMenuComponent(AMenuEnvironment parentMenuEnvironment) {
         this.parentMenuEnvironment = parentMenuEnvironment;
+    }
+
+    protected AMenuEnvironment getParentEnvironment() {
+        return parentMenuEnvironment;
+    }
+
+    protected EnvironmentsHandler getEnvironmentHandler() {
+        return parentMenuEnvironment.getParentEnvironmentsHandler();
     }
 
     public void setSpriteSheet(SpriteSheet spritesheet) {

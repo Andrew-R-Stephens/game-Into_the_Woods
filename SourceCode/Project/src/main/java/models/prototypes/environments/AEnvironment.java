@@ -2,6 +2,7 @@ package models.prototypes.environments;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import models.environments.EnvironmentsHandler;
+import models.prototypes.controls.AControls;
 import models.prototypes.controls.AKeyController;
 import models.prototypes.controls.AMouseController;
 import models.utils.drawables.IDrawable;
@@ -10,7 +11,7 @@ import models.utils.updates.IUpdatable;
 
 public abstract class AEnvironment implements IUpdatable, IDrawable {
 
-    protected EnvironmentsHandler parentEnvironmentsHandler;
+    private EnvironmentsHandler parentEnvironmentsHandler;
 
     private Resources resources;
 
@@ -19,10 +20,10 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
     protected AKeyController keyController;
     protected AMouseController mouseController;
 
-    protected void init(EnvironmentsHandler parentEnvironmentsModel, AKeyController keyController, AMouseController mouseController) {
+    protected void init(EnvironmentsHandler parentEnvironmentsModel, AControls gameControls) {
         this.parentEnvironmentsHandler = parentEnvironmentsModel;
-        this.keyController = keyController;
-        this.mouseController = mouseController;
+        this.keyController = gameControls.getKeyController();
+        this.mouseController = gameControls.getMouseController();
     }
 
     public AKeyController getKeyController() {

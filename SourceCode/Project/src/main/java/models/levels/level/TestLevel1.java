@@ -10,7 +10,6 @@ import models.environments.game.GameEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.reactor.AReactProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
-import models.utils.resources.Resources;
 
 import java.awt.*;
 

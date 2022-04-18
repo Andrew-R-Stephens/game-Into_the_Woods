@@ -4,7 +4,6 @@ import models.prototypes.controls.AMouseController;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.environments.menu.components.AMenuComponent;
 import models.utils.config.Config;
-import models.utils.resources.Resources;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,10 +26,10 @@ public abstract class ASliderView extends AMenuComponent {
         this.w = w;
         this.h = h;
 
-        BufferedImage buttonImg = parentMenuEnvironment.getResources().getImage("button_slider");
+        BufferedImage buttonImg = getParentEnvironment().getResources().getImage("button_slider");
         float scaleW = (float)buttonImg.getHeight() / h * .5f;
 
-        button = new AButtonView(parentMenuEnvironment, x, y, (int)(scaleW * h), h) {
+        button = new AButtonView(getParentEnvironment(), x, y, (int)(scaleW * h), h) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -42,7 +41,7 @@ public abstract class ASliderView extends AMenuComponent {
 
             @Override
             public void registerInput() {
-                AMouseController mc = parentMenuEnvironment.getMouseController();
+                AMouseController mc = getParentEnvironment().getMouseController();
                 if (mc.isLeftPressed()) {
                     ASliderView.this.isPressed = onClick(mc.getPos()[0], mc.getPos()[1]);
                     if(isPressed) {
@@ -56,7 +55,7 @@ public abstract class ASliderView extends AMenuComponent {
                 }
             }
         };
-        button.setBackgroundImage(parentMenuEnvironment.getResources().getImage("button_slider"));
+        button.setBackgroundImage(getParentEnvironment().getResources().getImage("button_slider"));
         button.setImageScaling(ImageScale.FIT_CENTERED);
 
         init();
@@ -104,7 +103,7 @@ public abstract class ASliderView extends AMenuComponent {
         if(button != null) {
             button.registerInput();
             if(button.isPressed()) {
-                moveSliderTo(parentMenuEnvironment.getMouseController().getPos()[0], parentMenuEnvironment.getMouseController().getPos()[1]);
+                moveSliderTo(getParentEnvironment().getMouseController().getPos()[0], getParentEnvironment().getMouseController().getPos()[1]);
                 doSetting();
             }
         }

@@ -2,6 +2,7 @@ package views.swing.canvas.menu;
 
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.views.ACanvas;
+
 import java.awt.*;
 
 public class MenuCanvas extends ACanvas {

@@ -15,12 +15,11 @@ import models.environments.menus.pausemenumodel.PauseMenuEnvironment;
 import models.levels.LevelsList;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.AProp;
-import models.prototypes.environments.AEnvironment;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
-import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -47,13 +46,21 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     private boolean isPaused = false;
 
+    private Robot robot;
+
     public void init(EnvironmentsHandler parentEnvironmentsHandler,
                      PauseMenuEnvironment pauseMenuEnvironment, GameControls gameControls,
                      LevelsList levelsList, HUDModel hudModel, PlayerInventory inventory) {
 
-        super.init(parentEnvironmentsHandler, gameControls.getKeyController(), gameControls.getMouseController());
+        super.init(parentEnvironmentsHandler, gameControls);
 
         this.gameControls = gameControls;
+
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
 
         setPauseMenuEnvironment(pauseMenuEnvironment);
         setLevelsList(levelsList);
@@ -135,12 +142,17 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     private void doGameControls() {
+        robot.mouseMove(
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().width * .5f),
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().height * .5f)
+        );
+
         if(keyController instanceof GameKeyControls kc) {
             if(kc.getControlsModel().getAction(GameControls.Actions.ESCAPE)) {
                 //kc.getControlsModel().resetAction(GameControls.Actions.ESCAPE);
                 kc.getControlsModel().reset();
                 setPaused(true);
-                parentEnvironmentsHandler.swapToEnvironment(
+                getParentEnvironmentsHandler().swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME_PAUSE_MENU, false).applyEnvironment();
             }
         }
@@ -152,7 +164,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 kc.getControlsModel().reset();
                 setPaused(false);
                 pauseMenuEnvironment.onExit();
-                parentEnvironmentsHandler.swapToEnvironment(
+                getParentEnvironmentsHandler().swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, false).applyEnvironment();
             }
         }

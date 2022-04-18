@@ -1,7 +1,7 @@
 package models.runnables;
 
-import models.prototypes.threading.ARunnable;
 import models.prototypes.environments.AEnvironment;
+import models.prototypes.threading.ARunnable;
 import models.utils.config.Config;
 
 public class UpdateRunnable extends ARunnable {

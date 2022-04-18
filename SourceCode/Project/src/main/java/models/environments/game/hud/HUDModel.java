@@ -7,7 +7,6 @@ import models.environments.game.hud.components.TimeKeeperOverlay;
 import models.environments.game.playerinventory.PlayerInventory;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
-import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -51,7 +50,7 @@ public class HUDModel implements IDrawable, IUpdatable {
         g.setFont(
                 gameEnvironment.getResources().getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
-                        .deriveFont(Font.PLAIN, 18 * Config.scaledW_zoom));
+                        .deriveFont(Font.PLAIN, 18 * Config.scaledW));
 
         map.draw(g);
         stats.draw(g);

@@ -7,7 +7,6 @@ import models.environments.menus.startscreen.StartScreenPage;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
-import models.utils.resources.Resources;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -20,6 +19,7 @@ public class MainMenuEnvironment extends AMenuEnvironment {
         super.init(environmentsHandler, menuControlsModel);
 
         backgroundImage = getResources().getImage("menubackground");
+
         StartScreenPage startPage = new StartScreenPage(this);
         push(startPage);
 
@@ -51,10 +51,10 @@ public class MainMenuEnvironment extends AMenuEnvironment {
 
         if(backgroundImage != null) {
             g.drawImage(backgroundImage,
-                    (int)((((Camera.camX * Config.scaledW) - (Config.DEFAULT_WINDOW_WIDTH * Config.scaledW)) * .25f)),
-                    (int)((((Camera.camY * Config.scaledW) - (Config.DEFAULT_WINDOW_HEIGHT * Config.scaledH)) * .25f)),
-                    (int)(Config.DEFAULT_WINDOW_WIDTH * 1.5f * Config.scaledW),
-                    (int)(Config.DEFAULT_WINDOW_HEIGHT * 1.5f * Config.scaledH),
+                    (int)((((Camera.camX * Config.scaledW) - (Config.DEFAULT_WINDOW_WIDTH * Config.scaledW)) * .10f)),
+                    (int)((((Camera.camY * Config.scaledW) - (Config.DEFAULT_WINDOW_HEIGHT * Config.scaledH)) * .10f)),
+                    (int)(Config.DEFAULT_WINDOW_WIDTH * 1.2f * Config.scaledW),
+                    (int)(Config.DEFAULT_WINDOW_HEIGHT * 1.2f * Config.scaledH),
                     null);
         }
 
@@ -74,6 +74,7 @@ public class MainMenuEnvironment extends AMenuEnvironment {
     @Override
     public void onExit() {
         super.onExit();
+
         popToFirst();
     }
 
