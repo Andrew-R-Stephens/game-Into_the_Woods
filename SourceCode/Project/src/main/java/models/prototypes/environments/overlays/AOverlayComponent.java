@@ -28,8 +28,4 @@ public abstract class AOverlayComponent implements IUpdatable, IDrawable {
         g.fillRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
     }
 
-    @Override
-    public void update(float delta) {
-
-    }
 }

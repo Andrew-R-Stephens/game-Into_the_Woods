@@ -1,5 +1,6 @@
 package models.environments.game.hud.components;
 
+import models.actors.gameactors.props.player.PlayerAvatar;
 import models.environments.game.GameEnvironment;
 import models.prototypes.environments.overlays.AOverlayComponent;
 import models.utils.config.Config;
@@ -47,7 +48,7 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
                 (int)((x * sW) - (stroke * .5)), (int)((y * sH) + (stroke * .5)),
                 (int)((w * sW)), (int)((h * sH) ));
 
-        int squareDim = (int)(5 * Config.scaledW_zoom);
+        int squareDim = (int)(5 * sW);
         g.setColor(Color.RED);
         g.fillRect(
                 (int)((x * sW) + (w * sW * .5) - (squareDim)),

@@ -10,6 +10,7 @@ public class Camera {
 
     public static float targX = 0, targY = 0;
     public static float camX = 0, camY = 0;
+    public static float mapX = 0, mapY = 0;
 
     public static float DEFAULT_ZOOM_ACCELERATION = .001f;
     public static float DEFAULT_PAN_ACCELERATION = .05f;
@@ -21,6 +22,9 @@ public class Camera {
     }
 
     public static void moveTo(float x2, float y2) {
+        mapX = x2;
+        mapY = y2;
+
         targX = x2 * zoomLevel;
         targY = y2 * zoomLevel;
 

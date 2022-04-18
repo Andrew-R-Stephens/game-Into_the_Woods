@@ -67,7 +67,7 @@ public abstract class AWindow extends JFrame {
 
     public void buildCursor(boolean isVisible) {
         Dimension prefCursorDim = Toolkit.getDefaultToolkit().getBestCursorSize(32, 32);
-        Image scaledImage = null;
+        Image scaledImage;
         if(isVisible) {
              scaledImage = resources.getImage("cursor2")
                     .getScaledInstance(prefCursorDim.width, prefCursorDim.height, Image.SCALE_SMOOTH);

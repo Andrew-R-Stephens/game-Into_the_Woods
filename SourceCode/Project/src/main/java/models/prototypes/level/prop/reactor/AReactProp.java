@@ -54,10 +54,4 @@ public abstract class AReactProp extends AProp implements IDrawable {
         g.setColor(Color.BLACK);
         g.drawString("React Area", (int) (offsetX) + 3, (int) (offsetY) + 12);
     }
-
-    @Override
-    public void drawAsHUD(Graphics g) {
-
-    }
-
 }

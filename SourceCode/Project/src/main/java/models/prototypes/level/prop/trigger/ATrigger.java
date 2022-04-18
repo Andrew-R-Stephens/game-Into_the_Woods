@@ -60,8 +60,5 @@ public abstract class ATrigger extends AProp implements IDrawable {
         g.drawString("Trigger Area", (int) (offsetX) + 3, (int) (offsetY) + 12);
     }
 
-    public void drawAsHUD(Graphics g) {
-
-    }
 
 }

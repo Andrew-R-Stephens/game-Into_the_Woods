@@ -42,7 +42,4 @@ public abstract class APropTrigger extends ATrigger {
         super.reset();
     }
 
-    public void drawAsHUD(Graphics g) {
-
-    }
 }

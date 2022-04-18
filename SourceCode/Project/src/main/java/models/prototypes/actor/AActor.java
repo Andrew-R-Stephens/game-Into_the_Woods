@@ -20,7 +20,6 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
 
     protected Color color = new Color(0, 0, 255, 50);
 
-
     protected AActor(
             Resources resources,
             float x, float y,
@@ -29,6 +28,7 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
             boolean hasGravity) {
 
         super(x, y, w, h, vx, vy, hasGravity);
+
         this.resources = resources;
 
     }
@@ -42,11 +42,11 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
     public void draw(Graphics g) {
         g.setColor(Color.CYAN);
 
-        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
+        float offsetX = ((x * Config.scaledW) + (Camera.targX));
+        float offsetY = ((y * Config.scaledH) + (Camera.targY));
 
-        float scaledW = w * Config.scaledW_zoom;
-        float scaledH = h * Config.scaledH_zoom;
+        float scaledW = w * Config.scaledW;
+        float scaledH = h * Config.scaledH;
 
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
     }

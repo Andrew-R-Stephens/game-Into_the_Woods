@@ -60,8 +60,8 @@ public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatabl
 
         g.setColor(Color.WHITE);
 
-        float offsetX = ((x * Config.scaledW_zoom) + (Camera.targX * Config.scaledW_zoom));
-        float offsetY = ((y * Config.scaledH_zoom) + (Camera.targY * Config.scaledH_zoom));
+        float offsetX = ((x * Config.scaledW_zoom) + (Camera.mapX * Config.scaledW_zoom));
+        float offsetY = ((y * Config.scaledH_zoom) + (Camera.mapY * Config.scaledH_zoom));
 
         float scaledW = w * Config.scaledW_zoom;
         float scaledH = h * Config.scaledH_zoom;

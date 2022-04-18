@@ -6,6 +6,7 @@ import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
+import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
@@ -162,4 +163,5 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
     public void setAction(ActionType actionState) {
         this.actionState = actionState;
     }
+
 }
