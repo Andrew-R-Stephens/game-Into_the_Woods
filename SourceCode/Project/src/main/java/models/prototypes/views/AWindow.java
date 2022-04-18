@@ -32,7 +32,7 @@ public abstract class AWindow extends JFrame {
             }
             case WINDOWED_FULLSCREEN -> {
                 int width = Toolkit.getDefaultToolkit().getScreenSize().width;
-                int height =Toolkit.getDefaultToolkit().getScreenSize().height;
+                int height = Toolkit.getDefaultToolkit().getScreenSize().height;
                 preferences.setWindowWidthActual(width);
                 preferences.setWindowHeightActual(height);
 
@@ -57,16 +57,6 @@ public abstract class AWindow extends JFrame {
                 setPreferredSize(new Dimension(width, height));
             }
         }
-
-        float dScalingX = (float) getGraphicsConfiguration().getDefaultTransform().getScaleX();
-        float dScalingY = (float) getGraphicsConfiguration().getDefaultTransform().getScaleY();
-
-        System.out.println(dScalingX + " " + dScalingY);
-
-        Config.scaledW_zoom = Config.scaledW_zoom / dScalingX;
-        Config.scaledH_zoom = Config.scaledH_zoom / dScalingY;
-
-        System.out.println(Config.scaledW_zoom + " " + Config.scaledH_zoom);
 
         setAlwaysOnTop(true);
         setResizable(false);
