@@ -26,6 +26,7 @@ public class TestLevel1 extends ALevel {
         build();
 
         addBackgroundLayer(getResources().getImage("menubackground"));
+        addBackgroundLayer(getResources().getImage("levelbackground_cave2"));
     }
 
     @Override

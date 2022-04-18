@@ -21,7 +21,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     protected GameEnvironment gameEnvironment;
 
-    protected BufferedImage backgroundImage;
+    //protected BufferedImage backgroundImage;
     private final ParallaxBackground scrollingBackground = new ParallaxBackground();
 
     protected int[] startOrigin = new int[2];
@@ -52,7 +52,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     }
 
     protected void addBackgroundLayer(BufferedImage backgroundImage) {
-        this.backgroundImage = backgroundImage;
+        //this.backgroundImage = backgroundImage;
 
         scrollingBackground.addLayer(backgroundImage);
     }
