@@ -22,6 +22,8 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         FILL_XY
     }
 
+    protected Color foregroundColor = new Color(0, 0, 0);
+    protected Color backgroundColor = new Color(0, 0, 0, 0);
     protected BufferedImage backgroundImage;
     protected BufferedImage tint;
 
@@ -94,12 +96,14 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     @Override
     public void draw(Graphics2D g) {
+        /*
         g.setColor(Color.RED);
         g.drawRect(
                 (int)(Config.scaledW * x),
                 (int)(Config.scaledW * y),
                 (int)(Config.scaledH * w),
                 (int)(Config.scaledH * h));
+        */
     }
 
     public int right() {

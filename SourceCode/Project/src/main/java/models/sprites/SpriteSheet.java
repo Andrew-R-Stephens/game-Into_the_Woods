@@ -83,6 +83,8 @@ public class SpriteSheet implements IUpdatable {
                 containerH / largestSize[1]
         };
 
+        System.out.println(frameScale);
+
         for (Sprite s : frames) {
             s.setScaledSize(frameScale);
             s.setScaledPos(frameScale);

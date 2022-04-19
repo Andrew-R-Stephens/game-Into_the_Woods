@@ -32,11 +32,10 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
 
         float sW = Config.scaledW, sH = Config.scaledH;
 
-        g.setColor(Color.WHITE);
+        g.setColor(backgroundColor);
         g.fillRect((int)(x*sW), (int)(y*sH), (int)(w*sW), (int)(h*sH));
 
-        g.setColor(Color.BLACK);
-
+        g.setColor(foregroundColor);
         int strHeight = h;
         g.setFont(
                 getParentEnvironment().getResources().getFont("bahnschrift")
@@ -78,4 +77,7 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
         super.reset();
     }
 
+    public void setBackgroundColor(Color color) {
+        this.backgroundColor = color;
+    }
 }

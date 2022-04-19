@@ -81,7 +81,7 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
             spritesheet.draw(g, (int) (x * sW), (int) (y * sH), (int) (w * sW), (int) (h * sH));
         }
 
-        g.setColor(Color.BLACK);
+        g.setColor(foregroundColor);
 
         g.setFont(
                 getParentEnvironment().getResources().getFont("bahnschrift")

@@ -34,15 +34,10 @@ public class AImageView extends AMenuComponent implements IDrawable, IUpdatable 
 
         super.draw(g);
 
-        g.setColor(new Color(255, 0, 0, 100));
         float sW = Config.scaledW, sH = Config.scaledH;
 
         g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
 
-        if(isFocused) {
-            g.setColor(new Color(255, 255, 255, 50));
-            g.fillRect((int) (x * sW), (int) (y * sH), (int) (w * sW), (int) (h * sH));
-        }
     }
 
     @Override
