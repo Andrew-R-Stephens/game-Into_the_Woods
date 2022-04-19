@@ -8,6 +8,7 @@ import models.utils.config.Config;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PauseOptionsPage extends AMenu {
 
@@ -16,7 +17,7 @@ public class PauseOptionsPage extends AMenu {
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
-        ASliderView slider_fps = new ASliderView(
+        ASliderView<Short> slider_fps = new ASliderView<>(
                 getParentEnvironment(),
                 (int) (centerW - (800 * .5f)),
                 300,
@@ -53,7 +54,7 @@ public class PauseOptionsPage extends AMenu {
             }
         };
 
-        ASliderView slider_window = new ASliderView(
+        ASliderView<Config.WindowType> slider_window = new ASliderView<>(
                 getParentEnvironment(),
                 (int) (centerW - (800 * .5f)),
                 400,
@@ -62,14 +63,13 @@ public class PauseOptionsPage extends AMenu {
             @Override
             public void init() {
                 values = new ArrayList<>();
-                for(short i = 0; i <= 5; i++) {
-                    values.add(i);
-                }
+                values.addAll(Arrays.asList(Config.WindowType.values()));
                 itemCount = values.size();
             }
             @Override
             public void doSetting() {
-                System.out.println("Setting" + values.get(current));
+                if(values.get(current) != values.get(previous)) {
+                }
             }
         };
 

@@ -2,7 +2,6 @@ package views.window;
 
 import models.environments.EnvironmentsHandler;
 import models.prototypes.views.AWindow;
-import models.utils.config.Config;
 
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -12,10 +11,10 @@ public class MainWindow extends AWindow {
 
     private EnvironmentsHandler environmentsHandler;
 
-    public void init(Config preferences, EnvironmentsHandler environmentsHandler){
+    public void init(EnvironmentsHandler environmentsHandler){
         this.environmentsHandler = environmentsHandler;
 
-        constructWindowAndDimensions(preferences);
+        constructWindowAndDimensions();
 
         buildCursor(true);
     }

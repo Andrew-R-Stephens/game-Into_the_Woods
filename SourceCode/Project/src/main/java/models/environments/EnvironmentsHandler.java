@@ -195,4 +195,12 @@ public class EnvironmentsHandler {
         rendersThread.start();
     }
 
+    public void rebuildWindow() {
+        parentWindow.dispose();
+        parentWindow = new MainWindow();
+        parentWindow.setResources(getCurrentEnvironment().getResources());
+        parentWindow.init(this);
+        applyEnvironment(false);
+    }
+
 }

@@ -2,6 +2,8 @@ package models.utils.config;
 
 import models.camera.Camera;
 
+import java.awt.*;
+
 public class Config {
 
     private static DisplayInfo displayInfo;
@@ -31,7 +33,7 @@ public class Config {
         window_width_selected = width;
     }
 
-    public int getWindowWidthSelected() {
+    public static int getWindowWidthSelected() {
         return window_width_selected;
     }
 
@@ -39,15 +41,15 @@ public class Config {
         window_height_selected = height;
     }
 
-    public int getWindowHeightSelected() {
+    public static int getWindowHeightSelected() {
         return window_height_selected;
     }
 
-    public void setWindowWidthActual(int width) {
+    public static void setWindowWidthActual(int width) {
         window_width_actual = width;
     }
 
-    public void setWindowHeightActual(int height) {
+    public static void setWindowHeightActual(int height) {
         window_height_actual = height;
     }
 
@@ -59,11 +61,15 @@ public class Config {
         Config.DEFAULT_WINDOW_HEIGHT = height;
     }
 
-    public void setWindowType(int type) {
+    public static void setWindowType(int type) {
         window_type = WindowType.values()[type];
     }
 
-    public WindowType getWindowType() {
+    public static void setWindowType(WindowType type) {
+        window_type = type;
+    }
+
+    public static WindowType getWindowType() {
         return window_type;
     }
 
@@ -103,6 +109,10 @@ public class Config {
         WindowType(int type, String name){
             this.type = type;
             this.name = name;
+        }
+
+        public String getName() {
+            return name;
         }
 
     }

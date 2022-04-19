@@ -15,16 +15,16 @@ public abstract class AWindow extends JFrame {
         this.resources = resources;
     }
 
-    protected void constructWindowAndDimensions(Config preferences) {
+    protected void constructWindowAndDimensions() {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        switch (preferences.getWindowType()) {
+        switch (Config.getWindowType()) {
             case FULLSCREEN_EXCLUSIVE -> {
                 int width = Toolkit.getDefaultToolkit().getScreenSize().width;
                 int height = Toolkit.getDefaultToolkit().getScreenSize().height;
-                preferences.setWindowWidthActual(width);
-                preferences.setWindowHeightActual(height);
+                Config.setWindowWidthActual(width);
+                Config.setWindowHeightActual(height);
 
                 setPreferredSize(new Dimension(width, height));
                 setUndecorated(true);
@@ -33,26 +33,26 @@ public abstract class AWindow extends JFrame {
             case WINDOWED_FULLSCREEN -> {
                 int width = Toolkit.getDefaultToolkit().getScreenSize().width;
                 int height = Toolkit.getDefaultToolkit().getScreenSize().height;
-                preferences.setWindowWidthActual(width);
-                preferences.setWindowHeightActual(height);
+                Config.setWindowWidthActual(width);
+                Config.setWindowHeightActual(height);
 
                 setPreferredSize(new Dimension(width, height));
             }
             case WINDOWED_BORDERLESS -> {
-                int width = preferences.getWindowWidthSelected();
-                int height = preferences.getWindowHeightSelected();
-                preferences.setWindowWidthActual(width);
-                preferences.setWindowHeightActual(height);
+                int width = Config.getWindowWidthSelected();
+                int height = Config.getWindowHeightSelected();
+                Config.setWindowWidthActual(width);
+                Config.setWindowHeightActual(height);
 
                 setUndecorated(true);
 
                 setPreferredSize(new Dimension(width, height));
             }
             default -> {
-                int width = preferences.getWindowWidthSelected();
-                int height = preferences.getWindowHeightSelected();
-                preferences.setWindowWidthActual(width);
-                preferences.setWindowHeightActual(height);
+                int width = Config.getWindowWidthSelected();
+                int height = Config.getWindowHeightSelected();
+                Config.setWindowWidthActual(width);
+                Config.setWindowHeightActual(height);
 
                 setPreferredSize(new Dimension(width, height));
             }

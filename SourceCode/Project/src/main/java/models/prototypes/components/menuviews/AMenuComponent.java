@@ -53,10 +53,6 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         return parentMenuEnvironment.getParentEnvironmentsHandler();
     }
 
-    public void setSpriteSheet(SpriteSheet spritesheet) {
-        this.spritesheet = spritesheet;
-    }
-
     protected boolean isInBounds(float mx, float my) {
         mx /= Config.scaledW;
         my /= Config.scaledH;

@@ -9,16 +9,19 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public abstract class ASliderView extends AMenuComponent {
+public abstract class ASliderView<E> extends AMenuComponent {
+
+    private E e;
 
     protected final AButtonView button;
 
     private final BufferedImage trackImage;
     private final BufferedImage notchImage;
 
-    protected ArrayList<Short> values;
+    protected ArrayList<E> values = new ArrayList<>();
     protected int itemCount = 2;
-    protected int current = 0;
+    protected int previous = 0;
+    protected int current = previous;
     private float notchDistance = 0;
 
     private boolean showNotches = true;
@@ -133,7 +136,9 @@ public abstract class ASliderView extends AMenuComponent {
         if(button != null) {
             button.registerInput();
             if(button.isPressed()) {
-                moveSliderTo(getParentEnvironment().getMouseController().getPos()[0], getParentEnvironment().getMouseController().getPos()[1]);
+                moveSliderTo(
+                        getParentEnvironment().getMouseController().getPos()[0],
+                        getParentEnvironment().getMouseController().getPos()[1]);
                 doSetting();
             }
         }

@@ -41,7 +41,8 @@ public class NewGamePage extends AMenu {
             }
         };
         button_avatar1.setText("TEO");
-        button_avatar1.setBackgroundImage(img_sqbutton);
+        button_avatar1.setSpritesheet(
+                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
         button_avatar1.setImageScaling(AButtonView.ImageScale.FILL_XY);
 
         //Level 3 Button
@@ -64,7 +65,8 @@ public class NewGamePage extends AMenu {
             }
         };
         button_avatar2.setText("MELYNN");
-        button_avatar2.setBackgroundImage(img_sqbutton);
+        button_avatar2.setSpritesheet(
+                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
         button_avatar2.setImageScaling(AButtonView.ImageScale.FILL_XY);
 
 

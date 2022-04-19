@@ -162,7 +162,7 @@ public class Main {
         preferencesParser.read();
 
         // Initialize Window with Preference Data
-        window.init(config, environmentsHandler);
+        window.init(environmentsHandler);
 
         // Initialize Control Models
         gameControlsModel.init(new GameMouseControls(gameControlsModel), new GameKeyControls(gameControlsModel));

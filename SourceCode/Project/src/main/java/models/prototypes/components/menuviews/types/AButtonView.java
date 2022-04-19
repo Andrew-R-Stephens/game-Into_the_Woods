@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 
 public abstract class AButtonView extends AMenuComponent implements IDrawable, IUpdatable {
 
+    public boolean isEnabled = true;
+
     public AButtonView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
         super(parentMenuModel);
 
@@ -37,6 +39,12 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         super.draw(g);
 
         float sW = Config.scaledW, sH = Config.scaledH;
+
+        float opacity = 1f;
+        if(!isEnabled) {
+            opacity = .05f;
+        }
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
 
         if(backgroundImage != null) {
             switch (scaleType) {
@@ -94,13 +102,6 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
                 (int)((x * sW) + (w * sW * .5) - (strWidth * .5)),
                 (int)((y * sH) + (h * sH * .5) + (h * .2 * sH * (spritesheet.getPercentCompleted()))));
     }
-/*
-
-    @Override
-    public void update(float delta) {
-        super.update(delta);
-    }
-*/
 
     public void setX(int x) {
         this.x = x;
@@ -127,4 +128,7 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         super.reset();
     }
 
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
+    }
 }
