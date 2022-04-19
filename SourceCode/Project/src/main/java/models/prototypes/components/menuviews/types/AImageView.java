@@ -1,7 +1,7 @@
-package models.prototypes.environments.menu.components.types;
+package models.prototypes.components.menuviews.types;
 
+import models.prototypes.components.menuviews.AMenuComponent;
 import models.prototypes.environments.menu.AMenuEnvironment;
-import models.prototypes.environments.menu.components.AMenuComponent;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;

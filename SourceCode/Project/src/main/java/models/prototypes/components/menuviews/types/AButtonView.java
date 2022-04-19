@@ -1,8 +1,8 @@
-package models.prototypes.environments.menu.components.types;
+package models.prototypes.components.menuviews.types;
 
+import models.prototypes.components.menuviews.AMenuComponent;
 import models.prototypes.controls.AMouseController;
 import models.prototypes.environments.menu.AMenuEnvironment;
-import models.prototypes.environments.menu.components.AMenuComponent;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
@@ -94,11 +94,13 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
                 (int)((x * sW) + (w * sW * .5) - (strWidth * .5)),
                 (int)((y * sH) + (h * sH * .5) + (h * .2 * sH * (spritesheet.getPercentCompleted()))));
     }
+/*
 
     @Override
     public void update(float delta) {
         super.update(delta);
     }
+*/
 
     public void setX(int x) {
         this.x = x;
@@ -118,10 +120,6 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         } else {
             isInBounds(mc.getPos()[0], mc.getPos()[1]);
         }
-    }
-
-    public void setText(String s) {
-        text = s;
     }
 
     public void reset() {

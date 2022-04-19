@@ -3,7 +3,7 @@ package models.environments.menus.startscreen;
 import models.environments.menus.mainmenu.submenus.MainMenuPage;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
-import models.prototypes.environments.menu.components.types.AButtonView;
+import models.prototypes.components.menuviews.types.AButtonView;
 
 public class StartScreenPage extends AMenu {
 

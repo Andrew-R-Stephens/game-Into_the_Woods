@@ -5,7 +5,7 @@ import controls.menu.MenuKeyControls;
 import models.environments.EnvironmentsHandler;
 import models.prototypes.controls.AKeyController;
 import models.prototypes.controls.AMouseController;
-import models.prototypes.environments.menu.components.AMenuComponent;
+import models.prototypes.components.menuviews.AMenuComponent;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;

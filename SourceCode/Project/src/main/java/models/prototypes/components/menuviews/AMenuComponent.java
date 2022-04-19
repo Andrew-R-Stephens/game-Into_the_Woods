@@ -1,4 +1,4 @@
-package models.prototypes.environments.menu.components;
+package models.prototypes.components.menuviews;
 
 import models.environments.EnvironmentsHandler;
 import models.prototypes.environments.menu.AMenuEnvironment;
@@ -122,6 +122,10 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         }
         isFocused = false;
         isPressed = false;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public void setSpritesheet(SpriteSheet spritesheet) {

@@ -2,7 +2,7 @@ package models.environments.menus.pausemenumodel.submenus;
 
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
-import models.prototypes.environments.menu.components.types.AButtonView;
+import models.prototypes.components.menuviews.types.AButtonView;
 
 public class PauseExitPage extends AMenu {
 

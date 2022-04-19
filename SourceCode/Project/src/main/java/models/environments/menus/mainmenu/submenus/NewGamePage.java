@@ -4,7 +4,7 @@ import models.environments.EnvironmentsHandler;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
-import models.prototypes.environments.menu.components.types.AButtonView;
+import models.prototypes.components.menuviews.types.AButtonView;
 import models.utils.config.Config;
 
 import java.awt.image.BufferedImage;

@@ -1,4 +1,4 @@
-package models.prototypes.environments.overlays;
+package models.prototypes.components.overlays;
 
 import models.environments.game.GameEnvironment;
 import models.utils.config.Config;

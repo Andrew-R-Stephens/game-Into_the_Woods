@@ -1,8 +1,8 @@
-package models.prototypes.environments.menu.components.types;
+package models.prototypes.components.menuviews.types;
 
+import models.prototypes.components.menuviews.AMenuComponent;
 import models.prototypes.controls.AMouseController;
 import models.prototypes.environments.menu.AMenuEnvironment;
-import models.prototypes.environments.menu.components.AMenuComponent;
 import models.utils.config.Config;
 
 import java.awt.*;
@@ -19,7 +19,9 @@ public abstract class ASliderView extends AMenuComponent {
     protected ArrayList<Short> values;
     protected int itemCount = 2;
     protected int current = 0;
-    protected float notchDistance = 0;
+    private float notchDistance = 0;
+
+    private boolean showNotches = true;
 
     public ASliderView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
         super(parentMenuModel);
@@ -109,15 +111,17 @@ public abstract class ASliderView extends AMenuComponent {
                 (int) (w * Config.scaledW),
                 (int) (scaleH * h * Config.scaledH), null);
 
-        if((Config.scaledW * notchImage.getWidth() * (h / (float)notchImage.getHeight())) > (w / notchDistance)) {
-            for (int i = 0; i < w; i++) {
-                g.drawImage(notchImage,
-                        (int) (((x + i) * Config.scaledW)),
-                        (int) (y * Config.scaledW),
-                        (int) (Config.scaledW * notchImage.getWidth() * h / notchImage.getHeight()),
-                        (int) (h * Config.scaledH),
-                        null);
-                i += notchDistance;
+        if(showNotches) {
+            if ((Config.scaledW * notchImage.getWidth() * (h / (float) notchImage.getHeight())) > (w / notchDistance)) {
+                for (int i = 0; i < w; i++) {
+                    g.drawImage(notchImage,
+                            (int) (((x + i) * Config.scaledW)),
+                            (int) (y * Config.scaledW),
+                            (int) (Config.scaledW * notchImage.getWidth() * h / notchImage.getHeight()),
+                            (int) (h * Config.scaledH),
+                            null);
+                    i += notchDistance;
+                }
             }
         }
 
@@ -140,8 +144,7 @@ public abstract class ASliderView extends AMenuComponent {
         button.setX(this.x + (int)(notchDistance*current));
     }
 
-    public void setText(String s) {
-        text = s;
+    public void showNotches(boolean showNotches) {
+        this.showNotches = showNotches;
     }
-
 }

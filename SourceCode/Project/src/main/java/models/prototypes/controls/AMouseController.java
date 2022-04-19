@@ -65,11 +65,11 @@ public abstract class AMouseController implements MouseListener, MouseMotionList
         switch (e.getButton()){
             case MouseEvent.BUTTON1 -> {
                 isLeftPressed = false;
-                setPos(-100, -100);
+                //setPos(-100, -100);
             }
             case MouseEvent.BUTTON2 -> {
                 isRightPressed = false;
-                setPos(-100, -100);
+                //setPos(-100, -100);
             }
         }
 

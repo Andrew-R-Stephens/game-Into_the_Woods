@@ -1,9 +1,10 @@
 package models.environments.menus.mainmenu.submenus;
 
+import models.prototypes.components.menuviews.types.ATextView;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
-import models.prototypes.environments.menu.components.types.AButtonView;
-import models.prototypes.environments.menu.components.types.ASliderView;
+import models.prototypes.components.menuviews.types.AButtonView;
+import models.prototypes.components.menuviews.types.ASliderView;
 import models.utils.config.Config;
 
 import java.awt.*;
@@ -16,11 +17,21 @@ public class OptionsPage extends AMenu {
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
+        ATextView text_fps = new ATextView(
+                getParentEnvironment(),
+                (int) (centerW - (btn_width * .5f)) - btn_width,
+                300,
+                btn_width,
+                btn_height){
+        };
+        text_fps.setText("Max FPS: " + Config.frameRate);
+        text_fps.setBackgroundImage(getResources().getImage("slider_track"));
+
         ASliderView slider_fps = new ASliderView(
                 getParentEnvironment(),
-                (int) (centerW - (800 * .5f)),
+                (int) (centerW - (btn_width * .5f)),
                 300,
-                800,
+                btn_width*2,
                 btn_height) {
             @Override
             public void init() {
@@ -51,15 +62,17 @@ public class OptionsPage extends AMenu {
             @Override
             public void doSetting() {
                 Config.frameRate = values.get(current);
+                text_fps.setText("Max FPS : " + Config.frameRate);
                 System.out.println("Setting framerate: " + Config.frameRate);
             }
         };
+        slider_fps.showNotches(false);
 
         ASliderView slider_window = new ASliderView(
                 getParentEnvironment(),
-                (int) (centerW - (800 * .5f)),
+                (int) (centerW - (btn_width * .5f)),
                 400,
-                800,
+                btn_width*2,
                 (int)(btn_height*.5)) {
             @Override
             public void init() {
@@ -96,6 +109,7 @@ public class OptionsPage extends AMenu {
         button_back.setText("Back");
         button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
+        addComponent(text_fps);
         addComponent(slider_fps);
         addComponent(slider_window);
         addComponent(button_back);
