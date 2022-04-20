@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  * <p>Contains references to all AEnvironments, and holds references each of their ACanvases and ARunnables.</p>
- *
+ * <br>
  * <p>Works to handle navigation between AEnvironments as needed. Controls threading and AWindow build procedures.</p>
  */
 public class EnvironmentsHandler {
@@ -32,8 +32,7 @@ public class EnvironmentsHandler {
 
     /**
      * <p>Initializes the EnvironmentsHandler.</p>
-     * <br>
-     * @param parentDisplayWindow - the window that is shown to the user
+     * @param parentDisplayWindow the window that is shown to the user
      */
     public void init(MainWindow parentDisplayWindow) {
         this.parentWindow = parentDisplayWindow;
@@ -41,11 +40,10 @@ public class EnvironmentsHandler {
 
     /**
      * <p>Adds a new AEnvironment subtype to the list of AEnvironments.</p>
-     * <br>
-     * @param model - The AEnvironment
-     * @param canvas - The ACanvas for the AEnvironment
-     * @param uRunnable - The update ARunnable for the AEnvironment
-     * @param rRunnable - The render ARunnable for the AEnvironment
+     * @param model The AEnvironment
+     * @param canvas The ACanvas for the AEnvironment
+     * @param uRunnable The update ARunnable for the AEnvironment
+     * @param rRunnable The render ARunnable for the AEnvironment
      */
     public void addEnvironmentPair(AEnvironment model, ACanvas canvas, ARunnable uRunnable, ARunnable rRunnable) {
         environments.add(model);
@@ -56,8 +54,7 @@ public class EnvironmentsHandler {
 
     /**
      * <p>Sets the current EnvironmentType.</p>
-     * <br>
-     * @param environmentType - the chosen EnvironmentType.
+     * @param environmentType the chosen EnvironmentType.
      */
     public void setCurrentEnvironmentType(EnvironmentType environmentType) {
         this.currentEnvironment = environmentType;
@@ -66,10 +63,9 @@ public class EnvironmentsHandler {
     /**
      * <p>Handles the procedure of switching from one AEnvironment to another. AEnvironments do no all need to be reset
      * due to some AEnvironments existing at certain points. Therefore, a reset condition is passed.</p>
-     * <br>
-     * @param environmentType - The desired environment to switch to.
-     * @param resetEnvironment - Whether or not the environment should be reset.
-     * @return - this EnvironmentsHandler, used for chaining
+     * @param environmentType the desired environment to switch to.
+     * @param resetEnvironment Whether or not the environment should be reset.
+     * @return this EnvironmentsHandler, used for chaining
      */
     public EnvironmentsHandler swapToEnvironment(EnvironmentType environmentType, boolean resetEnvironment) {
         if(resetEnvironment) {
@@ -127,7 +123,6 @@ public class EnvironmentsHandler {
 
     /**
      * <p>Returns the ARunnable of the current AEnvironment that deals with renders.</p>
-     * <br>
      * @return the active AEnvironment's render-based ARunnable
      */
     public Runnable getCurrentRenderRunnable() {
@@ -136,7 +131,6 @@ public class EnvironmentsHandler {
 
     /**
      * <p>Calls the applyEnvironment method with the reset default set as true.</p>
-     * <br>
      */
     public void applyEnvironment() {
         applyEnvironment(true);
@@ -144,8 +138,7 @@ public class EnvironmentsHandler {
 
     /**
      * <p>Applies the current AEnvironment to the Window. Restarts the current AEnvironment's Threads if necessary.</p>
-     * <br>
-     * @param resetThreads - whether or not the threads should be rebuilt
+     * @param resetThreads whether or not the threads should be rebuilt
      */
     public void applyEnvironment(boolean resetThreads) {
         if(environments.get(currentEnvironment.ordinal()) instanceof AMenuEnvironment) {
@@ -163,7 +156,6 @@ public class EnvironmentsHandler {
 
     /**
      * <p>Pauses the current AEnvironment's ARunnables.</p>
-     * <br>
      */
     public void pauseThreads() {
         updateRunnables.get(currentEnvironment.ordinal()).setPaused(true);

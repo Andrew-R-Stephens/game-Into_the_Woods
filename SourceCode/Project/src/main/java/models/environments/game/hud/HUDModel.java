@@ -26,10 +26,10 @@ public class HUDModel implements IDrawable, IUpdatable {
 
     /**
      * <p>Initializes the HUDModel with pre-created AOverlayComponent objects.</p>
-     * @param gameEnvironment - The parent GameEnvironment where the HUD components will be drawn to.
-     * @param mapOverlay - The MapOverlay HUD component.
-     * @param playerStatsOverlay - The PlayerStatsOverlay HUD Component.
-     * @param timeKeeperOverlay - The TimeKeeperOverlay HUD Component.
+     * @param gameEnvironment The parent GameEnvironment where the HUD components will be drawn to.
+     * @param mapOverlay The MapOverlay HUD component.
+     * @param playerStatsOverlay The PlayerStatsOverlay HUD Component.
+     * @param timeKeeperOverlay The TimeKeeperOverlay HUD Component.
      */
     public void init(GameEnvironment gameEnvironment, MapOverlay mapOverlay,
                      PlayerStatsOverlay playerStatsOverlay, TimeKeeperOverlay timeKeeperOverlay) {

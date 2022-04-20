@@ -68,9 +68,8 @@ public class Resources {
 
     /**
      * <p>Retrieves file path data held within the MetaDataParser.</p>
-     * <br>
-     * @param metaData - The MetaDataParser object which has processed the metadata already.
-     * @param tag - The key which holds data for a specified file type.
+     * @param metaData The MetaDataParser object which has processed the metadata already.
+     * @param tag The key which holds data for a specified file type.
      * @return An arraylist of file paths.
      */
     private String[] registerFiles(MetaDataParser metaData, String tag) {
@@ -83,8 +82,7 @@ public class Resources {
 
     /**
      * <p>Registers all image paths, loads image and stores a reference to the image into a Map.</p>
-     * <br>
-     * @param fileNames - The file names of images requested to be stored.
+     * @param fileNames The file names of images requested to be stored.
      */
     private void loadImageFiles(String[] fileNames) {
         for(String fileName : fileNames) {
@@ -94,8 +92,7 @@ public class Resources {
 
     /**
      * <p>Loads the specified image file to see if it exists in the Resource directory. If it exists, the file path is not null.</p>
-     * <br>
-     * @param fileName - The specific file name.
+     * @param fileName The specific file name.
      * @return BufferedImage file located from the Resources directory. Or null if the file could not be found.
      */
     public BufferedImage loadImageFile(String fileName) {
@@ -118,8 +115,7 @@ public class Resources {
 
     /**
      * <p>Registers all audio paths into a Map.</p>
-     * <br>
-     * @param fileNames - The file names of audio requested to be stored.
+     * @param fileNames The file names of audio requested to be stored.
      */
     private void loadAudioFiles(String[] fileNames) {
 
@@ -132,8 +128,7 @@ public class Resources {
 
     /**
      * <p>Loads the specified audio file to see if it exists in the Resource directory. If it exists, the file path is not null.</p>
-     * <br>
-     * @param fileName - The specific file name.
+     * @param fileName The specific file name.
      * @return the path to the audio file.
      */
     public String loadAudioFile(String fileName) {
@@ -157,8 +152,7 @@ public class Resources {
 
     /**
      * <p>Registers all text files into a Map.</p>
-     * <br>
-     * @param fileNames - The file names of text files requested to be stored.
+     * @param fileNames The file names of text files requested to be stored.
      */
     private void loadTextFiles(String[] fileNames) {
         for(String fileName: fileNames) {
@@ -169,8 +163,7 @@ public class Resources {
     /**
      * <p>Loads the specified text file to see if it exists in the Resource directory. If it exists, the file is not null.</p>
      * <p>Reads in the text file and stores the data into a temporary file which gets returned.</p>
-     * <br>
-     * @param fileName - The specific text file name.
+     * @param fileName The specific text file name.
      * @return the text file written to memory.
      */
     public File loadTextFile(String fileName) {
@@ -209,8 +202,7 @@ public class Resources {
 
     /**
      * <p>Registers all Font files into a Map.</p>
-     * <br>
-     * @param fileNames - The file names of Font files requested to be stored.
+     * @param fileNames The file names of Font files requested to be stored.
      */
     private void loadFontFiles(String[] fileNames) {
 
@@ -222,8 +214,7 @@ public class Resources {
 
     /**
      * <p>Loads the specified Font file to see if it exists in the Resource directory. If it exists, the Font is not null.</p>
-     * <br>
-     * @param fileName - The specific Font file name.
+     * @param fileName The specific Font file name.
      * @return the Font file written to memory.
      */
     public Font loadFontFile(String fileName) {
@@ -250,9 +241,8 @@ public class Resources {
 
     /**
      * <p>Retrieves a SpriteSheet which is stored in the Map. Uses the references from Text Files and BufferedImage Maps.</p>
-     * <br>
-     * @param spriteSheetName - the non-extension name of the SpriteSheet requested.
-     * @return - A reference to the SpriteSheet requested.
+     * @param spriteSheetName the non-extension name of the SpriteSheet requested.
+     * @return A reference to the SpriteSheet requested.
      */
     public SpriteSheet getSpriteSheet(String spriteSheetName) {
         String fileName = spriteSheetName + ".json";
@@ -272,9 +262,8 @@ public class Resources {
 
     /**
      * <p>Retrieves a BufferedImage which is stored in the Map</p>
-     * <br>
-     * @param imageKey - the non-extension file name of the image requested.
-     * @return - A reference to the BufferedImage requested.
+     * @param imageKey the non-extension file name of the image requested.
+     * @return A reference to the BufferedImage requested.
      */
     public BufferedImage getImage(String imageKey) {
         return imagesFiles.get(imageKey);
@@ -282,9 +271,8 @@ public class Resources {
 
     /**
      * <p>Retrieves a File which is stored in the Map</p>
-     * <br>
-     * @param fileKey - the non-extension file name of the text file requested.
-     * @return - A reference to the File requested.
+     * @param fileKey the non-extension file name of the text file requested.
+     * @return A reference to the File requested.
      */
     public File getTextFile(String fileKey) {
         return textFiles.get(fileKey);
@@ -292,21 +280,19 @@ public class Resources {
 
     /**
      * <p>Retrieves a Font which is stored in the Map</p>
-     * <br>
-     * @param fontKey - the non-extension file name of the font requested.
-     * @return - A reference to the Font requested.
+     * @param fontKey the non-extension file name of the font requested.
+     * @return A reference to the Font requested.
      */
     public Font getFont(String fontKey) {
         return fontFiles.get(fontKey);
     }
 
     /**
-     * Called externally to start a new concurrent audio thread.<br>
+     * <p>Called externally to start a new concurrent audio thread.</p>
      * <br>
-     * Uses stored audio file paths to in-stream the data as an audio file. Sets the file into an AdvancedPlayer object.<br>
-     * The AdvancedPlayer object is returned for control over object permanence.<br>
-     * <br>
-     * @param audioKey - The audio file name without extension.
+     * <p>Uses stored audio file paths to in-stream the data as an audio file. Sets the file into an AdvancedPlayer object.</p>
+     * <p>The AdvancedPlayer object is returned for control over object permanence.</p>
+     * @param audioKey The audio file name without extension.
      * @return The AdvancedPlayer that retains data for a specific audio file.
      */
     public synchronized AdvancedPlayer playAudio(String audioKey) {
@@ -352,8 +338,8 @@ public class Resources {
     }
 
     /**
-     * Checks if all files exist within the Map objects. Files do not exist or could not be found if they are null.<br>
-     * <br>
+     * <p>Checks if all files exist within the Map objects. Files do not exist or could not be found if they are null
+     * .</p>
      * @return Brief data about the resource file references.
      */
     public String toString() {
