@@ -10,15 +10,24 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public class Platform extends AProp implements IDrawable, IUpdatable {
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param hasGravity -
+     */
     public Platform(Resources resources, float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(resources, x, y, w, h, vx, vy, hasGravity);
-    }
-
-    @Override
-    public void update(float delta) {
-        super.update(delta);
     }
 
     @Override

@@ -10,18 +10,29 @@ import models.sprites.SpriteSheet;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * <p></p>
+ */
 public class SpriteSheetParser {
 
     private SpriteSheet spriteSheet;
 
     private final String jsonFile;
 
+    /**
+     * <p></p>
+     * @param jsonFile -
+     */
     public SpriteSheetParser(String jsonFile) {
         this.jsonFile = jsonFile;
 
         spriteSheet = processSpriteSheet();
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     private SpriteSheet processSpriteSheet() {
 
         new AFileReader() {
@@ -104,6 +115,10 @@ public class SpriteSheetParser {
         return spriteSheet;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public SpriteSheet getSpriteSheet() {
         return spriteSheet;
     }

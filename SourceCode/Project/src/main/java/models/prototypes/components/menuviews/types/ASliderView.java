@@ -9,6 +9,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * <p></p>
+ * @param <E> -
+ */
 public abstract class ASliderView<E> extends AMenuComponent {
 
     private E e;
@@ -26,6 +30,14 @@ public abstract class ASliderView<E> extends AMenuComponent {
 
     private boolean showNotches = true;
 
+    /**
+     * <p></p>
+     * @param parentMenuModel -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     */
     public ASliderView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
         super(parentMenuModel);
 
@@ -74,8 +86,16 @@ public abstract class ASliderView<E> extends AMenuComponent {
         build();
     }
 
+    /**
+     * <p></p>
+     */
     public abstract void init();
 
+    /**
+     * <p></p>
+     * @param x -
+     * @param y -
+     */
     public void moveSliderTo(int x, int y) {
 
         x = (int)(x / Config.scaledW);
@@ -95,7 +115,26 @@ public abstract class ASliderView<E> extends AMenuComponent {
 
     }
 
+    /**
+     * <p></p>
+     */
     public abstract void doSetting();
+
+    /**
+     * <p></p>
+     */
+    public void build() {
+        notchDistance = (w - button.getW()) / (float)(itemCount -1);
+        button.setX(this.x + (int)(notchDistance*current));
+    }
+
+    /**
+     * <p></p>
+     * @param showNotches -
+     */
+    public void showNotches(boolean showNotches) {
+        this.showNotches = showNotches;
+    }
 
     @Override
     public boolean onClick(float x, float y) {
@@ -116,12 +155,14 @@ public abstract class ASliderView<E> extends AMenuComponent {
 
         if(showNotches) {
             if ((Config.scaledW * notchImage.getWidth() * (h / (float) notchImage.getHeight())) > (w / notchDistance)) {
+                float scaleW = (float)notchImage.getHeight() / h * .5f;
                 for (int i = 0; i < w; i++) {
-                    g.drawImage(notchImage,
+                    g.drawImage(
+                            notchImage,
                             (int) (((x + i) * Config.scaledW)),
-                            (int) (y * Config.scaledW),
-                            (int) (Config.scaledW * notchImage.getWidth() * h / notchImage.getHeight()),
-                            (int) (h * Config.scaledH),
+                            (int) ((y * Config.scaledH) + (h * Config.scaledH * .75) - (h * Config.scaledH * .5f)),
+                            (int) (Config.scaledW * notchImage.getWidth() * (h / notchImage.getHeight())),
+                            (int) (h * Config.scaledH * .5f),
                             null);
                     i += notchDistance;
                 }
@@ -144,12 +185,4 @@ public abstract class ASliderView<E> extends AMenuComponent {
         }
     }
 
-    public void build() {
-        notchDistance = (w - button.getW()) / (float)(itemCount -1);
-        button.setX(this.x + (int)(notchDistance*current));
-    }
-
-    public void showNotches(boolean showNotches) {
-        this.showNotches = showNotches;
-    }
 }

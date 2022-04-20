@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * <p></p>
+ */
 public class SpriteSheet implements IUpdatable {
 
     private BufferedImage referenceImage;
@@ -19,6 +22,10 @@ public class SpriteSheet implements IUpdatable {
     private int currentFrame = 0, ticks = 0;
     private boolean loopOnLastFrame = true;
 
+    /**
+     * <p></p>
+     * @param spritelist -
+     */
     public SpriteSheet(ArrayList<Sprite> spritelist) {
         frames.addAll(spritelist);
 
@@ -37,15 +44,27 @@ public class SpriteSheet implements IUpdatable {
         }
     }
 
+    /**
+     * <p></p>
+     * @param referenceImage -
+     */
     public void setReferenceImage(BufferedImage referenceImage) {
         this.referenceImage = referenceImage;
     }
 
+    /**
+     * <p></p>
+     * @param i -
+     */
     public void incrementFrame(int i) {
         i++;
         setFrame(i);
     }
 
+    /**
+     * <p></p>
+     * @param i -
+     */
     public void setFrame(int i) {
         if (!loopOnLastFrame) {
             if (isLastFrame()) {
@@ -63,20 +82,39 @@ public class SpriteSheet implements IUpdatable {
         currentFrame = i;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public boolean isLastFrame() {
         return currentFrame >= frames.size() - 1;
     }
 
+    /**
+     * <p></p>
+     * @param b -
+     * @return
+     */
     public SpriteSheet setLoopOnLast(boolean b) {
         loopOnLastFrame = b;
 
         return this;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public float getPercentCompleted() {
         return (currentFrame / (float) (frames.size() - 1));
     }
 
+    /**
+     * <p></p>
+     * @param containerW -
+     * @param containerH -
+     * @return
+     */
     public SpriteSheet setFrameScale(float containerW, float containerH) {
         frameScale = new float[]{
                 containerW / largestSize[0],
@@ -93,38 +131,54 @@ public class SpriteSheet implements IUpdatable {
         return this;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public float[] getFrameScale() {
         return frameScale;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public float[] getCurrentFrameSize() {
         return frames.get(currentFrame).getScaledSize();
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public int[] getCurrentFramePos() {
         return frames.get(currentFrame).getPosition();
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public int[] getLargestSize() {
         return largestSize;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public boolean isTrimmed() {
         return frames.get(currentFrame).isTrimmed();
     }
 
-    @Override
-    public void update(float delta) {
-        ticks += 1000 / (Config.GAME_UPDATE_RATE * delta);
-
-        int newFrame = currentFrame;
-        if (ticks > frames.get(currentFrame).getDuration()) {
-            incrementFrame(newFrame);
-
-            ticks = 0;
-        }
-    }
-
+    /**
+     * <p></p>
+     * @param g
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
     public void draw(Graphics g, int x, int y, int w, int h) {
         BufferedImage croppedImage = frames.get(currentFrame).getSubImage(referenceImage);
         g.drawImage(
@@ -137,9 +191,24 @@ public class SpriteSheet implements IUpdatable {
         croppedImage.flush();
     }
 
+    /**
+     * <p></p>
+     */
     public void reset() {
         currentFrame = 0;
         ticks = 0;
+    }
+
+    @Override
+    public void update(float delta) {
+        ticks += 1000 / (Config.GAME_UPDATE_RATE * delta);
+
+        int newFrame = currentFrame;
+        if (ticks > frames.get(currentFrame).getDuration()) {
+            incrementFrame(newFrame);
+
+            ticks = 0;
+        }
     }
 
     public String toString() {

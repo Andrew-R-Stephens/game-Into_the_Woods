@@ -4,6 +4,9 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
 
+/**
+ * <p></p>
+ */
 public class QuitPage extends AMenu {
 
     public QuitPage(AMenuEnvironment parentModel) {

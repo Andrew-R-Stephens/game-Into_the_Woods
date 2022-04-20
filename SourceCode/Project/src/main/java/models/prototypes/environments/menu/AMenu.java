@@ -15,6 +15,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * <p></p>
+ */
 public abstract class AMenu implements IUpdatable, IDrawable {
 
     // The Parent Menu Model
@@ -30,10 +33,18 @@ public abstract class AMenu implements IUpdatable, IDrawable {
 
     protected float centerW = Config.DEFAULT_WINDOW_WIDTH * .5f, centerH = Config.DEFAULT_WINDOW_HEIGHT * .5f;
 
+    /**
+     * <p></p>
+     * @param parentMenuModel -
+     */
     public AMenu(AMenuEnvironment parentMenuModel) {
         this.parentEnvironment = parentMenuModel;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public boolean registerInput() {
         boolean isActivated = false;
         if (parentEnvironment.getKeyController() instanceof MenuKeyControls kc) {
@@ -46,26 +57,50 @@ public abstract class AMenu implements IUpdatable, IDrawable {
         return isActivated;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public AMenuEnvironment getParentEnvironment() {
         return parentEnvironment;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public EnvironmentsHandler getEnvironmentsHandler() {
         return parentEnvironment.getParentEnvironmentsHandler();
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public Resources getResources() {
         return parentEnvironment.getResources();
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public AMouseController getMouseController() {
         return parentEnvironment.getMouseController();
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public AKeyController getKeyController() {
         return parentEnvironment.getKeyController();
     }
 
+    /**
+     * <p></p>
+     * @param component
+     */
     public void addComponent(AMenuComponent component){
         components.add(component);
     }

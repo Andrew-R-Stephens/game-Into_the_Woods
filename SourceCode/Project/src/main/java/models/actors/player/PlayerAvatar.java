@@ -11,8 +11,23 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param cModel -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param hasGravity -
+     */
     public PlayerAvatar(
             Resources resources, GameControls cModel, float x, float y, float w, float h, float vx,
             float vy,
@@ -37,6 +52,65 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         spriteSheets.put(ActionType.WALL_CLIMBING,
                 resources.getSpriteSheet("spritesheet_avatarjump")
                         .setLoopOnLast(true).setFrameScale(w, h));
+    }
+
+    /**
+     * <p></p>
+     * @param delta -
+     */
+    private void updateSpriteAnimation(float delta) {
+        float tickRate = delta;
+
+        switch(actionState) {
+            case FLOOR_RUNNING -> {
+                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
+                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
+                spriteSheets.get(ActionType.WALL_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
+                if(vX != 0) {
+                    tickRate *= ((MAX_VEL_X*.5f)/(Math.abs(vX) + (MAX_VEL_X * .5)));
+                }
+            }
+            case WALL_CLIMBING -> {
+                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
+                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
+                spriteSheets.get(ActionType.WALL_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
+                if(vX != 0) {
+                    tickRate *= ((MAX_VEL_X*.5f)/(Math.abs(vX) + (MAX_VEL_X * .5)));
+                }
+            }
+            case FLOOR_JUMPING -> {
+                spriteSheets.get(ActionType.WALL_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
+                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
+                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
+                tickRate *= (-vY);
+            }
+            case WALL_JUMPING -> {
+                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
+                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
+                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
+                tickRate *= (-vY);
+            }
+            case FLOOR_IDLE -> {
+                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
+                spriteSheets.get(ActionType.WALL_JUMPING).reset();
+                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
+                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
+            }
+        }
+
+        spriteSheets.get(actionState).update(tickRate);
+    }
+
+    /**
+     * <p></p>
+     * @param actionState -
+     */
+    public void setAction(ActionType actionState) {
+        this.actionState = actionState;
     }
 
     @Override
@@ -108,59 +182,8 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
     }
 
-    private void updateSpriteAnimation(float delta) {
-        float tickRate = delta;
-
-        switch(actionState) {
-            case FLOOR_RUNNING -> {
-                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
-                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
-                spriteSheets.get(ActionType.WALL_JUMPING).reset();
-                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
-                if(vX != 0) {
-                    tickRate *= ((MAX_VEL_X*.5f)/(Math.abs(vX) + (MAX_VEL_X * .5)));
-                }
-            }
-            case WALL_CLIMBING -> {
-                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
-                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
-                spriteSheets.get(ActionType.WALL_JUMPING).reset();
-                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
-                if(vX != 0) {
-                    tickRate *= ((MAX_VEL_X*.5f)/(Math.abs(vX) + (MAX_VEL_X * .5)));
-                }
-            }
-            case FLOOR_JUMPING -> {
-                spriteSheets.get(ActionType.WALL_JUMPING).reset();
-                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
-                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
-                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
-                tickRate *= (-vY);
-            }
-            case WALL_JUMPING -> {
-                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
-                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
-                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
-                spriteSheets.get(ActionType.FLOOR_IDLE).reset();
-                tickRate *= (-vY);
-            }
-            case FLOOR_IDLE -> {
-                spriteSheets.get(ActionType.FLOOR_JUMPING).reset();
-                spriteSheets.get(ActionType.WALL_JUMPING).reset();
-                spriteSheets.get(ActionType.FLOOR_RUNNING).reset();
-                spriteSheets.get(ActionType.WALL_CLIMBING).reset();
-            }
-        }
-
-        spriteSheets.get(actionState).update(tickRate);
-    }
-
     public String toString() {
         return "TC:  VX= " + (int)vX + ", VY= " + (int)vY;
-    }
-
-    public void setAction(ActionType actionState) {
-        this.actionState = actionState;
     }
 
 }

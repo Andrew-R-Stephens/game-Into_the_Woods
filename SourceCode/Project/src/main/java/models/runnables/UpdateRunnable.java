@@ -4,10 +4,17 @@ import models.prototypes.environments.AEnvironment;
 import models.prototypes.threading.ARunnable;
 import models.utils.config.Config;
 
+/**
+ * <p></p>
+ */
 public class UpdateRunnable extends ARunnable {
 
     private AEnvironment environment;
 
+    /**
+     * <p></p>
+     * @param environment -
+     */
     public void init(AEnvironment environment) {
         this.environment = environment;
     }

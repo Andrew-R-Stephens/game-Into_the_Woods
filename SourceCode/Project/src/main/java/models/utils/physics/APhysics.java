@@ -3,6 +3,10 @@ package models.utils.physics;
 import models.prototypes.actor.AActor;
 import models.utils.config.Config;
 import models.utils.updates.IUpdatable;
+
+/**
+ * <p></p>
+ */
 public abstract class APhysics implements IUpdatable {
 
     public static final float GRAVITY = 9.8f / (float) Config.GAME_UPDATE_RATE;
@@ -20,6 +24,16 @@ public abstract class APhysics implements IUpdatable {
     protected boolean isUserControlled;
     protected boolean isMoving;
 
+    /**
+     * <p></p>
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vX -
+     * @param vY -
+     * @param hasGravity -
+     */
     protected APhysics(
             float x, float y,
             float w, float h,
@@ -35,29 +49,48 @@ public abstract class APhysics implements IUpdatable {
         setGravity(hasGravity);
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     public void update(float delta) {
         resetCollisions();
 
         updateVelocity(delta);
     }
 
+    /**
+     * <p></p>
+     */
     private void resetCollisions() {
         isFloorCollision = false;
         isWallCollisionLeft = false;
         isWallCollisionRight = false;
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     private void calculateGravity(float delta) {
         if (hasGravity && !isFloorCollision) {
             vY += (GRAVITY / delta);
         }
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     private void updateVelocity(float delta) {
         calculateGravity(delta);
         limitVelocity(delta);
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     public void limitVelocity(float delta) {
 
         float acc = 1 - (friction / Config.GAME_UPDATE_RATE / delta);

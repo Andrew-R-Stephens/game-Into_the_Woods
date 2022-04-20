@@ -10,17 +10,14 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     protected SpriteSheet spritesheet;
 
     protected ImageScale scaleType = ImageScale.FILL_XY;
-
-    public enum ImageScale {
-        FIT_CENTERED,
-        CENTER_CROP,
-        FILL_XY
-    }
 
     protected Color foregroundColor = new Color(0, 0, 0);
     protected Color backgroundColor = new Color(0, 0, 0, 0);
@@ -41,18 +38,36 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     protected boolean isPressed = false;
     protected boolean playSound = true;
 
+    /**
+     * <p></p>
+     * @param parentMenuEnvironment
+     */
     public AMenuComponent(AMenuEnvironment parentMenuEnvironment) {
         this.parentMenuEnvironment = parentMenuEnvironment;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     protected AMenuEnvironment getParentEnvironment() {
         return parentMenuEnvironment;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     protected EnvironmentsHandler getEnvironmentHandler() {
         return parentMenuEnvironment.getParentEnvironmentsHandler();
     }
 
+    /**
+     * <p></p>
+     * @param mx -
+     * @param my -
+     * @return
+     */
     protected boolean isInBounds(float mx, float my) {
         mx /= Config.scaledW;
         my /= Config.scaledH;
@@ -65,21 +80,31 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         return horizBound && vertBound;
     }
 
+    /**
+     * <p></p>
+     * @param isFocused -
+     */
     protected void setIsFocused(boolean isFocused) {
         this.isFocused = isFocused;
     }
 
+    /**
+     * <p></p>
+     * @param x -
+     * @param y -
+     * @return
+     */
     public abstract boolean onClick(float x, float y);
 
-    @Override
-    public void update(float delta) {
-        isFocused = false;
-        isPressed = false;
+    /**
+     * <p></p>
+     */
+    public abstract void registerInput();
 
-        registerInput();
-        updateSpriteSheet(delta);
-    }
-
+    /**
+     * <p></p>
+     * @param delta -
+     */
     public void updateSpriteSheet(float delta) {
         if(spritesheet != null) {
             if (backgroundImage == null && isFocused) {
@@ -88,6 +113,111 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
                 spritesheet.reset();
             }
         }
+    }
+
+    /**
+     * <p></p>
+     * @return
+     */
+    public int right() {
+        return x + w;
+    }
+
+    /**
+     * <p></p>
+     * @param backgroundImage -
+     */
+    public void setBackgroundImage(BufferedImage backgroundImage) {
+        this.backgroundImage = backgroundImage;
+    }
+
+    /**
+     * <p></p>
+     * @param scaleType -
+     */
+    public void setImageScaling(ImageScale scaleType) {
+        this.scaleType = scaleType;
+    }
+
+    /**
+     * <p></p>
+     * @param text -
+     */
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    /**
+     * <p></p>
+     * @param spritesheet -
+     */
+    public void setSpritesheet(SpriteSheet spritesheet) {
+        this.spritesheet = spritesheet;
+    }
+
+    /**
+     * <p></p>
+     * @param canPlaySound -
+     */
+    public void setPlaySound(boolean canPlaySound) {
+        playSound = canPlaySound;
+    }
+
+    /**
+     * <p></p>
+     * @return
+     */
+    public boolean isPressed() {
+        return isPressed;
+    }
+
+    /**
+     * <p></p>
+     * @return
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * <p></p>
+     * @return
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * <p></p>
+     * @return
+     */
+    public int getW() {
+        return w;
+    }
+
+    /**
+     * <p></p>
+     * @return
+     */
+    public int getH() {
+        return h;
+    }
+
+    public void reset() {
+        if(spritesheet != null) {
+            spritesheet.reset();
+        }
+        isFocused = false;
+        isPressed = false;
+    }
+
+    @Override
+    public void update(float delta) {
+        isFocused = false;
+        isPressed = false;
+
+        registerInput();
+        updateSpriteSheet(delta);
     }
 
     @Override
@@ -102,57 +232,13 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
         */
     }
 
-    public int right() {
-        return x + w;
+    /**
+     * <p></p>
+     */
+    public enum ImageScale {
+        FIT_CENTERED,
+        CENTER_CROP,
+        FILL_XY
     }
 
-    public abstract void registerInput();
-
-    public void setBackgroundImage(BufferedImage backgroundImage) {
-        this.backgroundImage = backgroundImage;
-    }
-
-    public void setImageScaling(ImageScale scaleType) {
-        this.scaleType = scaleType;
-    }
-
-    public void reset() {
-        if(spritesheet != null) {
-            spritesheet.reset();
-        }
-        isFocused = false;
-        isPressed = false;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setSpritesheet(SpriteSheet spritesheet) {
-        this.spritesheet = spritesheet;
-    }
-
-    public void setPlaySound(boolean canPlaySound) {
-        playSound = canPlaySound;
-    }
-
-    public boolean isPressed() {
-        return isPressed;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getW() {
-        return w;
-    }
-
-    public int getH() {
-        return h;
-    }
 }

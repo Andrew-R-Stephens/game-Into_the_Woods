@@ -13,6 +13,17 @@ import java.awt.*;
  */
 public abstract class APawn extends AActor implements IDrawable, IUpdatable {
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param hasGravity -
+     */
     protected APawn(
             Resources resources, float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(resources, x, y, w, h, vx, vy, hasGravity);
@@ -25,11 +36,6 @@ public abstract class APawn extends AActor implements IDrawable, IUpdatable {
         setX(x += vX);
         setY(y += vY);
 
-    }
-
-    @Override
-    public void draw(Graphics2D g) {
-        super.draw(g);
     }
 
 }

@@ -6,10 +6,27 @@ import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.trigger.ATrigger;
 import models.utils.resources.Resources;
 
+/**
+ * <p></p>
+ */
 public abstract class ACollectibleTrigger extends ATrigger {
 
     protected boolean isActive = true;
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param gameEnvironment -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param MAX_CYCLES -
+     * @param hasGravity -
+     * @param canMoveOnCollision -
+     */
     protected ACollectibleTrigger(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w,
                                   float h,
                                   float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
@@ -44,6 +61,9 @@ public abstract class ACollectibleTrigger extends ATrigger {
         isActive = false;
     }
 
+    /**
+     * <p></p>
+     */
     public void reset() {
         super.reset();
 

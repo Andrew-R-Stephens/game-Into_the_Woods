@@ -5,8 +5,15 @@ import models.prototypes.controls.AMouseController;
 
 import java.awt.event.MouseEvent;
 
+/**
+ * <p></p>
+ */
 public class MenuMouseControls extends AMouseController {
 
+    /**
+     * <p></p>
+     * @param controlsViewModel -
+     */
     public MenuMouseControls(AControls controlsViewModel) {
         super(controlsViewModel);
     }

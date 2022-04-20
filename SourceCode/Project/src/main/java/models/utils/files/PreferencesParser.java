@@ -10,20 +10,32 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
 
-public class PreferencesParser extends AFileReader {
+/**
+ * <p></p>
+ */
+public class PreferencesParser {
 
-    private final Config preferences;
+    private File file;
+    private final Config config;
 
-    public PreferencesParser(Config preferences, String filePath, String fileName, String fileType) {
-        super(filePath, fileName, fileType);
-
-        this.preferences = preferences;
+    /**
+     * <p></p>
+     * @param config -
+     * @param file -
+     */
+    public PreferencesParser(Config config, File file) {
+        this.config = config;
+        this.file = file;
     }
 
-    @Override
-    public boolean read() {
+    /**
+     * <p></p>
+     * @return
+     */
+    public boolean parse() {
 
         // Parse through file
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -55,31 +67,31 @@ public class PreferencesParser extends AFileReader {
                             .getElementsByTagName("resolutionWidthDefault")
                             .item(0)
                             .getTextContent());
-                    preferences.setWindowWidthDefault(dwidth);
+                    config.setWindowWidthDefault(dwidth);
 
                     int dheight = Integer.parseInt(eElement
                             .getElementsByTagName("resolutionHeightDefault")
                             .item(0)
                             .getTextContent());
-                    preferences.setWindowHeightDefault(dheight);
+                    config.setWindowHeightDefault(dheight);
 
                     int width = Integer.parseInt(eElement
                             .getElementsByTagName("resolutionWidth")
                             .item(0)
                             .getTextContent());
-                    preferences.setWindowWidthSelected(width);
+                    config.setWindowWidthSelected(width);
 
                     int height = Integer.parseInt(eElement
                             .getElementsByTagName("resolutionHeight")
                             .item(0)
                             .getTextContent());
-                    preferences.setWindowHeightSelected(height);
+                    config.setWindowHeightSelected(height);
 
                     int windowType = Integer.parseInt(eElement
                             .getElementsByTagName("windowType")
                             .item(0)
                             .getTextContent());
-                    preferences.setWindowType(windowType);
+                    config.setWindowType(windowType);
 
                     /*
                     System.out.println("Resolution Width = "
@@ -107,19 +119,19 @@ public class PreferencesParser extends AFileReader {
                             .getElementsByTagName("gameUpdateRate")
                             .item(0)
                             .getTextContent());
-                    preferences.setGameUpdateRate(gameUpdateRate);
+                    config.setGameUpdateRate(gameUpdateRate);
 
                     short frameRateDefault = Short.parseShort(eElement
                             .getElementsByTagName("frameRateDefault")
                             .item(0)
                             .getTextContent());
-                    preferences.setFrameRateDefault(frameRateDefault);
+                    config.setFrameRateDefault(frameRateDefault);
 
                     short frameRate = Short.parseShort(eElement
                             .getElementsByTagName("frameRate")
                             .item(0)
                             .getTextContent());
-                    preferences.setFrameRate(frameRate);
+                    config.setFrameRate(frameRate);
 
                     /*
                     System.out.println("Game Update Rate = "

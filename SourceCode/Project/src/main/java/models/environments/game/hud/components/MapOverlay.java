@@ -9,10 +9,14 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatable {
 
     private BufferedImage overlay;
 
+    @Override
     public void init(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
         super.init(gameEnvironment, x, y, w, h);
 
@@ -20,6 +24,9 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
                 Config.window_width_actual, Config.window_height_actual, BufferedImage.TYPE_INT_ARGB);
     }
 
+    /**
+     * <p></p>
+     */
     public void reset() {
         overlay = new BufferedImage(
                 Config.window_width_actual, Config.window_height_actual, BufferedImage.TYPE_INT_ARGB);

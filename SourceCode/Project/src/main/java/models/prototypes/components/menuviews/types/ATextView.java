@@ -8,17 +8,61 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public abstract class ATextView extends AMenuComponent implements IDrawable, IUpdatable {
 
-    public ATextView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
+    /**
+     * <p></p>
+     * @param parentMenuModel -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param text -
+     */
+    public ATextView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h, String text) {
         super(parentMenuModel);
 
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
+
+        setText(text);
+    }
+
+    /**
+     * <p></p>
+     * @param x -
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * <p></p>
+     */
+    public void registerInput() {
+        // DO NOTHING
+    }
+
+    /**
+     * <p></p>
+     */
+    public void reset() {
+        playSound = true;
+        super.reset();
+    }
+
+    /**
+     * <p></p>
+     * @param color -
+     */
+    public void setBackgroundColor(Color color) {
+        this.backgroundColor = color;
     }
 
     @Override
@@ -50,11 +94,11 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
                             .deriveFont(AffineTransform.getScaleInstance(.8, 1))
                             .deriveFont(Font.BOLD, strHeight * sW));
 
-            strWidth = g.getFontMetrics().stringWidth(text.toUpperCase());
+            strWidth = g.getFontMetrics().stringWidth(text);
         }
         int strHeightDiff = (int) (((g.getFontMetrics().getAscent() * sH) - (h * sW)) * .5f);
         g.drawString(
-                text.toUpperCase(),
+                text,
                 (int)((x * sW) + (w * sW * .5) - (strWidth * .5)),
                 (int)(((y * sH) + (h*sH))) + (strHeightDiff * sH));
     }
@@ -64,20 +108,4 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
         super.update(delta);
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void registerInput() {
-        // DO NOTHING
-    }
-
-    public void reset() {
-        playSound = true;
-        super.reset();
-    }
-
-    public void setBackgroundColor(Color color) {
-        this.backgroundColor = color;
-    }
 }

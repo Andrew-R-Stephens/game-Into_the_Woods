@@ -4,6 +4,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * <p></p>
+ */
 public abstract class AMouseController implements MouseListener, MouseMotionListener {
 
     protected AControls controlsViewModel;
@@ -13,27 +16,51 @@ public abstract class AMouseController implements MouseListener, MouseMotionList
     protected boolean isLeftPressed = false;
     protected boolean isRightPressed = false;
 
+    /**
+     * <p></p>
+     * @param controlsViewModel -
+     */
     protected AMouseController(AControls controlsViewModel) {
         this.controlsViewModel = controlsViewModel;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public boolean isLeftPressed() {
         return isLeftPressed;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public boolean isRightPressed() {
         return isRightPressed;
     }
 
+    /**
+     * <p></p>
+     * @param x -
+     * @param y -
+     */
     public void setPos(int x, int y) {
         mPos[0] = x;
         mPos[1] = y;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public int[] getPos() {
         return mPos;
     }
 
+    /**
+     * <p></p>
+     */
     public void reset() {
         isLeftPressed = false;
         isRightPressed = false;

@@ -11,6 +11,10 @@ import java.awt.event.KeyEvent;
  */
 public class GameKeyControls extends AKeyController {
 
+    /**
+     * <p></p>
+     * @param controlsViewModel
+     */
     public GameKeyControls(AControls controlsViewModel) {
         super(controlsViewModel);
     }

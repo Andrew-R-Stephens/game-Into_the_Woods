@@ -6,6 +6,7 @@ import models.prototypes.environments.AEnvironment;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.threading.ARunnable;
 import models.prototypes.views.ACanvas;
+import models.utils.config.Config;
 import views.window.MainWindow;
 
 import java.util.ArrayList;
@@ -19,11 +20,7 @@ public class EnvironmentsHandler {
 
     private MainWindow parentWindow;
 
-    public enum EnvironmentType {
-        MAIN_MENU,
-        GAME,
-        GAME_PAUSE_MENU
-    }
+
     private EnvironmentType currentEnvironment = EnvironmentType.MAIN_MENU;
 
     private final ArrayList<AEnvironment> environments = new ArrayList<>();
@@ -201,6 +198,15 @@ public class EnvironmentsHandler {
         parentWindow.setResources(getCurrentEnvironment().getResources());
         parentWindow.init(this);
         applyEnvironment(false);
+        Config.calcResolutionScale();
     }
 
+    /**
+     * <p></p>
+     */
+    public enum EnvironmentType {
+        MAIN_MENU,
+        GAME,
+        GAME_PAUSE_MENU
+    }
 }

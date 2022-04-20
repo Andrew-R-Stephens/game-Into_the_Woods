@@ -9,8 +9,21 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public class AImageView extends AMenuComponent implements IDrawable, IUpdatable {
 
+    /**
+     * <p></p>
+     * @param parentMenuModel -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param bufferedImage -
+     * @param scaleType -
+     */
     public AImageView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h, BufferedImage bufferedImage, ImageScale scaleType) {
         super(parentMenuModel);
 

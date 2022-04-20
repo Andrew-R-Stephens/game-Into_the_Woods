@@ -10,6 +10,9 @@ import models.utils.resources.Resources;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public abstract class AReactProp extends AProp implements IDrawable {
 
     protected GameEnvironment gameEnvironment;
@@ -17,6 +20,20 @@ public abstract class AReactProp extends AProp implements IDrawable {
     protected boolean canMoveOnCollision;
     protected int currentCycles = 0;
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param gameEnvironment -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param MAX_CYCLES -
+     * @param hasGravity -
+     * @param canMoveOnCollision -
+     */
     protected AReactProp(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
                          float vx,
                          float vy,

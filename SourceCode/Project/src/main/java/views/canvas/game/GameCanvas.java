@@ -5,14 +5,24 @@ import models.prototypes.views.ACanvas;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public class GameCanvas extends ACanvas {
 
     private GameEnvironment gameModel;
 
+    /**
+     * <p></p>
+     * @param gameModel -
+     */
     public void init(GameEnvironment gameModel) {
         this.gameModel = gameModel;
     }
 
+    /**
+     * <p></p>
+     */
     public void render() {
         repaint();
     }

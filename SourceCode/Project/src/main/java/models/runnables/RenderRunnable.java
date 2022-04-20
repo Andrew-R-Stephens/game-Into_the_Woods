@@ -4,10 +4,17 @@ import models.prototypes.threading.ARunnable;
 import models.prototypes.views.ACanvas;
 import models.utils.config.Config;
 
+/**
+ * <p></p>
+ */
 public class RenderRunnable extends ARunnable {
 
     private ACanvas canvas;
 
+    /**
+     * <p></p>
+     * @param canvas -
+     */
     public void init(ACanvas canvas) {
         this.canvas = canvas;
     }

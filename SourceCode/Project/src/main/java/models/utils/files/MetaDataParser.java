@@ -8,6 +8,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * <p></p>
+ */
 public class MetaDataParser {
 
     private final String jsonFile;
@@ -15,10 +18,17 @@ public class MetaDataParser {
     private HashMap<String, String> paths = new HashMap<>();
     private HashMap<String, ArrayList<String>> fileNames = new HashMap<>();
 
+    /**
+     * <p></p>
+     * @param jsonFile -
+     */
     public MetaDataParser(String jsonFile) {
         this.jsonFile = jsonFile;
     }
 
+    /**
+     * <p></p>
+     */
     public void init() {
 
         new AFileReader() {
@@ -54,14 +64,29 @@ public class MetaDataParser {
         };
     }
 
+    /**
+     * <p></p>
+     * @param type -
+     * @return
+     */
     public String getPath(String type) {
         return paths.get(type);
     }
 
+    /**
+     * <p></p>
+     * @param type -
+     * @return
+     */
     public ArrayList<String> getFileNames(String type) {
         return fileNames.get(type);
     }
 
+    /**
+     * <p></p>
+     * @param parent -
+     * @param memberName -
+     */
     private void registerElement(JsonObject parent, String memberName) {
         JsonElement typeElement = parent.get(memberName);
         JsonObject child = typeElement.getAsJsonObject();

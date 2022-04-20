@@ -11,10 +11,21 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public abstract class AButtonView extends AMenuComponent implements IDrawable, IUpdatable {
 
     public boolean isEnabled = true;
 
+    /**
+     * <p></p>
+     * @param parentMenuModel -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     */
     public AButtonView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
         super(parentMenuModel);
 
@@ -27,10 +38,56 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
                 getParentEnvironment().getResources().getSpriteSheet("spritesheet_buttonhrect").setLoopOnLast(false);
     }
 
+    /**
+     * <p></p>
+     * @param x -
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * <p></p>
+     */
     public void playSound() {
         if(playSound) {
             getParentEnvironment().getResources().playAudio("buttonclick");
         }
+    }
+
+    /**
+     * <p></p>
+     */
+    public void registerInput() {
+        AMouseController mc = getParentEnvironment().getMouseController();
+        if (mc.isLeftPressed()) {
+            isPressed = onClick(mc.getPos()[0], mc.getPos()[1]);
+            if(isPressed) {
+                mc.reset();
+                playSound();
+                playSound = false;
+            } else {
+                playSound = true;
+            }
+        } else {
+            isInBounds(mc.getPos()[0], mc.getPos()[1]);
+        }
+    }
+
+    /**
+     * <p></p>
+     * @param isEnabled -
+     */
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
+    }
+
+    /**
+     * <p></p>
+     */
+    public void reset() {
+        playSound = true;
+        super.reset();
     }
 
     @Override
@@ -103,32 +160,4 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
                 (int)((y * sH) + (h * sH * .5) + (h * .2 * sH * (spritesheet.getPercentCompleted()))));
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void registerInput() {
-        AMouseController mc = getParentEnvironment().getMouseController();
-        if (mc.isLeftPressed()) {
-            isPressed = onClick(mc.getPos()[0], mc.getPos()[1]);
-            if(isPressed) {
-                mc.reset();
-                playSound();
-                playSound = false;
-            } else {
-                playSound = true;
-            }
-        } else {
-            isInBounds(mc.getPos()[0], mc.getPos()[1]);
-        }
-    }
-
-    public void reset() {
-        playSound = true;
-        super.reset();
-    }
-
-    public void setEnabled(boolean isEnabled) {
-        this.isEnabled = isEnabled;
-    }
 }

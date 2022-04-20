@@ -12,6 +12,9 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
+/**
+ * <p></p>
+ */
 public class HUDModel implements IDrawable, IUpdatable {
 
     protected GameEnvironment gameEnvironment;
@@ -21,6 +24,14 @@ public class HUDModel implements IDrawable, IUpdatable {
     private PlayerStatsOverlay stats;
     private TimeKeeperOverlay timer;
 
+    /**
+     * <p></p>
+     * @param gameEnvironment -
+     * @param inventory -
+     * @param mapOverlay -
+     * @param playerStatsOverlay -
+     * @param timeKeeperOverlay -
+     */
     public void init(GameEnvironment gameEnvironment, PlayerInventory inventory, MapOverlay mapOverlay,
                      PlayerStatsOverlay playerStatsOverlay, TimeKeeperOverlay timeKeeperOverlay) {
         this.gameEnvironment = gameEnvironment;
@@ -34,6 +45,9 @@ public class HUDModel implements IDrawable, IUpdatable {
         timer.init(gameEnvironment,0, 0, 300, 200);
     }
 
+    /**
+     * <p></p>
+     */
     public void reset() {
         map.reset();
     }

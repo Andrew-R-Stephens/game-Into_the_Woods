@@ -14,42 +14,31 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
+
+    /**
+     * <p></p>
+     * @param resources -
+     * @param gameEnvironment -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param MAX_CYCLES -
+     */
     public Spikes(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
                   int MAX_CYCLES) {
         super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, false, false);
     }
 
     @Override
-    public void doAction() {
-        gameEnvironment.reset();
-    }
-
-    @Override
     public void update(float delta) {
         super.update(delta);
-    }
-
-    @Override
-    public boolean hasCollision(AActor a, float delta) {
-        if(!(a instanceof PlayerAvatar)) {
-            return false;
-        }
-
-        boolean hasCollision = super.hasCollision(a, delta);
-
-        if(MAX_CYCLES != -1) {
-            if (currentCycles > MAX_CYCLES) {
-                return false;
-            }
-        }
-
-        if(hasCollision) {
-            doAction();
-            currentCycles++;
-        }
-
-        return hasCollision;
     }
 
     @Override
@@ -93,4 +82,33 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
     public void drawAsHUD(Graphics2D g) {
 
     }
+
+    @Override
+    public void doAction() {
+        gameEnvironment.reset();
+    }
+
+    @Override
+    public boolean hasCollision(AActor a, float delta) {
+        if(!(a instanceof PlayerAvatar)) {
+            return false;
+        }
+
+        boolean hasCollision = super.hasCollision(a, delta);
+
+        if(MAX_CYCLES != -1) {
+            if (currentCycles > MAX_CYCLES) {
+                return false;
+            }
+        }
+
+        if(hasCollision) {
+            doAction();
+            currentCycles++;
+        }
+
+        return hasCollision;
+    }
+
+
 }

@@ -7,12 +7,23 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public abstract class AOverlayComponent implements IUpdatable, IDrawable {
 
     protected GameEnvironment gameEnvironment;
 
     protected int x, y, w, h;
 
+    /**
+     * <p></p>
+     * @param gameEnvironment -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     */
     public void init(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
         this.gameEnvironment = gameEnvironment;
         this.x = x;

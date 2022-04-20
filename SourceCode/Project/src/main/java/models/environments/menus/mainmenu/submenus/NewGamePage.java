@@ -9,8 +9,15 @@ import models.utils.config.Config;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public class NewGamePage extends AMenu {
 
+    /**
+     * <p></p>
+     * @param parentModel -
+     */
     public NewGamePage(AMenuEnvironment parentModel) {
         super(parentModel);
 

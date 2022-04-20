@@ -28,6 +28,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+/**
+ * <p></p>
+ */
 public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 
     private GameControls gameControls;
@@ -48,6 +51,15 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     private Robot robot;
 
+    /**
+     * <p></p>
+     * @param parentEnvironmentsHandler -
+     * @param pauseMenuEnvironment -
+     * @param gameControls -
+     * @param levelsList -
+     * @param hudModel -
+     * @param inventory -
+     */
     public void init(EnvironmentsHandler parentEnvironmentsHandler,
                      PauseMenuEnvironment pauseMenuEnvironment, GameControls gameControls,
                      LevelsList levelsList, HUDModel hudModel, PlayerInventory inventory) {
@@ -70,18 +82,34 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         build(gameControls);
     }
 
+    /**
+     * <p></p>
+     * @param inventory -
+     */
     private void setPlayerInventory(PlayerInventory inventory) {
         this.inventory = inventory;
     }
 
+    /**
+     * <p></p>
+     * @param hudModel -
+     */
     private void setHUDModel(HUDModel hudModel) {
         this.hudModel = hudModel;
     }
 
+    /**
+     * <p></p>
+     * @param pauseMenuEnvironment -
+     */
     private void setPauseMenuEnvironment(PauseMenuEnvironment pauseMenuEnvironment) {
         this.pauseMenuEnvironment = pauseMenuEnvironment;
     }
 
+    /**
+     * <p></p>
+     * @param controlsModel -
+     */
     public void build(GameControls controlsModel) {
         setPlayerAvatar(controlsModel, levelsList);
     }
@@ -117,6 +145,10 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     public void doGameUpdates(float delta) {
 
         doGameControls();
@@ -127,12 +159,19 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         updateHUD(delta); // Update HUD overlay
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     public void doPauseMenuUpdates(float delta) {
         doPauseMenuControls();
 
         pauseMenuEnvironment.update(delta);
     }
 
+    /**
+     * <p></p>
+     */
     private void doGameControls() {
         robot.mouseMove(
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().width * .5f),
@@ -149,6 +188,9 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         }
     }
 
+    /**
+     * <p></p>
+     */
     public void doPauseMenuControls() {
         if(pauseMenuEnvironment.getKeyController() instanceof MenuKeyControls kc) {
             if(kc.getControlsModel().getAction(MenuControls.Actions.ESCAPE)) {
@@ -161,13 +203,27 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         }
     }
 
+    /**
+     * <p></p>
+     * @param levelsList -
+     */
     public void setLevelsList(LevelsList levelsList) {
         this.levelsList = levelsList;
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public LevelsList getLevelsList() {
         return levelsList;
     }
+
+    /**
+     * <p></p>
+     * @param controlsViewModel -
+     * @param levelModel -
+     */
 
     private void setPlayerAvatar(GameControls controlsViewModel, LevelsList levelModel) {
         int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
@@ -185,15 +241,26 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     }
 
-
+    /**
+     * <p></p>
+     * @param delta -
+     */
     private void updateHUD(float delta) {
         hudModel.update(delta);
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     private void updateLevel(float delta) {
         levelsList.getCurrentLevel().update(delta);
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     private synchronized void testAddingActors(float delta) {
         if (mouseController instanceof GameMouseControls gmc) {
 
@@ -220,6 +287,10 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         }
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     public void updateActors(float delta) {
 
         // Update all Actors
@@ -236,11 +307,13 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 tc.update(delta);
                 //System.out.println(tc.actionState);
             }
-
         }
-
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     private void detectCollisions(float delta) {
         for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
             for (AActor a : actors) {
@@ -249,30 +322,69 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         }
     }
 
+    /**
+     * <p></p>
+     */
     private void insertQueuedActors() {
         for(int i = 0; i < 10 && actorsQueue.size() >= 1; i++) {
             addActor(actorsQueue.remove());
         }
     }
 
+    /**
+     * <p></p>
+     * @param a -
+     */
     public void queueActor(AActor a) {
         actorsQueue.add(a);
     }
 
+    /**
+     * <p></p>
+     * @param actor -
+     */
     public void addActor(AActor actor) {
         actors.add(actor);
     }
 
+    /**
+     * <p></p>
+     * @param levelIndex -
+     */
     public void setCurrentLevel(int levelIndex) {
         levelsList.setCurrentLevel(levelIndex);
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public ALevel getCurrentLevel() {
         return levelsList.getCurrentLevel();
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public ACharacter getPlayerAvatar() {
         return character;
+    }
+
+    /**
+     * <p></p>
+     * @return
+     */
+    public PlayerInventory getPlayerInventory() {
+        return inventory;
+    }
+
+    /**
+     * <p></p>
+     * @param paused -
+     */
+    public void setPaused(boolean paused) {
+        isPaused = paused;
     }
 
     @Override
@@ -290,14 +402,6 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         character.reset(levelsList.getCurrentLevel().getCharacterOrigin());
         levelsList.reset();
         Camera.reset();
-    }
-
-    public PlayerInventory getPlayerInventory() {
-        return inventory;
-    }
-
-    public void setPaused(boolean paused) {
-        isPaused = paused;
     }
 
     @Override

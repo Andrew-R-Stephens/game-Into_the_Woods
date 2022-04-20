@@ -10,6 +10,9 @@ import models.utils.resources.Resources;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public abstract class ATrigger extends AProp implements IDrawable {
 
     protected GameEnvironment gameEnvironment;
@@ -20,6 +23,20 @@ public abstract class ATrigger extends AProp implements IDrawable {
     protected int MAX_CYCLES;
     protected int currentCycles = 0;
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param gameEnvironment -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param MAX_CYCLES -
+     * @param hasGravity -
+     * @param canMoveOnCollision -
+     */
     protected ATrigger(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
                        float vx,
                        float vy,
@@ -35,12 +52,6 @@ public abstract class ATrigger extends AProp implements IDrawable {
     @Override
     public boolean hasCollision(AActor a, float delta) {
         return super.hasCollision(a, delta, canMoveOnCollision);
-    }
-
-    public abstract void doAction();
-
-    public void reset() {
-        currentCycles = 0;
     }
 
     @Override
@@ -60,5 +71,15 @@ public abstract class ATrigger extends AProp implements IDrawable {
         g.drawString("Trigger Area", (int) (offsetX) + 3, (int) (offsetY) + 12);
     }
 
+    /**
+     * <p></p>
+     */
+    public abstract void doAction();
 
+    /**
+     * <p></p>
+     */
+    public void reset() {
+        currentCycles = 0;
+    }
 }

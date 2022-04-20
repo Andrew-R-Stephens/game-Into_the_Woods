@@ -5,14 +5,24 @@ import models.prototypes.views.ACanvas;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public class MenuCanvas extends ACanvas {
 
     private MainMenuEnvironment mainMenuEnvironment;
 
+    /**
+     * <p></p>
+     * @param mainMenuEnvironment -
+     */
     public void init(MainMenuEnvironment mainMenuEnvironment) {
         this.mainMenuEnvironment = mainMenuEnvironment;
     }
 
+    /**
+     * <p></p>
+     */
     public void render() {
         repaint();
     }

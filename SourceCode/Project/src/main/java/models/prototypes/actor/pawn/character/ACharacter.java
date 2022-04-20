@@ -18,20 +18,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     protected final GameControls controlsModel;
 
     protected CharacterType characterType;
-    public enum CharacterType {
-        TEO,
-        MELYNN
-    }
-
     protected ActionType actionState = ActionType.FLOOR_IDLE;
-    public enum ActionType {
-        FLOOR_IDLE,
-        FLOOR_WALKING,
-        FLOOR_RUNNING,
-        FLOOR_JUMPING,
-        WALL_CLIMBING,
-        WALL_JUMPING
-    }
 
     protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 
@@ -43,6 +30,18 @@ public abstract class ACharacter extends APawn implements IUpdatable {
 
     private boolean isJumpLocked = false;
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param cModel -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param hasGravity -
+     */
     protected ACharacter(
             Resources resources, GameControls cModel,
             float x, float y, float w, float h, float vx,
@@ -52,18 +51,19 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         this.controlsModel = cModel;
     }
 
-    @Override
-    public void update(float delta) {
-        setActionType();
-
-        super.update(delta);
-    }
-
+    /**
+     * <p></p>
+     * @param delta -
+     */
     public void control(float delta) {
         doAbilities();
         doMovement(delta);
     }
 
+    /**
+     * <p></p>
+     * @param delta -
+     */
     private void doMovement(float delta) {
 
         boolean[] directionals = controlsModel.getDirectionals();
@@ -105,10 +105,16 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         //vY += yDir / (float)PreferenceData.GAME_UPDATE_RATE;
     }
 
+    /**
+     * <p></p>
+     */
     private void doAbilities() {
         doJumps();
     }
 
+    /**
+     * <p></p>
+     */
     private void doJumps() {
 
         if (time_jump > 0) {
@@ -148,11 +154,19 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         }
     }
 
+    /**
+     * <p></p>
+     */
     public void doFloorJump() {
         vY = -5;
         actionState = ActionType.FLOOR_JUMPING;
     }
 
+    /**
+     * <p></p>
+     * @param vX -
+     * @param vY -
+     */
     public void doWallJump(float vX, float vY) {
         this.vX = vX;
         this.vY = vY;
@@ -160,16 +174,27 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         actionState = ActionType.WALL_JUMPING;
     }
 
+    /**
+     * <p></p>
+     * @param state -
+     */
     private void lockJumpState(boolean state) {
         isJumpLocked = state;
 
         time_jump = MAX_ALLOWED_JUMP_TIME;
     }
 
+    /**
+     * <p></p>
+     * @param type -
+     */
     public void setCharacterType(CharacterType type) {
         this.characterType = type;
     }
 
+    /**
+     * <p></p>
+     */
     private void setActionType() {
         if(isFloorCollision) {
             if (!isUserControlled) {
@@ -190,14 +215,48 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         }
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public SpriteSheet getCurrentSpriteSheet() {
         return spriteSheets.get(actionState);
     }
 
+    /**
+     * <p></p>
+     * @param characterOrigin -
+     */
     public void reset(int[] characterOrigin) {
         setVelocity(0, 0);
         setX(characterOrigin[0]);
         setY(characterOrigin[1]);
     }
 
+    @Override
+    public void update(float delta) {
+        setActionType();
+
+        super.update(delta);
+    }
+
+    /**
+     * <p></p>
+     */
+    public enum CharacterType {
+        TEO,
+        MELYNN
+    }
+
+    /**
+     * <p></p>
+     */
+    public enum ActionType {
+        FLOOR_IDLE,
+        FLOOR_WALKING,
+        FLOOR_RUNNING,
+        FLOOR_JUMPING,
+        WALL_CLIMBING,
+        WALL_JUMPING
+    }
 }

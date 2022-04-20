@@ -7,8 +7,22 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public class Particle extends APawn implements IDrawable, IUpdatable {
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param hasGravity -
+     */
     public Particle(Resources resources, float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(resources, x, y, w, h, vx, vy, hasGravity);
     }

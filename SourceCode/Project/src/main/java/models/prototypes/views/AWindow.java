@@ -7,14 +7,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public abstract class AWindow extends JFrame {
 
     private Resources resources;
 
+    /**
+     * <p></p>
+     * @param resources
+     */
     public void setResources(Resources resources) {
         this.resources = resources;
     }
 
+    /**
+     * <p></p>
+     */
     protected void constructWindowAndDimensions() {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,6 +75,10 @@ public abstract class AWindow extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * <p></p>
+     * @param isVisible -
+     */
     public void buildCursor(boolean isVisible) {
         Dimension prefCursorDim = Toolkit.getDefaultToolkit().getBestCursorSize(32, 32);
         Image scaledImage;

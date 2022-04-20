@@ -16,15 +16,29 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.util.HashMap;
 
+/**
+ *
+ */
 public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
 
     private ActionType actionState = ActionType.IDLE;
-    private enum ActionType {
-        IDLE
-    }
 
     protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param gameEnvironment -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param MAX_CYCLES -
+     * @param hasGravity -
+     * @param canMoveOnCollision -
+     */
     public Spring(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx,
                   float vy,
                   int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
@@ -56,7 +70,6 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
 
     @Override
     public void doAction() {
-        //isActivated = true;
         lastActor.setVY(-100);
         if(lastActor instanceof PlayerAvatar p) {
             p.setAction(ACharacter.ActionType.FLOOR_JUMPING);
@@ -89,4 +102,12 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
     public void drawAsHUD(Graphics2D g) {
 
     }
+
+    /**
+     * <p></p>
+     */
+    private enum ActionType {
+        IDLE
+    }
+
 }

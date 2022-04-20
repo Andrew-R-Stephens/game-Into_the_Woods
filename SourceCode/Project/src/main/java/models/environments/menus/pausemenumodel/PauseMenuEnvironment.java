@@ -10,10 +10,19 @@ import models.utils.drawables.IDrawable;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable {
 
     protected GameEnvironment gameEnvironment;
 
+    /**
+     * <p></p>
+     * @param parentEnvironmentsModel -
+     * @param controlsModel -
+     * @param gameEnvironment -
+     */
     public void init(EnvironmentsHandler parentEnvironmentsModel, MenuControls controlsModel,
                      GameEnvironment gameEnvironment) {
         super.init(parentEnvironmentsModel, controlsModel);
@@ -25,6 +34,9 @@ public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable 
         initPage(landingMenu);
     }
 
+    /**
+     * <p></p>
+     */
     public void popToFirst() {
         while(getStackDepth() > 1) {
             pop();

@@ -5,8 +5,15 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
 import models.utils.config.Config;
 
+/**
+ * <p></p>
+ */
 public class HelpPage extends AMenu {
 
+    /**
+     * <p></p>
+     * @param parentModel -
+     */
     public HelpPage(AMenuEnvironment parentModel) {
         super(parentModel);
 

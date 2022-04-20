@@ -4,8 +4,15 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
 
+/**
+ * <p></p>
+ */
 public class PauseHelpPage extends AMenu {
 
+    /**
+     * <p></p>
+     * @param parentModel -
+     */
     public PauseHelpPage(AMenuEnvironment parentModel) {
         super(parentModel);
 

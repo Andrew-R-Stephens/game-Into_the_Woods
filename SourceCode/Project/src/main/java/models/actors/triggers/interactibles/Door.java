@@ -16,20 +16,30 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 import java.util.HashMap;
 
+/**
+ *
+ */
 public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpdatable {
 
     private State state = State.LOCKED;
-    private enum State {
-        CLOSED, OPEN, LOCKED
-    }
-
     private final Type type = Type.UNDEFINED;
-    private enum Type {
-        UNDEFINED
-    }
 
     protected HashMap<Type, SpriteSheet> spriteSheets = new HashMap<>();
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param gameEnvironment -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param MAX_CYCLES -
+     * @param hasGravity -
+     * @param canMoveOnCollision -
+     */
     public Door(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx,
                 float vy,
                 int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
@@ -38,29 +48,19 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
         spriteSheets.put(Type.UNDEFINED, resources.getSpriteSheet("spritesheet_door").setLoopOnLast(false));
     }
 
-    public void unlock() {
-        if(state == State.LOCKED) {
-            state = State.CLOSED;
-        }
-    }
-
-    @Override
-    public boolean hasCollision(AActor a, float delta) {
-        if(state == State.LOCKED || state == State.CLOSED) {
-            return false;
-        }
-
-        return super.hasCollision(a, delta);
-    }
-
+    /**
+     * <p></p>
+     */
     public void onReceive() {
         if(state != State.CLOSED) {
             return;
         }
-
         state = State.OPEN;
     }
 
+    /**
+     * <p></p>
+     */
     public void doAction() {
 
         if(state != State.OPEN) {
@@ -74,7 +74,24 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
             gameEnvironment.getParentEnvironmentsHandler().applyEnvironment();
         }
         gameEnvironment.reset();
+    }
 
+    /**
+     * <p></p>
+     */
+    public void unlock() {
+        if(state == State.LOCKED) {
+            state = State.CLOSED;
+        }
+    }
+
+    @Override
+    public boolean hasCollision(AActor a, float delta) {
+        if(state == State.LOCKED || state == State.CLOSED) {
+            return false;
+        }
+
+        return super.hasCollision(a, delta);
     }
 
     @Override
@@ -102,19 +119,24 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
         float scaleH = h * Config.scaledH_zoom;
 
         spriteSheets.get(type).draw(g, (int)offsetX, (int)offsetY, (int)scaleW, (int)scaleH);
-
-        /*
-        g.setColor(new Color(150, 50, 150, 50));
-        g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
-        g.setColor(new Color(100, 255, 100));
-        g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
-        g.setColor(Color.BLACK);
-        g.drawString("Door Trigger", (int) (offsetX) + 3, (int) (offsetY) + 12);
-        */
     }
 
     @Override
     public void drawAsHUD(Graphics2D g) {
 
+    }
+
+    /**
+     *
+     */
+    private enum State {
+        CLOSED, OPEN, LOCKED
+    }
+
+    /**
+     *
+     */
+    private enum Type {
+        UNDEFINED
     }
 }

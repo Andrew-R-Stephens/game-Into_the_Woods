@@ -9,7 +9,9 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
-
+/**
+ * <p></p>
+ */
 public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
 
     protected Resources resources;
@@ -20,6 +22,17 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
 
     protected Color color = new Color(0, 0, 255, 50);
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param hasGravity -
+     */
     protected AActor(
             Resources resources,
             float x, float y,

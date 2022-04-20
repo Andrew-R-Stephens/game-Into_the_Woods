@@ -6,8 +6,15 @@ import models.prototypes.controls.AKeyController;
 
 import java.awt.event.KeyEvent;
 
+/**
+ * <p></p>
+ */
 public class MenuKeyControls extends AKeyController{
 
+    /**
+     * <p></p>
+     * @param controlsModel -
+     */
     public MenuKeyControls(AControls controlsModel) {
         super(controlsModel);
     }
@@ -64,10 +71,18 @@ public class MenuKeyControls extends AKeyController{
         }
     }
 
+    /**
+     * <p></p>
+     * @param type -
+     * @return
+     */
     public boolean isAction(MenuControls.Actions type) {
         return ((MenuControls) controlsModel).isAction(type);
     }
 
+    /**
+     * <p></p>
+     */
     public void reset() {
         controlsModel.reset();
     }

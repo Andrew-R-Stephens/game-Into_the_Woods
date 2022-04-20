@@ -2,6 +2,9 @@ package models.camera;
 
 import models.utils.config.Config;
 
+/**
+ * <p></p>
+ */
 public class Camera {
 
     public static final float DEFAULT_ZOOM_LEVEL = 1f;
@@ -17,10 +20,18 @@ public class Camera {
     public static float acceleration_pan = DEFAULT_PAN_ACCELERATION;
     public static float acceleration_zoom = DEFAULT_ZOOM_ACCELERATION;
 
+    /**
+     * <p></p>
+     */
     public Camera() {
         reset();
     }
 
+    /**
+     * <p></p>
+     * @param x2 -
+     * @param y2 -
+     */
     public static void moveTo(float x2, float y2) {
         mapX = x2;
         mapY = y2;
@@ -35,6 +46,9 @@ public class Camera {
         zoomTo();
     }
 
+    /**
+     * <p></p>
+     */
     public static void zoomTo() {
         float t = zoomLevel/zoomTarget;
 
@@ -47,6 +61,9 @@ public class Camera {
         acceleration_pan = DEFAULT_PAN_ACCELERATION;
     }
 
+    /**
+     * <p></p>
+     */
     public static void reset() {
         targX = Config.window_width_actual * .5f;
         targY = Config.window_height_actual * .5f;

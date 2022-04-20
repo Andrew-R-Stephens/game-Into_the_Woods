@@ -5,8 +5,15 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
 
+/**
+ * <p></p>
+ */
 public class StartScreenPage extends AMenu {
 
+    /**
+     * <p></p>
+     * @param parentMenuModel
+     */
     public StartScreenPage(AMenuEnvironment parentMenuModel) {
 
         super(parentMenuModel);
@@ -38,6 +45,10 @@ public class StartScreenPage extends AMenu {
 
     }
 
+    /**
+     * <p></p>
+     * @return
+     */
     public MainMenuPage navigateToMainMenuPage() {
         getParentEnvironment().push(new MainMenuPage(getParentEnvironment()));
         return (MainMenuPage) (getParentEnvironment().peek());

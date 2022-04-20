@@ -11,10 +11,18 @@ import models.utils.config.Config;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p></p>
+ */
 public class MainMenuEnvironment extends AMenuEnvironment {
 
     protected BufferedImage backgroundImage;
 
+    /**
+     * <p></p>
+     * @param environmentsHandler -
+     * @param menuControlsModel -
+     */
     public void init(EnvironmentsHandler environmentsHandler, MenuControls menuControlsModel) {
         super.init(environmentsHandler, menuControlsModel);
 
@@ -27,6 +35,30 @@ public class MainMenuEnvironment extends AMenuEnvironment {
         Camera.camY = Config.scaledH * Config.DEFAULT_WINDOW_HEIGHT * .5f;
         Camera.targX = Config.scaledW * Config.DEFAULT_WINDOW_WIDTH * .5f;
         Camera.targY = Config.scaledH * Config.DEFAULT_WINDOW_HEIGHT * .5f;
+    }
+
+    /**
+     * <p></p>
+     * @return
+     */
+    public AMenu getTopPage() {
+        return peek();
+    }
+
+    /**
+     * <p></p>
+     */
+    public void popToFirst() {
+        while(getStackDepth() > 1) {
+            pop();
+        }
+    }
+
+    /**
+     * <p></p>
+     */
+    public void navigateToLevelSelectPage() {
+        ((StartScreenPage)peek()).navigateToMainMenuPage().navigateToLevelSelectPage();
     }
 
     @Override
@@ -61,25 +93,11 @@ public class MainMenuEnvironment extends AMenuEnvironment {
         super.draw(g);
     }
 
-    public AMenu getTopPage() {
-        return peek();
-    }
-
-    public void popToFirst() {
-        while(getStackDepth() > 1) {
-            pop();
-        }
-    }
-
     @Override
     public void onExit() {
         super.onExit();
 
         popToFirst();
-    }
-
-    public void navigateToLevelSelectPage() {
-        ((StartScreenPage)peek()).navigateToMainMenuPage().navigateToLevelSelectPage();
     }
 
     @Override

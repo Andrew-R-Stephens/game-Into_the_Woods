@@ -11,6 +11,9 @@ import models.utils.updates.IUpdatable;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatable {
     public DoorKey(Resources resources, GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy) {
         super(resources, gameModel, x, y, w, h, vx, vy, 1,false, false);

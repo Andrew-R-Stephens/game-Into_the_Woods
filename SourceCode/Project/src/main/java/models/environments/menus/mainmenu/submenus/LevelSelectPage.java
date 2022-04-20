@@ -6,8 +6,15 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
 import models.utils.config.Config;
 
+/**
+ * <p></p>
+ */
 public class LevelSelectPage extends AMenu {
 
+    /**
+     * <p></p>
+     * @param parentModel
+     */
     public LevelSelectPage(AMenuEnvironment parentModel) {
         super(parentModel);
 

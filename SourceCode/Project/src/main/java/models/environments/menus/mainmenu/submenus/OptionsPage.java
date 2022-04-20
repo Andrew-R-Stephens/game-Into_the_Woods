@@ -8,9 +8,11 @@ import models.prototypes.components.menuviews.types.ASliderView;
 import models.utils.config.Config;
 
 import java.awt.*;
-import java.io.ObjectInputFilter;
 import java.util.Arrays;
 
+/**
+ * <p></p>
+ */
 public class OptionsPage extends AMenu {
 
     private AButtonView button_apply;
@@ -18,6 +20,10 @@ public class OptionsPage extends AMenu {
     private short selectedFramerate = Config.frameRate;
     private Config.WindowType selectedWindowType = Config.getWindowType();
 
+    /**
+     * <p></p>
+     * @param parentModel
+     */
     public OptionsPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
@@ -30,18 +36,21 @@ public class OptionsPage extends AMenu {
                 (int) (centerW - (btn_width * 3 * .5f)),
                 (300-(textSizeH)),
                 btn_width * 3,
-                (textSizeH)){
+                (textSizeH),
+                "FPS Limit")
+        {
         };
-        text_fpsTitle.setText("FPS Limit");
+        text_fpsTitle.setBackgroundColor(new Color(255, 255, 255, 150));
 
         ATextView text_fps = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)) - btn_width,
                 (int)(300 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
-                textSizeH){
+                textSizeH,
+                selectedFramerate + "")
+        {
         };
-        text_fps.setText("" + Config.frameRate);
         text_fps.setBackgroundColor(new Color(255, 255, 255, 100));
 
         ASliderView<Short> slider_fps = new ASliderView<>(
@@ -78,7 +87,8 @@ public class OptionsPage extends AMenu {
             }
             @Override
             public void doSetting() {
-                if(selectedFramerate != values.get(previous)) {
+                if(values.get(current) != values.get(previous)) {
+                    previous = current;
                     selectedFramerate = values.get(current);
                     text_fps.setText("" + selectedFramerate);
                 }
@@ -89,21 +99,23 @@ public class OptionsPage extends AMenu {
         ATextView text_windowTitle = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * 3 * .5f)),
-                (450-(textSizeH)),
+                (450 - textSizeH),
                 btn_width * 3,
-                (textSizeH)){
+                textSizeH,
+                "Window Type")
+        {
         };
-        text_windowTitle.setText("Window Type");
+        text_windowTitle.setBackgroundColor(new Color(255, 255, 255, 150));
 
         ATextView text_window = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)) - btn_width,
                 (int)(450 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
-                textSizeH){
+                textSizeH,
+                selectedWindowType.getName())
+        {
         };
-        text_window.setText(
-                selectedWindowType.getName());
         text_window.setBackgroundColor(new Color(255, 255, 255, 100));
 
         ASliderView<Config.WindowType> slider_window = new ASliderView<>(
@@ -111,7 +123,7 @@ public class OptionsPage extends AMenu {
                 (int) (centerW - (btn_width * .5f)),
                 450,
                 btn_width * 2,
-                (int)(btn_height * .5f)) {
+                btn_height) {
             @Override
             public void init() {
                 values.addAll(Arrays.asList(Config.WindowType.values()));

@@ -7,10 +7,17 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * <p></p>
+ */
 public class MainWindow extends AWindow {
 
     private EnvironmentsHandler environmentsHandler;
 
+    /**
+     * <p></p>
+     * @param environmentsHandler -
+     */
     public void init(EnvironmentsHandler environmentsHandler){
         this.environmentsHandler = environmentsHandler;
 
@@ -19,6 +26,9 @@ public class MainWindow extends AWindow {
         buildCursor(true);
     }
 
+    /**
+     * <p></p>
+     */
     public void clearComponents() {
         for(MouseListener l : getContentPane().getMouseListeners()) {
             getContentPane().removeMouseListener(l);
@@ -34,6 +44,9 @@ public class MainWindow extends AWindow {
         repaint();
     }
 
+    /**
+     * <p></p>
+     */
     public void build() {
         clearComponents();
 

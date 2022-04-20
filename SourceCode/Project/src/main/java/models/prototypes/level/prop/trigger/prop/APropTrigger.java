@@ -8,8 +8,25 @@ import models.utils.resources.Resources;
 
 import java.awt.*;
 
+/**
+ * <p></p>
+ */
 public abstract class APropTrigger extends ATrigger {
 
+    /**
+     * <p></p>
+     * @param resources -
+     * @param gameEnvironment -
+     * @param x -
+     * @param y -
+     * @param w -
+     * @param h -
+     * @param vx -
+     * @param vy -
+     * @param MAX_CYCLES -
+     * @param hasGravity -
+     * @param canMoveOnCollision -
+     */
     protected APropTrigger(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
                            float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
         super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);

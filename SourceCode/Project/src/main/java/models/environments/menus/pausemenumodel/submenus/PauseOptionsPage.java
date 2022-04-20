@@ -10,8 +10,15 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * <p></p>
+ */
 public class PauseOptionsPage extends AMenu {
 
+    /**
+     * <p></p>
+     * @param parentModel -
+     */
     public PauseOptionsPage(AMenuEnvironment parentModel) {
         super(parentModel);
 

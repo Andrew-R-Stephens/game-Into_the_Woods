@@ -151,15 +151,13 @@ public class Main {
      */
     public static void init() {
 
+        // Reference resources
         mainMenuEnvironment.setResources(resources);
         pauseMenuModel.setResources(resources);
         gameEnvironment.setResources(resources);
         window.setResources(resources);
-
         // Initialize Preferences
-        PreferencesParser preferencesParser =
-                new PreferencesParser(config, "files/", "Preferences", ".xml");
-        preferencesParser.read();
+        new PreferencesParser(config, resources.loadTextFile("preferences.xml")).parse();
 
         // Initialize Window with Preference Data
         window.init(environmentsHandler);
