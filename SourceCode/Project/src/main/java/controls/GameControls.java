@@ -28,7 +28,7 @@ public class GameControls extends AControls {
     }
 
     /**
-     * <p>Sets all current control states to disabled.</p>
+     * <p>Sets states of all controls to disabled.</p>
      */
     public void reset() {
         super.reset();
