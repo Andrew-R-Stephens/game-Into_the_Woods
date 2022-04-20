@@ -13,29 +13,27 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 /**
- * <p></p>
+ * <p>The HUDModel is the handler class for all AOverlayComponenets of the GameEnvironment. It acts to update and
+ * draw all AOverlayComponents as needed.</p>
  */
 public class HUDModel implements IDrawable, IUpdatable {
 
     protected GameEnvironment gameEnvironment;
-    protected PlayerInventory inventory;
 
     private MapOverlay map;
     private PlayerStatsOverlay stats;
     private TimeKeeperOverlay timer;
 
     /**
-     * <p></p>
-     * @param gameEnvironment -
-     * @param inventory -
-     * @param mapOverlay -
-     * @param playerStatsOverlay -
-     * @param timeKeeperOverlay -
+     * <p>Initializes the HUDModel with pre-created AOverlayComponent objects.</p>
+     * @param gameEnvironment - The parent GameEnvironment where the HUD components will be drawn to.
+     * @param mapOverlay - The MapOverlay HUD component.
+     * @param playerStatsOverlay - The PlayerStatsOverlay HUD Component.
+     * @param timeKeeperOverlay - The TimeKeeperOverlay HUD Component.
      */
-    public void init(GameEnvironment gameEnvironment, PlayerInventory inventory, MapOverlay mapOverlay,
+    public void init(GameEnvironment gameEnvironment, MapOverlay mapOverlay,
                      PlayerStatsOverlay playerStatsOverlay, TimeKeeperOverlay timeKeeperOverlay) {
         this.gameEnvironment = gameEnvironment;
-        this.inventory = inventory;
         this.map = mapOverlay;
         this.stats = playerStatsOverlay;
         this.timer = timeKeeperOverlay;
@@ -46,7 +44,7 @@ public class HUDModel implements IDrawable, IUpdatable {
     }
 
     /**
-     * <p></p>
+     * <p>Acts to reset the map as-needed. Normally called during the reset of the parent GameEnvironment.</p>
      */
     public void reset() {
         map.reset();

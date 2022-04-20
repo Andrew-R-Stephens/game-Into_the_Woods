@@ -175,7 +175,7 @@ public class Main {
         // Initialize Pause Menu
         pauseMenuModel.init(environmentsHandler, menuControlsModel, gameEnvironment);
 
-        hudModel.init(gameEnvironment, inventory, mapOverlay, playerStatsOverlay, timeKeeperOverlay);
+        hudModel.init(gameEnvironment, mapOverlay, playerStatsOverlay, timeKeeperOverlay);
 
         // Initialize AEnvironment Models
         mainMenuEnvironment.init(environmentsHandler, menuControlsModel);

@@ -10,24 +10,25 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * <p></p>
+ * <p>The MapOverlay is drawn to the GameEnvironment's Canvas, which allows for the broader representation of the current
+ * level. It shows a depiction of the player position and shows obstacles.</p>
  */
 public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatable {
 
     private BufferedImage overlay;
 
-    @Override
-    public void init(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
-        super.init(gameEnvironment, x, y, w, h);
-
+    /**
+     * <p>Destroys and reconstructs the map image as a blank image.</p>
+     */
+    public void reset() {
         overlay = new BufferedImage(
                 Config.window_width_actual, Config.window_height_actual, BufferedImage.TYPE_INT_ARGB);
     }
 
-    /**
-     * <p></p>
-     */
-    public void reset() {
+    @Override
+    public void init(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
+        super.init(gameEnvironment, x, y, w, h);
+
         overlay = new BufferedImage(
                 Config.window_width_actual, Config.window_height_actual, BufferedImage.TYPE_INT_ARGB);
     }

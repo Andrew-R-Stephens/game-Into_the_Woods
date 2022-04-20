@@ -8,7 +8,8 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 
 /**
- * <p></p>
+ * <p>The TimeKeeperOverlay is drawn to the GameEnvironment's Canvas, which allows for the representation of the
+ * current time the player has spent playing the level.</p>
  */
 public class TimeKeeperOverlay extends AOverlayComponent implements IDrawable, IUpdatable {
 
@@ -24,6 +25,6 @@ public class TimeKeeperOverlay extends AOverlayComponent implements IDrawable, I
 
     @Override
     public void update(float delta) {
-
+        // DO NOTHING YET
     }
 }

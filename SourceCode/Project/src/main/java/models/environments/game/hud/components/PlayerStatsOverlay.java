@@ -8,7 +8,8 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 
 /**
- * <p></p>
+ * <p>The PlayerStatsOverlay is drawn to the GameEnvironment's Canvas, which allows for the representation of the player's
+ * inventory.</p>
  */
 public class PlayerStatsOverlay extends AOverlayComponent implements IDrawable, IUpdatable {
 
@@ -27,5 +28,6 @@ public class PlayerStatsOverlay extends AOverlayComponent implements IDrawable, 
 
     @Override
     public void update(float delta) {
+        // DO NOTHING YET
     }
 }
