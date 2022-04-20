@@ -20,7 +20,6 @@ public class EnvironmentsHandler {
 
     private MainWindow parentWindow;
 
-
     private EnvironmentType currentEnvironment = EnvironmentType.MAIN_MENU;
 
     private final ArrayList<AEnvironment> environments = new ArrayList<>();
@@ -192,6 +191,10 @@ public class EnvironmentsHandler {
         rendersThread.start();
     }
 
+    /**
+     * <p>Rebuilds the window with the appropriate window dimensions and WindowType.</p>
+     * <p>Used primarily through the Options menus.</p>
+     */
     public void rebuildWindow() {
         parentWindow.dispose();
         parentWindow = new MainWindow();
@@ -202,7 +205,8 @@ public class EnvironmentsHandler {
     }
 
     /**
-     * <p></p>
+     * <p>The EnvironmentType is responsible for simply giving enumeration to the three types of environments, which
+     * allows a more verbose representation of desired requests when switching environments.</p>
      */
     public enum EnvironmentType {
         MAIN_MENU,
