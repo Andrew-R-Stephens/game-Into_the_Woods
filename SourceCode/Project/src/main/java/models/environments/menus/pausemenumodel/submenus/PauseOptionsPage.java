@@ -1,9 +1,9 @@
 package models.environments.menus.pausemenumodel.submenus;
 
-import models.prototypes.environments.menu.AMenu;
-import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
 import models.prototypes.components.menuviews.types.ASliderView;
+import models.prototypes.environments.menu.AMenu;
+import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
 
 import java.awt.*;

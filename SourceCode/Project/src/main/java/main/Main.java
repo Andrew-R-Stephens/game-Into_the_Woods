@@ -21,15 +21,14 @@ import models.runnables.UpdateRunnable;
 import models.utils.config.Config;
 import models.utils.files.PreferencesParser;
 import models.utils.resources.Resources;
-import views.canvas.game.GameCanvas;
-import views.canvas.menu.MenuCanvas;
+import views.canvas.EnvironmentCanvas;
 import views.window.MainWindow;
 
 /**
- * The launching class.
+ * <p>The launching class.</p>
  *
- * Includes static references to all root-level objects.
- * Handles the initialization of all root-level objects.
+ * <p>Includes static references to all root-level objects.</p>
+ * <p>Handles the initialization of all root-level objects.</p>
  */
 public class Main {
 
@@ -61,16 +60,17 @@ public class Main {
 
     private static LevelsList levelsListModel;
 
-    private static MenuCanvas menuCanvas;
-    private static GameCanvas gameCanvas;
+    private static EnvironmentCanvas<MainMenuEnvironment> menuCanvas;
+    private static EnvironmentCanvas<GameEnvironment> gameCanvas;
 
     private static MainWindow window;
 
     /**
-     * The starting point of the program.<br><br>
-     * First loads all assets from file into a resource pool for later use and ease of access.<br>
-     * Then Creates all permanent static variables for protection against null pointer exceptions.<br>
-     * Then initializes all variables with their necessary reference objects. Assists in MVC cross-object communication.
+     * <p>The starting point of the program.</p>
+     * <p>First loads all assets from file into a resource pool for later use and ease of access.</p>
+     * <p>Then Creates all permanent static variables for protection against null pointer exceptions.</p>
+     * <p>Then initializes all variables with their necessary reference objects. Assists in MVC cross-object
+     * communication.</p>
      */
     public static void main(String[] args) {
 
@@ -86,7 +86,7 @@ public class Main {
     }
 
     /**
-     * Handles the loading of all assets from files into a resource pool for later use and ease of access.
+     * <p>Handles the loading of all assets from files into a resource pool for later use and ease of access.</p>
      */
     public static void loadAssets() {
 
@@ -99,7 +99,7 @@ public class Main {
     }
 
     /**
-     * Creates all permanent static variables for protection against null pointer exceptions.
+     * <p>Creates all permanent static variables for protection against null pointer exceptions.</p>
      */
     public static void create() {
 
@@ -111,6 +111,14 @@ public class Main {
         gameControlsModel = new GameControls();
         menuControlsModel = new MenuControls();
 
+        // Create all Environments
+        mainMenuEnvironment = new MainMenuEnvironment();
+        gameEnvironment = new GameEnvironment();
+        pauseMenuModel = new PauseMenuEnvironment();
+
+        // Create Levels List Model
+        levelsListModel = new LevelsList();
+
         // Create HUD Model Components
         mapOverlay = new MapOverlay();
         playerStatsOverlay = new PlayerStatsOverlay();
@@ -120,21 +128,12 @@ public class Main {
         hudModel = new HUDModel();
         inventory = new PlayerInventory();
 
-        // Create Menu Environment
-        mainMenuEnvironment = new MainMenuEnvironment();
-        // Create Game Environment
-        gameEnvironment = new GameEnvironment();
-
-        // Create Pause Menu for Game Environment
-        pauseMenuModel = new PauseMenuEnvironment();
-
-        // Create Levels List Model
-        levelsListModel = new LevelsList();
-
         // Create State Canvases
-        menuCanvas = new MenuCanvas();
-        gameCanvas = new GameCanvas();
+        //menuCanvas = new MenuCanvas();
+        menuCanvas = new EnvironmentCanvas<>();
+        gameCanvas = new EnvironmentCanvas<>();
 
+        // Create Runnables
         gameUpdateRunnable = new UpdateRunnable();
         gameRenderRunnable = new RenderRunnable();
         menuUpdateRunnable = new UpdateRunnable();
@@ -146,8 +145,8 @@ public class Main {
     }
 
     /**
-     * Handles the initializes all variables with their necessary reference objects.<br>
-     * Assists in MVC cross-object referencing.
+     * <p>Handles the initializes all variables with their necessary reference objects.</p>
+     * <p>Assists in MVC cross-object referencing.</p>
      */
     public static void init() {
 

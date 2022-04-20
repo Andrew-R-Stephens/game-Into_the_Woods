@@ -5,8 +5,6 @@ import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
-import java.awt.*;
-
 /**
  * A Simple Game Object which carries ability to move.
  * It is inherited by classes whos objects must physically move within the world.

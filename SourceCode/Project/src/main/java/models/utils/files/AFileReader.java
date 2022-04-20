@@ -1,6 +1,6 @@
 package models.utils.files;
 
-import java.io.*;
+import java.io.File;
 
 /**
  * <p></p>

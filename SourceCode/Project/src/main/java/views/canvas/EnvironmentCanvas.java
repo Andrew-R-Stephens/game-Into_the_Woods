@@ -1,6 +1,6 @@
-package views.canvas.game;
+package views.canvas;
 
-import models.environments.game.GameEnvironment;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.views.ACanvas;
 
 import java.awt.*;
@@ -8,16 +8,16 @@ import java.awt.*;
 /**
  * <p></p>
  */
-public class GameCanvas extends ACanvas {
+public class EnvironmentCanvas<T extends AEnvironment> extends ACanvas {
 
-    private GameEnvironment gameModel;
+    private T environment;
 
     /**
      * <p></p>
-     * @param gameModel -
+     * @param environment -
      */
-    public void init(GameEnvironment gameModel) {
-        this.gameModel = gameModel;
+    public void init(T environment) {
+        this.environment = environment;
     }
 
     /**
@@ -39,7 +39,7 @@ public class GameCanvas extends ACanvas {
         g2d.setColor(Color.LIGHT_GRAY);
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
-        gameModel.draw(g2d);
+        environment.draw(g2d);
 
         g.setColor(Color.RED);
 

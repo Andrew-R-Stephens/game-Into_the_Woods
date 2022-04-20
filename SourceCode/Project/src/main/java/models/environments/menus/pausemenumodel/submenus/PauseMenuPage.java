@@ -2,9 +2,9 @@ package models.environments.menus.pausemenumodel.submenus;
 
 import models.environments.EnvironmentsHandler;
 import models.environments.menus.startscreen.StartScreenPage;
+import models.prototypes.components.menuviews.types.AButtonView;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
-import models.prototypes.components.menuviews.types.AButtonView;
 
 /**
  * <p></p>
