@@ -4,7 +4,6 @@ import models.environments.game.GameEnvironment;
 import models.environments.game.hud.components.MapOverlay;
 import models.environments.game.hud.components.PlayerStatsOverlay;
 import models.environments.game.hud.components.TimeKeeperOverlay;
-import models.environments.game.playerinventory.PlayerInventory;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;

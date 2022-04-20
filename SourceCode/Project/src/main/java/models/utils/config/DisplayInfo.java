@@ -4,14 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * <p></p>
+ * <p>DisplayInfo is the configuration representative for the default display. It accepts custom scaling settings
+ * done within the system settings of the computer, allowing for scale factor changes within the Config.</p>
  */
 public class DisplayInfo {
 
     public static float SYS_SCALEX = 1f, SYS_SCALEY = 1f;
 
     /**
-     * <p></p>
+     * <p>Uses a temporary JFrame to obtain graphics configurations. Graphics configurations are then used to
+     * determine the custom scale of the system.</p>
      */
     public DisplayInfo () {
         JFrame f = new JFrame();

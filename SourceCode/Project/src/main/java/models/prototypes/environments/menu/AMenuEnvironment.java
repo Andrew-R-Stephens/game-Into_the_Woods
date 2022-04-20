@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.Stack;
 
 /**
- * <p></p>
+ * <p>AMenuEnvironment</p>
  */
 public abstract class AMenuEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 

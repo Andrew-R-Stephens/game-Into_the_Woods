@@ -178,7 +178,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().height * .5f)
         );
 
-        if(keyController instanceof GameKeyControls kc) {
+        if(getKeyController() instanceof GameKeyControls kc) {
             if(kc.getControlsModel().getAction(GameControls.Actions.ESCAPE)) {
                 kc.getControlsModel().reset();
                 setPaused(true);
@@ -262,7 +262,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
      * @param delta -
      */
     private synchronized void testAddingActors(float delta) {
-        if (mouseController instanceof GameMouseControls gmc) {
+        if (getMouseController() instanceof GameMouseControls gmc) {
 
             if (gmc.isLeftPressed()) {
                 int count = (int) (10 / delta);
