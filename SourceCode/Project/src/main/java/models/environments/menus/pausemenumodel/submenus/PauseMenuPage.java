@@ -1,6 +1,7 @@
 package models.environments.menus.pausemenumodel.submenus;
 
 import models.environments.EnvironmentsHandler;
+import models.environments.menus.mainmenu.submenus.OptionsPage;
 import models.environments.menus.startscreen.StartScreenPage;
 import models.prototypes.components.menuviews.types.AButtonView;
 import models.prototypes.environments.menu.AMenu;
@@ -60,7 +61,7 @@ public class PauseMenuPage extends AMenu {
                     return false;
                 }
 
-                getParentEnvironment().push(new PauseOptionsPage(getParentEnvironment()));
+                getParentEnvironment().push(new OptionsPage(getParentEnvironment()));
 
                 return true;
             }

@@ -16,7 +16,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- * <p></p>
+ * <p>The AMenu is a superclass to all menu pages. This is a dynamic class which enables for unlimited AMenuComponent
+ * additions. This class exists to deliver a seamless experience to the user with little cost to performance.</p>
+ * <p>The AMenu handles user input and either passes the input to each AMenuComponent. Or handles the request
+ * locally, depending on the input made.</p>
+ * <p>All AMenus exist within an AMenuEnvironment. To be seen or controlled, they must exist at the top of the
+ * environment's stack.</p>
  */
 public abstract class AMenu implements IUpdatable, IDrawable {
 
@@ -105,6 +110,15 @@ public abstract class AMenu implements IUpdatable, IDrawable {
         components.add(component);
     }
 
+    /**
+     *
+     */
+    public void reset() {
+        for(AMenuComponent c: components) {
+            c.reset();
+        }
+    }
+
     @Override
     public void draw(Graphics2D g) {
         for (AMenuComponent c : components) {
@@ -121,9 +135,4 @@ public abstract class AMenu implements IUpdatable, IDrawable {
         }
     }
 
-    public void reset() {
-        for(AMenuComponent c: components) {
-            c.reset();
-        }
-    }
 }

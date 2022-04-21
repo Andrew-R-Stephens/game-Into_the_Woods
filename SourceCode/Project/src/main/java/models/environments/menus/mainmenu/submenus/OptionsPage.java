@@ -78,12 +78,11 @@ public class OptionsPage extends AMenu {
                 current = itemCount;
                 int i = 0;
                 for(; i < values.size(); i++) {
-                    if(values.get(i) == Config.frameRate) {
+                    if (values.get(i) == MAX_REFRESH_RATE) {
                         current = i;
                         break;
                     }
                 }
-                System.out.println(current + " / " + itemCount);
             }
             @Override
             public void doSetting() {
@@ -128,6 +127,16 @@ public class OptionsPage extends AMenu {
             public void init() {
                 values.addAll(Arrays.asList(Config.WindowType.values()));
                 itemCount = values.size();
+
+                current = itemCount;
+                int i = 0;
+                for(; i < values.size(); i++) {
+                    if(values.get(i) == Config.getWindowType()) {
+                        current = i;
+                        break;
+                    }
+                }
+                System.out.println(current + " / " + itemCount);
             }
             @Override
             public void doSetting() {
@@ -156,7 +165,16 @@ public class OptionsPage extends AMenu {
             }
 
             @Override
+            public void registerInput() {
+                if(!isEnabled) {
+                    return;
+                }
+                super.registerInput();
+            }
+
+            @Override
             public boolean onClick(float x, float y) {
+
                 if(!isInBounds(x, y)) {
                     return false;
                 }

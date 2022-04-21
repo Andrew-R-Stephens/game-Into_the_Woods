@@ -84,7 +84,7 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
         g.setFont(
                 getParentEnvironment().getResources().getFont("bahnschrift")
                         .deriveFont(AffineTransform.getScaleInstance(.8, 1))
-                        .deriveFont(Font.BOLD, strHeight * sW));
+                        .deriveFont(Font.BOLD, strHeight * sH));
 
         int strWidth = g.getFontMetrics().stringWidth(text.toUpperCase());
         while(strWidth > w * sW) {
@@ -96,11 +96,11 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
 
             strWidth = g.getFontMetrics().stringWidth(text);
         }
-        int strHeightDiff = (int) (((g.getFontMetrics().getAscent() * sH) - (h * sW)) * .5f);
+        int strHeightDiff = g.getFontMetrics().getAscent();
         g.drawString(
                 text,
                 (int)((x * sW) + (w * sW * .5) - (strWidth * .5)),
-                (int)(((y * sH) + (h*sH))) + (strHeightDiff * sH));
+                (int)((y * sH) + strHeightDiff));
     }
 
     @Override

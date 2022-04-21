@@ -36,6 +36,9 @@ public class LevelSelectPage extends AMenu {
                     return false;
                 }
 
+                getMouseController().setPos(
+                        (int)(Config.window_width_actual * .5f),
+                        (int)(Config.window_height_actual * .5f));
                 getEnvironmentHandler().getGameEnvironment().reset();
                 getEnvironmentHandler().getGameEnvironment().setCurrentLevel(0);
                 getEnvironmentHandler().swapToEnvironment(
@@ -61,6 +64,9 @@ public class LevelSelectPage extends AMenu {
                     return false;
                 }
 
+                getMouseController().setPos(
+                        (int)(Config.window_width_actual * .5f),
+                        (int)(Config.window_height_actual * .5f));
                 getEnvironmentHandler().getGameEnvironment().reset();
                 getEnvironmentHandler().getGameEnvironment().setCurrentLevel(1);
                 getEnvironmentHandler().swapToEnvironment(
@@ -87,6 +93,9 @@ public class LevelSelectPage extends AMenu {
                     return false;
                 }
 
+                getMouseController().setPos(
+                        (int)(Config.window_width_actual * .5f),
+                        (int)(Config.window_height_actual * .5f));
                 getEnvironmentHandler().getGameEnvironment().reset();
                 getEnvironmentHandler().getGameEnvironment().setCurrentLevel(2);
                 getEnvironmentHandler().swapToEnvironment(
