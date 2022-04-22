@@ -38,6 +38,7 @@ public class SaveFileRW {
      * Write SaveData object to File. Validate File.
      */
     private boolean serialize() {
+/*
 
         URL url =
                 SaveFileRW.class.getClassLoader().getResource(Resources.path_textFile + "savedata.json");
@@ -61,6 +62,7 @@ public class SaveFileRW {
             e.printStackTrace();
             return false;
         }
+*/
 
         return true;//deserialize();
     }

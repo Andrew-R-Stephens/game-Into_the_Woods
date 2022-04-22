@@ -40,7 +40,7 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
         float scaledW = w * Config.scaledW_zoom;
         float scaledH = h * Config.scaledH_zoom;
 
-        BufferedImage img = resources.getImage("mockPlatformV2");
+        BufferedImage img = resources.getImage("platform_level2");
         float imgScaledH = scaledH/img.getHeight();
 
         if(scaledW < scaledH) {
