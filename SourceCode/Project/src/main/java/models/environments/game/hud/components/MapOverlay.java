@@ -35,7 +35,6 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
 
     @Override
     public void update(float delta) {
-
     }
 
     @Override
@@ -48,10 +47,9 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
         g.drawImage(overlay, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
 
         g.setColor(new Color(75, 25, 75));
-        Graphics2D g2d = (Graphics2D)g;
         int stroke = (int)(5 * sW);
-        g2d.setStroke(new BasicStroke(stroke * sW, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-        g2d.drawRect(
+        g.setStroke(new BasicStroke(stroke * sW, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+        g.drawRect(
                 (int)((x * sW) - (stroke * .5)), (int)((y * sH) + (stroke * .5)),
                 (int)((w * sW)), (int)((h * sH) ));
 

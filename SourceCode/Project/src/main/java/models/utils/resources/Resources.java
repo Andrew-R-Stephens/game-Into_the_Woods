@@ -28,7 +28,7 @@ public class Resources {
 
     private String PATH_META = "metadata/metadata.json";
 
-    private String path_textFile;
+    public static String path_textFile;
     private String path_images, path_audio, path_fonts;
 
     private final Map<String, BufferedImage> imagesFiles = new HashMap<>();
@@ -172,13 +172,14 @@ public class Resources {
 
         File file = null;
         try {
-            file = File.createTempFile(name, type);
+            file = File.createTempFile(name, "." + type);
 
             InputStream is =
                     AFileReader.class.getClassLoader().getResourceAsStream(path_textFile + fileName);
             if(is == null) {
                 return null;
             }
+
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader r = new BufferedReader(isr);
             FileWriter writer = new FileWriter(file);

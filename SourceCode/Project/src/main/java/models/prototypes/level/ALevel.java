@@ -79,8 +79,6 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * @param backgroundImage -
      */
     protected void addBackgroundLayer(BufferedImage backgroundImage) {
-        //this.backgroundImage = backgroundImage;
-
         scrollingBackground.addLayer(backgroundImage);
     }
 
@@ -164,6 +162,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 p.drawAsHUD(g);
             }
         }
+
     }
 
 }

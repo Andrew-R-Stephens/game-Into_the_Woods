@@ -19,7 +19,9 @@ import models.levels.LevelsList;
 import models.runnables.RenderRunnable;
 import models.runnables.UpdateRunnable;
 import models.utils.config.Config;
+import models.utils.config.SaveData;
 import models.utils.files.PreferencesParser;
+import models.utils.files.SaveFileRW;
 import models.utils.resources.Resources;
 import views.canvas.EnvironmentCanvas;
 import views.window.MainWindow;
@@ -96,6 +98,11 @@ public class Main {
         resources = new Resources();
         resources.init();
 
+        SaveData saveData = new SaveData();
+        SaveFileRW saveFileRW = new SaveFileRW(saveData, resources.loadTextFile("savedata.json"));
+        System.out.println(saveFileRW.deserialize());
+        saveData.setLevelProgress(1);
+        System.out.println(saveFileRW.savetoFile());
     }
 
     /**

@@ -25,7 +25,9 @@ public class TestLevel1 extends ALevel {
 
         build();
 
-        addBackgroundLayer(getResources().getImage("level2"));
+        addBackgroundLayer(getResources().getImage("caves_1"));
+        addBackgroundLayer(getResources().getImage("caves_2"));
+        addBackgroundLayer(getResources().getImage("caves_3"));
         //addBackgroundLayer(getResources().getImage("levelbackground_cave2"));
     }
 
@@ -37,7 +39,7 @@ public class TestLevel1 extends ALevel {
         addProp(new Platform(getResources(),9000, 0, 100, 1080, 0, 0, false));
 
         // Floor
-        addProp(new Platform(getResources(),0, 980, 10000, 100, 0, 0, false));
+        addProp(new Platform(getResources(),-1, 980, 10001, 100, 0, 0, false));
 
         // Climbing Walls
         addProp(new Platform(getResources(),320, -150, 50, 200, 0, 0, false));

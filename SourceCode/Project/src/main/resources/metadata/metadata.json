@@ -10,6 +10,7 @@
       "spritesheet_buttonsq.json",
       "spritesheet_spring.json",
       "spritesheet_door.json",
+      "savedata.json",
       "preferences.xml"
     ]
   },
@@ -39,6 +40,9 @@
       "button_slider.png",
       "levelbackground_cave.png",
       "levelbackground_cave2.png",
+      "caves_1.png",
+      "caves_2.png",
+      "caves_3.png",
       "cursor2.png"
     ]
   },

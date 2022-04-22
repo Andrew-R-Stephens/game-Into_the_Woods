@@ -12,7 +12,7 @@ public class ParallaxBackground implements IDrawable {
 
     private final ArrayList<Layer> layers = new ArrayList<>();
 
-    private float moveScale = .1f;
+    private float moveScale = .05f;
 
     public void addLayer(BufferedImage bufferedImage) {
         layers.add(new Layer(bufferedImage));
@@ -22,9 +22,9 @@ public class ParallaxBackground implements IDrawable {
         for(int i = 0; i < layers.size(); i++) {
             layers.get(i).draw(
                     g,
-                    Camera.mapX * (moveScale * (layers.size() - i)),
-                    Camera.mapY * (moveScale * (layers.size() - i)),
-                    moveScale * (layers.size() - i));
+                    Camera.camX/Camera.zoomLevel * (moveScale * (i+1)),
+                    Camera.camY/Camera.zoomLevel * (moveScale * (i+1)),
+                    moveScale * (i+1));
         }
     }
 

@@ -74,8 +74,8 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
 
         g.setColor(Color.WHITE);
 
-        float offsetX = ((x * Config.scaledW) + (Camera.mapX / Config.scaledW));
-        float offsetY = ((y * Config.scaledH) + (Camera.mapY / Config.scaledH));
+        float offsetX = ((x * Config.scaledW) + (Camera.camX / Camera.zoomLevel / Config.scaledW));
+        float offsetY = ((y * Config.scaledH) + (Camera.camY / Camera.zoomLevel / Config.scaledH));
 
         float scaledW = w * Config.scaledW;
         float scaledH = h * Config.scaledH;
