@@ -67,6 +67,7 @@ public abstract class AWindow extends JFrame {
                 setPreferredSize(new Dimension(width, height));
             }
         }
+        setIconImage(new ImageIcon(resources.getImage("icon")).getImage());
 
         setAlwaysOnTop(true);
         setResizable(false);

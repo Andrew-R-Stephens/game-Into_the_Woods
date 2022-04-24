@@ -186,7 +186,7 @@ public class OptionsPage extends AMenu {
                 if(Config.getWindowType() != selectedWindowType) {
                     Config.setWindowType(selectedWindowType);
                     getMouseController().reset();
-                    getEnvironmentHandler().rebuildWindow();
+                    getEnvironmentsHandler().rebuildWindow();
                 }
 
                 return true;

@@ -23,29 +23,23 @@ public class ParallaxBackground implements IDrawable {
             layers.get(i).draw(
                     g,
                     Camera.camX/Camera.zoomLevel * (moveScale * (i+1)),
-                    Camera.camY/Camera.zoomLevel * (moveScale * (i+1)),
-                    moveScale * (i+1));
+                    Camera.camY/Camera.zoomLevel * (moveScale * (i+1))
+            );
         }
     }
 
-    private class Layer {
+    private record Layer(BufferedImage image) {
 
-        private final BufferedImage image;
-
-        public Layer(BufferedImage image) {
-            this.image = image;
-        }
-
-        public void draw(Graphics2D g, float offsetX, float offsetY, float scale) {
+        public void draw(Graphics2D g, float offsetX, float offsetY) {
             g.drawImage(image,
-                    (int)((Config.window_width_actual * .5f)
+                    (int) ((Config.window_width_actual * .5f)
                             - (image.getWidth() * Config.scaledW_zoom * .5f)
-                            + (offsetX * .5f * Config.scaledW_zoom)),
-                    (int)((Config.window_height_actual * .5f)
+                            + (offsetX * .5f)),
+                    (int) ((Config.window_height_actual * .5f)
                             - (image.getHeight() * Config.scaledH_zoom * .5f)
-                            + (offsetY * .5f * Config.scaledH_zoom)),
-                    (int)(image.getWidth() * Config.scaledW_zoom),
-                    (int)(image.getHeight() * Config.scaledH_zoom),
+                            + (offsetY * .5f)),
+                    (int) (image.getWidth() * Config.scaledW_zoom),
+                    (int) (image.getHeight() * Config.scaledH_zoom),
                     null);
         }
     }

@@ -37,10 +37,10 @@ public class PauseMenuPage extends AMenu {
 
                 System.out.println("Pressed");
 
-                getEnvironmentHandler().getGameEnvironment().setPaused(false);
+                getEnvironmentsHandler().getGameEnvironment().setPaused(false);
                 getParentEnvironment().onExit();
-                getEnvironmentHandler().setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.GAME);
-                getEnvironmentHandler().applyEnvironment(false);
+                getEnvironmentsHandler().setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.GAME);
+                getEnvironmentsHandler().applyEnvironment(false);
                 return true;
 
             }
@@ -102,15 +102,15 @@ public class PauseMenuPage extends AMenu {
                     return false;
                 }
 
-                getEnvironmentHandler().getGameEnvironment().onExit();
-                getEnvironmentHandler().swapToEnvironment(
+                getEnvironmentsHandler().getGameEnvironment().onExit();
+                getEnvironmentsHandler().swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.MAIN_MENU, true);
-                if(getEnvironmentHandler().getMenuEnvironment().getTopPage()
+                if(getEnvironmentsHandler().getMenuEnvironment().getTopPage()
                         instanceof StartScreenPage ssp) {
                     ssp.navigateToMainMenuPage();
                 }
-                getEnvironmentHandler().applyEnvironment();
-                getEnvironmentHandler().getGameEnvironment().setPaused(false);
+                getEnvironmentsHandler().applyEnvironment();
+                getEnvironmentsHandler().getGameEnvironment().setPaused(false);
 
                 return true;
             }

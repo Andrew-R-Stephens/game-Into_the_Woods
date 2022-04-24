@@ -3,6 +3,7 @@ package models.utils.files;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import models.utils.config.Config;
 import models.utils.config.SaveData;
 import models.utils.resources.Resources;
 
@@ -38,8 +39,10 @@ public class SaveFileRW {
      * Write SaveData object to File. Validate File.
      */
     private boolean serialize() {
-/*
+        File file = new File(Config.jarPath);
+        System.out.println(file.getName());
 
+        /*
         URL url =
                 SaveFileRW.class.getClassLoader().getResource(Resources.path_textFile + "savedata.json");
         File file;

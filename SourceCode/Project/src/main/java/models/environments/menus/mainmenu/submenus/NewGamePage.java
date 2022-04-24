@@ -41,7 +41,7 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
-                getEnvironmentHandler().getGameEnvironment().getPlayerAvatar()
+                getEnvironmentsHandler().getGameEnvironment().getPlayerAvatar()
                         .setCharacterType(ACharacter.CharacterType.TEO);
 
                 return true;
@@ -65,7 +65,7 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
-                getEnvironmentHandler().getGameEnvironment().getPlayerAvatar()
+                getEnvironmentsHandler().getGameEnvironment().getPlayerAvatar()
                         .setCharacterType(ACharacter.CharacterType.MELYNN);
 
                 return true;
@@ -89,10 +89,10 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
-                getEnvironmentHandler().getGameEnvironment().reset();
-                getEnvironmentHandler().getGameEnvironment().getLevelsList().setCurrentLevel(0);
+                getEnvironmentsHandler().getGameEnvironment().reset();
+                getEnvironmentsHandler().getGameEnvironment().getLevelsList().setCurrentLevel(0);
 
-                getEnvironmentHandler().swapToEnvironment(
+                getEnvironmentsHandler().swapToEnvironment(
                         EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
 
                 return true;

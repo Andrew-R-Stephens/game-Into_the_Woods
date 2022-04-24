@@ -94,6 +94,7 @@ public class Main {
 
         // Create Preferences
         config = new Config();
+        Config.registerSystemInfo();
 
         resources = new Resources();
         resources.init();

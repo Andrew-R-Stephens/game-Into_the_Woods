@@ -17,7 +17,8 @@
   "images" : {
     "path": "/images/",
     "names": [
-      "avatar.png",
+      "icon.png",
+      "avatar1.png",
       "avatar2.png",
       "spritesheet_avataridle.png",
       "spritesheet_avatarjump.png",

@@ -18,15 +18,12 @@ public class LevelSelectPage extends AMenu {
     public LevelSelectPage(AMenuEnvironment parentModel) {
         super(parentModel);
 
-        float mx = Config.DEFAULT_WINDOW_WIDTH * .5f;
-        float my = Config.DEFAULT_WINDOW_HEIGHT * .5f;
-
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         //Level 1 Button
         AButtonView button_level1 = new AButtonView(
                 parentModel,
-                (int) (mx - (200 * .5f)) - 250,
+                (int) (centerW - (200 * .5f)) - 250,
                 300,
                 200,
                 200) {
@@ -36,13 +33,9 @@ public class LevelSelectPage extends AMenu {
                     return false;
                 }
 
-                getMouseController().setPos(
-                        (int)(Config.window_width_actual * .5f),
-                        (int)(Config.window_height_actual * .5f));
-                getEnvironmentHandler().getGameEnvironment().reset();
-                getEnvironmentHandler().getGameEnvironment().setCurrentLevel(0);
-                getEnvironmentHandler().swapToEnvironment(
-                        EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
+                navigateToLevel(0);
+
+                reset();
 
                 return true;
             }
@@ -55,7 +48,7 @@ public class LevelSelectPage extends AMenu {
         //Level 2 Button
         AButtonView button_level2 = new AButtonView(
                 parentModel,
-                (int) (mx - (200 * .5f)), 300,
+                (int) (centerW - (200 * .5f)), 300,
                 200, 200
         ) {
             @Override
@@ -64,13 +57,9 @@ public class LevelSelectPage extends AMenu {
                     return false;
                 }
 
-                getMouseController().setPos(
-                        (int)(Config.window_width_actual * .5f),
-                        (int)(Config.window_height_actual * .5f));
-                getEnvironmentHandler().getGameEnvironment().reset();
-                getEnvironmentHandler().getGameEnvironment().setCurrentLevel(1);
-                getEnvironmentHandler().swapToEnvironment(
-                        EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
+                navigateToLevel(1);
+
+                reset();
 
                 return true;
             }
@@ -83,7 +72,7 @@ public class LevelSelectPage extends AMenu {
         //Level 3 Button
         AButtonView button_level3 = new AButtonView(
                 parentModel,
-                (int) (mx - (200 * .5f) + 250),
+                (int) (centerW - (200 * .5f) + 250),
                 300,
                 200,
                 200) {
@@ -93,13 +82,9 @@ public class LevelSelectPage extends AMenu {
                     return false;
                 }
 
-                getMouseController().setPos(
-                        (int)(Config.window_width_actual * .5f),
-                        (int)(Config.window_height_actual * .5f));
-                getEnvironmentHandler().getGameEnvironment().reset();
-                getEnvironmentHandler().getGameEnvironment().setCurrentLevel(2);
-                getEnvironmentHandler().swapToEnvironment(
-                        EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
+                navigateToLevel(2);
+
+                reset();
 
                 return true;
             }
@@ -111,7 +96,7 @@ public class LevelSelectPage extends AMenu {
 
         AButtonView button_back = new AButtonView(
                 getParentEnvironment(),
-                (int) (mx - (btn_width * .5f)),
+                (int) (centerW - (btn_width * .5f)),
                 800,
                 btn_width,
                 btn_height
@@ -135,6 +120,16 @@ public class LevelSelectPage extends AMenu {
         addComponent(button_level2);
         addComponent(button_level3);
         addComponent(button_back);
+    }
+
+    public void navigateToLevel(int levelIndex) {
+        getMouseController().setPos(
+                (int)(Config.window_width_actual * .5f),
+                (int)(Config.window_height_actual * .5f));
+        getEnvironmentsHandler().getGameEnvironment().reset();
+        getEnvironmentsHandler().getGameEnvironment().setCurrentLevel(levelIndex);
+        getEnvironmentsHandler().swapToEnvironment(
+                EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
     }
 
 }

@@ -1,6 +1,10 @@
 package models.utils.config;
 
+import main.Main;
 import models.camera.Camera;
+
+import java.io.File;
+import java.net.URISyntaxException;
 
 /**
  * <p>The Configuration class deals with essential system data.</p>
@@ -8,6 +12,9 @@ import models.camera.Camera;
  * .</p>
  */
 public class Config {
+
+    private static String opSysName;
+    public static String jarPath;
 
     private static DisplayInfo displayInfo;
 
@@ -23,6 +30,16 @@ public class Config {
     public static short GAME_UPDATE_RATE = 60;
     public static short FRAME_RATE_DEFAULT = 60;
     public static short frameRate = 60;
+
+    public static void registerSystemInfo() {
+        opSysName = "Operating System: " + System.getProperty("os.name");
+
+        try {
+            jarPath = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * <p>Called after the system obtains the current Window. Records the scale factor of the current window size

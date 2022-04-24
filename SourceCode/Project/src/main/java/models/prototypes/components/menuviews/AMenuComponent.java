@@ -58,7 +58,7 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
      * <p></p>
      * @return
      */
-    protected EnvironmentsHandler getEnvironmentHandler() {
+    protected EnvironmentsHandler getEnvironmentsHandler() {
         return parentMenuEnvironment.getParentEnvironmentsHandler();
     }
 
