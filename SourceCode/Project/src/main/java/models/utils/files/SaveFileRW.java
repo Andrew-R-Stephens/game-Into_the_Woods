@@ -10,7 +10,7 @@ import java.io.*;
 
 public class SaveFileRW {
 
-    private final SaveData saveData;
+    private SaveData saveData;
     private String saveFileName;
     private File saveFile;
 
@@ -19,7 +19,7 @@ public class SaveFileRW {
      * @param saveData - where we pull SaveData from or write SaveData to
      * @param saveFileName - the File on disk
      */
-    public SaveFileRW(SaveData saveData, String saveFileName) {
+    public void init(SaveData saveData, String saveFileName) {
         this.saveData = saveData;
         this.saveFileName = saveFileName;
     }
@@ -34,13 +34,17 @@ public class SaveFileRW {
         System.out.println(file + "'s parent is -> " + folder + " which is " + (folder.isDirectory()? "a folder" :
                 "not a folder"));
         saveFile = new File(folder + "/" + saveFileName);
+
+        boolean isNew = false;
         try {
-            saveFile.createNewFile();
+            isNew = saveFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        serialize();
+        if(isNew) {
+            serialize();
+        }
     }
 
     public boolean savetoFile() {
@@ -117,10 +121,6 @@ public class SaveFileRW {
         };
 
         return true;
-    }
-
-    public boolean validate() {
-        return deserialize();
     }
 
 }

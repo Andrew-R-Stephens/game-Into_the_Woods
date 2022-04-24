@@ -46,6 +46,9 @@ public class LevelsList implements IDrawable {
     }
 
     public boolean navigateNextLevel() {
+        new Thread(() -> gameEnvironment.getParentEnvironmentsHandler()
+                .getSaveData().setLevelProgress(currentLevel).save()).start();
+
         gameEnvironment.reset();
 
         int tempCurrLevel = currentLevel;

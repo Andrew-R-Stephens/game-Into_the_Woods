@@ -36,6 +36,8 @@ public class Main {
 
     private static Config config;
     private static Resources resources;
+    private static SaveData saveData;
+    private static SaveFileRW saveFileRW;
 
     private static EnvironmentsHandler environmentsHandler;
 
@@ -99,16 +101,14 @@ public class Main {
         resources = new Resources();
         resources.init();
 
-        SaveData saveData = new SaveData();
-        SaveFileRW saveFileRW = new SaveFileRW(saveData, "savedata.json");
-        System.out.println(saveFileRW.deserialize());
     }
 
     /**
      * <p>Creates all permanent static variables for protection against null pointer exceptions.</p>
      */
     public static void create() {
-
+        saveData = new SaveData();
+        saveFileRW = new SaveFileRW();
 
         // Create Environment Handler
         environmentsHandler = new EnvironmentsHandler();
@@ -156,6 +156,8 @@ public class Main {
      */
     public static void init() {
 
+        saveData.init(saveFileRW);
+
         // Reference resources
         mainMenuEnvironment.setResources(resources);
         pauseMenuModel.setResources(resources);
@@ -176,7 +178,7 @@ public class Main {
         levelsListModel.init(gameEnvironment, defaultLevel);
 
         // Initialize AEnvironment Model Container
-        environmentsHandler.init(window);
+        environmentsHandler.init(window, saveData);
 
         // Initialize Pause Menu
         pauseMenuModel.init(environmentsHandler, menuControlsModel, gameEnvironment);

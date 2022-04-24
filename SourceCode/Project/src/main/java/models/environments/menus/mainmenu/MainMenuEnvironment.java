@@ -7,6 +7,7 @@ import models.environments.menus.startscreen.StartScreenPage;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
+import models.utils.config.SaveData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -1,5 +1,7 @@
 package models.utils.config;
 
+import models.utils.files.SaveFileRW;
+
 /**
  * <p>The data obtained from the the users previously written save file. Save files are simple, as they are only
  * manipulated to store and retrieve the user's last completed level. The Save Data will automatically update if a
@@ -11,29 +13,41 @@ package models.utils.config;
  */
 public class SaveData {
 
+    private SaveFileRW saveFileRW;
+
     private int lastCompletedLevel = -1;
 
     /**
      * <p>Initializes the progress to default values.</p>
      */
-    public SaveData() {
+    public void init(SaveFileRW saveFileRW) {
+        this.saveFileRW = saveFileRW;
+        this.saveFileRW.init(this, "savedata.json");
 
+        saveFileRW.deserialize();
     }
 
     /**
      * Sets the user's level progress.
+     *
      * @param lastCompletedLevel The last level completed. Must be >= 0.
      */
-    public void setLevelProgress(int lastCompletedLevel) {
+    public SaveData setLevelProgress(int lastCompletedLevel) {
+        System.out.println("Setting " + lastCompletedLevel);
         this.lastCompletedLevel = lastCompletedLevel;
+        return this;
     }
 
     /**
      * Gets the user's last completed level.
+     *
      * @return The last completed level. Must be >= -1.
      */
     public int getLevelProgress() {
         return lastCompletedLevel;
     }
 
+    public void save() {
+        saveFileRW.savetoFile();
+    }
 }

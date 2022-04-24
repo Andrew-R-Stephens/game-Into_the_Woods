@@ -5,6 +5,7 @@ import models.environments.EnvironmentsHandler;
 import models.prototypes.controls.AControls;
 import models.prototypes.controls.AKeyController;
 import models.prototypes.controls.AMouseController;
+import models.utils.config.SaveData;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
@@ -24,10 +25,12 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
     private AMouseController mouseController;
     private Resources resources;
 
+
     /**
      * <p>Initializes with the EnvironmentHandler and the controller used for this particular Environment subtype.</p>
      * @param parentEnvironmentsHandler The EnvironmentsHandler that contains this Environment.
      * @param controls The AControls subtype that this Environment subtype uses.
+     * @param saveData
      */
     protected void init(EnvironmentsHandler parentEnvironmentsHandler, AControls controls) {
         this.parentEnvironmentsHandler = parentEnvironmentsHandler;

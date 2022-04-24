@@ -7,6 +7,7 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.threading.ARunnable;
 import models.prototypes.views.ACanvas;
 import models.utils.config.Config;
+import models.utils.config.SaveData;
 import views.window.MainWindow;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 public class EnvironmentsHandler {
 
     private MainWindow parentWindow;
+
+    private SaveData saveData;
 
     private EnvironmentType currentEnvironment = EnvironmentType.MAIN_MENU;
 
@@ -34,8 +37,9 @@ public class EnvironmentsHandler {
      * <p>Initializes the EnvironmentsHandler.</p>
      * @param parentDisplayWindow the window that is shown to the user
      */
-    public void init(MainWindow parentDisplayWindow) {
+    public void init(MainWindow parentDisplayWindow, SaveData saveData) {
         this.parentWindow = parentDisplayWindow;
+        this.saveData = saveData;
     }
 
     /**
@@ -181,6 +185,10 @@ public class EnvironmentsHandler {
 
         updatesThread.start();
         rendersThread.start();
+    }
+
+    public SaveData getSaveData() {
+        return saveData;
     }
 
     /**

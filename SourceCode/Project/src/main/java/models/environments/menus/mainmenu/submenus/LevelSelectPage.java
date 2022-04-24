@@ -1,6 +1,7 @@
 package models.environments.menus.mainmenu.submenus;
 
 import models.environments.EnvironmentsHandler;
+import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
@@ -20,8 +21,10 @@ public class LevelSelectPage extends AMenu {
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
+        AButtonView[] levels = new AButtonView[3];
+
         //Level 1 Button
-        AButtonView button_level1 = new AButtonView(
+        levels[0] = new AButtonView(
                 parentModel,
                 (int) (centerW - (200 * .5f)) - 250,
                 300,
@@ -39,14 +42,23 @@ public class LevelSelectPage extends AMenu {
 
                 return true;
             }
+
+            @Override
+            public void registerInput() {
+                if(!isEnabled) {
+                    return;
+                }
+                super.registerInput();
+            }
         };
-        button_level1.setText("Level 1");
-        button_level1.setSpritesheet(
+        levels[0].setText("Level 1");
+        levels[0].setSpritesheet(
                 getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
-        button_level1.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
+        levels[0].setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
+
 
         //Level 2 Button
-        AButtonView button_level2 = new AButtonView(
+        levels[1] = new AButtonView(
                 parentModel,
                 (int) (centerW - (200 * .5f)), 300,
                 200, 200
@@ -63,14 +75,22 @@ public class LevelSelectPage extends AMenu {
 
                 return true;
             }
+
+            @Override
+            public void registerInput() {
+                if(!isEnabled) {
+                    return;
+                }
+                super.registerInput();
+            }
         };
-        button_level2.setText("Level 2");
-        button_level2.setSpritesheet(
+        levels[1].setText("Level 2");
+        levels[1].setSpritesheet(
                 getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
-        button_level2.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
+        levels[1].setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         //Level 3 Button
-        AButtonView button_level3 = new AButtonView(
+        levels[2] = new AButtonView(
                 parentModel,
                 (int) (centerW - (200 * .5f) + 250),
                 300,
@@ -88,11 +108,19 @@ public class LevelSelectPage extends AMenu {
 
                 return true;
             }
+
+            @Override
+            public void registerInput() {
+                if(!isEnabled) {
+                    return;
+                }
+                super.registerInput();
+            }
         };
-        button_level3.setText("Level 3");
-        button_level3.setSpritesheet(
+        levels[2].setText("Level 3");
+        levels[2].setSpritesheet(
                 getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
-        button_level3.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
+        levels[2].setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         AButtonView button_back = new AButtonView(
                 getParentEnvironment(),
@@ -115,10 +143,16 @@ public class LevelSelectPage extends AMenu {
         button_back.setText("Back");
         button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
+        // Set Level Selection Visibility
+        for(int i = 0; i < levels.length; i++) {
+            levels[i].setEnabled(false);
+            if((i-1) <= getEnvironmentsHandler().getSaveData().getLevelProgress()) {
+                System.out.println(i + " vs " + getEnvironmentsHandler().getSaveData().getLevelProgress());
+                levels[i].setEnabled(true);
+            }
+            addComponent(levels[i]);
+        }
 
-        addComponent(button_level1);
-        addComponent(button_level2);
-        addComponent(button_level3);
         addComponent(button_back);
     }
 
