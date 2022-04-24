@@ -100,10 +100,8 @@ public class Main {
         resources.init();
 
         SaveData saveData = new SaveData();
-        SaveFileRW saveFileRW = new SaveFileRW(saveData, resources.loadTextFile("savedata.json"));
+        SaveFileRW saveFileRW = new SaveFileRW(saveData, "savedata.json");
         System.out.println(saveFileRW.deserialize());
-        saveData.setLevelProgress(1);
-        System.out.println(saveFileRW.savetoFile());
     }
 
     /**

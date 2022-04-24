@@ -5,25 +5,42 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import models.utils.config.Config;
 import models.utils.config.SaveData;
-import models.utils.resources.Resources;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 public class SaveFileRW {
 
     private final SaveData saveData;
-    private final File saveFile;
+    private String saveFileName;
+    private File saveFile;
 
     /**
      * Construct the SaveFileRW with persistent Files.
      * @param saveData - where we pull SaveData from or write SaveData to
-     * @param saveFile - the File on disk
+     * @param saveFileName - the File on disk
      */
-    public SaveFileRW(SaveData saveData, File saveFile) {
+    public SaveFileRW(SaveData saveData, String saveFileName) {
         this.saveData = saveData;
-        this.saveFile = saveFile;
+        this.saveFileName = saveFileName;
+    }
+
+    public void createNewSaveFile() {
+        if(saveFile != null) {
+            return;
+        }
+
+        File file = new File(Config.jarPath);
+        File folder = file.getParentFile();
+        System.out.println(file + "'s parent is -> " + folder + " which is " + (folder.isDirectory()? "a folder" :
+                "not a folder"));
+        saveFile = new File(folder + "/" + saveFileName);
+        try {
+            saveFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        serialize();
     }
 
     public boolean savetoFile() {
@@ -39,24 +56,13 @@ public class SaveFileRW {
      * Write SaveData object to File. Validate File.
      */
     private boolean serialize() {
-        File file = new File(Config.jarPath);
-        System.out.println(file.getName());
+        createNewSaveFile();
 
-        /*
-        URL url =
-                SaveFileRW.class.getClassLoader().getResource(Resources.path_textFile + "savedata.json");
-        File file;
         try {
-            file = new File(url.toURI());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            return false;
-        }
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file, false));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(saveFile, false));
 
             JsonObject obj = new JsonObject();
-            obj.addProperty("levelProgress", 124);
+            obj.addProperty("levelProgress", saveData.getLevelProgress());
 
             bw.write(obj.toString());
             bw.close();
@@ -65,15 +71,16 @@ public class SaveFileRW {
             e.printStackTrace();
             return false;
         }
-*/
 
-        return true;//deserialize();
+        return deserialize();
     }
 
     /**
      * Read from File. Validate data. Record to SaveData object.
      */
     public boolean deserialize() {
+        createNewSaveFile();
+
         // Initialize temp file
         new AFileReader() {
             @Override
@@ -86,6 +93,10 @@ public class SaveFileRW {
                     BufferedReader r = new BufferedReader(isr);
 
                     JsonElement element = JsonParser.parseReader(r);
+
+                    if(element.isJsonNull()) {
+                        return false;
+                    }
 
                     JsonObject frames = element.getAsJsonObject();
                     JsonElement frameObj = frames.get("levelProgress");
