@@ -8,7 +8,8 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 
 /**
- * <p></p>
+ * <p>The AOverlayComponent is the superclass for all HUD overlay components. Contains positional
+ * and size data for all components. Also contains a reference to the parent Game Environment.</p>
  */
 public abstract class AOverlayComponent implements IUpdatable, IDrawable {
 
@@ -17,12 +18,12 @@ public abstract class AOverlayComponent implements IUpdatable, IDrawable {
     protected int x, y, w, h;
 
     /**
-     * <p></p>
-     * @param gameEnvironment -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
+     * <p>Initializes the components with positional and size data.</p>
+     * @param gameEnvironment The Game Environment that contains the parent HUD Model
+     * @param x horizontal position, relative to default dimensions.
+     * @param y vertical position, relative to default dimensions.
+     * @param w width, relative to default dimensions.
+     * @param h height, relative to default dimensions.
      */
     public void init(GameEnvironment gameEnvironment, int x, int y, int w, int h) {
         this.gameEnvironment = gameEnvironment;
