@@ -17,28 +17,30 @@ import java.awt.*;
 import java.util.HashMap;
 
 /**
- *
+ * <p>The Door is meant to be the gate by which the user will collide with in order to progress to the next level.</p>
+ * <p>Should the Door be locked, the player must collect DoorKeys to unlock it. Once unlocked, the player will
+ * walk into a boundary area that triggers the door open. When opened, the door's state will become 'open'. From there,
+ * the player may proceed to trigger the door event.</p>
  */
 public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpdatable {
 
-    private State state = State.LOCKED;
     private final Type type = Type.UNDEFINED;
-
     protected HashMap<Type, SpriteSheet> spriteSheets = new HashMap<>();
+    private State state = State.LOCKED;
 
     /**
-     * <p></p>
-     * @param resources -
-     * @param gameEnvironment -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param vx -
-     * @param vy -
-     * @param MAX_CYCLES -
-     * @param hasGravity -
-     * @param canMoveOnCollision -
+     * <p>Called from the subtypes, this method initializes the object. Also initializes the respective spriteSheet.</p>
+     * @param resources The resources of the parent Environment
+     * @param gameEnvironment The GameEnvironment that this object resides in.
+     * @param x The horizontal position, relative to the default dimensions.
+     * @param y The y position, relative to the default dimensions.
+     * @param w The width, relative to the default dimensions.
+     * @param h The height, relative to the default dimensions.
+     * @param vx The horizontal velocity.
+     * @param vy The vertical velocity.
+     * @param MAX_CYCLES The number of times this object can create an action. -1 is infinite.
+     * @param hasGravity If the object should be effected by gravity.
+     * @param canMoveOnCollision If the object should move if it collides with another object.
      */
     public Door(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx,
                 float vy,
@@ -49,7 +51,9 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
     }
 
     /**
-     * <p></p>
+     * <p>This is called when another ATrigger subtype defines their action to call this action. In other words, the
+     * onReceive method is beholden to another trigger.</p>
+     * <p>This event will open the door if it is closed.</p>
      */
     public void onReceive() {
         if(state != State.CLOSED) {
@@ -59,8 +63,15 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
     }
 
     /**
-     * <p></p>
+     * <p>Unlocks the door.</p>
      */
+    public void unlock() {
+        if(state == State.LOCKED) {
+            state = State.CLOSED;
+        }
+    }
+
+    @Override
     public void doAction() {
 
         if(state != State.OPEN) {
@@ -74,15 +85,6 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
             gameEnvironment.getParentEnvironmentsHandler().applyEnvironment();
         }
         gameEnvironment.reset();
-    }
-
-    /**
-     * <p></p>
-     */
-    public void unlock() {
-        if(state == State.LOCKED) {
-            state = State.CLOSED;
-        }
     }
 
     @Override
@@ -127,14 +129,17 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
     }
 
     /**
-     *
+     * The enum State contains the states of the Door.
+     * LOCKED - The locked, closed state.
+     * CLOSED - The unlocked, closed state.
+     * OPEN - The unlocked, ready state.
      */
     private enum State {
         CLOSED, OPEN, LOCKED
     }
 
     /**
-     *
+     * A generic type to satisfy the spriteSheet map enum.
      */
     private enum Type {
         UNDEFINED

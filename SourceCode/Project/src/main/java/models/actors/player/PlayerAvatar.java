@@ -12,21 +12,24 @@ import models.utils.updates.IUpdatable;
 import java.awt.*;
 
 /**
- * <p></p>
+ * <p>The PlayerAvatar is one of the most complex actors. It takes direct control from the GameControls and will
+ * react to the controls. Its position controls the Camera's viewport. The PlayerAvatar is the primary
+ * actor subtype that all actors check collisions with. The PlayerAvatar will have direct impact on the game levels,
+ * the other actors within a level.</p>
  */
 public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
     /**
-     * <p></p>
-     * @param resources -
-     * @param cModel -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param vx -
-     * @param vy -
-     * @param hasGravity -
+     * <p>Called from the subtypes, this method initializes the object.</p>
+     * @param resources The resources of the parent Environment
+     * @param cModel The GameControls of the parent Environment
+     * @param x The horizontal position, relative to the default dimensions.
+     * @param y The y position, relative to the default dimensions.
+     * @param w The width, relative to the default dimensions.
+     * @param h The height, relative to the default dimensions.
+     * @param vx The horizontal velocity.
+     * @param vy The vertical velocity.
+     * @param hasGravity If the object should be effected by gravity.
      */
     public PlayerAvatar(
             Resources resources, GameControls cModel, float x, float y, float w, float h, float vx,
@@ -55,8 +58,12 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param delta -
+     * <p>Updates the image used for the PlayerAvatar. This is obtained through the Spritesheet.</p>
+     * <p>The frame of the spritesheet is updated via the delta of the update loop. Some actions use values within
+     * to either speed up or slow down the rate at which a sprite changes, or the direction that it changes.</p>
+     * <p>The logic uses the action state that the player is currently in and obtains the image from the spritesheet
+     * which is correlated with that action.</p>
+     * @param delta The ratio of actual/target update rate for the game ticks.
      */
     private void updateSpriteAnimation(float delta) {
         float tickRate = delta;
@@ -106,8 +113,8 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param actionState -
+     * <p>Sets the current action, based on external states and collisions.</p>
+     * @param actionState The current action that the player is doing.
      */
     public void setAction(ActionType actionState) {
         this.actionState = actionState;
@@ -180,10 +187,6 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         float scaledH = h * Config.scaledH_zoom;
 
         g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
-    }
-
-    public String toString() {
-        return "TC:  VX= " + (int)vX + ", VY= " + (int)vY;
     }
 
 }

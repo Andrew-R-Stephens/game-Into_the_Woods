@@ -33,6 +33,11 @@ public abstract class APropTrigger extends ATrigger {
     }
 
     @Override
+    public void reset() {
+        super.reset();
+    }
+
+    @Override
     public boolean hasCollision(AActor a, float delta) {
 
         if(!(a instanceof PlayerAvatar)) {
@@ -54,10 +59,6 @@ public abstract class APropTrigger extends ATrigger {
 
     @Override
     public abstract void doAction();
-
-    public void reset() {
-        super.reset();
-    }
 
     @Override
     public void drawAsHUD(Graphics2D g) {

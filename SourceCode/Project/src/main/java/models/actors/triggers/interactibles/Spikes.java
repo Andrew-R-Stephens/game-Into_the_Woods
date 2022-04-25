@@ -15,21 +15,21 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * <p></p>
+ * <p>Spikes are a harmful obstacle. Touching the obstacle immediately kills the player.</p>
  */
 public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
 
     /**
-     * <p></p>
-     * @param resources -
-     * @param gameEnvironment -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param vx -
-     * @param vy -
-     * @param MAX_CYCLES -
+     * <p>Called from the subtypes, this method initializes the object. Also initializes the respective spriteSheet.</p>
+     * @param resources The resources of the parent Environment
+     * @param x The horizontal position, relative to the default dimensions.
+     * @param y The y position, relative to the default dimensions.
+     * @param w The width, relative to the default dimensions.
+     * @param h The height, relative to the default dimensions.
+     * @param vx The horizontal velocity.
+     * @param vy The vertical velocity.
+     * @param MAX_CYCLES The number of times this object can create an action. -1 is infinite.
+     * @param hasGravity If the object should be effected by gravity.
      */
     public Spikes(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
                   int MAX_CYCLES) {
@@ -80,7 +80,6 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
 
     @Override
     public void drawAsHUD(Graphics2D g) {
-
     }
 
     @Override

@@ -11,20 +11,21 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * <p></p>
+ * <p>A Platform is a boundary object that acts to create a physical barrier. It is the fundamental piece that allows
+ * the other actors to behave as if in a physical world.</p>
  */
 public class Platform extends AProp implements IDrawable, IUpdatable {
 
     /**
-     * <p></p>
-     * @param resources -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param vx -
-     * @param vy -
-     * @param hasGravity -
+     * <p>Called from the subtypes, this method initializes the object.</p>
+     * @param resources The resources of the parent Environment
+     * @param x The horizontal position, relative to the default dimensions.
+     * @param y The y position, relative to the default dimensions.
+     * @param w The width, relative to the default dimensions.
+     * @param h The height, relative to the default dimensions.
+     * @param vx The horizontal velocity.
+     * @param vy The vertical velocity.
+     * @param hasGravity If the object should be effected by gravity.
      */
     public Platform(Resources resources, float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
         super(resources, x, y, w, h, vx, vy, hasGravity);

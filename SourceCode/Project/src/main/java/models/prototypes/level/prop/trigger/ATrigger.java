@@ -49,6 +49,19 @@ public abstract class ATrigger extends AProp implements IDrawable {
         this.canMoveOnCollision = canMoveOnCollision;
     }
 
+    /**
+     * <p>doAction defines an action that should be done. It's called, normally, from within the onCollision method when
+     * there is a collision with another physical entity.</p>
+     */
+    public abstract void doAction();
+
+    /**
+     * <p>Resets the current cycle count back to zero.</p>
+     */
+    public void reset() {
+        currentCycles = 0;
+    }
+
     @Override
     public boolean hasCollision(AActor a, float delta) {
         return super.hasCollision(a, delta, canMoveOnCollision);
@@ -71,15 +84,4 @@ public abstract class ATrigger extends AProp implements IDrawable {
         g.drawString("Trigger Area", (int) (offsetX) + 3, (int) (offsetY) + 12);
     }
 
-    /**
-     * <p></p>
-     */
-    public abstract void doAction();
-
-    /**
-     * <p></p>
-     */
-    public void reset() {
-        currentCycles = 0;
-    }
 }

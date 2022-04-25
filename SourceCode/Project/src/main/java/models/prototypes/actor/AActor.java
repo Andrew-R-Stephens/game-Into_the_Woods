@@ -23,15 +23,16 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
     protected Color color = new Color(0, 0, 255, 50);
 
     /**
-     * <p></p>
-     * @param resources -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param vx -
-     * @param vy -
-     * @param hasGravity -
+     * <p>Called from the subtypes, this method initializes the object with position and size relative to the
+     * default dimensions.</p>
+     * @param resources The resources of the parent Environment
+     * @param x The horizontal position, relative to the default dimensions.
+     * @param y The y position, relative to the default dimensions.
+     * @param w The width, relative to the default dimensions.
+     * @param h The height, relative to the default dimensions.
+     * @param vx The horizontal velocity.
+     * @param vy The vertical velocity.
+     * @param hasGravity If the object should be effected by gravity.
      */
     protected AActor(
             Resources resources,
