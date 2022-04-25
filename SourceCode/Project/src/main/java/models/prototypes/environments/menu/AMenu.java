@@ -39,16 +39,17 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     protected float centerW = Config.DEFAULT_WINDOW_WIDTH * .5f, centerH = Config.DEFAULT_WINDOW_HEIGHT * .5f;
 
     /**
-     * <p></p>
-     * @param parentMenuModel -
+     * <p>Assigns the the Menu with the parent AMenuEnvironment for reflection.</p>
+     * <p>Should be called through subclass inheritance.</p>
+     * @param parentMenuModel The AMenuEnvironment that this Menu is contained within.
      */
     public AMenu(AMenuEnvironment parentMenuModel) {
         this.parentEnvironment = parentMenuModel;
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Obtains the controller and listens for specific input and executes the content if input is accepted.</p>
+     * @return if the input has been accepted.
      */
     public boolean registerInput() {
         boolean isActivated = false;
@@ -63,55 +64,55 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the AMenuEnvironment containing this Menu</p>
+     * @return The AMenuEnvironment that this Menu is contained within.
      */
     public AMenuEnvironment getParentEnvironment() {
         return parentEnvironment;
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the EnvironmentsHander that contains this AMenuEnvironment.</p>
+     * @return The EnvironmentsHandler that this Menu is held within. Should not be null.
      */
     public EnvironmentsHandler getEnvironmentsHandler() {
         return parentEnvironment.getParentEnvironmentsHandler();
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the Resources.</p>
+     * @return the parentEnvironment's Resources. Should not be null.
      */
     public Resources getResources() {
         return parentEnvironment.getResources();
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the MouseController for the containing Environment.</p>
+     * @return the parentEnvironment's MouseController. Should not be null.
      */
     public AMouseController getMouseController() {
         return parentEnvironment.getMouseController();
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the KeyController for the containing Environment.</p>
+     * @return the parentEnvironment's KeyController. Should not be null.
      */
     public AKeyController getKeyController() {
         return parentEnvironment.getKeyController();
     }
 
     /**
-     * <p></p>
-     * @param component
+     * <p>Accepts an AMenuComponent object and adds it to the components list.</p>
+     * @param component An AMenuComponent that defines a functionality in the Menu
      */
     public void addComponent(AMenuComponent component){
         components.add(component);
     }
 
     /**
-     *
+     * <p>Resets all the contained AMenuComponents.</p>
      */
     public void reset() {
         for(AMenuComponent c: components) {
