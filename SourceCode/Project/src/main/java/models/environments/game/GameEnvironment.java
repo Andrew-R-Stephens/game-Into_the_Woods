@@ -141,8 +141,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     /**
-     * <p></p>
-     * @param paused -
+     * <p>Sets the game environment to paused.</p>
+     * @param paused If the game should be paused.
      */
     public void setPaused(boolean paused) {
         isPaused = paused;
