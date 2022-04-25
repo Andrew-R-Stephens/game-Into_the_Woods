@@ -24,18 +24,19 @@ public abstract class ATrigger extends AProp implements IDrawable {
     protected int currentCycles = 0;
 
     /**
-     * <p></p>
-     * @param resources -
-     * @param gameEnvironment -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param vx -
-     * @param vy -
-     * @param MAX_CYCLES -
-     * @param hasGravity -
-     * @param canMoveOnCollision -
+     * <p>Called from the subtypes, this method initializes the object with position and size relative to the
+     * default dimensions.</p>
+     * @param resources The resources of the parent Environment
+     * @param gameEnvironment The GameEnvironment that contains this trigger
+     * @param x The horizontal position, relative to the default dimensions.
+     * @param y The y position, relative to the default dimensions.
+     * @param w The width, relative to the default dimensions.
+     * @param h The height, relative to the default dimensions.
+     * @param vx The horizontal velocity.
+     * @param vy The vertical velocity.
+     * @param MAX_CYCLES The maximum number of times this trigger will execute
+     * @param hasGravity If the object should be effected by gravity.
+     * @param canMoveOnCollision If the object should move on collision.
      */
     protected ATrigger(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
                        float vx,
