@@ -13,16 +13,20 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * <p></p>
+ * <p>MainMenuEnvironment is a subtype of AMenuEnvironment. It derives behavior and builds on it to create a more
+ * expansive version of a Menu environment.</p>
+ * <p>The MainMenuEnvironment contains from behavior that makes it more detailed than the Pause Menu, namely through
+ * visual fidelity and reactions to user interactions, such as with the moving menu background.</p>
  */
 public class MainMenuEnvironment extends AMenuEnvironment {
 
     protected BufferedImage backgroundImage;
 
     /**
-     * <p></p>
-     * @param environmentsHandler -
-     * @param menuControlsModel -
+     * <p>Initializes the MainMenuEnvironment with the parent EnvironmentsHandler and necessary MenuControls.</p>
+     * <p>Defaults the Camera to the center of the screen.</p>
+     * @param environmentsHandler The EnvironmentsHandler that contains this MenuEnvironment
+     * @param menuControlsModel The MenuControls that is required for this Environment
      */
     public void init(EnvironmentsHandler environmentsHandler, MenuControls menuControlsModel) {
         super.init(environmentsHandler, menuControlsModel);
@@ -39,15 +43,15 @@ public class MainMenuEnvironment extends AMenuEnvironment {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Returns the top menu page of this menu.</p>
+     * @return the top most menu page.
      */
     public AMenu getTopPage() {
         return peek();
     }
 
     /**
-     * <p></p>
+     * <p>Removes the highest AMenus that reside above the default Menu.</p>
      */
     public void popToFirst() {
         while(getStackDepth() > 1) {
@@ -56,7 +60,7 @@ public class MainMenuEnvironment extends AMenuEnvironment {
     }
 
     /**
-     * <p></p>
+     * <p>Navigates the user to the Level Select Page.</p>
      */
     public void navigateToLevelSelectPage() {
         ((StartScreenPage)peek()).navigateToMainMenuPage().navigateToLevelSelectPage();

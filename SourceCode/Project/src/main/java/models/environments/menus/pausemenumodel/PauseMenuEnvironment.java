@@ -11,21 +11,23 @@ import models.utils.drawables.IDrawable;
 import java.awt.*;
 
 /**
- * <p></p>
+ * <p>PauseMenuEnvironment is a subtype of AMenuEnvironment. It derives behavior from the AMenu class and is contained
+ * within the GameEnvironment. This class handles menu-based user interaction from within the Game Environment.</p>
  */
 public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable {
 
     protected GameEnvironment gameEnvironment;
 
     /**
-     * <p></p>
-     * @param parentEnvironmentsModel -
-     * @param controlsModel -
-     * @param gameEnvironment -
+     * <p>Initializes the MainMenuEnvironment with the parent EnvironmentsHandler and necessary MenuControls.</p>
+     * <p>Sets the default page to the PauseMenuPage.</p>
+     * @param environmentsHandler The EnvironmentsHandler that contains this MenuEnvironment
+     * @param controlsModel The MenuControls that is required for this Environment
+     * @param gameEnvironment The parent GameEnvironment
      */
-    public void init(EnvironmentsHandler parentEnvironmentsModel, MenuControls controlsModel,
+    public void init(EnvironmentsHandler environmentsHandler, MenuControls controlsModel,
                      GameEnvironment gameEnvironment) {
-        super.init(parentEnvironmentsModel, controlsModel);
+        super.init(environmentsHandler, controlsModel);
 
         this.gameEnvironment = gameEnvironment;
 
@@ -35,7 +37,7 @@ public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable 
     }
 
     /**
-     * <p></p>
+     * <p>Pops the top-most AMenus until the landing page is found.</p>
      */
     public void popToFirst() {
         while(getStackDepth() > 1) {
