@@ -5,15 +5,20 @@ import models.prototypes.threading.ARunnable;
 import models.utils.config.Config;
 
 /**
- * <p></p>
+ * <p>The Runnable for Update calls. This is an integral piece of all Environments.</p>
+ * <p>Contains a continuous loop that dictates the update rate based on a standard tick rate against the current
+ * rate. The Current rate is found by determining the number of ticks made in a given second. The ticks are recorded
+ * before resetting after a full second, and the ratio of actual updates vs target updates is found. This ratio,
+ * or delta, is passed into the update(float) method of the Environment references. The delta normalizes the
+ * updates for all updatable objects in the target environment.</p>
  */
 public class UpdateRunnable extends ARunnable {
 
     private AEnvironment environment;
 
     /**
-     * <p></p>
-     * @param environment -
+     * <p>Initializes the AEnvironment for this particular Update loop.</p>
+     * @param environment the AEnvironment used with this loop.
      */
     public void init(AEnvironment environment) {
         this.environment = environment;

@@ -5,15 +5,19 @@ import models.prototypes.views.ACanvas;
 import models.utils.config.Config;
 
 /**
- * <p></p>
+ * <p>The Runnable for Render calls. This is an integral piece of all Environments.</p>
+ * <p>Contains a continuous loop that dictates the render rate based on a standard tick rate against the current
+ * rate. The Current rate is found by determining the number of ticks made in a given second. The ticks are recorded
+ * before resetting after a full second.</p>
+ * The render rate is normalized by the framerate maximum, either set manually or by the display device's settings.</p>
  */
 public class RenderRunnable extends ARunnable {
 
     private ACanvas canvas;
 
     /**
-     * <p></p>
-     * @param canvas -
+     * <p>Initializes the subtype Canvas object for this particular render loop.</p>
+     * @param canvas The ACanvas used with this loop.
      */
     public void init(ACanvas canvas) {
         this.canvas = canvas;

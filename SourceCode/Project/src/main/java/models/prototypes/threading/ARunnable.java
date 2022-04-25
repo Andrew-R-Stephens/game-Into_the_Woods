@@ -3,7 +3,7 @@ package models.prototypes.threading;
 import models.utils.config.Config;
 
 /**
- * <p></p>
+ * <p>The superclass of Render and Update Runnables. This class contains the variables that both subclasses share.</p>
  */
 public abstract class ARunnable implements Runnable {
 
@@ -13,8 +13,8 @@ public abstract class ARunnable implements Runnable {
     protected int updates = 0;
 
     /**
-     * <p></p>
-     * @param isPaused -
+     * <p>Sets the loop to be paused or not.</p>
+     * @param isPaused If the loop should be paused.
      */
     public void setPaused(boolean isPaused) {
         isRunning = !isPaused;
