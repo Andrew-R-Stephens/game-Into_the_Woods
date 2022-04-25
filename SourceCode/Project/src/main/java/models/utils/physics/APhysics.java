@@ -5,7 +5,8 @@ import models.utils.config.Config;
 import models.utils.updates.IUpdatable;
 
 /**
- * <p></p>
+ * <p>The APhysics class contains data for any in-game object that should contain positional, dimensional, and vector
+ * data.</p>
  */
 public abstract class APhysics implements IUpdatable {
 
@@ -25,14 +26,15 @@ public abstract class APhysics implements IUpdatable {
     protected boolean isMoving;
 
     /**
-     * <p></p>
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param vX -
-     * @param vY -
-     * @param hasGravity -
+     * <p>Called from the subtypes, this method initializes the object with position and size relative to the
+     * default dimensions.</p>
+     * @param x The horizontal position, relative to the default dimensions.
+     * @param y The y position, relative to the default dimensions.
+     * @param w The width, relative to the default dimensions.
+     * @param h The height, relative to the default dimensions.
+     * @param vX The horizontal velocity.
+     * @param vY The vertical velocity.
+     * @param hasGravity If the object should be effected by gravity.
      */
     protected APhysics(
             float x, float y,
@@ -50,8 +52,8 @@ public abstract class APhysics implements IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param delta -
+     * <p>Updates the object by resetting collisions and then updating the velocity data.</p>
+     * @param delta The ratio of actual/target update rate for the game ticks.
      */
     public void update(float delta) {
         resetCollisions();
@@ -60,7 +62,7 @@ public abstract class APhysics implements IUpdatable {
     }
 
     /**
-     * <p></p>
+     * <p>Resets the state of collisions on the object.</p>
      */
     private void resetCollisions() {
         isFloorCollision = false;
@@ -69,8 +71,8 @@ public abstract class APhysics implements IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param delta -
+     * <p>Calculates the y velocity under gravity for this object.</p>
+     * @param delta The ratio of actual/target update rate for the game ticks.
      */
     private void calculateGravity(float delta) {
         if (hasGravity && !isFloorCollision) {
@@ -79,8 +81,8 @@ public abstract class APhysics implements IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param delta -
+     * <p>Updates the velocity of this object. Then limits the velocity to max and min values.</p>
+     * @param delta The ratio of actual/target update rate for the game ticks.
      */
     private void updateVelocity(float delta) {
         calculateGravity(delta);
@@ -88,8 +90,8 @@ public abstract class APhysics implements IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param delta -
+     * <p>Limits the velocity if the velocity exceeds the maximum velocity in any direction.</p>
+     * @param delta The ratio of actual/target update rate for the game ticks.
      */
     public void limitVelocity(float delta) {
 
@@ -114,10 +116,24 @@ public abstract class APhysics implements IUpdatable {
         }
     }
 
+    /**
+     * Checks if the object had collisions with the actor in question. Overloads the same method with a control that
+     * dictates if the object should act in an elastic manner if there is a collision.
+     * @param a The actor being compared.
+     * @param delta The ratio of actual/target update rate for the game ticks.
+     * @return if there has been a collision with the actor.
+     */
     public boolean hasCollision(AActor a, float delta) {
         return hasCollision(a, delta, true);
     }
 
+    /**
+     * Checks if the object had collisions with the actor in question.
+     * @param a The actor being compared.
+     * @param delta The ratio of actual/target update rate for the game ticks.
+     * @param moveToBounds If the actor should act ellastically under an affirmed collision state.
+     * @return if there has been a collision with the actor.
+     */
     public boolean hasCollision(AActor a, float delta, boolean moveToBounds) {
 
         boolean isFloorBounded = ((a.bottomBufferOuter()) >= top()) && (a.bottomBufferInner() <= bottom());
@@ -198,112 +214,220 @@ public abstract class APhysics implements IUpdatable {
 
     }
 
+    /**
+     * Sets the original size of the object.
+     * @param w Width
+     * @param h Height
+     */
     private void setOriginalSize(float w, float h) {
         this.ow = w;
         this.oh = h;
     }
 
+    /**
+     * Sets the origin x and y positions.
+     * @param x Horizontal position
+     * @param y Vertical position
+     */
     private void setOriginalPosition(float x, float y) {
         this.ox = x;
         this.oy = y;
     }
 
-
+    /**
+     * Sets the temporary x and y positions
+     * @param x Horizontal position
+     * @param y Vertical position
+     */
     private void setPosition(float x, float y) {
         setX(x);
         setY(y);
     }
 
-    public void setX(float x) {
-        this.x = this.ox = x;
-    }
-
-    public void setY(float y) {
-        this.y = this.oy = y;
-    }
-
+    /**
+     * Gets the position.
+     * @return The horizontal and vertical position.
+     */
     public float[] getLocation() {
         return new float[]{x, y};
     }
 
+    /**
+     * Gets the horizontal position.
+     * @return The horizontal position.
+     */
     public float getX() {
         return x;
     }
 
+    /**
+     * Sets the horizontal position.
+     * @param x The horizontal position.
+     */
+    public void setX(float x) {
+        this.x = this.ox = x;
+    }
+
+    /**
+     * Gets the vertical position.
+     * @return The vertical position.
+     */
     public float getY() {
         return y;
     }
 
+    /**
+     * Sets the vertical position.
+     * @param y The vertical position.
+     */
+    public void setY(float y) {
+        this.y = this.oy = y;
+    }
+
+    /**
+     * Gets the width.
+     * @return The width.
+     */
     public float getW() {
         return w;
     }
 
+    /**
+     * Gets the height.
+     * @return The height
+     */
     public float getH() {
         return h;
     }
 
+    /**
+     * Returns if the object has a y velocity of >= 0
+     * @return if the object's y velocity is >= 0
+     */
     public boolean isFalling() {
         return vY >= 0;
     }
 
+    /**
+     * Sets the Width and Height
+     * @param w The width
+     * @param h The height
+     */
     private void setSize(float w, float h) {
         this.w = w;
         this.h = h;
     }
 
+    /**
+     * Sets if the object should be affected by gravity.
+     * @param hasGravity If the object has gravity.
+     */
     protected void setGravity(boolean hasGravity) {
         this.hasGravity = hasGravity;
     }
 
+    /**
+     * Sets the horizontal and vertical velocity.
+     * @param velocityX The horizontal velocity
+     * @param velocityY The vertical velocity.
+     */
     public void setVelocity(float velocityX, float velocityY) {
         this.vX = velocityX;
         this.vY = velocityY;
     }
 
+    /**
+     * Sets the horizontal velocity.
+     * @param vX The horizontal velocity
+     */
     public void setVX(int vX) {
         this.vX = vX;
     }
 
+    /**
+     * Sets the vertical velocity
+     * @param vY The vertical velocity.
+     */
     public void setVY(int vY) {
         this.vY = vY;
     }
 
+    /**
+     * Gets the y position.
+     * @return
+     */
     protected float top() {
         return y;
     }
 
+    /**
+     * Gets the y+height position.
+     * @return
+     */
     protected float bottom() {
         return top() + h;
     }
 
+    /**
+     * Gets the x position
+     * @return
+     */
     protected float left() {
         return x;
     }
 
+    /**
+     * Gets the x + width position.
+     * @return
+     */
     protected float right() {
         return left() + w;
     }
 
+    /**
+     * Gets the inner left boundary based on the horizontal boundary and the left side.
+     * @return left inner padding
+     */
     protected float leftBufferInner() {
         return left() + bufferHoriz;
     }
 
+    /**
+     * Gets the outer left boundary based on the horizontal boundary and the left side.
+     * @return left outer padding
+     */
     protected float leftBufferOuter() {
         return left() - bufferHoriz;
     }
 
+    /**
+     * Gets the inner right boundary based on the horizontal boundary and the right side.
+     * @return right inner padding
+     */
     protected float rightBufferInner() {
         return right() + bufferHoriz;
     }
 
+    /**
+     * Gets the outer right boundary based on the horizontal boundary and the right side.
+     * @return right outer padding
+     */
     protected float rightBufferOuter() {
         return right() - bufferHoriz;
     }
 
+    /**
+     * Gets the inner bottom boundary based on the vertical boundary and the y+height.
+     * @return bottom inner padding
+     */
     protected float bottomBufferInner() {
         return bottom() - bufferVert;
     }
 
+    /**
+     * Gets the outer bottom boundary based on the vertical boundary and the y+height.
+     * @return bottom outer padding
+     */
     protected float bottomBufferOuter() {
         return bottom() + bufferVert;
     }

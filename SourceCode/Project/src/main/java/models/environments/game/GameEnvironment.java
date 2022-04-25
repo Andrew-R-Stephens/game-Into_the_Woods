@@ -96,8 +96,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     /**
-     * <p></p>
-     * @param levelsList -
+     * <p>The LevelsList that contains all of the Levels in the game.</p>
+     * @param levelsList The list of levels and any other level data.
      */
     public void setLevelsList(LevelsList levelsList) {
         this.levelsList = levelsList;
@@ -105,10 +105,9 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     /**
      * <p></p>
-     * @param controlsViewModel -
-     * @param levelModel -
+     * @param controlsViewModel The ControlsModel that the actor should see.
+     * @param levelModel The LevelsList that the actor should see.
      */
-
     private void setPlayerAvatar(GameControls controlsViewModel, LevelsList levelModel) {
         int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
         // Add in the Main Test Character
@@ -126,8 +125,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     /**
-     * <p></p>
-     * @param levelIndex -
+     * <p>Sets the current level by the use of index.</p>
+     * @param levelIndex The index of the level. Zero-based.
      */
     public void setCurrentLevel(int levelIndex) {
         levelsList.setCurrentLevel(levelIndex);
