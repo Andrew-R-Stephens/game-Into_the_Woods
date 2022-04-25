@@ -8,8 +8,8 @@ import java.awt.*;
 public interface IDrawable {
 
     /**
-     * <p>Draw method accepts the Graphics object obtained by the paintComponent method in Canvas.</p>
-     * @param g
+     * <p>Allows for standard draw calls from a Canvas object.</p>
+     * @param g Draw method accepts the Graphics object obtained by the paintComponent method in Canvas.
      */
     void draw(Graphics2D g);
 
