@@ -6,13 +6,13 @@ import models.prototypes.controls.AMouseController;
 import java.awt.event.MouseEvent;
 
 /**
- * <p></p>
+ * Dedicated AMenuEnvironment Controls class that extends the AMouseController.
  */
 public class MenuMouseControls extends AMouseController {
 
     /**
-     * <p></p>
-     * @param controlsViewModel -
+     * <p>Creates the MenuMouseControls and references the parent AControls</p>
+     * @param controlsViewModel - the AControls parent model
      */
     public MenuMouseControls(AControls controlsViewModel) {
         super(controlsViewModel);
@@ -21,7 +21,6 @@ public class MenuMouseControls extends AMouseController {
     @Override
     public void mouseDragged(MouseEvent e) {
         setPos(e.getX(), e.getY());
-        //reset();
     }
 
 }

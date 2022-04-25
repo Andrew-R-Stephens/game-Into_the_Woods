@@ -12,8 +12,8 @@ import java.awt.event.KeyEvent;
 public class GameKeyControls extends AKeyController {
 
     /**
-     * <p></p>
-     * @param controlsViewModel
+     * <p>Creates the GameKeyControls and references the parent AControls</p>
+     * @param controlsViewModel - the AControls parent model
      */
     public GameKeyControls(AControls controlsViewModel) {
         super(controlsViewModel);

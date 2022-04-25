@@ -7,13 +7,13 @@ import models.prototypes.controls.AKeyController;
 import java.awt.event.KeyEvent;
 
 /**
- * <p></p>
+ * Dedicated AMenuEnvironment Controls class that extends the AKeyController.
  */
 public class MenuKeyControls extends AKeyController{
 
     /**
-     * <p></p>
-     * @param controlsModel -
+     * <p>Creates the MenuKeyControls and references the parent AControls</p>
+     * @param controlsModel - the AControls parent model
      */
     public MenuKeyControls(AControls controlsModel) {
         super(controlsModel);
