@@ -5,12 +5,16 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
- * <p></p>
+ * <p>The Quit Page. A Confirmation to ensure the player's intention.</p>
  */
 public class QuitPage extends AMenu {
 
-    public QuitPage(AMenuEnvironment parentModel) {
-        super(parentModel);
+    /**
+     * <p>Builds the Quit page.</p>
+     * @param parentEnvironment The parent AMenuEnvironment
+     */
+    public QuitPage(AMenuEnvironment parentEnvironment) {
+        super(parentEnvironment);
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 

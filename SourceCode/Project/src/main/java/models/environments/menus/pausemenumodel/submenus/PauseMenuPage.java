@@ -8,22 +8,22 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
- * <p></p>
+ * <p>The landing page of the Pause Menu. Contains menu button components for navigation into sub pages.</p>
  */
 public class PauseMenuPage extends AMenu {
 
     /**
-     * <p></p>
-     * @param parentMenuModel
+     * <p>Builds the paused main page.</p>
+     * @param parentEnvironment The parent AMenuEnvironment
      */
-    public PauseMenuPage(AMenuEnvironment parentMenuModel) {
-        super(parentMenuModel);
+    public PauseMenuPage(AMenuEnvironment parentEnvironment) {
+        super(parentEnvironment);
 
         int buttonW = 400, buttonH = (int)(buttonW * .25);
 
         // Resume button
         AButtonView button_resume = new AButtonView(
-                parentMenuModel,
+                parentEnvironment,
                 (int)(centerW - (buttonW * .5f)),
                 175,
                 buttonW,
@@ -50,7 +50,7 @@ public class PauseMenuPage extends AMenu {
 
         // Options button
         AButtonView button_options = new AButtonView(
-                parentMenuModel,
+                parentEnvironment,
                 (int)(centerW - (buttonW * .5f)),
                 405,
                 buttonW,
@@ -71,7 +71,7 @@ public class PauseMenuPage extends AMenu {
 
         // Help button
         AButtonView button_help = new AButtonView(
-                parentMenuModel,
+                parentEnvironment,
                 (int)(centerW - (buttonW * .5f)),
                 520,
                 buttonW,
@@ -91,7 +91,7 @@ public class PauseMenuPage extends AMenu {
         button_help.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         // Quit button
-        AButtonView button_quit = new AButtonView(parentMenuModel,
+        AButtonView button_quit = new AButtonView(parentEnvironment,
                 (int)(centerW - (buttonW * .5f)),
                 800,
                 buttonW,

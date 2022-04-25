@@ -11,7 +11,8 @@ import java.awt.*;
 import java.util.Arrays;
 
 /**
- * <p></p>
+ * <p>The Options Page.</p>
+ * <p>Gives the user the option to set their target frame limit, their Window style, and the size of their window.</p>
  */
 public class OptionsPage extends AMenu {
 
@@ -21,11 +22,11 @@ public class OptionsPage extends AMenu {
     private Config.WindowType selectedWindowType = Config.getWindowType();
 
     /**
-     * <p></p>
-     * @param parentModel
+     * <p>Builds the Options page.</p>
+     * @param parentEnvironment The parent AMenuEnvironment
      */
-    public OptionsPage(AMenuEnvironment parentModel) {
-        super(parentModel);
+    public OptionsPage(AMenuEnvironment parentEnvironment) {
+        super(parentEnvironment);
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 

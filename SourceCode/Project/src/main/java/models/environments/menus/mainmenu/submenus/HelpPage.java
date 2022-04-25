@@ -6,16 +6,16 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
 
 /**
- * <p></p>
+ * <p>The Help Page, containing text content to assist the player.</p>
  */
 public class HelpPage extends AMenu {
 
     /**
-     * <p></p>
-     * @param parentModel -
+     * <p>Builds the Help page.</p>
+     * @param parentEnvironment The parent AMenuEnvironment
      */
-    public HelpPage(AMenuEnvironment parentModel) {
-        super(parentModel);
+    public HelpPage(AMenuEnvironment parentEnvironment) {
+        super(parentEnvironment);
 
         float mx = Config.DEFAULT_WINDOW_WIDTH * .5f;
         float my = Config.DEFAULT_WINDOW_HEIGHT * .5f;

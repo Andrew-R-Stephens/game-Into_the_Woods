@@ -8,16 +8,17 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
 
 /**
- * <p></p>
+ * <p>Level Select Page. Allows the user to choose a previously completed level, or a level that they need to
+ * complete next.</p>
  */
 public class LevelSelectPage extends AMenu {
 
     /**
-     * <p></p>
-     * @param parentModel
+     * <p>Builds the Level Select page.</p>
+     * @param parentEnvironment The parent AMenuEnvironment
      */
-    public LevelSelectPage(AMenuEnvironment parentModel) {
-        super(parentModel);
+    public LevelSelectPage(AMenuEnvironment parentEnvironment) {
+        super(parentEnvironment);
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
@@ -25,7 +26,7 @@ public class LevelSelectPage extends AMenu {
 
         //Level 1 Button
         levels[0] = new AButtonView(
-                parentModel,
+                parentEnvironment,
                 (int) (centerW - (200 * .5f)) - 250,
                 300,
                 200,
@@ -59,7 +60,7 @@ public class LevelSelectPage extends AMenu {
 
         //Level 2 Button
         levels[1] = new AButtonView(
-                parentModel,
+                parentEnvironment,
                 (int) (centerW - (200 * .5f)), 300,
                 200, 200
         ) {
@@ -91,7 +92,7 @@ public class LevelSelectPage extends AMenu {
 
         //Level 3 Button
         levels[2] = new AButtonView(
-                parentModel,
+                parentEnvironment,
                 (int) (centerW - (200 * .5f) + 250),
                 300,
                 200,

@@ -41,10 +41,10 @@ public abstract class AMenu implements IUpdatable, IDrawable {
     /**
      * <p>Assigns the the Menu with the parent AMenuEnvironment for reflection.</p>
      * <p>Should be called through subclass inheritance.</p>
-     * @param parentMenuModel The AMenuEnvironment that this Menu is contained within.
+     * @param parentEnvironment The AMenuEnvironment that this Menu is contained within.
      */
-    public AMenu(AMenuEnvironment parentMenuModel) {
-        this.parentEnvironment = parentMenuModel;
+    public AMenu(AMenuEnvironment parentEnvironment) {
+        this.parentEnvironment = parentEnvironment;
     }
 
     /**

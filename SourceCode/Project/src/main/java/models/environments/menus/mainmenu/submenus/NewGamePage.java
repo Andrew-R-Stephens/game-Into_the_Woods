@@ -10,16 +10,16 @@ import models.utils.config.Config;
 import java.awt.image.BufferedImage;
 
 /**
- * <p></p>
+ * <p>The New Game Page. Contains the character selection and the option to begin a fresh play-through.</p>
  */
 public class NewGamePage extends AMenu {
 
     /**
-     * <p></p>
-     * @param parentModel -
+     * <p>Builds the New Game page.</p>
+     * @param parentEnvironment The parent AMenuEnvironment
      */
-    public NewGamePage(AMenuEnvironment parentModel) {
-        super(parentModel);
+    public NewGamePage(AMenuEnvironment parentEnvironment) {
+        super(parentEnvironment);
 
         BufferedImage img_sqbutton = getResources().getImage("button_square");
 

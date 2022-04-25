@@ -5,21 +5,21 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
- * <p></p>
+ * <p>The Help Page, containing text content to assist the player.</p>
  */
 public class PauseHelpPage extends AMenu {
 
     /**
-     * <p></p>
-     * @param parentModel -
+     * <p>Builds the Help page.</p>
+     * @param parentEnvironment The parent AMenuEnvironment
      */
-    public PauseHelpPage(AMenuEnvironment parentModel) {
-        super(parentModel);
+    public PauseHelpPage(AMenuEnvironment parentEnvironment) {
+        super(parentEnvironment);
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
         AButtonView button_back = new AButtonView(
-                parentModel,
+                parentEnvironment,
                 (int) (centerW - (btn_width * .5f)),
                 800,
                 btn_width,

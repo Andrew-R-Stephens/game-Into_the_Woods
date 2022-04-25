@@ -6,17 +6,17 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
- * <p></p>
+ * <p>This is the default landing page on startup. Contains a single menu button that says "start".</p>
  */
 public class StartScreenPage extends AMenu {
 
     /**
      * <p></p>
-     * @param parentMenuModel
+     * @param parentEnvironment
      */
-    public StartScreenPage(AMenuEnvironment parentMenuModel) {
+    public StartScreenPage(AMenuEnvironment parentEnvironment) {
 
-        super(parentMenuModel);
+        super(parentEnvironment);
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
 
@@ -46,8 +46,8 @@ public class StartScreenPage extends AMenu {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Navigates the user to the Main Menu Page</p>
+     * @return the MainMenuPage to visit.
      */
     public MainMenuPage navigateToMainMenuPage() {
         getParentEnvironment().push(new MainMenuPage(getParentEnvironment()));

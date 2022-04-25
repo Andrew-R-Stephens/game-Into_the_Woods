@@ -5,16 +5,16 @@ import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
- * <p></p>
+ * <p>The Main Menu Page. Contains menu button components to allow menu navigation.</p>
  */
 public class MainMenuPage extends AMenu {
 
     /**
-     * <p></p>
-     * @param parentModel -
+     * <p>Builds the Main Menu page.</p>
+     * @param parentEnvironment The parent AMenuEnvironment
      */
-    public MainMenuPage(AMenuEnvironment parentModel) {
-        super(parentModel);
+    public MainMenuPage(AMenuEnvironment parentEnvironment) {
+        super(parentEnvironment);
 
         int buttonW = 400, buttonH = (int)(buttonW * .25);
 
@@ -129,7 +129,7 @@ public class MainMenuPage extends AMenu {
     }
 
     /**
-     * <p></p>
+     * <p>Navigates the user to the Level Select Page.</p>
      */
     public void navigateToLevelSelectPage() {
         getParentEnvironment().push(new LevelSelectPage(getParentEnvironment()));
