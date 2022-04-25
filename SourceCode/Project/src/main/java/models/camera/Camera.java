@@ -3,7 +3,11 @@ package models.camera;
 import models.utils.config.Config;
 
 /**
- * <p></p>
+ * <p>Camera class contains static variables and methods which allow for the manipulation of viewport-based data.</p>
+ * <p>Viewport data is used in all Environments where there is position-based renders.</p>
+ * <p>In the Game state, the player position will control the camera offset.</p>
+ * <p>In the Menu state, the mouse position will control the camera offset.</p>
+ * <p>Camera zooms in or out to act to increase or decrease the scaling of in-game objects.</p>
  */
 public class Camera {
 
@@ -21,14 +25,15 @@ public class Camera {
     public static float acceleration_zoom = DEFAULT_ZOOM_ACCELERATION;
 
     /**
-     * <p></p>
+     * <p>Initializes the Camera to the standard position and scale.</p>
      */
     public Camera() {
         reset();
     }
 
     /**
-     * <p></p>
+     * <p>This accepts a default-scale-relative location in the horizontal and vertical axis'. The following global
+     * variables manipulate scale and position to reflect new translations.</p>
      * @param x2 -
      * @param y2 -
      */
@@ -47,7 +52,7 @@ public class Camera {
     }
 
     /**
-     * <p></p>
+     * <p>Acts to zoom the camera to the target zoom level.</p>
      */
     public static void zoomTo() {
         float t = zoomLevel/zoomTarget;
@@ -62,7 +67,7 @@ public class Camera {
     }
 
     /**
-     * <p></p>
+     * <p>Resets the positional data of the camera.</p>
      */
     public static void reset() {
         targX = Config.window_width_actual * .5f;
