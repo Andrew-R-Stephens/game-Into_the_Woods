@@ -8,7 +8,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 /**
- * <p></p>
+ * <p>MainWindow class inherits from the AWindow class. MainWindow contains references to the EnvironmentsHandler.</p>
+ * <p>This class is used to build a new Window as a JFrame, and allows the structuring of such a window to the
+ * specifications set by the user.</p>
+ * <p>It allows for the creation of a custom cursor as well as rebuild the window based on user preferences.</p>
  */
 public class MainWindow extends AWindow {
 

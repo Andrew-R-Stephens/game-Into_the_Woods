@@ -8,22 +8,25 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * <p></p>
+ * <p>AWindow is the parent class of MainWindow and exists to separate external functionality from the MainWindow.</p>
+ * <p>This class extends JFrame, which means that the AWindow inherits the functionality from that class.</p>
+ * <p>This class holds the business logic for constructing the window and building the cursor.</p>
  */
 public abstract class AWindow extends JFrame {
 
     private Resources resources;
 
     /**
-     * <p></p>
-     * @param resources
+     * <p>Sets the Resources reference for the AWindow</p>
+     * @param resources The Resources
      */
     public void setResources(Resources resources) {
         this.resources = resources;
     }
 
     /**
-     * <p></p>
+     * <p>Constructs the Window based on user preferences. Uses the final design to set the actual dimensions to the
+     * Config data.</p>
      */
     protected void constructWindowAndDimensions() {
 
@@ -77,8 +80,9 @@ public abstract class AWindow extends JFrame {
     }
 
     /**
-     * <p></p>
-     * @param isVisible -
+     * <p>If the cursor is visible, we build a new cursor to replace the standard system cursor with an image saved
+     * within the resources director.</p>
+     * @param isVisible If the cursor should be visible.
      */
     public void buildCursor(boolean isVisible) {
         Dimension prefCursorDim = Toolkit.getDefaultToolkit().getBestCursorSize(32, 32);
