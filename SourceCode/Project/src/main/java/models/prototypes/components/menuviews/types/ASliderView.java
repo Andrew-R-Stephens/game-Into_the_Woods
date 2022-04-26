@@ -31,20 +31,15 @@ public abstract class ASliderView<E> extends AMenuComponent {
     private boolean showNotches = true;
 
     /**
-     * <p></p>
-     * @param parentMenuModel -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
+     * <p>Initializes the ASliderView</p>
+     * @param parentMenuModel The AMenuEnvironment containing the Menu that contains this component.
+     * @param x The horizontal position of the component
+     * @param y The vertical position of the component
+     * @param w The width of the component
+     * @param h The height of the component
      */
     public ASliderView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
-        super(parentMenuModel);
-
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+        super(parentMenuModel, x, y, w, h);
 
         trackImage = getParentEnvironment().getResources().getImage("slider_track");
         notchImage = getParentEnvironment().getResources().getImage("slider_notch");
@@ -87,14 +82,14 @@ public abstract class ASliderView<E> extends AMenuComponent {
     }
 
     /**
-     * <p></p>
+     * <p>Defined by the encapsulating class. Used to initializes specific content for each individual iteration.</p>
      */
     public abstract void init();
 
     /**
-     * <p></p>
-     * @param x -
-     * @param y -
+     * <p>Moves the slider button to the specific x and y position, and snaps it to the closest notch.</p>
+     * @param x The requested horizontal position
+     * @param y The requested vertical position
      */
     public void moveSliderTo(int x, int y) {
 
@@ -116,12 +111,12 @@ public abstract class ASliderView<E> extends AMenuComponent {
     }
 
     /**
-     * <p></p>
+     * <p>Defined by the encapsulating object at instantiation.</p>
      */
     public abstract void doSetting();
 
     /**
-     * <p></p>
+     * <p>Builds the slider immediately with these specific details.</p>
      */
     public void build() {
         notchDistance = (w - button.getW()) / (float)(itemCount -1);
@@ -129,8 +124,8 @@ public abstract class ASliderView<E> extends AMenuComponent {
     }
 
     /**
-     * <p></p>
-     * @param showNotches -
+     * <p>Sets if the notches should be drawn to the slider.</p>
+     * @param showNotches If the notches should be rendered.
      */
     public void showNotches(boolean showNotches) {
         this.showNotches = showNotches;

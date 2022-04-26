@@ -40,8 +40,12 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     /**
      * <p>Initializes the AMenuComponent</p>
      * @param parentMenuEnvironment The AMenuEnvironment containing the Menu that contains this component.
+     * @param x The horizontal position of the component
+     * @param y The vertical position of the component
+     * @param w The width of the component
+     * @param h The height of the component
      */
-    public AMenuComponent(AMenuEnvironment parentMenuEnvironment) {
+    public AMenuComponent(AMenuEnvironment parentMenuEnvironment, int x, int y, int w, int h) {
         this.parentMenuEnvironment = parentMenuEnvironment;
     }
 

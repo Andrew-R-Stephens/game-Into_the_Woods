@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * <p></p>
+ * <p>MetaDataParser class accepts the metadata.json file. This file is used to list all local files within the
+ * classpath, register them to a hashmap, and allow this data to be transferred into the Resources for further
+ * processing and resource allocation.</p>
  */
 public class MetaDataParser {
 
@@ -19,15 +21,15 @@ public class MetaDataParser {
     private HashMap<String, ArrayList<String>> fileNames = new HashMap<>();
 
     /**
-     * <p></p>
-     * @param jsonFile -
+     * <p>Creates a new MetaDataParser and stores the path of the metadata.json file.</p>
+     * @param jsonFile The metadata.json file path
      */
     public MetaDataParser(String jsonFile) {
         this.jsonFile = jsonFile;
     }
 
     /**
-     * <p></p>
+     * <p>Reads the metadata.json file and uses Gson to parse through the content.</p>
      */
     public void init() {
 
@@ -65,27 +67,27 @@ public class MetaDataParser {
     }
 
     /**
-     * <p></p>
-     * @param type -
-     * @return
+     * <p>Gets the path of the specific Resource type.</p>
+     * @param type The type of resource requested
+     * @return The path of the resource type
      */
     public String getPath(String type) {
         return paths.get(type);
     }
 
     /**
-     * <p></p>
-     * @param type -
-     * @return
+     * <p>Gets the file names of the type of resource that is requested.</p>
+     * @param type The type of resource.
+     * @return A list of the names of the files of the specified resource type.
      */
     public ArrayList<String> getFileNames(String type) {
         return fileNames.get(type);
     }
 
     /**
-     * <p></p>
-     * @param parent -
-     * @param memberName -
+     * <p>Registers the Element of the specified attributes passed.</p>
+     * @param parent The parent Json Object
+     * @param memberName The Json Object's attribute's member name
      */
     private void registerElement(JsonObject parent, String memberName) {
         JsonElement typeElement = parent.get(memberName);

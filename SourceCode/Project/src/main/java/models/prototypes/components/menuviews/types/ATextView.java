@@ -15,51 +15,45 @@ import java.awt.geom.AffineTransform;
 public abstract class ATextView extends AMenuComponent implements IDrawable, IUpdatable {
 
     /**
-     * <p></p>
-     * @param parentMenuModel -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param text -
+     * <p>Initializes the AButtonView</p>
+     * @param parentMenuModel The AMenuEnvironment containing the Menu that contains this component.
+     * @param x The horizontal position of the component
+     * @param y The vertical position of the component
+     * @param w The width of the component
+     * @param h The height of the component
+     * @param text The text to be drawn to this text view
      */
     public ATextView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h, String text) {
-        super(parentMenuModel);
-
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+        super(parentMenuModel, x, y, w, h);
 
         setText(text);
     }
 
     /**
-     * <p></p>
-     * @param x -
+     * <p>Sets the horizontal position of the component.</p>
+     * @param x The horizontal position requested.
      */
     public void setX(int x) {
         this.x = x;
     }
 
     /**
-     * <p></p>
+     * <p>Shorts the input registration.</p>
      */
+    @Override
     public void registerInput() {
         // DO NOTHING
     }
 
-    /**
-     * <p></p>
-     */
+    @Override
     public void reset() {
         playSound = true;
         super.reset();
     }
 
     /**
-     * <p></p>
-     * @param color -
+     * <p>Sets the background color of this text view</p>
+     * @param color the color to be rendered behind the text.
      */
     public void setBackgroundColor(Color color) {
         this.backgroundColor = color;

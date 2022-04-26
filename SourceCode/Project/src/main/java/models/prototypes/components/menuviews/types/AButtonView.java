@@ -12,27 +12,24 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
- * <p></p>
+ * <p>The AButtonView is a component that allows for user interaction in the form of mouse clicks.</p>
+ * <p>The button is constantly checked for an activated state. If it is active, it will execute a procedure defined
+ * in its definition.</p>
  */
 public abstract class AButtonView extends AMenuComponent implements IDrawable, IUpdatable {
 
     public boolean isEnabled = true;
 
     /**
-     * <p></p>
-     * @param parentMenuModel -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
+     * <p>Initializes the AButtonView</p>
+     * @param parentMenuModel The AMenuEnvironment containing the Menu that contains this component.
+     * @param x The horizontal position of the component
+     * @param y The vertical position of the component
+     * @param w The width of the component
+     * @param h The height of the component
      */
     public AButtonView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
-        super(parentMenuModel);
-
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+        super(parentMenuModel, x, y, w, h);
 
         spritesheet =
                 getParentEnvironment().getResources().getSpriteSheet("spritesheet_buttonhrect").setLoopOnLast(false);
