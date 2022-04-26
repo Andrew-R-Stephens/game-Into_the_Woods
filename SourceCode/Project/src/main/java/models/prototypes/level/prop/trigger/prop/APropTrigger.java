@@ -9,23 +9,24 @@ import models.utils.resources.Resources;
 import java.awt.*;
 
 /**
- * <p></p>
+ * <p>APropTriggers are used to standardize the functionality of objects which react to collisions.</p>
  */
 public abstract class APropTrigger extends ATrigger {
 
     /**
-     * <p></p>
-     * @param resources -
-     * @param gameEnvironment -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param vx -
-     * @param vy -
-     * @param MAX_CYCLES -
-     * @param hasGravity -
-     * @param canMoveOnCollision -
+     * <p>Called from the subtypes, this method initializes the object with position and size relative to the
+     * default dimensions.</p>
+     * @param resources The resources of the parent Environment
+     * @param gameEnvironment The parent game environment
+     * @param x The horizontal position, relative to the default dimensions.
+     * @param y The y position, relative to the default dimensions.
+     * @param w The width, relative to the default dimensions.
+     * @param h The height, relative to the default dimensions.
+     * @param vx The horizontal velocity.
+     * @param vy The vertical velocity.
+     * @param MAX_CYCLES The maximum number of times the action can be done
+     * @param hasGravity If the object should be effected by gravity.
+     * @param canMoveOnCollision If the object can react to the colliding object
      */
     protected APropTrigger(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
                            float vx, float vy, int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {

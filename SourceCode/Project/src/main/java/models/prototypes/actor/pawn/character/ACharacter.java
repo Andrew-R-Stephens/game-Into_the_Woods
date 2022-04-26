@@ -31,16 +31,17 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     private boolean isJumpLocked = false;
 
     /**
-     * <p></p>
-     * @param resources -
-     * @param cModel -
-     * @param x -
-     * @param y -
-     * @param w -
-     * @param h -
-     * @param vx -
-     * @param vy -
-     * @param hasGravity -
+     * <p>Called from the subtypes, this method initializes the object with position and size relative to the
+     * default dimensions.</p>
+     * @param resources The resources of the parent Environment
+     * @param cModel The controls particular to the Game Environment
+     * @param x The horizontal position, relative to the default dimensions.
+     * @param y The y position, relative to the default dimensions.
+     * @param w The width, relative to the default dimensions.
+     * @param h The height, relative to the default dimensions.
+     * @param vx The horizontal velocity.
+     * @param vy The vertical velocity.
+     * @param hasGravity If the object should be effected by gravity.
      */
     protected ACharacter(
             Resources resources, GameControls cModel,
@@ -52,8 +53,8 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param delta -
+     * <p>Called to register the controls to manipulate the entity. Updates for the abilities and movement.</p>
+     * @param delta The ratio of actual/target update rate for the game ticks.
      */
     public void control(float delta) {
         doAbilities();
@@ -61,8 +62,9 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param delta -
+     * <p>Uses the controls to manipulate the positional information.</p>
+     * <p>Registers directional and ability states.</p>
+     * @param delta The ratio of actual/target update rate for the game ticks.
      */
     private void doMovement(float delta) {
 
@@ -106,14 +108,14 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
+     * <p>Calls the process for any programmed abilities.</p>
      */
     private void doAbilities() {
         doJumps();
     }
 
     /**
-     * <p></p>
+     * <p>Does the jump procedure. Follows logic to execute floor jumps and wall jumps.</p>
      */
     private void doJumps() {
 
@@ -155,7 +157,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
+     * <p>Executes the procedure for a jump from the floor.</p>
      */
     public void doFloorJump() {
         vY = -5;
@@ -163,9 +165,9 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param vX -
-     * @param vY -
+     * <p>Does the procedure for a wall jump.</p>
+     * @param vX The new horizontal velocity.
+     * @param vY The new vertical velocity.
      */
     public void doWallJump(float vX, float vY) {
         this.vX = vX;
@@ -175,7 +177,8 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
+     * <p>Locks or Unlocks the character into being in a jump state. This is updated to be unlocked after a period, or
+     * if the player touches a boundary object.</p>
      * @param state -
      */
     private void lockJumpState(boolean state) {
@@ -185,15 +188,16 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @param type -
+     * <p>Sets the type of character, being the male or female character Teo or Melynn.</p>
+     * @param type The Character type chosen
      */
     public void setCharacterType(CharacterType type) {
         this.characterType = type;
     }
 
     /**
-     * <p></p>
+     * <p>Checks conditions of the character state to determine the action type of the character.</p>
+     * <p>This has an effect on the sprite animation of the character.</p>
      */
     private void setActionType() {
         if(isFloorCollision) {
@@ -216,16 +220,16 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Retrieves the current sprite sheet used, based on the action state.</p>
+     * @return the current sprite sheet.
      */
     public SpriteSheet getCurrentSpriteSheet() {
         return spriteSheets.get(actionState);
     }
 
     /**
-     * <p></p>
-     * @param characterOrigin -
+     * <p>Resets the data of the character. This involves defaulting the velocity and position.</p>
+     * @param characterOrigin The new position for the character.
      */
     public void reset(int[] characterOrigin) {
         setVelocity(0, 0);
@@ -241,7 +245,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
+     * <p>The enumerated Character type. This is used for determining the sprite style. Based on Teo or Melynn.</p>
      */
     public enum CharacterType {
         TEO,
@@ -249,7 +253,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
-     * <p></p>
+     * <p>The enumerate Action type. This is used for determining the sprite animation for the action type.</p>
      */
     public enum ActionType {
         FLOOR_IDLE,

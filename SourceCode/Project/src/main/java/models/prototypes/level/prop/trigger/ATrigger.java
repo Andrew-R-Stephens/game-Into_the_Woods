@@ -11,7 +11,7 @@ import models.utils.resources.Resources;
 import java.awt.*;
 
 /**
- * <p></p>
+ * <p>ATrigger is a class which dictates the standard behavior of an object that gets triggered on collision.</p>
  */
 public abstract class ATrigger extends AProp implements IDrawable {
 
