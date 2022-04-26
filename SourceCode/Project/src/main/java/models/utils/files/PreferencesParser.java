@@ -14,7 +14,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * <p></p>
+ * <p>The PreferencesParser accepts the local Preferences file and parses the data within it.</p>
+ * <p>The obtained data is used within the Config to initialize the program with default preferences.</p>
  */
 public class PreferencesParser {
 
@@ -22,9 +23,10 @@ public class PreferencesParser {
     private final Config config;
 
     /**
-     * <p></p>
-     * @param config -
-     * @param file -
+     * <p>This initializes the PreferencesParser with a reference to the Config and a reference to the preferences.xml
+     * file.</p>
+     * @param config The config file used across the entire software.
+     * @param file The preferences.xml file
      */
     public PreferencesParser(Config config, File file) {
         this.config = config;
@@ -32,8 +34,8 @@ public class PreferencesParser {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Parses through the preferences.xml through the use of DocumentBuilderFactory.</p>
+     * @return If the data registered properly.
      */
     public boolean parse() {
 

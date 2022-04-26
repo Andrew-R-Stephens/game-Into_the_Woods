@@ -8,6 +8,11 @@ import models.utils.config.SaveData;
 
 import java.io.*;
 
+/**
+ * <p>SaveFileRW is granted access to the SaveData that's held in memory and updated internally, and processes that data
+ * to Json format and writes it to a persistent external file. If the file is not found, the file is created.</p>
+ * <p>The external save file is always created at the path of the JAR.</p>
+ */
 public class SaveFileRW {
 
     private SaveData saveData;
@@ -24,6 +29,10 @@ public class SaveFileRW {
         this.saveFileName = saveFileName;
     }
 
+    /**
+     * <p>Creates a new Save File if the save file does not exist.</p>
+     * <p>The save file is always created at the same system path of the JAR.</p>
+     */
     public void createNewSaveFile() {
         if(saveFile != null) {
             return;
@@ -31,8 +40,6 @@ public class SaveFileRW {
 
         File file = new File(Config.jarPath);
         File folder = file.getParentFile();
-        System.out.println(file + "'s parent is -> " + folder + " which is " + (folder.isDirectory()? "a folder" :
-                "not a folder"));
         saveFile = new File(folder + "/" + saveFileName);
 
         boolean isNew = false;
@@ -47,6 +54,10 @@ public class SaveFileRW {
         }
     }
 
+    /**
+     * Serializes the save data to the save file.
+     * @return True if the serialization was successful. False if failure.
+     */
     public boolean savetoFile() {
         if(!serialize()) {
             System.out.println("Failed save.");
@@ -57,7 +68,8 @@ public class SaveFileRW {
     }
 
     /**
-     * Write SaveData object to File. Validate File.
+     * Write SaveData object to File. Validate File by deserializing the file and checking the data.
+     * @return True is the file was written properly and is checked via deserialization.
      */
     private boolean serialize() {
         createNewSaveFile();
@@ -80,7 +92,8 @@ public class SaveFileRW {
     }
 
     /**
-     * Read from File. Validate data. Record to SaveData object.
+     * Read from File and records to SaveData object.
+     * @return False if the data cannot be found, if the file is not found, or if there is malformed data.
      */
     public boolean deserialize() {
         createNewSaveFile();

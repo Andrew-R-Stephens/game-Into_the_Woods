@@ -11,7 +11,12 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * <p></p>
+ * <p>The SpriteSheetParser accepts a Json file that contains data that's particular to the output produced by a
+ * Spritesheet program called "Aseprite". Aseprite program allows a user to design animations, and outputs the animation
+ * as an image of all frames, conjoined side by side into one image.</p>
+ * <p>This program takes the Json file and delimits the frame data. This class parses that Json file and stores each
+ * Sprite's data into Sprite objects that are then stored into a SpriteSheet object. That SpriteSheet data is then used
+ * when a spritesheet is requested from the Resources.</p>
  */
 public class SpriteSheetParser {
 
@@ -20,8 +25,8 @@ public class SpriteSheetParser {
     private final String jsonFile;
 
     /**
-     * <p></p>
-     * @param jsonFile -
+     * <p>This initializes the SpriteSheetParser with a Json file to be parsed. It then parses that sheet.</p>
+     * @param jsonFile The json file to be read.
      */
     public SpriteSheetParser(String jsonFile) {
         this.jsonFile = jsonFile;
@@ -30,8 +35,9 @@ public class SpriteSheetParser {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Processes the Json file, stores the data into individual Sprites, and stores the Sprites into a SpriteSheet.
+     * </p>
+     * @return The completed SpriteSheet.
      */
     private SpriteSheet processSpriteSheet() {
 
@@ -116,8 +122,8 @@ public class SpriteSheetParser {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the SpriteSheets which has been given data retrieved from a Json containing spritesheet information.</p>
+     * @return The completed SpriteSheet.
      */
     public SpriteSheet getSpriteSheet() {
         return spriteSheet;
