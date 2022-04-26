@@ -4,7 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 /**
- * <p></p>
+ * <p>The Sprite class is for data read from the SpriteSheetParser. It contains all data of an individual frame in
+ * the spritesheet. The Sprite should be contained within a list in the SpriteSheet class.</p>
  */
 public class Sprite {
 
@@ -18,13 +19,13 @@ public class Sprite {
     private float[] scaledSize = new float[2];
 
     /**
-     * <p></p>
-     * @param filename -
-     * @param frame -
-     * @param rotated -
-     * @param trimmed -
-     * @param spriteSourceSize -
-     * @param sourceSize -
+     * <p>Sets the data pulled from the SpriteSheet Json file by means of the SpriteSheetParser.</p>
+     * @param filename The name of the frame
+     * @param frame The position and actual size of the frame
+     * @param rotated If the frame is rotated
+     * @param trimmed If the frame is trimmed
+     * @param spriteSourceSize The standard size of the frame
+     * @param sourceSize The trimmed size of the frame
      * @param duration -
      */
     public Sprite(String filename, int[] frame, boolean rotated, boolean trimmed, int[] spriteSourceSize,
@@ -39,17 +40,17 @@ public class Sprite {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the name of the frame.</p>
+     * @return The name of the frame.
      */
     public String getName() {
         return filename;
     }
 
     /**
-     * <p></p>
-     * @param spritesheet -
-     * @return
+     * <p>Gets the frame from the master sprite sheet image.</p>
+     * @param spritesheet The master Sprite Sheet image.
+     * @return The frame from the master sprite sheet.
      */
     public BufferedImage getSubImage(BufferedImage spritesheet) {
         return spritesheet.getSubimage(
@@ -57,24 +58,24 @@ public class Sprite {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the frame duration.</p>
+     * @return The number of milliseconds that this frame should exist for.
      */
     public int getDuration() {
         return duration;
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets if the frame is trimmed.</p>
+     * @return If the frame is trimmed.
      */
     public boolean isTrimmed() {
         return trimmed;
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the actual size of the frame.</p>
+     * @return The size of the frame.
      */
     public int[] getSize() {
         if(!isTrimmed()) {
@@ -84,8 +85,8 @@ public class Sprite {
     }
 
     /**
-     * <p></p>
-     * @param scale -
+     * <p>Gets the scaled size against the largest width frame and the largest height frame.</p>
+     * @param scale The scaled size of the largest width frame and the largest height frame
      */
     public void setScaledSize(float[] scale) {
         scaledSize[0] = scale[0] * getSize()[0];
@@ -93,8 +94,8 @@ public class Sprite {
     }
 
     /**
-     * <p></p>
-     * @param scale -
+     * <p>Gets the scaled position vs the largest frame width and largest frame height.</p>
+     * @param scale The scale of the largest width frame and the largest height frame
      */
     public void setScaledPos(float[] scale) {
         scaledPos[0] = scale[0] * getPosition()[0];
@@ -102,16 +103,16 @@ public class Sprite {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the scale of the frame in relation to the largest frame.</p>
+     * @return The scaled size of the frame
      */
     public float[] getScaledSize() {
         return scaledSize;
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the scaled position of the frame in relation to the max frame size.</p>
+     * @return The scaled position of the frame
      */
     public int[] getPosition() {
         return new int[] {(int)scaledPos[0], (int)scaledPos[1]};

@@ -6,23 +6,22 @@ import models.prototypes.views.ACanvas;
 import java.awt.*;
 
 /**
- * <p></p>
+ * <p>The EnvironmentCanvas behaves ubiquitously between all types of Environments.</p>
+ * @param <T> The AEnvironment subtype that this Canvas is used for.
  */
 public class EnvironmentCanvas<T extends AEnvironment> extends ACanvas {
 
     private T environment;
 
     /**
-     * <p></p>
-     * @param environment -
+     * <p>Initializes this Canvas with the Environment type that is specified in the generic.</p>
+     * @param environment The Environment this Canvas is used with.
      */
     public void init(T environment) {
         this.environment = environment;
     }
 
-    /**
-     * <p></p>
-     */
+    @Override
     public void render() {
         repaint();
     }

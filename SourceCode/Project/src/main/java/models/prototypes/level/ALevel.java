@@ -18,7 +18,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- * <p></p>
+ * <p>ALevel standardizes the data of a level.</p>
  */
 public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
@@ -34,56 +34,56 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     protected int keyCount = 0;
 
     /**
-     * <p></p>
-     * @param gameEnvironment -
+     * <p>Creates a level and obtains reference to the game environment of the level.</p>
+     * @param gameEnvironment The parent game environment
      */
     public ALevel(GameEnvironment gameEnvironment) {
         this.gameEnvironment = gameEnvironment;
     }
 
     /**
-     * <p></p>
-     * @param prop -
+     * <p>Adds a new Prop to the Level.</p>
+     * @param prop The prop to be added.
      */
     protected void addProp(AProp prop) {
         levelProps.add(prop);
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the props of the level.</p>
+     * @return The list of props in the level.
      */
     public ArrayList<AProp> getLevelProps() {
         return levelProps;
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the defined spawn origin point for the player to start in.</p>
+     * @return The defined spawn origin.
      */
     public int[] getCharacterOrigin() {
         return startOrigin;
     }
 
     /**
-     * <p></p>
-     * @param x
-     * @param y
+     * <p>Sets the spawn origin point for the player to start in.</p>
+     * @param x The horizontal position of the origin.
+     * @param y The vertical position of the origin.
      */
     public void setStartOrigin(int x, int y) {
         startOrigin = new int[]{x, y};
     }
 
     /**
-     * <p></p>
-     * @param backgroundImage -
+     * <p>Adds a background layer to the parallax background in the level.</p>
+     * @param backgroundImage The background image to be added as a layer of the background
      */
     protected void addBackgroundLayer(BufferedImage backgroundImage) {
         scrollingBackground.addLayer(backgroundImage);
     }
 
     /**
-     * <p></p>
+     * <p>Counts the number of keys that exist in the level.</p>
      */
     public void countKeys() {
         for (AActor levelProps : getLevelProps()) {
@@ -94,22 +94,22 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Retrieves the number of keys in the level.</p>
+     * @return The number of Keys in the level
      */
     public int getKeyCount() {
         return keyCount;
     }
 
     /**
-     * <p></p>
+     * <p>Builds the level.</p>
      */
     public void build() {
         countKeys();
     }
 
     /**
-     * <p></p>
+     * <p>Resets the props of each level.</p>
      */
     public void reset() {
         for(AProp p: levelProps) {
@@ -120,15 +120,15 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the reference to the Resources.</p>
+     * @return The reference to Resources.
      */
     public Resources getResources() {
         return gameEnvironment.getResources();
     }
 
     /**
-     * <p></p>
+     * <p>Unlocks the door of the level.</p>
      */
     public void unlockDoor() {
         door.unlock();
