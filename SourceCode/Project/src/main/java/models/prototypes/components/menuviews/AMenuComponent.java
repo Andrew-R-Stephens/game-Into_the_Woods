@@ -18,23 +18,43 @@ import java.awt.image.BufferedImage;
  */
 public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
-    // The Parent menu model which holds all pages and subpages.
+    /**
+     * <p>The Parent menu model which holds all pages and subpages.</p>
+     */
     private final AMenuEnvironment parentMenuEnvironment;
+
+    /**<p>The SpriteSheet that will be used to draw this component.</p>*/
     protected SpriteSheet spritesheet;
+    /**<p>The scaling procedure of the background image of this component.</p>*/
     protected ImageScale scaleType = ImageScale.FILL_XY;
+    /**<p>The foreground color overlaying the other parts of the component.</p>*/
     protected Color foregroundColor = new Color(0, 0, 0);
+    /**<p>The background color under the other parts of the component.</p>*/
     protected Color backgroundColor = new Color(0, 0, 0, 0);
+
+    /**<p>The background image of the component.</p>*/
     protected BufferedImage backgroundImage;
+    /**<p>The image's tint of an image in the component.</p>*/
     protected BufferedImage tint;
-    // Text to be displayed.
-    // Will be removed if we add actual images in place of awt views.graphics.
+
+    /**<p>Text to be displayed. Will be removed if we add actual images in place of awt views.graphics.</p>*/
     protected String text = "";
 
-    protected int x, y; // Coordinates on the 2D space, relative to the default screen size
-    protected int w, h; // The width of the component
+    /**<p>The horizontal position of the component.</p>*/
+    protected int x;
+    /**<p>The vertical position of the component.</p>*/
+    protected int y;
 
+    /**<p>The width of the component.</p>*/
+    protected int w;
+    /**<p>The height of the component.</p>*/
+    protected int h;
+
+    /**<p>If the component has focus from the user.</p>*/
     protected boolean isFocused = false;
+    /**<p>If the component has been activated by the user.</p>*/
     protected boolean isPressed = false;
+    /**<p>If the component should play audio.</p>*/
     protected boolean playSound = true;
 
     /**

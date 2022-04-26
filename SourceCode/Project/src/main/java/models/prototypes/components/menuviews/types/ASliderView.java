@@ -17,19 +17,29 @@ import java.util.ArrayList;
  */
 public abstract class ASliderView<E> extends AMenuComponent {
 
+    /**<p>The generic type of the elements accepted for this component's arraylist.</p>*/
     private E e;
 
+    /**<p>The slider button.</p>*/
     protected final AButtonView button;
 
+    /**<p>The background track image.</p>*/
     private final BufferedImage trackImage;
+    /**<p>The mid-ground notch image.</p>*/
     private final BufferedImage notchImage;
 
+    /**<p>The arraylist that contains all elements for the slider to navigate through.</p>*/
     protected ArrayList<E> values = new ArrayList<>();
+    /**<p>The item count of all elements in the values arraylist.</p>*/
     protected int itemCount = 2;
+    /**<p>The previously selected index of the slider.</p>*/
     protected int previous = 0;
+    /**<p>The currently chosen index that the slider is on.</p>*/
     protected int current = previous;
+    /**<p>The distance between each notch in the slider.</p>*/
     private float notchDistance = 0;
 
+    /**<p>If the notch images should be displayed within the slider.</p>*/
     private boolean showNotches = true;
 
     /**

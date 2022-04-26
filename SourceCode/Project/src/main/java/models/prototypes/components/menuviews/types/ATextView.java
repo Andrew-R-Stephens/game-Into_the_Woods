@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 /**
- * <p></p>
+ * <p>The ATextView component simply should draw text within the component.</p>
  */
 public abstract class ATextView extends AMenuComponent implements IDrawable, IUpdatable {
 
