@@ -10,8 +10,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- * <p></p>
- * @param <E> -
+ * <p>The ASliderView is a class that contains a clickable button that moves based on user mouse input and mouse
+ * position. Notches will cause the slider to snap to specific locations, the quantity of notches (and therefore snaps)
+ * are based on the number of items in the list that this slider will move through.</p>
+ * @param <E> The type of item that is used in the list that the slider position will obtain.
  */
 public abstract class ASliderView<E> extends AMenuComponent {
 
