@@ -14,9 +14,13 @@ import java.awt.*;
  */
 public abstract class AOverlayComponent implements IUpdatable, IDrawable {
 
+    /**<p>The parent GameEnvironment.</p>*/
     protected GameEnvironment gameEnvironment;
 
-    protected int x, y, w, h;
+    /**<p>The positional coordinate of the component.</p>*/
+    protected int x, y;
+    /**<p>The dimensions of the component.</p>*/
+    protected int w, h;
 
     /**
      * <p>Initializes the components with positional and size data.</p>

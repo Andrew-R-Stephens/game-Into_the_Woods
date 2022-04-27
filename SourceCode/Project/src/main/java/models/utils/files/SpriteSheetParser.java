@@ -21,8 +21,10 @@ import java.util.ArrayList;
  */
 public class SpriteSheetParser {
 
+    /**<p>The Spritesheet that shit parser will write to.</p>*/
     private SpriteSheet spriteSheet;
 
+    /**<p>The path of the json file for this SpriteSheet.</p>*/
     private final String jsonFile;
 
     /**

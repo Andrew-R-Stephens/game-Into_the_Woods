@@ -10,13 +10,19 @@ import java.util.Arrays;
  */
 public class Sprite {
 
+    /**<p>The Sprite frame name.</p>*/
     private final String filename;
 
+    /**<p>The frame size.</p>*/
     private final int[] frame, spriteSourceSize, sourceSize;
+    /**<p>A modification of the frame.</p>*/
     private final boolean rotated, trimmed;
+    /**<p>The duration that the frame should last for in milliseconds.</p>*/
     private final int duration;
 
+    /**<p>The scaled position relative to the max sprite size.</p>*/
     private float[] scaledPos = new float[2];
+    /**<p>The scaled size relative to the max sprite size.</p>*/
     private float[] scaledSize = new float[2];
 
     /**

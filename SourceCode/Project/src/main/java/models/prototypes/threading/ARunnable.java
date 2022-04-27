@@ -8,9 +8,12 @@ import models.utils.config.Config;
  */
 public abstract class ARunnable implements Runnable {
 
+    /**<p>Is the runnable is looping.</p>*/
     protected boolean isRunning;
 
+    /**<p>The last number of ticks in the last 1 second cycle.</p>*/
     protected int lastUpdates = Config.GAME_UPDATE_RATE;
+    /**<p>The current count of ticks contained in this current 1 second cycle.</p>*/
     protected int updates = 0;
 
     /**

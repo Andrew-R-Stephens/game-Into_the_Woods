@@ -16,9 +16,12 @@ import java.util.HashMap;
  */
 public class MetaDataParser {
 
+    /**<p>The path of the Json file</p>*/
     private final String jsonFile;
 
+    /**<p>The resource paths of all data types.</p>*/
     private HashMap<String, String> paths = new HashMap<>();
+    /**<p>The arraylist of file names based on the file type.</p>*/
     private HashMap<String, ArrayList<String>> fileNames = new HashMap<>();
 
     /**

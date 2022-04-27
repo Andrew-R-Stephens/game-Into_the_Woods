@@ -14,8 +14,9 @@ import models.utils.files.SaveFileRW;
  */
 public class SaveData {
 
+    /**<p>SaveFileRW parsing process.</p>*/
     private SaveFileRW saveFileRW;
-
+    /**<p>The last level that the user has completed.</p>*/
     private int lastCompletedLevel = -1;
 
     /**

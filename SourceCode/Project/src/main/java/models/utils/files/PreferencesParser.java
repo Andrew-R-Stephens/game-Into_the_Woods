@@ -20,7 +20,9 @@ import java.io.IOException;
  */
 public class PreferencesParser {
 
+    /**<p>The preferences file that will be parsed through.</p>*/
     private File file;
+    /**<p>The Configurations that will be registered by the data acquired by the preferences.xml.</p>*/
     private final Config config;
 
     /**

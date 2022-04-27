@@ -14,22 +14,34 @@ import java.net.URISyntaxException;
  */
 public class Config {
 
+    /**<p>The name of the Operating System.</p>*/
     private static String opSysName;
+    /**<p>The system path of the jar.</p>*/
     public static String jarPath;
 
+    /**<p>The DisplayInfo of the system</p>*/
     private static DisplayInfo displayInfo;
 
+    /**<p>The type of frame for this window.</p>*/
     private static WindowType window_type = WindowType.WINDOWED;
 
+    /**<p>The default window dimension that all render scales compare to.</p>*/
     public static int DEFAULT_WINDOW_WIDTH = 1920, DEFAULT_WINDOW_HEIGHT = 1080;
+    /**<p>The user requested window width.</p>*/
     public static int window_width_selected = DEFAULT_WINDOW_WIDTH, window_height_selected = DEFAULT_WINDOW_HEIGHT;
+    /**<p>The actual window width. Is restricted by the screen dimensions.</p>*/
     public static int window_width_actual = DEFAULT_WINDOW_WIDTH, window_height_actual = DEFAULT_WINDOW_HEIGHT;
 
+    /**<p>The scaled dimensions of the window against the DEFAULT_WINDOW dimensions</p>*/
     public static float scaledW = 1f, scaledH = 1f;
+    /**<p>The scaled dimensions, with camera zoom considered, compared against the DEFAULT_WINDOW dimensions.</p>*/
     public static float scaledW_zoom = 1f, scaledH_zoom = 1f;
 
+    /**<p>The default tick rate of the environments.</p>*/
     public static short GAME_UPDATE_RATE = 60;
+    /**<p>The default target framerate for the renders.</p>*/
     public static short FRAME_RATE_DEFAULT = 60;
+    /**<p>The actual framerate for the renders.</p>*/
     public static short frameRate = 60;
 
     /**

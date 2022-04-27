@@ -10,6 +10,7 @@ import java.awt.*;
  */
 public class DisplayInfo {
 
+    /**<p>The system's extra scale factor of all GUI components.</p>*/
     public static float SYS_SCALEX = 1f, SYS_SCALEY = 1f;
 
     /**

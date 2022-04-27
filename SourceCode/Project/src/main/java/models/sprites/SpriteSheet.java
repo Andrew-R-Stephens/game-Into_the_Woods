@@ -14,14 +14,20 @@ import java.util.ArrayList;
  */
 public class SpriteSheet implements IUpdatable {
 
+    /**<p>The spritesheet image that sprites will be sampled from.</p>*/
     private BufferedImage referenceImage;
 
+    /**<p>All frame data that exist for this sprite sheet.</p>*/
     private ArrayList<Sprite> frames = new ArrayList<>();
 
+    /**<p>The largest x and y dimension of all considered frames.</p>*/
     private final int[] largestSize = new int[2];
+    /**<p>The frame scale of the largestSize against the max size.</p>*/
     private float[] frameScale = new float[2];
 
+    /**<p>The current index information of the animation.</p>*/
     private int currentFrame = 0, ticks = 0;
+    /**<p>If the animation should restart at the first frame when the last frame is finished.</p>*/
     private boolean loopOnLastFrame = true;
 
     /**

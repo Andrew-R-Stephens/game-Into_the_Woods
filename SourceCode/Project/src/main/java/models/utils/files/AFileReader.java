@@ -9,6 +9,7 @@ import java.io.File;
  */
 public abstract class AFileReader {
 
+    /**<p>The File that this FileReader has read in.</p>*/
     protected File file;
 
     /**

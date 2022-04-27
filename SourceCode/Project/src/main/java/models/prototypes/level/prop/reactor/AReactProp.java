@@ -16,9 +16,12 @@ import java.awt.*;
  */
 public abstract class AReactProp extends AProp implements IDrawable {
 
+    /**<p>The parent GameEnvironment.</p>*/
     protected GameEnvironment gameEnvironment;
 
+    /**<p>If the prop should move upon collision.</p>*/
     protected boolean canMoveOnCollision;
+    /**<p>The number of times this prop has been activated.</p>*/
     protected int currentCycles = 0;
 
     /**

@@ -11,19 +11,31 @@ import models.utils.updates.IUpdatable;
  */
 public abstract class APhysics implements IUpdatable {
 
+    /**<p>The gravity that the object will be affected by.</p>*/
     public static final float GRAVITY = 9.8f / (float) Config.GAME_UPDATE_RATE;
+    /**<p>The buffers of the hitbox.</p>*/
     protected final float bufferVert = 5, bufferHoriz = 5;
-    protected final float MAX_VEL_X = 9.8f;
-    protected final float MAX_VEL_Y = 9.8f;
+    /**<p>The maximum velocity that the object can move per second.</p>*/
+    protected final float MAX_VEL_X = 9.8f, MAX_VEL_Y = 9.8f;
+    /**<p>The multiplier that friction has on the object's motion.</p>*/
     protected final float friction = .5f;
 
+    /**<p>The original dimension of the object.</p>*/
     protected float ox, oy, ow, oh;
-    protected float x, y, w, h;
+    /**<p>The position of the object.</p>*/
+    protected float x, y;
+    /**<p>The width and height of the object.</p>*/
+    protected float w, h;
+    /**<p>The velocity of the object.</p>*/
     protected float vX, vY;
 
+    /**<p>If the collision on a specific face is made.</p>*/
     protected boolean isFloorCollision,  isWallCollisionLeft, isWallCollisionRight;
+    /**<p>If the object should be affected by gravity.</p>*/
     protected boolean hasGravity = true;
+    /**<p>If the object is being directly controlled by the user.</p>*/
     protected boolean isUserControlled;
+    /**<p>If this object is moving either horizontally or vertically.</p>*/
     protected boolean isMoving;
 
     /**

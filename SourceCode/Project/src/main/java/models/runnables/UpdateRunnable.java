@@ -15,6 +15,7 @@ import models.utils.config.Config;
  */
 public class UpdateRunnable extends ARunnable {
 
+    /**<p>THe AEnvironment that this Runnable updates for.</p>*/
     private AEnvironment environment;
 
     /**

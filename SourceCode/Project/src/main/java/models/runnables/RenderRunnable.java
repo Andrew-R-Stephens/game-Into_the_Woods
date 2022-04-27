@@ -14,6 +14,7 @@ import models.utils.config.Config;
  */
 public class RenderRunnable extends ARunnable {
 
+    /**<p>The ACanvas that will be drawn to.</p>*/
     private ACanvas canvas;
 
     /**

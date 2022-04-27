@@ -23,15 +23,20 @@ import java.util.ArrayList;
  */
 public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
+    /**<p>The parent GameEnvironment.</p>*/
     protected GameEnvironment gameEnvironment;
 
-    //protected BufferedImage backgroundImage;
+    /**<p>The moving background for the level.</p>*/
     private final ParallaxBackground scrollingBackground = new ParallaxBackground();
 
+    /**<p>The spawning point of the player.</p>*/
     protected int[] startOrigin = new int[2];
+    /**<p>The Props that exist within this level.</p>*/
     protected final ArrayList<AProp> levelProps = new ArrayList<>();
+    /**<p>The Door that allows the player to exit the level.</p>*/
     protected Door door;
 
+    /**<p>The number of keys that exist in the level.</p>*/
     protected int keyCount = 0;
 
     /**

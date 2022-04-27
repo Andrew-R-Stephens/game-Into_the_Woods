@@ -25,14 +25,21 @@ import java.util.Map;
  */
 public class Resources {
 
+    /**<p>The metadata.json file classpath.</p>*/
     private String PATH_META = "metadata/metadata.json";
 
+    /**<p>The classpath to all text files.</p>*/
     public static String path_textFile;
+    /**<p>The classpath for the resource.</p>*/
     private String path_images, path_audio, path_fonts;
 
+    /**<p>The Hashmap of String keys obtaining specific BufferedImage references.</p>*/
     private final Map<String, BufferedImage> imagesFiles = new HashMap<>();
+    /**<p>The Hashmap of String keys obtaining specific Audio File classpaths.</p>*/
     private final Map<String, String> audioFiles = new HashMap<>();
+    /**<p>The Hashmap of String keys obtaining specific File references.</p>*/
     private final Map<String, File> textFiles = new HashMap<>();
+    /**<p>The Hashmap of String keys obtaining specific Font references.</p>*/
     private final Map<String, Font> fontFiles = new HashMap<>();
 
     /**
