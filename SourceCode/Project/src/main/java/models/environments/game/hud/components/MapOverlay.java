@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
  */
 public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatable {
 
+    /**<p>The overlay image.</p>*/
     private BufferedImage overlay;
 
     /**

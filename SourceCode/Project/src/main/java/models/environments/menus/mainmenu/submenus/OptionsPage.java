@@ -17,9 +17,12 @@ import java.util.Arrays;
  */
 public class OptionsPage extends AMenu {
 
-    private AButtonView button_apply;
+    /**<p>The apply button used to accept changes.</p>*/
+    private final AButtonView button_apply;
 
+    /**<p>The user-defined framerate</p>*/
     private short selectedFramerate = Config.frameRate;
+    /**<p>The user-defined window type</p>*/
     private Config.WindowType selectedWindowType = Config.getWindowType();
 
     /**

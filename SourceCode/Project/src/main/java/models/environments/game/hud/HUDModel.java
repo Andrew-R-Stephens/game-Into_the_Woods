@@ -18,10 +18,14 @@ import java.awt.geom.AffineTransform;
  */
 public class HUDModel implements IDrawable, IUpdatable {
 
+    /**<p>The parent GameEnvironment</p>*/
     protected GameEnvironment gameEnvironment;
 
+    /**<p>The local MapOverlay</p>*/
     private MapOverlay map;
+    /**<p>The local PlayerStatsOverlay</p>*/
     private PlayerStatsOverlay stats;
+    /**<p>The local TimeKeeperOverlay</p>*/
     private TimeKeeperOverlay timer;
 
     /**

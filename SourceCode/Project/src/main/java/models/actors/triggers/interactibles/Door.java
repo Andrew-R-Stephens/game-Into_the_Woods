@@ -25,8 +25,11 @@ import java.util.HashMap;
  */
 public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpdatable {
 
+    /**<p>The action of the Door.</p>*/
     private final Type type = Type.UNDEFINED;
+    /**<p>The Hashmap containing all spritesheets relative to a Door.</p>*/
     protected HashMap<Type, SpriteSheet> spriteSheets = new HashMap<>();
+    /**<p>The current state of the door.</p>*/
     private State state = State.LOCKED;
 
     /**

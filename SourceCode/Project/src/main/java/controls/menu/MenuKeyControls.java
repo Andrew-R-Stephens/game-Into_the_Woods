@@ -73,16 +73,16 @@ public class MenuKeyControls extends AKeyController{
     }
 
     /**
-     * <p></p>
-     * @param type -
-     * @return
+     * <p>Checks if the action passed is an action.</p>
+     * @param type the action requested
+     * @return if the action exists
      */
     public boolean isAction(MenuControls.Actions type) {
         return ((MenuControls) controlsModel).isAction(type);
     }
 
     /**
-     * <p></p>
+     * <p>Resets the control Model</p>
      */
     public void reset() {
         controlsModel.reset();

@@ -17,6 +17,7 @@ import java.awt.*;
  */
 public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable {
 
+    /**<p>The GameEnvironment that this pause menu belonds to</p>*/
     protected GameEnvironment gameEnvironment;
 
     /**

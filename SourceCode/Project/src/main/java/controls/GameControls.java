@@ -10,6 +10,7 @@ import java.util.Arrays;
  */
 public class GameControls extends AControls {
 
+    /**<p>Contains the state of the abilities.</p>*/
     boolean[] abilities = new boolean[Abilities.values().length];
 
     /**

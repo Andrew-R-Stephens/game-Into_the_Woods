@@ -21,6 +21,7 @@ import java.awt.image.BufferedImage;
  */
 public class MainMenuEnvironment extends AMenuEnvironment {
 
+    /**<p>The background image of the menu</p>*/
     protected BufferedImage backgroundImage;
 
     /**

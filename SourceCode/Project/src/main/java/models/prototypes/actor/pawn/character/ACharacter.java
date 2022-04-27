@@ -16,19 +16,29 @@ import java.util.HashMap;
  */
 public abstract class ACharacter extends APawn implements IUpdatable {
 
+    /**<p>The controls model that this entity will listen to</p>*/
     protected final GameControls controlsModel;
 
+    /**<p>The user-defined chosen character</p>*/
     protected CharacterType characterType;
+    /**<p></p>*/
     protected ActionType actionState = ActionType.FLOOR_IDLE;
 
+    /**<p>The hashmap containing all spritesheets particular for specific user actions.</p>*/
     protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 
+    /**<p>The amount of ticks that a player has to hit the ground or wall after pressing jump before the jump
+     * button is no longer recognized as pressed.</p>*/
     private final int MAX_ALLOWED_JUMP_TIME = 10;
+    /**<p>The length of time that a player may stick to the wall.</p>*/
     private final float MAX_ALLOWED_WALLRIDE_TIME = .7f;
 
+    /**<p>The current number of ticks that the player has not hit the ground or wall after pressing jump.</p>*/
     private int time_jump = MAX_ALLOWED_JUMP_TIME;
+    /**<p>The amount of time that the player has wall ridden for.</p>*/
     private float time_wallride = MAX_ALLOWED_JUMP_TIME;
 
+    /**<p>If the jump is still executing.</p>*/
     private boolean isJumpLocked = false;
 
     /**

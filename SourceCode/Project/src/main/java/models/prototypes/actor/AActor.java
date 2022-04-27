@@ -16,12 +16,15 @@ import java.awt.*;
  */
 public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
 
+    /**<p>The persistent Resources.</p>*/
     protected Resources resources;
 
+    /**<p>The current Facing direction.</p>*/
     protected Facing facing;
-
+    /**<p>The enums meant for setting the facing direction.</p>*/
     protected enum Facing { LEFT, RIGHT, UP, DOWN }
 
+    /**<p>The current simple color of the actor's hitbox.</p>*/
     protected Color color = new Color(0, 0, 255, 50);
 
     /**

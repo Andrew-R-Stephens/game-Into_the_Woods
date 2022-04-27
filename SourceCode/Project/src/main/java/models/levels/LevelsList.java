@@ -17,9 +17,12 @@ import java.util.ArrayList;
  */
 public class LevelsList implements IDrawable {
 
+    /**<p>The parent Game Environment</p>*/
     private GameEnvironment gameEnvironment = null;
 
+    /**<p>The list of all levels available</p>*/
     private final ArrayList<ALevel> levels = new ArrayList<>();
+    /**<p>The index of the active level</p>*/
     private int currentLevel = 0;
 
     /**

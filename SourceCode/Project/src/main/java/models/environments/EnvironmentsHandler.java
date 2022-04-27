@@ -20,18 +20,27 @@ import java.util.ArrayList;
  */
 public class EnvironmentsHandler {
 
+    /**<p>The main window frame.</p>*/
     private MainWindow parentWindow;
 
+    /**<p>The save data with previously saved information and current information.</p>*/
     private SaveData saveData;
 
+    /**<p>The current environment that the user is in</p>*/
     private EnvironmentType currentEnvironment = EnvironmentType.MAIN_MENU;
 
+    /**<p>The list of all environments available</p>*/
     private final ArrayList<AEnvironment> environments = new ArrayList<>();
+    /**<p>The list of all canvases available</p>*/
     private final ArrayList<ACanvas> canvases = new ArrayList<>();
+    /**<p>The list of all update runnables available</p>*/
     private final ArrayList<ARunnable> updateRunnables = new ArrayList<>();
+    /**<p>The list of all render runnables available</p>*/
     private final ArrayList<ARunnable> renderRunnables = new ArrayList<>();
 
+    /**<p>The Updates thread that all environments' update runnables will use.</p>*/
     private Thread updatesThread;
+    /**<p>The Render thread that all environments' render runnables will use.</p>*/
     private Thread rendersThread;
 
     /**

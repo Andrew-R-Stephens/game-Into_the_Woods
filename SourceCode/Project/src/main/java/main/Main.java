@@ -35,39 +35,62 @@ import views.window.MainWindow;
  */
 public class Main {
 
+    /**<p>The globally used Configurations reference.</p>*/
     private static Config config;
+    /**<p>The globally used resource files of the classpath.</p>*/
     private static Resources resources;
+    /**<p>The persistently used save data.</p>*/
     private static SaveData saveData;
+    /**<p>The SaveFileRW that the SaveData uses persistently.</p>*/
     private static SaveFileRW saveFileRW;
 
+    /**<p>The persistent EnvironmentsHandler.</p>*/
     private static EnvironmentsHandler environmentsHandler;
 
+    /**<p>The persistent MapOverlay.</p>*/
     private static MapOverlay mapOverlay;
+    /**<p>The persistent PlayerStatsOverlay.</p>*/
     private static PlayerStatsOverlay playerStatsOverlay;
+    /**<p>The persistent TimeKeeperOverlay.</p>*/
     private static TimeKeeperOverlay timeKeeperOverlay;
 
+    /**<p>The persistent HUDModel.</p>*/
     private static HUDModel hudModel;
+    /**<p>The persistent PlayerInventory.</p>*/
     private static PlayerInventory inventory;
 
+    /**<p>The persistent GameControls.</p>*/
     private static GameControls gameControlsModel;
+    /**<p>The persistent MenuControls.</p>*/
     private static MenuControls menuControlsModel;
 
+    /**<p>The persistent MainMenuEnvironment.</p>*/
     private static MainMenuEnvironment mainMenuEnvironment;
+    /**<p>The persistent GameEnvironment.</p>*/
     private static GameEnvironment gameEnvironment;
 
+    /**<p>The persistent PauseMenuEnvironment.</p>*/
     private static PauseMenuEnvironment pauseMenuModel;
 
+    /**<p>The persistent UpdateRunnable.</p>*/
     private static UpdateRunnable gameUpdateRunnable;
+    /**<p>The persistent RenderRunnable.</p>*/
     private static RenderRunnable gameRenderRunnable;
 
+    /**<p>The persistent UpdateRunnable.</p>*/
     private static UpdateRunnable menuUpdateRunnable;
+    /**<p>The persistent RenderRunnable.</p>*/
     private static RenderRunnable menuRenderRunnable;
 
+    /**<p>The persistent LevelsList.</p>*/
     private static LevelsList levelsListModel;
 
+    /**<p>The persistent EnvironmentCanvas for the MainMenuEnvironment.</p>*/
     private static EnvironmentCanvas<MainMenuEnvironment> menuCanvas;
+    /**<p>The persistent EnvironmentCanvas for the GameEnvironment.</p>*/
     private static EnvironmentCanvas<GameEnvironment> gameCanvas;
 
+    /**<p>The persistent MainWindow reference.</p>*/
     private static MainWindow window;
 
     /**

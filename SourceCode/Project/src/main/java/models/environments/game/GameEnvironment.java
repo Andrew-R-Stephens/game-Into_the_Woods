@@ -36,17 +36,26 @@ import java.util.Random;
  */
 public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 
+    /**<p>The list of actors currently active within the current level.</p>*/
     private final ArrayList<AActor> actors = new ArrayList<>();
+    /**<p>The to-add actors that will be added to the list of actors when available.</p>*/
     private final Queue<AActor> actorsQueue = new LinkedList<>();
+    /**<p>The Game Controls for the Game Environment</p>*/
     private GameControls gameControls;
+    /**<p>The PauseMenuEnvironment that is used for the pause state.</p>*/
     private PauseMenuEnvironment pauseMenuEnvironment;
+    /**<p>The list of Levels that the user will navigate between.</p>*/
     private LevelsList levelsList;
+    /**<p>The heads-up-display containing all overlays.</p>*/
     private HUDModel hudModel;
+    /**<p>The player's inventory of collected items.</p>*/
     private PlayerInventory inventory;
+    /**<p>The Player Avatar model</p>*/
     private PlayerAvatar character;
 
+    /**<p>If the game is paused</p>*/
     private boolean isPaused = false;
-
+    /**<p>The Robot which keeps the mouse centered in the window in the unpaused game.</p>*/
     private Robot robot;
 
     /**

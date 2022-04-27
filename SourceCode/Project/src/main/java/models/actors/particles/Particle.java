@@ -32,7 +32,6 @@ public class Particle extends APawn implements IDrawable, IUpdatable {
     @Override
     public void update(float delta) {
         super.update(delta);
-
     }
 
     @Override

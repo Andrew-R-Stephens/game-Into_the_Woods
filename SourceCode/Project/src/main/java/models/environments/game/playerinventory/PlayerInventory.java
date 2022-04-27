@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class PlayerInventory {
 
+    /**<p>The collectibles that the player has aquired from the level.</p>*/
     protected ArrayList<ACollectibleTrigger> collectibles = new ArrayList<>();
 
     /**

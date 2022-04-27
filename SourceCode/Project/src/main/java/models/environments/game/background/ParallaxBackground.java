@@ -17,8 +17,9 @@ import java.util.ArrayList;
  */
 public class ParallaxBackground implements IDrawable {
 
+    /**<p>The list of background layers.</p>*/
     private final ArrayList<Layer> layers = new ArrayList<>();
-
+    /**<p>The standard scale of movement for the front-most image.</p>*/
     private float moveScale = .05f;
 
     /**

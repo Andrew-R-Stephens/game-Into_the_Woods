@@ -12,18 +12,24 @@ import models.utils.config.Config;
  */
 public class Camera {
 
+    /**<p>The default level of zoom. Where the target resolves to if reset.</p>*/
     public static final float DEFAULT_ZOOM_LEVEL = 1f;
+    /**<p>The current zoom level.</p>*/
     public static float zoomLevel = DEFAULT_ZOOM_LEVEL;
+    /**<p>The target zoom level</p>*/
     public static float zoomTarget = DEFAULT_ZOOM_LEVEL;
 
+    /**<p>The target camera coordinates.</p>*/
     public static float targX = 0, targY = 0;
+    /**<p>The current chase camera coordinates.</p>*/
     public static float camX = 0, camY = 0;
+    /**<p>The current non-chase camera coordinates.</p>*/
     public static float mapX = 0, mapY = 0;
 
-    public static float DEFAULT_ZOOM_ACCELERATION = .001f;
-    public static float DEFAULT_PAN_ACCELERATION = .05f;
-    public static float acceleration_pan = DEFAULT_PAN_ACCELERATION;
-    public static float acceleration_zoom = DEFAULT_ZOOM_ACCELERATION;
+    /**<p>The default acceleration for the camera.</p>*/
+    public static float DEFAULT_ZOOM_ACCELERATION = .001f, DEFAULT_PAN_ACCELERATION = .05f;
+    /**<p>The current acceleration for the camera.</p>*/
+    public static float acceleration_pan = DEFAULT_PAN_ACCELERATION, acceleration_zoom = DEFAULT_ZOOM_ACCELERATION;
 
     /**
      * <p>Initializes the Camera to the standard position and scale.</p>
@@ -35,8 +41,8 @@ public class Camera {
     /**
      * <p>This accepts a default-scale-relative location in the horizontal and vertical axis'. The following global
      * variables manipulate scale and position to reflect new translations.</p>
-     * @param x2 -
-     * @param y2 -
+     * @param x2 The target position for the camera to move to
+     * @param y2 The target position for the camera to move to
      */
     public static void moveTo(float x2, float y2) {
         mapX = x2;
