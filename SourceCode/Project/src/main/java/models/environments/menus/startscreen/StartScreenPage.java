@@ -7,12 +7,13 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
  * <p>This is the default landing page on startup. Contains a single menu button that says "start".</p>
+ * @author Andrew Stephens
  */
 public class StartScreenPage extends AMenu {
 
     /**
-     * <p></p>
-     * @param parentEnvironment
+     * <p>Creates the Start Screen Page</p>
+     * @param parentEnvironment the Menu's parent Menu Environment
      */
     public StartScreenPage(AMenuEnvironment parentEnvironment) {
 

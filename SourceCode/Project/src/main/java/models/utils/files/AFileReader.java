@@ -5,6 +5,7 @@ import java.io.File;
 /**
  * <p>The AFileReader class accepts and stores a File.</p>
  * <p>The read method should be defined at instantiation, and it is called at runtime.</p>
+ * @author Andrew Stephens
  */
 public abstract class AFileReader {
 

@@ -12,6 +12,7 @@ import java.awt.*;
 
 /**
  * <p>ATrigger is a class which dictates the standard behavior of an object that gets triggered on collision.</p>
+ * @author Andrew Stephens
  */
 public abstract class ATrigger extends AProp implements IDrawable {
 

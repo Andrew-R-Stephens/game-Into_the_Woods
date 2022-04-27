@@ -10,8 +10,9 @@ import models.utils.updates.IUpdatable;
 import java.util.HashMap;
 
 /**
- * The prime function of the ACharacter class is that it represents an AActor object that can be controlled directly
- * by the player. This includes, but may not be limited to, the PlayerAvatar.
+ * <p>The prime function of the ACharacter class is that it represents an AActor object that can be controlled directly
+ * by the player. This includes, but may not be limited to, the PlayerAvatar.</p>
+ * @author Andrew Stephens
  */
 public abstract class ACharacter extends APawn implements IUpdatable {
 

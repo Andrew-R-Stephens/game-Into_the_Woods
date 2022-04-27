@@ -16,6 +16,7 @@ import java.awt.*;
  * react to the controls. Its position controls the Camera's viewport. The PlayerAvatar is the primary
  * actor subtype that all actors check collisions with. The PlayerAvatar will have direct impact on the game levels,
  * the other actors within a level.</p>
+ * @author Andrew Stephens
  */
 public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 

@@ -5,6 +5,7 @@ import models.prototypes.controls.AMouseController;
 
 /**
  * Dedicated GameEnvironment Controls class that extends the AMouseController.
+ * @author Andrew Stephens
  */
 public class GameMouseControls extends AMouseController {
 

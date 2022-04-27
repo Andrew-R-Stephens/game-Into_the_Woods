@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * <p>The New Game Page. Contains the character selection and the option to begin a fresh play-through.</p>
+ * @author Andrew Stephens
  */
 public class NewGamePage extends AMenu {
 

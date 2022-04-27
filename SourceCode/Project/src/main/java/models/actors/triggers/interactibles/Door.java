@@ -21,6 +21,7 @@ import java.util.HashMap;
  * <p>Should the Door be locked, the player must collect DoorKeys to unlock it. Once unlocked, the player will
  * walk into a boundary area that triggers the door open. When opened, the door's state will become 'open'. From there,
  * the player may proceed to trigger the door event.</p>
+ * @author Andrew Stephens
  */
 public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpdatable {
 

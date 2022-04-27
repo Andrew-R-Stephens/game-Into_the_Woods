@@ -10,6 +10,7 @@ import models.utils.files.SaveFileRW;
  * <p>Progress is written to file either at the next available time whenever the user's progress is updated or when
  * the user closes the program. Non-graceful termination may lead to corrupted save file or lost progress from the
  * previous execution.</p>
+ * @author Andrew Stephens
  */
 public class SaveData {
 

@@ -11,6 +11,7 @@ import models.utils.config.Config;
  * before resetting after a full second, and the ratio of actual updates vs target updates is found. This ratio,
  * or delta, is passed into the update(float) method of the Environment references. The delta normalizes the
  * updates for all updatable objects in the target environment.</p>
+ * @author Andrew Stephens
  */
 public class UpdateRunnable extends ARunnable {
 

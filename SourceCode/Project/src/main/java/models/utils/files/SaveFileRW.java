@@ -12,6 +12,7 @@ import java.io.*;
  * <p>SaveFileRW is granted access to the SaveData that's held in memory and updated internally, and processes that data
  * to Json format and writes it to a persistent external file. If the file is not found, the file is created.</p>
  * <p>The external save file is always created at the path of the JAR.</p>
+ * @author Andrew Stephens
  */
 public class SaveFileRW {
 

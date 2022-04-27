@@ -16,6 +16,7 @@ import java.awt.*;
  * <p>As a collectible, it is added to the Player's Inventory once acquired.</p>
  * <p>If acquired, the object reference is passed to the Inventory, and this item is set to effectively invisible
  * by setting its state to not active.</p>
+ * @author Andrew Stephens
  */
 public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatable {
 

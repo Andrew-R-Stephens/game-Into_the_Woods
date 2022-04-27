@@ -7,6 +7,7 @@ import models.utils.updates.IUpdatable;
 /**
  * <p>The APhysics class contains data for any in-game object that should contain positional, dimensional, and vector
  * data.</p>
+ * @author Andrew Stephens
  */
 public abstract class APhysics implements IUpdatable {
 

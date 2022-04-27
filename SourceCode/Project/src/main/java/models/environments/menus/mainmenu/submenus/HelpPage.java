@@ -7,6 +7,7 @@ import models.utils.config.Config;
 
 /**
  * <p>The Help Page, containing text content to assist the player.</p>
+ * @author Andrew Stephens
  */
 public class HelpPage extends AMenu {
 

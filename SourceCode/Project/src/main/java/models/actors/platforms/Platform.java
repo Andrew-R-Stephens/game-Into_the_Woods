@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 /**
  * <p>A Platform is a boundary object that acts to create a physical barrier. It is the fundamental piece that allows
  * the other actors to behave as if in a physical world.</p>
+ * @author Andrew Stephens
  */
 public class Platform extends AProp implements IDrawable, IUpdatable {
 

@@ -6,6 +6,7 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
  * <p>The Quit Page. A Confirmation to ensure the player's intention.</p>
+ * @author Andrew Stephens
  */
 public class QuitPage extends AMenu {
 

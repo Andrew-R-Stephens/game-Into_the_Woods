@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * <p>The AImageView is a class that simply displays an image based on the rendering procedure specified.</p>
+ * @author Andrew Stephens
  */
 public class AImageView extends AMenuComponent implements IDrawable, IUpdatable {
 

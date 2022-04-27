@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
  * expansive version of a Menu environment.</p>
  * <p>The MainMenuEnvironment contains from behavior that makes it more detailed than the Pause Menu, namely through
  * visual fidelity and reactions to user interactions, such as with the moving menu background.</p>
+ * @author Andrew Stephens
  */
 public class MainMenuEnvironment extends AMenuEnvironment {
 

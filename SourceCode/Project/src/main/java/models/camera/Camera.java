@@ -8,6 +8,7 @@ import models.utils.config.Config;
  * <p>In the Game state, the player position will control the camera offset.</p>
  * <p>In the Menu state, the mouse position will control the camera offset.</p>
  * <p>Camera zooms in or out to act to increase or decrease the scaling of in-game objects.</p>
+ * @author Andrew Stephens
  */
 public class Camera {
 

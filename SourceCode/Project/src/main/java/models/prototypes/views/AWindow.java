@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
  * <p>AWindow is the parent class of MainWindow and exists to separate external functionality from the MainWindow.</p>
  * <p>This class extends JFrame, which means that the AWindow inherits the functionality from that class.</p>
  * <p>This class holds the business logic for constructing the window and building the cursor.</p>
+ * @author Andrew Stephens
  */
 public abstract class AWindow extends JFrame {
 

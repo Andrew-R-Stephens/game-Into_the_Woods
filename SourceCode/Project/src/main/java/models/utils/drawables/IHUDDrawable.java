@@ -4,6 +4,7 @@ import java.awt.*;
 
 /**
  * <p>IHUDDrawable is used by HUD Overlay classes which require draw calls for a render thread.</p>
+ * @author Andrew Stephens
  */
 public interface IHUDDrawable {
 

@@ -10,6 +10,7 @@ import java.awt.*;
 
 /**
  * <p>APropTriggers are used to standardize the functionality of objects which react to collisions.</p>
+ * @author Andrew Stephens
  */
 public abstract class APropTrigger extends ATrigger {
 

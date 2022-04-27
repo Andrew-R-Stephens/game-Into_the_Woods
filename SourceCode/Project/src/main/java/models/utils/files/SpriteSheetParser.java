@@ -17,6 +17,7 @@ import java.util.ArrayList;
  * <p>This program takes the Json file and delimits the frame data. This class parses that Json file and stores each
  * Sprite's data into Sprite objects that are then stored into a SpriteSheet object. That SpriteSheet data is then used
  * when a spritesheet is requested from the Resources.</p>
+ * @author Andrew Stephens
  */
 public class SpriteSheetParser {
 

@@ -10,6 +10,7 @@ import models.utils.config.Config;
  * rate. The Current rate is found by determining the number of ticks made in a given second. The ticks are recorded
  * before resetting after a full second.</p>
  * The render rate is normalized by the framerate maximum, either set manually or by the display device's settings.</p>
+ * @author Andrew Stephens
  */
 public class RenderRunnable extends ARunnable {
 

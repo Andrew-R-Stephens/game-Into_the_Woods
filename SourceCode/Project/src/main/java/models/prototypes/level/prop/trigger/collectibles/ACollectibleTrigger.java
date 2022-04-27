@@ -8,6 +8,7 @@ import models.utils.resources.Resources;
 
 /**
  * <p>ACollectibleTrigger is a class built for objects that will be collected upon trigger.</p>
+ * @author Andrew Stephens
  */
 public abstract class ACollectibleTrigger extends ATrigger {
 

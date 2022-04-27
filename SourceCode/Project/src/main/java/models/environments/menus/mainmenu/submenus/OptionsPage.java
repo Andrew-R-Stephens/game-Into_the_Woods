@@ -13,6 +13,7 @@ import java.util.Arrays;
 /**
  * <p>The Options Page.</p>
  * <p>Gives the user the option to set their target frame limit, their Window style, and the size of their window.</p>
+ * @author Andrew Stephens
  */
 public class OptionsPage extends AMenu {
 

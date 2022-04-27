@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * <p>Spikes are a harmful obstacle. Touching the obstacle immediately kills the player.</p>
+ * @author Andrew Stephens
  */
 public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
 

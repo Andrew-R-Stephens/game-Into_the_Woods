@@ -13,6 +13,7 @@ import java.util.Stack;
  * <p>AMenuEnvironment class is an AEnvironment subtype that controls any Menu Environment and its contained
  * entities.</p>
  * <p>Child subtypes include both MainMenuEnvironment and PauseMenuEnvironment.</p>
+ * @author Andrew Stephens
  */
 public abstract class AMenuEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 

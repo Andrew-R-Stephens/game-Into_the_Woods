@@ -13,6 +13,7 @@ import java.awt.*;
 /**
  * <p>PauseMenuEnvironment is a subtype of AMenuEnvironment. It derives behavior from the AMenu class and is contained
  * within the GameEnvironment. This class handles menu-based user interaction from within the Game Environment.</p>
+ * @author Andrew Stephens
  */
 public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable {
 

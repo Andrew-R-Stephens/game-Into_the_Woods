@@ -13,6 +13,7 @@ import java.util.ArrayList;
 /**
  * <p>The LevelsList contains the list of all Levels that exist for the game. Loads all levels at the same time.</p>
  * <p>Only the current level is updated or drawn.</p>
+ * @author Andrew Stephens
  */
 public class LevelsList implements IDrawable {
 

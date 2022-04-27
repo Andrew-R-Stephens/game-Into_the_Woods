@@ -22,6 +22,7 @@ import java.util.ArrayList;
  * locally, depending on the input made.</p>
  * <p>All AMenus exist within an AMenuEnvironment. To be seen or controlled, they must exist at the top of the
  * environment's stack.</p>
+ * @author Andrew Stephens
  */
 public abstract class AMenu implements IUpdatable, IDrawable {
 

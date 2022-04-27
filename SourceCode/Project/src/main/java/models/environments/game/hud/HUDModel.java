@@ -14,6 +14,7 @@ import java.awt.geom.AffineTransform;
 /**
  * <p>The HUDModel is the handler class for all AOverlayComponenets of the GameEnvironment. It acts to update and
  * draw all AOverlayComponents as needed.</p>
+ * @author Andrew Stephens
  */
 public class HUDModel implements IDrawable, IUpdatable {
 

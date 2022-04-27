@@ -10,6 +10,7 @@ import java.awt.*;
 /**
  * <p>A Particle is a Pawn that accepts an initial velocity and position. It follows its vector and does nothing
  * else.</p>
+ * @author Andrew Stephens
  */
 public class Particle extends APawn implements IDrawable, IUpdatable {
 

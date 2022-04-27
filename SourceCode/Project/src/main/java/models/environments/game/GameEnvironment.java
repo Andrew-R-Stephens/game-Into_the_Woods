@@ -32,6 +32,7 @@ import java.util.Random;
  * <p>GameEnvironment class is an AEnvironment subtype that controls the Game Environment and its contained entities.</p>
  * <p>Controls the PauseMenuEnvironment when the GameEnvironment is paused.</p>
  * <p>Contains the GameControls, Levels, Game HUD, Player Inventory, and all Actors.</p>
+ * @author Andrew Stephens
  */
 public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 

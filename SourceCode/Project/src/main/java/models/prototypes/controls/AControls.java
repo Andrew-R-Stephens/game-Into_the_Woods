@@ -6,6 +6,7 @@ import java.util.Arrays;
  * <p>AControls is the parent class of all Environment-specific Controls. Contains the state of Actions and state of
  * movement controls as well as references to the Mouse and Key Controls which make up the Environment's controls.
  * </p>
+ * @author Andrew Stephens
  */
 public abstract class AControls {
 

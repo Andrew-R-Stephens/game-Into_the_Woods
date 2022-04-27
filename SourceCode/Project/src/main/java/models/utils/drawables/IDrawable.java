@@ -4,6 +4,7 @@ import java.awt.*;
 
 /**
  * <p>IDrawable is used by classes which require draw calls for a render thread.</p>
+ * @author Andrew Stephens
  */
 public interface IDrawable {
 

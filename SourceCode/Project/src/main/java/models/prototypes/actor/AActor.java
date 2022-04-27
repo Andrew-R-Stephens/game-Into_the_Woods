@@ -12,6 +12,7 @@ import java.awt.*;
 /**
  * <p>The AActor is the most basic form of entity in the GameEnvironment. Contains a reference to the Resources.
  * Acts as a wrapper, but also contains some data that allows for the appropriate orientations of subtypes.</p>
+ * @author Andrew Stephens
  */
 public abstract class AActor extends APhysics implements IDrawable, IUpdatable {
 

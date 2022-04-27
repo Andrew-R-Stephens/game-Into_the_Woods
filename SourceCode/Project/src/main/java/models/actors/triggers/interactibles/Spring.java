@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 /**
  * The Spring is a trigger that will set the velocity of the player to something new.
+ * @author Andrew Stephens
  */
 public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
 

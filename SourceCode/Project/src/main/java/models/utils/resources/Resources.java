@@ -16,13 +16,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * First, this class checks for different types of resources along their respective paths. Paths vary between IDE and
- * Jar environments, so those specified within this class respect the paths of both environments.<br>
- *<br>
- * If found, resources are either stored into HashMap lists as objects or as referential paths.<br>
- *<br>
- * Resources are called on by reference, ensuring for a singleton instance of the resource existing in memory. This
- * allows for the system to use that resource multiple times without requiring resource overhead.
+ * <p>First, this class checks for different types of resources along their respective paths. Paths vary between IDE and
+ * Jar environments, so those specified within this class respect the paths of both environments.</p>
+ * <p>If found, resources are either stored into HashMap lists as objects or as referential paths.</p>
+ * <p>Resources are called on by reference, ensuring for a singleton instance of the resource existing in memory. This
+ * allows for the system to use that resource multiple times without requiring resource overhead.</p>
+ * @author Andrew Stephens
  */
 public class Resources {
 

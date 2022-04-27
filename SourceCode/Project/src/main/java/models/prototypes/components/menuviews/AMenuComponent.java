@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
  * <p>In their basic form, they contain positional data and size data relative to the default screen dimensions.</p>
  * <p>Text may be present in the component if allowed. Sound may also emit if a trigger is present.</p>
  * <p>Contain a spriteSheet, foreground and backgrounds, background images, and tints.</p>
+ * @author Andrew Stephens
  */
 public abstract class AMenuComponent implements IUpdatable, IDrawable {
 

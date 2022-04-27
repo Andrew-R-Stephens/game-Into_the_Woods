@@ -8,8 +8,9 @@ import java.net.URISyntaxException;
 
 /**
  * <p>The Configuration class deals with essential system data.</p>
- * <p>Heavily used for scaling of all rendered elements, managing render and update rates, and determining window types
- * .</p>
+ * <p>Heavily used for scaling of all rendered elements, managing render and update rates, and determining window
+ * types.</p>
+ * @author Andrew Stephens
  */
 public class Config {
 
@@ -31,6 +32,9 @@ public class Config {
     public static short FRAME_RATE_DEFAULT = 60;
     public static short frameRate = 60;
 
+    /**
+     * <p>Looks at the system configurations for operating system type and finds the JAR path.</p>
+     */
     public static void registerSystemInfo() {
         opSysName = "Operating System: " + System.getProperty("os.name");
 

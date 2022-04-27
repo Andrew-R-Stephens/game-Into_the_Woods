@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 /**
  * <p>ALevel standardizes the data of a level.</p>
+ * @author Andrew Stephens
  */
 public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 

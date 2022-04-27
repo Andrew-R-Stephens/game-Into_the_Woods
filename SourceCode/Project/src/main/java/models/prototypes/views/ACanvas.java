@@ -4,6 +4,7 @@ import javax.swing.*;
 
 /**
  * <p>The abstract wrapper class for an environment's canvas.</p>
+ * @author Andrew Stephens
  */
 public abstract class ACanvas extends JPanel {
 

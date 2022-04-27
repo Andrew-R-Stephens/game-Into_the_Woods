@@ -6,6 +6,7 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
  * <p>The Help Page, containing text content to assist the player.</p>
+ * @author Andrew Stephens
  */
 public class PauseHelpPage extends AMenu {
 

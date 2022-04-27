@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * position. Notches will cause the slider to snap to specific locations, the quantity of notches (and therefore snaps)
  * are based on the number of items in the list that this slider will move through.</p>
  * @param <E> The type of item that is used in the list that the slider position will obtain.
+ * @author Andrew Stephens
  */
 public abstract class ASliderView<E> extends AMenuComponent {
 

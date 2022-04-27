@@ -10,6 +10,7 @@ import models.utils.config.Config;
 /**
  * <p>Level Select Page. Allows the user to choose a previously completed level, or a level that they need to
  * complete next.</p>
+ * @author Andrew Stephens
  */
 public class LevelSelectPage extends AMenu {
 
@@ -157,6 +158,10 @@ public class LevelSelectPage extends AMenu {
         addComponent(button_back);
     }
 
+    /**
+     * Navigates to the specified level and swaps the Environment.
+     * @param levelIndex The specified level.
+     */
     public void navigateToLevel(int levelIndex) {
         getMouseController().setPos(
                 (int)(Config.window_width_actual * .5f),

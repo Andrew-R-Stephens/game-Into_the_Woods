@@ -9,6 +9,7 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
  * <p>The landing page of the Pause Menu. Contains menu button components for navigation into sub pages.</p>
+ * @author Andrew Stephens
  */
 public class PauseMenuPage extends AMenu {
 

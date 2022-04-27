@@ -5,6 +5,7 @@ import models.prototypes.controls.AControls;
 /**
  * <p>MenuControls is dedicated to the Controls of the AMenuEnvironments, such as MainMenuEnvironment and the
  * PauseMenuEnvironment.</p>
+ * @author Andrew Stephens
  */
 public class MenuControls extends AControls {
 

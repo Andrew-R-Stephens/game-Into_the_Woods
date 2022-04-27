@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * <p>Contains references to all AEnvironments, and holds references each of their ACanvases and ARunnables.</p>
  * <br>
  * <p>Works to handle navigation between AEnvironments as needed. Controls threading and AWindow build procedures.</p>
+ * @author Andrew Stephens
  */
 public class EnvironmentsHandler {
 

@@ -3,23 +3,24 @@ package models.prototypes.controls;
 import java.awt.event.KeyListener;
 
 /**
- * <p></p>
+ * <p>The AKeyController is an abstract class that Key controller based class inherit.</p>
+ * @author Andrew Stephens
  */
 public abstract class AKeyController implements KeyListener {
 
     protected AControls controlsModel;
 
     /**
-     * <p></p>
-     * @param controlsModel -
+     * <p>Creates a new AKeyController</p>
+     * @param controlsModel The parent AControls model
      */
     public AKeyController(AControls controlsModel) {
         this.controlsModel = controlsModel;
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the parent ControlsModel.</p>
+     * @return the parent ControlsModel
      */
     public AControls getControlsModel() {
         return controlsModel;

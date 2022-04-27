@@ -8,6 +8,7 @@ import java.util.ArrayList;
 /**
  * <p>The PlayerInventory contains relevant ad-hoc information about the player's collectibles status within the
  * current level.</p>
+ * @author Andrew Stephens
  */
 public class PlayerInventory {
 

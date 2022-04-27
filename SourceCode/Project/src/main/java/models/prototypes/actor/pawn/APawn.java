@@ -6,8 +6,9 @@ import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
 /**
- * A Simple Game Object which carries ability to move.
- * It is inherited by classes whos objects must physically move within the world.
+ * <p>A Simple Game Object which carries ability to move.</p>
+ * <p>It is inherited by classes whos objects must physically move within the world.</p>
+ * @author Andrew Stephens
  */
 public abstract class APawn extends AActor implements IDrawable, IUpdatable {
 

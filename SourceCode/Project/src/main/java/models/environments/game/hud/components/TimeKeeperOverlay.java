@@ -10,6 +10,7 @@ import java.awt.*;
 /**
  * <p>The TimeKeeperOverlay is drawn to the GameEnvironment's Canvas, which allows for the representation of the
  * current time the player has spent playing the level.</p>
+ * @author Andrew Stephens
  */
 public class TimeKeeperOverlay extends AOverlayComponent implements IDrawable, IUpdatable {
 

@@ -12,6 +12,7 @@ import java.awt.*;
 
 /**
  * <p>The ReactProp ensures that a prop will contain a reaction method as well as the standard Trigger methods.</p>
+ * @author Andrew Stephens
  */
 public abstract class AReactProp extends AProp implements IDrawable {
 
@@ -45,15 +46,21 @@ public abstract class AReactProp extends AProp implements IDrawable {
         this.canMoveOnCollision = canMoveOnCollision;
     }
 
+    /**
+     * Defined by the inherited class.
+     */
+    public abstract void onReact();
+
+    /**
+     * Resets the cycles.
+     */
+    public void reset() {
+        currentCycles = 0;
+    }
+
     @Override
     public boolean hasCollision(AActor a, float delta) {
         return false;
-    }
-
-    public abstract void onReact();
-
-    public void reset() {
-        currentCycles = 0;
     }
 
     @Override

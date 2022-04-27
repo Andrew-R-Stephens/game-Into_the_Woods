@@ -10,6 +10,7 @@ import java.awt.*;
 /**
  * <p>The PlayerStatsOverlay is drawn to the GameEnvironment's Canvas, which allows for the representation of the player's
  * inventory.</p>
+ * @author Andrew Stephens
  */
 public class PlayerStatsOverlay extends AOverlayComponent implements IDrawable, IUpdatable {
 

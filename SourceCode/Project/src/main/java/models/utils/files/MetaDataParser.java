@@ -12,6 +12,7 @@ import java.util.HashMap;
  * <p>MetaDataParser class accepts the metadata.json file. This file is used to list all local files within the
  * classpath, register them to a hashmap, and allow this data to be transferred into the Resources for further
  * processing and resource allocation.</p>
+ * @author Andrew Stephens
  */
 public class MetaDataParser {
 

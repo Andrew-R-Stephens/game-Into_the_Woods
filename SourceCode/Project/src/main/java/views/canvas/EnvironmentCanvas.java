@@ -8,6 +8,7 @@ import java.awt.*;
 /**
  * <p>The EnvironmentCanvas behaves ubiquitously between all types of Environments.</p>
  * @param <T> The AEnvironment subtype that this Canvas is used for.
+ * @author Andrew Stephens
  */
 public class EnvironmentCanvas<T extends AEnvironment> extends ACanvas {
 

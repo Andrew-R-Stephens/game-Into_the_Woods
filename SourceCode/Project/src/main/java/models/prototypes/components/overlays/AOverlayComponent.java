@@ -10,6 +10,7 @@ import java.awt.*;
 /**
  * <p>The AOverlayComponent is the superclass for all HUD overlay components. Contains positional
  * and size data for all components. Also contains a reference to the parent Game Environment.</p>
+ * @author Andrew Stephens
  */
 public abstract class AOverlayComponent implements IUpdatable, IDrawable {
 

@@ -12,6 +12,7 @@ import java.awt.*;
  * <p>AProp is an abstract entity type that derives from AActor. This type is simply a wrapper class for Level
  * props.</p>
  * <p>Level props should be allowed to draw to the Map Overlay, which is why the drawToHUD() method is added.</p>
+ * @author Andrew Stephens
  */
 public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, IUpdatable {
 

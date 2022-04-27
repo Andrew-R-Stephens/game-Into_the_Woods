@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * level.</p>
  * <p>The level background will move, and each layer will move at separate rates, respective to their layer number.
  * The closer the layer is to the player, the faster the layers will move.</p>
+ * @author Andrew Stephens
  */
 public class ParallaxBackground implements IDrawable {
 

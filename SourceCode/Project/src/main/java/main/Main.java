@@ -31,6 +31,7 @@ import views.window.MainWindow;
  *
  * <p>Includes static references to all root-level objects.</p>
  * <p>Handles the initialization of all root-level objects.</p>
+ * @author Andrew Stephens
  */
 public class Main {
 

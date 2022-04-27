@@ -6,6 +6,7 @@ import models.prototypes.environments.menu.AMenuEnvironment;
 
 /**
  * <p>The Main Menu Page. Contains menu button components to allow menu navigation.</p>
+ * @author Andrew Stephens
  */
 public class MainMenuPage extends AMenu {
 

@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 /**
  * Dedicated AMenuEnvironment Controls class that extends the AMouseController.
+ * @author Andrew Stephens
  */
 public class MenuMouseControls extends AMouseController {
 

@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 /**
  * <p>The MapOverlay is drawn to the GameEnvironment's Canvas, which allows for the broader representation of the current
  * level. It shows a depiction of the player position and shows obstacles.</p>
+ * @author Andrew Stephens
  */
 public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatable {
 

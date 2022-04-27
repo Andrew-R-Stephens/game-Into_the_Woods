@@ -6,6 +6,7 @@ import java.util.Arrays;
 /**
  * <p>The Sprite class is for data read from the SpriteSheetParser. It contains all data of an individual frame in
  * the spritesheet. The Sprite should be contained within a list in the SpriteSheet class.</p>
+ * @author Andrew Stephens
  */
 public class Sprite {
 

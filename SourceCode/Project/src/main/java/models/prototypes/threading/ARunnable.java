@@ -4,6 +4,7 @@ import models.utils.config.Config;
 
 /**
  * <p>The superclass of Render and Update Runnables. This class contains the variables that both subclasses share.</p>
+ * @author Andrew Stephens
  */
 public abstract class ARunnable implements Runnable {
 

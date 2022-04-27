@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 
 /**
  * Dedicated AMenuEnvironment Controls class that extends the AKeyController.
+ * @author Andrew Stephens
  */
 public class MenuKeyControls extends AKeyController{
 

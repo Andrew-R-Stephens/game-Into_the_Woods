@@ -12,14 +12,16 @@ import java.awt.event.MouseMotionListener;
  * <p>This class is used to build a new Window as a JFrame, and allows the structuring of such a window to the
  * specifications set by the user.</p>
  * <p>It allows for the creation of a custom cursor as well as rebuild the window based on user preferences.</p>
+ * @author Andrew Stephens
  */
 public class MainWindow extends AWindow {
 
     private EnvironmentsHandler environmentsHandler;
 
     /**
-     * <p></p>
-     * @param environmentsHandler -
+     * <p>Initializes the Main Menu with a reference to the EnvironmentHandler. Also constructs the Window and
+     * builds the cursor for the window.</p>
+     * @param environmentsHandler the parent EnvironmentsHandler
      */
     public void init(EnvironmentsHandler environmentsHandler){
         this.environmentsHandler = environmentsHandler;
@@ -30,7 +32,7 @@ public class MainWindow extends AWindow {
     }
 
     /**
-     * <p></p>
+     * <p>Removes all components from the window before rebuilding.</p>
      */
     public void clearComponents() {
         for(MouseListener l : getContentPane().getMouseListeners()) {
@@ -48,7 +50,7 @@ public class MainWindow extends AWindow {
     }
 
     /**
-     * <p></p>
+     * <p>Adds the necessary components to the window.</p>
      */
     public void build() {
         clearComponents();

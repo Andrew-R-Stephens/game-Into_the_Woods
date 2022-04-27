@@ -16,6 +16,7 @@ import models.utils.updates.IUpdatable;
  * <p>It contains references to the AKeyController and AMouseController for this particular Environment subtype.</p>
  * <p>There is a reference to the prebuilt Resources, allowing quick access to pre-allocated resources.</p>
  * <p>The AdvancedPlayer is used to control audio streams which remain particular to this Environment.</p>
+ * @author Andrew Stephens
  */
 public abstract class AEnvironment implements IUpdatable, IDrawable {
 

@@ -11,6 +11,7 @@ import java.awt.geom.AffineTransform;
 
 /**
  * <p>The ATextView component simply should draw text within the component.</p>
+ * @author Andrew Stephens
  */
 public abstract class ATextView extends AMenuComponent implements IDrawable, IUpdatable {
 

@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
  * <p>The AButtonView is a component that allows for user interaction in the form of mouse clicks.</p>
  * <p>The button is constantly checked for an activated state. If it is active, it will execute a procedure defined
  * in its definition.</p>
+ * @author Andrew Stephens
  */
 public abstract class AButtonView extends AMenuComponent implements IDrawable, IUpdatable {
 
@@ -36,15 +37,15 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
     }
 
     /**
-     * <p></p>
-     * @param x -
+     * <p>Sets the x position</p>
+     * @param x The horizontal position.
      */
     public void setX(int x) {
         this.x = x;
     }
 
     /**
-     * <p></p>
+     * <p>Plays the button click audio sound.</p>
      */
     public void playSound() {
         if(playSound) {
@@ -53,7 +54,7 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
     }
 
     /**
-     * <p></p>
+     * <p>Checks for the mouse input and does actions based on positive recognition.</p>
      */
     public void registerInput() {
         AMouseController mc = getParentEnvironment().getMouseController();
@@ -72,15 +73,15 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
     }
 
     /**
-     * <p></p>
-     * @param isEnabled -
+     * <p>Checks if the button is enabled.</p>
+     * @param isEnabled If the button is enabled
      */
     public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
     }
 
     /**
-     * <p></p>
+     * <p>Resets the button's audio state</p>
      */
     public void reset() {
         playSound = true;

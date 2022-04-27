@@ -5,7 +5,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 /**
- * <p></p>
+ * <p>The AMouseController is an abstract class that Mouse controller based class inherit.</p>
+ * @author Andrew Stephens
  */
 public abstract class AMouseController implements MouseListener, MouseMotionListener {
 
@@ -17,33 +18,33 @@ public abstract class AMouseController implements MouseListener, MouseMotionList
     protected boolean isRightPressed = false;
 
     /**
-     * <p></p>
-     * @param controlsViewModel -
+     * <p>Creates the AMouseController</p>
+     * @param controlsViewModel The parent AControls
      */
     protected AMouseController(AControls controlsViewModel) {
         this.controlsViewModel = controlsViewModel;
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Checks if the left mouse button is pressed.</p>
+     * @return if the left mouse button is pressed.
      */
     public boolean isLeftPressed() {
         return isLeftPressed;
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Checks if the right mouse button is pressed.</p>
+     * @return if the right mouse button is pressed.
      */
     public boolean isRightPressed() {
         return isRightPressed;
     }
 
     /**
-     * <p></p>
-     * @param x -
-     * @param y -
+     * <p>Records the x and y position of the mouse pointer.</p>
+     * @param x The horizontal mouse position
+     * @param y The vertical mouse position
      */
     public void setPos(int x, int y) {
         mPos[0] = x;
@@ -51,15 +52,15 @@ public abstract class AMouseController implements MouseListener, MouseMotionList
     }
 
     /**
-     * <p></p>
-     * @return
+     * <p>Gets the saved position of the mouse</p>
+     * @return the recorded mouse position.
      */
     public int[] getPos() {
         return mPos;
     }
 
     /**
-     * <p></p>
+     * <p>Resets the left and right button</p>
      */
     public void reset() {
         isLeftPressed = false;

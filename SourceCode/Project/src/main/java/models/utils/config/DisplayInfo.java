@@ -6,6 +6,7 @@ import java.awt.*;
 /**
  * <p>DisplayInfo is the configuration representative for the default display. It accepts custom scaling settings
  * done within the system settings of the computer, allowing for scale factor changes within the Config.</p>
+ * @author Andrew Stephens
  */
 public class DisplayInfo {
 

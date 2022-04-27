@@ -16,6 +16,7 @@ import java.io.IOException;
 /**
  * <p>The PreferencesParser accepts the local Preferences file and parses the data within it.</p>
  * <p>The obtained data is used within the Config to initialize the program with default preferences.</p>
+ * @author Andrew Stephens
  */
 public class PreferencesParser {
 
