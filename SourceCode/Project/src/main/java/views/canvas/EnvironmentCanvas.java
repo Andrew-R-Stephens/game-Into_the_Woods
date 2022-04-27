@@ -12,6 +12,7 @@ import java.awt.*;
  */
 public class EnvironmentCanvas<T extends AEnvironment> extends ACanvas {
 
+    /**<p>The generic type for the Environment that will be rendered.</p>*/
     private T environment;
 
     /**

@@ -17,6 +17,7 @@ import java.util.Stack;
  */
 public abstract class AMenuEnvironment extends AEnvironment implements IDrawable, IUpdatable {
 
+    /**<p>The stack of AMenu items that controls the current menu that's active.</p>*/
     private final Stack<AMenu> menuStack = new Stack<>();
 
     /**

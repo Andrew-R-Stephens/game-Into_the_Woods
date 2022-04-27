@@ -26,17 +26,15 @@ import java.util.ArrayList;
  */
 public abstract class AMenu implements IUpdatable, IDrawable {
 
-    // The Parent Menu Model
+    /**<p>The Parent Menu Model</p>*/
     private AMenuEnvironment parentEnvironment;
-    // Background Image
+    /**<p> Background Image</p>*/
     protected BufferedImage image_buttonRect;
 
-    // The Menu Buttons.
+    /**<p>The Menu Buttons.</p>*/
     private ArrayList<AMenuComponent> components = new ArrayList<>();
 
-    // The Bundle of sub page AMenu objects.
-    //public MenuBundle bundle = new MenuBundle();
-
+    /**<p>The centered position of the screen.</p>*/
     protected float centerW = Config.DEFAULT_WINDOW_WIDTH * .5f, centerH = Config.DEFAULT_WINDOW_HEIGHT * .5f;
 
     /**

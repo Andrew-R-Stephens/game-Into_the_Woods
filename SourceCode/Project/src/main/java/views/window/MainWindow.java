@@ -16,6 +16,7 @@ import java.awt.event.MouseMotionListener;
  */
 public class MainWindow extends AWindow {
 
+    /**<p>The EnvironmentsHandler connected to the window.</p>*/
     private EnvironmentsHandler environmentsHandler;
 
     /**

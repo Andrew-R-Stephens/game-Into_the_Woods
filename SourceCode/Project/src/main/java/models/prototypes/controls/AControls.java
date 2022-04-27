@@ -10,10 +10,14 @@ import java.util.Arrays;
  */
 public abstract class AControls {
 
+    /**<p>The KeyControls related to this AControls parent.</p>*/
     protected AKeyController keyController;
+    /**<p>The MouseControls related to this AControls parent.</p>*/
     protected AMouseController mouseController;
 
+    /**<p>The directionals states. These represent Up Down Left and Right.</p>*/
     protected boolean[] directionals = new boolean[Directionals.values().length];
+    /**<p>The actions states. This represents the Jump and Dash abilities.</p>*/
     protected boolean[] actions = new boolean[Actions.values().length];
 
     /**

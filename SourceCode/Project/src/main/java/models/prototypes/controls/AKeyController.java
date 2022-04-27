@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
  */
 public abstract class AKeyController implements KeyListener {
 
+    /**<p>The parent AControls model.</p>*/
     protected AControls controlsModel;
 
     /**

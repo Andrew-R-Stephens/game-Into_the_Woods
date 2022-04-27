@@ -12,6 +12,7 @@ import models.utils.resources.Resources;
  */
 public abstract class ACollectibleTrigger extends ATrigger {
 
+    /**<p>If the trigger can still be activated.</p>*/
     protected boolean isActive = true;
 
     /**

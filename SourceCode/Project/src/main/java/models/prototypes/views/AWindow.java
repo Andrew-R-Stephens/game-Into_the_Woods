@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
  */
 public abstract class AWindow extends JFrame {
 
+    /**The Resources that stay persistent across all objects.*/
     private Resources resources;
 
     /**

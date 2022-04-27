@@ -10,11 +10,15 @@ import java.awt.event.MouseMotionListener;
  */
 public abstract class AMouseController implements MouseListener, MouseMotionListener {
 
+    /**<p>The parent AControls Model</p>*/
     protected AControls controlsViewModel;
 
+    /**<p>The recorded position of the mouse.</p>*/
     protected final int[] mPos = new int[]{-100, -100};
 
+    /**<p>If the left mouse button is pressed.</p>*/
     protected boolean isLeftPressed = false;
+    /**<p>If the right mouse button is pressed.</p>*/
     protected boolean isRightPressed = false;
 
     /**

@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
  */
 public abstract class AButtonView extends AMenuComponent implements IDrawable, IUpdatable {
 
+    /**<p>If the button is currently enabled, or used.</p>*/
     public boolean isEnabled = true;
 
     /**

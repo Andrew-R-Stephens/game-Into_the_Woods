@@ -20,10 +20,15 @@ import models.utils.updates.IUpdatable;
  */
 public abstract class AEnvironment implements IUpdatable, IDrawable {
 
+    /**<p>The AudioPlayer object that controls the sound for background audio.</p>*/
     protected AdvancedPlayer audioPlayer;
+    /**<p>The parent EnvironmentsHandler.</p>*/
     private EnvironmentsHandler parentEnvironmentsHandler;
+    /**<p>The Environment's Key Controller that's particular to the type of Environment.</p>*/
     private AKeyController keyController;
+    /**<p>The Environment's Key Controller that's particular to the type of Environment.</p>*/
     private AMouseController mouseController;
+    /**<p>The Resources that exist persistently across all objects.</p>*/
     private Resources resources;
 
 
@@ -31,7 +36,6 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
      * <p>Initializes with the EnvironmentHandler and the controller used for this particular Environment subtype.</p>
      * @param parentEnvironmentsHandler The EnvironmentsHandler that contains this Environment.
      * @param controls The AControls subtype that this Environment subtype uses.
-     * @param saveData
      */
     protected void init(EnvironmentsHandler parentEnvironmentsHandler, AControls controls) {
         this.parentEnvironmentsHandler = parentEnvironmentsHandler;
