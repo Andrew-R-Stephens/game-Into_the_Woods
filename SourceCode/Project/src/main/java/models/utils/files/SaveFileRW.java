@@ -80,6 +80,11 @@ public class SaveFileRW {
 
             JsonObject obj = new JsonObject();
             obj.addProperty("levelProgress", saveData.getLevelProgress());
+            obj.addProperty("selectedCharacterType", saveData.getCharacterType().ordinal());
+            obj.addProperty("selectedWindowWidth", Config.getWindowWidthSelected());
+            obj.addProperty("selectedWindowHeight", Config.getWindowHeightSelected());
+            obj.addProperty("selectedWindowType", Config.getWindowType().ordinal());
+            obj.addProperty("selectFramerate", Config.frameRate);
 
             bw.write(obj.toString());
             bw.close();
@@ -116,10 +121,48 @@ public class SaveFileRW {
                         return false;
                     }
 
-                    JsonObject frames = element.getAsJsonObject();
-                    JsonElement frameObj = frames.get("levelProgress");
+                    JsonObject saveObject = element.getAsJsonObject();
+                    JsonElement saveElement;
 
-                    saveData.setLevelProgress(frameObj.getAsInt());
+                    int levelProgress= -1;
+                    if(saveObject.has("levelProgress")) {
+                        saveElement = saveObject.get("levelProgress");
+                        levelProgress = saveElement.getAsInt();
+                    }
+                    int characterType = 0;
+                    if(saveObject.has("selectedCharacterType")) {
+                        saveElement = saveObject.get("selectedCharacterType");
+                        characterType = saveElement.getAsInt();
+                    }
+                    int windowWidth = Config.DEFAULT_WINDOW_WIDTH;
+                    if(saveObject.has("selectedWindowWidth")) {
+                        saveElement = saveObject.get("selectedWindowWidth");
+                        windowWidth = saveElement.getAsInt();
+                    }
+                    int windowHeight = Config.DEFAULT_WINDOW_HEIGHT;
+                    if(saveObject.has("selectedWindowHeight")) {
+                        saveElement = saveObject.get("selectedWindowHeight");
+                        windowHeight = saveElement.getAsInt();
+                    }
+                    int windowType = 0;
+                    if(saveObject.has("selectedWindowType")) {
+                        saveElement = saveObject.get("selectedWindowType");
+                        windowType = saveElement.getAsInt();
+                    }
+                    short framerate = Config.FRAME_RATE_DEFAULT;
+                    if(saveObject.has("selectFramerate")) {
+                        saveElement = saveObject.get("selectFramerate");
+                        framerate = (short) saveElement.getAsInt();
+                    }
+
+                    saveData.setAll(
+                            levelProgress,
+                            characterType,
+                            windowWidth,
+                            windowHeight,
+                            windowType,
+                            framerate
+                    );
 
                     r.close();
                     isr.close();

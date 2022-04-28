@@ -89,6 +89,7 @@ public class NewGamePage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
+                getEnvironmentsHandler().getSaveData().save();
 
                 getEnvironmentsHandler().getGameEnvironment().reset();
                 getEnvironmentsHandler().getGameEnvironment().getLevelsList().setCurrentLevel(0);

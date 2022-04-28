@@ -20,7 +20,7 @@ public class Config {
     public static String jarPath;
 
     /**<p>The DisplayInfo of the system</p>*/
-    private static DisplayInfo displayInfo;
+    private final static DisplayInfo displayInfo = new DisplayInfo();
 
     /**<p>The type of frame for this window.</p>*/
     private static WindowType window_type = WindowType.WINDOWED;
@@ -67,6 +67,10 @@ public class Config {
 
         scaledW_zoom = scaledW * Camera.zoomLevel;
         scaledH_zoom = scaledH * Camera.zoomLevel;
+    }
+
+    public static DisplayInfo getDisplayData() {
+        return displayInfo;
     }
 
     /**

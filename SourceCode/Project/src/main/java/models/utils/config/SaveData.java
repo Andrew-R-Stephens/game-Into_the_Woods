@@ -1,5 +1,6 @@
 package models.utils.config;
 
+import models.prototypes.actor.pawn.character.ACharacter;
 import models.utils.files.SaveFileRW;
 
 /**
@@ -16,6 +17,11 @@ public class SaveData {
 
     /**<p>SaveFileRW parsing process.</p>*/
     private SaveFileRW saveFileRW;
+
+    /**
+     * The character type used for this run.
+     */
+    private ACharacter.CharacterType characterType = ACharacter.CharacterType.TEO;
     /**<p>The last level that the user has completed.</p>*/
     private int lastCompletedLevel = -1;
 
@@ -49,7 +55,33 @@ public class SaveData {
         return lastCompletedLevel;
     }
 
+    public ACharacter.CharacterType getCharacterType() {
+        return characterType;
+    }
+
+    /**
+     * <p>Defaults the saveData. The saves the saveData to file immediately.</p>
+     */
+    public void createNewGame() {
+        this.lastCompletedLevel = -1;
+        this.characterType = ACharacter.CharacterType.TEO;
+    }
+
+    /**
+     * <p>Requests to record the SaveData to file.</p>
+     */
     public void save() {
-        saveFileRW.savetoFile();
+        System.out.println("The save file was saved " + (saveFileRW.savetoFile() ? "successfully" : "unsuccessfully"));
+    }
+
+    public void setAll(
+            int levelProgress, int characterType,
+            int windowWidth, int windowHeight, int windowType, short framerate) {
+        this.lastCompletedLevel = levelProgress;
+        this.characterType = ACharacter.CharacterType.values()[characterType];
+        Config.window_width_selected = windowWidth;
+        Config.window_height_selected = windowHeight;
+        Config.setWindowType(windowType);
+        Config.frameRate = framerate;
     }
 }

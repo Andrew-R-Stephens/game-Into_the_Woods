@@ -38,7 +38,7 @@ public abstract class ASliderView<E> extends AMenuComponent {
     /**<p>The currently chosen index that the slider is on.</p>*/
     protected int current = previous;
     /**<p>The distance between each notch in the slider.</p>*/
-    private float notchDistance = 0;
+    protected float notchDistance = 0;
 
     /**<p>If the notch images should be displayed within the slider.</p>*/
     private boolean showNotches = true;

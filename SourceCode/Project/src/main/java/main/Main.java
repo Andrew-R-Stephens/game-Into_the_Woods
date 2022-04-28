@@ -180,6 +180,8 @@ public class Main {
      */
     public static void init() {
 
+        // Initialize Preferences
+        new PreferencesParser(config, resources.loadTextFile("preferences.xml")).parse();
         saveData.init(saveFileRW);
 
         // Reference resources
@@ -187,8 +189,6 @@ public class Main {
         pauseMenuModel.setResources(resources);
         gameEnvironment.setResources(resources);
         window.setResources(resources);
-        // Initialize Preferences
-        new PreferencesParser(config, resources.loadTextFile("preferences.xml")).parse();
 
         // Initialize Window with Preference Data
         window.init(environmentsHandler);

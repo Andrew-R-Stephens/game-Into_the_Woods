@@ -24,6 +24,9 @@ public class OptionsPage extends AMenu {
     private short selectedFramerate = Config.frameRate;
     /**<p>The user-defined window type</p>*/
     private Config.WindowType selectedWindowType = Config.getWindowType();
+    /**<p>The user-defined window dimension</p>*/
+    private int selectedWindowWidth = Config.window_width_selected,
+            selectedWindowHeight = Config.window_height_selected;
 
     /**
      * <p>Builds the Options page.</p>
@@ -36,10 +39,15 @@ public class OptionsPage extends AMenu {
 
         int textSizeW = btn_width, textSizeH = (int)(btn_height * .5f);
 
+
+        // ===========
+        // FPS
+        // ===========
+
         ATextView text_fpsTitle = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * 3 * .5f)),
-                (300-(textSizeH)),
+                (200-(textSizeH)),
                 btn_width * 3,
                 (textSizeH),
                 "FPS Limit")
@@ -50,7 +58,7 @@ public class OptionsPage extends AMenu {
         ATextView text_fps = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)) - btn_width,
-                (int)(300 + (btn_height * .5f) - (textSizeH * .5f)),
+                (int)(200 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
                 textSizeH,
                 selectedFramerate + "")
@@ -61,7 +69,7 @@ public class OptionsPage extends AMenu {
         ASliderView<Short> slider_fps = new ASliderView<>(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)),
-                300,
+                200,
                 btn_width * 2,
                 btn_height) {
             @Override
@@ -88,6 +96,8 @@ public class OptionsPage extends AMenu {
                         break;
                     }
                 }
+
+                button.setX(this.x + (int)(notchDistance*current));
             }
             @Override
             public void doSetting() {
@@ -100,32 +110,36 @@ public class OptionsPage extends AMenu {
         };
         slider_fps.showNotches(false);
 
-        ATextView text_windowTitle = new ATextView(
+        // ===========
+        // WINDOW TYPE
+        // ===========
+
+        ATextView text_windowTypeTitle = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * 3 * .5f)),
-                (450 - textSizeH),
+                (350 - textSizeH),
                 btn_width * 3,
                 textSizeH,
                 "Window Type")
         {
         };
-        text_windowTitle.setBackgroundColor(new Color(255, 255, 255, 150));
+        text_windowTypeTitle.setBackgroundColor(new Color(255, 255, 255, 150));
 
-        ATextView text_window = new ATextView(
+        ATextView text_windowType = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)) - btn_width,
-                (int)(450 + (btn_height * .5f) - (textSizeH * .5f)),
+                (int)(350 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
                 textSizeH,
                 selectedWindowType.getName())
         {
         };
-        text_window.setBackgroundColor(new Color(255, 255, 255, 100));
+        text_windowType.setBackgroundColor(new Color(255, 255, 255, 100));
 
-        ASliderView<Config.WindowType> slider_window = new ASliderView<>(
+        ASliderView<Config.WindowType> slider_windowType = new ASliderView<>(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)),
-                450,
+                350,
                 btn_width * 2,
                 btn_height) {
             @Override
@@ -148,15 +162,79 @@ public class OptionsPage extends AMenu {
                 if(values.get(current) != values.get(previous)) {
                     previous = current;
                     selectedWindowType = values.get(current);
-                    text_window.setText(selectedWindowType.getName());
+                    text_windowType.setText(selectedWindowType.getName());
                 }
             }
         };
 
-        button_apply = new AButtonView(
+        // ===========
+        // WINDOW DIMS
+        // ===========
+        ATextView text_windowDimsTitle = new ATextView(
+                getParentEnvironment(),
+                (int) (centerW - (btn_width * 3 * .5f)),
+                (550 - textSizeH),
+                btn_width * 3,
+                textSizeH,
+                "Window Dimensions")
+        {
+        };
+        text_windowDimsTitle.setBackgroundColor(new Color(255, 255, 255, 150));
+
+        ATextView text_windowDims = new ATextView(
+                getParentEnvironment(),
+                (int) (centerW - (btn_width * .5f)) - btn_width,
+                (int)(550 + (btn_height * .5f) - (textSizeH * .5f)),
+                textSizeW,
+                textSizeH,
+                selectedWindowWidth + " x " + selectedWindowHeight)
+        {
+        };
+        text_windowDims.setBackgroundColor(new Color(255, 255, 255, 100));
+
+        ASliderView<Dimension> slider_windowDims = new ASliderView<>(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)),
-                800 - (btn_height * 2),
+                550,
+                btn_width * 2,
+                btn_height) {
+            @Override
+            public void init() {
+                Dimension[] dimensions = new Dimension[Config.getDisplayData().getWindowDimensions().size()];
+                Config.getDisplayData().getWindowDimensions().toArray(dimensions);
+                values.addAll(Arrays.asList(dimensions));
+                itemCount = values.size();
+
+                current = itemCount;
+                int i = 0;
+                for(; i < values.size(); i++) {
+                    if(values.get(i).width == Config.getWindowWidthSelected() &&
+                            values.get(i).height == Config.getWindowHeightSelected()) {
+                        current = i;
+                        break;
+                    }
+                }
+                System.out.println(current + " / " + itemCount);
+            }
+            @Override
+            public void doSetting() {
+                if(values.get(current) != values.get(previous)) {
+                    previous = current;
+                    selectedWindowWidth = (int)values.get(current).getWidth();
+                    selectedWindowHeight = (int)values.get(current).getHeight();
+                    text_windowDims.setText(selectedWindowWidth + " x " + selectedWindowHeight);
+                }
+            }
+        };
+
+        // ===========
+        // APPLY
+        // ===========
+
+        button_apply = new AButtonView(
+                getParentEnvironment(),
+                (int) (centerW - (btn_width * 1.25f)),
+                800,
                 btn_width,
                 btn_height
         ) {
@@ -166,7 +244,10 @@ public class OptionsPage extends AMenu {
 
                 button_apply.setEnabled(
                         Config.frameRate != selectedFramerate ||
-                        Config.getWindowType() != selectedWindowType);
+                        Config.getWindowType() != selectedWindowType ||
+                        (selectedWindowWidth != Config.getWindowWidthSelected() &&
+                                selectedWindowHeight != Config.getWindowHeightSelected())
+                        );
             }
 
             @Override
@@ -184,6 +265,8 @@ public class OptionsPage extends AMenu {
                     return false;
                 }
 
+                boolean rebuildWindow = false;
+
                 if(Config.frameRate != selectedFramerate) {
                     Config.frameRate = selectedFramerate;
                 }
@@ -191,8 +274,23 @@ public class OptionsPage extends AMenu {
                 if(Config.getWindowType() != selectedWindowType) {
                     Config.setWindowType(selectedWindowType);
                     getMouseController().reset();
+
+                    rebuildWindow = true;
+                }
+
+                if((Config.window_width_selected != selectedWindowWidth) &&
+                        (Config.window_height_selected != selectedWindowHeight)) {
+                    Config.window_width_selected = selectedWindowWidth;
+                    Config.window_height_selected = selectedWindowHeight;
+
+                    rebuildWindow = true;
+                }
+
+                if(rebuildWindow) {
                     getEnvironmentsHandler().rebuildWindow();
                 }
+
+                getEnvironmentsHandler().getSaveData().save();
 
                 return true;
             }
@@ -201,10 +299,13 @@ public class OptionsPage extends AMenu {
         button_apply.setText("Apply");
         button_apply.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
+        // ===========
+        // BACK
+        // ===========
 
         AButtonView button_back = new AButtonView(
                 getParentEnvironment(),
-                (int) (centerW - (btn_width * .5f)),
+                (int) (centerW + (btn_width * .25f)),
                 800,
                 btn_width,
                 btn_height
@@ -221,12 +322,20 @@ public class OptionsPage extends AMenu {
         button_back.setText("Back");
         button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
+
+
         addComponent(text_fpsTitle);
         addComponent(text_fps);
         addComponent(slider_fps);
-        addComponent(text_windowTitle);
-        addComponent(text_window);
-        addComponent(slider_window);
+
+        addComponent(text_windowTypeTitle);
+        addComponent(text_windowType);
+        addComponent(slider_windowType);
+
+        addComponent(text_windowDimsTitle);
+        addComponent(text_windowDims);
+        addComponent(slider_windowDims);
+
         addComponent(button_apply);
         addComponent(button_back);
     }

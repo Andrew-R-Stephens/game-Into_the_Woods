@@ -27,7 +27,7 @@
 
     <Performance>
 
-        <gameUpdateRate>10</gameUpdateRate>
+        <gameUpdateRate>60</gameUpdateRate>
 
         <frameRateDefault>60</frameRateDefault>
         <frameRate>144</frameRate>
