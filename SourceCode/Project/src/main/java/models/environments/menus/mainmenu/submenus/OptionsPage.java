@@ -91,7 +91,7 @@ public class OptionsPage extends AMenu {
                 current = itemCount;
                 int i = 0;
                 for(; i < values.size(); i++) {
-                    if (values.get(i) == MAX_REFRESH_RATE) {
+                    if (values.get(i) == selectedFramerate) {
                         current = i;
                         break;
                     }
