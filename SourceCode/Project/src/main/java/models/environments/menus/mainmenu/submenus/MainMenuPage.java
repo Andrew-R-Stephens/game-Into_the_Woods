@@ -32,7 +32,6 @@ public class MainMenuPage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
-
                 getParentEnvironment().push(new NewGamePage(getParentEnvironment()));
 
                 return true;
@@ -52,7 +51,6 @@ public class MainMenuPage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
-
                 navigateToLevelSelectPage();
 
                 return true;
@@ -72,7 +70,6 @@ public class MainMenuPage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
-
                 getParentEnvironment().push(new OptionsPage(getParentEnvironment()));
 
                 return true;
@@ -92,7 +89,6 @@ public class MainMenuPage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
-
                 getParentEnvironment().push(new HelpPage(getParentEnvironment()));
 
                 return true;
@@ -112,6 +108,8 @@ public class MainMenuPage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
+                getEnvironmentsHandler().getSaveData().save();
+
                 System.exit(0);
 
                 return true;

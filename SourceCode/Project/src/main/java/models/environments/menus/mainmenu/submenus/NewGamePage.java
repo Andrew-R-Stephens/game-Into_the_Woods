@@ -89,13 +89,18 @@ public class NewGamePage extends AMenu {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
-                getEnvironmentsHandler().getSaveData().save();
 
                 getEnvironmentsHandler().getGameEnvironment().reset();
                 getEnvironmentsHandler().getGameEnvironment().getLevelsList().setCurrentLevel(0);
-
-                getEnvironmentsHandler().swapToEnvironment(
-                        EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        getEnvironmentsHandler().getSaveData().createNewGame();
+                        getEnvironmentsHandler().swapToEnvironment(
+                                EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
+                    }
+                });
+                t.start();
 
                 return true;
             }
@@ -122,7 +127,6 @@ public class NewGamePage extends AMenu {
             }
         };
         button_back.setText("Back");
-        //button_back.setBackgroundImage(img_button);
         button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         addComponent(button_avatar1);

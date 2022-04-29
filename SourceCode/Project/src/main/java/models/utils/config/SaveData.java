@@ -65,6 +65,7 @@ public class SaveData {
     public void createNewGame() {
         this.lastCompletedLevel = -1;
         this.characterType = ACharacter.CharacterType.TEO;
+        save();
     }
 
     /**

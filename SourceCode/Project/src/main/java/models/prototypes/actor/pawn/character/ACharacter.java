@@ -20,7 +20,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     protected final GameControls controlsModel;
 
     /**<p>The user-defined chosen character</p>*/
-    protected CharacterType characterType;
+    protected CharacterType characterType = CharacterType.TEO;
     /**<p></p>*/
     protected ActionType actionState = ActionType.FLOOR_IDLE;
 

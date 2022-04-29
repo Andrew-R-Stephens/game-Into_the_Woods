@@ -42,13 +42,47 @@ public class AImageView extends AMenuComponent implements IDrawable, IUpdatable 
 
     @Override
     public void draw(Graphics2D g) {
-
         super.draw(g);
 
         float sW = Config.scaledW, sH = Config.scaledH;
 
-        g.drawRect((int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH));
+        if(backgroundImage != null) {
+            switch (scaleType) {
 
+                case FIT_CENTERED -> {
+                    float sBW = w / (float)backgroundImage.getWidth();
+                    float sBH = h / (float)backgroundImage.getHeight();
+                    float s = Math.min(sBW, sBH);
+                    g.drawImage(backgroundImage,
+                            (int)(((x * sW) + (w * sW * .5f)) - (backgroundImage.getWidth() * sW * s * .5f)),
+                            (int)(((y * sH) + (h * sH * .5f)) - (backgroundImage.getHeight() * sH * s * .5f)),
+                            (int)(backgroundImage.getWidth() * sW * s),
+                            (int)(backgroundImage.getHeight() * sH * s),
+                            null);
+                }
+                case CENTER_CROP -> {
+                    float sBW = w / (float)backgroundImage.getWidth();
+                    float sBH = h / (float)backgroundImage.getHeight();
+                    float s = Math.min(sBW, sBH);
+                    int     nx = (int)((backgroundImage.getWidth() - (backgroundImage.getWidth() * s)) * .5f),
+                            nw = (int)(backgroundImage.getWidth() * s);
+                    BufferedImage croppedImage =
+                            backgroundImage.getSubimage(
+                                    nx, 0,
+                                    nw, backgroundImage.getHeight()
+                            );
+                    g.drawImage(croppedImage,
+                            (int)(x * sW),
+                            (int)(y * sH),
+                            (int)(w * sW),
+                            (int)(h * sH),
+                            null);
+                }
+                default -> {
+                    g.drawImage(backgroundImage, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
+                }
+            }
+        }
     }
 
     @Override

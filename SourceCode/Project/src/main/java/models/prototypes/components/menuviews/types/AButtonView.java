@@ -34,7 +34,8 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         super(parentMenuModel, x, y, w, h);
 
         spritesheet =
-                getParentEnvironment().getResources().getSpriteSheet("spritesheet_buttonhrect").setLoopOnLast(false);
+                getParentEnvironment().getResources().getSpriteSheet("spritesheet_buttonhrect")
+                        .setLoopOnLast(false);
     }
 
     /**
