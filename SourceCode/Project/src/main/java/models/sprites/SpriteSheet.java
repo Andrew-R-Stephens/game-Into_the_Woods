@@ -25,8 +25,9 @@ public class SpriteSheet implements IUpdatable {
     /**<p>The frame scale of the largestSize against the max size.</p>*/
     private float[] frameScale = new float[2];
 
+    private boolean isNewCycle = true;
     /**<p>The current index information of the animation.</p>*/
-    private int currentFrame = 0, ticks = 0;
+    private int currentFrame = 0, previousFrame = currentFrame, ticks = 0;
     /**<p>If the animation should restart at the first frame when the last frame is finished.</p>*/
     private boolean loopOnLastFrame = true;
 
@@ -95,7 +96,12 @@ public class SpriteSheet implements IUpdatable {
      * @return if the current frame is the last frame.
      */
     public boolean isLastFrame() {
-        return currentFrame >= frames.size() - 1;
+        isNewCycle = true;
+        boolean isLast = currentFrame >= frames.size() - 1;
+        if(ticks > 0) {
+            isNewCycle = false;
+        }
+        return isLast;
     }
 
     /**
@@ -230,4 +236,11 @@ public class SpriteSheet implements IUpdatable {
         }
     }
 
+    public boolean isFrameIndex(int i) {
+        return i == currentFrame;
+    }
+
+    public boolean isNewCycle() {
+        return isNewCycle;
+    }
 }

@@ -60,10 +60,12 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
      * <p>This event will open the door if it is closed.</p>
      */
     public void onReceive() {
-        if(state != State.CLOSED) {
+        if(state == State.LOCKED || state == State.OPEN) {
             return;
         }
         state = State.OPEN;
+
+        resources.getAudioPlayer("door_unlock").play();
     }
 
     /**

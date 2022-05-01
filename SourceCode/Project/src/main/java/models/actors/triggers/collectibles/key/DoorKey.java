@@ -47,6 +47,8 @@ public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatabl
         if(gameEnvironment.getPlayerInventory().getKeyCount() >= gameEnvironment.getCurrentLevel().getKeyCount()) {
             gameEnvironment.getLevelsList().getCurrentLevel().unlockDoor();
         }
+
+        resources.getAudioPlayer("door_key").play();
     }
 
     @Override

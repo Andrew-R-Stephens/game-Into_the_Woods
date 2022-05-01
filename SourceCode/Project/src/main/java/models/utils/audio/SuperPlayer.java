@@ -61,13 +61,16 @@ public class SuperPlayer {
      */
     public void play() {
         if(Config.audioEnabled) {
-            try {
-                isPlaying = true;
-                player.play();
-            } catch (JavaLayerException e) {
-                e.printStackTrace();
-                isPlaying = false;
-            }
+            Thread t = new Thread(() -> {
+                try {
+                    isPlaying = true;
+                    player.play();
+                } catch (JavaLayerException e) {
+                    e.printStackTrace();
+                    isPlaying = false;
+                }
+            });
+            t.start();
         }
     }
 

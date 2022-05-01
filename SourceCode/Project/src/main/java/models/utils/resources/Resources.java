@@ -321,8 +321,7 @@ public class Resources {
         SuperPlayer p = new SuperPlayer(audioFiles.get(audioKey));
 
         // Start the audio
-        Thread t = new Thread(p::play);
-        t.start();
+        p.play();
 
         return p;
 
