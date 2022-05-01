@@ -104,13 +104,6 @@ public class MainMenuEnvironment extends AMenuEnvironment {
     }
 
     @Override
-    public void onExit() {
-        super.onExit();
-
-        popToFirst();
-    }
-
-    @Override
     public void startBackgroundAudio() {
         Thread audioInitThread = new Thread(() -> {
             if(!audioPlayer.isPlaying()) {
@@ -125,6 +118,13 @@ public class MainMenuEnvironment extends AMenuEnvironment {
     @Override
     public void setAudioPlayer() {
         audioPlayer = getResources().getAudioPlayer("mainmenu");
+    }
+
+    @Override
+    public void onExit() {
+        super.onExit();
+
+        popToFirst();
     }
 
     @Override

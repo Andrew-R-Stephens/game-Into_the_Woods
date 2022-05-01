@@ -15,10 +15,20 @@ import java.io.InputStream;
  */
 public class SuperPlayer {
 
+    /**
+     * The AdvancedPlayer for this audio source
+     */
     private AdvancedPlayer player = null;
 
+    /**
+     * If this audio is playing
+     */
     private boolean isPlaying = false;
 
+    /**
+     * Creates a new SuperPlayer which acts to wrap the AdvancedPlayer for more functionality
+     * @param filepath The path of the audio file
+     */
     public SuperPlayer(String filepath) {
         BufferedInputStream ins = getBuffInstream(filepath);
         if(ins != null) {
@@ -30,6 +40,11 @@ public class SuperPlayer {
         }
     }
 
+    /**
+     * Gets the BufferedInputStream of the classpath for the specified audio file
+     * @param filepath The path of the audio file
+     * @return The BufferedInputStream for the audio file
+     */
     private BufferedInputStream getBuffInstream(String filepath) {
         InputStream resourceBuff = SuperPlayer.class.getResourceAsStream(filepath);
 
@@ -41,6 +56,9 @@ public class SuperPlayer {
         return new BufferedInputStream(resourceBuff);
     }
 
+    /**
+     * Starts the audio clip and records that it is playing.
+     */
     public void play() {
         if(Config.audioEnabled) {
             try {
@@ -53,16 +71,18 @@ public class SuperPlayer {
         }
     }
 
-    public void stop() {
-        isPlaying = false;
-        player.close();
-    }
-
+    /**
+     * Closes the audio clip and records that it is not playing.
+     */
     public void close() {
         isPlaying = false;
         player.close();
     }
 
+    /**
+     * Gets if the audio file is playing.
+     * @return if the audio file is playing.
+     */
     public boolean isPlaying() {
         return isPlaying;
     }

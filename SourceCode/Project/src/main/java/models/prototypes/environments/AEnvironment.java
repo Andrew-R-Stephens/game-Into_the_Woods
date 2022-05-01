@@ -76,6 +76,9 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
         }
     }
 
+    /**
+     * Allows subclasses to define the audio clip.
+     */
     public abstract void setAudioPlayer();
 
     /**

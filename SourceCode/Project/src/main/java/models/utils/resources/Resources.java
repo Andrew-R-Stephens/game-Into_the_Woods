@@ -297,10 +297,10 @@ public class Resources {
     /**
      * <p>Called externally to start a new concurrent audio thread.</p>
      * <br>
-     * <p>Uses stored audio file paths to in-stream the data as an audio file. Sets the file into an AdvancedPlayer object.</p>
-     * <p>The AdvancedPlayer object is returned for control over object permanence.</p>
+     * <p>Uses stored audio file paths to in-stream the data as an audio file. Sets the file into an SuperPlayer object.</p>
+     * <p>The SuperPlayer object is returned for control over object permanence.</p>
      * @param audioKey The audio file name without extension.
-     * @return The AdvancedPlayer that retains data for a specific audio file.
+     * @return The SuperPlayer that retains data for a specific audio file.
      */
     public synchronized SuperPlayer getAudioPlayer(String audioKey) {
         // Create a Player object that realizes the audio
@@ -310,10 +310,11 @@ public class Resources {
     /**
      * <p>Called externally to start a new concurrent audio thread.</p>
      * <br>
-     * <p>Uses stored audio file paths to in-stream the data as an audio file. Sets the file into an AdvancedPlayer object.</p>
-     * <p>The AdvancedPlayer object is returned for control over object permanence.</p>
+     * <p>Uses stored audio file paths to in-stream the data as an audio file. Sets the file into an SuperPlayer object.</p>
+     * <p>The SuperPlayer object is returned for control over object permanence.</p>
+     * <p>Starts the SuperPlayer automatically.</p>
      * @param audioKey The audio file name without extension.
-     * @return The AdvancedPlayer that retains data for a specific audio file.
+     * @return The SuperPlayer that retains data for a specific audio file.
      */
     public synchronized SuperPlayer playAudio(String audioKey) {
         // Create a Player object that realizes the audio
