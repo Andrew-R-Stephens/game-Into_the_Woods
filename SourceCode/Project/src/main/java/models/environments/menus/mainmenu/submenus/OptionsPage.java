@@ -1,6 +1,7 @@
 package models.environments.menus.mainmenu.submenus;
 
 import models.prototypes.components.menuviews.types.AButtonView;
+import models.prototypes.components.menuviews.types.ACheckboxView;
 import models.prototypes.components.menuviews.types.ASliderView;
 import models.prototypes.components.menuviews.types.ATextView;
 import models.prototypes.environments.menu.AMenu;
@@ -27,6 +28,8 @@ public class OptionsPage extends AMenu {
     /**<p>The user-defined window dimension</p>*/
     private int selectedWindowWidth = Config.window_width_selected,
             selectedWindowHeight = Config.window_height_selected;
+    /**<p>The user-defined window dimension</p>*/
+    private boolean selectedAudioEnabled = Config.audioEnabled;
 
     /**
      * <p>Builds the Options page.</p>
@@ -227,6 +230,37 @@ public class OptionsPage extends AMenu {
             }
         };
 
+        ATextView text_audioEnabled = new ATextView(
+                getParentEnvironment(),
+                (int) (centerW - (btn_width * .5f)) - btn_width,
+                (int)(650 + (btn_height * .5f) - (textSizeH * .5f)),
+                textSizeW,
+                textSizeH,
+                "Enable Audio")
+        {};
+        text_audioEnabled.setBackgroundColor(new Color(255, 255, 255, 100));
+
+        ACheckboxView checkbox_audioEnabled = new ACheckboxView(
+                getParentEnvironment(),
+                text_audioEnabled.getX() + text_audioEnabled.getW() + 50,
+                text_audioEnabled.getY(),
+                text_audioEnabled.getH(),
+                text_audioEnabled.getH()
+        ) {
+            @Override
+            public void init() {
+                button.setEnabled(selectedAudioEnabled);
+                System.out.println(selectedAudioEnabled);
+            }
+
+            @Override
+            public void doSetting() {
+                selectedAudioEnabled = !button.isEnabled;
+                System.out.println(selectedAudioEnabled);
+            }
+        };
+
+
         // ===========
         // APPLY
         // ===========
@@ -246,8 +280,9 @@ public class OptionsPage extends AMenu {
                         Config.frameRate != selectedFramerate ||
                         Config.getWindowType() != selectedWindowType ||
                         (selectedWindowWidth != Config.getWindowWidthSelected() &&
-                                selectedWindowHeight != Config.getWindowHeightSelected())
-                        );
+                                selectedWindowHeight != Config.getWindowHeightSelected()) ||
+                        Config.audioEnabled != selectedAudioEnabled
+                );
             }
 
             @Override
@@ -282,6 +317,20 @@ public class OptionsPage extends AMenu {
                         (Config.window_height_selected != selectedWindowHeight)) {
                     Config.window_width_selected = selectedWindowWidth;
                     Config.window_height_selected = selectedWindowHeight;
+
+                    rebuildWindow = true;
+                }
+
+                if(Config.audioEnabled != selectedAudioEnabled) {
+                    Config.audioEnabled = selectedAudioEnabled;
+
+                    if(Config.audioEnabled) {
+                        System.out.println("Starting Background Audio from Options");
+                        System.out.println(getEnvironmentsHandler().getCurrentEnvironment().getClass());
+                        getEnvironmentsHandler().getCurrentEnvironment().startBackgroundAudio();
+                    } else {
+                        getEnvironmentsHandler().getCurrentEnvironment().stopBackgroundAudio();
+                    }
 
                     rebuildWindow = true;
                 }
@@ -323,7 +372,6 @@ public class OptionsPage extends AMenu {
         button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
 
-
         addComponent(text_fpsTitle);
         addComponent(text_fps);
         addComponent(slider_fps);
@@ -335,6 +383,9 @@ public class OptionsPage extends AMenu {
         addComponent(text_windowDimsTitle);
         addComponent(text_windowDims);
         addComponent(slider_windowDims);
+
+        addComponent(text_audioEnabled);
+        addComponent(checkbox_audioEnabled);
 
         addComponent(button_apply);
         addComponent(button_back);

@@ -86,7 +86,7 @@ public abstract class ASliderView<E> extends AMenuComponent {
                 }
             }
         };
-        button.setBackgroundImage(getParentEnvironment().getResources().getImage("button_slider"));
+        button.setBackgroundImage(buttonImg);
         button.setImageScaling(ImageScale.FIT_CENTERED);
 
         init();

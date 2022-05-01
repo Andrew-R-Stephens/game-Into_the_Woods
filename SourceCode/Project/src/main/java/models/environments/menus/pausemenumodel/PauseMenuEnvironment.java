@@ -57,12 +57,23 @@ public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable 
 
     @Override
     public void onExit() {
-        super.onExit();
+        //super.onExit();
         reset();
     }
 
     @Override
     public void startBackgroundAudio() {
+        gameEnvironment.startBackgroundAudio();
+    }
+
+    @Override
+    public void stopBackgroundAudio() {
+        gameEnvironment.stopBackgroundAudio();
+    }
+
+    @Override
+    public void setAudioPlayer() {
+
     }
 
     @Override

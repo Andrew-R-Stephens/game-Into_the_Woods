@@ -85,6 +85,7 @@ public class SaveFileRW {
             obj.addProperty("selectedWindowHeight", Config.getWindowHeightSelected());
             obj.addProperty("selectedWindowType", Config.getWindowType().ordinal());
             obj.addProperty("selectFramerate", Config.frameRate);
+            obj.addProperty("selectAudioEnabled", Config.audioEnabled);
 
             bw.write(obj.toString());
             bw.close();
@@ -154,6 +155,11 @@ public class SaveFileRW {
                         saveElement = saveObject.get("selectFramerate");
                         framerate = (short) saveElement.getAsInt();
                     }
+                    boolean audioEnabled = Config.audioEnabled;
+                    if(saveObject.has("selectAudioEnabled")) {
+                        saveElement = saveObject.get("selectAudioEnabled");
+                        audioEnabled = saveElement.getAsBoolean();
+                    }
 
                     saveData.setAll(
                             levelProgress,
@@ -161,7 +167,8 @@ public class SaveFileRW {
                             windowWidth,
                             windowHeight,
                             windowType,
-                            framerate
+                            framerate,
+                            audioEnabled
                     );
 
                     r.close();

@@ -73,6 +73,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
         super.init(parentEnvironmentsHandler, gameControls);
 
+        setAudioPlayer();
+
         this.gameControls = gameControls;
 
         try {
@@ -400,7 +402,19 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     @Override
     public void startBackgroundAudio() {
-        audioPlayer = getResources().playAudio("game");
+        Thread audioInitThread = new Thread(() -> {
+            if(!audioPlayer.isPlaying()) {
+                audioPlayer.play();
+            } else {
+                System.out.println("Currently playing");
+            }
+        });
+        audioInitThread.start();
+    }
+
+    @Override
+    public void setAudioPlayer() {
+        audioPlayer = getResources().getAudioPlayer("game");
     }
 
     @Override

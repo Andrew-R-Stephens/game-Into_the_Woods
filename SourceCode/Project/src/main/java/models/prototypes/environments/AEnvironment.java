@@ -1,11 +1,10 @@
 package models.prototypes.environments;
 
-import javazoom.jl.player.advanced.AdvancedPlayer;
 import models.environments.EnvironmentsHandler;
 import models.prototypes.controls.AControls;
 import models.prototypes.controls.AKeyController;
 import models.prototypes.controls.AMouseController;
-import models.utils.config.SaveData;
+import models.utils.audio.SuperPlayer;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
@@ -21,7 +20,7 @@ import models.utils.updates.IUpdatable;
 public abstract class AEnvironment implements IUpdatable, IDrawable {
 
     /**<p>The AudioPlayer object that controls the sound for background audio.</p>*/
-    protected AdvancedPlayer audioPlayer;
+    protected SuperPlayer audioPlayer;
     /**<p>The parent EnvironmentsHandler.</p>*/
     private EnvironmentsHandler parentEnvironmentsHandler;
     /**<p>The Environment's Key Controller that's particular to the type of Environment.</p>*/
@@ -70,11 +69,14 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
      * <p>Called primarily during onExit executions. Some subclasses might not need this to execute, so the body may be
      * overridden as undefined there.</p>
      */
-    protected void stopBackgroundAudio() {
+    public void stopBackgroundAudio() {
         if(audioPlayer != null) {
             audioPlayer.close();
+            setAudioPlayer();
         }
     }
+
+    public abstract void setAudioPlayer();
 
     /**
      * <p>Defined by subclasses. Used to completely default all fields.</p>
@@ -110,8 +112,10 @@ public abstract class AEnvironment implements IUpdatable, IDrawable {
      * <p>Deals with starting the audiostream.</p>
      */
     public void onResume() {
-        Thread audioInitThread = new Thread(this::startBackgroundAudio);
-        audioInitThread.start();
+        if(audioPlayer != null) {
+            Thread audioInitThread = new Thread(this::startBackgroundAudio);
+            audioInitThread.start();
+        }
     }
 
     /**

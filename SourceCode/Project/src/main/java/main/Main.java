@@ -26,6 +26,8 @@ import models.utils.resources.Resources;
 import views.canvas.EnvironmentCanvas;
 import views.window.MainWindow;
 
+import java.io.File;
+
 /**
  * <p>The launching class.</p>
  *
@@ -181,7 +183,11 @@ public class Main {
     public static void init() {
 
         // Initialize Preferences
-        new PreferencesParser(config, resources.loadTextFile("preferences.xml")).parse();
+        File file = resources.loadTextFile("preferences.xml");
+        if(file == null) {
+            file = resources.loadTextFile("Preferences.xml");
+        }
+        new PreferencesParser(config, file).parse();
         saveData.init(saveFileRW);
 
         // Reference resources

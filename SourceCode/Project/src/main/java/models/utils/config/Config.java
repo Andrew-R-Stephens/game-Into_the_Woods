@@ -44,6 +44,9 @@ public class Config {
     /**<p>The actual framerate for the renders.</p>*/
     public static short frameRate = 60;
 
+    /**<p>If the game should be muted or not.</p>*/
+    public static boolean audioEnabled = true;
+
     /**
      * <p>Looks at the system configurations for operating system type and finds the JAR path.</p>
      */

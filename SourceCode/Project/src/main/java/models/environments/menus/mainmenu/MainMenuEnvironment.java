@@ -6,8 +6,10 @@ import models.environments.EnvironmentsHandler;
 import models.environments.menus.startscreen.StartScreenPage;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
+import models.utils.audio.SuperPlayer;
 import models.utils.config.Config;
 import models.utils.config.SaveData;
+import models.utils.resources.Resources;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -34,6 +36,7 @@ public class MainMenuEnvironment extends AMenuEnvironment {
         super.init(environmentsHandler, menuControlsModel);
 
         backgroundImage = getResources().getImage("menubackground");
+        setAudioPlayer();
 
         StartScreenPage startPage = new StartScreenPage(this);
         push(startPage);
@@ -109,7 +112,19 @@ public class MainMenuEnvironment extends AMenuEnvironment {
 
     @Override
     public void startBackgroundAudio() {
-        audioPlayer = getResources().playAudio("mainmenu");
+        Thread audioInitThread = new Thread(() -> {
+            if(!audioPlayer.isPlaying()) {
+                audioPlayer.play();
+            } else {
+                System.out.println("Currently playing");
+            }
+        });
+        audioInitThread.start();
+    }
+
+    @Override
+    public void setAudioPlayer() {
+        audioPlayer = getResources().getAudioPlayer("mainmenu");
     }
 
     @Override

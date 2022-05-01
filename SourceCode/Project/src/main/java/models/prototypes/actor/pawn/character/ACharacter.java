@@ -21,7 +21,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
 
     /**<p>The user-defined chosen character</p>*/
     protected CharacterType characterType = CharacterType.TEO;
-    /**<p></p>*/
+    /**<p>The current state of the player.</p>*/
     protected ActionType actionState = ActionType.FLOOR_IDLE;
 
     /**<p>The hashmap containing all spritesheets particular for specific user actions.</p>*/

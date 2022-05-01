@@ -51,7 +51,8 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
      */
     public void playSound() {
         if(playSound) {
-            getParentEnvironment().getResources().playAudio("buttonclick");
+            Thread t = new Thread(() -> getParentEnvironment().getResources().playAudio("buttonclick"));
+            t.start();
         }
     }
 

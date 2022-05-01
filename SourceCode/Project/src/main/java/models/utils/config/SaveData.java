@@ -77,12 +77,13 @@ public class SaveData {
 
     public void setAll(
             int levelProgress, int characterType,
-            int windowWidth, int windowHeight, int windowType, short framerate) {
+            int windowWidth, int windowHeight, int windowType, short framerate, boolean audioEnabled) {
         this.lastCompletedLevel = levelProgress;
         this.characterType = ACharacter.CharacterType.values()[characterType];
         Config.window_width_selected = windowWidth;
         Config.window_height_selected = windowHeight;
         Config.setWindowType(windowType);
         Config.frameRate = framerate;
+        Config.audioEnabled = audioEnabled;
     }
 }

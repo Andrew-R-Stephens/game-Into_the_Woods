@@ -1,8 +1,8 @@
 package models.utils.resources;
 
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.advanced.AdvancedPlayer;
 import models.sprites.SpriteSheet;
+import models.utils.audio.SuperPlayer;
 import models.utils.files.AFileReader;
 import models.utils.files.MetaDataParser;
 import models.utils.files.SpriteSheetParser;
@@ -302,42 +302,25 @@ public class Resources {
      * @param audioKey The audio file name without extension.
      * @return The AdvancedPlayer that retains data for a specific audio file.
      */
-    public synchronized AdvancedPlayer playAudio(String audioKey) {
-        // create AudioInputStream object
-        InputStream resourceBuff = Resources.class.getResourceAsStream(audioFiles.get(audioKey));
-
-        if(resourceBuff == null) {
-            System.out.println("Buffer is null");
-            return null;
-        }
-
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(resourceBuff);
-
+    public synchronized SuperPlayer getAudioPlayer(String audioKey) {
         // Create a Player object that realizes the audio
-        AdvancedPlayer p = null;
-        try {
-            p = new AdvancedPlayer(bufferedInputStream);
-        } catch (JavaLayerException e) {
-            e.printStackTrace();
-        }
+        return new SuperPlayer(audioFiles.get(audioKey));
+    }
 
-        AdvancedPlayer finalP = p;
-        Thread t = new Thread(() -> {
-            try {
-                if (finalP != null) {
-                    finalP.play(); // Start the music
+    /**
+     * <p>Called externally to start a new concurrent audio thread.</p>
+     * <br>
+     * <p>Uses stored audio file paths to in-stream the data as an audio file. Sets the file into an AdvancedPlayer object.</p>
+     * <p>The AdvancedPlayer object is returned for control over object permanence.</p>
+     * @param audioKey The audio file name without extension.
+     * @return The AdvancedPlayer that retains data for a specific audio file.
+     */
+    public synchronized SuperPlayer playAudio(String audioKey) {
+        // Create a Player object that realizes the audio
+        SuperPlayer p = new SuperPlayer(audioFiles.get(audioKey));
 
-                    try {
-                        resourceBuff.close();
-                        bufferedInputStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (JavaLayerException e) {
-                e.printStackTrace();
-            }
-        });
+        // Start the audio
+        Thread t = new Thread(p::play);
         t.start();
 
         return p;
