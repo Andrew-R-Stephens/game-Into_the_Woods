@@ -1,15 +1,12 @@
 package models.environments.menus.mainmenu;
 
-import controls.MenuControls;
+import controls.menu.MenuControls;
 import models.camera.Camera;
 import models.environments.EnvironmentsHandler;
 import models.environments.menus.startscreen.StartScreenPage;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
-import models.utils.audio.SuperPlayer;
 import models.utils.config.Config;
-import models.utils.config.SaveData;
-import models.utils.resources.Resources;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

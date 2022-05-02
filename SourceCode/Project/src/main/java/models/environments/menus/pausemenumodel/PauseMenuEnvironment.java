@@ -1,6 +1,6 @@
 package models.environments.menus.pausemenumodel;
 
-import controls.MenuControls;
+import controls.menu.MenuControls;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
 import models.environments.menus.pausemenumodel.submenus.PauseMenuPage;

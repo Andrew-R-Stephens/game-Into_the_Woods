@@ -1,7 +1,7 @@
 package models.environments.game;
 
-import controls.GameControls;
-import controls.MenuControls;
+import controls.game.GameControls;
+import controls.menu.MenuControls;
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
 import controls.menu.MenuKeyControls;

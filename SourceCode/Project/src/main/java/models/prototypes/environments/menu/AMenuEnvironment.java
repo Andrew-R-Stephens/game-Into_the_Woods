@@ -1,6 +1,6 @@
 package models.prototypes.environments.menu;
 
-import controls.MenuControls;
+import controls.menu.MenuControls;
 import models.environments.EnvironmentsHandler;
 import models.prototypes.environments.AEnvironment;
 import models.utils.drawables.IDrawable;

@@ -1,6 +1,7 @@
 package models.prototypes.views;
 
 import models.utils.config.Config;
+import models.utils.config.DisplayInfo;
 import models.utils.resources.Resources;
 
 import javax.swing.*;
@@ -56,16 +57,31 @@ public abstract class AWindow extends JFrame {
             case WINDOWED_BORDERLESS -> {
                 int width = Config.getWindowWidthSelected();
                 int height = Config.getWindowHeightSelected();
+
+                if(width * DisplayInfo.SYS_SCALEX > Toolkit.getDefaultToolkit().getScreenSize().width) {
+                    width = Toolkit.getDefaultToolkit().getScreenSize().width;
+                }
+                if(height * DisplayInfo.SYS_SCALEY > Toolkit.getDefaultToolkit().getScreenSize().height) {
+                    height = Toolkit.getDefaultToolkit().getScreenSize().height;
+                }
+
                 Config.setWindowWidthActual(width);
                 Config.setWindowHeightActual(height);
 
                 setUndecorated(true);
-
                 setPreferredSize(new Dimension(width, height));
             }
             default -> {
                 int width = Config.getWindowWidthSelected();
                 int height = Config.getWindowHeightSelected();
+
+                if(width * DisplayInfo.SYS_SCALEX > Toolkit.getDefaultToolkit().getScreenSize().width) {
+                    width = Toolkit.getDefaultToolkit().getScreenSize().width;
+                }
+                if(height * DisplayInfo.SYS_SCALEY > Toolkit.getDefaultToolkit().getScreenSize().height) {
+                    height = Toolkit.getDefaultToolkit().getScreenSize().height;
+                }
+
                 Config.setWindowWidthActual(width);
                 Config.setWindowHeightActual(height);
 

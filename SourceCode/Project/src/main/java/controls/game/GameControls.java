@@ -1,4 +1,4 @@
-package controls;
+package controls.game;
 
 import models.prototypes.controls.AControls;
 

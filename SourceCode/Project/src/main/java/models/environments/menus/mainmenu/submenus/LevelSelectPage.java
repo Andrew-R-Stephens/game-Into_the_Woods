@@ -149,7 +149,6 @@ public class LevelSelectPage extends AMenu {
         for(int i = 0; i < levels.length; i++) {
             levels[i].setEnabled(false);
             if((i-1) <= getEnvironmentsHandler().getSaveData().getLevelProgress()) {
-                System.out.println(i + " vs " + getEnvironmentsHandler().getSaveData().getLevelProgress());
                 levels[i].setEnabled(true);
             }
             addComponent(levels[i]);

@@ -1,6 +1,6 @@
 package models.prototypes.actor.pawn.character;
 
-import controls.GameControls;
+import controls.game.GameControls;
 import models.prototypes.actor.pawn.APawn;
 import models.sprites.SpriteSheet;
 import models.utils.config.Config;

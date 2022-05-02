@@ -1,6 +1,6 @@
 package models.actors.player;
 
-import controls.GameControls;
+import controls.game.GameControls;
 import models.camera.Camera;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
@@ -158,7 +158,6 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
         if(actionState == ActionType.FLOOR_RUNNING &&
                 getCurrentSpriteSheet().isLastFrame() && getCurrentSpriteSheet().isNewCycle()) {
-            System.out.println("Cycle run");
             resources.getAudioPlayer("run_" + ((int)(Math.random()*5)+1)).play();
         }
     }

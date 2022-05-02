@@ -1,6 +1,5 @@
 package controls.game;
 
-import controls.GameControls;
 import models.prototypes.controls.AControls;
 import models.prototypes.controls.AKeyController;
 

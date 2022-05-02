@@ -1,6 +1,5 @@
 package controls.menu;
 
-import controls.MenuControls;
 import models.prototypes.controls.AControls;
 import models.prototypes.controls.AKeyController;
 

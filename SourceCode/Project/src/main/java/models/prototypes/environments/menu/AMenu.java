@@ -1,6 +1,6 @@
 package models.prototypes.environments.menu;
 
-import controls.MenuControls;
+import controls.menu.MenuControls;
 import controls.menu.MenuKeyControls;
 import models.environments.EnvironmentsHandler;
 import models.prototypes.components.menuviews.AMenuComponent;

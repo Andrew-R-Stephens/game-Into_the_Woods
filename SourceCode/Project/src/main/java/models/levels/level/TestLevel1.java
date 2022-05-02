@@ -25,9 +25,9 @@ public class TestLevel1 extends ALevel {
 
         build();
 
-        addBackgroundLayer(getResources().getImage("caves_1"));
-        addBackgroundLayer(getResources().getImage("caves_2"));
-        addBackgroundLayer(getResources().getImage("caves_3"));
+        addBackgroundLayer(getResources().getImage("forest_1"));
+        addBackgroundLayer(getResources().getImage("forest_2"));
+        addBackgroundLayer(getResources().getImage("forest_3"));
     }
 
     @Override
