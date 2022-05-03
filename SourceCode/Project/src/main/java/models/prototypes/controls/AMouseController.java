@@ -71,6 +71,13 @@ public abstract class AMouseController implements MouseListener, MouseMotionList
         isRightPressed = false;
     }
 
+    /**
+     * Sets the Left Button pressed state
+     */
+    public void setLeftPressed() {
+        isLeftPressed = false;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
     }

@@ -155,11 +155,7 @@ public class EnvironmentsHandler {
      * @param resetThreads whether or not the threads should be rebuilt
      */
     public void applyEnvironment(boolean resetThreads) {
-        if(environments.get(currentEnvironment.ordinal()) instanceof AMenuEnvironment) {
-            parentWindow.buildCursor(true);
-        } else {
-            parentWindow.buildCursor(false);
-        }
+        parentWindow.buildCursor(environments.get(currentEnvironment.ordinal()) instanceof AMenuEnvironment);
 
         parentWindow.build();
 
