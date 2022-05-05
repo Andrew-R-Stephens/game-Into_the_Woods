@@ -267,6 +267,7 @@ public class OptionsPage extends AMenu {
             }
         };
 
+        int otherbtn_w = (int)(btn_width * .5f);
 
         // ===========
         // APPLY
@@ -274,9 +275,9 @@ public class OptionsPage extends AMenu {
 
         button_apply = new AButtonView(
                 getParentEnvironment(),
-                (int) (centerW - (btn_width * 1.25f)),
+                (int) (centerW - (otherbtn_w * 1.25f)),
                 800,
-                btn_width,
+                otherbtn_w,
                 btn_height
         ) {
             @Override
@@ -358,12 +359,12 @@ public class OptionsPage extends AMenu {
         // BACK
         // ===========
 
-        int backbtn_w = (int)(btn_width * .5f);
+
         AButtonView button_back = new AButtonView(
                 getParentEnvironment(),
-                (int) (centerW + (backbtn_w * .25f)),
+                (int) (centerW + (otherbtn_w * .25f)),
                 800,
-                backbtn_w,
+                otherbtn_w,
                 btn_height
         ) {
             @Override

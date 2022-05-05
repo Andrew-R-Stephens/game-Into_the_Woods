@@ -297,24 +297,13 @@ public class HelpPage extends AMenu {
             BufferedImage bufferedImage_objectives_img = getResources().getImage("help_controls");
             AImageView img_objectives = new AImageView(
                     getParentEnvironment(),
-                    (int) (mx - (bufferedImage_objectives_img.getWidth() * .5f)),
-                    text_title.getY() + text_title.getH() + 100,
-                    bufferedImage_objectives_img.getWidth(),
-                    bufferedImage_objectives_img.getHeight(),
+                    (int) (mx - (1200 * .5f)),
+                    text_title.getY() + text_title.getH() + 25,
+                    1200,
+                    600,
                     bufferedImage_objectives_img,
                     AMenuComponent.ImageScale.FIT_CENTERED
             );
-            BufferedImage bufferedImage_objectives_text = getResources().getImage("help_controls_text");
-            AImageView text_objectives = new AImageView(
-                    getParentEnvironment(),
-                    (int) (mx - (img_objectives.getW() * .5f)),
-                    img_objectives.getY() + img_objectives.getH(),
-                    img_objectives.getW(),
-                    img_objectives.getH(),
-                    bufferedImage_objectives_text,
-                    AMenuComponent.ImageScale.FIT_CENTERED
-            );
-
 
             int backbtn_w = (int)(btn_width * .5f);
             AButtonView button_back = new AButtonView(
@@ -340,7 +329,6 @@ public class HelpPage extends AMenu {
 
             addComponent(text_title);
             addComponent(img_objectives);
-            addComponent(text_objectives);
             addComponent(button_back);
         }
 
