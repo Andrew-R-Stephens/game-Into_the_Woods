@@ -192,7 +192,7 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         float scaledW = w * Config.scaledW_zoom;
         float scaledH = h * Config.scaledH_zoom;
 
-        g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
+        //g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
         g.drawString(characterType.name(), (int) ((offsetX)), (int) (offsetY));
     }
 

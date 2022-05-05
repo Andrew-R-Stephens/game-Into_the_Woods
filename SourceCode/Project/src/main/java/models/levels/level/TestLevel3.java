@@ -22,10 +22,10 @@ public class TestLevel3 extends ALevel {
     public void build() {
 
         // Floor
-        addProp(new Platform(getResources(), 0, 980, 10000, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1", 0, 980, 10000, 100, 0, 0, false));
 
         for(int i = 0; i < 10; i++) {
-            addProp(new Platform(getResources(),i*20, 500+(-5*i*.8f), 20, 20, 0, 0, false));
+            addProp(new Platform(getResources(),"platform_level1",i*20, 500+(-5*i*.8f), 20, 20, 0, 0, false));
         }
 
         // Keys

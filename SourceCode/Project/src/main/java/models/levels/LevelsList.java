@@ -1,7 +1,8 @@
 package models.levels;
 
 import models.environments.game.GameEnvironment;
-import models.levels.level.TestLevel1;
+import models.levels.level.Level1;
+import models.levels.level.Level2;
 import models.levels.level.TestLevel2;
 import models.levels.level.TestLevel3;
 import models.prototypes.level.ALevel;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
  * @author Andrew Stephens
  */
 public class LevelsList implements IDrawable {
+
+    public static final float WORLD_SCALE = .75f;
 
     /**<p>The parent Game Environment</p>*/
     private GameEnvironment gameEnvironment = null;
@@ -33,8 +36,8 @@ public class LevelsList implements IDrawable {
     public void init(GameEnvironment gameEnvironment, int currentLevel) {
         this.gameEnvironment = gameEnvironment;
 
-        addLevel(new TestLevel1(gameEnvironment));
-        addLevel(new TestLevel2(gameEnvironment));
+        addLevel(new Level1(gameEnvironment));
+        addLevel(new Level2(gameEnvironment));
         addLevel(new TestLevel3(gameEnvironment));
 
         setCurrentLevel(currentLevel);

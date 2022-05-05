@@ -1,5 +1,6 @@
 package models.prototypes.level.prop;
 
+import models.levels.LevelsList;
 import models.prototypes.actor.AActor;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
@@ -29,7 +30,11 @@ public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, I
      * @param hasGravity If the object should be effected by gravity.
      */
     protected AProp(Resources resources, float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
-        super(resources, x, y, w, h, vx, vy, hasGravity);
+        super(resources,
+                x * LevelsList.WORLD_SCALE,
+                y * LevelsList.WORLD_SCALE,
+                w * LevelsList.WORLD_SCALE,
+                h * LevelsList.WORLD_SCALE, vx, vy, hasGravity);
     }
 
     @Override

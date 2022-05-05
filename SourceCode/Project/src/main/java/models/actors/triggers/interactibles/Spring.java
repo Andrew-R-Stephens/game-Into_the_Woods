@@ -82,6 +82,7 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
     @Override
     public void update(float delta) {
         super.update(delta);
+        spriteSheets.get(actionState).update(delta);
     }
 
     @Override
@@ -92,12 +93,16 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
         float scaledW = w * Config.scaledW_zoom;
         float scaledH = h * Config.scaledH_zoom;
 
+        spriteSheets.get(actionState).draw(g, (int)offsetX, (int)(offsetY-(scaledH)), (int)scaledW,
+                (int)(scaledH));
+        /*
         g.setColor(new Color(255, 100, 100, 50));
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
         g.setColor(new Color(100, 255, 100));
         g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
         g.setColor(Color.BLACK);
-        g.drawString("Spring Trigger", (int) (offsetX) + 3, (int) (offsetY) + 12);
+        g.drawString("Spring Trigger", (int) (offsetX) + 3, (int) (offsetY) + 12);*/
+
     }
 
     @Override

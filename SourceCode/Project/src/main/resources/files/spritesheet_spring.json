@@ -1,90 +1,88 @@
 { "frames": [
    {
-    "filename": "Spring 0.ase",
-    "frame": { "x": 0, "y": 0, "w": 180, "h": 175 },
+    "filename": "spring 0.ase",
+    "frame": { "x": 0, "y": 0, "w": 97, "h": 46 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
-    "sourceSize": { "w": 200, "h": 200 },
+    "spriteSourceSize": { "x": 1, "y": 4, "w": 97, "h": 46 },
+    "sourceSize": { "w": 100, "h": 50 },
     "duration": 100
    },
    {
-    "filename": "Spring 1.ase",
-    "frame": { "x": 180, "y": 0, "w": 180, "h": 175 },
+    "filename": "spring 1.ase",
+    "frame": { "x": 97, "y": 0, "w": 97, "h": 49 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
-    "sourceSize": { "w": 200, "h": 200 },
+    "spriteSourceSize": { "x": 1, "y": 0, "w": 97, "h": 49 },
+    "sourceSize": { "w": 100, "h": 50 },
     "duration": 100
    },
    {
-    "filename": "Spring 2.ase",
-    "frame": { "x": 360, "y": 0, "w": 180, "h": 175 },
+    "filename": "spring 2.ase",
+    "frame": { "x": 194, "y": 0, "w": 89, "h": 46 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
-    "sourceSize": { "w": 200, "h": 200 },
+    "spriteSourceSize": { "x": 9, "y": 4, "w": 89, "h": 46 },
+    "sourceSize": { "w": 100, "h": 50 },
     "duration": 100
    },
    {
-    "filename": "Spring 3.ase",
-    "frame": { "x": 540, "y": 0, "w": 180, "h": 175 },
+    "filename": "spring 3.ase",
+    "frame": { "x": 283, "y": 0, "w": 93, "h": 45 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
-    "sourceSize": { "w": 200, "h": 200 },
+    "spriteSourceSize": { "x": 4, "y": 4, "w": 93, "h": 45 },
+    "sourceSize": { "w": 100, "h": 50 },
     "duration": 100
    },
    {
-    "filename": "Spring 4.ase",
-    "frame": { "x": 720, "y": 0, "w": 180, "h": 175 },
+    "filename": "spring 4.ase",
+    "frame": { "x": 376, "y": 0, "w": 90, "h": 44 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
-    "sourceSize": { "w": 200, "h": 200 },
+    "spriteSourceSize": { "x": 2, "y": 5, "w": 90, "h": 44 },
+    "sourceSize": { "w": 100, "h": 50 },
     "duration": 100
    },
    {
-    "filename": "Spring 5.ase",
-    "frame": { "x": 900, "y": 0, "w": 180, "h": 175 },
+    "filename": "spring 5.ase",
+    "frame": { "x": 466, "y": 0, "w": 95, "h": 48 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
-    "sourceSize": { "w": 200, "h": 200 },
+    "spriteSourceSize": { "x": 1, "y": 2, "w": 95, "h": 48 },
+    "sourceSize": { "w": 100, "h": 50 },
     "duration": 100
    },
    {
-    "filename": "Spring 6.ase",
-    "frame": { "x": 1080, "y": 0, "w": 180, "h": 175 },
+    "filename": "spring 6.ase",
+    "frame": { "x": 561, "y": 0, "w": 96, "h": 47 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
-    "sourceSize": { "w": 200, "h": 200 },
+    "spriteSourceSize": { "x": 1, "y": 3, "w": 96, "h": 47 },
+    "sourceSize": { "w": 100, "h": 50 },
     "duration": 100
    },
    {
-    "filename": "Spring 7.ase",
-    "frame": { "x": 1260, "y": 0, "w": 180, "h": 175 },
+    "filename": "spring 7.ase",
+    "frame": { "x": 657, "y": 0, "w": 96, "h": 47 },
     "rotated": false,
     "trimmed": true,
-    "spriteSourceSize": { "x": 11, "y": 25, "w": 180, "h": 175 },
-    "sourceSize": { "w": 200, "h": 200 },
+    "spriteSourceSize": { "x": 2, "y": 1, "w": 96, "h": 47 },
+    "sourceSize": { "w": 100, "h": 50 },
     "duration": 100
    }
  ],
  "meta": {
   "app": "https://www.aseprite.org/",
   "version": "1.2.34.1-x64",
-  "image": "Spring.png",
+  "image": "spring.png",
   "format": "RGBA8888",
-  "size": { "w": 1440, "h": 175 },
+  "size": { "w": 753, "h": 49 },
   "scale": "1",
   "frameTags": [
   ],
   "layers": [
-   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
-   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
-   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" }
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]

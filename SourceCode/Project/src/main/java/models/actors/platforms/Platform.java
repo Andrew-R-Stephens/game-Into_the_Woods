@@ -1,6 +1,7 @@
 package models.actors.platforms;
 
 import models.camera.Camera;
+import models.levels.LevelsList;
 import models.prototypes.level.prop.AProp;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
@@ -17,6 +18,8 @@ import java.awt.image.BufferedImage;
  */
 public class Platform extends AProp implements IDrawable, IUpdatable {
 
+    private BufferedImage image;
+
     /**
      * <p>Called from the subtypes, this method initializes the object.</p>
      * @param resources The resources of the parent Environment
@@ -28,8 +31,11 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
      * @param vy The vertical velocity.
      * @param hasGravity If the object should be effected by gravity.
      */
-    public Platform(Resources resources, float x, float y, float w, float h, float vx, float vy, boolean hasGravity) {
+    public Platform(Resources resources, String imageName, float x, float y, float w, float h, float vx, float vy,
+                    boolean hasGravity) {
         super(resources, x, y, w, h, vx, vy, hasGravity);
+
+        this.image = resources.getImage(imageName);
     }
 
     @Override
@@ -42,33 +48,35 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
         float scaledW = w * Config.scaledW_zoom;
         float scaledH = h * Config.scaledH_zoom;
 
-        BufferedImage img = resources.getImage("platform_level2");
-        float imgScaledH = scaledH/img.getHeight();
+        float imgScaledH = scaledH/image.getHeight();
 
         if(scaledW < scaledH) {
-            g.drawImage(img,
+            g.drawImage(image,
                     (int) (offsetX), (int) (offsetY),
                     (int) (scaledW), (int) (scaledH) + 1,
                     null);
             return;
         }
 
-        float imgScaledW = img.getWidth() * imgScaledH;
+        float imgScaledW = image.getWidth() * imgScaledH;
         float numImgs = scaledW / imgScaledW;
         int i;
         for(i = 0; i < numImgs-1; i++) {
-            g.drawImage(img,
+            g.drawImage(image,
                     (int) (offsetX + (i * imgScaledW)), (int) (offsetY),
                     (int) (imgScaledW) + 1, (int) (scaledH) + 1,
                     null);
         }
         float lastImgScale = numImgs-i;
         if(lastImgScale > 0) {
-            g.drawImage(img,
+            g.drawImage(image,
                     (int) (offsetX + (i * imgScaledW)), (int) (offsetY),
                     (int) (lastImgScale * imgScaledW)+1, (int) (scaledH) + 1,
                     null);
         }
+
+        //g.setColor(Color.RED);
+        //g.drawString(x + " " + y, (int) (offsetX), (int) (offsetY));
     }
 
     @Override
@@ -81,6 +89,7 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
 
         float scaledW = w * Config.scaledW;
         float scaledH = h * Config.scaledH;
+
 
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
 

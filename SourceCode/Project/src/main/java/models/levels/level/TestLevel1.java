@@ -34,34 +34,34 @@ public class TestLevel1 extends ALevel {
     public void build() {
 
         // Walls
-        addProp(new Platform(getResources(), -500, 0, 500, 1080, 0, 0, false));
-        addProp(new Platform(getResources(),9000, 0, 100, 1080, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1", -500, 0, 500, 1080, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",9000, 0, 100, 1080, 0, 0, false));
 
         // Floor
-        addProp(new Platform(getResources(),-1, 980, 10001, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",-1, 980, 10001, 100, 0, 0, false));
 
         // Climbing Walls
-        addProp(new Platform(getResources(),320, -150, 50, 200, 0, 0, false));
-        addProp(new Platform(getResources(),500, 0, 50, 200, 0, 0, false));
-        addProp(new Platform(getResources(),320, 220, 50, 200, 0, 0, false));
-        addProp(new Platform(getResources(),500, 360, 50, 200, 0, 0, false));
-        addProp(new Platform(getResources(),320, 500, 50, 200, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",320, -150, 50, 200, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",500, 0, 50, 200, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",320, 220, 50, 200, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",500, 360, 50, 200, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",320, 500, 50, 200, 0, 0, false));
 
         // Other Platforms
-        addProp(new Platform(getResources(),1800, 100, 500, 100, 0, 0, false));
-        addProp(new Platform(getResources(),70, 800, 500, 100, 0, 0, false));
-        addProp(new Platform(getResources(),500, 700, 500, 100, 0, 0, false));
-        addProp(new Platform(getResources(),1100, 600, 500, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",1800, 100, 500, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",70, 800, 500, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",500, 700, 500, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",1100, 600, 500, 100, 0, 0, false));
 
-        addProp(new Platform(getResources(),1800, 600, 500, 50, 0, 0, false));
-        addProp(new Platform(getResources(),2000, 650, 220, 100, 0, 0, false));
-        addProp(new Platform(getResources(),3500, 750, 500, 100, 0, 0, false));
-        addProp(new Platform(getResources(),4000, 780, 200, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",1800, 600, 500, 50, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",2000, 650, 220, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",3500, 750, 500, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",4000, 780, 200, 100, 0, 0, false));
 
-        addProp(new Platform(getResources(),6800, 400, 500, 50, 0, 0, false));
-        addProp(new Platform(getResources(),2500, 720, 220, 100, 0, 0, false));
-        addProp(new Platform(getResources(),3000, 700, 500, 50, 0, 0, false));
-        addProp(new Platform(getResources(),3200, 650, 100, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",6800, 400, 500, 50, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",2500, 720, 220, 100, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",3000, 700, 500, 50, 0, 0, false));
+        addProp(new Platform(getResources(),"platform_level1",3200, 650, 100, 100, 0, 0, false));
 
         // REACTION PROP
         AReactProp reactProp = new AReactProp(getResources(), gameEnvironment, 75, 500, 100, 100,
