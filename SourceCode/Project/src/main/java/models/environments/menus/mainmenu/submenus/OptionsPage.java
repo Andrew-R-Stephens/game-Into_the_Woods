@@ -42,6 +42,13 @@ public class OptionsPage extends AMenu {
 
         int textSizeW = btn_width, textSizeH = (int)(btn_height * .5f);
 
+        ATextView text_title = new ATextView(
+                getParentEnvironment(),
+                (int)centerW - btn_width, 50,
+                (btn_width * 2), (int)(btn_height * .75f),
+                "OPTIONS"
+        ) {};
+        text_title.setBackgroundColor(new Color(255, 255, 255, 150));
 
         // ===========
         // FPS
@@ -50,7 +57,7 @@ public class OptionsPage extends AMenu {
         ATextView text_fpsTitle = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * 3 * .5f)),
-                (200-(textSizeH)),
+                (250-(textSizeH)),
                 btn_width * 3,
                 (textSizeH),
                 "FPS Limit")
@@ -61,7 +68,7 @@ public class OptionsPage extends AMenu {
         ATextView text_fps = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)) - btn_width,
-                (int)(200 + (btn_height * .5f) - (textSizeH * .5f)),
+                (int)(250 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
                 textSizeH,
                 selectedFramerate + "")
@@ -72,7 +79,7 @@ public class OptionsPage extends AMenu {
         ASliderView<Short> slider_fps = new ASliderView<>(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)),
-                200,
+                250,
                 btn_width * 2,
                 btn_height) {
             @Override
@@ -120,7 +127,7 @@ public class OptionsPage extends AMenu {
         ATextView text_windowTypeTitle = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * 3 * .5f)),
-                (350 - textSizeH),
+                (400 - textSizeH),
                 btn_width * 3,
                 textSizeH,
                 "Window Type")
@@ -131,7 +138,7 @@ public class OptionsPage extends AMenu {
         ATextView text_windowType = new ATextView(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)) - btn_width,
-                (int)(350 + (btn_height * .5f) - (textSizeH * .5f)),
+                (int)(400 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
                 textSizeH,
                 selectedWindowType.getName())
@@ -142,7 +149,7 @@ public class OptionsPage extends AMenu {
         ASliderView<Config.WindowType> slider_windowType = new ASliderView<>(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)),
-                350,
+                400,
                 btn_width * 2,
                 btn_height) {
             @Override
@@ -371,6 +378,7 @@ public class OptionsPage extends AMenu {
         button_back.setText("Back");
         button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
+        addComponent(text_title);
 
         addComponent(text_fpsTitle);
         addComponent(text_fps);

@@ -52,7 +52,10 @@
       "forest_1.png",
       "forest_2.png",
       "forest_3.png",
-      "cursor2.png"
+      "cursor2.png",
+      "help_objectives.png",
+      "help_objectives_text.png",
+      "help_obstacles.png"
     ]
   },
   "audio" : {

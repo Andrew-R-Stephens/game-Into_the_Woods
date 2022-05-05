@@ -191,7 +191,6 @@ public class Level2 extends ALevel {
             }
         });
 
-        super.build();
         // Keys
         addProp(new DoorKey(getResources(), gameEnvironment, 4744, 510, 100, 50, 0, 0));
         addProp(new DoorKey(getResources(), gameEnvironment, 3710, 2601, 100, 50, 0, 0));
@@ -215,7 +214,7 @@ public class Level2 extends ALevel {
         addProp(new Spring(getResources(), gameEnvironment, 2900, 3343, 100, 150, 0, 0, -1,false, false));
         addProp(new Spring(getResources(), gameEnvironment, 2774, 2939, 100, 150, 0, 0, -1,false, false));
 
-
+        super.build();
 
     }
 
