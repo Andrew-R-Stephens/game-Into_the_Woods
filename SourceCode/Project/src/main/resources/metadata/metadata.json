@@ -68,7 +68,9 @@
       "run_2.mp3",
       "run_3.mp3",
       "run_4.mp3",
-      "run_5.mp3"
+      "run_5.mp3",
+      "jump.mp3",
+      "spring.mp3"
     ]
   },
   "fonts" : {

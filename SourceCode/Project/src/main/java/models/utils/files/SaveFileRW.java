@@ -1,8 +1,7 @@
 package models.utils.files;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 import models.utils.config.Config;
 import models.utils.config.SaveData;
 
@@ -117,6 +116,7 @@ public class SaveFileRW {
                     BufferedReader r = new BufferedReader(isr);
 
                     JsonElement element = JsonParser.parseReader(r);
+
 
                     if(element.isJsonNull()) {
                         return false;

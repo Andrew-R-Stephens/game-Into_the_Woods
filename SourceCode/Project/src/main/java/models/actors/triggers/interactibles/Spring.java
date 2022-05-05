@@ -76,6 +76,7 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
         if(lastActor instanceof PlayerAvatar p) {
             p.setAction(ACharacter.ActionType.FLOOR_JUMPING);
             p.getCurrentSpriteSheet().reset();
+            resources.playAudio("spring");
         }
     }
 

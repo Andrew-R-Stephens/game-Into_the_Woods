@@ -173,6 +173,15 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     public void doFloorJump() {
         vY = -5;
         actionState = ActionType.FLOOR_JUMPING;
+
+        doJumpAudio();
+    }
+
+    /**
+     * Executes jump audio
+     */
+    private void doJumpAudio() {
+        resources.playAudio("jump");
     }
 
     /**
@@ -185,6 +194,8 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         this.vY = vY;
 
         actionState = ActionType.WALL_JUMPING;
+
+        doJumpAudio();
     }
 
     /**

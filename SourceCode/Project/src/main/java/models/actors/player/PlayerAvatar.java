@@ -156,9 +156,10 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
         updateSpriteAnimation(delta);
 
-        if(actionState == ActionType.FLOOR_RUNNING &&
-                getCurrentSpriteSheet().isLastFrame() && getCurrentSpriteSheet().isNewCycle()) {
-            resources.getAudioPlayer("run_" + ((int)(Math.random()*5)+1)).play();
+        if (actionState == ActionType.FLOOR_RUNNING) {
+            if (getCurrentSpriteSheet().isLastFrame() && getCurrentSpriteSheet().isNewCycle()) {
+                resources.playAudio("run_" + ((int) (Math.random() * 5) + 1));
+            }
         }
     }
 
