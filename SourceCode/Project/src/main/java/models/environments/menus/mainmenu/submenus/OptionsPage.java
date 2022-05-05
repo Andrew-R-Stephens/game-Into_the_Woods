@@ -351,11 +351,12 @@ public class OptionsPage extends AMenu {
         // BACK
         // ===========
 
+        int backbtn_w = (int)(btn_width * .5f);
         AButtonView button_back = new AButtonView(
                 getParentEnvironment(),
-                (int) (centerW + (btn_width * .25f)),
+                (int) (centerW + (backbtn_w * .25f)),
                 800,
-                btn_width,
+                backbtn_w,
                 btn_height
         ) {
             @Override

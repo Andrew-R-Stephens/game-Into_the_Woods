@@ -2,12 +2,17 @@ package models.environments.menus.mainmenu.submenus;
 
 import models.environments.EnvironmentsHandler;
 import models.prototypes.actor.pawn.character.ACharacter;
+import models.prototypes.components.menuviews.AMenuComponent;
 import models.prototypes.components.menuviews.types.AButtonView;
+import models.prototypes.components.menuviews.types.AImageView;
+import models.prototypes.components.menuviews.types.ATextView;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  * <p>The New Game Page. Contains the character selection and the option to begin a fresh play-through.</p>
@@ -22,12 +27,40 @@ public class NewGamePage extends AMenu {
     public NewGamePage(AMenuEnvironment parentEnvironment) {
         super(parentEnvironment);
 
-        BufferedImage img_sqbutton = getResources().getImage("button_square");
+        HashMap<ACharacter.CharacterType, BufferedImage> avatars = new HashMap<>();
+        avatars.put(ACharacter.CharacterType.TEO, getResources().getImage("avatar1"));
+        avatars.put(ACharacter.CharacterType.MELYNN, getResources().getImage("avatar2"));
 
         float mx = Config.DEFAULT_WINDOW_WIDTH * .5f;
         float my = Config.DEFAULT_WINDOW_HEIGHT * .5f;
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
+
+        ATextView text_title = new ATextView(
+                getParentEnvironment(),
+                (int)mx - btn_width, 100,
+                (btn_width * 2), (int)(btn_height * .75f),
+                "CREATE NEW GAME"
+        ) {};
+        text_title.setBackgroundColor(new Color(255, 255, 255, 150));
+
+
+        AImageView img_character = new AImageView(
+                getParentEnvironment(),
+                (int) (mx - (200 * .5f)),300,
+                200,200,
+                avatars.get(getEnvironmentsHandler().getGameEnvironment().getPlayerAvatar()
+                        .getCharacterType()),
+                AMenuComponent.ImageScale.FIT_CENTERED
+        ){
+            @Override
+            public void update(float delta) {
+                backgroundImage = avatars.get(getEnvironmentsHandler().getGameEnvironment().getPlayerAvatar()
+                        .getCharacterType());
+
+                super.update(delta);
+            }
+        };
 
         //Level 1 Button
         AButtonView button_avatar1 = new AButtonView(
@@ -92,13 +125,10 @@ public class NewGamePage extends AMenu {
 
                 getEnvironmentsHandler().getGameEnvironment().reset();
                 getEnvironmentsHandler().getGameEnvironment().getLevelsList().setCurrentLevel(0);
-                Thread t = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        getEnvironmentsHandler().getSaveData().createNewGame();
-                        getEnvironmentsHandler().swapToEnvironment(
-                                EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
-                    }
+                Thread t = new Thread(() -> {
+                    getEnvironmentsHandler().getSaveData().createNewGame();
+                    getEnvironmentsHandler().swapToEnvironment(
+                            EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
                 });
                 t.start();
 
@@ -108,11 +138,12 @@ public class NewGamePage extends AMenu {
         button_characterConfirm.setText("Start New Game");
         button_characterConfirm.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
+        int backbtn_w = (int)(btn_width * .5f);
         AButtonView button_back = new AButtonView(
                 getParentEnvironment(),
-                (int) (mx - (btn_width * .5f)),
+                (int) (mx - (backbtn_w * .5f)),
                 800,
-                btn_width,
+                backbtn_w,
                 btn_height
         ) {
             @Override
@@ -129,8 +160,10 @@ public class NewGamePage extends AMenu {
         button_back.setText("Back");
         button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
+        addComponent(text_title);
         addComponent(button_avatar1);
         addComponent(button_avatar2);
+        addComponent(img_character);
         addComponent(button_characterConfirm);
         addComponent(button_characterConfirm);
         addComponent(button_back);

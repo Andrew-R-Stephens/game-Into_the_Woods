@@ -3,9 +3,12 @@ package models.environments.menus.mainmenu.submenus;
 import models.environments.EnvironmentsHandler;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
+import models.prototypes.components.menuviews.types.ATextView;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
+
+import java.awt.*;
 
 /**
  * <p>Level Select Page. Allows the user to choose a previously completed level, or a level that they need to
@@ -22,6 +25,15 @@ public class LevelSelectPage extends AMenu {
         super(parentEnvironment);
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
+
+        ATextView text_title = new ATextView(
+                getParentEnvironment(),
+                (int)centerW - btn_width, 100,
+                (btn_width * 2), (int)(btn_height * .75f),
+                "LEVEL SELECT"
+        ) {};
+        text_title.setBackgroundColor(new Color(255, 255, 255, 150));
+
 
         AButtonView[] levels = new AButtonView[3];
 
@@ -124,11 +136,12 @@ public class LevelSelectPage extends AMenu {
                 getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
         levels[2].setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
+        int backbtn_w = (int)(btn_width * .5f);
         AButtonView button_back = new AButtonView(
                 getParentEnvironment(),
-                (int) (centerW - (btn_width * .5f)),
+                (int) (centerW - (backbtn_w * .5f)),
                 800,
-                btn_width,
+                backbtn_w,
                 btn_height
         ) {
             @Override
@@ -145,6 +158,7 @@ public class LevelSelectPage extends AMenu {
         button_back.setText("Back");
         button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
+        addComponent(text_title);
         // Set Level Selection Visibility
         for(int i = 0; i < levels.length; i++) {
             levels[i].setEnabled(false);
@@ -153,7 +167,6 @@ public class LevelSelectPage extends AMenu {
             }
             addComponent(levels[i]);
         }
-
         addComponent(button_back);
     }
 

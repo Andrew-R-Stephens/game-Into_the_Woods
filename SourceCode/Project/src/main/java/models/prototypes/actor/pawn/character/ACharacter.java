@@ -218,6 +218,14 @@ public abstract class ACharacter extends APawn implements IUpdatable {
     }
 
     /**
+     * Retrieves the enum of the character type
+     * @return
+     */
+    public CharacterType getCharacterType() {
+        return characterType;
+    }
+
+    /**
      * <p>Checks conditions of the character state to determine the action type of the character.</p>
      * <p>This has an effect on the sprite animation of the character.</p>
      */
