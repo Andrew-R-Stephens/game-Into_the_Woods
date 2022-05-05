@@ -11,6 +11,11 @@ import models.levels.LevelsList;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 
+/**
+ * The first level.
+ *
+ * Forest level; 5 Keys; 1 door; 8 Spikes; 14 Springs; 4 Generic triggers (used for camera zoom)
+ */
 public class Level1 extends ALevel {
 
     public Level1(GameEnvironment gameModel) {
@@ -30,14 +35,15 @@ public class Level1 extends ALevel {
     @Override
     public void build() {
         // Spikes
-        addProp(new Spikes(getResources(), gameEnvironment, 7165, 1928, 284, 97, 0, 0, -1));
-        addProp(new Spikes(getResources(), gameEnvironment, 5250, 3900, 151, 109, 0, 0, -1));
-        addProp(new Spikes(getResources(), gameEnvironment, 2274, 3429, 973, 88, 0, 0, -1));
-        addProp(new Spikes(getResources(), gameEnvironment, 1805, 3640, 227, 82, 0, 0, -1));
-        addProp(new Spikes(getResources(), gameEnvironment, 1152, 3649, 73, 66, 0, 0, -1));
-        addProp(new Spikes(getResources(), gameEnvironment, 71, 2168, 371, 103, 0, 0, -1));
-        addProp(new Spikes(getResources(), gameEnvironment, 192, 1248, 271, 113, 0, 0, -1));
+        addProp(new Spikes(getResources(), gameEnvironment, 7165, 1928, 284, 97, 0, 0, 1));
+        addProp(new Spikes(getResources(), gameEnvironment, 5250, 3900, 151, 109, 0, 0, 1));
+        addProp(new Spikes(getResources(), gameEnvironment, 2274, 3429, 973, 88, 0, 0, 1));
+        addProp(new Spikes(getResources(), gameEnvironment, 1805, 3640, 227, 82, 0, 0, 1));
+        addProp(new Spikes(getResources(), gameEnvironment, 1152, 3649, 73, 66, 0, 0, 1));
+        addProp(new Spikes(getResources(), gameEnvironment, 71, 2168, 371, 103, 0, 0, 1));
+        addProp(new Spikes(getResources(), gameEnvironment, 192, 1248, 271, 113, 0, 0, 1));
 
+        // Platforms
         addProp(new Platform(getResources(),"platform_level1", -500,    -500,     1221, 1630, 0, 0, false));
         addProp(new Platform(getResources(),"platform_level1", -500,    1122,  578,  158, 0, 0, false));
         addProp(new Platform(getResources(),"platform_level1", -500,    1280,  703, 769, 0, 0, false));
@@ -191,7 +197,6 @@ public class Level1 extends ALevel {
             }
         });
 
-        super.build();
         // Keys
         addProp(new DoorKey(getResources(), gameEnvironment, 4744, 510, 100, 50, 0, 0));
         addProp(new DoorKey(getResources(), gameEnvironment, 3710, 2601, 100, 50, 0, 0));
@@ -215,7 +220,7 @@ public class Level1 extends ALevel {
         addProp(new Spring(getResources(), gameEnvironment, 2900, 3343, 100, 150, 0, 0, -1,false, false));
         addProp(new Spring(getResources(), gameEnvironment, 2774, 2939, 100, 150, 0, 0, -1,false, false));
 
-
+        super.build();
 
     }
 

@@ -7,7 +7,9 @@ import models.environments.game.GameEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 
-
+/**
+ * The second proof-of-concept test level
+ */
 public class TestLevel2 extends ALevel {
 
     public TestLevel2(GameEnvironment gameModel) {

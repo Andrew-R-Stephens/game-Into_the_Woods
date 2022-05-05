@@ -55,6 +55,18 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     /**<p>If the game is paused</p>*/
     private boolean isPaused = false;
+    /**
+     * If the game is awaiting reset
+     */
+    private boolean isAwaitingReset = false;
+    /**
+     * The max timeout for death
+     */
+    private final long DEATH_TIMEOUT = 2000L;
+    /**
+     * The time of death.
+     */
+    private long deathTimeoutStart = -1L;
     /**<p>The Robot which keeps the mouse centered in the window in the unpaused game.</p>*/
     private Robot robot;
 
@@ -182,6 +194,12 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         updateActors(delta); // Update the Game Objects
         updateLevel(delta); // Update level models.props
         updateHUD(delta); // Update HUD overlay
+
+        if(isAwaitingReset) {
+            if(deathTimeoutStart < System.currentTimeMillis() - DEATH_TIMEOUT) {
+                reset();
+            }
+        }
     }
 
     /**
@@ -299,8 +317,10 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
             // Update Characters
             if (gameObject instanceof PlayerAvatar tc) {
-                tc.control(delta);
-                tc.update(delta);
+                if(!isAwaitingReset) {
+                    tc.control(delta);
+                    tc.update(delta);
+                }
                 //System.out.println(tc.actionState);
             }
         }
@@ -346,6 +366,14 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     /**
+     * Removes an actor from the list of active entities
+     * @param actor The actor to be removed
+     */
+    public void removeActor(AActor actor) {
+        actors.remove(actor);
+    }
+
+    /**
      * <p>Gets the current level that's active.</p>
      * @return the current level object
      */
@@ -369,6 +397,40 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         return inventory;
     }
 
+    /**
+     * The Procedure for a player death
+     */
+    public void doPlayerDeath() {
+        if(isAwaitingReset) {
+            return;
+        }
+
+        isAwaitingReset = true;
+        deathTimeoutStart = System.currentTimeMillis();
+        for(int i = 0; i < 20; i++) {
+            Particle p = new Particle(
+                    getResources(),
+                    new Random().nextFloat((int)getPlayerAvatar().getX(),
+                            (int)(getPlayerAvatar().getX()+ getPlayerAvatar().getW())),
+                    new Random().nextFloat((int)getPlayerAvatar().getY(),
+                            (int)(getPlayerAvatar().getY()+ getPlayerAvatar().getH())),
+                    new Random().nextFloat(2, 15),
+                    new Random().nextFloat(2, 15),
+                    new Random().nextFloat(-5, 5),
+                    new Random().nextFloat(-5, 5),
+                    true
+            ){
+                @Override
+                public void doAction() {
+                    removeActor(this);
+                }
+            };
+            System.out.println(p);
+            queueActor(p);
+        }
+        getResources().playAudio("death_" + ((int) (Math.random() * 3) + 1));
+    }
+
     @Override
     public void update(float delta) {
 
@@ -388,7 +450,12 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
         // Render Game Actors
         for (AActor gameObject : actors) {
-            gameObject.draw(g2d);
+            if((gameObject instanceof PlayerAvatar) && !isAwaitingReset) {
+                gameObject.draw(g2d);
+            }
+            if(!(gameObject instanceof PlayerAvatar)) {
+                gameObject.draw(g2d);
+            }
         }
 
         if(isPaused) {
@@ -427,6 +494,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         character.reset(levelsList.getCurrentLevel().getCharacterOrigin());
         levelsList.reset();
         Camera.reset();
+        isAwaitingReset = false;
     }
 
     @Override
@@ -434,4 +502,5 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         super.onExit();
         reset();
     }
+
 }

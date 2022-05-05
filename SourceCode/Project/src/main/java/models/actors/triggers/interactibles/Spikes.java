@@ -30,7 +30,6 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
      * @param vx The horizontal velocity.
      * @param vy The vertical velocity.
      * @param MAX_CYCLES The number of times this object can create an action. -1 is infinite.
-     * @param hasGravity If the object should be effected by gravity.
      */
     public Spikes(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
                   int MAX_CYCLES) {
@@ -85,7 +84,7 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
 
     @Override
     public void doAction() {
-        gameEnvironment.reset();
+        gameEnvironment.doPlayerDeath();
     }
 
     @Override
