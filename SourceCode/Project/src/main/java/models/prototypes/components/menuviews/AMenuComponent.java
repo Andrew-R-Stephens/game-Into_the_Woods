@@ -255,6 +255,7 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
 
     @Override
     public void draw(Graphics2D g) {
+        //The following just allows for outlines of menu components
         /*
         g.setColor(Color.RED);
         g.drawRect(

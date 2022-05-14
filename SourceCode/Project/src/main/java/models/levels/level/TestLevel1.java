@@ -14,10 +14,15 @@ import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import java.awt.*;
 
 /**
- * This is TestLevel1 class
+ * This is TestLevel1 class for proof of concept
  */
 public class TestLevel1 extends ALevel {
 
+
+    /**
+     * Creates the first test Level.
+     * @param gameModel
+     */
     public TestLevel1(GameEnvironment gameModel) {
         super(gameModel);
 

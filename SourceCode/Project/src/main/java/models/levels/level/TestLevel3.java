@@ -12,6 +12,10 @@ import models.prototypes.level.prop.trigger.prop.APropTrigger;
  */
 public class TestLevel3 extends ALevel {
 
+    /**
+     * Creates the third test Level.
+     * @param gameModel
+     */
     public TestLevel3(GameEnvironment gameModel) {
         super(gameModel);
 

@@ -55,6 +55,10 @@ public class SaveData {
         return lastCompletedLevel;
     }
 
+    /**
+     * Retrieves the character selected and saved by the user.
+     * @return The saved character type
+     */
     public ACharacter.CharacterType getCharacterType() {
         return characterType;
     }
@@ -75,6 +79,16 @@ public class SaveData {
         System.out.println("The save file was saved " + (saveFileRW.savetoFile() ? "successfully" : "unsuccessfully"));
     }
 
+    /**
+     * Sets all settings obtained by the save data file.
+     * @param levelProgress
+     * @param characterType
+     * @param windowWidth
+     * @param windowHeight
+     * @param windowType
+     * @param framerate
+     * @param audioEnabled
+     */
     public void setAll(
             int levelProgress, int characterType,
             int windowWidth, int windowHeight, int windowType, short framerate, boolean audioEnabled) {

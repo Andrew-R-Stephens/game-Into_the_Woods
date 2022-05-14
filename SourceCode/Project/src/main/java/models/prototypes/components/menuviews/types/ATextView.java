@@ -39,6 +39,22 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
     }
 
     /**
+     * Sets the text color
+     * @param color The new text color
+     */
+    public void setForegroundColor(Color color) {
+        foregroundColor = color;
+    }
+
+    /**
+     * <p>Sets the background color of this text view</p>
+     * @param color the color to be rendered behind the text.
+     */
+    public void setBackgroundColor(Color color) {
+        this.backgroundColor = color;
+    }
+
+    /**
      * <p>Shorts the input registration.</p>
      */
     @Override
@@ -50,14 +66,6 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
     public void reset() {
         playSound = true;
         super.reset();
-    }
-
-    /**
-     * <p>Sets the background color of this text view</p>
-     * @param color the color to be rendered behind the text.
-     */
-    public void setBackgroundColor(Color color) {
-        this.backgroundColor = color;
     }
 
     @Override

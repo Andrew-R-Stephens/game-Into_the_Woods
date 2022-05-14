@@ -38,24 +38,57 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
             boolean hasGravity) {
         super(resources, cModel, x - w, y - h, w, h, vx, vy, hasGravity);
 
-        spriteSheets.put(ActionType.FLOOR_IDLE,
-                resources.getSpriteSheet("spritesheet_avataridle")
-                        .setLoopOnLast(true).setFrameScale(w, h));
-        spriteSheets.put(ActionType.FLOOR_WALKING,
-                resources.getSpriteSheet("spritesheet_avatarrun2")
-                        .setLoopOnLast(true).setFrameScale(w, h));
-        spriteSheets.put(ActionType.FLOOR_RUNNING,
-                resources.getSpriteSheet("spritesheet_avatarrun2")
-                        .setLoopOnLast(true).setFrameScale(w, h));
-        spriteSheets.put(ActionType.FLOOR_JUMPING,
-                resources.getSpriteSheet("spritesheet_avatarjump")
-                        .setLoopOnLast(false).setFrameScale(w, h));
-        spriteSheets.put(ActionType.WALL_JUMPING,
-                resources.getSpriteSheet("spritesheet_avatarjump")
-                        .setLoopOnLast(false).setFrameScale(w, h));
-        spriteSheets.put(ActionType.WALL_CLIMBING,
-                resources.getSpriteSheet("spritesheet_avatarjump")
-                        .setLoopOnLast(true).setFrameScale(w, h));
+        setSpriteSheets();
+    }
+
+    /**
+     * <p>Controls which spritesheets are used. Determined first by the character, the further controlled by the
+     * action state of the avatar.</p>
+     */
+    private void setSpriteSheets() {
+
+        switch(characterType) {
+            case MELYNN -> {
+                spriteSheets.replace(ActionType.FLOOR_IDLE,
+                        resources.getSpriteSheet("spritesheet_melynn_idle")
+                                .setLoopOnLast(true).setFrameScale(w, h));
+                spriteSheets.put(ActionType.FLOOR_WALKING,
+                        resources.getSpriteSheet("spritesheet_melynn_run")
+                                .setLoopOnLast(true).setFrameScale(w, h));
+                spriteSheets.put(ActionType.FLOOR_RUNNING,
+                        resources.getSpriteSheet("spritesheet_melynn_run")
+                                .setLoopOnLast(true).setFrameScale(w, h));
+                spriteSheets.put(ActionType.FLOOR_JUMPING,
+                        resources.getSpriteSheet("spritesheet_melynn_jump")
+                                .setLoopOnLast(false).setFrameScale(w, h));
+                spriteSheets.put(ActionType.WALL_JUMPING,
+                        resources.getSpriteSheet("spritesheet_melynn_jump")
+                                .setLoopOnLast(false).setFrameScale(w, h));
+                spriteSheets.put(ActionType.WALL_CLIMBING,
+                        resources.getSpriteSheet("spritesheet_melynn_jump")
+                                .setLoopOnLast(true).setFrameScale(w, h));
+            }
+            case TEO -> {
+                spriteSheets.put(ActionType.FLOOR_IDLE,
+                        resources.getSpriteSheet("spritesheet_teo_idle")
+                                .setLoopOnLast(true).setFrameScale(w, h));
+                spriteSheets.put(ActionType.FLOOR_WALKING,
+                        resources.getSpriteSheet("spritesheet_teo_run")
+                                .setLoopOnLast(true).setFrameScale(w, h));
+                spriteSheets.put(ActionType.FLOOR_RUNNING,
+                        resources.getSpriteSheet("spritesheet_teo_run")
+                                .setLoopOnLast(true).setFrameScale(w, h));
+                spriteSheets.put(ActionType.FLOOR_JUMPING,
+                        resources.getSpriteSheet("spritesheet_teo_jump")
+                                .setLoopOnLast(false).setFrameScale(w, h));
+                spriteSheets.put(ActionType.WALL_JUMPING,
+                        resources.getSpriteSheet("spritesheet_teo_jump")
+                                .setLoopOnLast(false).setFrameScale(w, h));
+                spriteSheets.put(ActionType.WALL_CLIMBING,
+                        resources.getSpriteSheet("spritesheet_teo_jump")
+                                .setLoopOnLast(true).setFrameScale(w, h));
+            }
+        }
     }
 
     /**
@@ -119,6 +152,12 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
      */
     public void setAction(ActionType actionState) {
         this.actionState = actionState;
+    }
+
+    @Override
+    public void reset(int[] characterOrigin) {
+        setSpriteSheets();
+        super.reset(characterOrigin);
     }
 
     @Override
@@ -187,14 +226,6 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
 
         g.setColor(Color.CYAN);
 
-        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
-
-        float scaledW = w * Config.scaledW_zoom;
-        float scaledH = h * Config.scaledH_zoom;
-
-        //g.drawRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
-        g.drawString(characterType.name(), (int) ((offsetX)), (int) (offsetY));
     }
 
 }

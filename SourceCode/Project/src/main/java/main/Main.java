@@ -1,9 +1,9 @@
 package main;
 
 import controls.game.GameControls;
-import controls.menu.MenuControls;
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
+import controls.menu.MenuControls;
 import controls.menu.MenuKeyControls;
 import controls.menu.MenuMouseControls;
 import models.environments.EnvironmentsHandler;
@@ -183,11 +183,14 @@ public class Main {
     public static void init() {
 
         // Initialize Preferences
+        // Uses two versions of Preferences.xml due to strange behavior
         File file = resources.loadTextFile("preferences.xml");
         if(file == null) {
             file = resources.loadTextFile("Preferences.xml");
         }
         new PreferencesParser(config, file).parse();
+
+        // Overwrite certain preferences from save data
         saveData.init(saveFileRW);
 
         // Reference resources

@@ -2,9 +2,7 @@ package models.utils.audio;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
-import javazoom.jl.player.advanced.PlaybackEvent;
 import models.utils.config.Config;
-import models.utils.resources.Resources;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;

@@ -1,7 +1,6 @@
 package models.actors.platforms;
 
 import models.camera.Camera;
-import models.levels.LevelsList;
 import models.prototypes.level.prop.AProp;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
@@ -18,6 +17,9 @@ import java.awt.image.BufferedImage;
  */
 public class Platform extends AProp implements IDrawable, IUpdatable {
 
+    /**
+     * The native image for this platform.
+     */
     private BufferedImage image;
 
     /**

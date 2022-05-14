@@ -1,9 +1,9 @@
 package models.environments.game;
 
 import controls.game.GameControls;
-import controls.menu.MenuControls;
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
+import controls.menu.MenuControls;
 import controls.menu.MenuKeyControls;
 import models.actors.particles.Particle;
 import models.actors.player.PlayerAvatar;

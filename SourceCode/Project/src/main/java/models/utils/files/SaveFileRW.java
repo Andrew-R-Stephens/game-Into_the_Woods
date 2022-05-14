@@ -1,7 +1,8 @@
 package models.utils.files;
 
-import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import models.utils.config.Config;
 import models.utils.config.SaveData;
 
@@ -15,8 +16,19 @@ import java.io.*;
  */
 public class SaveFileRW {
 
+    /**
+     * The SaveData instance
+     */
     private SaveData saveData;
+
+    /**
+     * The name of the save file
+     */
     private String saveFileName;
+
+    /**
+     * The save file, loaded in
+     */
     private File saveFile;
 
     /**

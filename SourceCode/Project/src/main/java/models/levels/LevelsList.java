@@ -3,7 +3,6 @@ package models.levels;
 import models.environments.game.GameEnvironment;
 import models.levels.level.Level1;
 import models.levels.level.Level2;
-import models.levels.level.TestLevel2;
 import models.levels.level.TestLevel3;
 import models.prototypes.level.ALevel;
 import models.utils.drawables.IDrawable;

@@ -12,6 +12,10 @@ import models.prototypes.level.prop.trigger.prop.APropTrigger;
  */
 public class TestLevel2 extends ALevel {
 
+    /**
+     * Creates the second test Level.
+     * @param gameModel
+     */
     public TestLevel2(GameEnvironment gameModel) {
         super(gameModel);
 

@@ -2,6 +2,7 @@
   "text" : {
     "path": "files/",
     "names" : [
+      "spritesheet_melynn_idle.json",
       "spritesheet_avataridle.json",
       "spritesheet_avatarjump.json",
       "spritesheet_avatarrun.json",
@@ -10,6 +11,12 @@
       "spritesheet_buttonsq.json",
       "spritesheet_spring.json",
       "spritesheet_door.json",
+      "spritesheet_teo_jump.json",
+      "spritesheet_teo_run.json",
+      "spritesheet_teo_idle.json",
+      "spritesheet_melynn_jump.json",
+      "spritesheet_melynn_run.json",
+      "spritesheet_melynn_idle.json",
       "savedata.json",
       "preferences.xml"
     ]
@@ -21,6 +28,12 @@
       "logo.png",
       "avatar1.png",
       "avatar2.png",
+      "spritesheet_teo_jump.png",
+      "spritesheet_teo_run.png",
+      "spritesheet_teo_idle.png",
+      "spritesheet_melynn_jump.png",
+      "spritesheet_melynn_run.png",
+      "spritesheet_melynn_idle.png",
       "spritesheet_avataridle.png",
       "spritesheet_avatarjump.png",
       "spritesheet_avatarrun.png",

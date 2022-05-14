@@ -39,6 +39,10 @@ public class DisplayInfo {
         }
     }
 
+    /**
+     * Retrieves all of the possible Window dimensions
+     * @return The Window dimensions list
+     */
     public ArrayList<Dimension> getWindowDimensions() {
         return windowDimensions;
     }

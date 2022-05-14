@@ -18,6 +18,10 @@ import models.prototypes.level.prop.trigger.prop.APropTrigger;
  */
 public class Level1 extends ALevel {
 
+    /**
+     * Creates the first Level.
+     * @param gameModel
+     */
     public Level1(GameEnvironment gameModel) {
         super(gameModel);
 

@@ -7,7 +7,6 @@ import models.utils.config.Config;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 /**
  * <p>The ASliderView is a class that contains a clickable button that moves based on user mouse input and mouse

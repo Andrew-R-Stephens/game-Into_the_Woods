@@ -1,10 +1,8 @@
 package models.prototypes.level.prop.trigger;
 
-import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.level.prop.AProp;
-import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 

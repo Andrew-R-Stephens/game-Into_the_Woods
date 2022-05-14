@@ -1,6 +1,5 @@
 package models.utils.resources;
 
-import javazoom.jl.decoder.JavaLayerException;
 import models.sprites.SpriteSheet;
 import models.utils.audio.SuperPlayer;
 import models.utils.files.AFileReader;

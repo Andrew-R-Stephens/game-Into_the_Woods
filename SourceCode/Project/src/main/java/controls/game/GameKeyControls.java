@@ -39,7 +39,7 @@ public class GameKeyControls extends AKeyController {
                 controlsModel.setDirectional(GameControls.Directionals.UP, false);
             }
             case KeyEvent.VK_S -> {
-                controlsModel.setDirectional(GameControls.Directionals.DOWN, true);
+                controlsModel.setDirectional(GameControls.Directionals.DOWN, false);
             }
 
             case KeyEvent.VK_SPACE -> {

@@ -33,8 +33,10 @@ public class Particle extends APawn implements IDrawable, IUpdatable {
         super(resources, x, y, w, h, vx, vy, hasGravity);
     }
 
+    /**
+     * <p>The placeholder for actions.</p>
+     */
     public void doAction() {
-
     }
 
     @Override
