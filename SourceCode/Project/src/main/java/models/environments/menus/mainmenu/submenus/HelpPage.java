@@ -357,7 +357,7 @@ public class HelpPage extends AMenu {
     }
 
     /**
-     * The Objectives Page for the Help Meu
+     * The Credits Page for the Help Meu
      */
     private class HelpCreditsPage extends AMenu{
 

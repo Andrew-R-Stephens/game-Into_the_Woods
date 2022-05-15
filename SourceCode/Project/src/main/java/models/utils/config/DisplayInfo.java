@@ -15,7 +15,7 @@ public class DisplayInfo {
     public static float SYS_SCALEX = 1f, SYS_SCALEY = 1f;
 
     /**<p>List of all screen dimensions.</p>*/
-    private ArrayList<Dimension> windowDimensions = new ArrayList<>();
+    private final ArrayList<Dimension> windowDimensions = new ArrayList<>();
 
     /**
      * <p>Uses a temporary JFrame to obtain graphics configurations. Graphics configurations are then used to
