@@ -44,7 +44,10 @@ public class StartScreenPage extends AMenu {
                 (int)(centerW - (btn_width * .5f)),
                 (int)((centerH * 1.25f) - (btn_height * .5f)),
                 btn_width,
-                btn_height) {
+                btn_height,
+                "Start button",
+                AButtonView.ImageScale.FIT_CENTERED
+        ){
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)){
@@ -55,8 +58,6 @@ public class StartScreenPage extends AMenu {
                 return true;
             }
         };
-        startButton.setText("Start button");
-        startButton.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         addComponent(gameTitle);
         addComponent(startButton);

@@ -37,6 +37,7 @@ public class Particle extends APawn implements IDrawable, IUpdatable {
      * <p>The placeholder for actions.</p>
      */
     public void doAction() {
+        // STUB
     }
 
     @Override

@@ -145,6 +145,11 @@ public abstract class ASliderView<E> extends AMenuComponent {
     }
 
     @Override
+    public void playSound() {
+        // STUB
+    }
+
+    @Override
     public boolean onClick(float x, float y) {
         return false;
     }

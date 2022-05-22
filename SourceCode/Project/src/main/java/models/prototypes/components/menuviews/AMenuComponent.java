@@ -66,12 +66,65 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
      * @param w The width of the component
      * @param h The height of the component
      */
-    public AMenuComponent(AMenuEnvironment parentMenuEnvironment, int x, int y, int w, int h) {
+    public AMenuComponent(AMenuEnvironment parentMenuEnvironment,
+                          int x, int y, int w, int h) {
+        this.parentMenuEnvironment = parentMenuEnvironment;
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.parentMenuEnvironment = parentMenuEnvironment;
+    }
+
+    public AMenuComponent(AMenuEnvironment parentMenuModel,
+                          int x, int y, int w, int h,
+                          String text) {
+        this.parentMenuEnvironment = parentMenuModel;
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.text = text;
+    }
+
+    public AMenuComponent(AMenuEnvironment parentEnvironment,
+                          int x, int y, int w, int h,
+                          String text,
+                          ImageScale imageScale) {
+        this.parentMenuEnvironment = parentEnvironment;
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.text = text;
+        this.scaleType = imageScale;
+    }
+
+    public AMenuComponent(AMenuEnvironment parentEnvironment,
+                          int x, int y, int w, int h,
+                          String text,
+                          SpriteSheet spriteSheet, ImageScale imageScale) {
+        this.parentMenuEnvironment = parentEnvironment;
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.text = text;
+        this.spritesheet = spriteSheet;
+        this.scaleType = imageScale;
+    }
+
+    public AMenuComponent(AMenuEnvironment parentEnvironment,
+                          int x, int y, int w, int h,
+                          String text,
+                          BufferedImage backgroundImage, ImageScale imageScale) {
+        this.parentMenuEnvironment = parentEnvironment;
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.text = text;
+        this.backgroundImage = backgroundImage;
+        this.scaleType = imageScale;
     }
 
     /**
@@ -146,11 +199,19 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     }
 
     /**
-     * <p>Gets the right side of the component</p>
-     * @return x position + width
+     * Sets the text color
+     * @param color The new text color
      */
-    public int right() {
-        return x + w;
+    public void setForegroundColor(Color color) {
+        foregroundColor = color;
+    }
+
+    /**
+     * <p>Sets the background color of this text view</p>
+     * @param color the color to be rendered behind the text.
+     */
+    public void setBackgroundColor(Color color) {
+        this.backgroundColor = color;
     }
 
     /**
@@ -194,11 +255,24 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
     }
 
     /**
+     * <p>Plays the button click audio sound.</p>
+     */
+    public abstract void playSound();
+
+    /**
      * <p>Gets if the component is pressed.</p>
      * @return if the component is pressed.
      */
     public boolean isPressed() {
         return isPressed;
+    }
+
+    /**
+     * <p>Sets the x position</p>
+     * @param x The horizontal position.
+     */
+    public void setX(int x) {
+        this.x = x;
     }
 
     /**
@@ -231,6 +305,14 @@ public abstract class AMenuComponent implements IUpdatable, IDrawable {
      */
     public int getH() {
         return h;
+    }
+
+    /**
+     * <p>Gets the right side of the component</p>
+     * @return x position + width
+     */
+    public int right() {
+        return x + w;
     }
 
     /**

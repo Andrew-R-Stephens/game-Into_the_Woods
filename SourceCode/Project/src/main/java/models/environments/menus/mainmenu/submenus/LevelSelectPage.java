@@ -29,10 +29,9 @@ public class LevelSelectPage extends AMenu {
                 getParentEnvironment(),
                 (int)centerW - btn_width, 100,
                 (btn_width * 2), (int)(btn_height * .75f),
-                "LEVEL SELECT"
+                "LEVEL SELECT",
+                new Color(255, 255, 255, 150)
         ) {};
-        text_title.setBackgroundColor(new Color(255, 255, 255, 150));
-
 
         AButtonView[] levels = new AButtonView[3];
 
@@ -42,7 +41,11 @@ public class LevelSelectPage extends AMenu {
                 (int) (centerW - (200 * .5f)) - 250,
                 300,
                 200,
-                200) {
+                200,
+                "Level 1",
+                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false),
+                AButtonView.ImageScale.FIT_CENTERED
+    ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -50,7 +53,6 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 navigateToLevel(0);
-
                 reset();
 
                 return true;
@@ -64,17 +66,16 @@ public class LevelSelectPage extends AMenu {
                 super.registerInput();
             }
         };
-        levels[0].setText("Level 1");
-        levels[0].setSpritesheet(
-                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
-        levels[0].setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
 
         //Level 2 Button
         levels[1] = new AButtonView(
                 parentEnvironment,
                 (int) (centerW - (200 * .5f)), 300,
-                200, 200
+                200, 200,
+                "Level 2",
+                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false),
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -83,7 +84,6 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 navigateToLevel(1);
-
                 reset();
 
                 return true;
@@ -97,10 +97,6 @@ public class LevelSelectPage extends AMenu {
                 super.registerInput();
             }
         };
-        levels[1].setText("Level 2");
-        levels[1].setSpritesheet(
-                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
-        levels[1].setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         //Level 3 Button
         levels[2] = new AButtonView(
@@ -108,7 +104,11 @@ public class LevelSelectPage extends AMenu {
                 (int) (centerW - (200 * .5f) + 250),
                 300,
                 200,
-                200) {
+                200,
+                "Level 3",
+                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false),
+                AButtonView.ImageScale.FIT_CENTERED
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -116,7 +116,6 @@ public class LevelSelectPage extends AMenu {
                 }
 
                 navigateToLevel(2);
-
                 reset();
 
                 return true;
@@ -130,10 +129,7 @@ public class LevelSelectPage extends AMenu {
                 super.registerInput();
             }
         };
-        levels[2].setText("Level 3");
-        levels[2].setSpritesheet(
-                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
-        levels[2].setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
+
 
         int backbtn_w = (int)(btn_width * .5f);
         AButtonView button_back = new AButtonView(
@@ -141,7 +137,9 @@ public class LevelSelectPage extends AMenu {
                 (int) (centerW - (backbtn_w * .5f)),
                 800,
                 backbtn_w,
-                btn_height
+                btn_height,
+                "Back",
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -154,8 +152,7 @@ public class LevelSelectPage extends AMenu {
                 return true;
             }
         };
-        button_back.setText("Back");
-        button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
+
 
         addComponent(text_title);
         // Set Level Selection Visibility

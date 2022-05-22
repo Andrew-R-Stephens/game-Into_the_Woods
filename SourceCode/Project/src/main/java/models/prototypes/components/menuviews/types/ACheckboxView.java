@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
  */
 public abstract class ACheckboxView extends AMenuComponent {
 
-
     /**<p>The slider button.</p>*/
     protected final AButtonView button;
 
@@ -82,6 +81,11 @@ public abstract class ACheckboxView extends AMenuComponent {
      * <p>Defined by the encapsulating object at instantiation.</p>
      */
     public abstract void doSetting();
+
+    @Override
+    public void playSound() {
+        // STUB
+    }
 
     @Override
     public boolean onClick(float x, float y) {

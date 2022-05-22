@@ -92,7 +92,12 @@ public class AImageView extends AMenuComponent implements IDrawable, IUpdatable 
 
     @Override
     public void registerInput() {
-        // DO NOTHING
+        // STUB
+    }
+
+    @Override
+    public void playSound() {
+        // STUB
     }
 
 }

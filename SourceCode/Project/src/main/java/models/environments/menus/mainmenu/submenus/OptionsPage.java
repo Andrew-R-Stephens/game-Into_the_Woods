@@ -46,9 +46,9 @@ public class OptionsPage extends AMenu {
                 getParentEnvironment(),
                 (int)centerW - btn_width, 50,
                 (btn_width * 2), (int)(btn_height * .75f),
-                "OPTIONS"
+                "OPTIONS",
+                new Color(255, 255, 255, 150)
         ) {};
-        text_title.setBackgroundColor(new Color(255, 255, 255, 150));
 
         // ===========
         // FPS
@@ -60,10 +60,10 @@ public class OptionsPage extends AMenu {
                 (250-(textSizeH)),
                 btn_width * 3,
                 (textSizeH),
-                "FPS Limit")
-        {
-        };
-        text_fpsTitle.setBackgroundColor(new Color(255, 255, 255, 150));
+                "FPS Limit",
+                new Color(255, 255, 255, 150)
+        )
+        {};
 
         ATextView text_fps = new ATextView(
                 getParentEnvironment(),
@@ -71,10 +71,10 @@ public class OptionsPage extends AMenu {
                 (int)(250 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
                 textSizeH,
-                selectedFramerate + "")
-        {
-        };
-        text_fps.setBackgroundColor(new Color(255, 255, 255, 100));
+                selectedFramerate + "",
+                new Color(255, 255, 255, 100)
+        )
+        {};
 
         ASliderView<Short> slider_fps = new ASliderView<>(
                 getParentEnvironment(),
@@ -130,10 +130,10 @@ public class OptionsPage extends AMenu {
                 (400 - textSizeH),
                 btn_width * 3,
                 textSizeH,
-                "Window Type")
-        {
-        };
-        text_windowTypeTitle.setBackgroundColor(new Color(255, 255, 255, 150));
+                "Window Type",
+                new Color(255, 255, 255, 150)
+        )
+        {};
 
         ATextView text_windowType = new ATextView(
                 getParentEnvironment(),
@@ -141,10 +141,10 @@ public class OptionsPage extends AMenu {
                 (int)(400 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
                 textSizeH,
-                selectedWindowType.getName())
-        {
-        };
-        text_windowType.setBackgroundColor(new Color(255, 255, 255, 100));
+                selectedWindowType.getName(),
+                new Color(255, 255, 255, 100)
+        )
+        {};
 
         ASliderView<Config.WindowType> slider_windowType = new ASliderView<>(
                 getParentEnvironment(),
@@ -186,10 +186,9 @@ public class OptionsPage extends AMenu {
                 (550 - textSizeH),
                 btn_width * 3,
                 textSizeH,
-                "Window Dimensions")
-        {
-        };
-        text_windowDimsTitle.setBackgroundColor(new Color(255, 255, 255, 150));
+                "Window Dimensions",
+                new Color(255, 255, 255, 150))
+        {};
 
         ATextView text_windowDims = new ATextView(
                 getParentEnvironment(),
@@ -197,10 +196,9 @@ public class OptionsPage extends AMenu {
                 (int)(550 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
                 textSizeH,
-                selectedWindowWidth + " x " + selectedWindowHeight)
-        {
-        };
-        text_windowDims.setBackgroundColor(new Color(255, 255, 255, 100));
+                selectedWindowWidth + " x " + selectedWindowHeight,
+                new Color(255, 255, 255, 100))
+        {};
 
         ASliderView<Dimension> slider_windowDims = new ASliderView<>(
                 getParentEnvironment(),
@@ -224,7 +222,6 @@ public class OptionsPage extends AMenu {
                         break;
                     }
                 }
-                System.out.println(current + " / " + itemCount);
             }
             @Override
             public void doSetting() {
@@ -243,9 +240,9 @@ public class OptionsPage extends AMenu {
                 (int)(650 + (btn_height * .5f) - (textSizeH * .5f)),
                 textSizeW,
                 textSizeH,
-                "Enable Audio")
+                "Enable Audio",
+                new Color(255, 255, 255, 100))
         {};
-        text_audioEnabled.setBackgroundColor(new Color(255, 255, 255, 100));
 
         ACheckboxView checkbox_audioEnabled = new ACheckboxView(
                 getParentEnvironment(),
@@ -262,7 +259,7 @@ public class OptionsPage extends AMenu {
 
             @Override
             public void doSetting() {
-                selectedAudioEnabled = !button.isEnabled;
+                selectedAudioEnabled = !button.isEnabled();
                 System.out.println(selectedAudioEnabled);
             }
         };
@@ -278,7 +275,9 @@ public class OptionsPage extends AMenu {
                 (int) (centerW - (otherbtn_w * 1.25f)),
                 800,
                 otherbtn_w,
-                btn_height
+                btn_height,
+                "Apply",
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public void update(float delta) {
@@ -352,8 +351,6 @@ public class OptionsPage extends AMenu {
             }
         };
         button_apply.setEnabled(false);
-        button_apply.setText("Apply");
-        button_apply.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         // ===========
         // BACK
@@ -365,7 +362,9 @@ public class OptionsPage extends AMenu {
                 (int) (centerW + (otherbtn_w * .25f)),
                 800,
                 otherbtn_w,
-                btn_height
+                btn_height,
+                "Back",
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -376,8 +375,6 @@ public class OptionsPage extends AMenu {
                 return true;
             }
         };
-        button_back.setText("Back");
-        button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         addComponent(text_title);
 

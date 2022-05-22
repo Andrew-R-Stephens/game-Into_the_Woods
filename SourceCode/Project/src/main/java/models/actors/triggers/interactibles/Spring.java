@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
 
     /**<p>The current action of the door.</p>*/
-    private ActionType actionState = ActionType.IDLE;
+    private final ActionType actionState = ActionType.IDLE;
     /**<p>The hashmap of spritesheets for the states of the Spring.</p>*/
     protected HashMap<ActionType, SpriteSheet> spriteSheets = new HashMap<>();
 

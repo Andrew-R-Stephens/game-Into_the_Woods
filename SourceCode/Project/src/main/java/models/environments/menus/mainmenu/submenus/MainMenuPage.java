@@ -24,9 +24,11 @@ public class MainMenuPage extends AMenu {
                 (int)(centerW - (buttonW * .5f)),
                 175,
                 buttonW,
-                buttonH)
+                buttonH,
+                "New Game",
+                AButtonView.ImageScale.FIT_CENTERED
+        )
         {
-
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -37,15 +39,16 @@ public class MainMenuPage extends AMenu {
                 return true;
             }
         };
-        button_newGame.setText("New Game");
-        button_newGame.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         AButtonView button_continueGame = new AButtonView(
                 getParentEnvironment(),
                 (int)(centerW - (buttonW * .5f)),
                 290,
                 buttonW,
-                buttonH) {
+                buttonH,
+                "Continue Game",
+                AButtonView.ImageScale.FIT_CENTERED
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -56,15 +59,17 @@ public class MainMenuPage extends AMenu {
                 return true;
             }
         };
-        button_continueGame.setText("Continue Game");
-        button_continueGame.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
+
 
         AButtonView button_options = new AButtonView(
                 getParentEnvironment(),
                 (int)(centerW - (buttonW * .5f)),
                 405,
                 buttonW,
-                buttonH) {
+                buttonH,
+                "Options",
+                AButtonView.ImageScale.FIT_CENTERED
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -75,15 +80,16 @@ public class MainMenuPage extends AMenu {
                 return true;
             }
         };
-        button_options.setText("Options");
-        button_options.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         AButtonView button_help = new AButtonView(
                 getParentEnvironment(),
                 (int)(centerW - (buttonW * .5f)),
                 520,
                 buttonW,
-                buttonH) {
+                buttonH,
+                "Help",
+                AButtonView.ImageScale.FIT_CENTERED
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -94,15 +100,16 @@ public class MainMenuPage extends AMenu {
                 return true;
             }
         };
-        button_help.setText("Help");
-        button_help.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         AButtonView button_quit = new AButtonView(
                 getParentEnvironment(),
                 (int)(centerW - (buttonW * .5f)),
                 800,
                 buttonW,
-                buttonH) {
+                buttonH,
+                "Quit to Desktop",
+                AButtonView.ImageScale.FIT_CENTERED
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -115,9 +122,6 @@ public class MainMenuPage extends AMenu {
                 return true;
             }
         };
-        button_quit.setText("Quit to Desktop");
-        button_quit.setBackgroundImage(image_buttonRect);
-        button_quit.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         addComponent(button_newGame);
         addComponent(button_continueGame);

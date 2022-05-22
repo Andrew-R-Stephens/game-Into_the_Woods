@@ -29,15 +29,16 @@ public class PauseMenuPage extends AMenu {
                 (int)(centerW - (buttonW * .5f)),
                 175,
                 buttonW,
-                buttonH)
+                buttonH,
+                "Resume Game",
+                AButtonView.ImageScale.FIT_CENTERED
+        )
         {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
                     return false;
                 }
-
-                System.out.println("Pressed");
 
                 getEnvironmentsHandler().getGameEnvironment().setPaused(false);
                 getParentEnvironment().onExit();
@@ -47,8 +48,6 @@ public class PauseMenuPage extends AMenu {
 
             }
         };
-        button_resume.setText("Resume Game");
-        button_resume.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         // Options button
         AButtonView button_options = new AButtonView(
@@ -56,7 +55,10 @@ public class PauseMenuPage extends AMenu {
                 (int)(centerW - (buttonW * .5f)),
                 405,
                 buttonW,
-                buttonH) {
+                buttonH,
+                "Options",
+                AButtonView.ImageScale.FIT_CENTERED
+        ){
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -68,8 +70,6 @@ public class PauseMenuPage extends AMenu {
                 return true;
             }
         };
-        button_options.setText("Options");
-        button_options.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         // Help button
         AButtonView button_help = new AButtonView(
@@ -77,7 +77,10 @@ public class PauseMenuPage extends AMenu {
                 (int)(centerW - (buttonW * .5f)),
                 520,
                 buttonW,
-                buttonH) {
+                buttonH,
+                "Help",
+                AButtonView.ImageScale.FIT_CENTERED
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -89,15 +92,15 @@ public class PauseMenuPage extends AMenu {
                 return true;
             }
         };
-        button_help.setText("Help");
-        button_help.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         // Quit button
         AButtonView button_quit = new AButtonView(parentEnvironment,
                 (int)(centerW - (buttonW * .5f)),
                 800,
                 buttonW,
-                buttonH) {
+                buttonH,
+                "Exit to Main Menu",
+                AButtonView.ImageScale.FIT_CENTERED) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -117,8 +120,6 @@ public class PauseMenuPage extends AMenu {
                 return true;
             }
         };
-        button_quit.setText("Exit to Main Menu");
-        button_quit.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         // Add all components
         addComponent(button_resume);

@@ -33,16 +33,18 @@ public class HelpPage extends AMenu {
                 getParentEnvironment(),
                 (int)mx - btn_width, 100,
                 (btn_width * 2), (int)(btn_height * .75f),
-                "HELP"
+                "HELP",
+                new Color(255, 255, 255, 150)
                 ) {};
-        text_title.setBackgroundColor(new Color(255, 255, 255, 150));
 
         AButtonView button_objectives = new AButtonView(
                 getParentEnvironment(),
                 (int) (mx - (btn_width * .5f)),
                 225,
                 btn_width,
-                btn_height
+                btn_height,
+                "Objectives",
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -55,15 +57,15 @@ public class HelpPage extends AMenu {
                 return true;
             }
         };
-        button_objectives.setText("Objectives");
-        button_objectives.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         AButtonView button_obstacles = new AButtonView(
                 getParentEnvironment(),
                 (int) (mx - (btn_width * .5f)),
                 button_objectives.getY() + btn_height + 25,
                 btn_width,
-                btn_height
+                btn_height,
+                "Obstacles",
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -76,15 +78,15 @@ public class HelpPage extends AMenu {
                 return true;
             }
         };
-        button_obstacles.setText("Obstacles");
-        button_obstacles.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         AButtonView button_controls = new AButtonView(
                 getParentEnvironment(),
                 (int) (mx - (btn_width * .5f)),
                 button_obstacles.getY() + btn_height + 25,
                 btn_width,
-                btn_height
+                btn_height,
+                "Controls",
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -97,15 +99,15 @@ public class HelpPage extends AMenu {
                 return true;
             }
         };
-        button_controls.setText("Controls");
-        button_controls.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         AButtonView button_credits = new AButtonView(
                 getParentEnvironment(),
                 (int) (mx - (btn_width * .5f)),
                 button_controls.getY() + btn_height + 25,
                 btn_width,
-                btn_height
+                btn_height,
+                "Credits",
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -118,8 +120,6 @@ public class HelpPage extends AMenu {
                 return true;
             }
         };
-        button_credits.setText("Credits");
-        button_credits.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         int backbtn_w = (int)(btn_width * .5f);
         AButtonView button_back = new AButtonView(
@@ -127,7 +127,9 @@ public class HelpPage extends AMenu {
                 (int) (mx - (backbtn_w * .5f)),
                 800,
                 backbtn_w,
-                btn_height
+                btn_height,
+                "Back",
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -140,9 +142,6 @@ public class HelpPage extends AMenu {
                 return true;
             }
         };
-        button_back.setText("Back");
-        button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
-
 
         addComponent(text_title);
         addComponent(button_objectives);
@@ -175,11 +174,12 @@ public class HelpPage extends AMenu {
                     getParentEnvironment(),
                     (int)mx - btn_width, 100,
                     (btn_width * 2), (int)(btn_height * .75f),
-                    "OBJECTIVES"
+                    "OBJECTIVES",
+                    new Color(255, 255, 255, 150)
             ) {};
-            text_title.setBackgroundColor(new Color(255, 255, 255, 150));
 
             BufferedImage bufferedImage_objectives_img = getResources().getImage("help_objectives");
+
             AImageView img_objectives = new AImageView(
                     getParentEnvironment(),
                     (int) (mx - (bufferedImage_objectives_img.getWidth() * .5f)),
@@ -189,7 +189,9 @@ public class HelpPage extends AMenu {
                     bufferedImage_objectives_img,
                     AMenuComponent.ImageScale.FIT_CENTERED
             );
+
             BufferedImage bufferedImage_objectives_text = getResources().getImage("help_objectives_text");
+
             AImageView text_objectives = new AImageView(
                     getParentEnvironment(),
                     (int) (mx - (img_objectives.getW() * .5f)),
@@ -200,14 +202,15 @@ public class HelpPage extends AMenu {
                     AMenuComponent.ImageScale.FIT_CENTERED
             );
 
-
             int backbtn_w = (int)(btn_width * .5f);
             AButtonView button_back = new AButtonView(
                     getParentEnvironment(),
                     (int) (mx - (backbtn_w * .5f)),
                     800,
                     backbtn_w,
-                    btn_height
+                    btn_height,
+                    "Back",
+                    AButtonView.ImageScale.FIT_CENTERED
             ) {
                 @Override
                 public boolean onClick(float x, float y) {
@@ -220,8 +223,6 @@ public class HelpPage extends AMenu {
                     return true;
                 }
             };
-            button_back.setText("Back");
-            button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
             addComponent(text_title);
             addComponent(img_objectives);
@@ -249,10 +250,9 @@ public class HelpPage extends AMenu {
                     getParentEnvironment(),
                     (int)mx - btn_width, 100,
                     (btn_width * 2), (int)(btn_height * .75f),
-                    "OBSTACLES"
+                    "OBSTACLES",
+                    new Color(255, 255, 255, 150)
             ) {};
-            text_title.setBackgroundColor(new Color(255, 255, 255, 150));
-
 
             BufferedImage bufferedImage_obstacles_img = getResources().getImage("help_obstacles");
             AImageView img_obstacles = new AImageView(
@@ -265,14 +265,15 @@ public class HelpPage extends AMenu {
                     AMenuComponent.ImageScale.FIT_CENTERED
             );
 
-
             int backbtn_w = (int)(btn_width * .5f);
             AButtonView button_back = new AButtonView(
                     getParentEnvironment(),
                     (int) (mx - (backbtn_w * .5f)),
                     800,
                     backbtn_w,
-                    btn_height
+                    btn_height,
+                    "Back",
+                    AButtonView.ImageScale.FIT_CENTERED
             ) {
                 @Override
                 public boolean onClick(float x, float y) {
@@ -285,8 +286,6 @@ public class HelpPage extends AMenu {
                     return true;
                 }
             };
-            button_back.setText("Back");
-            button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
             addComponent(text_title);
             addComponent(img_obstacles);
@@ -312,9 +311,9 @@ public class HelpPage extends AMenu {
                     getParentEnvironment(),
                     (int)mx - btn_width, 100,
                     (btn_width * 2), (int)(btn_height * .75f),
-                    "CONTROLS"
+                    "CONTROLS",
+                    new Color(255, 255, 255, 150)
             ) {};
-            text_title.setBackgroundColor(new Color(255, 255, 255, 150));
 
             BufferedImage bufferedImage_objectives_img = getResources().getImage("help_controls");
             AImageView img_objectives = new AImageView(
@@ -333,7 +332,9 @@ public class HelpPage extends AMenu {
                     (int) (mx - (backbtn_w * .5f)),
                     800,
                     backbtn_w,
-                    btn_height
+                    btn_height,
+                    "Back",
+                    AButtonView.ImageScale.FIT_CENTERED
             ) {
                 @Override
                 public boolean onClick(float x, float y) {
@@ -346,8 +347,6 @@ public class HelpPage extends AMenu {
                     return true;
                 }
             };
-            button_back.setText("Back");
-            button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
             addComponent(text_title);
             addComponent(img_objectives);
@@ -373,9 +372,9 @@ public class HelpPage extends AMenu {
                     getParentEnvironment(),
                     (int)mx - btn_width, 100,
                     (btn_width * 2), (int)(btn_height * .75f),
-                    "CREDITS"
+                    "CREDITS",
+                    new Color(255, 255, 255, 150)
             ) {};
-            text_title.setBackgroundColor(new Color(255, 255, 255, 150));
 
             /*
              * Andrew Stephens
@@ -386,9 +385,10 @@ public class HelpPage extends AMenu {
                     text_title.getY() + text_title.getH() + 50,
                     (int)(text_title.getW() * .4),
                     (int)(btn_height * .5f),
-                    "Andrew Stephens"
+                    "Andrew Stephens",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_andrew.setForegroundColor(new Color(255, 255, 255));
 
             int subitemHight = (int)(text_title_andrew.getH() * .75f);
 
@@ -398,39 +398,43 @@ public class HelpPage extends AMenu {
                     (int)(text_title_andrew.getY() + (subitemHight*.25)),
                     text_title.getW() - text_title_andrew.getW(),
                     subitemHight,
-                    "Team Leader"
+                    "Team Leader",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_andrew_a.setForegroundColor(new Color(255, 255, 255));
 
             ATextView text_title_andrew_b = new ATextView(
                     getParentEnvironment(),
                     text_title_andrew_a.getX(),
-                    text_title_andrew_a.getY() + text_title_andrew_a.getH(),
+                    text_title_andrew_a.getY() + text_title_andrew_a.getH() + 10,
                     text_title.getW() - text_title_andrew.getW(),
                     subitemHight,
-                    "Game Director / Designer"
+                    "Game Director / Designer",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_andrew_b.setForegroundColor(new Color(255, 255, 255));
 
             ATextView text_title_andrew_c = new ATextView(
                     getParentEnvironment(),
                     text_title_andrew_a.getX(),
-                    text_title_andrew_b.getY() + text_title_andrew_b.getH(),
+                    text_title_andrew_b.getY() + text_title_andrew_b.getH() + 10,
                     text_title.getW() - text_title_andrew.getW(),
                     subitemHight,
-                    "Game Programmer"
+                    "Game Programmer",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_andrew_c.setForegroundColor(new Color(255, 255, 255));
 
             ATextView text_title_andrew_d = new ATextView(
                     getParentEnvironment(),
                     text_title_andrew_a.getX(),
-                    text_title_andrew_c.getY() + text_title_andrew_c.getH(),
+                    text_title_andrew_c.getY() + text_title_andrew_c.getH() + 10,
                     text_title.getW() - text_title_andrew.getW(),
                     subitemHight,
-                    "Software Documentation"
+                    "Software Documentation",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_andrew_d.setForegroundColor(new Color(255, 255, 255));
 
             /*
              * Emiz Intriago
@@ -438,12 +442,13 @@ public class HelpPage extends AMenu {
             ATextView text_title_emiz = new ATextView(
                     getParentEnvironment(),
                     (int)mx - btn_width,
-                    text_title_andrew_d.getY() + text_title_andrew_d.getH() + 50,
+                    text_title_andrew_d.getY() + text_title_andrew_d.getH() + 25,
                     text_title_andrew.getW(),
                     text_title_andrew.getH(),
-                    "Emiz Intriago"
+                    "Emiz Intriago",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_emiz.setForegroundColor(new Color(255, 255, 255));
 
             ATextView text_title_emiz_a = new ATextView(
                     getParentEnvironment(),
@@ -451,19 +456,21 @@ public class HelpPage extends AMenu {
                     (int)(text_title_emiz.getY() + (subitemHight*.25)),
                     text_title.getW() - text_title_emiz.getW(),
                     subitemHight,
-                    "Game Art"
+                    "Graphics Designer",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_emiz_a.setForegroundColor(new Color(255, 255, 255));
 
             ATextView text_title_emiz_b = new ATextView(
                     getParentEnvironment(),
                     text_title_emiz_a.getX(),
-                    text_title_emiz_a.getY() + text_title_emiz_a.getH(),
+                    text_title_emiz_a.getY() + text_title_emiz_a.getH() + 10,
                     text_title_emiz_a.getW(),
                     subitemHight,
-                    "Software Documentation"
+                    "Software Documentation",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_emiz_b.setForegroundColor(new Color(255, 255, 255));
 
             /*
              * Gurkiran Kaur
@@ -474,9 +481,10 @@ public class HelpPage extends AMenu {
                     text_title_emiz_b.getY() + text_title_emiz_b.getH() + 25,
                     text_title_andrew.getW(),
                     text_title_andrew.getH(),
-                    "Gurkiran Kaur"
+                    "Gurkiran Kaur",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_kiran.setForegroundColor(new Color(255, 255, 255));
 
             ATextView text_title_kiran_a = new ATextView(
                     getParentEnvironment(),
@@ -484,9 +492,10 @@ public class HelpPage extends AMenu {
                     (int)(text_title_kiran.getY() + (subitemHight*.25)),
                     text_title.getW() - text_title_kiran.getW(),
                     subitemHight,
-                    "Software Documentation"
+                    "Software Documentation",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_kiran_a.setForegroundColor(new Color(255, 255, 255));
 
             /*
              * Miranda Figueras
@@ -497,9 +506,10 @@ public class HelpPage extends AMenu {
                     text_title_kiran_a.getY() + text_title_kiran_a.getH() + 25,
                     text_title_andrew.getW(),
                     text_title_andrew.getH(),
-                    "Miranda Figueras"
+                    "Miranda Figueras",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_miranda.setForegroundColor(new Color(255, 255, 255));
 
             ATextView text_title_miranda_a = new ATextView(
                     getParentEnvironment(),
@@ -507,9 +517,10 @@ public class HelpPage extends AMenu {
                     (int)(text_title_miranda.getY() + (subitemHight*.25)),
                     text_title.getW() - text_title_miranda.getW(),
                     subitemHight,
-                    "Software Documentation"
+                    "Software Documentation",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_miranda_a.setForegroundColor(new Color(255, 255, 255));
 
             /*
              * Wardah Aziz
@@ -520,9 +531,10 @@ public class HelpPage extends AMenu {
                     text_title_miranda_a.getY() + text_title_miranda_a.getH() + 25,
                     text_title_andrew.getW(),
                     text_title_andrew.getH(),
-                    "Wardah Aziz"
+                    "Wardah Aziz",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_wardah.setForegroundColor(new Color(255, 255, 255));
 
             ATextView text_title_wardah_a = new ATextView(
                     getParentEnvironment(),
@@ -530,9 +542,10 @@ public class HelpPage extends AMenu {
                     (int)(text_title_wardah.getY() + (subitemHight*.25)),
                     text_title.getW() - text_title_wardah.getW(),
                     subitemHight,
-                    "Software Documentation"
+                    "Software Documentation",
+                    new Color(255, 255, 255),
+                    new Color(0, 0, 0, 0)
             ) {};
-            text_title_wardah_a.setForegroundColor(new Color(255, 255, 255));
 
             /*
              * BACK
@@ -543,7 +556,9 @@ public class HelpPage extends AMenu {
                     (int) (mx - (backbtn_w * .5f)),
                     800,
                     backbtn_w,
-                    btn_height
+                    btn_height,
+                    "Back",
+                    AButtonView.ImageScale.FIT_CENTERED
             ) {
                 @Override
                 public boolean onClick(float x, float y) {
@@ -556,8 +571,6 @@ public class HelpPage extends AMenu {
                     return true;
                 }
             };
-            button_back.setText("Back");
-            button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
             addComponent(text_title);
             addComponent(text_title_andrew);

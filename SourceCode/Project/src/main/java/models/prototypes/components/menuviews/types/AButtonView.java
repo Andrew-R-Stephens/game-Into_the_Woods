@@ -3,6 +3,7 @@ package models.prototypes.components.menuviews.types;
 import models.prototypes.components.menuviews.AMenuComponent;
 import models.prototypes.controls.AMouseController;
 import models.prototypes.environments.menu.AMenuEnvironment;
+import models.sprites.SpriteSheet;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
@@ -20,35 +21,55 @@ import java.awt.image.BufferedImage;
 public abstract class AButtonView extends AMenuComponent implements IDrawable, IUpdatable {
 
     /**<p>If the button is currently enabled, or used.</p>*/
-    public boolean isEnabled = true;
+    protected boolean isEnabled = true;
 
     /**
      * <p>Initializes the AButtonView</p>
-     * @param parentMenuModel The AMenuEnvironment containing the Menu that contains this component.
+     * @param parentEnvironment The AMenuEnvironment containing the Menu that contains this component.
      * @param x The horizontal position of the component
      * @param y The vertical position of the component
      * @param w The width of the component
      * @param h The height of the component
      */
-    public AButtonView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h) {
-        super(parentMenuModel, x, y, w, h);
+    public AButtonView(AMenuEnvironment parentEnvironment, int x, int y, int w, int h) {
+        super(parentEnvironment, x, y, w, h);
 
-        spritesheet =
+        setSpritesheet(
                 getParentEnvironment().getResources().getSpriteSheet("spritesheet_buttonhrect")
-                        .setLoopOnLast(false);
+                        .setLoopOnLast(false));
     }
 
-    /**
-     * <p>Sets the x position</p>
-     * @param x The horizontal position.
-     */
-    public void setX(int x) {
-        this.x = x;
+    public AButtonView(AMenuEnvironment parentEnvironment,
+                       int x, int y, int w, int h,
+                       String text, ImageScale imageScale) {
+
+        super(parentEnvironment, x, y, w, h, text, imageScale);
+
+        setSpritesheet(
+                getParentEnvironment().getResources().getSpriteSheet("spritesheet_buttonhrect")
+                        .setLoopOnLast(false));
+    }
+
+    public AButtonView(AMenuEnvironment parentEnvironment,
+                       int x, int y, int w, int h,
+                       String text,
+                       SpriteSheet spriteSheet, ImageScale imageScale) {
+
+        super(parentEnvironment, x, y, w, h, text, spriteSheet, imageScale);
+    }
+
+    public AButtonView(AMenuEnvironment parentEnvironment,
+                       int x, int y, int w, int h,
+                       String text,
+                       BufferedImage backgroundImage, ImageScale imageScale) {
+
+        super(parentEnvironment, x, y, w, h, text, backgroundImage, imageScale);
     }
 
     /**
      * <p>Plays the button click audio sound.</p>
      */
+    @Override
     public void playSound() {
         if(playSound) {
             getParentEnvironment().getResources().playAudio("buttonclick");
@@ -80,6 +101,14 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
      */
     public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
+    }
+
+    /**
+     * Gets if the component is enabled and responsive to input.
+     * @return if the component is enabled.
+     */
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
     /**
@@ -156,8 +185,8 @@ public abstract class AButtonView extends AMenuComponent implements IDrawable, I
         int strWidth = g.getFontMetrics().stringWidth(text.toUpperCase());
         g.drawString(
                 text.toUpperCase(),
-                (int)((x * sW) + (w * sW * .5) - (strWidth * .5)),
-                (int)((y * sH) + (h * sH * .5) + (h * .2 * sH * (spritesheet.getPercentCompleted()))));
+                (int) ((x * sW) + (w * sW * .5) - (strWidth * .5)),
+                (int) ((y * sH) + (h * sH * .5) + (h * .2 * sH * (spritesheet.getPercentCompleted()))));
     }
 
 }

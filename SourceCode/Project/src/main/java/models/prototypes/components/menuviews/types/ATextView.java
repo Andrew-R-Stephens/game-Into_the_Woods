@@ -25,33 +25,29 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
      * @param text The text to be drawn to this text view
      */
     public ATextView(AMenuEnvironment parentMenuModel, int x, int y, int w, int h, String text) {
-        super(parentMenuModel, x, y, w, h);
-
-        setText(text);
+        super(parentMenuModel, x, y, w, h, text);
     }
 
-    /**
-     * <p>Sets the horizontal position of the component.</p>
-     * @param x The horizontal position requested.
-     */
-    public void setX(int x) {
-        this.x = x;
+    public ATextView(AMenuEnvironment parentEnvironment,
+                     int x, int y, int w, int h, String text,
+                     Color backgroundColor) {
+        super(parentEnvironment, x, y, w, h, text);
+
+        setBackgroundColor(backgroundColor);
     }
 
-    /**
-     * Sets the text color
-     * @param color The new text color
-     */
-    public void setForegroundColor(Color color) {
-        foregroundColor = color;
+    public ATextView(AMenuEnvironment parentEnvironment,
+                     int x, int y, int w, int h, String text,
+                     Color foregroundColor, Color backgroundColor) {
+        super(parentEnvironment, x, y, w, h, text);
+
+        setForegroundColor(foregroundColor);
+        setBackgroundColor(backgroundColor);
     }
 
-    /**
-     * <p>Sets the background color of this text view</p>
-     * @param color the color to be rendered behind the text.
-     */
-    public void setBackgroundColor(Color color) {
-        this.backgroundColor = color;
+    @Override
+    public void playSound() {
+        // STUB
     }
 
     /**
@@ -59,7 +55,7 @@ public abstract class ATextView extends AMenuComponent implements IDrawable, IUp
      */
     @Override
     public void registerInput() {
-        // DO NOTHING
+        // STUB
     }
 
     @Override

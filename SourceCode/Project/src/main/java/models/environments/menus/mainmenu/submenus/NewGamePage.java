@@ -40,10 +40,9 @@ public class NewGamePage extends AMenu {
                 getParentEnvironment(),
                 (int)mx - btn_width, 100,
                 (btn_width * 2), (int)(btn_height * .75f),
-                "CREATE NEW GAME"
+                "CREATE NEW GAME",
+                new Color(255, 255, 255, 150)
         ) {};
-        text_title.setBackgroundColor(new Color(255, 255, 255, 150));
-
 
         AImageView img_character = new AImageView(
                 getParentEnvironment(),
@@ -68,7 +67,11 @@ public class NewGamePage extends AMenu {
                 (int) (mx - (200 * .5f)) - 250,
                 300,
                 200,
-                200) {
+                200,
+                "TEO",
+                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false),
+                AButtonView.ImageScale.FILL_XY
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -81,10 +84,6 @@ public class NewGamePage extends AMenu {
                 return true;
             }
         };
-        button_avatar1.setText("TEO");
-        button_avatar1.setSpritesheet(
-                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
-        button_avatar1.setImageScaling(AButtonView.ImageScale.FILL_XY);
 
         //Level 3 Button
         AButtonView button_avatar2 = new AButtonView(
@@ -92,7 +91,11 @@ public class NewGamePage extends AMenu {
                 (int) (mx - (200 * .5f) + 250),
                 300,
                 200,
-                200) {
+                200,
+                "MELYNN",
+                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false),
+                AButtonView.ImageScale.FILL_XY
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -105,10 +108,6 @@ public class NewGamePage extends AMenu {
                 return true;
             }
         };
-        button_avatar2.setText("MELYNN");
-        button_avatar2.setSpritesheet(
-                getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false));
-        button_avatar2.setImageScaling(AButtonView.ImageScale.FILL_XY);
 
 
         AButtonView button_characterConfirm = new AButtonView(
@@ -116,7 +115,11 @@ public class NewGamePage extends AMenu {
                 (int)(mx - (btn_width * .5f)),
                 550,
                 btn_width,
-                btn_height) {
+                btn_height,
+                "Start New Game",
+                AButtonView.ImageScale.FIT_CENTERED
+        )
+        {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -135,8 +138,6 @@ public class NewGamePage extends AMenu {
                 return true;
             }
         };
-        button_characterConfirm.setText("Start New Game");
-        button_characterConfirm.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         int backbtn_w = (int)(btn_width * .5f);
         AButtonView button_back = new AButtonView(
@@ -144,7 +145,9 @@ public class NewGamePage extends AMenu {
                 (int) (mx - (backbtn_w * .5f)),
                 800,
                 backbtn_w,
-                btn_height
+                btn_height,
+                "Back",
+                AButtonView.ImageScale.FIT_CENTERED
         ) {
             @Override
             public boolean onClick(float x, float y) {
@@ -157,8 +160,6 @@ public class NewGamePage extends AMenu {
                 return true;
             }
         };
-        button_back.setText("Back");
-        button_back.setImageScaling(AButtonView.ImageScale.FIT_CENTERED);
 
         addComponent(text_title);
         addComponent(button_avatar1);
