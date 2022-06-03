@@ -11,6 +11,9 @@
 #### Game Design / Development: `Andrew Stephens` 
 #### Graphics Design: `Emiz Intriago`
 
+<br>
+<br>
+
 ## Included Libraries
 `Note: This project was developed using the Java JDK 17.`
 
