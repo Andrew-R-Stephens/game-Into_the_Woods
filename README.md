@@ -13,7 +13,7 @@
 
 <a href = "https://mvnrepository.com/artifact/javazoom/jlayer/1.0.1">Javazoom JLayer</a><br>
 <a href = "https://mvnrepository.com/artifact/com.google.code.gson/gson">Gson</a>
-
+<br>
 
 ## Usage and License Limitations  
 
@@ -21,6 +21,7 @@
 <p>This strict copyleft license is in place due to the wholesale cheating that goes on at SUNY College at Old Westbury. Please understand the License before you get yourself into trouble.</p>
 <p><b>Do NOT</b> use any of this project's content <em>(structure /or source code /or libraries /or assets /or etc.)</em>, regardless of external modification, without citing Copyright where such content is used.</p>
 <p><b>DO</b> contact <a href="mailto:asteph11@oldwestbury.edu">Andrew Stephens</a> for inquiries.</p>
+<br>
 
 ## Development Support
 <p><b>Minimum JRE:</b> <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">Oracle JDK 17+</a></p>
