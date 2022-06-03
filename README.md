@@ -3,6 +3,9 @@
 <p>This is a 2D platformer game which derives a likeness from many other platformers like <em>"Ori and the Blind Forest"</em>.</p>
 <p>The entire game was made from scratch, save for two libraries, <em>"javazoom"</em> and <em>"Gson"</em>, which assisted in audio streaming and Json file parsing, respectively.</p>
 
+<br>
+<br>
+
 ## Contributors
 
 #### Game Design / Development: `Andrew Stephens` 
