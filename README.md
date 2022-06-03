@@ -1,4 +1,3 @@
-<br>
 <h1>About Into The Woods</h1>
 <p><em><b>Into The Woods</b></em> exists as the software portion of the Software Engineering class at <b>SUNY College at Old Westbury</b>.</p>
 <p>This is a 2D platformer game which derives a likeness from many other platformers like <em>"Ori and the Blind Forest"</em>.</p>
