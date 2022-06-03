@@ -16,6 +16,7 @@
 
 <br>
 <br>
+
 ## Usage and License Limitations  
 
 <p><code>LICENSE WARNING:</code> Please read and understand the included <a href="https://github.com/asteph11/SoftwareEngineeringProject/blob/main/LICENSE.md">GPL License</a> before attempting to use this code.</p>
