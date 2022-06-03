@@ -11,7 +11,7 @@
 ## Included Libraries
 `Note: This project was developed using the Java JDK 17.`
 
-<a href = "https://mvnrepository.com/artifact/javazoom/jlayer/1.0.1">Javazoom JLayer</a>
+<a href = "https://mvnrepository.com/artifact/javazoom/jlayer/1.0.1">Javazoom JLayer</a><br>
 <a href = "https://mvnrepository.com/artifact/com.google.code.gson/gson">Gson</a>
 
 ## Usage and Limitations  
