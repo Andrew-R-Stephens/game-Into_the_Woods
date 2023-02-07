@@ -19,8 +19,10 @@
 #### Parallax map rendering
 #### Centered Origin on Player, with elastic chase-camera
 #### Custom Environment solutions -- Game, Main Menu, and Pause Menu
-#### Custom controller solution
+#### Custom controller solutions
 #### Display settings populated around primary monitor properties
+#### Save progress upon level completion; and New Game feature
+#### Game objectives and Level progression
 
 <br>
 
