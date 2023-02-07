@@ -1,7 +1,7 @@
 <h1>About Into The Woods</h1>
-<p><em><b>Into The Woods</b></em> exists as the software portion of the Software Engineering class at <b>SUNY College at Old Westbury</b>.</p>
-<p>This is a 2D platformer game which derives a likeness from many other platformers like <em>"Ori and the Blind Forest"</em>.</p>
-<p>The entire game was made from scratch, save for two libraries, <em>"javazoom"</em> and <em>"Gson"</em>, which assisted in audio streaming and Json file parsing, respectively.</p>
+<p><em><b>Into The Woods</b></em> exists to satisfy the software portion of the Software Engineering curriculum at <b>SUNY College at Old Westbury</b>.</p>
+<p>Into the Woods is a 2D platformer game which derives ideas from platformer titles like <em>"Ori and the Blind Forest"</em>.</p>
+<p>The entire game was developed from scratch, save for two libraries, <em>"javazoom"</em> and <em>"Gson"</em>, which assisted in audio streaming and Json file parsing, respectively.</p>
 
 <br>
 
@@ -9,6 +9,18 @@
 
 #### Game Design / Development: `Andrew Stephens` 
 #### Graphics Design: `Emiz Intriago`
+
+<br>
+
+## Notable solutions
+#### Update loop runs independently from Render loops
+#### Update rate scales velocities of game entities
+#### Custom spritesheet solutions for Asperite exports
+#### Parallax map rendering
+#### Centered Origin on Player, with elastic chase-camera
+#### Custom Environment solutions -- Game, Main Menu, and Pause Menu
+#### Custom controller solution
+#### Display settings populated around primary monitor properties
 
 <br>
 
