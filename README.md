@@ -4,6 +4,8 @@
 
 <p><em><b>Into The Woods</b></em> exists to satisfy the software portion of the Software Engineering curriculum at <b>SUNY College at Old Westbury</b>. We are instructed to create a software solution with our assigned team and use it to create the documentation. We had very far reaching goals, and managed to satisfy nearly all of them, between the software development and documentation, within 3 months.</p>
 
+<br>
+
 ## Contributors
 
 #### Team Lead / Game Design / Development: <a href="https://github.com/TRITIUMNITR0X">Andrew Stephens</a>
@@ -13,8 +15,17 @@
 
 ## How to Run
 - Install Java 17 or greater
-- Download the .exe executable
-- Double click .exe
+- Download the [Into The Woods.jar](https://github.com/TRITIUMNITR0X/game-Into_the_Woods/raw/main/Into%20The%20Woods.jar) executable
+- Double click `Into The Woods.jar`
+
+<br>
+
+<h2 style="color: ghostwhite">Documentation</h2>
+
+#### <a href="https://github.com/TRITIUMNITR0X/game-Into_the_Woods/blob/main/documentation/Proposal%20Document.pdf">Proposal Document</a>
+#### <a href="https://github.com/TRITIUMNITR0X/game-Into_the_Woods/blob/main/documentation/Design%20Document%20.pdf">Design Document</a>
+#### <a href="https://github.com/TRITIUMNITR0X/game-Into_the_Woods/blob/main/documentation/Final%20Document.pdf">Final Document</a>
+#### <a href="https://github.com/TRITIUMNITR0X/game-Into_the_Woods/blob/main/documentation/Analysis%20Contributions.pdf">Analysis Contributions</a>
 
 <br>
 
