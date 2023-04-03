@@ -1,38 +1,59 @@
-<h1>About Into The Woods</h1>
-<p><em><b>Into The Woods</b></em> exists to satisfy the software portion of the Software Engineering curriculum at <b>SUNY College at Old Westbury</b>. We are instructed to create a software solution with our assigned team and use it to create the documentation.</p>
-<p>This is a 2D platformer game which derives ideas from platformer titles like <em>"Ori and the Blind Forest"</em>.</p>
+<h1>Into The Woods</h1>
+<p>Into the Woods is a 2D platformer game which derives ideas from platformer titles like <em>"Ori and the Blind Forest"</em>.</p>
 <p>The entire game was developed from scratch, save for two libraries, <em>"javazoom"</em> and <em>"Gson"</em>, which assisted in audio streaming and Json file parsing, respectively.</p>
 
-<br>
+<p><em><b>Into The Woods</b></em> exists to satisfy the software portion of the Software Engineering curriculum at <b>SUNY College at Old Westbury</b>. We are instructed to create a software solution with our assigned team and use it to create the documentation. We had very far reaching goals, and managed to satisfy nearly all of them, between the software development and documentation, within 3 months.</p>
 
 ## Contributors
 
-#### Team Lead / Game Design / Development: `Andrew Stephens` 
-#### Graphics Design: `Emiz Intriago`
+#### Team Lead / Game Design / Development: <a href="https://github.com/TRITIUMNITR0X">Andrew Stephens</a>
+#### Graphics Design: <a href="https://github.com/Emz027">Emiz Intriago</a>
+
+<br>
+
+## How to Run
+- Install Java 17 or greater
+- Download the .exe executable
+- Double click .exe
+
+<br>
+
+<h2 style="color: ghostwhite">FRONT-END</h2>
+
+<div style="display:float">
+    <img src="https://img.shields.io/badge/Java-JDK%2017-F80000?logo=oracle&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/XML-005A9C?logo=w3c&logoColor=white&style=bold"/>
+</div>
+
+<h2 style="color: ghostwhite">Included Libraries</h2>
+<div style="display:float">
+    <a href = "https://mvnrepository.com/artifact/javazoom/jlayer/1.0.1"><img src="https://img.shields.io/badge/Javazoom-JLayer-D3002D?logo=o'reilly&logoColor=white&style=bold"/></a>
+    <a href = "https://mvnrepository.com/artifact/com.google.code.gson/gson"><img src="https://img.shields.io/badge/Google-Gson-4285F4?logo=google&logoColor=white&style=bold"/></a>
+</div>
+
+<h2 style="color: ghostwhite">IDE's / Platforms</h2>
+
+<div style="display:float">
+    <img src="https://img.shields.io/badge/-IntelliJ%20Ultimate-000000?logo=intellij%20idea&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/Git-Bash-F05032?logo=git&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/Github-181717?logo=github&logoColor=white&style=bold"/>
+</div>
 
 <br>
 
 ## Notable solutions
-#### Update loop runs independently from Render loops
-#### Update rate scales velocities of game entities
-#### Custom spritesheet solutions for Asperite exports
-#### Parallax map rendering
-#### Centered Origin on Player, with elastic chase-camera
-#### Custom Environment solutions -- Game, Main Menu, and Pause Menu
-#### Custom controller solutions
-#### Display settings populated around primary monitor properties
-#### Save progress upon level completion; and New Game feature
-#### Game objectives and Level progression
+- Update loop runs independently from Render loops
+- Update rate scales velocities of game entities
+- Custom spritesheet solutions for Asperite exports
+- Parallax map rendering
+- Centered Origin on Player, with elastic chase-camera
+- Custom Game solutions -- Game Environment
+- Custom Menu solutions -- Main Menu, and Pause Menu
+- Custom controller solutions
+- Display settings populated around user\'s primary monitor properties
+- Save progress upon level completion; and New Game feature
+- Game objectives and Level progression
 
-<br>
-
-## Included Libraries
-`Note: This project was developed using the Java JDK 17.`
-
-<a href = "https://mvnrepository.com/artifact/javazoom/jlayer/1.0.1">Javazoom JLayer</a><br>
-<a href = "https://mvnrepository.com/artifact/com.google.code.gson/gson">Gson</a>
-
-<br>
 <br>
 
 ## Usage and License Limitations  
