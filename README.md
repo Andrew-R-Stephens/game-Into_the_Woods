@@ -29,11 +29,13 @@
 
 <br>
 
-<h2 style="color: ghostwhite">FRONT-END</h2>
+<h2 style="color: ghostwhite">Technologies Used</h2>
 
 <div style="display:float">
     <img src="https://img.shields.io/badge/Java-JDK%2017-F80000?logo=oracle&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white&style=bold"/>
     <img src="https://img.shields.io/badge/XML-005A9C?logo=w3c&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/JSON-000000?logo=json&logoColor=white&style=bold"/>
 </div>
 
 <h2 style="color: ghostwhite">Included Libraries</h2>
@@ -46,8 +48,9 @@
 
 <div style="display:float">
     <img src="https://img.shields.io/badge/-IntelliJ%20Ultimate-000000?logo=intellij%20idea&logoColor=white&style=bold"/>
-    <img src="https://img.shields.io/badge/Git-Bash-F05032?logo=git&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/Aseprite-7D929E?logo=aseprite&logoColor=white&style=bold"/>
     <img src="https://img.shields.io/badge/Github-181717?logo=github&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/Git-Bash-F05032?logo=git&logoColor=white&style=bold"/>
 </div>
 
 <br>
