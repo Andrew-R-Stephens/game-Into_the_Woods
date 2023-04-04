@@ -8,24 +8,24 @@
 
 ## Contributors
 
-#### Team Lead / Game Design / Development: <a href="https://github.com/TRITIUMNITR0X">Andrew Stephens</a>
+#### Team Lead / Game Design / Development: <a href="https://github.com/Andrew-R-Stephens">Andrew Stephens</a>
 #### Graphics Design: <a href="https://github.com/Emz027">Emiz Intriago</a>
 
 <br>
 
 ## How to Run
 - Install Java 17 or greater
-- Download the [Into The Woods.jar](https://github.com/TRITIUMNITR0X/game-Into_the_Woods/raw/main/Into%20The%20Woods.jar) executable
+- Download the [Into The Woods.jar](https://github.com/Andrew-R-Stephens/game-Into_the_Woods/raw/main/Into%20The%20Woods.jar) executable
 - Double click `Into The Woods.jar`
 
 <br>
 
 <h2 style="color: ghostwhite">Documentation</h2>
 
-#### <a href="https://github.com/TRITIUMNITR0X/game-Into_the_Woods/blob/main/documentation/Proposal%20Document.pdf">Proposal Document</a>
-#### <a href="https://github.com/TRITIUMNITR0X/game-Into_the_Woods/blob/main/documentation/Design%20Document%20.pdf">Design Document</a>
-#### <a href="https://github.com/TRITIUMNITR0X/game-Into_the_Woods/blob/main/documentation/Final%20Document.pdf">Final Document</a>
-#### <a href="https://github.com/TRITIUMNITR0X/game-Into_the_Woods/blob/main/documentation/Analysis%20Contributions.pdf">Analysis Contributions</a>
+#### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Proposal%20Document.pdf">Proposal Document</a>
+#### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Design%20Document%20.pdf">Design Document</a>
+#### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Final%20Document.pdf">Final Document</a>
+#### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Analysis%20Contributions.pdf">Analysis Contributions</a>
 
 <br>
 
