@@ -1,6 +1,5 @@
 <img height="100%" src="https://raw.githubusercontent.com/Andrew-R-Stephens/game-Into_the_Woods/main/SourceCode/Project/src/main/resources/images/logo.png"/>
 
-<h1>Into The Woods</h1>
 <p>Into the Woods is a 2D platformer game which derives ideas from platformer titles like <em>"Ori and the Blind Forest"</em>.</p>
 <p>The entire game was developed from scratch, save for two libraries, <em>"javazoom"</em> and <em>"Gson"</em>, which assisted in audio streaming and Json file parsing, respectively.</p>
 
