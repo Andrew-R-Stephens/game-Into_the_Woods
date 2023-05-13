@@ -1,11 +1,13 @@
-<img height="100%" src="https://raw.githubusercontent.com/Andrew-R-Stephens/game-Into_the_Woods/main/SourceCode/Project/src/main/resources/images/logo.png"/>
-
+<div style="display:float" align="center">
+    <img height="100%" src="https://raw.githubusercontent.com/Andrew-R-Stephens/game-Into_the_Woods/main/SourceCode/Project/src/main/resources/images/logo.png"/>
+</div>
+    
 <p>Into the Woods is a 2D platformer game which derives ideas from platformer titles like <em>"Ori and the Blind Forest"</em>.</p>
 <p>The entire game was developed from scratch, save for two libraries, <em>"javazoom"</em> and <em>"Gson"</em>, which assisted in audio streaming and Json file parsing, respectively.</p>
 
 <p><em><b>Into The Woods</b></em> exists to satisfy the software portion of the Software Engineering curriculum at <b>SUNY College at Old Westbury</b>. We are instructed to create a software solution with our assigned team and use it to create the documentation. We had very far reaching goals, and managed to satisfy nearly all of them, between the software development and documentation, within 3 months.</p>
 
-<div style="display:float">
+<div style="display:float" align="center">
     <img src="https://img.shields.io/badge/Java-JDK%2017-F80000?logo=oracle&logoColor=white&style=bold"/>
     <img src="https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white&style=bold"/>
     <img src="https://img.shields.io/badge/XML-005A9C?logo=w3c&logoColor=white&style=bold"/>
@@ -16,6 +18,17 @@
     <img src="https://img.shields.io/badge/Aseprite-7D929E?logo=aseprite&logoColor=white&style=bold"/>
     <img src="https://img.shields.io/badge/Github-181717?logo=github&logoColor=white&style=bold"/>
     <img src="https://img.shields.io/badge/Git-Bash-F05032?logo=git&logoColor=white&style=bold"/>
+</div>
+
+<br>
+<br>
+
+<div style="display:float" align="center">
+    <img height="100%" src="https://raw.githubusercontent.com/Andrew-R-Stephens/game-Into_the_Woods/main/SourceCode/Project/src/main/resources/images/avatar1.png"/>
+    <label>&emsp;</label>
+    <img height="150" src="https://raw.githubusercontent.com/Andrew-R-Stephens/game-Into_the_Woods/main/SourceCode/Project/src/main/resources/images/icon.png"/>
+    <label>&emsp;</label>
+    <img height="100%" src="https://raw.githubusercontent.com/Andrew-R-Stephens/game-Into_the_Woods/main/SourceCode/Project/src/main/resources/images/avatar2.png"/>
 </div>
 
 <br>
@@ -40,6 +53,11 @@
 #### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Design%20Document%20.pdf">Design Document</a>
 #### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Final%20Document.pdf">Final Document</a>
 #### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Analysis%20Contributions.pdf">Analysis Contributions</a>
+
+<br>
+
+<div style="display:float" align="center">
+</div>
 
 <br>
 
