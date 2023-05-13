@@ -5,6 +5,19 @@
 
 <p><em><b>Into The Woods</b></em> exists to satisfy the software portion of the Software Engineering curriculum at <b>SUNY College at Old Westbury</b>. We are instructed to create a software solution with our assigned team and use it to create the documentation. We had very far reaching goals, and managed to satisfy nearly all of them, between the software development and documentation, within 3 months.</p>
 
+<div style="display:float">
+    <img src="https://img.shields.io/badge/Java-JDK%2017-F80000?logo=oracle&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/XML-005A9C?logo=w3c&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/JSON-000000?logo=json&logoColor=white&style=bold"/>
+    <a href = "https://mvnrepository.com/artifact/javazoom/jlayer/1.0.1"><img src="https://img.shields.io/badge/Javazoom-JLayer-D3002D?logo=o'reilly&logoColor=white&style=bold"/></a>
+    <a href = "https://mvnrepository.com/artifact/com.google.code.gson/gson"><img src="https://img.shields.io/badge/Google-Gson-4285F4?logo=google&logoColor=white&style=bold"/></a>
+    <img src="https://img.shields.io/badge/-IntelliJ%20Ultimate-000000?logo=intellij%20idea&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/Aseprite-7D929E?logo=aseprite&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/Github-181717?logo=github&logoColor=white&style=bold"/>
+    <img src="https://img.shields.io/badge/Git-Bash-F05032?logo=git&logoColor=white&style=bold"/>
+</div>
+
 <br>
 
 ## Contributors
@@ -27,32 +40,6 @@
 #### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Design%20Document%20.pdf">Design Document</a>
 #### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Final%20Document.pdf">Final Document</a>
 #### <a href="https://github.com/Andrew-R-Stephens/game-Into_the_Woods/blob/main/documentation/Analysis%20Contributions.pdf">Analysis Contributions</a>
-
-<br>
-
-<h2 style="color: ghostwhite">Technologies Used</h2>
-
-<div style="display:float">
-    <img src="https://img.shields.io/badge/Java-JDK%2017-F80000?logo=oracle&logoColor=white&style=bold"/>
-    <img src="https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white&style=bold"/>
-    <img src="https://img.shields.io/badge/XML-005A9C?logo=w3c&logoColor=white&style=bold"/>
-    <img src="https://img.shields.io/badge/JSON-000000?logo=json&logoColor=white&style=bold"/>
-</div>
-
-<h2 style="color: ghostwhite">Included Libraries</h2>
-<div style="display:float">
-    <a href = "https://mvnrepository.com/artifact/javazoom/jlayer/1.0.1"><img src="https://img.shields.io/badge/Javazoom-JLayer-D3002D?logo=o'reilly&logoColor=white&style=bold"/></a>
-    <a href = "https://mvnrepository.com/artifact/com.google.code.gson/gson"><img src="https://img.shields.io/badge/Google-Gson-4285F4?logo=google&logoColor=white&style=bold"/></a>
-</div>
-
-<h2 style="color: ghostwhite">IDE's / Platforms</h2>
-
-<div style="display:float">
-    <img src="https://img.shields.io/badge/-IntelliJ%20Ultimate-000000?logo=intellij%20idea&logoColor=white&style=bold"/>
-    <img src="https://img.shields.io/badge/Aseprite-7D929E?logo=aseprite&logoColor=white&style=bold"/>
-    <img src="https://img.shields.io/badge/Github-181717?logo=github&logoColor=white&style=bold"/>
-    <img src="https://img.shields.io/badge/Git-Bash-F05032?logo=git&logoColor=white&style=bold"/>
-</div>
 
 <br>
 
