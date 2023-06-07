@@ -9,6 +9,8 @@
 
 <p><em><b>Into The Woods</b></em> exists to satisfy the software portion of the Software Engineering curriculum at <b>SUNY College at Old Westbury</b>. We are instructed to create a software solution with our assigned team and use it to create the documentation. We had very far reaching goals, and managed to satisfy nearly all of them, between the software development and documentation, within 3 months.</p>
 
+<br>
+
 <div style="display:float" align="center">
     <img src="https://img.shields.io/badge/Java-JDK%2017-F80000?logo=oracle&logoColor=white&style=bold"/>
     <img src="https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white&style=bold"/>
