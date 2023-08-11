@@ -90,7 +90,7 @@
 <br>
 
 ## Development Support
-<p><b>Minimum JRE:</b> <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">Oracle JDK 17+</a></p>
+<p><b>Minimum JRE:</b> <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">Oracle JDK 17+ (or below JRE v53)</a></p>
 <p><b>Suggested IDE:</b> Intellij IDEA</p>
 
 ## Runtime Support
