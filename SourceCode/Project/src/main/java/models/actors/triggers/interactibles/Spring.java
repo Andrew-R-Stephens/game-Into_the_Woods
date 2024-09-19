@@ -50,6 +50,13 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
         spriteSheets.put(actionState, resources.getSpriteSheet("spritesheet_spring"));
     }
 
+    public Spring(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
+                  int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
+        super(resources, gameEnvironment, x, y, w, h, 0, 0, MAX_CYCLES, hasGravity, canMoveOnCollision);
+
+        spriteSheets.put(actionState, resources.getSpriteSheet("spritesheet_spring"));
+    }
+
     @Override
     public boolean hasCollision(AActor a, float delta) {
         boolean hasCollision = super.hasCollision(a, delta);

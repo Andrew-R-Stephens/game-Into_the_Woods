@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 /**
- * <p>The HUDModel is the handler class for all AOverlayComponenets of the GameEnvironment. It acts to update and
+ * <p>The HUDModel is the handler class for all AOverlayComponents of the GameEnvironment. It acts to update and
  * draw all AOverlayComponents as needed.</p>
  * @author Andrew Stephens
  */

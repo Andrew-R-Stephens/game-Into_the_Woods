@@ -9,7 +9,9 @@ import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.levels.LevelsList;
 import models.prototypes.level.ALevel;
+import models.prototypes.level.LevelData;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
+import models.prototypes.level.LevelData.LevelModel;
 
 public class Level2 extends ALevel {
 
@@ -17,7 +19,7 @@ public class Level2 extends ALevel {
      * Creates the second Level.
      * @param gameModel
      */
-    public Level2(GameEnvironment gameModel) {
+    public Level2(GameEnvironment gameModel, LevelModel levelModel) {
         super(gameModel);
 
         setStartOrigin(

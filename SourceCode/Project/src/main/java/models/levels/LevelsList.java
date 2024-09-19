@@ -3,8 +3,10 @@ package models.levels;
 import models.environments.game.GameEnvironment;
 import models.levels.level.Level1;
 import models.levels.level.Level2;
+import models.levels.level.TestLevel1;
 import models.levels.level.TestLevel3;
 import models.prototypes.level.ALevel;
+import models.prototypes.level.LevelData;
 import models.utils.drawables.IDrawable;
 
 import java.awt.*;
@@ -35,9 +37,20 @@ public class LevelsList implements IDrawable {
     public void init(GameEnvironment gameEnvironment, int currentLevel) {
         this.gameEnvironment = gameEnvironment;
 
-        addLevel(new Level1(gameEnvironment));
-        addLevel(new Level2(gameEnvironment));
-        addLevel(new TestLevel3(gameEnvironment));
+        LevelData levelData = new LevelData(gameEnvironment.getResources().getLevelsFile());
+
+        addLevel(
+            new Level1(gameEnvironment, levelData.levelModels.levels.get(0)));
+
+        addLevel(
+                new Level2(gameEnvironment, levelData.levelModels.levels.get(1)));
+
+        addLevel(
+                new TestLevel3(gameEnvironment, levelData.levelModels.levels.get(2)));
+
+        //addLevel(new Level1(gameEnvironment));
+        //addLevel(new Level2(gameEnvironment));
+        //addLevel(new TestLevel3(gameEnvironment));
 
         setCurrentLevel(currentLevel);
     }

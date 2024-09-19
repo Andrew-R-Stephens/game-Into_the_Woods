@@ -117,7 +117,7 @@ public class SaveFileRW {
         createNewSaveFile();
 
         // Initialize temp file
-        new AFileReader() {
+        new models.utils.files.AFileReader() {
             @Override
             public boolean read() {
                 try {

@@ -1,7 +1,9 @@
 package models.prototypes.level;
 
+import models.actors.platforms.Platform;
 import models.actors.triggers.collectibles.key.DoorKey;
 import models.actors.triggers.interactibles.Door;
+import models.actors.triggers.interactibles.Spikes;
 import models.environments.game.GameEnvironment;
 import models.environments.game.background.ParallaxBackground;
 import models.prototypes.actor.AActor;
@@ -80,6 +82,42 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         startOrigin = new int[]{x, y};
     }
 
+    public AProp createProp(
+            LevelData.LevelModel levelModel,
+            LevelData.LevelModel.Prop propData
+    ) {
+        AProp outProp = null;
+        switch (propData.type) {
+            case "platform": {
+                String[] arr = new String[0];
+                outProp = new Platform(
+                        getResources(),
+                        levelModel.typeImages.get(
+                                propData.type
+                        ).toArray(arr),
+                        propData.coords.x,
+                        propData.coords.y,
+                        propData.dims.w,
+                        propData.dims.h,
+                        propData.hasGravity
+                );
+                break;
+            }
+            case "spikes": {
+                outProp = new Spikes(
+                        getResources(),
+                        gameEnvironment,
+                        propData.coords.x,
+                        propData.coords.y,
+                        propData.dims.w,
+                        propData.dims.h,
+                        propData.maxCycles
+                );
+            }
+        }
+        return outProp;
+    }
+
     /**
      * <p>Adds a background layer to the parallax background in the level.</p>
      * @param backgroundImage The background image to be added as a layer of the background
@@ -105,6 +143,13 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      */
     public int getKeyCount() {
         return keyCount;
+    }
+
+    /**
+     * <p>Builds the level.</p>
+     */
+    public void build(LevelData.LevelModel levelModel) {
+        build();
     }
 
     /**

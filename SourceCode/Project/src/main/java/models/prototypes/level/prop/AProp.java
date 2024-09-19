@@ -34,7 +34,8 @@ public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, I
                 x * LevelsList.WORLD_SCALE,
                 y * LevelsList.WORLD_SCALE,
                 w * LevelsList.WORLD_SCALE,
-                h * LevelsList.WORLD_SCALE, vx, vy, hasGravity);
+                h * LevelsList.WORLD_SCALE,
+                vx, vy, hasGravity);
     }
 
     @Override

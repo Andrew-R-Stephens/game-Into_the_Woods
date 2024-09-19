@@ -36,6 +36,10 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
         super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, false, false);
     }
 
+    public Spikes(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, int MAX_CYCLES) {
+        super(resources, gameEnvironment, x, y, w, h, 0, 0, MAX_CYCLES, false, false);
+    }
+
     @Override
     public void update(float delta) {
         super.update(delta);

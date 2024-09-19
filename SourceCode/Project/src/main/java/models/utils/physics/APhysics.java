@@ -55,6 +55,19 @@ public abstract class APhysics implements IUpdatable {
             float vX, float vY,
             boolean hasGravity) {
 
+        float tX = roundCoordinate(x), tY = roundCoordinate(y);
+        float tW = roundCoordinate(w), tH = roundCoordinate(h);
+        float tVX = roundCoordinate(vX), tVY = roundCoordinate(vY);
+
+        setOriginalPosition(tX, tY);
+        setOriginalSize(tW, tH);
+        setPosition(tX, tY);
+        setSize(tW, tH);
+
+        setVelocity(tVX, tVY);
+        setGravity(hasGravity);
+
+        /*
         setOriginalPosition(x, y);
         setOriginalSize(w, h);
         setPosition(x, y);
@@ -62,6 +75,13 @@ public abstract class APhysics implements IUpdatable {
 
         setVelocity(vX, vY);
         setGravity(hasGravity);
+        */
+    }
+
+    public static float roundCoordinate(float num) {
+        float roundingFactor = 16;
+        float rounded = (float)Math.round(num / roundingFactor);
+        return rounded * roundingFactor;
     }
 
     /**

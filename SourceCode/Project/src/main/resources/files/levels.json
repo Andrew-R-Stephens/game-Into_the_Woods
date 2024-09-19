@@ -1,0 +1,159 @@
+{
+    "defaults": {
+        "typeImages": {
+            "platform": "platform_level1",
+            "spikes": "spikes",
+            "spring": "spritesheet_spring",
+            "door": "spritesheet_door",
+            "doorkey": "door_key"
+        }
+    },
+    "levels": [
+        {
+            "id": 0,
+            "name": "Level 1",
+            "backgroundImages": [
+                "forest_1", "forest_2", "forest_3"
+            ],
+            "typeImages": {
+                "platform": ["platform_level1_1", "platform_level1_2"]
+            },
+            "startOrigin": {
+                "x": 1988,"y": 2110
+            },
+            "props": [
+
+                {"type": "spikes", "coords": {"x": 7165, "y": 1928}, "dims": {"w": 284, "h": 97}, "maxCycles": 1},
+                {"type": "spikes", "coords": {"x": 5250, "y": 3900}, "dims": {"w": 151, "h": 109}, "maxCycles": 1},
+                {"type": "spikes", "coords": {"x": 2274, "y": 3429}, "dims": {"w": 973, "h": 88}, "maxCycles": 1},
+                {"type": "spikes", "coords": {"x": 1805, "y": 3640}, "dims": {"w": 227, "h": 82}, "maxCycles": 1},
+                {"type": "spikes", "coords": {"x": 1152, "y": 3649}, "dims": {"w": 73, "h": 66}, "maxCycles": 1},
+                {"type": "spikes", "coords": {"x": 71, "y": 2168}, "dims": {"w": 371, "h": 103}, "maxCycles": 1},
+                {"type": "spikes", "coords": {"x": 192, "y": 1248}, "dims": {"w": 271, "h": 113}, "maxCycles": 1},
+
+                {"type":"platform","coords":{"x":-500, "y": -500}, "dims":{"w": 1221, "h": 1630}, "hasGravity": false},
+                {"type":"platform","coords":{"x":-500,"y": 1122}, "dims":{"w": 578, "h": 158 }, "hasGravity": false},
+                {"type":"platform","coords":{"x":-500, "y": 1280}, "dims":{"w": 703, "h": 769 }, "hasGravity": false},
+                {"type":"platform","coords":{"x":119, "y": 1339}, "dims":{"w": 271, "h": 240 }, "hasGravity": false},
+                {"type":"platform","coords":{"x":-500, "y": 2059}, "dims":{"w": 950, "h": 1791 }, "hasGravity": false},
+                {"type":"platform","coords":{"x":444, "y": 3258}, "dims":{"w": 715, "h": 792 }, "hasGravity": false},
+                {"type":"platform","coords":{"x":1156,"y": 2157}, "dims":{"w": 1122, "h": 341 }, "hasGravity": false},
+                {"type":"platform","coords":{"x":1710, "y": 2770}, "dims":{"w": 570, "h": 141 }, "hasGravity": false},
+                {"type":"platform","coords":{"x":1958, "y": 2906}, "dims":{"w": 321, "h": 401 }, "hasGravity": false },
+                {"type":"platform","coords":{"x":2040, "y": 3304}, "dims":{"w": 239, "h": 414}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2268, "y": 3509}, "dims":{"w": 991, "h": 541}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3249, "y": 3300}, "dims":{"w": 419, "h": 750}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3250, "y": 3231}, "dims":{"w": 349, "h": 74}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3340, "y": 3098}, "dims":{"w": 258, "h": 134}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3340, "y": 2769}, "dims":{"w": 599, "h": 331}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3150, "y": 2809}, "dims":{"w": 199, "h": 39}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3781, "y": 3093}, "dims":{"w": 157, "h": 116}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3927, "y": 2529}, "dims":{"w": 212, "h": 681}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3515, "y": 2320}, "dims":{"w": 623, "h": 218}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2707, "y": 2322}, "dims":{"w": 811, "h": 278}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2702, "y": 2251}, "dims":{"w": 568, "h": 79}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2450, "y": 2792}, "dims":{"w": 332, "h": 179}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2450, "y": 2597}, "dims":{"w": 369, "h": 190}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2239, "y": 2484}, "dims":{"w": 470, "h": 115}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2176, "y": 2211}, "dims":{"w": 535, "h": 278}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2351, "y": 2132}, "dims":{"w": 329, "h": 83}, "hasGravity": false },
+                {"type":"platform","coords":{"x":1619, "y": 2030}, "dims":{"w": 410, "h": 127}, "hasGravity": false },
+                {"type":"platform","coords":{"x":1144, "y": 2151}, "dims":{"w": 1036,"h": 349}, "hasGravity": false },
+                {"type":"platform","coords":{"x":781,  "y": 2488}, "dims":{"w": 762, "h": 584}, "hasGravity": false },
+                {"type":"platform","coords":{"x":1008, "y": 2329}, "dims":{"w": 141, "h": 171 }, "hasGravity": false },
+                {"type":"platform","coords":{"x":909,  "y": -500}, "dims":{"w": 852, "h": 562}, "hasGravity": false },
+                {"type":"platform","coords":{"x":1749, "y": -500}, "dims":{"w": 4077,"h": 800}, "hasGravity": false },
+                {"type":"platform","coords":{"x":5820, "y": -500}, "dims":{"w": 1620,"h": 1989}, "hasGravity": false },
+                {"type":"platform","coords":{"x":7439, "y": -500}, "dims":{"w": 111, "h": 2525}, "hasGravity": false },
+                {"type":"platform","coords":{"x":5615, "y": 2026}, "dims":{"w": 1935,"h": 1297}, "hasGravity": false },
+                {"type":"platform","coords":{"x":5276, "y": 3310}, "dims":{"w": 2274,"h": 116}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4847, "y": 3422}, "dims":{"w": 2703,"h": 48}, "hasGravity": false },
+                {"type":"platform","coords":{"x":5375, "y": 3462}, "dims":{"w": 2175,"h": 588}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3841, "y": 3982}, "dims":{"w": 1550,"h": 68}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3657, "y": 3826}, "dims":{"w": 200, "h": 224}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3660, "y": 3382}, "dims":{"w": 377, "h": 76}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3660, "y": 3458}, "dims":{"w": 212, "h": 100}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3660, "y": 3559}, "dims":{"w": 113, "h": 70}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4120, "y": 2752}, "dims":{"w": 122, "h": 336}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4238, "y": 2839}, "dims":{"w": 299, "h": 193}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4539, "y": 2916}, "dims":{"w": 269, "h": 82}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4676, "y": 3003}, "dims":{"w": 138, "h": 70}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4803, "y": 2947}, "dims":{"w": 315, "h": 42}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4816, "y": 2991}, "dims":{"w": 190, "h": 103}, "hasGravity": false },
+                {"type":"platform","coords":{"x":5000, "y": 2991}, "dims":{"w": 262, "h": 60}, "hasGravity": false },
+                {"type":"platform","coords":{"x":5157, "y": 3065}, "dims":{"w": 241, "h": 39}, "hasGravity": false },
+                {"type":"platform","coords":{"x":5437, "y": 2466}, "dims":{"w": 200, "h": 246},  "hasGravity": false },
+                {"type":"platform","coords":{"x":5008, "y": 2022}, "dims":{"w": 623, "h": 454},  "hasGravity": false },
+                {"type":"platform","coords":{"x":5462, "y": 1932}, "dims":{"w": 206, "h": 85}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4471, "y": 2075}, "dims":{"w": 560, "h": 302}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4397, "y": 2140}, "dims":{"w": 78,  "h": 100},  "hasGravity": false },
+                {"type":"platform","coords":{"x":4322, "y": 2227}, "dims":{"w": 156, "h": 122}, "hasGravity": false },
+                {"type":"platform","coords":{"x":6611, "y": 1972}, "dims":{"w": 569, "h": 54}, "hasGravity": false },
+                {"type":"platform","coords":{"x":7096, "y": 1481}, "dims":{"w": 358, "h": 166},  "hasGravity": false },
+                {"type":"platform","coords":{"x":7242, "y": 1624}, "dims":{"w": 215, "h": 132},  "hasGravity": false },
+                {"type":"platform","coords":{"x":5791, "y": 1478}, "dims":{"w": 986, "h": 256},  "hasGravity": false },
+                {"type":"platform","coords":{"x":5872, "y": 1721}, "dims":{"w": 585, "h": 119},  "hasGravity": false },
+                {"type":"platform","coords":{"x":5712, "y": 1056}, "dims":{"w": 116, "h": 187},  "hasGravity": false },
+                {"type":"platform","coords":{"x":5409, "y": 310},  "dims":{"w": 417, "h": 738},  "hasGravity": false },
+                {"type":"platform","coords":{"x":4000, "y": 3600}, "dims":{"w": 613, "h": 66}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4118, "y": 3614}, "dims":{"w": 510, "h": 70} , "hasGravity": false },
+                {"type":"platform","coords":{"x":4273, "y": 3512}, "dims":{"w": 365, "h": 113},  "hasGravity": false },
+                {"type":"platform","coords":{"x":4525, "y": 3471}, "dims":{"w": 562, "h": 113},  "hasGravity": false },
+                {"type":"platform","coords":{"x":4130, "y": 2754}, "dims":{"w": 122, "h": 336}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4236, "y": 2841}, "dims":{"w": 302, "h": 197}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4155, "y": 3305}, "dims":{"w": 253, "h": 45}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3173, "y": 312},  "dims":{"w": 734, "h": 840}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3903, "y": 316},  "dims":{"w": 193, "h": 1476}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4083, "y": 319},  "dims":{"w": 172, "h": 619}, "hasGravity": false },
+                {"type":"platform","coords":{"x":4241, "y": 306},  "dims":{"w": 194, "h": 141}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3263, "y": 1145}, "dims":{"w": 411, "h": 190}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3654, "y": 1135}, "dims":{"w": 265, "h": 122}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2949, "y": 744},  "dims":{"w": 234, "h": 85}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2154, "y": 306},  "dims":{"w": 1039,"h": 442}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2133, "y": 728},  "dims":{"w": 476, "h": 182}, "hasGravity": false },
+                {"type":"platform","coords":{"x":1850, "y": 859},  "dims":{"w": 296, "h": 262}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3310, "y": 1514}, "dims":{"w": 600, "h": 417}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3549, "y": 1921}, "dims":{"w": 231, "h": 237}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3421, "y": 1912}, "dims":{"w": 135, "h": 134}, "hasGravity": false },
+                {"type":"platform","coords":{"x":3161, "y": 1586}, "dims":{"w": 156, "h": 300}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2980, "y": 1598}, "dims":{"w": 191, "h": 159}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2859, "y": 1576}, "dims":{"w": 141, "h": 101}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2738, "y": 1545}, "dims":{"w": 135, "h": 94}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2880, "y": 1489}, "dims":{"w": 200, "h": 82}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2446, "y": 1437}, "dims":{"w": 141, "h": 112}, "hasGravity": false },
+                {"type":"platform","coords":{"x":2300, "y": 1374}, "dims":{"w": 163, "h": 147}, "hasGravity": false },
+                {"type":"platform","coords":{"x":1144, "y": 3694}, "dims":{"w": 1134,"h":  356}, "hasGravity": false }
+
+            ]
+        },
+        {
+            "id": 1,
+            "name": "Level 2",
+            "backgroundImages": [
+                "cave_1", "cave_2", "cave_3"
+            ],
+            "typeImages": {
+                "platform": "platform_level2"
+            },
+            "startOrigin": {
+                "x": 1988,"y": 2110
+            },
+            "props": [
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Test Level",
+            "backgroundImages": [
+            ],
+            "typeImages": {
+                "platform": "platform_level1"
+            },
+            "startOrigin": {
+                "x": 1988,"y": 2110
+            },
+            "props": [
+            ]
+        }
+    ]
+}

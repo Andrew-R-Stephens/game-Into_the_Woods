@@ -1,5 +1,6 @@
 package models.utils.resources;
 
+import models.prototypes.level.LevelData;
 import models.sprites.SpriteSheet;
 import models.utils.audio.SuperPlayer;
 import models.utils.files.AFileReader;
@@ -264,6 +265,15 @@ public class Resources {
         spriteSheet.setReferenceImage(getImage(spriteSheetName));
 
         return spriteSheet;
+    }
+
+    /**
+     * <p>Retrieves a SpriteSheet which is stored in the Map. Uses the references from Text Files and BufferedImage Maps.</p>
+     * @param spriteSheetName the non-extension name of the SpriteSheet requested.
+     * @return A reference to the SpriteSheet requested.
+     */
+    public String getLevelsFile() {
+        return path_textFile + "levels.json";
     }
 
     /**

@@ -35,6 +35,10 @@ public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatabl
         super(resources, gameModel, x, y, w, h, vx, vy, 1,false, false);
     }
 
+    public DoorKey(Resources resources, GameEnvironment gameModel, float x, float y, float w, float h) {
+        super(resources, gameModel, x, y, w, h, 0, 0, 1,false, false);
+    }
+
     @Override
     public boolean hasCollision(AActor a, float delta) {
         return super.hasCollision(a, delta);

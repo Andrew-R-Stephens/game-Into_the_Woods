@@ -14,6 +14,8 @@ import java.net.URISyntaxException;
  */
 public class Config {
 
+    public static boolean DEBUG = false;
+
     /**<p>The name of the Operating System.</p>*/
     private static String opSysName;
     /**<p>The system path of the jar.</p>*/

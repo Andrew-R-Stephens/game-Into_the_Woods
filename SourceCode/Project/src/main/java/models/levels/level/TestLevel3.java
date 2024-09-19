@@ -5,7 +5,9 @@ import models.actors.triggers.collectibles.key.DoorKey;
 import models.actors.triggers.interactibles.Door;
 import models.environments.game.GameEnvironment;
 import models.prototypes.level.ALevel;
+import models.prototypes.level.LevelData;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
+import models.prototypes.level.LevelData.LevelModel;
 
 /**
  * The third proof-of-concept test level
@@ -16,7 +18,7 @@ public class TestLevel3 extends ALevel {
      * Creates the third test Level.
      * @param gameModel
      */
-    public TestLevel3(GameEnvironment gameModel) {
+    public TestLevel3(GameEnvironment gameModel, LevelModel levelModel) {
         super(gameModel);
 
         setStartOrigin(200, 50);
