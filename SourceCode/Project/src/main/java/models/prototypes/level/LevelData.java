@@ -94,6 +94,11 @@ public class LevelData {
                                     maxCycles = propIn.get("maxCycles").getAsInt();
                                 }
 
+                                boolean canMoveOnCollision = false;
+                                if(propIn.get("canMoveOnCollision") != null) {
+                                    canMoveOnCollision = propIn.get("canMoveOnCollision").getAsBoolean();
+                                }
+
                                 JsonObject coordsIn = propIn.get("coords").getAsJsonObject();
                                 int pX = coordsIn.get("x").getAsInt();
                                 int pY = coordsIn.get("y").getAsInt();
@@ -115,7 +120,11 @@ public class LevelData {
 
                                 String type = propIn.get("type").getAsString();
 
-                                Prop prop = new Prop(type, coords, dims, motion, hasGravity, maxCycles);
+                                Prop prop = new Prop(
+                                        type,
+                                        coords, dims, motion,
+                                        hasGravity, maxCycles, canMoveOnCollision
+                                );
 
                                 propsOut.add(prop);
                             }
@@ -180,6 +189,10 @@ public class LevelData {
                     }
 
                     prop.addProperty("hasGravity", p.hasGravity);
+
+                    if(p.canMoveOnCollision == true) {
+                        prop.addProperty("canMoveOnCollision", p.canMoveOnCollision);
+                    }
 
                     props.add(prop);
                 }
@@ -255,20 +268,24 @@ public class LevelData {
         }
 
         public static class Prop {
-            public boolean hasGravity;
             public String type;
             public Coords coords;
             public Dims dims;
             public Motion motion;
+            public boolean hasGravity;
             public int maxCycles;
+            public boolean canMoveOnCollision;
 
-            public Prop(String type, Coords coords, Dims dims, Motion motion, boolean hasGravity, int maxCycles) {
+            public Prop(String type,
+                        Coords coords, Dims dims, Motion motion,
+                        boolean hasGravity, int maxCycles, boolean canMoveOnCollision) {
                 this.type = type;
                 this.hasGravity = hasGravity;
                 this.coords = coords;
                 this.dims = dims;
                 this.motion = motion;
-                this.maxCycles = 1;
+                this.maxCycles = maxCycles;
+                this.canMoveOnCollision = canMoveOnCollision;
             }
 
             public static class Coords {

@@ -1,11 +1,11 @@
 {
     "defaults": {
         "typeImages": {
-            "platform": "platform_level1",
+            "platform": ["platform_level1_1", "platform_level1_2"],
             "spikes": "spikes",
             "spring": "spritesheet_spring",
             "door": "spritesheet_door",
-            "doorkey": "door_key"
+            "doorKey": "door_key"
         }
     },
     "levels": [
@@ -16,20 +16,24 @@
                 "forest_1", "forest_2", "forest_3"
             ],
             "typeImages": {
-                "platform": ["platform_level1_1", "platform_level1_2"]
+                "platform": ["platform_level1_1", "platform_level1_2"],
+                "spikes": ["spikes"],
+                "spring": ["spritesheet_spring"],
+                "door": ["spritesheet_door"],
+                "doorKey": ["door_key"]
             },
             "startOrigin": {
                 "x": 1988,"y": 2110
             },
             "props": [
 
-                {"type": "spikes", "coords": {"x": 7165, "y": 1928}, "dims": {"w": 284, "h": 97}, "maxCycles": 1},
-                {"type": "spikes", "coords": {"x": 5250, "y": 3900}, "dims": {"w": 151, "h": 109}, "maxCycles": 1},
-                {"type": "spikes", "coords": {"x": 2274, "y": 3429}, "dims": {"w": 973, "h": 88}, "maxCycles": 1},
-                {"type": "spikes", "coords": {"x": 1805, "y": 3640}, "dims": {"w": 227, "h": 82}, "maxCycles": 1},
-                {"type": "spikes", "coords": {"x": 1152, "y": 3649}, "dims": {"w": 73, "h": 66}, "maxCycles": 1},
-                {"type": "spikes", "coords": {"x": 71, "y": 2168}, "dims": {"w": 371, "h": 103}, "maxCycles": 1},
-                {"type": "spikes", "coords": {"x": 192, "y": 1248}, "dims": {"w": 271, "h": 113}, "maxCycles": 1},
+                {"type":"spikes", "coords": {"x": 7165, "y": 1928}, "dims": {"w": 284, "h": 97}, "maxCycles": 1},
+                {"type":"spikes", "coords": {"x": 5250, "y": 3900}, "dims": {"w": 151, "h": 109}, "maxCycles": 1},
+                {"type":"spikes", "coords": {"x": 2274, "y": 3429}, "dims": {"w": 973, "h": 88}, "maxCycles": 1},
+                {"type":"spikes", "coords": {"x": 1805, "y": 3640}, "dims": {"w": 227, "h": 82}, "maxCycles": 1},
+                {"type":"spikes", "coords": {"x": 1152, "y": 3649}, "dims": {"w": 73, "h": 66}, "maxCycles": 1},
+                {"type":"spikes", "coords": {"x": 71, "y": 2168}, "dims": {"w": 371, "h": 103}, "maxCycles": 1},
+                {"type":"spikes", "coords": {"x": 192, "y": 1248}, "dims": {"w": 271, "h": 113}, "maxCycles": 1},
 
                 {"type":"platform","coords":{"x":-500, "y": -500}, "dims":{"w": 1221, "h": 1630}, "hasGravity": false},
                 {"type":"platform","coords":{"x":-500,"y": 1122}, "dims":{"w": 578, "h": 158 }, "hasGravity": false},
@@ -122,8 +126,28 @@
                 {"type":"platform","coords":{"x":2880, "y": 1489}, "dims":{"w": 200, "h": 82}, "hasGravity": false },
                 {"type":"platform","coords":{"x":2446, "y": 1437}, "dims":{"w": 141, "h": 112}, "hasGravity": false },
                 {"type":"platform","coords":{"x":2300, "y": 1374}, "dims":{"w": 163, "h": 147}, "hasGravity": false },
-                {"type":"platform","coords":{"x":1144, "y": 3694}, "dims":{"w": 1134,"h":  356}, "hasGravity": false }
+                {"type":"platform","coords":{"x":1144, "y": 3694}, "dims":{"w": 1134,"h":  356}, "hasGravity": false },
 
+                {"type":"doorKey","coords":{"x":4744, "y":510}, "dims":{"w": 100, "h":50}},
+                {"type":"doorKey","coords":{"x":3710, "y":2601}, "dims":{"w": 100, "h":50}},
+                {"type":"doorKey","coords":{"x":4934, "y":3704}, "dims":{"w": 100, "h":50}},
+                {"type":"doorKey","coords":{"x":2692, "y":1375}, "dims":{"w": 100, "h":50}},
+                {"type":"doorKey","coords":{"x":1919, "y":713}, "dims":{"w": 100, "h":50}},
+
+                {"type":"spring","coords":{"x":1535, "y":3025}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":1440, "y":950 }, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":850,  "y":1220}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":1000, "y":1550}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":1450, "y":1725}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":1750, "y":2000}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":2100, "y":1600}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":4900, "y":960},  "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":4550, "y":1350}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":4950, "y":1600}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":5325, "y":1800}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":2460, "y":3343}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":2900, "y":3343}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+                {"type":"spring","coords":{"x":2774, "y":2939}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false}
             ]
         },
         {

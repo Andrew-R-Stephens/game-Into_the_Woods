@@ -5,6 +5,7 @@ import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.trigger.ATrigger;
 import models.sprites.SpriteSheet;
 import models.utils.config.Config;
@@ -30,7 +31,8 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
     /**
      * <p>Called from the subtypes, this method initializes the object. Also initializes the respective spriteSheet.</p>
      * @param resources The resources of the parent Environment
-     * @param gameEnvironment The GameEnvironment that this object resides in.
+     * @param environment The GameEnvironment that this object resides in.
+     * @param spriteSheetName The sprite sheet for this object.
      * @param x The horizontal position, relative to the default dimensions.
      * @param y The y position, relative to the default dimensions.
      * @param w The width, relative to the default dimensions.
@@ -41,20 +43,39 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
      * @param hasGravity If the object should be effected by gravity.
      * @param canMoveOnCollision If the object should move if it collides with another object.
      */
-    public Spring(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx,
-                  float vy,
+    public Spring(Resources resources, AEnvironment environment,
+                  String spriteSheetName,
+                  float x, float y, float w, float h, float vx, float vy,
                   int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity,
+        super(resources, environment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity,
                 canMoveOnCollision);
 
-        spriteSheets.put(actionState, resources.getSpriteSheet("spritesheet_spring"));
+        spriteSheets.put(actionState, resources.getSpriteSheet(spriteSheetName));
     }
 
-    public Spring(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
+    public Spring(Resources resources, AEnvironment environment,
+                  String spriteSheetName,
+                  float x, float y, float w, float h,
                   int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(resources, gameEnvironment, x, y, w, h, 0, 0, MAX_CYCLES, hasGravity, canMoveOnCollision);
+        super(resources, environment, x, y, w, h, 0, 0, MAX_CYCLES, hasGravity, canMoveOnCollision);
 
-        spriteSheets.put(actionState, resources.getSpriteSheet("spritesheet_spring"));
+        spriteSheets.put(actionState, resources.getSpriteSheet(spriteSheetName));
+    }
+
+    public Spring(Resources resources, AEnvironment environment,
+                  String spriteSheetName,
+                  float x, float y, float w, float h, float vx, float vy) {
+        super(resources, environment, x, y, w, h, vx, vy, -1, false, false);
+
+        spriteSheets.put(actionState, resources.getSpriteSheet(spriteSheetName));
+    }
+
+    public Spring(Resources resources, AEnvironment environment,
+                  String spriteSheetName,
+                  float x, float y, float w, float h, int MAX_CYCLES) {
+        super(resources, environment, x, y, w, h, 0, 0, MAX_CYCLES, false, false);
+
+        spriteSheets.put(actionState, resources.getSpriteSheet(spriteSheetName));
     }
 
     @Override

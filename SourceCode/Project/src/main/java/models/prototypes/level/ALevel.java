@@ -4,9 +4,11 @@ import models.actors.platforms.Platform;
 import models.actors.triggers.collectibles.key.DoorKey;
 import models.actors.triggers.interactibles.Door;
 import models.actors.triggers.interactibles.Spikes;
+import models.actors.triggers.interactibles.Spring;
 import models.environments.game.GameEnvironment;
 import models.environments.game.background.ParallaxBackground;
 import models.prototypes.actor.AActor;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.ATrigger;
 import models.utils.config.Config;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     /**<p>The parent GameEnvironment.</p>*/
-    protected GameEnvironment gameEnvironment;
+    protected AEnvironment environment;
 
     /**<p>The moving background for the level.</p>*/
     private final ParallaxBackground scrollingBackground = new ParallaxBackground();
@@ -43,10 +45,10 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     /**
      * <p>Creates a level and obtains reference to the game environment of the level.</p>
-     * @param gameEnvironment The parent game environment
+     * @param environment The parent game environment
      */
-    public ALevel(GameEnvironment gameEnvironment) {
-        this.gameEnvironment = gameEnvironment;
+    public ALevel(AEnvironment environment) {
+        this.environment = environment;
     }
 
     /**
@@ -106,13 +108,40 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
             case "spikes": {
                 outProp = new Spikes(
                         getResources(),
-                        gameEnvironment,
+                        environment,
                         propData.coords.x,
                         propData.coords.y,
                         propData.dims.w,
                         propData.dims.h,
                         propData.maxCycles
                 );
+                break;
+            }
+            case "spring": {
+                outProp = new Spring(
+                        getResources(),
+                        environment,
+                        levelModel.typeImages.get(
+                                propData.type
+                        ).get(0),
+                        propData.coords.x,
+                        propData.coords.y,
+                        propData.dims.w,
+                        propData.dims.h,
+                        propData.maxCycles
+                );
+                break;
+            }
+            case "doorKey": {
+                outProp = new DoorKey(
+                        getResources(),
+                        environment,
+                        propData.coords.x,
+                        propData.coords.y,
+                        propData.dims.w,
+                        propData.dims.h
+                );
+                break;
             }
         }
         return outProp;
@@ -149,6 +178,13 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * <p>Builds the level.</p>
      */
     public void build(LevelData.LevelModel levelModel) {
+        for (LevelData.LevelModel.Prop p : levelModel.props) {
+            AProp prop = createProp(levelModel, p);
+            if (prop != null) {
+                addProp(prop);
+            }
+        }
+
         build();
     }
 
@@ -175,7 +211,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * @return The reference to Resources.
      */
     public Resources getResources() {
-        return gameEnvironment.getResources();
+        return environment.getResources();
     }
 
     /**

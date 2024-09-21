@@ -1,5 +1,6 @@
 package models.environments;
 
+import models.environments.editor.EditorEnvironment;
 import models.environments.game.GameEnvironment;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.environments.AEnvironment;
@@ -29,14 +30,8 @@ public class EnvironmentsHandler {
     /**<p>The current environment that the user is in</p>*/
     private EnvironmentType currentEnvironment = EnvironmentType.MAIN_MENU;
 
-    /**<p>The list of all environments available</p>*/
-    private final ArrayList<AEnvironment> environments = new ArrayList<>();
-    /**<p>The list of all canvases available</p>*/
-    private final ArrayList<ACanvas> canvases = new ArrayList<>();
-    /**<p>The list of all update runnables available</p>*/
-    private final ArrayList<ARunnable> updateRunnables = new ArrayList<>();
     /**<p>The list of all render runnables available</p>*/
-    private final ArrayList<ARunnable> renderRunnables = new ArrayList<>();
+    private final ArrayList<EnvironmentPair> environmentPairs = new ArrayList<>();
 
     /**<p>The Updates thread that all environments' update runnables will use.</p>*/
     private Thread updatesThread;
@@ -60,10 +55,8 @@ public class EnvironmentsHandler {
      * @param rRunnable The render ARunnable for the AEnvironment
      */
     public void addEnvironmentPair(AEnvironment model, ACanvas canvas, ARunnable uRunnable, ARunnable rRunnable) {
-        environments.add(model);
-        canvases.add(canvas);
-        updateRunnables.add(uRunnable);
-        renderRunnables.add(rRunnable);
+        EnvironmentPair environmentPair = new EnvironmentPair(model, canvas, uRunnable, rRunnable);
+        environmentPairs.add(environmentPair);
     }
 
     /**
@@ -78,23 +71,25 @@ public class EnvironmentsHandler {
      * <p>Handles the procedure of switching from one AEnvironment to another. AEnvironments do no all need to be reset
      * due to some AEnvironments existing at certain points. Therefore, a reset condition is passed.</p>
      * @param environmentType the desired environment to switch to.
-     * @param resetEnvironment Whether or not the environment should be reset.
+     * @param resetEnvironment Whether the environment should be reset.
      * @return this EnvironmentsHandler, used for chaining
      */
     public EnvironmentsHandler swapToEnvironment(EnvironmentType environmentType, boolean resetEnvironment) {
         if(resetEnvironment) {
-            environments.get(currentEnvironment.ordinal()).onExit();
-            environments.get(currentEnvironment.ordinal()).reset();
+            AEnvironment e = environmentPairs.get(currentEnvironment.ordinal()).environment;
+            e.onExit();
+            e.reset();
         }
         pauseThreads();
 
         EnvironmentType previousEnvironment = currentEnvironment;
         setCurrentEnvironmentType(environmentType);
 
-        if(resetEnvironment &&
-                environments.get(previousEnvironment.ordinal()) != environments.get(currentEnvironment.ordinal())) {
-            environments.get(previousEnvironment.ordinal()).onExit();
-            environments.get(currentEnvironment.ordinal()).onResume();
+        AEnvironment pEnvironment = environmentPairs.get(previousEnvironment.ordinal()).environment;
+        AEnvironment cEnvironment = environmentPairs.get(currentEnvironment.ordinal()).environment;
+        if(resetEnvironment && pEnvironment != cEnvironment) {
+            pEnvironment.onExit();
+            cEnvironment.onResume();
         }
 
         return this;
@@ -104,35 +99,42 @@ public class EnvironmentsHandler {
      * @return the active AEnvironment.
      */
     public AEnvironment getCurrentEnvironment() {
-        return environments.get(currentEnvironment.ordinal());
+        return environmentPairs.get(currentEnvironment.ordinal()).environment;
     }
 
     /**
      * @return the GameEnvironment.
      */
     public GameEnvironment getGameEnvironment() {
-        return (GameEnvironment) environments.get(EnvironmentType.GAME.ordinal());
+        return (GameEnvironment) environmentPairs.get(EnvironmentType.GAME.ordinal()).environment;
+    }
+
+    /**
+     * @return the GameEnvironment.
+     */
+    public EditorEnvironment getEditorEnvironment() {
+        return (EditorEnvironment) environmentPairs.get(EnvironmentType.EDITOR.ordinal()).environment;
     }
 
     /**
      * @return the MainMenuEnvironment.
      */
     public MainMenuEnvironment getMenuEnvironment() {
-        return (MainMenuEnvironment) environments.get(EnvironmentType.MAIN_MENU.ordinal());
+        return (MainMenuEnvironment) environmentPairs.get(EnvironmentType.MAIN_MENU.ordinal()).environment;
     }
 
     /**
      * @return the active AEnvironment's canvas.
      */
     public ACanvas getCurrentCanvas() {
-        return canvases.get(currentEnvironment.ordinal());
+        return environmentPairs.get(currentEnvironment.ordinal()).canvas;
     }
 
     /**
      * @return the active AEnvironment's updates-based ARunnable
      */
     public Runnable getCurrentUpdateRunnable() {
-        return updateRunnables.get(currentEnvironment.ordinal());
+        return environmentPairs.get(currentEnvironment.ordinal()).updateRunnable;
     }
 
     /**
@@ -140,7 +142,7 @@ public class EnvironmentsHandler {
      * @return the active AEnvironment's render-based ARunnable
      */
     public Runnable getCurrentRenderRunnable() {
-        return renderRunnables.get(currentEnvironment.ordinal());
+        return environmentPairs.get(currentEnvironment.ordinal()).renderRunnable;
     }
 
     /**
@@ -152,10 +154,12 @@ public class EnvironmentsHandler {
 
     /**
      * <p>Applies the current AEnvironment to the Window. Restarts the current AEnvironment's Threads if necessary.</p>
-     * @param resetThreads whether or not the threads should be rebuilt
+     * @param resetThreads whether the threads should be rebuilt
      */
     public void applyEnvironment(boolean resetThreads) {
-        parentWindow.buildCursor(environments.get(currentEnvironment.ordinal()) instanceof AMenuEnvironment);
+        boolean showCursor =
+                !(environmentPairs.get(currentEnvironment.ordinal()).environment instanceof GameEnvironment);
+        parentWindow.buildCursor(showCursor);
 
         parentWindow.build();
 
@@ -168,8 +172,8 @@ public class EnvironmentsHandler {
      * <p>Pauses the current AEnvironment's ARunnables.</p>
      */
     public void pauseThreads() {
-        updateRunnables.get(currentEnvironment.ordinal()).setPaused(true);
-        renderRunnables.get(currentEnvironment.ordinal()).setPaused(true);
+        environmentPairs.get(currentEnvironment.ordinal()).updateRunnable.setPaused(true);
+        environmentPairs.get(currentEnvironment.ordinal()).renderRunnable.setPaused(true);
     }
 
     /**
@@ -210,13 +214,5 @@ public class EnvironmentsHandler {
         Config.calcResolutionScale();
     }
 
-    /**
-     * <p>The EnvironmentType is responsible for simply giving enumeration to the three types of environments, which
-     * allows a more verbose representation of desired requests when switching environments.</p>
-     */
-    public enum EnvironmentType {
-        MAIN_MENU,
-        GAME,
-        GAME_PAUSE_MENU
-    }
+
 }

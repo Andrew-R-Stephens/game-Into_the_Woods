@@ -1,6 +1,7 @@
 package models.prototypes.components.menuviews.types;
 
 import models.prototypes.components.menuviews.AMenuComponent;
+import models.prototypes.controls.AMouseController;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
@@ -92,7 +93,15 @@ public class AImageView extends AMenuComponent implements IDrawable, IUpdatable 
 
     @Override
     public void registerInput() {
-        // STUB
+        AMouseController mc = getParentEnvironment().getMouseController();
+        if (mc.isLeftPressed()) {
+            isPressed = onClick(mc.getPos()[0], mc.getPos()[1]);
+            if(isPressed) {
+                mc.reset();
+            }
+        } else {
+            isInBounds(mc.getPos()[0], mc.getPos()[1]);
+        }
     }
 
     @Override

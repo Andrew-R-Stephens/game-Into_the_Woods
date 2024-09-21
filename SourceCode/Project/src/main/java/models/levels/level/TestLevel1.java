@@ -69,7 +69,7 @@ public class TestLevel1 extends ALevel {
         addProp(new Platform(getResources(),"platform_level1",3200, 650, 100, 100, 0, 0, false));
 
         // REACTION PROP
-        AReactProp reactProp = new AReactProp(getResources(), gameEnvironment, 75, 500, 100, 100,
+        AReactProp reactProp = new AReactProp(getResources(), environment, 75, 500, 100, 100,
                 0, 0, 1,false, false) {
             @Override
             public void onReact() {
@@ -79,7 +79,7 @@ public class TestLevel1 extends ALevel {
         addProp(reactProp);
 
         // ZOOM TRIGGER
-        addProp(new APropTrigger(getResources(), gameEnvironment, 0, -300, 800, 1080,
+        addProp(new APropTrigger(getResources(), environment, 0, -300, 800, 1080,
                 0, 0, -1,false, false) {
             @Override
             public void doAction() {
@@ -88,12 +88,12 @@ public class TestLevel1 extends ALevel {
         });
 
         // Door
-        door = new Door(getResources(), gameEnvironment, 2000, 0, 50, 100,
+        door = new Door(getResources(), environment, 2000, 0, 50, 100,
                         0, 0, 1, false, false);
         addProp(door);
 
         // Door Open Animation Trigger
-        addProp(new APropTrigger(getResources(), gameEnvironment, 1800, -150, 450, 300,
+        addProp(new APropTrigger(getResources(), environment, 1800, -150, 450, 300,
                 0, 0, 1,false, false) {
             @Override
             public void doAction() {
@@ -104,23 +104,15 @@ public class TestLevel1 extends ALevel {
 
         });
 
-        // Springs
-        addProp(new Spring(getResources(), gameEnvironment, 1000, 280, 100, 20, 0, 0, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 1200, 280, 100, 20, 0, 0, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 1400, 280, 100, 20, 0, 0, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 300, 580, 100, 20, 0, 0, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 1000, 180, 100, 20, 0, 0, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 100, 680, 100, 20, 0, 0, -1,false, false));
-
         // Spikes
-        addProp(new Spikes(getResources(), gameEnvironment, 1000, 930, 100, 50, 0, 0, -1));
-        addProp(new Spikes(getResources(), gameEnvironment, 1200, 960, 100, 20, 0, 0, -1));
-        addProp(new Spikes(getResources(), gameEnvironment, 1400, 905, 100, 75, 0, 0, -1));
+        addProp(new Spikes(getResources(), environment, 1000, 930, 100, 50, 0, 0, -1));
+        addProp(new Spikes(getResources(), environment, 1200, 960, 100, 20, 0, 0, -1));
+        addProp(new Spikes(getResources(), environment, 1400, 905, 100, 75, 0, 0, -1));
 
         // Keys
-        addProp(new DoorKey(getResources(), gameEnvironment, 1600, 750, 100, 50, 0, 0));
-        addProp(new DoorKey(getResources(), gameEnvironment, 2500, 450, 100, 50, 0, 0));
-        addProp(new DoorKey(getResources(), gameEnvironment, 500, 300, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), environment, 1600, 750, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), environment, 2500, 450, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), environment, 500, 300, 100, 50, 0, 0));
 
         super.build();
 

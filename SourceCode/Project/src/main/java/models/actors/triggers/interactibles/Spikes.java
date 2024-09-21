@@ -4,6 +4,7 @@ import models.actors.player.PlayerAvatar;
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.trigger.ATrigger;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
@@ -31,13 +32,13 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
      * @param vy The vertical velocity.
      * @param MAX_CYCLES The number of times this object can create an action. -1 is infinite.
      */
-    public Spikes(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx, float vy,
+    public Spikes(Resources resources, AEnvironment environment, float x, float y, float w, float h, float vx, float vy,
                   int MAX_CYCLES) {
-        super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, false, false);
+        super(resources, environment, x, y, w, h, vx, vy, MAX_CYCLES, false, false);
     }
 
-    public Spikes(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, int MAX_CYCLES) {
-        super(resources, gameEnvironment, x, y, w, h, 0, 0, MAX_CYCLES, false, false);
+    public Spikes(Resources resources, AEnvironment environment, float x, float y, float w, float h, int MAX_CYCLES) {
+        super(resources, environment, x, y, w, h, 0, 0, MAX_CYCLES, false, false);
     }
 
     @Override
@@ -88,7 +89,9 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
 
     @Override
     public void doAction() {
-        gameEnvironment.doPlayerDeath();
+        if(environment instanceof GameEnvironment ge) {
+            ge.doPlayerDeath();
+        }
     }
 
     @Override

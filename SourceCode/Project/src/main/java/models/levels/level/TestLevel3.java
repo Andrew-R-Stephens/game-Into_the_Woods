@@ -4,6 +4,7 @@ import models.actors.platforms.Platform;
 import models.actors.triggers.collectibles.key.DoorKey;
 import models.actors.triggers.interactibles.Door;
 import models.environments.game.GameEnvironment;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.LevelData;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
@@ -16,10 +17,10 @@ public class TestLevel3 extends ALevel {
 
     /**
      * Creates the third test Level.
-     * @param gameModel
+     * @param environment
      */
-    public TestLevel3(GameEnvironment gameModel, LevelModel levelModel) {
-        super(gameModel);
+    public TestLevel3(AEnvironment environment, LevelModel levelModel) {
+        super(environment);
 
         setStartOrigin(200, 50);
 
@@ -37,17 +38,17 @@ public class TestLevel3 extends ALevel {
         }
 
         // Keys
-        addProp(new DoorKey(getResources(), gameEnvironment, 1600, 930, 100, 50, 0, 0));
-        addProp(new DoorKey(getResources(), gameEnvironment, 2500, 930, 100, 50, 0, 0));
-        addProp(new DoorKey(getResources(), gameEnvironment, 500, 930, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), environment, 1600, 930, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), environment, 2500, 930, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), environment, 500, 930, 100, 50, 0, 0));
 
         // Door
-        door = new Door(getResources(), gameEnvironment, 2000, 830, 50, 100,
+        door = new Door(getResources(), environment, 2000, 830, 50, 100,
                 0, 0, 1, false, false);
         addProp(door);
 
         // Door Listener
-        addProp(new APropTrigger(getResources(), gameEnvironment, 1800, 700, 450, 300,
+        addProp(new APropTrigger(getResources(), environment, 1800, 700, 450, 300,
                 0, 0, 1,false, false) {
             @Override
             public void doAction() {

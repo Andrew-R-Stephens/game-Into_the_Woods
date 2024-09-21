@@ -2,7 +2,7 @@ package models.environments.menus.mainmenu.submenus;
 
 import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
-import models.environments.game.GameEnvironment;
+import models.environments.editor.EditorEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
 import models.prototypes.components.menuviews.types.ATextView;
 import models.prototypes.environments.menu.AMenu;
@@ -16,13 +16,13 @@ import java.awt.*;
  * complete next.</p>
  * @author Andrew Stephens
  */
-public class LevelSelectPage extends AMenu {
+public class EditLevelPage extends AMenu {
 
     /**
      * <p>Builds the Level Select page.</p>
      * @param parentEnvironment The parent AMenuEnvironment
      */
-    public LevelSelectPage(AMenuEnvironment parentEnvironment) {
+    public EditLevelPage(AMenuEnvironment parentEnvironment) {
         super(parentEnvironment);
 
         int btn_width = 400, btn_height = (int)(btn_width * .25);
@@ -31,7 +31,7 @@ public class LevelSelectPage extends AMenu {
                 getParentEnvironment(),
                 (int)centerW - btn_width, 100,
                 (btn_width * 2), (int)(btn_height * .75f),
-                "LEVEL SELECT",
+                "Edit Level",
                 new Color(255, 255, 255, 150)
         ) {};
 
@@ -47,7 +47,7 @@ public class LevelSelectPage extends AMenu {
                 "Level 1",
                 getResources().getSpriteSheet("spritesheet_buttonsq").setLoopOnLast(false),
                 AButtonView.ImageScale.FIT_CENTERED
-    ) {
+        ) {
             @Override
             public boolean onClick(float x, float y) {
                 if(!isInBounds(x, y)) {
@@ -173,17 +173,17 @@ public class LevelSelectPage extends AMenu {
      * @param levelIndex The specified level.
      */
     public void navigateToLevel(int levelIndex) {
-        getMouseController().setPos(
-                (int)(Config.window_width_actual * .5f),
-                (int)(Config.window_height_actual * .5f));
-
-        GameEnvironment ge = getEnvironmentsHandler().getGameEnvironment();
-
-        ge.reset();
-        ge.getLevelsList().setEnvironment(ge);
-        ge.setCurrentLevel(levelIndex);
-        getEnvironmentsHandler().swapToEnvironment(
-                EnvironmentType.GAME, true).applyEnvironment();
+        EditorEnvironment ee = getEnvironmentsHandler().getEditorEnvironment();
+        ee.reset();
+        //ee.getLevelsList().setEnvironment(ee);
+        ee.getLevelsList().init(ee, levelIndex);
+        //ee.getLevelsList().setCurrentLevel(levelIndex);
+        Thread t = new Thread(() -> {
+            getEnvironmentsHandler().getSaveData().createNewGame();
+            getEnvironmentsHandler().swapToEnvironment(
+                    EnvironmentType.EDITOR, true).applyEnvironment();
+        });
+        t.start();
     }
 
 }

@@ -1,8 +1,11 @@
 package models.environments.menus.mainmenu.submenus;
 
+import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
+import models.prototypes.components.menuviews.types.AImageView;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
+import models.utils.config.Config;
 
 /**
  * <p>The Main Menu Page. Contains menu button components to allow menu navigation.</p>
@@ -123,11 +126,53 @@ public class MainMenuPage extends AMenu {
             }
         };
 
+        AImageView image_editorMode = new AImageView(
+                getParentEnvironment(),
+                Config.DEFAULT_WINDOW_WIDTH - (int)(64 * 2.25),
+                Config.DEFAULT_WINDOW_HEIGHT - (int)(64 * 2.25),
+                64,
+                64,
+                getResources().getImage("gear"),
+                AButtonView.ImageScale.FIT_CENTERED
+        ) {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+                getParentEnvironment().push(new EditLevelPage(getParentEnvironment()));
+
+                return true;
+            }
+        };
+/*
+        AButtonView button_editorMode = new AButtonView(
+                getParentEnvironment(),
+                Config.DEFAULT_WINDOW_WIDTH - buttonW,
+                Config.DEFAULT_WINDOW_HEIGHT - buttonH,
+                buttonW,
+                buttonH,
+                "Edit",
+                AButtonView.ImageScale.FIT_CENTERED
+        )
+        {
+            @Override
+            public boolean onClick(float x, float y) {
+                if(!isInBounds(x, y)) {
+                    return false;
+                }
+                getParentEnvironment().push(new EditLevelPage(getParentEnvironment()));
+
+                return true;
+            }
+        };*/
+
         addComponent(button_newGame);
         addComponent(button_continueGame);
         addComponent(button_options);
         addComponent(button_help);
         addComponent(button_quit);
+        addComponent(image_editorMode);
 
     }
 

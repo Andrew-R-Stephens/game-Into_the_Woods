@@ -3,6 +3,7 @@ package models.prototypes.level.prop.trigger.collectibles;
 import models.actors.player.PlayerAvatar;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.trigger.ATrigger;
 import models.utils.resources.Resources;
 
@@ -19,7 +20,7 @@ public abstract class ACollectibleTrigger extends ATrigger {
      * <p>Called from the subtypes, this method initializes the object with position and size relative to the
      * default dimensions.</p>
      * @param resources The resources of the parent Environment
-     * @param gameEnvironment The parent game environment
+     * @param environment The parent game environment
      * @param x The horizontal position, relative to the default dimensions.
      * @param y The y position, relative to the default dimensions.
      * @param w The width, relative to the default dimensions.
@@ -30,12 +31,12 @@ public abstract class ACollectibleTrigger extends ATrigger {
      * @param hasGravity If the object should be effected by gravity.
      * @param canMoveOnCollision If the object can react to the colliding object
      */
-    protected ACollectibleTrigger(Resources resources, GameEnvironment gameEnvironment,
+    protected ACollectibleTrigger(Resources resources, AEnvironment environment,
                                   float x, float y,
                                   float w, float h,
                                   float vx, float vy,
                                   int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(resources, gameEnvironment, x, y, w, h, vx, vy, 1, hasGravity, canMoveOnCollision);
+        super(resources, environment, x, y, w, h, vx, vy, 1, hasGravity, canMoveOnCollision);
     }
 
     @Override
@@ -69,8 +70,10 @@ public abstract class ACollectibleTrigger extends ATrigger {
 
     @Override
     public void doAction() {
-        gameEnvironment.getPlayerInventory().addCollectible(this);
-        isActive = false;
+        if(environment instanceof GameEnvironment ge) {
+            ge.getPlayerInventory().addCollectible(this);
+            isActive = false;
+        }
     }
 
 

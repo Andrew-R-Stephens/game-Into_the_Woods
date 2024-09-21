@@ -28,12 +28,10 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
     private final BufferedImage imageTop, imageBody;
     private BufferedImage platformImage;
 
-    float scaledW = w * Config.scaledW_zoom;
-    float scaledH = h * Config.scaledH_zoom;
-
     /**
      * <p>Called from the subtypes, this method initializes the object.</p>
      * @param resources The resources of the parent Environment
+     * @param imageNames The images for this object
      * @param x The horizontal position, relative to the default dimensions.
      * @param y The y position, relative to the default dimensions.
      * @param w The width, relative to the default dimensions.
@@ -42,39 +40,41 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
      * @param vy The vertical velocity.
      * @param hasGravity If the object should be effected by gravity.
      */
-    public Platform(Resources resources, String[] imageNames, float x, float y, float w, float h, float vx, float vy,
+    public Platform(Resources resources, String[] imageNames,
+                    float x, float y, float w, float h, float vx, float vy,
                     boolean hasGravity) {
         super(resources, x, y, w, h, vx, vy, hasGravity);
 
         this.imageTop = resources.getImage(imageNames[0]);
         this.imageBody = resources.getImage(imageNames[1]);
 
-        calcTiles();
         calcSubImages();
     }
 
     /**
      * <p>Called from the subtypes, this method initializes the object.</p>
      * @param resources The resources of the parent Environment
+     * @param imageNames The images for this object
      * @param x The horizontal position, relative to the default dimensions.
      * @param y The y position, relative to the default dimensions.
      * @param w The width, relative to the default dimensions.
      * @param h The height, relative to the default dimensions.
      * @param hasGravity If the object should be effected by gravity.
      */
-    public Platform(Resources resources, String[] imageNames, float x, float y, float w, float h, boolean hasGravity) {
+    public Platform(Resources resources, String[] imageNames,
+                    float x, float y, float w, float h, boolean hasGravity) {
         super(resources, x, y, w, h, 0, 0, hasGravity);
 
         this.imageTop = resources.getImage(imageNames[0]);
         this.imageBody = resources.getImage(imageNames[1]);
 
-        calcTiles();
         calcSubImages();
     }
 
     /**
      * <p>Called from the subtypes, this method initializes the object.</p>
      * @param resources The resources of the parent Environment
+     * @param imageName The image for this object
      * @param x The horizontal position, relative to the default dimensions.
      * @param y The y position, relative to the default dimensions.
      * @param w The width, relative to the default dimensions.
@@ -83,45 +83,41 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
      * @param vy The vertical velocity.
      * @param hasGravity If the object should be effected by gravity.
      */
-    public Platform(Resources resources, String imageName, float x, float y, float w, float h, float vx, float vy,
+    public Platform(Resources resources, String imageName,
+                    float x, float y, float w, float h, float vx, float vy,
                     boolean hasGravity) {
         super(resources, x, y, w, h, vx, vy, hasGravity);
 
         this.imageTop = resources.getImage(imageName);
         this.imageBody = resources.getImage(imageName);
 
-        calcTiles();
         calcSubImages();
     }
 
     /**
      * <p>Called from the subtypes, this method initializes the object.</p>
      * @param resources The resources of the parent Environment
+     * @param imageName The images for this object
      * @param x The horizontal position, relative to the default dimensions.
      * @param y The y position, relative to the default dimensions.
      * @param w The width, relative to the default dimensions.
      * @param h The height, relative to the default dimensions.
      * @param hasGravity If the object should be effected by gravity.
      */
-    public Platform(Resources resources, String imageName, float x, float y, float w, float h, boolean hasGravity) {
+    public Platform(Resources resources, String imageName,
+                    float x, float y, float w, float h, boolean hasGravity) {
         super(resources, x, y, w, h, 0, 0, hasGravity);
 
         this.imageTop = resources.getImage(imageName);
         this.imageBody = resources.getImage(imageName);
 
-        calcTiles();
         calcSubImages();
     }
 
-    private void calcTiles() {
-        cols = Math.max(1, (int)Math.ceil(w / (float)Tile.W));
-        rows = Math.max(1, (int)Math.ceil(h / (float)Tile.H));
-    }
+    public void calcSubImages() {
 
-    private void calcSubImages() {
-
-        scaledW = w * Config.scaledW_zoom;
-        scaledH = h * Config.scaledH_zoom;
+        cols = Math.max(1, (int)Math.ceil(w / (float)Tile.W)) + 1;
+        rows = Math.max(1, (int)Math.ceil(h / (float)Tile.H)) + 1;
 
         if(imageTop != null && imageBody != null) {
             Image tempTopImage = imageTop.getScaledInstance(
@@ -190,12 +186,13 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
                 null);
 
 
-        if(Config.DEBUG) {
+        if(Config.DEBUG && isHighlighted) {
             Color c = Color.RED;
             g.setColor(c);
             g.drawRect((int) (offsetX), (int) (offsetY),
                     (int) (w * Config.scaledW_zoom),
                     (int) (h * Config.scaledH_zoom));
+            g.drawString(x + " " + y, (int) (offsetX), (int) (offsetY));
         }
     }
 

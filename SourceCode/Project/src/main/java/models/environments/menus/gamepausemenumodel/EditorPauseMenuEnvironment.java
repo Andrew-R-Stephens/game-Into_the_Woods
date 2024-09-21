@@ -1,9 +1,10 @@
-package models.environments.menus.pausemenumodel;
+package models.environments.menus.gamepausemenumodel;
 
 import controls.menu.MenuControls;
 import models.environments.EnvironmentsHandler;
+import models.environments.editor.EditorEnvironment;
 import models.environments.game.GameEnvironment;
-import models.environments.menus.pausemenumodel.submenus.PauseMenuPage;
+import models.environments.menus.gamepausemenumodel.submenus.PauseMenuPage;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
@@ -15,23 +16,23 @@ import java.awt.*;
  * within the GameEnvironment. This class handles menu-based user interaction from within the Game Environment.</p>
  * @author Andrew Stephens
  */
-public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable {
+public class EditorPauseMenuEnvironment extends AMenuEnvironment implements IDrawable {
 
     /**<p>The GameEnvironment that this pause menu belonds to</p>*/
-    protected GameEnvironment gameEnvironment;
+    protected EditorEnvironment environment;
 
     /**
      * <p>Initializes the MainMenuEnvironment with the parent EnvironmentsHandler and necessary MenuControls.</p>
      * <p>Sets the default page to the PauseMenuPage.</p>
      * @param environmentsHandler The EnvironmentsHandler that contains this MenuEnvironment
      * @param controlsModel The MenuControls that is required for this Environment
-     * @param gameEnvironment The parent GameEnvironment
+     * @param environment The parent GameEnvironment
      */
     public void init(EnvironmentsHandler environmentsHandler, MenuControls controlsModel,
-                     GameEnvironment gameEnvironment) {
+                     EditorEnvironment environment) {
         super.init(environmentsHandler, controlsModel);
 
-        this.gameEnvironment = gameEnvironment;
+        this.environment = environment;
 
         PauseMenuPage landingMenu = new PauseMenuPage(this);
 
@@ -63,12 +64,12 @@ public class PauseMenuEnvironment extends AMenuEnvironment implements IDrawable 
 
     @Override
     public void startBackgroundAudio() {
-        gameEnvironment.startBackgroundAudio();
+        environment.startBackgroundAudio();
     }
 
     @Override
     public void stopBackgroundAudio() {
-        gameEnvironment.stopBackgroundAudio();
+        environment.stopBackgroundAudio();
     }
 
     @Override

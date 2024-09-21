@@ -325,12 +325,20 @@ public abstract class APhysics implements IUpdatable {
         return w;
     }
 
+    public void setW(float w) {
+        this.w = w;
+    }
+
     /**
      * Gets the height.
      * @return The height
      */
     public float getH() {
         return h;
+    }
+
+    public void setH(float h) {
+        this.h = h;
     }
 
     /**

@@ -1,5 +1,6 @@
 package models.environments.menus.mainmenu.submenus;
 
+import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.components.menuviews.AMenuComponent;
@@ -131,7 +132,7 @@ public class NewGamePage extends AMenu {
                 Thread t = new Thread(() -> {
                     getEnvironmentsHandler().getSaveData().createNewGame();
                     getEnvironmentsHandler().swapToEnvironment(
-                            EnvironmentsHandler.EnvironmentType.GAME, true).applyEnvironment();
+                            EnvironmentType.GAME, true).applyEnvironment();
                 });
                 t.start();
 

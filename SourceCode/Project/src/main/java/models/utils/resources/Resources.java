@@ -254,7 +254,7 @@ public class Resources {
     public SpriteSheet getSpriteSheet(String spriteSheetName) {
         String fileName = spriteSheetName + ".json";
         if(textFiles.get(fileName) == null) {
-            System.out.println("No spritesheet data file of that name!");
+            System.out.println("No spritesheet data file of that name!: " + spriteSheetName);
         }
         if(imagesFiles.get(spriteSheetName) == null) {
             System.out.println("No spritesheet image file of that name!");
@@ -269,7 +269,6 @@ public class Resources {
 
     /**
      * <p>Retrieves a SpriteSheet which is stored in the Map. Uses the references from Text Files and BufferedImage Maps.</p>
-     * @param spriteSheetName the non-extension name of the SpriteSheet requested.
      * @return A reference to the SpriteSheet requested.
      */
     public String getLevelsFile() {

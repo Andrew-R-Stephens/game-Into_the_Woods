@@ -3,6 +3,7 @@ package models.actors.triggers.collectibles.key;
 import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.trigger.collectibles.ACollectibleTrigger;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
@@ -23,7 +24,7 @@ public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatabl
     /**
      * <p>Called from the subtypes, this method initializes the object.</p>
      * @param resources The resources of the parent Environment
-     * @param gameModel The GameEnvironment of the parent Environment
+     * @param environment The GameEnvironment of the parent Environment
      * @param x The horizontal position, relative to the default dimensions.
      * @param y The y position, relative to the default dimensions.
      * @param w The width, relative to the default dimensions.
@@ -31,12 +32,12 @@ public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatabl
      * @param vx The horizontal velocity.
      * @param vy The vertical velocity.
      */
-    public DoorKey(Resources resources, GameEnvironment gameModel, float x, float y, float w, float h, float vx, float vy) {
-        super(resources, gameModel, x, y, w, h, vx, vy, 1,false, false);
+    public DoorKey(Resources resources, AEnvironment environment, float x, float y, float w, float h, float vx, float vy) {
+        super(resources, environment, x, y, w, h, vx, vy, 1,false, false);
     }
 
-    public DoorKey(Resources resources, GameEnvironment gameModel, float x, float y, float w, float h) {
-        super(resources, gameModel, x, y, w, h, 0, 0, 1,false, false);
+    public DoorKey(Resources resources, AEnvironment environment, float x, float y, float w, float h) {
+        super(resources, environment, x, y, w, h, 0, 0, 1,false, false);
     }
 
     @Override
@@ -48,8 +49,9 @@ public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatabl
     public void doAction() {
         super.doAction();
 
-        if(gameEnvironment.getPlayerInventory().getKeyCount() >= gameEnvironment.getCurrentLevel().getKeyCount()) {
-            gameEnvironment.getLevelsList().getCurrentLevel().unlockDoor();
+        if(environment instanceof GameEnvironment ge &&
+                ge.getPlayerInventory().getKeyCount() >= ge.getCurrentLevel().getKeyCount()) {
+            ge.getLevelsList().getCurrentLevel().unlockDoor();
         }
 
         resources.getAudioPlayer("door_key").play();

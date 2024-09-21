@@ -2,6 +2,7 @@ package models.prototypes.actor.pawn.character;
 
 import controls.game.GameControls;
 import models.prototypes.actor.pawn.APawn;
+import models.prototypes.controls.AControls;
 import models.sprites.SpriteSheet;
 import models.utils.config.Config;
 import models.utils.resources.Resources;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 public abstract class ACharacter extends APawn implements IUpdatable {
 
     /**<p>The controls model that this entity will listen to</p>*/
-    protected final GameControls controlsModel;
+    protected final AControls controlsModel;
 
     /**<p>The user-defined chosen character</p>*/
     protected CharacterType characterType = CharacterType.TEO;
@@ -55,7 +56,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
      * @param hasGravity If the object should be effected by gravity.
      */
     protected ACharacter(
-            Resources resources, GameControls cModel,
+            Resources resources, AControls cModel,
             float x, float y, float w, float h, float vx,
             float vy,
             boolean hasGravity) {
@@ -68,7 +69,9 @@ public abstract class ACharacter extends APawn implements IUpdatable {
      * @param delta The ratio of actual/target update rate for the game ticks.
      */
     public void control(float delta) {
-        doAbilities();
+        if(controlsModel instanceof GameControls) {
+            doAbilities();
+        }
         doMovement(delta);
     }
 
@@ -134,7 +137,7 @@ public abstract class ACharacter extends APawn implements IUpdatable {
             time_jump--;
         }
 
-        boolean[] abilities = controlsModel.getAbilities();
+        boolean[] abilities = ((GameControls)controlsModel).getAbilities();
 
         if (abilities[0]) {
 

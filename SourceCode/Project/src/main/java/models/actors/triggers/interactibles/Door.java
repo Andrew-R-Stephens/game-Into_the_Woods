@@ -1,10 +1,12 @@
 package models.actors.triggers.interactibles;
 
 import models.camera.Camera;
+import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.actor.AActor;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.sprites.SpriteSheet;
 import models.utils.config.Config;
@@ -35,7 +37,7 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
     /**
      * <p>Called from the subtypes, this method initializes the object. Also initializes the respective spriteSheet.</p>
      * @param resources The resources of the parent Environment
-     * @param gameEnvironment The GameEnvironment that this object resides in.
+     * @param environment The GameEnvironment that this object resides in.
      * @param x The horizontal position, relative to the default dimensions.
      * @param y The y position, relative to the default dimensions.
      * @param w The width, relative to the default dimensions.
@@ -46,10 +48,10 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
      * @param hasGravity If the object should be effected by gravity.
      * @param canMoveOnCollision If the object should move if it collides with another object.
      */
-    public Door(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h, float vx,
+    public Door(Resources resources, AEnvironment environment, float x, float y, float w, float h, float vx,
                 float vy,
                 int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
-        super(resources, gameEnvironment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
+        super(resources, environment, x, y, w, h, vx, vy, MAX_CYCLES, hasGravity, canMoveOnCollision);
 
         spriteSheets.put(Type.UNDEFINED, resources.getSpriteSheet("spritesheet_door").setLoopOnLast(false));
     }
@@ -84,13 +86,14 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
             return;
         }
 
-        if(!gameEnvironment.getLevelsList().navigateNextLevel()) {
-            MainMenuEnvironment mainMenuEnvironment = gameEnvironment.getParentEnvironmentsHandler()
-                    .swapToEnvironment(EnvironmentsHandler.EnvironmentType.MAIN_MENU, true).getMenuEnvironment();
+        if(environment instanceof GameEnvironment ge &&
+                !ge.getLevelsList().navigateNextLevel()) {
+            MainMenuEnvironment mainMenuEnvironment = ge.getParentEnvironmentsHandler()
+                    .swapToEnvironment(EnvironmentType.MAIN_MENU, true).getMenuEnvironment();
             mainMenuEnvironment.navigateToLevelSelectPage();
-            gameEnvironment.getParentEnvironmentsHandler().applyEnvironment();
+            ge.getParentEnvironmentsHandler().applyEnvironment();
         }
-        gameEnvironment.reset();
+        environment.reset();
     }
 
     @Override

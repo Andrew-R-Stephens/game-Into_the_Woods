@@ -5,6 +5,7 @@ import models.levels.level.Level1;
 import models.levels.level.Level2;
 import models.levels.level.TestLevel1;
 import models.levels.level.TestLevel3;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.LevelData;
 import models.utils.drawables.IDrawable;
@@ -21,8 +22,8 @@ public class LevelsList implements IDrawable {
 
     public static final float WORLD_SCALE = .75f;
 
-    /**<p>The parent Game Environment</p>*/
-    private GameEnvironment gameEnvironment = null;
+    /**<p>The parent Environment</p>*/
+    private AEnvironment environment = null;
 
     /**<p>The list of all levels available</p>*/
     private final ArrayList<ALevel> levels = new ArrayList<>();
@@ -31,28 +32,28 @@ public class LevelsList implements IDrawable {
 
     /**
      * <p>Initializes the Levels list with the parent GameEnvironment and the starting level.</p>
-     * @param gameEnvironment The parent GameEnvironment
+     * @param environment The parent GameEnvironment
      * @param currentLevel The starting level
      */
-    public void init(GameEnvironment gameEnvironment, int currentLevel) {
-        this.gameEnvironment = gameEnvironment;
+    public void init(AEnvironment environment, int currentLevel) {
+        setEnvironment(environment);
 
-        LevelData levelData = new LevelData(gameEnvironment.getResources().getLevelsFile());
-
-        addLevel(
-            new Level1(gameEnvironment, levelData.levelModels.levels.get(0)));
+        LevelData levelData = new LevelData(environment.getResources().getLevelsFile());
 
         addLevel(
-                new Level2(gameEnvironment, levelData.levelModels.levels.get(1)));
+            new Level1(environment, levelData.levelModels.levels.get(0)));
 
         addLevel(
-                new TestLevel3(gameEnvironment, levelData.levelModels.levels.get(2)));
+                new Level2(environment, levelData.levelModels.levels.get(1)));
 
-        //addLevel(new Level1(gameEnvironment));
-        //addLevel(new Level2(gameEnvironment));
-        //addLevel(new TestLevel3(gameEnvironment));
+        addLevel(
+                new TestLevel3(environment, levelData.levelModels.levels.get(2)));
 
         setCurrentLevel(currentLevel);
+    }
+
+    public void setEnvironment(AEnvironment environment) {
+        this.environment = environment;
     }
 
     /**
@@ -92,10 +93,10 @@ public class LevelsList implements IDrawable {
      * @return If there is a following level present.
      */
     public boolean navigateNextLevel() {
-        new Thread(() -> gameEnvironment.getParentEnvironmentsHandler()
+        new Thread(() -> environment.getParentEnvironmentsHandler()
                 .getSaveData().setLevelProgress(currentLevel).save()).start();
 
-        gameEnvironment.reset();
+        environment.reset();
 
         int tempCurrLevel = currentLevel;
         tempCurrLevel++;

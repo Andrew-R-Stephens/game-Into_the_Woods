@@ -17,6 +17,8 @@ import java.awt.*;
  */
 public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, IUpdatable {
 
+    protected boolean isHighlighted = false;
+
     /**
      * <p>Called from the subtypes, this method initializes the object with position and size relative to the
      * default dimensions.</p>
@@ -44,5 +46,9 @@ public abstract class AProp extends AActor implements IDrawable, IHUDDrawable, I
 
     @Override
     public abstract void drawAsHUD(Graphics2D g);
+
+    public void isHighlighted(boolean b) {
+        isHighlighted = b;
+    }
 
 }

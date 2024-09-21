@@ -1,5 +1,6 @@
-package models.environments.menus.pausemenumodel.submenus;
+package models.environments.menus.gamepausemenumodel.submenus;
 
+import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
 import models.environments.menus.mainmenu.submenus.HelpPage;
 import models.environments.menus.mainmenu.submenus.OptionsPage;
@@ -42,7 +43,7 @@ public class PauseMenuPage extends AMenu {
 
                 getEnvironmentsHandler().getGameEnvironment().setPaused(false);
                 getParentEnvironment().onExit();
-                getEnvironmentsHandler().setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.GAME);
+                getEnvironmentsHandler().setCurrentEnvironmentType(EnvironmentType.GAME);
                 getEnvironmentsHandler().applyEnvironment(false);
                 return true;
 
@@ -109,7 +110,7 @@ public class PauseMenuPage extends AMenu {
 
                 getEnvironmentsHandler().getGameEnvironment().onExit();
                 getEnvironmentsHandler().swapToEnvironment(
-                        EnvironmentsHandler.EnvironmentType.MAIN_MENU, true);
+                        EnvironmentType.MAIN_MENU, true);
                 if(getEnvironmentsHandler().getMenuEnvironment().getTopPage()
                         instanceof StartScreenPage ssp) {
                     ssp.navigateToMainMenuPage();

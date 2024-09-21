@@ -1,20 +1,26 @@
 package main;
 
+import controls.editor.EditorControls;
+import controls.editor.EditorKeyControls;
+import controls.editor.EditorMouseControls;
 import controls.game.GameControls;
 import controls.game.GameKeyControls;
 import controls.game.GameMouseControls;
 import controls.menu.MenuControls;
 import controls.menu.MenuKeyControls;
 import controls.menu.MenuMouseControls;
+import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
+import models.environments.editor.EditorEnvironment;
 import models.environments.game.GameEnvironment;
 import models.environments.game.hud.HUDModel;
 import models.environments.game.hud.components.MapOverlay;
 import models.environments.game.hud.components.PlayerStatsOverlay;
 import models.environments.game.hud.components.TimeKeeperOverlay;
 import models.environments.game.playerinventory.PlayerInventory;
+import models.environments.menus.gamepausemenumodel.EditorPauseMenuEnvironment;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
-import models.environments.menus.pausemenumodel.PauseMenuEnvironment;
+import models.environments.menus.gamepausemenumodel.GamePauseMenuEnvironment;
 import models.levels.LevelsList;
 import models.runnables.RenderRunnable;
 import models.runnables.UpdateRunnable;
@@ -61,18 +67,24 @@ public class Main {
     /**<p>The persistent PlayerInventory.</p>*/
     private static PlayerInventory inventory;
 
-    /**<p>The persistent GameControls.</p>*/
-    private static GameControls gameControlsModel;
     /**<p>The persistent MenuControls.</p>*/
     private static MenuControls menuControlsModel;
+    /**<p>The persistent GameControls.</p>*/
+    private static GameControls gameControlsModel;
+    /**<p>The persistent GameControls.</p>*/
+    private static EditorControls editorControlsModel;
 
     /**<p>The persistent MainMenuEnvironment.</p>*/
     private static MainMenuEnvironment mainMenuEnvironment;
     /**<p>The persistent GameEnvironment.</p>*/
     private static GameEnvironment gameEnvironment;
+    /**<p>The persistent GameEnvironment.</p>*/
+    private static EditorEnvironment editorEnvironment;
 
     /**<p>The persistent PauseMenuEnvironment.</p>*/
-    private static PauseMenuEnvironment pauseMenuModel;
+    private static GamePauseMenuEnvironment gamePauseMenuModel;
+    /**<p>The persistent PauseMenuEnvironment.</p>*/
+    private static EditorPauseMenuEnvironment editorPauseMenuModel;
 
     /**<p>The persistent UpdateRunnable.</p>*/
     private static UpdateRunnable gameUpdateRunnable;
@@ -84,6 +96,11 @@ public class Main {
     /**<p>The persistent RenderRunnable.</p>*/
     private static RenderRunnable menuRenderRunnable;
 
+    /**<p>The persistent UpdateRunnable.</p>*/
+    private static UpdateRunnable editorUpdateRunnable;
+    /**<p>The persistent RenderRunnable.</p>*/
+    private static RenderRunnable editorRenderRunnable;
+
     /**<p>The persistent LevelsList.</p>*/
     private static LevelsList levelsListModel;
 
@@ -91,6 +108,8 @@ public class Main {
     private static EnvironmentCanvas<MainMenuEnvironment> menuCanvas;
     /**<p>The persistent EnvironmentCanvas for the GameEnvironment.</p>*/
     private static EnvironmentCanvas<GameEnvironment> gameCanvas;
+    /**<p>The persistent EnvironmentCanvas for the GameEnvironment.</p>*/
+    private static EnvironmentCanvas<EditorEnvironment> editorCanvas;
 
     /**<p>The persistent MainWindow reference.</p>*/
     private static MainWindow window;
@@ -140,13 +159,16 @@ public class Main {
         environmentsHandler = new EnvironmentsHandler();
 
         // Create Control Models
-        gameControlsModel = new GameControls();
         menuControlsModel = new MenuControls();
+        gameControlsModel = new GameControls();
+        editorControlsModel = new EditorControls();
 
         // Create all Environments
         mainMenuEnvironment = new MainMenuEnvironment();
         gameEnvironment = new GameEnvironment();
-        pauseMenuModel = new PauseMenuEnvironment();
+        gamePauseMenuModel = new GamePauseMenuEnvironment();
+        editorEnvironment = new EditorEnvironment();
+        editorPauseMenuModel = new EditorPauseMenuEnvironment();
 
         // Create Levels List Model
         levelsListModel = new LevelsList();
@@ -164,10 +186,13 @@ public class Main {
         //menuCanvas = new MenuCanvas();
         menuCanvas = new EnvironmentCanvas<>();
         gameCanvas = new EnvironmentCanvas<>();
+        editorCanvas = new EnvironmentCanvas<>();
 
         // Create Runnables
         gameUpdateRunnable = new UpdateRunnable();
         gameRenderRunnable = new RenderRunnable();
+        editorUpdateRunnable = new UpdateRunnable();
+        editorRenderRunnable = new RenderRunnable();
         menuUpdateRunnable = new UpdateRunnable();
         menuRenderRunnable = new RenderRunnable();
 
@@ -195,8 +220,10 @@ public class Main {
 
         // Reference resources
         mainMenuEnvironment.setResources(resources);
-        pauseMenuModel.setResources(resources);
+        gamePauseMenuModel.setResources(resources);
         gameEnvironment.setResources(resources);
+        editorPauseMenuModel.setResources(resources);
+        editorEnvironment.setResources(resources);
         window.setResources(resources);
 
         // Initialize Window with Preference Data
@@ -204,6 +231,7 @@ public class Main {
 
         // Initialize Control Models
         gameControlsModel.init(new GameMouseControls(gameControlsModel), new GameKeyControls(gameControlsModel));
+        editorControlsModel.init(new EditorMouseControls(editorControlsModel), new EditorKeyControls(editorControlsModel));
         menuControlsModel.init(new MenuMouseControls(menuControlsModel), new MenuKeyControls(menuControlsModel));
 
         // Initialize Levels
@@ -214,7 +242,9 @@ public class Main {
         environmentsHandler.init(window, saveData);
 
         // Initialize Pause Menu
-        pauseMenuModel.init(environmentsHandler, menuControlsModel, gameEnvironment);
+        gamePauseMenuModel.init(environmentsHandler, menuControlsModel, gameEnvironment);
+        // Initialize Pause Menu
+        editorPauseMenuModel.init(environmentsHandler, menuControlsModel, editorEnvironment);
 
         hudModel.init(gameEnvironment, mapOverlay, playerStatsOverlay, timeKeeperOverlay);
 
@@ -222,15 +252,24 @@ public class Main {
         mainMenuEnvironment.init(environmentsHandler, menuControlsModel);
         gameEnvironment.init(
                 environmentsHandler,
-                pauseMenuModel, gameControlsModel,
+                gamePauseMenuModel, gameControlsModel,
                 levelsListModel, hudModel, inventory);
+        editorEnvironment.init(
+                environmentsHandler,
+                editorPauseMenuModel, editorControlsModel,
+                levelsListModel);
 
         // Initialize Canvases
         menuCanvas.init(mainMenuEnvironment);
         gameCanvas.init(gameEnvironment);
+        editorCanvas.init(editorEnvironment);
 
         gameUpdateRunnable.init(gameEnvironment);
         gameRenderRunnable.init(gameCanvas);
+
+        editorUpdateRunnable.init(editorEnvironment);
+        editorRenderRunnable.init(editorCanvas);
+
         menuUpdateRunnable.init(mainMenuEnvironment);
         menuRenderRunnable.init(menuCanvas);
 
@@ -240,8 +279,13 @@ public class Main {
         environmentsHandler.addEnvironmentPair(
                 gameEnvironment, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
         environmentsHandler.addEnvironmentPair(
-                pauseMenuModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
-        environmentsHandler.setCurrentEnvironmentType(EnvironmentsHandler.EnvironmentType.MAIN_MENU);
+                gamePauseMenuModel, gameCanvas, gameUpdateRunnable, gameRenderRunnable);
+        environmentsHandler.addEnvironmentPair(
+                editorEnvironment, editorCanvas, editorUpdateRunnable, editorRenderRunnable);
+        environmentsHandler.addEnvironmentPair(
+                editorPauseMenuModel, editorCanvas, editorUpdateRunnable, editorRenderRunnable);
+
+        environmentsHandler.setCurrentEnvironmentType(EnvironmentType.MAIN_MENU);
         environmentsHandler.getCurrentEnvironment().onResume();
 
         // Initialize Window's Environment

@@ -61,17 +61,17 @@ public class TestLevel2 extends ALevel {
         addProp(new Platform(getResources(),"platform_level2",3200, 650, 100, 100, 0, 0, false));
 
         // Keys
-        addProp(new DoorKey(getResources(), gameEnvironment, 1600, 930, 100, 50, 0, 0));
-        addProp(new DoorKey(getResources(), gameEnvironment, 2500, 930, 100, 50, 0, 0));
-        addProp(new DoorKey(getResources(), gameEnvironment, 500, 930, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), environment, 1600, 930, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), environment, 2500, 930, 100, 50, 0, 0));
+        addProp(new DoorKey(getResources(), environment, 500, 930, 100, 50, 0, 0));
 
         // Door
-        door = new Door(getResources(), gameEnvironment, 2000, 830, 50, 100,
+        door = new Door(getResources(), environment, 2000, 830, 50, 100,
                 0, 0, 1, false, false);
         addProp(door);
 
         // Door Listener
-        addProp(new APropTrigger(getResources(), gameEnvironment, 1800, 700, 450, 300,
+        addProp(new APropTrigger(getResources(), environment, 1800, 700, 450, 300,
                 0, 0, 1,false, false) {
             @Override
             public void doAction() {

@@ -2,6 +2,7 @@ package models.prototypes.level.prop.trigger;
 
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
@@ -15,7 +16,7 @@ import java.awt.*;
 public abstract class ATrigger extends AProp implements IDrawable {
 
     /**<p>The parent GameEnvironment.</p>*/
-    protected GameEnvironment gameEnvironment;
+    protected AEnvironment environment;
 
     /**<p>The last actor this trigger affected.</p>*/
     protected AActor lastActor;
@@ -31,7 +32,7 @@ public abstract class ATrigger extends AProp implements IDrawable {
      * <p>Called from the subtypes, this method initializes the object with position and size relative to the
      * default dimensions.</p>
      * @param resources The resources of the parent Environment
-     * @param gameEnvironment The GameEnvironment that contains this trigger
+     * @param environment The GameEnvironment that contains this trigger
      * @param x The horizontal position, relative to the default dimensions.
      * @param y The y position, relative to the default dimensions.
      * @param w The width, relative to the default dimensions.
@@ -42,13 +43,13 @@ public abstract class ATrigger extends AProp implements IDrawable {
      * @param hasGravity If the object should be effected by gravity.
      * @param canMoveOnCollision If the object should move on collision.
      */
-    protected ATrigger(Resources resources, GameEnvironment gameEnvironment, float x, float y, float w, float h,
+    protected ATrigger(Resources resources, AEnvironment environment, float x, float y, float w, float h,
                        float vx,
                        float vy,
                        int MAX_CYCLES, boolean hasGravity, boolean canMoveOnCollision) {
         super(resources, x, y, w, h, vx, vy, hasGravity);
 
-        this.gameEnvironment = gameEnvironment;
+        this.environment = environment;
 
         this.MAX_CYCLES = MAX_CYCLES;
         this.canMoveOnCollision = canMoveOnCollision;

@@ -1,14 +1,10 @@
 package models.levels.level;
 
-import models.actors.triggers.collectibles.key.DoorKey;
 import models.actors.triggers.interactibles.Door;
-import models.actors.triggers.interactibles.Spikes;
-import models.actors.triggers.interactibles.Spring;
 import models.camera.Camera;
-import models.environments.game.GameEnvironment;
 import models.levels.LevelsList;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
-import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.prototypes.level.LevelData.LevelModel;
 
@@ -20,10 +16,10 @@ public class Level1 extends ALevel {
 
     /**
      * Creates the first Level.
-     * @param gameModel
+     * @param environment
      */
-    public Level1(GameEnvironment gameModel, LevelModel levelModel) {
-        super(gameModel);
+    public Level1(AEnvironment environment, LevelModel levelModel) {
+        super(environment);
 
         setStartOrigin(
                 (int)(levelModel.startOrigin.x * LevelsList.WORLD_SCALE),
@@ -36,26 +32,12 @@ public class Level1 extends ALevel {
             addBackgroundLayer(getResources().getImage(b));
         }
 
-        /*
-        setStartOrigin(
-                (int)(1988 * LevelsList.WORLD_SCALE),
-                (int)(2110 * LevelsList.WORLD_SCALE));
-
-        addBackgroundLayer(getResources().getImage("forest_1"));
-        addBackgroundLayer(getResources().getImage("forest_2"));
-        addBackgroundLayer(getResources().getImage("forest_3"));
-        */
     }
 
     @Override
     public void build(LevelModel levelModel) {
 
-        for(LevelModel.Prop p: levelModel.props) {
-            AProp prop = createProp(levelModel, p);
-            if(prop != null) {
-                addProp(prop);
-            }
-        }
+        super.build(levelModel);
 
         // Spikes
         /*
@@ -171,12 +153,12 @@ public class Level1 extends ALevel {
         */
 
         // Door
-        door = new Door(getResources(), gameEnvironment, 6815, 1873, 50, 100,
+        door = new Door(getResources(), environment, 6815, 1873, 50, 100,
                 0, 0, 1, false, false);
         addProp(door);
 
         // Door Open Animation Trigger
-        addProp(new APropTrigger(getResources(), gameEnvironment, 6600, 1673, 450, 300,
+        addProp(new APropTrigger(getResources(), environment, 6600, 1673, 450, 300,
                 0, 0, 1,false, false) {
             @Override
             public void doAction() {
@@ -186,57 +168,34 @@ public class Level1 extends ALevel {
         });
 
         // ZOOM TRIGGER
-        addProp(new APropTrigger(getResources(), gameEnvironment, 1028, 2495, 1040, 1250,
+        addProp(new APropTrigger(getResources(), environment, 1028, 2495, 1040, 1250,
                 0, 0, -1,false, false) {
             @Override
             public void doAction() {
                 Camera.zoomTarget = .75f;
             }
         });
-        addProp(new APropTrigger(getResources(), gameEnvironment, 2100, 2430, 1360, 1190,
+        addProp(new APropTrigger(getResources(), environment, 2100, 2430, 1360, 1190,
                 0, 0, -1,false, false) {
             @Override
             public void doAction() {
                 Camera.zoomTarget = .75f;
             }
         });
-        addProp(new APropTrigger(getResources(), gameEnvironment, 750, 325, 1575, 1725,
+        addProp(new APropTrigger(getResources(), environment, 750, 325, 1575, 1725,
                 0, 0, -1,false, false) {
             @Override
             public void doAction() {
                 Camera.zoomTarget = .75f;
             }
         });
-        addProp(new APropTrigger(getResources(), gameEnvironment, 4140, 325, 1680, 1980,
+        addProp(new APropTrigger(getResources(), environment, 4140, 325, 1680, 1980,
                 0, 0, -1,false, false) {
             @Override
             public void doAction() {
                 Camera.zoomTarget = .75f;
             }
         });
-
-        // Keys
-        addProp(new DoorKey(getResources(), gameEnvironment, 4744, 510, 100, 50));
-        addProp(new DoorKey(getResources(), gameEnvironment, 3710, 2601, 100, 50));
-        addProp(new DoorKey(getResources(), gameEnvironment, 4934, 3704, 100, 50));
-        addProp(new DoorKey(getResources(), gameEnvironment, 2692, 1375, 100, 50));
-        addProp(new DoorKey(getResources(), gameEnvironment, 1919, 713, 100, 50));
-
-        // Springs
-        addProp(new Spring(getResources(), gameEnvironment, 1535, 3025, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 1440, 950,  100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 850, 1220,  100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 1000, 1550, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 1450, 1725, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 1750, 2000, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 2100, 1600, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 4900, 960,  100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 4550, 1350, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 4950, 1600, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 5325, 1800, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 2460, 3343, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 2900, 3343, 100, 150, -1,false, false));
-        addProp(new Spring(getResources(), gameEnvironment, 2774, 2939, 100, 150, -1,false, false));
 
         super.build();
 
