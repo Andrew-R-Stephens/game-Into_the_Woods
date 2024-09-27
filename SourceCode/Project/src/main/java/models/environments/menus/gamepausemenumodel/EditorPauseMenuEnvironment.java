@@ -1,10 +1,11 @@
 package models.environments.menus.gamepausemenumodel;
 
 import controls.menu.MenuControls;
+import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
 import models.environments.editor.EditorEnvironment;
-import models.environments.game.GameEnvironment;
-import models.environments.menus.gamepausemenumodel.submenus.PauseMenuPage;
+import models.environments.menus.editpausemenumodel.submenus.EditorPauseMenuPage;
+import models.environments.menus.gamepausemenumodel.submenus.GamePauseMenuPage;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
@@ -34,7 +35,8 @@ public class EditorPauseMenuEnvironment extends AMenuEnvironment implements IDra
 
         this.environment = environment;
 
-        PauseMenuPage landingMenu = new PauseMenuPage(this);
+        EditorPauseMenuPage landingMenu = new EditorPauseMenuPage(
+                this, EnvironmentType.EDITOR);
 
         initPage(landingMenu);
     }
@@ -63,19 +65,13 @@ public class EditorPauseMenuEnvironment extends AMenuEnvironment implements IDra
     }
 
     @Override
-    public void startBackgroundAudio() {
-        environment.startBackgroundAudio();
-    }
+    public void startBackgroundAudio() { }
 
     @Override
-    public void stopBackgroundAudio() {
-        environment.stopBackgroundAudio();
-    }
+    public void stopBackgroundAudio() { }
 
     @Override
-    public void setAudioPlayer() {
-
-    }
+    public void setAudioPlayer() { }
 
     @Override
     public void reset() {

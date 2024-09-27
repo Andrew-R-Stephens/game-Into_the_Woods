@@ -45,7 +45,7 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
 
         float sW = Config.scaledW, sH = Config.scaledH;
 
-        gameEnvironment.getCurrentLevel().drawAsHUD((Graphics2D) overlay.getGraphics());
+        gameEnvironment.drawAsHUD((Graphics2D) overlay.getGraphics());
         g.drawImage(overlay, (int)(x * sW), (int)(y * sH), (int)(w * sW), (int)(h * sH), null);
 
         g.setColor(new Color(75, 25, 75));
@@ -55,6 +55,7 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
                 (int)((x * sW) - (stroke * .5)), (int)((y * sH) + (stroke * .5)),
                 (int)((w * sW)), (int)((h * sH) ));
 
+        /*
         int squareDim = (int)(5 * sW);
         g.setColor(Color.RED);
         g.fillRect(
@@ -63,6 +64,7 @@ public class MapOverlay extends AOverlayComponent implements IDrawable, IUpdatab
                 squareDim,
                 squareDim
                 );
+        */
 
     }
 

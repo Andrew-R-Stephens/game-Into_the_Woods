@@ -2,7 +2,6 @@ package models.actors.triggers.interactibles;
 
 import models.actors.player.PlayerAvatar;
 import models.camera.Camera;
-import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.environments.AEnvironment;
@@ -13,8 +12,10 @@ import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
+import views.Tile;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 /**
@@ -22,6 +23,9 @@ import java.util.HashMap;
  * @author Andrew Stephens
  */
 public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
+
+    int cols = Math.max(1, (int)Math.ceil(w / (float) Tile.W));
+    int rows = Math.max(1, (int)Math.ceil(h / (float) Tile.H));
 
     /**<p>The current action of the door.</p>*/
     private final ActionType actionState = ActionType.IDLE;
@@ -88,7 +92,7 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
             }
         }
 
-        if(hasCollision && a.isFalling()) {
+        if(hasCollision /*&& a.isFalling()*/) {
             lastActor = a;
 
             doAction();
@@ -100,7 +104,9 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
 
     @Override
     public void doAction() {
-        lastActor.setVY(-100);
+        float VELY_MAX = 9.8f;
+
+        lastActor.setVY(-VELY_MAX);
         if(lastActor instanceof PlayerAvatar p) {
             p.setAction(ACharacter.ActionType.FLOOR_JUMPING);
             p.getCurrentSpriteSheet().reset();
@@ -116,24 +122,41 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
 
     @Override
     public void draw(Graphics2D g) {
-        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
+        float[] offset = Camera.getRelativeOffset(x, y);
+        float[] scale = Camera.getRelativeScale(w, h);
 
-        float scaledW = w * Config.scaledW_zoom;
-        float scaledH = h * Config.scaledH_zoom;
+        spriteSheets.get(actionState).draw(
+                g,
+                (int)offset[0],
+                (int)(offset[1]-(scale[1] * .2f)),
+                (int)scale[0],
+                (int)(scale[1] * 1.4f));
 
-        spriteSheets.get(actionState).draw(g, (int)offsetX, (int)(offsetY-(scaledH)), (int)scaledW,
-                (int)(scaledH));
+
+        if(Config.DEBUG && isHighlighted) {
+            Color c = Color.RED;
+            g.setColor(c);
+            g.drawRect((int) (offset[0]), (int) (offset[1]),
+                    (int) (w * Config.scaledW_zoom),
+                    (int) (h * Config.scaledH_zoom));
+            g.drawString(x + " " + y, (int) (offset[0]), (int) (offset[1]));
+        }
     }
 
     @Override
     public void drawAsHUD(Graphics2D g) {
+        g.setColor(Color.PINK);
+
+        float[] offset = Camera.getRelativeOffsetBy(x, y, Camera.SCALE_MINIMAP);
+        float[] scale = Camera.getRelativeScaleBy(w, h, Camera.SCALE_MINIMAP);
+
+        g.fillRect((int) offset[0], (int) offset[1], (int) scale[0], (int) scale[1]);
     }
 
     /**
      * A generic type to satisfy the spriteSheet map enum.
      */
-    private enum ActionType {
+    public enum ActionType {
         IDLE
     }
 

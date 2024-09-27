@@ -73,27 +73,36 @@ public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatabl
             return;
         }
 
-        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
+        float[] offset = Camera.getRelativeOffset(x, y);
+        float[] scale = Camera.getRelativeScale(w, h);
 
-        float scaledW = w * Config.scaledW_zoom;
-        float scaledH = h * Config.scaledH_zoom;
+        g.drawImage(
+                resources.getImage("key"),
+                (int)offset[0],
+                (int)offset[1],
+                (int)scale[0],
+                (int)scale[1],
+                null);
 
-        g.drawImage(resources.getImage("key"), (int)offsetX, (int)offsetY, (int)scaledW, (int)scaledH, null);
+        if(Config.DEBUG && isHighlighted) {
+            Color c = Color.RED;
+            g.setColor(c);
+            g.drawRect((int) (offset[0]), (int) (offset[1]),
+                    (int) (w * Config.scaledW_zoom),
+                    (int) (h * Config.scaledH_zoom));
+            g.drawString(x + " " + y, (int) (offset[0]), (int) (offset[1]));
+        }
     }
 
     @Override
     public void drawAsHUD(Graphics2D g) {
 
-        g.setColor(Color.WHITE);
+        g.setColor(Color.GREEN);
 
-        float offsetX = ((x * Config.scaledW_zoom) + (Camera.mapX * Config.scaledW_zoom));
-        float offsetY = ((y * Config.scaledH_zoom) + (Camera.mapY * Config.scaledH_zoom));
+        float[] offset = Camera.getRelativeOffsetBy(x, y, Camera.SCALE_MINIMAP);
+        float[] scale = Camera.getRelativeScaleBy(w, h, Camera.SCALE_MINIMAP);
 
-        float scaledW = w * Config.scaledW_zoom;
-        float scaledH = h * Config.scaledH_zoom;
-
-        g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
+        g.fillRect((int) offset[0], (int) offset[1], (int) scale[0], (int) scale[1]);
 
     }
 

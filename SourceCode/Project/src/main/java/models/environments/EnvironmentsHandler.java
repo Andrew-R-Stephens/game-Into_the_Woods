@@ -4,11 +4,10 @@ import models.environments.editor.EditorEnvironment;
 import models.environments.game.GameEnvironment;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.environments.AEnvironment;
-import models.prototypes.environments.menu.AMenuEnvironment;
 import models.prototypes.threading.ARunnable;
 import models.prototypes.views.ACanvas;
 import models.utils.config.Config;
-import models.utils.config.SaveData;
+import models.utils.files.SaveData;
 import views.window.MainWindow;
 
 import java.util.ArrayList;
@@ -100,6 +99,18 @@ public class EnvironmentsHandler {
      */
     public AEnvironment getCurrentEnvironment() {
         return environmentPairs.get(currentEnvironment.ordinal()).environment;
+    }
+
+    public AEnvironment getEnvironment() {
+        return getEnvironment(currentEnvironment);
+    }
+
+    public AEnvironment getEnvironment(EnvironmentType environmentType) {
+        return switch (environmentType) {
+            case GAME -> getGameEnvironment();
+            case EDITOR -> getEditorEnvironment();
+            default -> getMenuEnvironment();
+        };
     }
 
     /**

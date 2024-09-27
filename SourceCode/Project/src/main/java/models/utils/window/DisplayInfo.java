@@ -1,4 +1,4 @@
-package models.utils.config;
+package models.utils.window;
 
 import javax.swing.*;
 import java.awt.*;

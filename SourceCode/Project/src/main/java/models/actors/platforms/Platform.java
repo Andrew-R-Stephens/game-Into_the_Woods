@@ -6,11 +6,12 @@ import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
+import views.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RasterFormatException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * <p>A Platform is a physical barrier object. It is the fundamental piece that allows
@@ -19,14 +20,17 @@ import java.util.ArrayList;
  */
 public class Platform extends AProp implements IDrawable, IUpdatable {
 
-    int cols = Math.max(1, (int)Math.ceil(w / (float)Tile.W));
+    int cols = Math.max(1, (int)Math.ceil(w / (float) Tile.W));
     int rows = Math.max(1, (int)Math.ceil(h / (float)Tile.H));
 
     /**
      * The native image for this platform.
      */
     private final BufferedImage imageTop, imageBody;
-    private BufferedImage platformImage;
+    /**
+     * The final drawn image
+     */
+    private BufferedImage image;
 
     /**
      * <p>Called from the subtypes, this method initializes the object.</p>
@@ -48,7 +52,7 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
         this.imageTop = resources.getImage(imageNames[0]);
         this.imageBody = resources.getImage(imageNames[1]);
 
-        calcSubImages();
+        //calcSubImages();
     }
 
     /**
@@ -67,8 +71,6 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
 
         this.imageTop = resources.getImage(imageNames[0]);
         this.imageBody = resources.getImage(imageNames[1]);
-
-        calcSubImages();
     }
 
     /**
@@ -90,8 +92,6 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
 
         this.imageTop = resources.getImage(imageName);
         this.imageBody = resources.getImage(imageName);
-
-        calcSubImages();
     }
 
     /**
@@ -110,10 +110,17 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
 
         this.imageTop = resources.getImage(imageName);
         this.imageBody = resources.getImage(imageName);
-
-        calcSubImages();
     }
 
+    public Platform(Resources resources, BufferedImage[] images,
+                    float x, float y, float w, float h, float vX, float vY, boolean hasGravity) {
+        super(resources, x, y, w, h, vX, vY, hasGravity);
+
+        this.imageTop = images[0];
+        this.imageBody = images[1];
+    }
+
+    @Override
     public void calcSubImages() {
 
         cols = Math.max(1, (int)Math.ceil(w / (float)Tile.W)) + 1;
@@ -167,7 +174,7 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
             }
             bGr.dispose();
 
-            platformImage = tempPlatformImage.getSubimage(0, 0, (int)w, (int)h);
+            image = tempPlatformImage.getSubimage(0, 0, (int)Math.max(w, 1),  (int)Math.max(h, 1));
         }
     }
 
@@ -178,13 +185,12 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
         float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
         float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
 
-        g.drawImage(platformImage,
+        g.drawImage(image,
                 (int) Math.floor(offsetX),
                 (int) Math.floor(offsetY),
                 (int) Math.floor(w * Config.scaledW_zoom) + 1,
                 (int) Math.floor(h * Config.scaledH_zoom) + 1,
                 null);
-
 
         if(Config.DEBUG && isHighlighted) {
             Color c = Color.RED;
@@ -201,20 +207,25 @@ public class Platform extends AProp implements IDrawable, IUpdatable {
 
         g.setColor(Color.WHITE);
 
-        float offsetX = ((x * Config.scaledW) + (Camera.camX / Camera.zoomLevel / Config.scaledW));
-        float offsetY = ((y * Config.scaledH) + (Camera.camY / Camera.zoomLevel / Config.scaledH));
+        float[] offset = Camera.getRelativeOffsetBy(x, y, Camera.SCALE_MINIMAP);
+        float[] scale = Camera.getRelativeScaleBy(w, h, Camera.SCALE_MINIMAP);
 
-        float scaledW = w * Config.scaledW;
-        float scaledH = h * Config.scaledH;
-
-
-        g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
-    }
-
-    private static class Tile {
-
-        private static final int W = 128, H = 128;
+        g.fillRect((int) offset[0], (int) offset[1], (int) scale[0], (int) scale[1]);
 
     }
 
+    @Override
+    public AProp[] createTiles() {
+        AProp[] tiles = super.createTiles();
+        for(int i = 0; i < tiles.length; i++) {
+            float x = getX() * i / Tile.W, y = getY() * i / Tile.H;
+            Platform platform = new Platform(
+                    resources, new BufferedImage[]{imageTop, imageBody},
+                    x, y, w, h, vX, vY, hasGravity
+            );
+            tiles[i] = platform;
+        }
+        System.out.println(tiles.length);
+        return tiles;
+    }
 }

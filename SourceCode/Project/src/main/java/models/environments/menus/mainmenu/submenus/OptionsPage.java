@@ -7,6 +7,7 @@ import models.prototypes.components.menuviews.types.ATextView;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
+import models.utils.window.WindowType;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class OptionsPage extends AMenu {
     /**<p>The user-defined framerate</p>*/
     private short selectedFramerate = Config.frameRate;
     /**<p>The user-defined window type</p>*/
-    private Config.WindowType selectedWindowType = Config.getWindowType();
+    private WindowType selectedWindowType = Config.getWindowType();
     /**<p>The user-defined window dimension</p>*/
     private int selectedWindowWidth = Config.window_width_selected,
             selectedWindowHeight = Config.window_height_selected;
@@ -146,7 +147,7 @@ public class OptionsPage extends AMenu {
         )
         {};
 
-        ASliderView<Config.WindowType> slider_windowType = new ASliderView<>(
+        ASliderView<WindowType> slider_windowType = new ASliderView<>(
                 getParentEnvironment(),
                 (int) (centerW - (btn_width * .5f)),
                 400,
@@ -154,7 +155,7 @@ public class OptionsPage extends AMenu {
                 btn_height) {
             @Override
             public void init() {
-                values.addAll(Arrays.asList(Config.WindowType.values()));
+                values.addAll(Arrays.asList(WindowType.values()));
                 itemCount = values.size();
 
                 current = itemCount;

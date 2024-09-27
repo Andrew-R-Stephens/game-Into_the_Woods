@@ -32,13 +32,18 @@ public class ParallaxBackground implements IDrawable {
 
     @Override
     public void draw(Graphics2D g) {
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
         for(int i = 0; i < layers.size(); i++) {
             layers.get(i).draw(
                     g,
-                    Camera.camX/Camera.zoomLevel * (moveScale * (i+1)),
-                    Camera.camY/Camera.zoomLevel * (moveScale * (i+1))
+                    ((Camera.camX + (Config.window_width_actual * .5f))/Camera.zoomLevel) * (moveScale * (i+1)),
+                    ((Camera.camY + (Config.window_height_actual * .5f))/Camera.zoomLevel) * (moveScale * (i+1))
             );
         }
+
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_DEFAULT);
     }
 
     /**
@@ -54,16 +59,31 @@ public class ParallaxBackground implements IDrawable {
          * @param offsetY The vertical offset of the player
          */
         public void draw(Graphics2D g, float offsetX, float offsetY) {
+            int windowWHalf = (int)Math.floor(Config.window_width_actual * .5f);
+            int windowHHalf = (int)Math.floor(Config.window_height_actual * .5f);
+            int scaleImgW = (int)Math.ceil(image.getWidth() * Config.scaledW_zoom);
+            int scaleImgH = (int)Math.ceil(image.getHeight() * Config.scaledH_zoom);
+
             g.drawImage(image,
-                    (int) ((Config.window_width_actual * .5f)
-                            - (image.getWidth() * Config.scaledW_zoom * .5f)
-                            + (offsetX * .5f)),
-                    (int) ((Config.window_height_actual * .5f)
-                            - (image.getHeight() * Config.scaledH_zoom * .5f)
-                            + (offsetY * .5f)),
-                    (int) (image.getWidth() * Config.scaledW_zoom),
-                    (int) (image.getHeight() * Config.scaledH_zoom),
+                    (int) (windowWHalf
+                            - Math.ceil(scaleImgW * .5f)
+                            + Math.ceil(offsetX * .5f)),
+                    (int) (windowHHalf
+                            - Math.ceil(scaleImgH * .5f)
+                            + Math.ceil(offsetY * .5f)),
+                    scaleImgW, scaleImgH,
                     null);
+            /*
+            g.drawImage(image,
+                (int) ((Config.window_halfWidth_actual)
+                        - (scaleImgW * .5f)
+                        + (offsetX * .5f)),
+                (int) ((Config.window_halfHeight_actual)
+                        - (scaleImgH * .5f)
+                        + (offsetY * .5f)),
+                (int) scaleImgW, (int) scaleImgH,
+                null);
+            */
         }
     }
 

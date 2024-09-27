@@ -66,16 +66,6 @@ public abstract class APhysics implements IUpdatable {
 
         setVelocity(tVX, tVY);
         setGravity(hasGravity);
-
-        /*
-        setOriginalPosition(x, y);
-        setOriginalSize(w, h);
-        setPosition(x, y);
-        setSize(w, h);
-
-        setVelocity(vX, vY);
-        setGravity(hasGravity);
-        */
     }
 
     public static float roundCoordinate(float num) {
@@ -147,6 +137,10 @@ public abstract class APhysics implements IUpdatable {
         } else if (vX < -MAX_VEL_X) {
             vX = -MAX_VEL_X;
         }
+    }
+
+    public boolean hasGravity() {
+        return hasGravity;
     }
 
     /**
@@ -363,8 +357,16 @@ public abstract class APhysics implements IUpdatable {
      * Sets if the object should be affected by gravity.
      * @param hasGravity If the object has gravity.
      */
-    protected void setGravity(boolean hasGravity) {
+    public void setGravity(boolean hasGravity) {
         this.hasGravity = hasGravity;
+    }
+
+    public float getVX() {
+        return this.vX;
+    }
+
+    public float getVY() {
+        return this.vY;
     }
 
     /**
@@ -381,7 +383,7 @@ public abstract class APhysics implements IUpdatable {
      * Sets the horizontal velocity.
      * @param vX The horizontal velocity
      */
-    public void setVX(int vX) {
+    public void setVX(float vX) {
         this.vX = vX;
     }
 
@@ -389,7 +391,7 @@ public abstract class APhysics implements IUpdatable {
      * Sets the vertical velocity
      * @param vY The vertical velocity.
      */
-    public void setVY(int vY) {
+    public void setVY(float vY) {
         this.vY = vY;
     }
 

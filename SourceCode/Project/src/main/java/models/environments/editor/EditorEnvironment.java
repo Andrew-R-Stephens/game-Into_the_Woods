@@ -4,10 +4,8 @@ import controls.editor.EditorControls;
 import controls.editor.EditorKeyControls;
 import controls.menu.MenuControls;
 import controls.menu.MenuKeyControls;
-import models.actors.editor.AEditProp;
+import models.prototypes.actor.editor.AEditProp;
 import models.actors.editor.EditorAvatar;
-import models.actors.particles.Particle;
-import models.actors.platforms.Platform;
 import models.camera.Camera;
 import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
@@ -16,7 +14,7 @@ import models.levels.LevelsList;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
-import models.utils.config.Config;
+import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
 
@@ -37,14 +35,14 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
     private final ArrayList<AActor> actors = new ArrayList<>();
     /**<p>The to-add actors that will be added to the list of actors when available.</p>*/
     private final Queue<AActor> actorsQueue = new LinkedList<>();
-    /**<p>The Game Controls for the Game Environment</p>*/
+    /**<p>The Editor Controls for the Editor Environment</p>*/
     private EditorControls editorControls;
-    /**<p>The PauseMenuEnvironment that is used for the pause state.</p>*/
+    /**<p>The EditorPauseMenuEnvironment that is used for the pause state.</p>*/
     private EditorPauseMenuEnvironment pauseMenuEnvironment;
     /**<p>The list of Levels that the user will navigate between.</p>*/
     private LevelsList levelsList;
-    /**<p>The Player Avatar model</p>*/
-    private EditorAvatar character;
+    /**<p>The Editor Avatar model</p>*/
+    private EditorAvatar editorAvatar;
 
     private AEditProp aEditProp = null;
 
@@ -67,15 +65,9 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
 
         super.init(parentEnvironmentsHandler, editorControls);
 
-        setAudioPlayer();
-
         this.editorControls = editorControls;
 
-        try {
-            robot = new Robot();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
+        try { robot = new Robot(); } catch (AWTException e) {e.printStackTrace();}
 
         setPauseMenuEnvironment(pauseMenuEnvironment);
         setLevelsList(levelsList);
@@ -104,16 +96,16 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
      * @param controlsViewModel The ControlsModel that the actor should see.
      * @param levelModel The LevelsList that the actor should see.
      */
-    private void setPlayerAvatar(EditorControls controlsViewModel, LevelsList levelModel) {
+    private void setEditorAvatar(EditorControls controlsViewModel, LevelsList levelModel) {
         int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
         // Add in the Main Test Character
 
-        character = new EditorAvatar (
+        editorAvatar = new EditorAvatar (
                 getResources(),
                 controlsViewModel,
                 startPos[0],
                 startPos[1],
-                55, 70,
+                0, 0,
                 0, 0
         );
 
@@ -141,7 +133,7 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
      * @param controlsModel The controls model that should control the PlayerAvatar.
      */
     public void build(EditorControls controlsModel) {
-        setPlayerAvatar(controlsModel, levelsList);
+        setEditorAvatar(controlsModel, levelsList);
     }
 
     /**
@@ -149,10 +141,11 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
      * updates the Overlay.</p>
      * @param delta The ratio of actual/target update rate for the game ticks.
      */
-    public void doGameUpdates(float delta) {
+    public void doEditorUpdates(float delta) {
         doEditorControls();
         insertQueuedActors(); // Dequeue queued actors and add them to list of actors
-        detectCollisions(delta); // Check Game Object Collisions with Level Props
+        detectMouseSelect(); // Check Game Object Collisions with Level Props
+        detectCollisions(delta);
         updateActors(delta); // Update the Game Objects
         updateLevel(delta); // Update level models.props
     }
@@ -163,7 +156,6 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
      * @param delta The ratio of actual/target update rate for the game ticks.
      */
     public void doPauseMenuUpdates(float delta) {
-        System.out.println("doEditorPauseUpdates");
         doPauseMenuControls();
 
         pauseMenuEnvironment.update(delta);
@@ -186,6 +178,8 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
         if(aEditProp != null) {
             if(getMouseController().isLeftPressed()) {
                 aEditProp.onLeftPressed(getMouseController().getPos());
+            } else if(getMouseController().isLeftClicked()) {
+                aEditProp.onLeftClicked(getMouseController().getPos());
             } else { aEditProp.onLeftReleased(); }
         }
     }
@@ -200,7 +194,7 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
                 setPaused(false);
                 pauseMenuEnvironment.onExit();
                 getParentEnvironmentsHandler().swapToEnvironment(
-                        EnvironmentType.GAME, false).applyEnvironment();
+                        EnvironmentType.EDITOR, false).applyEnvironment();
             }
         }
     }
@@ -231,12 +225,15 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
         for (AActor gameObject : actors) {
 
             // Update TestActors
-            if (gameObject instanceof Particle a) {
+            /*if (gameObject instanceof Particle a) {
+                a.update(delta);
+            }*/
+            if (gameObject instanceof AProp a) {
                 a.update(delta);
             }
 
             // Update Characters
-            if (gameObject instanceof EditorAvatar tc) {
+            else if (gameObject instanceof EditorAvatar tc) {
                 tc.control(delta);
                 tc.update(delta);
                 //System.out.println(tc.actionState);
@@ -247,39 +244,52 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
     /**
      * <p>Detects the collisions of platforms with actors. Resolves the collisions within the actor and platform
      * objects themselves.</p>
-     * @param delta The ratio of actual/target update rate for the game ticks.
      */
-    private void detectCollisions(float delta) {
+    private void detectMouseSelect() {
 
-        int[] mP = getMouseController().getPos();
-        int mx = (int)((mP[0] - Camera.camX) / Config.scaledW_zoom);
-        int my = (int)((mP[1] - Camera.camY) / Config.scaledH_zoom);
+        int[] mRel = Camera.getRelativeMousePos(getMouseController().getPos());
 
         if(getMouseController().isLeftPressed()) {
-            if(aEditProp != null) {
+            if (aEditProp != null) {
                 float px = aEditProp.prop.getX() - 12, py = aEditProp.prop.getY() - 12;
                 float pw = aEditProp.prop.getW() + 24, ph = aEditProp.prop.getH() + 24;
-                if (((px < mx) && ((px + pw) > mx) && (py < my) && ((py + ph) > my))) {
+                if (((px < mRel[0]) && ((px + pw) > mRel[0]) &&
+                        (py < mRel[1]) && ((py + ph) > mRel[1]))) {
                     return;
                 } else {
                     aEditProp = null;
                 }
             }
-
             for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
-                if(p instanceof Platform) {
+                if(!(p instanceof APropTrigger)) {
                     float px = p.getX(), py = p.getY();
                     float pw = p.getW(), ph = p.getH();
-                    if (((px < mx) && ((px + pw) > mx) && (py < my) && ((py + ph) > my))) {
-                        if (aEditProp != null) {
-                            aEditProp = null;
-                        }
+                    if (((px < mRel[0]) && ((px + pw) > mRel[0]) &&
+                            (py < mRel[1]) && ((py + ph) > mRel[1]))) {
+                        if (aEditProp != null) { aEditProp = null; }
                         aEditProp = new AEditProp(p);
                         break;
                     }
                 }
             }
         }
+    }
+
+    /**
+     * <p>Detects the collisions of platforms with actors. Resolves the collisions within the actor and platform
+     * objects themselves.</p>
+     * @param delta The ratio of actual/target update rate for the game ticks.
+     */
+    private void detectCollisions(float delta) {
+        new Thread(() -> {
+            for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
+                for (AProp op : levelsList.getCurrentLevel().getLevelProps()) {
+                    if(p != op && (p.hasGravity() || op.hasGravity())) {
+                        p.hasCollision(op, delta);
+                    }
+                }
+            }
+        }).start();
     }
 
     /**
@@ -320,7 +330,7 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
     public void update(float delta) {
 
         if(!isPaused) {
-            doGameUpdates(delta);
+            doEditorUpdates(delta);
         } else {
             doPauseMenuUpdates(delta);
         }
@@ -363,8 +373,8 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
     public void reset() {
         editorControls.reset();
         actors.clear();
-        actors.add(character);
-        character.reset(levelsList.getCurrentLevel().getCharacterOrigin());
+        actors.add(editorAvatar);
+        editorAvatar.reset(levelsList.getCurrentLevel().getCharacterOrigin());
         levelsList.reset();
         Camera.moveTo(100, 100);
     }

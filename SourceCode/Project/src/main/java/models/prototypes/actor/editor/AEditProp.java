@@ -1,13 +1,13 @@
-package models.actors.editor;
+package models.prototypes.actor.editor;
 
 import models.actors.platforms.Platform;
 import models.camera.Camera;
 import models.prototypes.level.prop.AProp;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
+import views.Tile;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class AEditProp implements IDrawable {
@@ -17,6 +17,8 @@ public class AEditProp implements IDrawable {
     public ArrayList<EditPropGrip> grips = new ArrayList<>();
     public EditPropGrip selectedGrip = null;
 
+    public EditPropAttribute attributeToggle;
+
     public AEditProp(AProp p) {
         this.prop = p;
         this.prop.isHighlighted(true);
@@ -25,6 +27,17 @@ public class AEditProp implements IDrawable {
         for(GripEdge e: GripEdge.values()) {
             grips.add(new EditPropGrip(this.prop, e));
         }
+
+        attributeToggle = new EditPropAttribute(this.prop);
+        attributeToggle.onToggleListener = new EditPropAttribute.OnToggleAttributeListener() {
+            @Override
+            void onToggle() {
+                prop.setGravity(!prop.hasGravity());
+                if(!prop.hasGravity()) {
+                    prop.setVelocity(0, 0);
+                }
+            }
+        };
     }
 
     @Override
@@ -33,8 +46,6 @@ public class AEditProp implements IDrawable {
 
             float offsetX = ((prop.getX() * Config.scaledW_zoom) + (Camera.camX));
             float offsetY = ((prop.getY() * Config.scaledH_zoom) + (Camera.camY));
-
-            //prop.draw(g);
 
             Color c = Color.RED;
             g.setColor(c);
@@ -47,6 +58,10 @@ public class AEditProp implements IDrawable {
                 grip.draw(g);
             }
 
+            if(attributeToggle != null) {
+                attributeToggle.draw(g);
+            }
+
             g.drawString(prop.getX() + " " + prop.getY(), (int) (offsetX), (int) (offsetY));
 
         }
@@ -57,11 +72,23 @@ public class AEditProp implements IDrawable {
         int my = (int)((pos[1] - Camera.camY) / Config.scaledH_zoom);
         if(selectedGrip != null) {
             selectedGrip.modify(mx, my);
+            prop.setGravity(false);
+            prop.setVelocity(0, 0);
         } else {
             for (EditPropGrip g : grips) {
                 if (new Rectangle(g.getDrawX(), g.getDrawY(), g.W, g.H).contains(pos[0], pos[1])) {
                     selectedGrip = g;
                 }
+            }
+        }
+    }
+
+    public void onLeftClicked(int[] pos) {
+        if(attributeToggle != null) {
+            if (new Rectangle(
+                    attributeToggle.getDrawX(), attributeToggle.getDrawY(),
+                    attributeToggle.W, attributeToggle.H).contains(pos[0], pos[1])) {
+                attributeToggle.toggleAttribute();
             }
         }
     }
@@ -74,7 +101,7 @@ public class AEditProp implements IDrawable {
         LEFT, TOP, RIGHT, BOTTOM
     }
 
-    private class EditPropGrip {
+    public static class EditPropGrip {
 
         private final AProp prop;
         private final GripEdge e;
@@ -109,18 +136,17 @@ public class AEditProp implements IDrawable {
         }
 
         public void modify(int mx, int my) {
-            float x = prop.getX(), y = prop.getY(), w = prop.getW(), h = prop.getH();
+            float w = prop.getW(), h = prop.getH();
 
             switch (e) {
                 case LEFT -> prop.setX(Platform.roundCoordinate(mx));
                 case TOP -> prop.setY(Platform.roundCoordinate(my));
-                case RIGHT -> prop.setW(Platform.roundCoordinate(mx - prop.getX()));
-                case BOTTOM -> prop.setH(Platform.roundCoordinate(my - prop.getY()));
+                case RIGHT -> prop.setW(Platform.roundCoordinate(Math.max(Tile.W, mx - prop.getX())));
+                case BOTTOM -> prop.setH(Platform.roundCoordinate(Math.max(Tile.H, my - prop.getY())));
             }
 
-            if(prop instanceof Platform plat &&
-                    (w != prop.getW() || h != prop.getH())) {
-                plat.calcSubImages();
+            if(w != prop.getW() || h != prop.getH()) {
+                prop.calcSubImages();
             }
         }
 
@@ -130,5 +156,59 @@ public class AEditProp implements IDrawable {
             g.drawOval(getDrawX(), getDrawY(), W, H);
         }
 
+    }
+
+    public static class EditPropAttribute {
+
+        private final AProp prop;
+
+        private final int W = 12, H = 12;
+
+        public EditPropAttribute(AProp p) {
+            this.prop = p;
+        }
+
+        public void toggleAttribute() {
+            onToggleListener.onToggle();
+        }
+
+        private int getDrawX() {
+            float offsetX = (prop.getX() * Config.scaledW_zoom) + (Camera.camX);
+            float width = prop.getW() * Config.scaledW_zoom;
+            return (int) (offsetX + width);
+        }
+
+        private int getDrawY() {
+            float offsetY = ((prop.getY() * Config.scaledH_zoom) + (Camera.camY));
+            float height = prop.getH() * Config.scaledH_zoom;
+
+            return (int) (offsetY + height - H);
+        }
+
+        public void draw(Graphics2D g) {
+            if(prop!=null) {
+                if(prop.hasGravity()) {
+                    g.setColor(new Color(55, 91, 13));
+                } else {
+                    g.setColor(new Color(91, 25, 25));
+                }
+                g.fillRect(getDrawX(),
+                        getDrawY(),
+                        W, H);
+                g.drawImage(
+                        prop.getResources().getImage("gravityIcon"),
+                        getDrawX(),
+                        getDrawY(),
+                        W, H,
+                        null);
+            }
+        }
+
+        public OnToggleAttributeListener onToggleListener = new OnToggleAttributeListener() {
+            void onToggle() {}
+        };
+        private abstract static class OnToggleAttributeListener {
+            abstract void onToggle();
+        }
     }
 }

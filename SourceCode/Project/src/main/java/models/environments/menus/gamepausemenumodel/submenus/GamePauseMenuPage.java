@@ -1,11 +1,13 @@
 package models.environments.menus.gamepausemenumodel.submenus;
 
 import models.environments.EnvironmentType;
-import models.environments.EnvironmentsHandler;
+import models.environments.editor.EditorEnvironment;
+import models.environments.game.GameEnvironment;
 import models.environments.menus.mainmenu.submenus.HelpPage;
 import models.environments.menus.mainmenu.submenus.OptionsPage;
 import models.environments.menus.startscreen.StartScreenPage;
 import models.prototypes.components.menuviews.types.AButtonView;
+import models.prototypes.environments.AEnvironment;
 import models.prototypes.environments.menu.AMenu;
 import models.prototypes.environments.menu.AMenuEnvironment;
 
@@ -13,13 +15,13 @@ import models.prototypes.environments.menu.AMenuEnvironment;
  * <p>The landing page of the Pause Menu. Contains menu button components for navigation into sub pages.</p>
  * @author Andrew Stephens
  */
-public class PauseMenuPage extends AMenu {
+public class GamePauseMenuPage extends AMenu {
 
     /**
      * <p>Builds the paused main page.</p>
      * @param parentEnvironment The parent AMenuEnvironment
      */
-    public PauseMenuPage(AMenuEnvironment parentEnvironment) {
+    public GamePauseMenuPage(AMenuEnvironment parentEnvironment, EnvironmentType environmentType) {
         super(parentEnvironment);
 
         int buttonW = 400, buttonH = (int)(buttonW * .25);
@@ -41,10 +43,13 @@ public class PauseMenuPage extends AMenu {
                     return false;
                 }
 
-                getEnvironmentsHandler().getGameEnvironment().setPaused(false);
+                GameEnvironment environment = getEnvironmentsHandler().getGameEnvironment();
+                environment.setPaused(true);
+
                 getParentEnvironment().onExit();
-                getEnvironmentsHandler().setCurrentEnvironmentType(EnvironmentType.GAME);
+                getEnvironmentsHandler().setCurrentEnvironmentType(environmentType);
                 getEnvironmentsHandler().applyEnvironment(false);
+
                 return true;
 
             }
@@ -108,7 +113,8 @@ public class PauseMenuPage extends AMenu {
                     return false;
                 }
 
-                getEnvironmentsHandler().getGameEnvironment().onExit();
+                AEnvironment currentEnvironment = getEnvironmentsHandler().getEnvironment(environmentType);
+                currentEnvironment.onExit();
                 getEnvironmentsHandler().swapToEnvironment(
                         EnvironmentType.MAIN_MENU, true);
                 if(getEnvironmentsHandler().getMenuEnvironment().getTopPage()
@@ -116,7 +122,11 @@ public class PauseMenuPage extends AMenu {
                     ssp.navigateToMainMenuPage();
                 }
                 getEnvironmentsHandler().applyEnvironment();
-                getEnvironmentsHandler().getGameEnvironment().setPaused(false);
+                if(currentEnvironment instanceof GameEnvironment ge) {
+                    ge.setPaused(false);
+                }else if (currentEnvironment instanceof EditorEnvironment ee) {
+                    ee.setPaused(false);
+                }
 
                 return true;
             }

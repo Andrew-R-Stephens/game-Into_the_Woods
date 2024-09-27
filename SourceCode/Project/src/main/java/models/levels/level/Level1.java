@@ -5,6 +5,7 @@ import models.camera.Camera;
 import models.levels.LevelsList;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
+import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.prototypes.level.LevelData.LevelModel;
 
@@ -152,10 +153,15 @@ public class Level1 extends ALevel {
         addProp(new Platform(getResources(),"platform_level1", 1144, 3694, 1134, 356, false));
         */
 
+        for (AProp levelProp : levelProps) {
+            if (levelProp instanceof Door d) {
+                door = d;
+            }
+        }
         // Door
-        door = new Door(getResources(), environment, 6815, 1873, 50, 100,
+        /*door = new Door(getResources(), environment, 6815, 1873, 50, 100,
                 0, 0, 1, false, false);
-        addProp(door);
+        addProp(door);*/
 
         // Door Open Animation Trigger
         addProp(new APropTrigger(getResources(), environment, 6600, 1673, 450, 300,

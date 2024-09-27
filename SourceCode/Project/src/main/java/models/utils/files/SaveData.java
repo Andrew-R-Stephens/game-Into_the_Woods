@@ -1,7 +1,8 @@
-package models.utils.config;
+package models.utils.files;
 
 import models.prototypes.actor.pawn.character.ACharacter;
-import models.utils.files.SaveFileRW;
+import models.utils.config.Config;
+import models.utils.files.io.SaveFileRW;
 
 /**
  * <p>The data obtained from the the users previously written save file. Save files are simple, as they are only

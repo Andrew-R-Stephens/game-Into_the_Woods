@@ -6,6 +6,7 @@ import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
+import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 
@@ -18,7 +19,7 @@ import java.awt.*;
  * the other actors within a level.</p>
  * @author Andrew Stephens
  */
-public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
+public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable, IHUDDrawable {
 
     /**
      * <p>Called from the subtypes, this method initializes the object.</p>
@@ -187,9 +188,9 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
         }
 
         float tx =
-                (float)(((Config.window_width_actual * .5) - (w * Config.scaledW_zoom)) - (x * Config.scaledW_zoom));
+                (float)(((Config.window_width_actual * .5) - (w * Config.scaledW_zoom * .5f)) - (x * Config.scaledW_zoom));
         float ty =
-                (float)(((Config.window_height_actual * .5) - (h * Config.scaledH_zoom)) - (y * Config.scaledH_zoom));
+                (float)(((Config.window_height_actual * .5) - (h * Config.scaledH_zoom* .5f)) - (y * Config.scaledH_zoom));
 
         Camera.moveTo(tx, ty);
 
@@ -225,6 +226,18 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable {
                 (int) scaleH);
 
         g.setColor(Color.CYAN);
+
+    }
+
+    @Override
+    public void drawAsHUD(Graphics2D g) {
+
+        g.setColor(Color.GREEN);
+
+        float[] offset = Camera.getRelativeOffsetBy(x, y, Camera.SCALE_MINIMAP);
+        float[] scale = Camera.getRelativeScaleBy(w, h, Camera.SCALE_MINIMAP);
+
+        g.fillRect((int) offset[0], (int) offset[1], (int) scale[0], (int) scale[1]);
 
     }
 

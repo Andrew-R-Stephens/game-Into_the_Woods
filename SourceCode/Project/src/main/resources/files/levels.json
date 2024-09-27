@@ -147,7 +147,9 @@
                 {"type":"spring","coords":{"x":5325, "y":1800}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
                 {"type":"spring","coords":{"x":2460, "y":3343}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
                 {"type":"spring","coords":{"x":2900, "y":3343}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
-                {"type":"spring","coords":{"x":2774, "y":2939}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false}
+                {"type":"spring","coords":{"x":2774, "y":2939}, "dims":{"w":100, "h":150}, "maxCycles":-1, "hasGravity":false, "canMoveOnCollision":false},
+
+                {"type":"door","coords":{"x":6815, "y":1873}, "dims":{"w":50, "h":100}, "maxCycles":1}
             ]
         },
         {

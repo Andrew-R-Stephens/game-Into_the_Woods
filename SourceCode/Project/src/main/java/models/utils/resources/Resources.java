@@ -1,11 +1,10 @@
 package models.utils.resources;
 
-import models.prototypes.level.LevelData;
 import models.sprites.SpriteSheet;
 import models.utils.audio.SuperPlayer;
-import models.utils.files.AFileReader;
-import models.utils.files.MetaDataParser;
-import models.utils.files.SpriteSheetParser;
+import models.utils.files.io.AFileReader;
+import models.utils.files.io.MetaDataParser;
+import models.utils.files.io.SpriteSheetParser;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

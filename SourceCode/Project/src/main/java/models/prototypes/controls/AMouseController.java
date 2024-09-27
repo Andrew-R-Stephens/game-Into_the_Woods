@@ -20,6 +20,8 @@ public abstract class AMouseController implements MouseListener, MouseMotionList
     protected boolean isLeftPressed = false;
     /**<p>If the right mouse button is pressed.</p>*/
     protected boolean isRightPressed = false;
+    /**<p>If the right mouse button is pressed.</p>*/
+    protected boolean isLeftClicked = false;
 
     /**
      * <p>Creates the AMouseController</p>
@@ -35,6 +37,16 @@ public abstract class AMouseController implements MouseListener, MouseMotionList
      */
     public boolean isLeftPressed() {
         return isLeftPressed;
+    }
+
+    /**
+     * <p>Checks if the left mouse button is clicked.</p>
+     * @return if the left mouse button is clicked.
+     */
+    public boolean isLeftClicked() {
+        boolean state = isLeftClicked;
+        isLeftClicked = false;
+        return state;
     }
 
     /**
@@ -80,6 +92,7 @@ public abstract class AMouseController implements MouseListener, MouseMotionList
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        isLeftClicked = true;
     }
 
     @Override

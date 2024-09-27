@@ -1,7 +1,7 @@
 package models.prototypes.views;
 
 import models.utils.config.Config;
-import models.utils.config.DisplayInfo;
+import models.utils.window.DisplayInfo;
 import models.utils.resources.Resources;
 
 import javax.swing.*;

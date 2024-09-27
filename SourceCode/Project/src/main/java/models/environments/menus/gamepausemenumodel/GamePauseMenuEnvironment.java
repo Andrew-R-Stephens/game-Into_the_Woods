@@ -1,9 +1,10 @@
 package models.environments.menus.gamepausemenumodel;
 
 import controls.menu.MenuControls;
+import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
-import models.environments.menus.gamepausemenumodel.submenus.PauseMenuPage;
+import models.environments.menus.gamepausemenumodel.submenus.GamePauseMenuPage;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
@@ -33,7 +34,7 @@ public class GamePauseMenuEnvironment extends AMenuEnvironment implements IDrawa
 
         this.gameEnvironment = gameEnvironment;
 
-        PauseMenuPage landingMenu = new PauseMenuPage(this);
+        GamePauseMenuPage landingMenu = new GamePauseMenuPage(this, EnvironmentType.GAME);
 
         initPage(landingMenu);
     }

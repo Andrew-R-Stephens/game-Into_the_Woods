@@ -56,6 +56,15 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
         spriteSheets.put(Type.UNDEFINED, resources.getSpriteSheet("spritesheet_door").setLoopOnLast(false));
     }
 
+    public Door(Resources resources, AEnvironment environment,
+                String spriteSheetName,
+                float x, float y, float w, float h,
+                int MAX_CYCLES) {
+        super(resources, environment, x, y, w, h, 0, 0, MAX_CYCLES, false, false);
+
+        spriteSheets.put(Type.UNDEFINED, resources.getSpriteSheet(spriteSheetName).setLoopOnLast(false));
+    }
+
     /**
      * <p>This is called when another ATrigger subtype defines their action to call this action. In other words, the
      * onReceive method is beholden to another trigger.</p>
@@ -134,6 +143,12 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
 
     @Override
     public void drawAsHUD(Graphics2D g) {
+        g.setColor(Color.GREEN);
+
+        float[] offset = Camera.getRelativeOffsetBy(x, y, Camera.SCALE_MINIMAP);
+        float[] scale = Camera.getRelativeScaleBy(w, h, Camera.SCALE_MINIMAP);
+
+        g.fillRect((int) offset[0], (int) offset[1], (int) scale[0], (int) scale[1]);
 
     }
 

@@ -4,7 +4,7 @@ import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
 import models.prototypes.actor.AActor;
 import models.utils.config.Config;
-import models.utils.files.AFileReader;
+import models.utils.files.io.AFileReader;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ import models.prototypes.level.LevelData.LevelModel.Prop.Dims;
 import models.prototypes.level.LevelData.LevelModel.Prop.Coords;
 import models.prototypes.level.LevelData.LevelModel.Prop.Motion;
 import models.prototypes.level.LevelData.LevelModel.StartOrigin;
-import models.utils.physics.APhysics;
 
 public class LevelData {
 
@@ -86,7 +85,7 @@ public class LevelData {
 
                                 boolean hasGravity = false;
                                 if(propIn.get("hasGravity") != null) {
-                                 hasGravity = propIn.get("hasGravity").getAsBoolean();
+                                    hasGravity = propIn.get("hasGravity").getAsBoolean();
                                 }
 
                                 int maxCycles = 0;
@@ -286,6 +285,14 @@ public class LevelData {
                 this.motion = motion;
                 this.maxCycles = maxCycles;
                 this.canMoveOnCollision = canMoveOnCollision;
+            }
+
+            public double getX() {
+                return coords.x;
+            }
+
+            public double getY() {
+                return coords.y;
             }
 
             public static class Coords {

@@ -1,10 +1,10 @@
-package models.utils.files;
+package models.utils.files.io;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import models.utils.config.Config;
-import models.utils.config.SaveData;
+import models.utils.files.SaveData;
 
 import java.io.*;
 
@@ -117,7 +117,7 @@ public class SaveFileRW {
         createNewSaveFile();
 
         // Initialize temp file
-        new models.utils.files.AFileReader() {
+        new AFileReader() {
             @Override
             public boolean read() {
                 try {

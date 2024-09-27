@@ -14,6 +14,7 @@ public class Camera {
 
     /**<p>The default level of zoom. Where the target resolves to if reset.</p>*/
     public static final float DEFAULT_ZOOM_LEVEL = 1f;
+    public static final float SCALE_MINIMAP = .5f;
     /**<p>The current zoom level.</p>*/
     public static float zoomLevel = DEFAULT_ZOOM_LEVEL;
     /**<p>The target zoom level</p>*/
@@ -52,9 +53,9 @@ public class Camera {
         targY = y2 * zoomLevel;
 
         // Casting these to int rounds the translation, which helps mitigate render misalignment issues
-        camX += (((x2 * zoomLevel) - (camX * zoomLevel)) * acceleration_pan);
-        camY += (((y2 * zoomLevel) - (camY * zoomLevel)) * acceleration_pan);
-
+        camX += ((x2 * zoomLevel) - (camX * zoomLevel)) * acceleration_pan;
+        camY += ((y2 * zoomLevel) - (camY * zoomLevel)) * acceleration_pan;
+;
         zoomTo();
     }
 
@@ -64,7 +65,7 @@ public class Camera {
     public static void zoomTo() {
         float t = zoomLevel/zoomTarget;
 
-        zoomLevel += acceleration_zoom * zoomTarget * (t * t * (3.0f - 2.0f * t));
+        zoomLevel += acceleration_zoom * zoomTarget * ((t * t) * (3.0f - 2.0f * t));
 
         Config.calcResolutionScale();
 
@@ -82,5 +83,65 @@ public class Camera {
 
         camX = Config.window_width_actual * .5f;
         camY = Config.window_height_actual * .5f;
+    }
+
+    public static int[] getRelativeMousePos(int[] mP) {
+        int mx = (int)((mP[0] - Camera.camX) / Config.scaledW_zoom);
+        int my = (int)((mP[1] - Camera.camY) / Config.scaledH_zoom);
+        return new int[]{mx, my};
+    }
+
+    public static float[] getRelativeOffset(float x, float y) {
+        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
+        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
+        return new float[]{offsetX, offsetY};
+    }
+
+    public static float[] getRelativeOffsetBy(float x, float y, float scale) {
+        float offsetX = ((x * Config.scaledW_zoom * scale) + (Camera.camX * scale));
+        float offsetY = ((y * Config.scaledH_zoom * scale) + (Camera.camY * scale));
+        return new float[]{offsetX, offsetY};
+    }
+
+    public static float[] getRelativeScale(float w, float h) {
+        float scaledW = w * Config.scaledW_zoom;
+        float scaledH = h * Config.scaledH_zoom;
+        return new float[]{scaledW, scaledH};
+    }
+
+    public static float[] getRelativeScaleBy(float w, float h, float scale) {
+        float scaledW = w * Config.scaledW_zoom * scale;
+        float scaledH = h * Config.scaledH_zoom * scale;
+        return new float[]{scaledW, scaledH};
+    }
+
+    private static float[] absoluteToRelative(float x, float y) {
+        int mx = (int)((x - Camera.camX) / Config.scaledW_zoom);
+        int my = (int)((y - Camera.camY) / Config.scaledH_zoom);
+        return new float[]{mx, my};
+    }
+
+    public static float[] getViewportRelative(float x, float y) {
+        int mx = (int)((x - Camera.camX) / Config.scaledW_zoom);
+        int my = (int)((y - Camera.camY) / Config.scaledH_zoom);
+        return new float[]{mx, my};
+    }
+
+    public static float[] getMapRelative() {
+        int mx = (int)((-mapX) / Config.scaledW_zoom);
+        int my = (int)((-mapY) / Config.scaledH_zoom);
+        return new float[]{mx, my};
+    }
+
+    public static float[] getCamRelative() {
+        int mx = (int)((-Camera.camX) / Config.scaledW_zoom);
+        int my = (int)((-Camera.camY) / Config.scaledH_zoom);
+        return new float[]{mx, my};
+    }
+
+    public static float[] getTargRelative() {
+        int mx = (int)((-targX) / Config.scaledW_zoom);
+        int my = (int)((-targY) / Config.scaledH_zoom);
+        return new float[]{mx, my};
     }
 }

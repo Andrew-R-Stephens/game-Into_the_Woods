@@ -5,21 +5,24 @@ import models.actors.triggers.collectibles.key.DoorKey;
 import models.actors.triggers.interactibles.Door;
 import models.actors.triggers.interactibles.Spikes;
 import models.actors.triggers.interactibles.Spring;
-import models.environments.game.GameEnvironment;
 import models.environments.game.background.ParallaxBackground;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
+import models.prototypes.level.prop.tile.TileProp;
 import models.prototypes.level.prop.trigger.ATrigger;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
+import models.prototypes.level.LevelData.LevelModel.Prop;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * <p>ALevel standardizes the data of a level.</p>
@@ -31,14 +34,16 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     protected AEnvironment environment;
 
     /**<p>The moving background for the level.</p>*/
-    private final ParallaxBackground scrollingBackground = new ParallaxBackground();
+    private final ParallaxBackground parallaxBackground = new ParallaxBackground();
 
     /**<p>The spawning point of the player.</p>*/
     protected int[] startOrigin = new int[2];
     /**<p>The Props that exist within this level.</p>*/
-    protected final ArrayList<AProp> levelProps = new ArrayList<>();
+    protected ArrayList<AProp> levelProps = new ArrayList<>();
     /**<p>The Door that allows the player to exit the level.</p>*/
     protected Door door;
+
+    protected final ArrayList<AProp> tileProps = new ArrayList<>();
 
     /**<p>The number of keys that exist in the level.</p>*/
     protected int keyCount = 0;
@@ -143,6 +148,21 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 );
                 break;
             }
+            case "door": {
+                outProp = new Door(
+                        getResources(),
+                        environment,
+                        levelModel.typeImages.get(
+                                propData.type
+                        ).get(0),
+                        propData.coords.x,
+                        propData.coords.y,
+                        propData.dims.w,
+                        propData.dims.h,
+                        propData.maxCycles
+                );
+                break;
+            }
         }
         return outProp;
     }
@@ -152,7 +172,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * @param backgroundImage The background image to be added as a layer of the background
      */
     protected void addBackgroundLayer(BufferedImage backgroundImage) {
-        scrollingBackground.addLayer(backgroundImage);
+        parallaxBackground.addLayer(backgroundImage);
     }
 
     /**
@@ -178,12 +198,16 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * <p>Builds the level.</p>
      */
     public void build(LevelData.LevelModel levelModel) {
-        for (LevelData.LevelModel.Prop p : levelModel.props) {
+
+        ArrayList<AProp> allTiles = new ArrayList<>();
+        for (Prop p : levelModel.props) {
             AProp prop = createProp(levelModel, p);
             if (prop != null) {
-                addProp(prop);
+                AProp[] tiles = prop.createTiles();
+                Collections.addAll(allTiles, tiles);
             }
         }
+        levelProps = allTiles;
 
         build();
     }
@@ -223,10 +247,10 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
 
     @Override
     public void draw(Graphics2D g) {
-        scrollingBackground.draw(g);
+        parallaxBackground.draw(g);
 
         for (AActor levelProps : getLevelProps()) {
-            if (levelProps instanceof AProp p) {
+            if (levelProps instanceof AProp p && p.canRender()) {
                 p.draw(g);
             }
         }
@@ -235,6 +259,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     @Override
     public void update(float delta) {
         for(AProp p: levelProps) {
+            if(p == null) continue;
             p.update(delta);
         }
     }
@@ -244,10 +269,9 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         g.setColor(new Color(50, 50,50));
         g.fillRect(0, 0, Config.window_width_actual, Config.window_height_actual);
 
-        for (AActor levelProps : getLevelProps()) {
-            if (levelProps instanceof AProp p) {
-                p.drawAsHUD(g);
-            }
+        for (AActor p : getLevelProps()) {
+            if(p == null) continue;
+            p.drawAsHUD(g);
         }
 
     }

@@ -7,6 +7,7 @@ import controls.menu.MenuControls;
 import controls.menu.MenuKeyControls;
 import models.actors.particles.Particle;
 import models.actors.player.PlayerAvatar;
+import models.actors.viewport.Viewport;
 import models.camera.Camera;
 import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
@@ -21,6 +22,7 @@ import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.AProp;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
+import models.utils.drawables.IHUDDrawable;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
@@ -35,7 +37,7 @@ import java.util.Random;
  * <p>Contains the GameControls, Levels, Game HUD, Player Inventory, and all Actors.</p>
  * @author Andrew Stephens
  */
-public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatable {
+public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatable, IHUDDrawable {
 
     /**<p>The list of actors currently active within the current level.</p>*/
     private final ArrayList<AActor> actors = new ArrayList<>();
@@ -53,6 +55,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     private PlayerInventory inventory;
     /**<p>The Player Avatar model</p>*/
     private PlayerAvatar character;
+    private Viewport viewport;
 
     /**<p>If the game is paused</p>*/
     private boolean isPaused = false;
@@ -70,6 +73,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     private long deathTimeoutStart = -1L;
     /**<p>The Robot which keeps the mouse centered in the window in the unpaused game.</p>*/
     private Robot robot;
+
+    private Thread viewportCollisionThread;
 
     /**
      * <p>Initializes the GameEnvironment with references to preconfigured object.</p>
@@ -180,6 +185,10 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
      */
     public void build(GameControls controlsModel) {
         setPlayerAvatar(controlsModel, levelsList);
+        viewport = new Viewport(0, 0,
+                Config.window_width_actual,
+                Config.window_height_actual
+        );
     }
 
     /**
@@ -191,6 +200,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
         doGameControls();
         insertQueuedActors(); // Dequeue queued actors and add them to list of actors
+        detectViewportCollisions();
         detectCollisions(delta); // Check Game Object Collisions with Level Props
         updateActors(delta); // Update the Game Objects
         updateLevel(delta); // Update level models.props
@@ -201,6 +211,35 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 reset();
             }
         }
+    }
+
+    private void detectViewportCollisions() {
+        if(viewportCollisionThread == null) {
+            viewportCollisionThread = new Thread(() -> {
+                while(!isPaused) {
+                    Rectangle vpRect = new Rectangle(
+                            (int) viewport.getX(), (int) viewport.getY(),
+                            (int) viewport.getW(), (int) viewport.getH());
+
+                    for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
+                        if(p == null) continue;
+                        float[] pPos = {p.getX(), p.getY()};
+                        float[] pDim = {p.getW(), p.getH()};
+                        boolean canRender = vpRect.intersects(new Rectangle(
+                                (int) pPos[0], (int) pPos[1], (int) pDim[0], (int) pDim[1]));
+                        p.setCanRender(canRender);
+                    }
+                    try {
+                        Thread.sleep(100L);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                viewportCollisionThread = null;
+            });
+            viewportCollisionThread.start();
+        }
+
     }
 
     /**
@@ -321,6 +360,12 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 if(!isAwaitingReset) {
                     tc.control(delta);
                     tc.update(delta);
+
+                    float[] viewportPos = Camera.getViewportRelative(0f, 0f);
+                    viewport.setX(viewportPos[0]);
+                    viewport.setY(viewportPos[1]);
+                    viewport.setW(Config.window_width_actual / Config.scaledW);
+                    viewport.setH(Config.window_height_actual / Config.scaledH);
                 }
                 //System.out.println(tc.actionState);
             }
@@ -334,17 +379,34 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
      */
     private void detectCollisions(float delta) {
         for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
-            for (AActor a : actors) {
-                p.hasCollision(a, delta);
+            if(p == null) continue;
+            if(p.canRender()) {
+                for (AActor a : actors) {
+                    p.hasCollision(a, delta);
+                }
             }
         }
+
+        new Thread(() -> {
+            for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
+                if(p == null) continue;
+                if(p.canRender()) {
+                    for (AProp op : levelsList.getCurrentLevel().getLevelProps()) {
+                        if(op == null) continue;
+                        if (op.canRender() && p != op && p.hasGravity()) {
+                            p.hasCollision(op, delta, false);
+                        }
+                    }
+                }
+            }
+        }).start();
     }
 
     /**
      * <p>Inserts an actor from the queue into the primary list of actors.</p>
      */
     private void insertQueuedActors() {
-        for(int i = 0; i < 10 && actorsQueue.size() >= 1; i++) {
+        for(int i = 0; i < 10 && !actorsQueue.isEmpty(); i++) {
             addActor(actorsQueue.remove());
         }
     }
@@ -451,10 +513,10 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
         // Render Game Actors
         for (AActor gameObject : actors) {
-            if((gameObject instanceof PlayerAvatar) && !isAwaitingReset) {
+            if ((gameObject instanceof PlayerAvatar) && !isAwaitingReset) {
                 gameObject.draw(g2d);
             }
-            if(!(gameObject instanceof PlayerAvatar)) {
+            if (!(gameObject instanceof PlayerAvatar)) {
                 gameObject.draw(g2d);
             }
         }
@@ -466,6 +528,35 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
             hudModel.draw(g2d);
         }
 
+        /*
+        g2d.setColor(Color.YELLOW);
+        float[] pos = Camera.getCamRelative();
+        g2d.drawString("Cam", (int)(pos[0] - 5), (int)(pos[1] - 5));
+        g2d.fillOval((int)(pos[0] - 5), (int)(pos[1] - 5), 10, 10);
+
+        g2d.setColor(Color.GREEN);
+        pos = Camera.getTargRelative();
+        g2d.drawString("Targ", (int)(pos[0] - 5), (int)(pos[1] - 5));
+        g2d.fillOval((int)(pos[0] - 5), (int)(pos[1] - 5), 10, 10);
+
+        g2d.setColor(Color.BLUE);
+        pos = Camera.getMapRelative();
+        g2d.drawString("Map", (int)(pos[0] - 5), (int)(pos[1] - 5));
+        g2d.fillOval((int)(pos[0] - 5), (int)(pos[1] - 5), 10, 10);
+
+        g2d.setColor(Color.BLACK);
+        g2d.drawLine(0, 0, Config.window_width_actual, Config.window_height_actual);
+        g2d.drawLine(0, Config.window_height_actual, Config.window_width_actual, 0);
+        */
+
+        //viewport.draw(g2d);
+    }
+
+    @Override
+    public void drawAsHUD(Graphics2D g) {
+        getCurrentLevel().drawAsHUD(g);
+        character.drawAsHUD(g);
+        viewport.drawAsHUD(g);
     }
 
     @Override

@@ -145,27 +145,6 @@ public class MainMenuPage extends AMenu {
                 return true;
             }
         };
-/*
-        AButtonView button_editorMode = new AButtonView(
-                getParentEnvironment(),
-                Config.DEFAULT_WINDOW_WIDTH - buttonW,
-                Config.DEFAULT_WINDOW_HEIGHT - buttonH,
-                buttonW,
-                buttonH,
-                "Edit",
-                AButtonView.ImageScale.FIT_CENTERED
-        )
-        {
-            @Override
-            public boolean onClick(float x, float y) {
-                if(!isInBounds(x, y)) {
-                    return false;
-                }
-                getParentEnvironment().push(new EditLevelPage(getParentEnvironment()));
-
-                return true;
-            }
-        };*/
 
         addComponent(button_newGame);
         addComponent(button_continueGame);

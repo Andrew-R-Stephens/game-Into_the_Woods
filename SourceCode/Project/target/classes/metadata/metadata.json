@@ -18,7 +18,8 @@
       "spritesheet_melynn_run.json",
       "spritesheet_melynn_idle.json",
       "savedata.json",
-      "preferences.xml"
+      "preferences.xml",
+      "levels.json"
     ]
   },
   "images" : {
@@ -28,6 +29,8 @@
       "logo.png",
       "avatar1.png",
       "avatar2.png",
+      "gear.png",
+      "gravityIcon.png",
       "spritesheet_teo_jump.png",
       "spritesheet_teo_run.png",
       "spritesheet_teo_idle.png",
@@ -50,8 +53,10 @@
       "key.png",
       "menubackground.png",
       "level2.png",
-      "platform_level1.png",
-      "platform_level2.png",
+      "platform_level1_1.png",
+      "platform_level1_2.png",
+      "platform_level2_1.png",
+      "platform_level2_2.png",
       "mockPlatformV2.png",
       "spikes.png",
       "button_slider.png",

@@ -88,6 +88,9 @@ public class MainMenuEnvironment extends AMenuEnvironment {
     @Override
     public void draw(Graphics2D g) {
 
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
         if(backgroundImage != null) {
             g.drawImage(backgroundImage,
                     (int)((((Camera.camX * Config.scaledW) - (Config.DEFAULT_WINDOW_WIDTH * Config.scaledW)) * .10f)),
