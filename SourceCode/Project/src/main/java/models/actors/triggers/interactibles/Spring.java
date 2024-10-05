@@ -12,10 +12,9 @@ import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
-import views.Tile;
+import views.renders.Tile;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 /**

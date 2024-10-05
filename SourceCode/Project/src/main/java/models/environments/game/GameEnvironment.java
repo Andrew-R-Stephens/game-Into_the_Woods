@@ -20,16 +20,15 @@ import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.AProp;
+import models.prototypes.level.propChunk.PropChunk;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.updates.IUpdatable;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 
 /**
  * <p>GameEnvironment class is an AEnvironment subtype that controls the Game Environment and its contained entities.</p>
@@ -95,11 +94,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
         this.gameControls = gameControls;
 
-        try {
-            robot = new Robot();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
+        try { robot = new Robot(); }
+        catch (AWTException e) { e.printStackTrace(); }
 
         setPauseMenuEnvironment(pauseMenuEnvironment);
         setLevelsList(levelsList);
@@ -145,9 +141,9 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         character = new PlayerAvatar (
                 getResources(),
                 controlsViewModel,
-                startPos[0],
-                startPos[1],
-                55, 70,
+                AActor.roundCoordinate(startPos[0]),
+                AActor.roundCoordinate(startPos[1]),
+                AActor.roundCoordinate(55), AActor.roundCoordinate(70),
                 0, 0,
                 true
         );
@@ -221,19 +217,19 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                             (int) viewport.getX(), (int) viewport.getY(),
                             (int) viewport.getW(), (int) viewport.getH());
 
-                    for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
-                        if(p == null) continue;
-                        float[] pPos = {p.getX(), p.getY()};
-                        float[] pDim = {p.getW(), p.getH()};
-                        boolean canRender = vpRect.intersects(new Rectangle(
-                                (int) pPos[0], (int) pPos[1], (int) pDim[0], (int) pDim[1]));
-                        p.setCanRender(canRender);
+                    int count = 0;
+                    getLevelsList().getCurrentLevel().setLocalChunks(viewport);
+                    for(PropChunk localChunk: getLevelsList().getCurrentLevel().getLocalChunks()) {
+                        for (AProp[] pO : localChunk.getAllProps()) {
+                            for(AProp p: pO) {
+                                if (p == null) continue;
+                                p.setCanRender(true);
+                            }
+                        }
                     }
-                    try {
-                        Thread.sleep(100L);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                    System.out.println("Render count: " + count);
+                    try {  Thread.sleep(500L);  }
+                    catch (InterruptedException e) {  throw new RuntimeException(e); }
                 }
                 viewportCollisionThread = null;
             });
@@ -378,28 +374,37 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
      * @param delta The ratio of actual/target update rate for the game ticks.
      */
     private void detectCollisions(float delta) {
-        for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
-            if(p == null) continue;
-            if(p.canRender()) {
-                for (AActor a : actors) {
-                    p.hasCollision(a, delta);
+        new Thread(() -> {
+            ArrayList<AProp> allProps = new ArrayList<>();
+            for(PropChunk pC: getLevelsList().getCurrentLevel().getLocalChunks()) {
+                for(AProp[] props: pC.getAllProps()) {
+                    allProps.addAll(Arrays.asList(props));
                 }
             }
-        }
 
-        new Thread(() -> {
-            for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
+            for(AProp p: allProps) {
                 if(p == null) continue;
                 if(p.canRender()) {
-                    for (AProp op : levelsList.getCurrentLevel().getLevelProps()) {
-                        if(op == null) continue;
-                        if (op.canRender() && p != op && p.hasGravity()) {
-                            p.hasCollision(op, delta, false);
+                    for (AActor a : actors) {
+                        p.hasCollision(a, delta);
+                    }
+                }
+            }
+
+            for (AProp p1 : allProps) {
+                if(p1 == null) continue;
+                if(p1.canRender()) {
+                    for (AProp p2 : allProps) {
+                        if (p2 == null || p1 == p2) continue;
+                        if (p2.canRender() && p1.hasGravity() && p1.getY() < p2.getY()) {
+                            p2.hasCollision(p1, delta, true);
                         }
                     }
                 }
             }
+
         }).start();
+
     }
 
     /**
@@ -512,14 +517,16 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         levelsList.draw(g2d);
 
         // Render Game Actors
-        for (AActor gameObject : actors) {
-            if ((gameObject instanceof PlayerAvatar) && !isAwaitingReset) {
-                gameObject.draw(g2d);
+        try {
+            for (AActor gameObject : actors) {
+                if ((gameObject instanceof PlayerAvatar) && !isAwaitingReset) {
+                    gameObject.draw(g2d);
+                }
+                if (!(gameObject instanceof PlayerAvatar)) {
+                    gameObject.draw(g2d);
+                }
             }
-            if (!(gameObject instanceof PlayerAvatar)) {
-                gameObject.draw(g2d);
-            }
-        }
+        } catch (ConcurrentModificationException e) { e.printStackTrace(); }
 
         if(isPaused) {
             //Draw Pause Menu

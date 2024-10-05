@@ -12,28 +12,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import models.prototypes.level.LevelData.LevelModel.Prop;
-import models.prototypes.level.LevelData.LevelModel.Prop.Dims;
-import models.prototypes.level.LevelData.LevelModel.Prop.Coords;
-import models.prototypes.level.LevelData.LevelModel.Prop.Motion;
-import models.prototypes.level.LevelData.LevelModel.StartOrigin;
+import models.prototypes.level.LevelModelRW.LevelModel.Prop;
+import models.prototypes.level.LevelModelRW.LevelModel.Prop.Dims;
+import models.prototypes.level.LevelModelRW.LevelModel.Prop.Coords;
+import models.prototypes.level.LevelModelRW.LevelModel.Prop.Motion;
+import models.prototypes.level.LevelModelRW.LevelModel.StartOrigin;
 
-public class LevelData {
+public class LevelModelRW {
 
+    private String saveFileOut = "levels_out.json";
     public LevelModels levelModels = new LevelModels();
 
-    public LevelData(String fileName) {
+    public LevelModelRW(String fileName) {
         parseLevels(fileName);
 
-        String outName = "levels_out.json";
-        System.out.println(outName);
-        serialize(outName);
+        serialize();
     }
 
     /**
-     * <p>Processes the Json file, stores the data into individual Sprites, and stores the Sprites into a SpriteSheet.
-     * </p>
-     * @return The completed SpriteSheet.
+     * <p>Processes the Json file, stores the data into individual Sprites,
+     * and stores the Sprites into a SpriteSheet.</p>
      */
     private void parseLevels(String jsonFile) {
 
@@ -147,11 +145,11 @@ public class LevelData {
         };
     }
 
-    private void serialize(String saveFile) {
-        createNewSaveFile(saveFile);
+    public void serialize() {
+        createNewSaveFile(saveFileOut);
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(saveFile, false));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(saveFileOut, false));
 
             JsonObject root = new JsonObject();
             Map<String, JsonElement> rootMap = root.asMap();
@@ -224,19 +222,19 @@ public class LevelData {
             e.printStackTrace();
         }
         if(isNew) {
-            serialize(saveFileName);
+            serialize();
         }
     }
 
 
-    public class LevelModels {
+    public static class LevelModels {
 
         @SerializedName("levels")
         public List<LevelModel> levels = new ArrayList<>(0);
 
     }
 
-    public class LevelModel {
+    public static class LevelModel {
 
         public int id;
         public String name;

@@ -7,7 +7,7 @@ import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
-import models.prototypes.level.LevelData.LevelModel;
+import models.prototypes.level.LevelModelRW.LevelModel;
 
 public class Level2 extends ALevel {
 
@@ -43,12 +43,14 @@ public class Level2 extends ALevel {
     @Override
     public void build(LevelModel levelModel) {
 
+        /*
         for(LevelModel.Prop p: levelModel.props) {
             AProp prop = createProp(levelModel, p);
             if(prop != null) {
                 addProp(prop);
             }
         }
+        */
 
         // Door
         door = new Door(getResources(), environment, 6815, 1873, 50, 100,

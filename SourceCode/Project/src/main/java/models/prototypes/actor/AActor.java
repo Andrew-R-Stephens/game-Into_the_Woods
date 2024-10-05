@@ -15,7 +15,7 @@ import java.awt.*;
  * Acts as a wrapper, but also contains some data that allows for the appropriate orientations of subtypes.</p>
  * @author Andrew Stephens
  */
-public abstract class AActor extends APhysics implements IDrawable, IUpdatable, IHUDDrawable {
+public abstract class AActor extends APhysics implements IUpdatable {
 
     /**<p>The persistent Resources.</p>*/
     protected Resources resources;
@@ -53,7 +53,15 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable, 
         super(x, y, w, h, vx, vy, hasGravity);
 
         this.resources = resources;
+    }
 
+    protected AActor(
+            float x, float y,
+            float w, float h,
+            float vx, float vy,
+            boolean hasGravity) {
+
+        super(x, y, w, h, vx, vy, hasGravity);
     }
 
     public Resources getResources() {
@@ -65,7 +73,6 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable, 
         super.update(delta);
     }
 
-    @Override
     public void draw(Graphics2D g) {
         g.setColor(Color.RED);
 
@@ -78,7 +85,6 @@ public abstract class AActor extends APhysics implements IDrawable, IUpdatable, 
         g.fillRect((int) ((offsetX)), (int) (offsetY), (int) (scaledW), (int) (scaledH));
     }
 
-    @Override
     public void drawAsHUD(Graphics2D g) {  }
 
     public void setCanRender(boolean canRender) {

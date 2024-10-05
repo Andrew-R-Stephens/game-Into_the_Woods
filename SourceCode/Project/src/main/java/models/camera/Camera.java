@@ -14,7 +14,7 @@ public class Camera {
 
     /**<p>The default level of zoom. Where the target resolves to if reset.</p>*/
     public static final float DEFAULT_ZOOM_LEVEL = 1f;
-    public static final float SCALE_MINIMAP = .5f;
+    public static final float SCALE_MINIMAP = .25f;
     /**<p>The current zoom level.</p>*/
     public static float zoomLevel = DEFAULT_ZOOM_LEVEL;
     /**<p>The target zoom level</p>*/

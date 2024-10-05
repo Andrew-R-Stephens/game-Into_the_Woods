@@ -13,25 +13,16 @@ import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
-import views.Tile;
+import views.renders.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 /**
  * <p>Spikes are a harmful obstacle. Touching the obstacle immediately kills the player.</p>
  * @author Andrew Stephens
  */
 public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdatable {
-
-    int cols = Math.max(1, (int)Math.ceil(w / (float) Tile.W));
-    int rows = Math.max(1, (int)Math.ceil(h / (float) Tile.H));
-
-    /** The native image for this platform. */
-    private final BufferedImage imageRaw;
-    /** The final drawn image */
-    private BufferedImage image;
 
     /**
      * <p>Called from the subtypes, this method initializes the object. Also initializes the respective spriteSheet.</p>
@@ -44,101 +35,32 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
      * @param vy The vertical velocity.
      * @param MAX_CYCLES The number of times this object can create an action. -1 is infinite.
      */
-    public Spikes(Resources resources, AEnvironment environment, float x, float y, float w, float h, float vx, float vy,
+    public Spikes(Resources resources, AEnvironment environment,
+                  float x, float y, float w, float h, float vx, float vy,
                   int MAX_CYCLES) {
         super(resources, environment, x, y, w, h, vx, vy, MAX_CYCLES, false, false);
-
-        imageRaw = resources.getImage("spikes");
-        calcSubImages();
     }
 
-    public Spikes(Resources resources, AEnvironment environment, float x, float y, float w, float h, int MAX_CYCLES) {
-        super(resources, environment, x, y, w, h, 0, 0, MAX_CYCLES, false, false);
-
-        imageRaw = resources.getImage("spikes");
-        calcSubImages();
+    public Spikes(
+                  float x, float y, float w, float h, float vx, float vy,
+                  int MAX_CYCLES) {
+        super(x, y, w, h, vx, vy, MAX_CYCLES, false, false);
     }
 
     @Override
-    public void calcSubImages() {
-
-        cols = Math.max(1, (int)Math.ceil(w / (float) Tile.W)) + 1;
-        rows = Math.max(1, (int)Math.ceil(h / (float) Tile.H)) + 1;
-
-        System.out.println(cols + " " + rows);
-
-        if(imageRaw != null) {
-            Image tempImage = imageRaw.getScaledInstance(
-                    Tile.W,
-                    Tile.H,
-                    BufferedImage.SCALE_SMOOTH
-            );
-
-            BufferedImage tempPlatformImage = new BufferedImage(
-                    Tile.W * cols,
-                    Tile.H * rows,
-                    BufferedImage.TYPE_INT_ARGB);
-            Graphics2D bGr = tempPlatformImage.createGraphics();
-
+    public AProp[] createTiles() {
+        AProp[] tiles = super.createTiles();
+        int index = 0;
+        for(int row = 0; row < rows; row++) {
             for(int col = 0; col < cols; col++) {
-                float x = (int) (col * Tile.W * Config.scaledW_zoom);
-                float y = 0;
-
-                bGr.drawImage(
-                        tempImage,
-                        (int) Math.floor(x),
-                        (int) Math.floor(y),
-                        (int) Math.floor((Tile.W) * Config.scaledW_zoom) + 1,
-                        (int) Math.floor((Tile.H) * Config.scaledH_zoom) + 1,
-                        null
-                );
+                float x = roundCoordinate(getX() + (col * Tile.W));
+                float y = roundCoordinate(getY() + (row * Tile.H));
+                Spikes spike = new Spikes(x, y, Tile.W, Tile.H, vX, vY, MAX_CYCLES);
+                tiles[index] = spike;
+                index++;
             }
-            bGr.dispose();
-
-            image = tempPlatformImage.getSubimage(
-                    0, 0,
-                    Math.max((int)w, 1), Math.max((int)h, 1));
         }
-    }
-
-    @Override
-    public void update(float delta) {
-        super.update(delta);
-    }
-
-    @Override
-    public void draw(Graphics2D g) {
-        g.setColor(Color.DARK_GRAY);
-
-        float offsetX = ((x * Config.scaledW_zoom) + (Camera.camX));
-        float offsetY = ((y * Config.scaledH_zoom) + (Camera.camY));
-
-        g.drawImage(image,
-                (int) Math.floor(offsetX),
-                (int) Math.floor(offsetY),
-                (int) Math.floor(w * Config.scaledW_zoom) + 1,
-                (int) Math.floor(h * Config.scaledH_zoom) + 1,
-                null);
-
-        if(Config.DEBUG && isHighlighted) {
-            Color c = Color.RED;
-            g.setColor(c);
-            g.drawRect((int) (offsetX), (int) (offsetY),
-                    (int) (w * Config.scaledW_zoom),
-                    (int) (h * Config.scaledH_zoom));
-            g.drawString(x + " " + y, (int) (offsetX), (int) (offsetY));
-        }
-    }
-
-    @Override
-    public void drawAsHUD(Graphics2D g) {
-        g.setColor(Color.RED);
-
-        float[] offset = Camera.getRelativeOffsetBy(x, y, Camera.SCALE_MINIMAP);
-        float[] scale = Camera.getRelativeScaleBy(w, h, Camera.SCALE_MINIMAP);
-
-        g.fillRect((int) offset[0], (int) offset[1], (int) scale[0], (int) scale[1]);
-
+        return tiles;
     }
 
     @Override
@@ -170,18 +92,4 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
         return hasCollision;
     }
 
-    @Override
-    public AProp[] createTiles() {
-        AProp[] tiles = super.createTiles();
-        for(int i = 0; i < tiles.length; i++) {
-            float x = getX() * i / Tile.W, y = getY() * i / Tile.H;
-            Spikes platform = new Spikes(
-                    resources, environment,
-                    x, y, w, h, vX, vY, MAX_CYCLES
-            );
-            tiles[i] = platform;
-        }
-        System.out.println(tiles.length);
-        return tiles;
-    }
 }

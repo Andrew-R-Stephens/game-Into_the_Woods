@@ -31,39 +31,39 @@ public class TestLevel2 extends ALevel {
     @Override
     public void build() {
         // Wall
-        addProp(new Platform(getResources(),"platform_level2",0, 0, 100, 1080, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",0, 0, 100, 1080, 0, 0, false));
-        // Climbing Walls
-        addProp(new Platform(getResources(),"platform_level2",100, -150, 50, 200, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",200, 0, 50, 200, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",300, 220, 50, 200, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",400, 360, 50, 200, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",500, 500, 50, 200, 0, 0, false));
-
-        addProp(new Platform(getResources(),"platform_level2",9000, 0, 100, 1080, 0, 0, false));
-        // Floor
-        addProp(new Platform(getResources(),"platform_level2",0, 980, 10000, 100, 0, 0, false));
-
-        // Other Props
-        addProp(new Platform(getResources(),"platform_level2",1800, 100, 500, 100, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",70, 800, 500, 100, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",500, 700, 500, 100, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",1100, 600, 500, 100, 0, 0, false));
-
-        addProp(new Platform(getResources(),"platform_level2",1800, 600, 500, 50, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",2000, 650, 220, 100, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",3500, 750, 500, 100, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",4000, 780, 200, 100, 0, 0, false));
-
-        addProp(new Platform(getResources(),"platform_level2",6800, 400, 500, 50, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",2500, 720, 220, 100, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",3000, 700, 500, 50, 0, 0, false));
-        addProp(new Platform(getResources(),"platform_level2",3200, 650, 100, 100, 0, 0, false));
-
-        // Keys
-        addProp(new DoorKey(getResources(), environment, 1600, 930, 100, 50, 0, 0));
-        addProp(new DoorKey(getResources(), environment, 2500, 930, 100, 50, 0, 0));
-        addProp(new DoorKey(getResources(), environment, 500, 930, 100, 50, 0, 0));
+//        addProp(new Platform(getResources(),"platform_level2",0, 0, 100, 1080, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",0, 0, 100, 1080, 0, 0, false));
+//        // Climbing Walls
+//        addProp(new Platform(getResources(),"platform_level2",100, -150, 50, 200, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",200, 0, 50, 200, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",300, 220, 50, 200, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",400, 360, 50, 200, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",500, 500, 50, 200, 0, 0, false));
+//
+//        addProp(new Platform(getResources(),"platform_level2",9000, 0, 100, 1080, 0, 0, false));
+//        // Floor
+//        addProp(new Platform(getResources(),"platform_level2",0, 980, 10000, 100, 0, 0, false));
+//
+//        // Other Props
+//        addProp(new Platform(getResources(),"platform_level2",1800, 100, 500, 100, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",70, 800, 500, 100, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",500, 700, 500, 100, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",1100, 600, 500, 100, 0, 0, false));
+//
+//        addProp(new Platform(getResources(),"platform_level2",1800, 600, 500, 50, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",2000, 650, 220, 100, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",3500, 750, 500, 100, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",4000, 780, 200, 100, 0, 0, false));
+//
+//        addProp(new Platform(getResources(),"platform_level2",6800, 400, 500, 50, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",2500, 720, 220, 100, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",3000, 700, 500, 50, 0, 0, false));
+//        addProp(new Platform(getResources(),"platform_level2",3200, 650, 100, 100, 0, 0, false));
+//
+//        // Keys
+//        addProp(new DoorKey(getResources(), environment, 1600, 930, 100, 50, 0, 0));
+//        addProp(new DoorKey(getResources(), environment, 2500, 930, 100, 50, 0, 0));
+//        addProp(new DoorKey(getResources(), environment, 500, 930, 100, 50, 0, 0));
 
         // Door
         door = new Door(getResources(), environment, 2000, 830, 50, 100,

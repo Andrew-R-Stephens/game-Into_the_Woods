@@ -5,7 +5,8 @@ import models.camera.Camera;
 import models.prototypes.level.prop.AProp;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
-import views.Tile;
+import models.utils.resources.Resources;
+import views.renders.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class AEditProp implements IDrawable {
 
     public EditPropAttribute attributeToggle;
 
-    public AEditProp(AProp p) {
+    public AEditProp(AProp p, Resources resources) {
         this.prop = p;
         this.prop.isHighlighted(true);
 
@@ -28,7 +29,7 @@ public class AEditProp implements IDrawable {
             grips.add(new EditPropGrip(this.prop, e));
         }
 
-        attributeToggle = new EditPropAttribute(this.prop);
+        attributeToggle = new EditPropAttribute(this.prop, resources);
         attributeToggle.onToggleListener = new EditPropAttribute.OnToggleAttributeListener() {
             @Override
             void onToggle() {
@@ -139,10 +140,10 @@ public class AEditProp implements IDrawable {
             float w = prop.getW(), h = prop.getH();
 
             switch (e) {
-                case LEFT -> prop.setX(Platform.roundCoordinate(mx));
-                case TOP -> prop.setY(Platform.roundCoordinate(my));
-                case RIGHT -> prop.setW(Platform.roundCoordinate(Math.max(Tile.W, mx - prop.getX())));
-                case BOTTOM -> prop.setH(Platform.roundCoordinate(Math.max(Tile.H, my - prop.getY())));
+                case LEFT -> prop.setX(Platform.roundCoordinate(mx - (Tile.W * .25f)));
+                case TOP -> prop.setY(Platform.roundCoordinate(my - (Tile.H * .25f)));
+                case RIGHT -> prop.setW(Platform.roundCoordinate(Math.max(Tile.W, mx - prop.getX() + (Tile.W * .5f))));
+                case BOTTOM -> prop.setH(Platform.roundCoordinate(Math.max(Tile.H, my - prop.getY() + (Tile.H * .5f))));
             }
 
             if(w != prop.getW() || h != prop.getH()) {
@@ -160,12 +161,14 @@ public class AEditProp implements IDrawable {
 
     public static class EditPropAttribute {
 
+        private final Resources resources;
         private final AProp prop;
 
         private final int W = 12, H = 12;
 
-        public EditPropAttribute(AProp p) {
+        public EditPropAttribute(AProp p, Resources resources) {
             this.prop = p;
+            this.resources = resources;
         }
 
         public void toggleAttribute() {
@@ -196,7 +199,7 @@ public class AEditProp implements IDrawable {
                         getDrawY(),
                         W, H);
                 g.drawImage(
-                        prop.getResources().getImage("gravityIcon"),
+                        resources.getImage("gravityIcon"),
                         getDrawX(),
                         getDrawY(),
                         W, H,

@@ -1,13 +1,11 @@
 package models.levels;
 
-import models.environments.game.GameEnvironment;
 import models.levels.level.Level1;
 import models.levels.level.Level2;
-import models.levels.level.TestLevel1;
 import models.levels.level.TestLevel3;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
-import models.prototypes.level.LevelData;
+import models.prototypes.level.LevelModelRW;
 import models.utils.drawables.IDrawable;
 
 import java.awt.*;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
  */
 public class LevelsList implements IDrawable {
 
-    public static final float WORLD_SCALE = .75f;
+    public static final float WORLD_SCALE = .8f;
 
     /**<p>The parent Environment</p>*/
     private AEnvironment environment = null;
@@ -38,7 +36,7 @@ public class LevelsList implements IDrawable {
     public void init(AEnvironment environment, int currentLevel) {
         setEnvironment(environment);
 
-        LevelData levelData = new LevelData(environment.getResources().getLevelsFile());
+        LevelModelRW levelData = new LevelModelRW(environment.getResources().getLevelsFile());
 
         addLevel(
             new Level1(environment, levelData.levelModels.levels.get(0)));
@@ -48,6 +46,8 @@ public class LevelsList implements IDrawable {
 
         addLevel(
                 new TestLevel3(environment, levelData.levelModels.levels.get(2)));
+
+        levelData.serialize();
 
         setCurrentLevel(currentLevel);
     }

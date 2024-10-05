@@ -7,7 +7,8 @@ import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
-import models.prototypes.level.LevelData.LevelModel;
+import models.prototypes.level.LevelModelRW.LevelModel;
+import models.prototypes.level.propChunk.PropChunk;
 
 /**
  * The first level.
@@ -17,7 +18,6 @@ public class Level1 extends ALevel {
 
     /**
      * Creates the first Level.
-     * @param environment
      */
     public Level1(AEnvironment environment, LevelModel levelModel) {
         super(environment);
@@ -153,15 +153,21 @@ public class Level1 extends ALevel {
         addProp(new Platform(getResources(),"platform_level1", 1144, 3694, 1134, 356, false));
         */
 
-        for (AProp levelProp : levelProps) {
-            if (levelProp instanceof Door d) {
-                door = d;
-            }
-        }
         // Door
         /*door = new Door(getResources(), environment, 6815, 1873, 50, 100,
                 0, 0, 1, false, false);
         addProp(door);*/
+
+        for(PropChunk pC: getLocalChunks()) {
+            for (AProp[] props : pC.getAllProps()) {
+                for (AProp prop : props) {
+                    if (prop instanceof Door d) {
+                        door = d;
+                    }
+                }
+
+            }
+        }
 
         // Door Open Animation Trigger
         addProp(new APropTrigger(getResources(), environment, 6600, 1673, 450, 300,

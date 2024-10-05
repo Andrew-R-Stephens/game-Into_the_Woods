@@ -4,25 +4,35 @@ import models.actors.platforms.Platform;
 import models.actors.triggers.collectibles.key.DoorKey;
 import models.actors.triggers.interactibles.Door;
 import models.actors.triggers.interactibles.Spikes;
-import models.actors.triggers.interactibles.Spring;
+import models.actors.viewport.Viewport;
 import models.environments.game.background.ParallaxBackground;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
-import models.prototypes.level.prop.tile.TileProp;
-import models.prototypes.level.prop.trigger.ATrigger;
+import models.prototypes.level.propChunk.PropChunk;
+import models.prototypes.level.propChunk.PropChunks;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
-import models.prototypes.level.LevelData.LevelModel.Prop;
+import views.renders.tile.platform.APlatformTile;
+import views.renders.tile.platform.PlatformBodyTile;
+import views.renders.tile.platform.PlatformBottomTile;
+import views.renders.tile.platform.PlatformTopTile;
+import views.renders.tile.spike.ASpikesTile;
+import views.renders.tile.spike.SpikesTile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
+
+import static models.camera.Camera.camX;
+import static models.camera.Camera.camY;
+import static models.utils.config.Config.scaledH_zoom;
+import static models.utils.config.Config.scaledW_zoom;
 
 /**
  * <p>ALevel standardizes the data of a level.</p>
@@ -39,11 +49,15 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     /**<p>The spawning point of the player.</p>*/
     protected int[] startOrigin = new int[2];
     /**<p>The Props that exist within this level.</p>*/
-    protected ArrayList<AProp> levelProps = new ArrayList<>();
+    //protected ArrayList<AProp> levelProps = new ArrayList<>();
+    private PropChunks chunks;
     /**<p>The Door that allows the player to exit the level.</p>*/
     protected Door door;
 
-    protected final ArrayList<AProp> tileProps = new ArrayList<>();
+    private PlatformTopTile platformTileTop;
+    private PlatformBottomTile platformTileBottom;
+    private PlatformBodyTile platformTileBody;
+    private ASpikesTile spikesTile;
 
     /**<p>The number of keys that exist in the level.</p>*/
     protected int keyCount = 0;
@@ -61,15 +75,25 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * @param prop The prop to be added.
      */
     protected void addProp(AProp prop) {
-        levelProps.add(prop);
+        //levelProps.add(prop);
+    }
+
+    /*
+    public ArrayList<AProp> getLevelProps() {
+        return levelProps;
+    }
+    */
+
+    public void setLocalChunks(Viewport viewport) {
+        chunks.setLocal(viewport);
     }
 
     /**
      * <p>Gets the props of the level.</p>
      * @return The list of props in the level.
      */
-    public ArrayList<AProp> getLevelProps() {
-        return levelProps;
+    public ArrayList<PropChunk> getLocalChunks() {
+        return chunks.getLocal();
     }
 
     /**
@@ -89,84 +113,6 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         startOrigin = new int[]{x, y};
     }
 
-    public AProp createProp(
-            LevelData.LevelModel levelModel,
-            LevelData.LevelModel.Prop propData
-    ) {
-        AProp outProp = null;
-        switch (propData.type) {
-            case "platform": {
-                String[] arr = new String[0];
-                outProp = new Platform(
-                        getResources(),
-                        levelModel.typeImages.get(
-                                propData.type
-                        ).toArray(arr),
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h,
-                        propData.hasGravity
-                );
-                break;
-            }
-            case "spikes": {
-                outProp = new Spikes(
-                        getResources(),
-                        environment,
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h,
-                        propData.maxCycles
-                );
-                break;
-            }
-            case "spring": {
-                outProp = new Spring(
-                        getResources(),
-                        environment,
-                        levelModel.typeImages.get(
-                                propData.type
-                        ).get(0),
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h,
-                        propData.maxCycles
-                );
-                break;
-            }
-            case "doorKey": {
-                outProp = new DoorKey(
-                        getResources(),
-                        environment,
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h
-                );
-                break;
-            }
-            case "door": {
-                outProp = new Door(
-                        getResources(),
-                        environment,
-                        levelModel.typeImages.get(
-                                propData.type
-                        ).get(0),
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h,
-                        propData.maxCycles
-                );
-                break;
-            }
-        }
-        return outProp;
-    }
-
     /**
      * <p>Adds a background layer to the parallax background in the level.</p>
      * @param backgroundImage The background image to be added as a layer of the background
@@ -179,11 +125,11 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * <p>Counts the number of keys that exist in the level.</p>
      */
     public void countKeys() {
-        for (AActor levelProps : getLevelProps()) {
+        /*for (AActor levelProps : getPropsInChunk()) {
             if (levelProps instanceof DoorKey) {
                 this.keyCount++;
             }
-        }
+        }*/
     }
 
     /**
@@ -197,17 +143,28 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     /**
      * <p>Builds the level.</p>
      */
-    public void build(LevelData.LevelModel levelModel) {
+    public void build(LevelModelRW.LevelModel levelModel) {
 
-        ArrayList<AProp> allTiles = new ArrayList<>();
+        platformTileTop = new PlatformTopTile(getResources(), levelModel.typeImages.get("platform").get(0));
+        platformTileBody = new PlatformBodyTile(getResources(), levelModel.typeImages.get("platform").get(1));
+        platformTileBottom = new PlatformBottomTile(getResources(), levelModel.typeImages.get("platform").get(2));
+        spikesTile = new SpikesTile(getResources(), levelModel.typeImages.get("spikes").get(0));
+
+        /*
+        ArrayList<AProp> tempTiles = new ArrayList<>();
         for (Prop p : levelModel.props) {
             AProp prop = createProp(levelModel, p);
             if (prop != null) {
                 AProp[] tiles = prop.createTiles();
-                Collections.addAll(allTiles, tiles);
+                tempTiles.addAll(Arrays.asList(tiles));
             }
         }
-        levelProps = allTiles;
+
+        levelProps.clear();
+        levelProps.addAll(tempTiles);
+        */
+
+        chunks = new PropChunks(levelModel);
 
         build();
     }
@@ -223,11 +180,12 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * <p>Resets the props of each level.</p>
      */
     public void reset() {
-        for(AProp p: levelProps) {
+        /*for(AProp p: levelProps) {
             if(p instanceof ATrigger t) {
                 t.reset();
             }
-        }
+        }*/
+        chunks.resetAll();
     }
 
     /**
@@ -246,21 +204,43 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     }
 
     @Override
-    public void draw(Graphics2D g) {
-        parallaxBackground.draw(g);
+    public void update(float delta) {
 
-        for (AActor levelProps : getLevelProps()) {
-            if (levelProps instanceof AProp p && p.canRender()) {
-                p.draw(g);
+        for(PropChunk chunk: getLocalChunks()) {
+            for(AProp[] propsO: chunk.getAllProps()) {
+                for (AActor prop : propsO) {
+                    if (prop == null) continue;
+                    prop.update(delta);
+                }
             }
         }
+        chunks.update();
     }
 
     @Override
-    public void update(float delta) {
-        for(AProp p: levelProps) {
-            if(p == null) continue;
-            p.update(delta);
+    public void draw(Graphics2D g) {
+        parallaxBackground.draw(g);
+
+        for(PropChunk chunk: getLocalChunks()) {
+            drawChunk(g, chunk.getBounds());
+            for(AProp[] propsO: chunk.getAllProps()) {
+                for (AActor prop : propsO) {
+                    if (prop == null) continue;
+                    if (prop instanceof Platform platform) {
+                        switch(platform.side) {
+                            case TOP -> {
+                                platformTileTop.draw(g, platform);
+                            }
+                            case BOTTOM -> {
+                                platformTileBottom.draw(g, platform);
+                            }
+                            default -> platformTileBody.draw(g, platform);
+                        }
+                    } else if (prop instanceof Spikes spikes) {
+                        spikesTile.draw(g, spikes);
+                    }
+                }
+            }
         }
     }
 
@@ -269,10 +249,41 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         g.setColor(new Color(50, 50,50));
         g.fillRect(0, 0, Config.window_width_actual, Config.window_height_actual);
 
-        for (AActor p : getLevelProps()) {
-            if(p == null) continue;
-            p.drawAsHUD(g);
+        for(PropChunk chunk: getLocalChunks()) {
+            for(AProp[] propsO: chunk.getAllProps()) {
+                for (AActor prop : propsO) {
+                    if (prop == null) continue;
+                    if (prop instanceof Platform platform) {
+                        switch(platform.side) {
+                            case TOP -> {
+                                platformTileTop.drawAsHUD(g, platform);
+                            }
+                            case BOTTOM -> {
+                                platformTileBottom.drawAsHUD(g, platform);
+                            }
+                            default -> platformTileBody.drawAsHUD(g, platform);
+                        }
+                    } else if (prop instanceof Spikes spikes) {
+                        spikesTile.drawAsHUD(g, spikes);
+                    }
+                }
+            }
         }
+    }
+
+    private void drawChunk(Graphics g, int[] bounds) {
+        g.setColor(Color.DARK_GRAY);
+
+        float offsetX = ((bounds[0] * scaledW_zoom) + (camX));
+        float offsetY = ((bounds[1] * scaledH_zoom) + (camY));
+
+        g.setColor(Color.BLUE);
+        g.drawRect(
+                (int) Math.floor(offsetX),
+                (int) Math.floor(offsetY),
+                (int) Math.floor(bounds[2] * scaledW_zoom) + 1,
+                (int) Math.floor(bounds[3] * scaledH_zoom) + 1
+        );
 
     }
 

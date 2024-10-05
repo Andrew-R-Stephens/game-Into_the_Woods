@@ -4,6 +4,7 @@ import controls.editor.EditorControls;
 import controls.editor.EditorKeyControls;
 import controls.menu.MenuControls;
 import controls.menu.MenuKeyControls;
+import models.actors.viewport.Viewport;
 import models.prototypes.actor.editor.AEditProp;
 import models.actors.editor.EditorAvatar;
 import models.camera.Camera;
@@ -15,11 +16,15 @@ import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
+import models.prototypes.level.propChunk.PropChunk;
+import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
+import views.renders.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -43,6 +48,7 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
     private LevelsList levelsList;
     /**<p>The Editor Avatar model</p>*/
     private EditorAvatar editorAvatar;
+    private Viewport viewport;
 
     private AEditProp aEditProp = null;
 
@@ -51,6 +57,8 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
 
     /**<p>The Robot which keeps the mouse centered in the window in the unpaused game.</p>*/
     private Robot robot;
+
+    private Thread viewportCollisionThread;
 
     /**
      * <p>Initializes the GameEnvironment with references to preconfigured object.</p>
@@ -134,6 +142,11 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
      */
     public void build(EditorControls controlsModel) {
         setEditorAvatar(controlsModel, levelsList);
+
+        viewport = new Viewport(0, 0,
+                Config.window_width_actual,
+                Config.window_height_actual
+        );
     }
 
     /**
@@ -144,6 +157,7 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
     public void doEditorUpdates(float delta) {
         doEditorControls();
         insertQueuedActors(); // Dequeue queued actors and add them to list of actors
+        detectViewportCollisions();
         detectMouseSelect(); // Check Game Object Collisions with Level Props
         detectCollisions(delta);
         updateActors(delta); // Update the Game Objects
@@ -236,9 +250,40 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
             else if (gameObject instanceof EditorAvatar tc) {
                 tc.control(delta);
                 tc.update(delta);
-                //System.out.println(tc.actionState);
+
+                float[] viewportPos = Camera.getViewportRelative(0f, 0f);
+                viewport.setX(viewportPos[0]);
+                viewport.setY(viewportPos[1]);
+                viewport.setW(Config.window_width_actual / Config.scaledW);
+                viewport.setH(Config.window_height_actual / Config.scaledH);
             }
         }
+    }
+
+    private void detectViewportCollisions() {
+        if(viewportCollisionThread == null) {
+            viewportCollisionThread = new Thread(() -> {
+                while(!isPaused) {
+                    int count = 0;
+                    getLevelsList().getCurrentLevel().setLocalChunks(viewport);
+                    for(PropChunk localChunk: getLevelsList().getCurrentLevel().getLocalChunks()) {
+                        for (AProp[] pO : localChunk.getAllProps()) {
+                            for(AProp p: pO) {
+                                if (p == null) continue;
+                                p.setCanRender(true);
+                                count++;
+                            }
+                        }
+                    }
+                    System.out.println("Render count: " + count);
+                    try {  Thread.sleep(100L);  }
+                    catch (InterruptedException e) {  throw new RuntimeException(e); }
+                }
+                viewportCollisionThread = null;
+            });
+            viewportCollisionThread.start();
+        }
+
     }
 
     /**
@@ -248,11 +293,10 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
     private void detectMouseSelect() {
 
         int[] mRel = Camera.getRelativeMousePos(getMouseController().getPos());
-
         if(getMouseController().isLeftPressed()) {
             if (aEditProp != null) {
-                float px = aEditProp.prop.getX() - 12, py = aEditProp.prop.getY() - 12;
-                float pw = aEditProp.prop.getW() + 24, ph = aEditProp.prop.getH() + 24;
+                float px = aEditProp.prop.getX() - (Tile.W * .25f), py = aEditProp.prop.getY() - (Tile.W * .25f);
+                float pw = aEditProp.prop.getW() + (Tile.W * .5f), ph = aEditProp.prop.getH() + (Tile.H * .5f);
                 if (((px < mRel[0]) && ((px + pw) > mRel[0]) &&
                         (py < mRel[1]) && ((py + ph) > mRel[1]))) {
                     return;
@@ -260,15 +304,22 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
                     aEditProp = null;
                 }
             }
-            for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
-                if(!(p instanceof APropTrigger)) {
-                    float px = p.getX(), py = p.getY();
-                    float pw = p.getW(), ph = p.getH();
-                    if (((px < mRel[0]) && ((px + pw) > mRel[0]) &&
-                            (py < mRel[1]) && ((py + ph) > mRel[1]))) {
-                        if (aEditProp != null) { aEditProp = null; }
-                        aEditProp = new AEditProp(p);
-                        break;
+            for(PropChunk localChunk: getLevelsList().getCurrentLevel().getLocalChunks()) {
+                for (AProp[] pO : localChunk.getAllProps()) {
+                    for (AProp p : pO) {
+                        if (!(p instanceof APropTrigger)) {
+                            if (p == null) continue;
+                            float px = p.getX(), py = p.getY();
+                            float pw = p.getW(), ph = p.getH();
+                            if (((px < mRel[0]) && ((px + pw) > mRel[0]) &&
+                                    (py < mRel[1]) && ((py + ph) > mRel[1]))) {
+                                if (aEditProp != null) {
+                                    aEditProp = null;
+                                }
+                                aEditProp = new AEditProp(p, getResources());
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -282,14 +333,29 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
      */
     private void detectCollisions(float delta) {
         new Thread(() -> {
-            for (AProp p : levelsList.getCurrentLevel().getLevelProps()) {
-                for (AProp op : levelsList.getCurrentLevel().getLevelProps()) {
-                    if(p != op && (p.hasGravity() || op.hasGravity())) {
-                        p.hasCollision(op, delta);
+
+            ArrayList<AProp> allProps = new ArrayList<>();
+            for(PropChunk pC: getLevelsList().getCurrentLevel().getLocalChunks()) {
+                for(AProp[] props: pC.getAllProps()) {
+                    allProps.addAll(Arrays.asList(props));
+                }
+            }
+
+            for (AProp p1 : allProps) {
+                if(p1 == null) continue;
+                if(p1.canRender()) {
+                    for (AProp p2 : allProps) {
+                        if (p2 == null || p1 == p2) continue;
+                        if (p2.canRender() && p1.hasGravity()) {
+                            p2.hasCollision(p1, delta, true);
+                        }
                     }
                 }
             }
+
         }).start();
+
+
     }
 
     /**
@@ -361,6 +427,8 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
         if(aEditProp != null) {
             aEditProp.draw(g2d);
         }
+
+        //viewport.draw(g2d);
     }
 
     @Override

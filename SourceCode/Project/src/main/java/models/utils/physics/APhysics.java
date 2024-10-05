@@ -3,6 +3,7 @@ package models.utils.physics;
 import models.prototypes.actor.AActor;
 import models.utils.config.Config;
 import models.utils.updates.IUpdatable;
+import views.renders.Tile;
 
 /**
  * <p>The APhysics class contains data for any in-game object that should contain positional, dimensional, and vector
@@ -54,7 +55,6 @@ public abstract class APhysics implements IUpdatable {
             float w, float h,
             float vX, float vY,
             boolean hasGravity) {
-
         float tX = roundCoordinate(x), tY = roundCoordinate(y);
         float tW = roundCoordinate(w), tH = roundCoordinate(h);
         float tVX = roundCoordinate(vX), tVY = roundCoordinate(vY);
@@ -65,11 +65,21 @@ public abstract class APhysics implements IUpdatable {
         setSize(tW, tH);
 
         setVelocity(tVX, tVY);
+/*
+
+        setOriginalPosition(x, y);
+        setOriginalSize(w, h);
+        setPosition(x, y);
+        setSize(w, h);
+
+        setVelocity(vX, vY);
+*/
+
         setGravity(hasGravity);
     }
 
     public static float roundCoordinate(float num) {
-        float roundingFactor = 16;
+        float roundingFactor = Tile.W;
         float rounded = (float)Math.round(num / roundingFactor);
         return rounded * roundingFactor;
     }
@@ -216,7 +226,7 @@ public abstract class APhysics implements IUpdatable {
                         a.vX *= .9f;
                     }
                 } else {
-                    a.setY(bottom());
+                    a.setY(bottom() + 1);
                 }
 
                 a.vY = 0;
@@ -359,6 +369,9 @@ public abstract class APhysics implements IUpdatable {
      */
     public void setGravity(boolean hasGravity) {
         this.hasGravity = hasGravity;
+        if(!hasGravity) {
+            vY = 0;
+        }
     }
 
     public float getVX() {
