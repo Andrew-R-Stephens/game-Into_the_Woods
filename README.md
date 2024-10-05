@@ -5,7 +5,7 @@
 <br>
 
 <p><b>Into the Woods</b> is a 2D platformer game. It's inspired by platformer titles like <em>"Ori and the Blind Forest"</em>.</p>
-<p>I built this this entire system from scratch within 3 months. Development continues - for the passion, fulfillment, and a challenge.</p>
+<p>The entire system is proprietary. Development continues on for the passion, the fulfillment, and the challenges.</p>
 
 <br>
 
