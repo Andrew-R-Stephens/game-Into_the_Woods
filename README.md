@@ -4,10 +4,8 @@
 
 <br>
 
-<p>Into the Woods is a 2D platformer game which derives ideas from platformer titles like <em>"Ori and the Blind Forest"</em>.</p>
-<p>The entire game was developed from scratch, save for two libraries, <em>"javazoom"</em> and <em>"Gson"</em>, which assisted in audio streaming and Json file parsing, respectively.</p>
-
-<p><em><b>Into The Woods</b></em> exists to satisfy the software portion of the Software Engineering curriculum at <b>SUNY College at Old Westbury</b>. We are instructed to create a software solution with our assigned team and use it to create the documentation. We had very far reaching goals, and managed to satisfy nearly all of them, between the software development and documentation, within 3 months.</p>
+<p><b>Into the Woods</b> is a 2D platformer game. It's inspired by platformer titles like <em>"Ori and the Blind Forest"</em>.</p>
+<p>I built this this entire system from scratch within 3 months. Development continues - for the passion, fulfillment, and a challenge.</p>
 
 <br>
 
