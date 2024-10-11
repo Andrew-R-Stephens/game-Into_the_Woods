@@ -1,7 +1,7 @@
-package views.renders.tile.spike;
+package models.textures.meshes.spike;
 
 import models.utils.resources.Resources;
-import views.renders.tile.ATile;
+import models.textures.meshes.ATile;
 
 public class ASpikesTile extends ATile {
 

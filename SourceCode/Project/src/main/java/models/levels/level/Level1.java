@@ -9,6 +9,7 @@ import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.prototypes.level.LevelModelRW.LevelModel;
 import models.prototypes.level.propChunk.PropChunk;
+import models.textures.meshes.Tile;
 
 /**
  * The first level.
@@ -23,8 +24,8 @@ public class Level1 extends ALevel {
         super(environment);
 
         setStartOrigin(
-                (int)(levelModel.startOrigin.x * LevelsList.WORLD_SCALE),
-                (int)(levelModel.startOrigin.y * LevelsList.WORLD_SCALE)
+                (int)(levelModel.startOrigin.x / Tile.W * LevelsList.WORLD_SCALE),
+                (int)(levelModel.startOrigin.y / Tile.H * LevelsList.WORLD_SCALE)
         );
 
         build(levelModel);

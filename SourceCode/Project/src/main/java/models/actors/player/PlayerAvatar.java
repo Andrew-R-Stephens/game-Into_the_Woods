@@ -162,25 +162,32 @@ public class PlayerAvatar extends ACharacter implements IDrawable, IUpdatable, I
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
-        return super.hasCollision(a, delta);
+    public boolean checkCollision(AActor a, float delta) {
+        boolean collided = super.checkCollision(a, delta);
+        if(collided) {
+            System.out.println("Actor collision! " + getX() + " " + getY());
+        }
+        return collided;
     }
 
     @Override
     public void update(float delta) {
+        control(delta);
+
         super.update(delta);
 
+        /*
         float[] spriteScale = spriteSheets.get(actionState).getCurrentFrameSize();
         int[] largest = spriteSheets.get(actionState).getLargestSize();
 
-        /*
         w = spriteScale[0];
         h = (spriteScale[1] * largest[1]) + spriteSheets.get(actionState).getCurrentFramePos()[1];
 
         setY(y + (oh - h));
+
+        System.out.println((int)y + " " + (int)h + " " + largest[1]);
         */
 
-        //System.out.println((int)y + " " + (int)h + " " + largest[1]);
         if(vX < 0) {
             facing = Facing.RIGHT;
         } else if (vX > 0) {

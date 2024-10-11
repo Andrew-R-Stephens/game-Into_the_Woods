@@ -1,6 +1,7 @@
 package models.prototypes.actor;
 
 import models.camera.Camera;
+import models.prototypes.level.prop.AProp;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
@@ -45,9 +46,7 @@ public abstract class AActor extends APhysics implements IUpdatable {
      */
     protected AActor(
             Resources resources,
-            float x, float y,
-            float w, float h,
-            float vx, float vy,
+            float x, float y, float w, float h, float vx, float vy,
             boolean hasGravity) {
 
         super(x, y, w, h, vx, vy, hasGravity);
@@ -56,9 +55,7 @@ public abstract class AActor extends APhysics implements IUpdatable {
     }
 
     protected AActor(
-            float x, float y,
-            float w, float h,
-            float vx, float vy,
+            float x, float y, float w, float h, float vx, float vy,
             boolean hasGravity) {
 
         super(x, y, w, h, vx, vy, hasGravity);
@@ -66,6 +63,14 @@ public abstract class AActor extends APhysics implements IUpdatable {
 
     public Resources getResources() {
         return resources;
+    }
+
+    public void setCanRender(boolean canRender) {
+        this.canRender = canRender;
+    }
+
+    public boolean canRender() {
+        return canRender;
     }
 
     @Override
@@ -87,11 +92,4 @@ public abstract class AActor extends APhysics implements IUpdatable {
 
     public void drawAsHUD(Graphics2D g) {  }
 
-    public void setCanRender(boolean canRender) {
-        this.canRender = canRender;
-    }
-
-    public boolean canRender() {
-        return canRender;
-    }
 }

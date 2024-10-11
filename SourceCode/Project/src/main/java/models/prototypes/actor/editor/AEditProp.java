@@ -6,7 +6,7 @@ import models.prototypes.level.prop.AProp;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.resources.Resources;
-import views.renders.Tile;
+import models.textures.meshes.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;

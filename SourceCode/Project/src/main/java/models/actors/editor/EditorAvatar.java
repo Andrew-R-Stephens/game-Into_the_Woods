@@ -1,10 +1,8 @@
 package models.actors.editor;
 
 import controls.editor.EditorControls;
-import controls.game.GameControls;
 import models.camera.Camera;
 import models.prototypes.actor.AActor;
-import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.actor.pawn.editor.AEditorAvatar;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
@@ -45,8 +43,8 @@ public class EditorAvatar extends AEditorAvatar implements IDrawable, IUpdatable
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
-        return super.hasCollision(a, delta);
+    public boolean checkCollision(AActor a, float delta) {
+        return super.checkCollision(a, delta);
     }
 
     @Override

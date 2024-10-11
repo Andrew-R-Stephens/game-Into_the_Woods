@@ -1,22 +1,16 @@
 package models.actors.triggers.interactibles;
 
-import models.actors.platforms.Platform;
 import models.actors.player.PlayerAvatar;
-import models.camera.Camera;
 import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.ATrigger;
-import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
-import views.renders.Tile;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import models.textures.meshes.Tile;
 
 /**
  * <p>Spikes are a harmful obstacle. Touching the obstacle immediately kills the player.</p>
@@ -71,12 +65,12 @@ public class Spikes extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
+    public boolean checkCollision(AActor a, float delta) {
         if(!(a instanceof PlayerAvatar)) {
             return false;
         }
 
-        boolean hasCollision = super.hasCollision(a, delta);
+        boolean hasCollision = super.checkCollision(a, delta);
 
         if(MAX_CYCLES != -1) {
             if (currentCycles > MAX_CYCLES) {

@@ -47,7 +47,7 @@ public abstract class ACollectibleTrigger extends ATrigger {
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
+    public boolean checkCollision(AActor a, float delta) {
         if(!isActive)
             return false;
 
@@ -55,7 +55,7 @@ public abstract class ACollectibleTrigger extends ATrigger {
             return false;
         }
 
-        boolean hasCollision = super.hasCollision(a, delta);
+        boolean hasCollision = super.checkCollision(a, delta);
 
         if(MAX_CYCLES != -1 && currentCycles > MAX_CYCLES) {
             return false;

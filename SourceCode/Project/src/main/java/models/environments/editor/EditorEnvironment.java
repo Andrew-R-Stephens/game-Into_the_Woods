@@ -14,17 +14,18 @@ import models.environments.menus.gamepausemenumodel.EditorPauseMenuEnvironment;
 import models.levels.LevelsList;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
+import models.prototypes.level.ALevel;
+import models.prototypes.level.ChunkProp;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.prototypes.level.propChunk.PropChunk;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;
-import views.renders.Tile;
+import models.textures.meshes.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -252,10 +253,11 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
                 tc.update(delta);
 
                 float[] viewportPos = Camera.getViewportRelative(0f, 0f);
-                viewport.setX(viewportPos[0]);
-                viewport.setY(viewportPos[1]);
-                viewport.setW(Config.window_width_actual / Config.scaledW);
-                viewport.setH(Config.window_height_actual / Config.scaledH);
+                viewport.update(
+                        (int)Math.floor(viewportPos[0]), (int)Math.floor(viewportPos[1]),
+                        (int)Math.ceil(Config.window_width_actual / Config.scaledW),
+                        (int)Math.ceil(Config.window_height_actual / Config.scaledH)
+                );
             }
         }
     }
@@ -264,18 +266,15 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
         if(viewportCollisionThread == null) {
             viewportCollisionThread = new Thread(() -> {
                 while(!isPaused) {
-                    int count = 0;
                     getLevelsList().getCurrentLevel().setLocalChunks(viewport);
                     for(PropChunk localChunk: getLevelsList().getCurrentLevel().getLocalChunks()) {
                         for (AProp[] pO : localChunk.getAllProps()) {
                             for(AProp p: pO) {
                                 if (p == null) continue;
                                 p.setCanRender(true);
-                                count++;
                             }
                         }
                     }
-                    System.out.println("Render count: " + count);
                     try {  Thread.sleep(100L);  }
                     catch (InterruptedException e) {  throw new RuntimeException(e); }
                 }
@@ -334,20 +333,34 @@ public class EditorEnvironment extends AEnvironment implements IDrawable, IUpdat
     private void detectCollisions(float delta) {
         new Thread(() -> {
 
-            ArrayList<AProp> allProps = new ArrayList<>();
-            for(PropChunk pC: getLevelsList().getCurrentLevel().getLocalChunks()) {
+            ALevel currentLevel = getLevelsList().getCurrentLevel();
+            ArrayList<PropChunk> localChunks = currentLevel.getLocalChunks();
+            ArrayList<ChunkProp> allProps = new ArrayList<>();
+
+            for(PropChunk pC: localChunks) {
                 for(AProp[] props: pC.getAllProps()) {
-                    allProps.addAll(Arrays.asList(props));
+                    for(AProp prop: props) {
+                        ChunkProp chunkProp = new ChunkProp(prop, pC);
+                        allProps.add(chunkProp);
+                    }
                 }
             }
 
-            for (AProp p1 : allProps) {
-                if(p1 == null) continue;
-                if(p1.canRender()) {
-                    for (AProp p2 : allProps) {
-                        if (p2 == null || p1 == p2) continue;
-                        if (p2.canRender() && p1.hasGravity()) {
-                            p2.hasCollision(p1, delta, true);
+            for (ChunkProp cP1 : allProps) {
+                if(cP1.prop() == null) continue;
+                if(cP1.prop().canRender() && cP1.prop().hasGravity()) {
+                    for (ChunkProp cP2 : allProps) {
+                        if (cP2.prop() == null || cP1.prop() == cP2.prop()) continue;
+                        if (cP2.prop().canRender()) {
+                            boolean collided = cP2.prop().checkCollision(cP1.prop(), delta, true);
+                            if (collided) {
+                                /*cP1.chunk().removeProp(cP1.prop());
+                                cP2.chunk().addProp(cP1.prop());
+
+                                cP2.chunk().removeProp(cP2.prop());
+                                cP1.chunk().addProp(cP2.prop());*/
+                            }
+
                         }
                     }
                 }

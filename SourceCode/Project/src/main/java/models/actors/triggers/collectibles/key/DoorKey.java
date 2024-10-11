@@ -41,8 +41,8 @@ public class DoorKey extends ACollectibleTrigger implements IDrawable, IUpdatabl
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
-        return super.hasCollision(a, delta);
+    public boolean checkCollision(AActor a, float delta) {
+        return super.checkCollision(a, delta);
     }
 
     @Override

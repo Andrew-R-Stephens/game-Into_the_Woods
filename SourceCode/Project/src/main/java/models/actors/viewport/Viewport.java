@@ -37,12 +37,16 @@ public class Viewport extends ACharacter implements IDrawable, IUpdatable, IHUDD
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
-        return super.hasCollision(a, delta);
+    public boolean checkCollision(AActor a, float delta) {
+        return super.checkCollision(a, delta);
     }
 
-    @Override
-    public void update(float delta) { }
+    public void update(float x, float y, float w, float h) {
+        setX(x);
+        setY(y);
+        setW(w);
+        setH(h);
+    }
 
     @Override
     public void draw(Graphics2D g) {

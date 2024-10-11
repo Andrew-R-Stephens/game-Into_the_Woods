@@ -41,11 +41,11 @@ public class Particle extends APawn implements IDrawable, IUpdatable {
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
+    public boolean checkCollision(AActor a, float delta) {
         if(!(a instanceof Platform)) {
             return false;
         }
-        boolean hasCollision = super.hasCollision(a, delta);
+        boolean hasCollision = super.checkCollision(a, delta);
 
         if(hasCollision) {
             doAction();

@@ -3,19 +3,26 @@ package models.prototypes.level.propChunk;
 import models.actors.platforms.Platform;
 import models.actors.triggers.interactibles.Spikes;
 import models.actors.viewport.Viewport;
-import models.prototypes.actor.AActor;
 import models.prototypes.level.LevelModelRW;
 import models.prototypes.level.prop.AProp;
-import views.renders.Tile;
+import models.prototypes.level.prop.AProp.Side;
+import models.textures.meshes.Tile;
 
 import java.awt.*;
 import java.util.*;
+
+import static models.prototypes.level.prop.AProp.Side.*;
 
 public class PropChunks {
 
     private PropChunk[][] propChunks = new PropChunk[0][0];
 
     private ArrayList<PropChunk> localChunks = new ArrayList<>();
+
+    float arrShiftX = 0;
+    float arrShiftY = 0;
+    int arrMaxX = 0;
+    int arrMaxY = 0;
 
     public PropChunks(LevelModelRW.LevelModel levelModel) {
 
@@ -41,10 +48,10 @@ public class PropChunks {
             }
         }
 
-        float arrShiftX = Math.max(0f, Math.abs(minX));
-        float arrShiftY = Math.max(0f, Math.abs(minY));
-        int arrMaxX = (int)(maxX+1 + Math.ceil(arrShiftX));
-        int arrMaxY = (int)(maxY+1 + Math.ceil(arrShiftY));
+        arrShiftX = Math.max(0f, Math.abs(minX));
+        arrShiftY = Math.max(0f, Math.abs(minY));
+        arrMaxX = (int)(maxX+1 + Math.ceil(arrShiftX));
+        arrMaxY = (int)(maxY+1 + Math.ceil(arrShiftY));
 
         propChunks = new PropChunk[arrMaxY][arrMaxX];
 
@@ -70,6 +77,11 @@ public class PropChunks {
 
         }
 
+        assignPropMeshes();
+
+    }
+
+    private void assignPropMeshes() {
         for(int j = 0; j < propChunks.length; j++) {
             for(int i = 0; i < propChunks[j].length; i++) {
 
@@ -77,81 +89,118 @@ public class PropChunks {
                 if(chunk == null) continue;
 
                 AProp[][] propsAbove = null;
-                if(j-1 > 0) {
-                    propsAbove = propChunks[j - 1][i].getAllProps();
+                int py = j - 1;
+                PropChunk tempChunk;
+                if(py >= 0 && ((tempChunk = propChunks[py][i]) != null)) {
+                    propsAbove = tempChunk.getAllProps();
                 }
                 AProp[][] propsBelow = null;
-                if(j+1 < propChunks.length) {
-                    propsBelow = propChunks[j + 1][i].getAllProps();
+                py = j + 1;
+                if(py < propChunks.length && ((tempChunk = propChunks[py][i]) != null)) {
+                    propsBelow = tempChunk.getAllProps();
                 }
                 AProp[][] propsLeft = null;
-                if(i-1 > 0) {
-                    propsLeft = propChunks[j][i-1].getAllProps();
+                int px = i - 1;
+                if(px >= 0 && ((tempChunk = propChunks[j][px]) != null)) {
+                    propsLeft = tempChunk.getAllProps();
                 }
                 AProp[][] propsRight = null;
-                if(i+1 < propChunks[j].length) {
-                    propsRight = propChunks[j][i+1].getAllProps();
+                px = i + 1;
+                if(px < propChunks[j].length && ((tempChunk = propChunks[j][px]) != null)) {
+                    propsRight = tempChunk.getAllProps();
                 }
 
                 AProp[][] chunkProps = chunk.getAllProps();
                 for(int y = 0; y < chunkProps.length; y++) {
                     for (int x = 0; x < chunkProps[y].length; x++) {
-                        AProp chunkProp = chunkProps[y][x];
-                        if(chunkProp != null) continue;
-
-                        boolean canCheckVertical = true;
-                        boolean canCheckHorizontal = true;
-
-                        //check top
-                        AProp targetProp = null;
-                        int pY = y - 1;
-                        if(pY >= 0) {
-                            targetProp = chunkProps[pY][x];
-                        } else if(propsAbove != null){
-                            targetProp = propsAbove[chunkProps.length-1][x];
-                        }
-                        if(targetProp != null && targetProp.side != AProp.Side.TOP) {
-                            targetProp.side = AProp.Side.BOTTOM;
-                        }
-
-                        //check bottom
-                        pY = y + 1;
-                        if(pY < chunkProps.length) {
-                            targetProp = chunkProps[pY][x];
-                        } else if(propsBelow != null){
-                            targetProp = propsBelow[0][x];
-                        }
-                        if(targetProp != null) {
-                            targetProp.side = AProp.Side.TOP;
-                        }
-
-                        //check left
-                        int pX = x - 1;
-                        if(pX >= 0) {
-                            targetProp = chunkProps[y][pX];
-                        } else if(propsLeft != null){
-                            targetProp = propsLeft[y][chunkProps.length-1];
-                        }
-                        if(targetProp != null) {
-                            //targetProp.side = AProp.Side.START;
-                        }
-
-                        //check right
-                        pX = x + 1;
-                        if(pX < chunkProps[y].length) {
-                            targetProp = chunkProps[y][pX];
-                        } else if(propsRight != null){
-                            targetProp = propsRight[y][0];
-                        }
-                        if(targetProp != null) {
-                            //targetProp.side = AProp.Side.END;
-                        }
-
+                        assignPropMesh(chunkProps, y, x, propsAbove, propsBelow, propsLeft, propsRight);
                     }
                 }
             }
         }
+    }
 
+    private void assignPropMesh(AProp[][] chunkProps,
+                                int y, int x,
+                                AProp[][] propsAbove, AProp[][] propsBelow,
+                                AProp[][] propsLeft, AProp[][] propsRight) {
+
+        AProp chunkProp = chunkProps[y][x];
+        if(chunkProp == null) return;
+
+        //     x
+        //   [][][]
+        // y [][][]
+        //   [][][]
+        boolean[][] sidesMatrix = new boolean[3][3]; // y, x
+
+        //check above
+        AProp targetProp = null;
+        int pY = y - 1;
+        if(pY >= 0) {
+            targetProp = chunkProps[pY][x];
+        } else if(propsAbove != null){
+            targetProp = propsAbove[chunkProps.length-1][x];
+        }
+        if(targetProp == null || !(targetProp.getClass() == chunkProp.getClass())) {
+            // Include Top
+            sidesMatrix[0][1] = true;
+        }
+
+        //check below
+        pY = y + 1;
+        if(pY < chunkProps.length) {
+            targetProp = chunkProps[pY][x];
+        } else if(propsBelow != null){
+            targetProp = propsBelow[0][x];
+        }
+        if(targetProp == null || !(targetProp.getClass() == chunkProp.getClass())) {
+            // Include Bottom
+            sidesMatrix[2][1] = true;
+        }
+
+        //check right
+        int pX = x - 1;
+        if(pX >= 0) {
+            targetProp = chunkProps[y][pX];
+        } else if(propsLeft != null){
+            targetProp = propsLeft[y][chunkProps.length-1];
+        }
+        if(targetProp == null || !(targetProp.getClass() == chunkProp.getClass())) {
+            // Include End
+            sidesMatrix[1][2] = true;
+        }
+
+        //check left
+        pX = x + 1;
+        if(pX < chunkProps[y].length) {
+            targetProp = chunkProps[y][pX];
+        } else if(propsRight != null){
+            targetProp = propsRight[y][0];
+        }
+        if(targetProp == null || !(targetProp.getClass() == chunkProp.getClass())) {
+            // Include Start
+            sidesMatrix[1][0] = true;
+        }
+
+        chunkProp.meshFlag = matrixToMeshMask(sidesMatrix);
+
+    }
+
+    private int matrixToMeshMask(boolean[][] matrix) {
+
+        int mask = BODY.flag;
+
+        if(matrix[0][1]) mask = mask + TOP.flag;
+        if(matrix[2][1]) mask = mask + BOTTOM.flag;
+        if(matrix[1][2]) mask = mask + START.flag;
+        if(matrix[1][0]) mask = mask + END.flag;
+
+        System.out.println("Flag: " + mask + " | "
+                + (mask & TOP.flag) + " " + (mask & BOTTOM.flag) + " " +
+                + (mask & START.flag) + " " + (mask & END.flag));
+
+        return mask - 1;
     }
 
     public AProp createProp(
@@ -245,9 +294,6 @@ public class PropChunks {
 
     public ArrayList<PropChunk> getChunksIn(Viewport viewport) {
 
-        float origRatioW = PropChunk.SIZE * Tile.W;
-        float origRatioH = PropChunk.SIZE * Tile.H;
-
         ArrayList<PropChunk> chunks = new ArrayList<>();
         for(PropChunk[] pCO: propChunks) {
             if(pCO == null) continue;
@@ -255,17 +301,7 @@ public class PropChunks {
             for(PropChunk pC: pCO) {
                 if(pC == null) continue;
 
-                for(AProp[] pO: pC.getAllProps()) {
-                    for(AProp p: pO) {
-                        if(p == null) continue;
-                        p.setCanRender(false);
-                    }
-                }
-
-                if(new Rectangle(
-                        pC.getBounds()[0], pC.getBounds()[1],
-                        pC.getBounds()[2], pC.getBounds()[3]
-                    ).intersects(
+                if(pC.getRectangle().intersects(
                         new Rectangle(
                             (int)viewport.getX(), (int)viewport.getY(),
                             (int)viewport.getW(), (int)viewport.getH()

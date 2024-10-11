@@ -1,9 +1,8 @@
 package models.actors.platforms;
 
 import models.prototypes.level.prop.AProp;
-import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
-import views.renders.Tile;
+import models.textures.meshes.Tile;
 
 /**
  * <p>A Platform is a physical barrier object. It is the fundamental piece that allows

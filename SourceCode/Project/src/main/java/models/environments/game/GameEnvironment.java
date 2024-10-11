@@ -25,10 +25,10 @@ import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.updates.IUpdatable;
+import models.textures.meshes.Tile;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * <p>GameEnvironment class is an AEnvironment subtype that controls the Game Environment and its contained entities.</p>
@@ -138,12 +138,13 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
         // Add in the Main Test Character
 
+        float h = Tile.H * .9f;
         character = new PlayerAvatar (
                 getResources(),
                 controlsViewModel,
                 AActor.roundCoordinate(startPos[0]),
                 AActor.roundCoordinate(startPos[1]),
-                AActor.roundCoordinate(55), AActor.roundCoordinate(70),
+                h * .714f, h,
                 0, 0,
                 true
         );
@@ -197,7 +198,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         doGameControls();
         insertQueuedActors(); // Dequeue queued actors and add them to list of actors
         detectViewportCollisions();
-        detectCollisions(delta); // Check Game Object Collisions with Level Props
+        detectCollisions(delta); // Check Actor collisions with Level Props
+        doCollisions(); // Execute all collisions
         updateActors(delta); // Update the Game Objects
         updateLevel(delta); // Update level models.props
         updateHUD(delta); // Update HUD overlay
@@ -354,14 +356,15 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
             // Update Characters
             if (gameObject instanceof PlayerAvatar tc) {
                 if(!isAwaitingReset) {
-                    tc.control(delta);
+                    //tc.control(delta);
                     tc.update(delta);
 
                     float[] viewportPos = Camera.getViewportRelative(0f, 0f);
-                    viewport.setX(viewportPos[0]);
-                    viewport.setY(viewportPos[1]);
-                    viewport.setW(Config.window_width_actual / Config.scaledW);
-                    viewport.setH(Config.window_height_actual / Config.scaledH);
+                    viewport.update(
+                            viewportPos[0], viewportPos[1],
+                            Config.window_width_actual / Config.scaledW,
+                            Config.window_height_actual / Config.scaledH
+                    );
                 }
                 //System.out.println(tc.actionState);
             }
@@ -375,6 +378,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
      */
     private void detectCollisions(float delta) {
         new Thread(() -> {
+
             ArrayList<AProp> allProps = new ArrayList<>();
             for(PropChunk pC: getLevelsList().getCurrentLevel().getLocalChunks()) {
                 for(AProp[] props: pC.getAllProps()) {
@@ -382,6 +386,17 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 }
             }
 
+            for (AActor a : actors) {
+                if(a == null) continue;
+                for(AProp p: allProps) {
+                    if(p == null) continue;
+                    if(p.canRender()) {
+                        if(p.checkCollision(a, delta, true));
+                    }
+                }
+                //a.doCollisions();
+            }
+            /*
             for(AProp p: allProps) {
                 if(p == null) continue;
                 if(p.canRender()) {
@@ -389,21 +404,25 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                         p.hasCollision(a, delta);
                     }
                 }
-            }
+            }*/
 
             for (AProp p1 : allProps) {
                 if(p1 == null) continue;
-                if(p1.canRender()) {
+                if(p1.canRender() && p1.hasGravity()) {
                     for (AProp p2 : allProps) {
                         if (p2 == null || p1 == p2) continue;
-                        if (p2.canRender() && p1.hasGravity() && p1.getY() < p2.getY()) {
-                            p2.hasCollision(p1, delta, true);
+                        if (p2.canRender() && p1.getY() < p2.getY()) {
+                            p2.checkCollision(p1, delta, true);
                         }
                     }
                 }
             }
 
         }).start();
+
+    }
+
+    private void doCollisions() {
 
     }
 

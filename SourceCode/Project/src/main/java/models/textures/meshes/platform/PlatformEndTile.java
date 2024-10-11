@@ -1,4 +1,4 @@
-package views.renders.tile.platform;
+package models.textures.meshes.platform;
 
 import models.utils.resources.Resources;
 
@@ -7,13 +7,13 @@ import models.utils.resources.Resources;
  * the other actors to behave as if in a physical world.</p>
  * @author Andrew Stephens
  */
-public class PlatformBodyTile extends APlatformTile {
+public class PlatformEndTile extends APlatformTile {
 
-    public PlatformBodyTile(Resources resources, String name) {
+    public PlatformEndTile(Resources resources, String name) {
         super(resources, name);
     }
 
-    public PlatformBodyTile(Resources resources) {
-        this(resources, "platform_level1_2");
+    public PlatformEndTile(Resources resources) {
+        this(resources, "platform_level1_right");
     }
 }

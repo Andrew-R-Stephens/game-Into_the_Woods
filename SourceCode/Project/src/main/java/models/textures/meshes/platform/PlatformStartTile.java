@@ -1,4 +1,4 @@
-package views.renders.tile.spike;
+package models.textures.meshes.platform;
 
 import models.utils.resources.Resources;
 
@@ -7,13 +7,13 @@ import models.utils.resources.Resources;
  * the other actors to behave as if in a physical world.</p>
  * @author Andrew Stephens
  */
-public class SpikesTile extends ASpikesTile {
+public class PlatformStartTile extends APlatformTile {
 
-    public SpikesTile(Resources resources, String name) {
+    public PlatformStartTile(Resources resources, String name) {
         super(resources, name);
     }
 
-    public SpikesTile(Resources resources) {
-        this(resources, "spikes");
+    public PlatformStartTile(Resources resources) {
+        this(resources, "platform_level1_left");
     }
 }

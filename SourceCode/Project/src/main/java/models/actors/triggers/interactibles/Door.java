@@ -2,7 +2,6 @@ package models.actors.triggers.interactibles;
 
 import models.camera.Camera;
 import models.environments.EnvironmentType;
-import models.environments.EnvironmentsHandler;
 import models.environments.game.GameEnvironment;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.actor.AActor;
@@ -106,12 +105,12 @@ public class Door extends APropTrigger implements IDrawable, IHUDDrawable, IUpda
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
+    public boolean checkCollision(AActor a, float delta) {
         if(state == State.LOCKED || state == State.CLOSED) {
             return false;
         }
 
-        return super.hasCollision(a, delta);
+        return super.checkCollision(a, delta);
     }
 
     @Override

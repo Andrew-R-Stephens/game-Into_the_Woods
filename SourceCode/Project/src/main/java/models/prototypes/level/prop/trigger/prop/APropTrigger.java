@@ -1,7 +1,6 @@
 package models.prototypes.level.prop.trigger.prop;
 
 import models.actors.player.PlayerAvatar;
-import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.trigger.ATrigger;
@@ -41,7 +40,7 @@ public abstract class APropTrigger extends ATrigger {
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
+    public boolean checkCollision(AActor a, float delta) {
 
         if(!(a instanceof PlayerAvatar)) {
             return false;
@@ -51,7 +50,7 @@ public abstract class APropTrigger extends ATrigger {
             return false;
         }
 
-        boolean hasCollision = super.hasCollision(a, delta);
+        boolean hasCollision = super.checkCollision(a, delta);
 
         if(hasCollision) {
             doAction();

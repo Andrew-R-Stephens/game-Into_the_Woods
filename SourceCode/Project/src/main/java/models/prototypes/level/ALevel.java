@@ -1,7 +1,6 @@
 package models.prototypes.level;
 
 import models.actors.platforms.Platform;
-import models.actors.triggers.collectibles.key.DoorKey;
 import models.actors.triggers.interactibles.Door;
 import models.actors.triggers.interactibles.Spikes;
 import models.actors.viewport.Viewport;
@@ -11,26 +10,22 @@ import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.propChunk.PropChunk;
 import models.prototypes.level.propChunk.PropChunks;
+import models.textures.meshes.platform.*;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
-import views.renders.tile.platform.APlatformTile;
-import views.renders.tile.platform.PlatformBodyTile;
-import views.renders.tile.platform.PlatformBottomTile;
-import views.renders.tile.platform.PlatformTopTile;
-import views.renders.tile.spike.ASpikesTile;
-import views.renders.tile.spike.SpikesTile;
+import models.textures.meshes.spike.ASpikesTile;
+import models.textures.meshes.spike.SpikesTile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 import static models.camera.Camera.camX;
 import static models.camera.Camera.camY;
+import static models.prototypes.level.prop.AProp.Side.*;
 import static models.utils.config.Config.scaledH_zoom;
 import static models.utils.config.Config.scaledW_zoom;
 
@@ -50,13 +45,15 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     protected int[] startOrigin = new int[2];
     /**<p>The Props that exist within this level.</p>*/
     //protected ArrayList<AProp> levelProps = new ArrayList<>();
-    private PropChunks chunks;
+    public PropChunks allChunks;
     /**<p>The Door that allows the player to exit the level.</p>*/
     protected Door door;
 
-    private PlatformTopTile platformTileTop;
-    private PlatformBottomTile platformTileBottom;
-    private PlatformBodyTile platformTileBody;
+    private APlatformTile platformTileBody,
+            platformTileTop, platformTileBottom, platformTileStart,  platformTileEnd,
+            platformTileCorner0, platformTileCorner1, platformTileCorner2, platformTileCorner3,
+            platformTileVertical, platformTileHorizontal, platformTileFullStart, platformTileFullEnd;
+
     private ASpikesTile spikesTile;
 
     /**<p>The number of keys that exist in the level.</p>*/
@@ -85,7 +82,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     */
 
     public void setLocalChunks(Viewport viewport) {
-        chunks.setLocal(viewport);
+        allChunks.setLocal(viewport);
     }
 
     /**
@@ -93,7 +90,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * @return The list of props in the level.
      */
     public ArrayList<PropChunk> getLocalChunks() {
-        return chunks.getLocal();
+        return allChunks.getLocal();
     }
 
     /**
@@ -145,28 +142,41 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      */
     public void build(LevelModelRW.LevelModel levelModel) {
 
-        platformTileTop = new PlatformTopTile(getResources(), levelModel.typeImages.get("platform").get(0));
-        platformTileBody = new PlatformBodyTile(getResources(), levelModel.typeImages.get("platform").get(1));
-        platformTileBottom = new PlatformBottomTile(getResources(), levelModel.typeImages.get("platform").get(2));
-        spikesTile = new SpikesTile(getResources(), levelModel.typeImages.get("spikes").get(0));
+        configureTileImages(levelModel);
 
-        /*
-        ArrayList<AProp> tempTiles = new ArrayList<>();
-        for (Prop p : levelModel.props) {
-            AProp prop = createProp(levelModel, p);
-            if (prop != null) {
-                AProp[] tiles = prop.createTiles();
-                tempTiles.addAll(Arrays.asList(tiles));
-            }
-        }
-
-        levelProps.clear();
-        levelProps.addAll(tempTiles);
-        */
-
-        chunks = new PropChunks(levelModel);
+        allChunks = new PropChunks(levelModel);
 
         build();
+    }
+
+    private void configureTileImages(LevelModelRW.LevelModel levelModel) {
+
+        BufferedImage platformBody = getResources().getImage(levelModel.typeImages.get("platform").get(0));
+        BufferedImage platformTop = getResources().getImage(levelModel.typeImages.get("platform").get(1));
+        BufferedImage platformBottom = getResources().getImage(levelModel.typeImages.get("platform").get(2));
+        BufferedImage platformStart = getResources().getImage(levelModel.typeImages.get("platform").get(3));
+        BufferedImage platformEnd = getResources().getImage(levelModel.typeImages.get("platform").get(4));
+
+        platformTileBody = new APlatformTile(new BufferedImage[]{ platformBody });
+
+        platformTileTop = new APlatformTile(new BufferedImage[]{ platformBody, platformTop });
+        platformTileBottom = new APlatformTile(new BufferedImage[]{ platformBody, platformBottom });
+        platformTileStart  = new APlatformTile(new BufferedImage[]{ platformBody, platformStart });
+        platformTileEnd = new APlatformTile(new BufferedImage[]{ platformBody, platformEnd });
+
+        platformTileVertical  = new APlatformTile(new BufferedImage[]{ platformBody, platformTop, platformBottom });
+        platformTileHorizontal = new APlatformTile(new BufferedImage[]{ platformBody, platformStart, platformEnd });
+
+        platformTileFullStart  = new APlatformTile(new BufferedImage[]{ platformBody, platformTop, platformBottom, platformStart });
+        platformTileFullEnd = new APlatformTile(new BufferedImage[]{ platformBody, platformTop, platformBottom, platformEnd });
+
+
+        platformTileCorner0 = new APlatformTile(new BufferedImage[]{ platformBody, platformStart, platformTop });
+        platformTileCorner1 = new APlatformTile(new BufferedImage[]{ platformBody, platformEnd, platformTop });
+        platformTileCorner2 = new APlatformTile(new BufferedImage[]{ platformBody, platformStart, platformBottom });
+        platformTileCorner3  = new APlatformTile(new BufferedImage[]{ platformBody, platformEnd, platformBottom });
+
+        spikesTile = new SpikesTile(getResources(), levelModel.typeImages.get("spikes").get(0));
     }
 
     /**
@@ -180,12 +190,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * <p>Resets the props of each level.</p>
      */
     public void reset() {
-        /*for(AProp p: levelProps) {
-            if(p instanceof ATrigger t) {
-                t.reset();
-            }
-        }*/
-        chunks.resetAll();
+        allChunks.resetAll();
     }
 
     /**
@@ -214,7 +219,7 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 }
             }
         }
-        chunks.update();
+        allChunks.update();
     }
 
     @Override
@@ -222,25 +227,35 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         parallaxBackground.draw(g);
 
         for(PropChunk chunk: getLocalChunks()) {
-            drawChunk(g, chunk.getBounds());
+
             for(AProp[] propsO: chunk.getAllProps()) {
                 for (AActor prop : propsO) {
                     if (prop == null) continue;
                     if (prop instanceof Platform platform) {
-                        switch(platform.side) {
-                            case TOP -> {
-                                platformTileTop.draw(g, platform);
-                            }
-                            case BOTTOM -> {
-                                platformTileBottom.draw(g, platform);
-                            }
-                            default -> platformTileBody.draw(g, platform);
-                        }
+                        int flag = platform.meshFlag;
+
+                        if((flag & (TOP.flag | BOTTOM.flag | START.flag)) == (TOP.flag | BOTTOM.flag | START.flag)) platformTileFullStart.draw(g, platform);
+                        else if((flag & (TOP.flag | BOTTOM.flag | END.flag)) == (TOP.flag | BOTTOM.flag | END.flag)) platformTileFullEnd.draw(g, platform);
+                        else if((flag & (TOP.flag | START.flag)) == (TOP.flag | START.flag)) platformTileCorner0.draw(g, platform);
+                        else if((flag & (TOP.flag | END.flag)) == (TOP.flag | END.flag)) platformTileCorner1.draw(g, platform);
+                        else if((flag & (BOTTOM.flag | START.flag)) == (BOTTOM.flag | START.flag)) platformTileCorner2.draw(g, platform);
+                        else if((flag & (BOTTOM.flag | END.flag)) == (BOTTOM.flag | END.flag)) platformTileCorner3.draw(g, platform);
+                        else if((flag & (TOP.flag | BOTTOM.flag)) == (TOP.flag | BOTTOM.flag)) platformTileVertical.draw(g, platform);
+                        else if((flag & (START.flag | END.flag)) == (START.flag | END.flag)) platformTileHorizontal.draw(g, platform);
+                        else if(flag == TOP.flag) platformTileTop.draw(g, platform);
+                        else if(flag == BOTTOM.flag) platformTileBottom.draw(g, platform);
+                        else if(flag == START.flag) platformTileStart.draw(g, platform);
+                        else if(flag == END.flag) platformTileEnd.draw(g, platform);
+                        else platformTileBody.draw(g, platform);
+
                     } else if (prop instanceof Spikes spikes) {
                         spikesTile.draw(g, spikes);
                     }
                 }
             }
+
+            drawChunkDebug(g, chunk);
+
         }
     }
 
@@ -254,15 +269,17 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 for (AActor prop : propsO) {
                     if (prop == null) continue;
                     if (prop instanceof Platform platform) {
-                        switch(platform.side) {
-                            case TOP -> {
-                                platformTileTop.drawAsHUD(g, platform);
-                            }
-                            case BOTTOM -> {
-                                platformTileBottom.drawAsHUD(g, platform);
-                            }
-                            default -> platformTileBody.drawAsHUD(g, platform);
-                        }
+                        int flag = platform.meshFlag;
+
+                        if(flag == TOP.flag) platformTileTop.drawAsHUD(g, platform);
+                        else if(flag == BOTTOM.flag) platformTileBottom.drawAsHUD(g, platform);
+                        else if(flag == START.flag) platformTileStart.drawAsHUD(g, platform);
+                        else if(flag == END.flag) platformTileEnd.drawAsHUD(g, platform);
+                        else if((flag & (TOP.flag | START.flag)) == (TOP.flag | START.flag)) platformTileCorner0.drawAsHUD(g, platform);
+                        else if((flag & (TOP.flag | END.flag)) == (TOP.flag | END.flag)) platformTileCorner1.drawAsHUD(g, platform);
+                        else if((flag & (BOTTOM.flag | START.flag)) == (BOTTOM.flag | START.flag)) platformTileCorner2.drawAsHUD(g, platform);
+                        else if((flag & (BOTTOM.flag | END.flag)) == (BOTTOM.flag | END.flag)) platformTileCorner3.drawAsHUD(g, platform);
+                        else platformTileBody.drawAsHUD(g, platform);
                     } else if (prop instanceof Spikes spikes) {
                         spikesTile.drawAsHUD(g, spikes);
                     }
@@ -271,8 +288,10 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         }
     }
 
-    private void drawChunk(Graphics g, int[] bounds) {
+    private void drawChunkDebug(Graphics g, PropChunk chunk) {
         g.setColor(Color.DARK_GRAY);
+
+        int[] bounds = chunk.getBounds();
 
         float offsetX = ((bounds[0] * scaledW_zoom) + (camX));
         float offsetY = ((bounds[1] * scaledH_zoom) + (camY));

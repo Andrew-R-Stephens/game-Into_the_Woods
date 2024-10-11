@@ -1,6 +1,5 @@
 package models.prototypes.level.prop.trigger;
 
-import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
@@ -91,8 +90,8 @@ public abstract class ATrigger extends AProp implements IDrawable {
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
-        return super.hasCollision(a, delta, canMoveOnCollision);
+    public boolean checkCollision(AActor a, float delta) {
+        return super.checkCollision(a, delta, canMoveOnCollision);
     }
 
     @Override

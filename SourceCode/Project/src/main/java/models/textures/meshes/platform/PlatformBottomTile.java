@@ -1,4 +1,4 @@
-package views.renders.tile.platform;
+package models.textures.meshes.platform;
 
 import models.utils.resources.Resources;
 
@@ -9,11 +9,4 @@ import models.utils.resources.Resources;
  */
 public class PlatformBottomTile extends APlatformTile {
 
-    public PlatformBottomTile(Resources resources, String name) {
-        super(resources, name);
-    }
-
-    public PlatformBottomTile(Resources resources) {
-        this(resources, "platform_level1_3");
-    }
 }

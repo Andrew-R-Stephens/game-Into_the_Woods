@@ -63,7 +63,7 @@ public abstract class AReactProp extends AProp implements IDrawable {
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
+    public boolean checkCollision(AActor a, float delta) {
         return false;
     }
 

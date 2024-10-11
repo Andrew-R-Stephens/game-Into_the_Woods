@@ -4,7 +4,9 @@ import models.levels.LevelsList;
 import models.prototypes.actor.AActor;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
-import views.renders.Tile;
+import models.textures.meshes.Tile;
+
+import static models.prototypes.level.prop.AProp.Side.BODY;
 
 /**
  * <p>AProp is an abstract entity type that derives from AActor. This type is simply a wrapper class for Level
@@ -15,10 +17,20 @@ import views.renders.Tile;
 public abstract class AProp extends AActor implements IUpdatable {
 
     public enum Side {
-        TOP, BOTTOM, START, END, BODY
+        BODY(0),
+        TOP(1),
+        BOTTOM(2),
+        START(3),
+        END(4);
+
+        public final int flag;
+
+        Side(int id) {
+            this.flag = 1 << id;
+        }
     }
 
-    public Side side = Side.BODY;
+    public int meshFlag = BODY.flag;
 
     protected int cols = 1;
     protected int rows = 1;

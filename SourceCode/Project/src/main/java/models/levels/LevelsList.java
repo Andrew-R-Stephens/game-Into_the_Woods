@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class LevelsList implements IDrawable {
 
-    public static final float WORLD_SCALE = .8f;
+    public static final float WORLD_SCALE = 1f;
 
     /**<p>The parent Environment</p>*/
     private AEnvironment environment = null;

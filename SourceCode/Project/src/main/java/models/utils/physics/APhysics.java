@@ -1,9 +1,10 @@
 package models.utils.physics;
 
 import models.prototypes.actor.AActor;
+import models.prototypes.level.prop.AProp;
 import models.utils.config.Config;
 import models.utils.updates.IUpdatable;
-import views.renders.Tile;
+import models.textures.meshes.Tile;
 
 /**
  * <p>The APhysics class contains data for any in-game object that should contain positional, dimensional, and vector
@@ -31,7 +32,9 @@ public abstract class APhysics implements IUpdatable {
     protected float vX, vY;
 
     /**<p>If the collision on a specific face is made.</p>*/
-    protected boolean isFloorCollision,  isWallCollisionLeft, isWallCollisionRight;
+    protected boolean
+            isFloorCollision, isCeilingCollision,
+            isWallCollisionLeft, isWallCollisionRight;
     /**<p>If the object should be affected by gravity.</p>*/
     protected boolean hasGravity = true;
     /**<p>If the object is being directly controlled by the user.</p>*/
@@ -55,6 +58,7 @@ public abstract class APhysics implements IUpdatable {
             float w, float h,
             float vX, float vY,
             boolean hasGravity) {
+
         float tX = roundCoordinate(x), tY = roundCoordinate(y);
         float tW = roundCoordinate(w), tH = roundCoordinate(h);
         float tVX = roundCoordinate(vX), tVY = roundCoordinate(vY);
@@ -65,15 +69,6 @@ public abstract class APhysics implements IUpdatable {
         setSize(tW, tH);
 
         setVelocity(tVX, tVY);
-/*
-
-        setOriginalPosition(x, y);
-        setOriginalSize(w, h);
-        setPosition(x, y);
-        setSize(w, h);
-
-        setVelocity(vX, vY);
-*/
 
         setGravity(hasGravity);
     }
@@ -160,28 +155,84 @@ public abstract class APhysics implements IUpdatable {
      * @param delta The ratio of actual/target update rate for the game ticks.
      * @return if there has been a collision with the actor.
      */
+    public boolean checkCollision(AActor a, float delta) {
+        return checkCollision(a, delta, true);
+    }
+    /*
     public boolean hasCollision(AActor a, float delta) {
         return hasCollision(a, delta, true);
-    }
+    }*/
 
     /**
      * Checks if the object had collisions with the actor in question.
-     * @param a The actor being compared.
+     * @param a The other actor.
      * @param delta The ratio of actual/target update rate for the game ticks.
-     * @param moveToBounds If the actor should act ellastically under an affirmed collision state.
+     * @param moveToBounds If the actor should act elastically under an affirmed collision state.
      * @return if there has been a collision with the actor.
      */
+    public boolean checkCollision(AActor a, float delta, boolean moveToBounds) {
+
+        // Determine the conditions of the object collision
+        boolean hitBottom =
+                ((a.top() <= bottom()) && (a.top() >= top())) ||
+                        ((bottom() >= a.top()) && (bottom() <= a.bottom()));
+        boolean hitTop =
+                ((a.bottom() >= top()) && (a.bottom() <= bottom())) ||
+                        ((top() <= a.bottom()) && (top() >= a.top()));
+        boolean hitLeft =
+                ((a.right() >= left()) && (a.right() <= right())) ||
+                        ((left() <= a.right()) && (left() >= a.left()));
+        boolean hitRight =
+                ((a.left() <= right()) && (a.left() >= left())) ||
+                        ((right() >= a.left()) && (right() <= a.right()));
+
+        if ((hitBottom || hitTop) && (hitLeft || hitRight)) {
+
+            if(!moveToBounds) {
+                return true; // If collision occurs, and movement should not occur, do not proceed.
+            }
+
+            // Determine the side that the object should rebound off of
+            float distY = Math.min(Math.abs(a.top() - bottom()), Math.abs(a.bottom() - top()));
+            float distX = Math.min(Math.abs(a.right() - left()), Math.abs(a.left() - right()));
+
+            if (distX > distY) {
+
+                if (hitTop) {
+                    a.setY(AProp.roundCoordinate(top() - a.h));
+
+                    a.isFloorCollision = true;
+
+                    if (!a.isUserControlled) {
+                        a.vX *= .9f;
+                    }
+                } else {
+                    a.setY(AProp.roundCoordinate(bottom() + 1));
+                }
+
+                a.vY = 0;
+
+            } else if (distX < distY) {
+                if (hitRight) {
+                    a.setX(right());
+                    a.isWallCollisionLeft = true;
+                } else {
+                    a.setX(left() - a.w);
+                    a.isWallCollisionRight = true;
+                }
+
+                a.vX = 0;
+
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /*
     public boolean hasCollision(AActor a, float delta, boolean moveToBounds) {
-
-        boolean isFloorBounded = ((a.bottomBufferOuter()) >= top()) && (a.bottomBufferInner() <= bottom());
-
-        /*
-        boolean isWallBoundedLeft =
-                !isFloorBounded && ((a.leftBufferOuter() >= right()) && (a.leftBufferInner() <= left()));
-
-        boolean isWallBoundedRight =
-                !isFloorBounded && ((a.rightBufferInner() <= left()) && (a.rightBufferOuter() >= right()));
-        */
 
         // Determine the conditions of the object collision
         boolean hitBottom =
@@ -205,11 +256,13 @@ public abstract class APhysics implements IUpdatable {
 
             // Determine the side that the object should rebound off of
             float distX, distY;
+
             if (hitBottom) {
                 distY = Math.abs(a.top() - bottom());
             } else {
                 distY = Math.abs(a.bottom() - top());
             }
+
             if (hitLeft) {
                 distX = Math.abs(a.right() - left());
             } else {
@@ -218,7 +271,7 @@ public abstract class APhysics implements IUpdatable {
 
             if (distX > distY) {
                 if (hitTop) {
-                    a.setY(top() - a.h);
+                    a.setY(AProp.roundCoordinate(top() - a.h));
 
                     a.isFloorCollision = true;
 
@@ -226,7 +279,7 @@ public abstract class APhysics implements IUpdatable {
                         a.vX *= .9f;
                     }
                 } else {
-                    a.setY(bottom() + 1);
+                    a.setY(AProp.roundCoordinate(bottom() + 1));
                 }
 
                 a.vY = 0;
@@ -248,8 +301,8 @@ public abstract class APhysics implements IUpdatable {
         }
 
         return false;
-
     }
+    */
 
     /**
      * Sets the original size of the object.

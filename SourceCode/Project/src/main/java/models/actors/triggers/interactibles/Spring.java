@@ -12,7 +12,7 @@ import models.utils.drawables.IDrawable;
 import models.utils.drawables.IHUDDrawable;
 import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
-import views.renders.Tile;
+import models.textures.meshes.Tile;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -82,8 +82,8 @@ public class Spring extends ATrigger implements IDrawable, IHUDDrawable, IUpdata
     }
 
     @Override
-    public boolean hasCollision(AActor a, float delta) {
-        boolean hasCollision = super.hasCollision(a, delta);
+    public boolean checkCollision(AActor a, float delta) {
+        boolean hasCollision = super.checkCollision(a, delta);
 
         if(MAX_CYCLES != -1) {
             if (currentCycles > MAX_CYCLES) {

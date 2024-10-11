@@ -89,14 +89,14 @@ public abstract class ACharacter extends APawn implements IUpdatable {
         //int yDir = (directionals[2] ? -1 : 0) + (directionals[3] ? 1 : 0);
 
         if(actionState == ActionType.FLOOR_JUMPING || actionState == ActionType.WALL_JUMPING) {
-            xDir *= .7;
+            xDir *= .7f;
         }
 
         isUserControlled = directionals[0] || directionals[1] || directionals[2] || directionals[3];
 
         // If control direction goes against character movement direction, slow velocity down
         if (vX * xDir < 0) {
-            vX *= .85; //.95
+            vX *= .85f; //.95
         }
 
         // MULTIPLY BASE MOVEMENT SPEED BY DIRECTION MOVED
