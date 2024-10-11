@@ -1,7 +1,8 @@
 {
     "defaults": {
         "typeImages": {
-            "platform": ["platform_level1_1", "platform_level1_2", "platform_level1_3"],
+            "platform": ["platform_level1_body", "platform_level1_top", "platform_level1_bottom",
+                "platform_level1_left", "platform_level1_right"],
             "spikes": "spikes",
             "spring": "spritesheet_spring",
             "door": "spritesheet_door",
@@ -16,7 +17,8 @@
                 "forest_1", "forest_2", "forest_3"
             ],
             "typeImages": {
-                "platform": ["platform_level1_1", "platform_level1_2", "platform_level1_3"],
+                "platform": ["platform_level1_body", "platform_level1_top", "platform_level1_bottom",
+                    "platform_level1_left", "platform_level1_right"],
                 "spikes": ["spikes"],
                 "spring": ["spritesheet_spring"],
                 "door": ["spritesheet_door"],

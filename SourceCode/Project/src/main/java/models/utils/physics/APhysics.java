@@ -6,6 +6,8 @@ import models.utils.config.Config;
 import models.utils.updates.IUpdatable;
 import models.textures.meshes.Tile;
 
+import java.awt.*;
+
 /**
  * <p>The APhysics class contains data for any in-game object that should contain positional, dimensional, and vector
  * data.</p>
@@ -158,10 +160,6 @@ public abstract class APhysics implements IUpdatable {
     public boolean checkCollision(AActor a, float delta) {
         return checkCollision(a, delta, true);
     }
-    /*
-    public boolean hasCollision(AActor a, float delta) {
-        return hasCollision(a, delta, true);
-    }*/
 
     /**
      * Checks if the object had collisions with the actor in question.
@@ -172,8 +170,11 @@ public abstract class APhysics implements IUpdatable {
      */
     public boolean checkCollision(AActor a, float delta, boolean moveToBounds) {
 
+        Rectangle thisRect = new Rectangle((int)x, (int)y, (int)w, (int)h);
+        Rectangle aRect = new Rectangle((int)a.x, (int)a.y, (int)a.w, (int)a.h);
+
         // Determine the conditions of the object collision
-        boolean hitBottom =
+        /*boolean hitBottom =
                 ((a.top() <= bottom()) && (a.top() >= top())) ||
                         ((bottom() >= a.top()) && (bottom() <= a.bottom()));
         boolean hitTop =
@@ -184,8 +185,17 @@ public abstract class APhysics implements IUpdatable {
                         ((left() <= a.right()) && (left() >= a.left()));
         boolean hitRight =
                 ((a.left() <= right()) && (a.left() >= left())) ||
-                        ((right() >= a.left()) && (right() <= a.right()));
+                        ((right() >= a.left()) && (right() <= a.right()));*/
+        boolean hitBottom =
+                ((a.top() < bottom()) && (a.top() >= top()));
+        boolean hitTop =
+                ((a.bottom() > top()) && (a.bottom() <= bottom()));
+        boolean hitLeft =
+                ((a.right() > left()) && (a.right() <= right()));
+        boolean hitRight =
+                ((a.left() < right()) && (a.left() >= left()));
 
+        //if ((hitBottom || hitTop) && (hitLeft || hitRight)) {
         if ((hitBottom || hitTop) && (hitLeft || hitRight)) {
 
             if(!moveToBounds) {
@@ -193,8 +203,8 @@ public abstract class APhysics implements IUpdatable {
             }
 
             // Determine the side that the object should rebound off of
-            float distY = Math.min(Math.abs(a.top() - bottom()), Math.abs(a.bottom() - top()));
-            float distX = Math.min(Math.abs(a.right() - left()), Math.abs(a.left() - right()));
+            int distY = (int)Math.floor(Math.min(Math.abs(a.top() - bottom()), Math.abs(a.bottom() - top())));
+            int distX = (int)Math.floor(Math.min(Math.abs(a.right() - left()), Math.abs(a.left() - right())));
 
             if (distX > distY) {
 

@@ -5,7 +5,7 @@ import controls.editor.EditorKeyControls;
 import controls.menu.MenuControls;
 import controls.menu.MenuKeyControls;
 import models.actors.viewport.Viewport;
-import models.prototypes.actor.editor.AEditProp;
+import models.prototypes.actor.editprop.AEditProp;
 import models.actors.editor.EditorAvatar;
 import models.camera.Camera;
 import models.environments.EnvironmentType;

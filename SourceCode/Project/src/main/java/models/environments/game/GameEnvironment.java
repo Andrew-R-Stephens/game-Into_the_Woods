@@ -199,8 +199,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         insertQueuedActors(); // Dequeue queued actors and add them to list of actors
         detectViewportCollisions();
         detectCollisions(delta); // Check Actor collisions with Level Props
-        doCollisions(); // Execute all collisions
         updateActors(delta); // Update the Game Objects
+        doCollisions(); // Execute all collisions
         updateLevel(delta); // Update level models.props
         updateHUD(delta); // Update HUD overlay
 

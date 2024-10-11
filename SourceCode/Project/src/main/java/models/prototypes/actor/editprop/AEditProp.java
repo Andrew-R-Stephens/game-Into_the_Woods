@@ -1,4 +1,4 @@
-package models.prototypes.actor.editor;
+package models.prototypes.actor.editprop;
 
 import models.actors.platforms.Platform;
 import models.camera.Camera;
