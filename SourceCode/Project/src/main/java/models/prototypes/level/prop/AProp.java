@@ -6,7 +6,7 @@ import models.utils.resources.Resources;
 import models.utils.updates.IUpdatable;
 import models.textures.meshes.Tile;
 
-import static models.prototypes.level.prop.AProp.Side.BODY;
+import static models.prototypes.level.prop.AProp.Side.*;
 
 /**
  * <p>AProp is an abstract entity type that derives from AActor. This type is simply a wrapper class for Level
@@ -21,7 +21,13 @@ public abstract class AProp extends AActor implements IUpdatable {
         TOP(1),
         BOTTOM(2),
         START(3),
-        END(4);
+        END(4),
+        FULL_START(TOP.flag | BOTTOM.flag | START.flag),
+        FULL_END(TOP.flag | BOTTOM.flag | END.flag),
+        CORNER_TOP_START(TOP.flag | START.flag),
+        CORNER_TOP_END(TOP.flag | END.flag),
+        CORNER_BOTTOM_START(BOTTOM.flag | START.flag),
+        CORNER_BOTTOM_END(BOTTOM.flag | END.flag);
 
         public final int flag;
 

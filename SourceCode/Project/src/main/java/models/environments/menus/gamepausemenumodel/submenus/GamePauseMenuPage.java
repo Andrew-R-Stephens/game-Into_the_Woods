@@ -44,7 +44,7 @@ public class GamePauseMenuPage extends AMenu {
                 }
 
                 GameEnvironment environment = getEnvironmentsHandler().getGameEnvironment();
-                environment.setPaused(true);
+                environment.setPaused(false);
 
                 getParentEnvironment().onExit();
                 getEnvironmentsHandler().setCurrentEnvironmentType(environmentType);

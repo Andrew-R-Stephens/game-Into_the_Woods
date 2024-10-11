@@ -82,7 +82,9 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     */
 
     public void setLocalChunks(Viewport viewport) {
-        allChunks.setLocal(viewport);
+        if(allChunks != null) {
+            allChunks.setLocal(viewport);
+        }
     }
 
     /**
@@ -90,6 +92,9 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
      * @return The list of props in the level.
      */
     public ArrayList<PropChunk> getLocalChunks() {
+        if(allChunks == null) {
+            return new ArrayList<>(0);
+        }
         return allChunks.getLocal();
     }
 
@@ -164,17 +169,36 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
         platformTileStart  = new APlatformTile(new BufferedImage[]{ platformBody, platformStart });
         platformTileEnd = new APlatformTile(new BufferedImage[]{ platformBody, platformEnd });
 
-        platformTileVertical  = new APlatformTile(new BufferedImage[]{ platformBody, platformTop, platformBottom });
-        platformTileHorizontal = new APlatformTile(new BufferedImage[]{ platformBody, platformStart, platformEnd });
+        platformTileVertical  = new APlatformTile(
+                new BufferedImage[]{ platformBody, platformTop, platformBottom });
+        platformTileHorizontal = new APlatformTile(
+                new BufferedImage[]{ platformBody, platformStart, platformEnd });
 
-        platformTileFullStart  = new APlatformTile(new BufferedImage[]{ platformBody, platformTop, platformBottom, platformStart });
-        platformTileFullEnd = new APlatformTile(new BufferedImage[]{ platformBody, platformTop, platformBottom, platformEnd });
+        platformTileFullStart  = new APlatformTile(
+                new BufferedImage[]{ platformBody, platformTop, platformBottom, platformStart },
+                new boolean[]{true, false, true, false}
+        );
+        platformTileFullEnd = new APlatformTile(
+                new BufferedImage[]{ platformBody, platformTop, platformBottom, platformEnd },
+                new boolean[]{false, true, false, true}
+        );
 
-
-        platformTileCorner0 = new APlatformTile(new BufferedImage[]{ platformBody, platformStart, platformTop });
-        platformTileCorner1 = new APlatformTile(new BufferedImage[]{ platformBody, platformEnd, platformTop });
-        platformTileCorner2 = new APlatformTile(new BufferedImage[]{ platformBody, platformStart, platformBottom });
-        platformTileCorner3  = new APlatformTile(new BufferedImage[]{ platformBody, platformEnd, platformBottom });
+        platformTileCorner0 = new APlatformTile(
+                new BufferedImage[]{ platformBody, platformStart, platformTop },
+                new boolean[]{true, false, false, false}
+        );
+        platformTileCorner1 = new APlatformTile(
+                new BufferedImage[]{ platformBody, platformEnd, platformTop },
+                new boolean[]{false, true, false, false}
+        );
+        platformTileCorner2 = new APlatformTile(
+                new BufferedImage[]{ platformBody, platformStart, platformBottom },
+                new boolean[]{false, false, true, false}
+        );
+        platformTileCorner3  = new APlatformTile(
+                new BufferedImage[]{ platformBody, platformEnd, platformBottom },
+                new boolean[]{false, false, false, true}
+        );
 
         spikesTile = new SpikesTile(getResources(), levelModel.typeImages.get("spikes").get(0));
     }
@@ -232,20 +256,20 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
                 for (AActor prop : propsO) {
                     if (prop == null) continue;
                     if (prop instanceof Platform platform) {
-                        int flag = platform.meshFlag;
+                        int meshFlag = platform.meshFlag;
 
-                        if((flag & (TOP.flag | BOTTOM.flag | START.flag)) == (TOP.flag | BOTTOM.flag | START.flag)) platformTileFullStart.draw(g, platform);
-                        else if((flag & (TOP.flag | BOTTOM.flag | END.flag)) == (TOP.flag | BOTTOM.flag | END.flag)) platformTileFullEnd.draw(g, platform);
-                        else if((flag & (TOP.flag | START.flag)) == (TOP.flag | START.flag)) platformTileCorner0.draw(g, platform);
-                        else if((flag & (TOP.flag | END.flag)) == (TOP.flag | END.flag)) platformTileCorner1.draw(g, platform);
-                        else if((flag & (BOTTOM.flag | START.flag)) == (BOTTOM.flag | START.flag)) platformTileCorner2.draw(g, platform);
-                        else if((flag & (BOTTOM.flag | END.flag)) == (BOTTOM.flag | END.flag)) platformTileCorner3.draw(g, platform);
-                        else if((flag & (TOP.flag | BOTTOM.flag)) == (TOP.flag | BOTTOM.flag)) platformTileVertical.draw(g, platform);
-                        else if((flag & (START.flag | END.flag)) == (START.flag | END.flag)) platformTileHorizontal.draw(g, platform);
-                        else if(flag == TOP.flag) platformTileTop.draw(g, platform);
-                        else if(flag == BOTTOM.flag) platformTileBottom.draw(g, platform);
-                        else if(flag == START.flag) platformTileStart.draw(g, platform);
-                        else if(flag == END.flag) platformTileEnd.draw(g, platform);
+                        if((meshFlag & (TOP.flag | BOTTOM.flag | START.flag)) == (TOP.flag | BOTTOM.flag | START.flag)) platformTileFullStart.draw(g, platform);
+                        else if((meshFlag & (TOP.flag | BOTTOM.flag | END.flag)) == (TOP.flag | BOTTOM.flag | END.flag)) platformTileFullEnd.draw(g, platform);
+                        else if((meshFlag & (TOP.flag | START.flag)) == (TOP.flag | START.flag)) platformTileCorner0.draw(g, platform);
+                        else if((meshFlag & (TOP.flag | END.flag)) == (TOP.flag | END.flag)) platformTileCorner1.draw(g, platform);
+                        else if((meshFlag & (BOTTOM.flag | START.flag)) == (BOTTOM.flag | START.flag)) platformTileCorner2.draw(g, platform);
+                        else if((meshFlag & (BOTTOM.flag | END.flag)) == (BOTTOM.flag | END.flag)) platformTileCorner3.draw(g, platform);
+                        else if((meshFlag & (TOP.flag | BOTTOM.flag)) == (TOP.flag | BOTTOM.flag)) platformTileVertical.draw(g, platform);
+                        else if((meshFlag & (START.flag | END.flag)) == (START.flag | END.flag)) platformTileHorizontal.draw(g, platform);
+                        else if(meshFlag == TOP.flag) platformTileTop.draw(g, platform);
+                        else if(meshFlag == BOTTOM.flag) platformTileBottom.draw(g, platform);
+                        else if(meshFlag == START.flag) platformTileStart.draw(g, platform);
+                        else if(meshFlag == END.flag) platformTileEnd.draw(g, platform);
                         else platformTileBody.draw(g, platform);
 
                     } else if (prop instanceof Spikes spikes) {

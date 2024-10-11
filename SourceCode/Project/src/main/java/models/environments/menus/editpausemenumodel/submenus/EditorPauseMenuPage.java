@@ -70,9 +70,10 @@ public class EditorPauseMenuPage extends AMenu {
                     return false;
                 }
 
-                getParentEnvironment().push(new OptionsPage(getParentEnvironment()));
+                //getParentEnvironment().push(new OptionsPage(getParentEnvironment()));
+                //return true;
 
-                return true;
+                return false;
             }
         };
 
@@ -92,9 +93,10 @@ public class EditorPauseMenuPage extends AMenu {
                     return false;
                 }
 
-                getParentEnvironment().push(new HelpPage(getParentEnvironment()));
+                //getParentEnvironment().push(new HelpPage(getParentEnvironment()));
+                //return true;
 
-                return true;
+                return false;
             }
         };
 
@@ -115,13 +117,15 @@ public class EditorPauseMenuPage extends AMenu {
                 }
 
                 AEnvironment currentEnvironment = getEnvironmentsHandler().getEnvironment(environmentType);
+                getEnvironmentsHandler().getEditorEnvironment().setPaused(true);
                 currentEnvironment.onExit();
+
+                getEnvironmentsHandler().getGameEnvironment().setPaused(true);
                 getEnvironmentsHandler()
                         .swapToEnvironment(
-                                EnvironmentType.GAME,
+                                EnvironmentType.GAME_PAUSE_MENU,
                                 false)
-                        .applyEnvironment();
-                getEnvironmentsHandler().getGameEnvironment().setPaused(true);
+                        .applyEnvironment(true);
 
                 return true;
             }

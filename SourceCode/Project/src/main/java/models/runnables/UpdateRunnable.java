@@ -34,6 +34,7 @@ public class UpdateRunnable extends ARunnable {
         float updateRatio = 1;
 
         isRunning = true;
+
         while(isRunning) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;

@@ -5,6 +5,9 @@ import models.prototypes.level.prop.AProp;
 import models.utils.resources.Resources;
 
 import java.awt.*;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 
 import static models.camera.Camera.*;
@@ -21,8 +24,8 @@ public abstract class ATile {
         createImage(resources.getImage(image));
     }
 
-    public ATile(BufferedImage[] layers) {
-        createImage(layers);
+    public ATile(BufferedImage[] layers, boolean[] corners) {
+        createImage(layers, corners);
     }
 
     public void createImage(BufferedImage image) {
@@ -53,8 +56,7 @@ public abstract class ATile {
         }
     }
 
-    public void createImage(BufferedImage[] images) {
-
+    public void createImage(BufferedImage[] images, boolean[] corners) {
         if(images == null || images.length == 0) return;
 
         BufferedImage tempImageOut = new BufferedImage(
@@ -63,12 +65,38 @@ public abstract class ATile {
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = tempImageOut.createGraphics();
 
+        RoundRectangle2D origClipShape =
+                new RoundRectangle2D.Double(0, 0, Tile.W, Tile.H, 25, 25);
+        Area clip = new Area(origClipShape);
+        int halfW = (int)(Tile.W * .5f);
+        int halfH = (int)(Tile.H * .5f);
+        int cornerIndex = 0;
+        for(int i = 0; i < 2; i++) {
+            for(int j = 0; j < 2; j++) {
+                if (!corners[cornerIndex]) {
+                    if(cornerIndex == 0)
+                        clip.add(new Area(new Rectangle(0, 0, halfW, halfH)));
+                    if(cornerIndex == 1)
+                        clip.add(new Area(new Rectangle(halfW, 0, halfW, halfH)));
+                    if(cornerIndex == 2)
+                        clip.add(new Area(new Rectangle(0, halfH, halfW, halfW)));
+                    if(cornerIndex == 3)
+                        clip.add(new Area(new Rectangle(halfW, halfH, halfW, halfH)));
+                }
+                cornerIndex++;
+            }
+        }
+
+        bGr.setClip(clip);
+
         for (BufferedImage bufferedImage : images) {
+
             Image tempImageIn = bufferedImage.getScaledInstance(
                     (int) Tile.W,
                     (int) Tile.H,
                     BufferedImage.SCALE_SMOOTH
             );
+
             bGr.drawImage(
                     tempImageIn,
                     0, 0,

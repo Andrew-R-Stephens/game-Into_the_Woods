@@ -8,6 +8,7 @@ import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.prop.trigger.prop.APropTrigger;
 import models.prototypes.level.LevelModelRW.LevelModel;
+import models.textures.meshes.Tile;
 
 public class Level2 extends ALevel {
 
@@ -42,6 +43,8 @@ public class Level2 extends ALevel {
 
     @Override
     public void build(LevelModel levelModel) {
+
+        super.build(levelModel);
 
         /*
         for(LevelModel.Prop p: levelModel.props) {

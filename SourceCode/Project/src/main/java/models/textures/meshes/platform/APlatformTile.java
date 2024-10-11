@@ -12,7 +12,11 @@ public class APlatformTile extends ATile {
     }
 
     public APlatformTile(BufferedImage[] images) {
-        super(images);
+        super(images, new boolean[]{false, false, false, false});
+    }
+
+    public APlatformTile(BufferedImage[] images, boolean[] corners) {
+        super(images, corners);
     }
 
     public APlatformTile() {

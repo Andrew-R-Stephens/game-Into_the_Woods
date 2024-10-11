@@ -28,14 +28,13 @@ public class RenderRunnable extends ARunnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
-
         final short targetFPS = Config.frameRate;
         double ns = 1000000000 / (float)targetFPS, delta = 0;
 
         isRunning = true;
         while(isRunning) {
             long now = System.nanoTime();
-            delta += (now - lastTime) / (1000000000 / (float) Config.frameRate);
+            delta += (now - lastTime) / ns;
             lastTime = now;
 
             if(delta >= 1) {
