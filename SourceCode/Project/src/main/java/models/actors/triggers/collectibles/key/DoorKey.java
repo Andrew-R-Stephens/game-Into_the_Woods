@@ -1,7 +1,7 @@
 package models.actors.triggers.collectibles.key;
 
 import models.camera.Camera;
-import models.environments.game.GameEnvironment;
+import models.environments.levelEnvironment.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.trigger.collectibles.ACollectibleTrigger;

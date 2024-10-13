@@ -1,4 +1,4 @@
-package models.environments.game;
+package models.environments.levelEnvironment.game;
 
 import controls.game.GameControls;
 import controls.game.GameKeyControls;
@@ -11,20 +11,17 @@ import models.actors.viewport.Viewport;
 import models.camera.Camera;
 import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
-import models.environments.game.hud.HUDModel;
-import models.environments.game.playerinventory.PlayerInventory;
+import models.environments.levelEnvironment.LevelEnvironment;
+import models.environments.levelEnvironment.game.hud.HUDModel;
+import models.environments.levelEnvironment.game.playerinventory.PlayerInventory;
 import models.environments.menus.gamepausemenumodel.GamePauseMenuEnvironment;
 import models.levels.LevelsList;
 import models.prototypes.actor.AActor;
 import models.prototypes.actor.pawn.character.ACharacter;
-import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.ALevel;
 import models.prototypes.level.prop.AProp;
 import models.prototypes.level.propChunk.PropChunk;
 import models.utils.config.Config;
-import models.utils.drawables.IDrawable;
-import models.utils.drawables.IHUDDrawable;
-import models.utils.updates.IUpdatable;
 import models.textures.meshes.Tile;
 
 import java.awt.*;
@@ -36,28 +33,13 @@ import java.util.*;
  * <p>Contains the GameControls, Levels, Game HUD, Player Inventory, and all Actors.</p>
  * @author Andrew Stephens
  */
-public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatable, IHUDDrawable {
+public class GameEnvironment extends LevelEnvironment {
 
-    /**<p>The list of actors currently active within the current level.</p>*/
-    private final ArrayList<AActor> actors = new ArrayList<>();
-    /**<p>The to-add actors that will be added to the list of actors when available.</p>*/
-    private final Queue<AActor> actorsQueue = new LinkedList<>();
-    /**<p>The Game Controls for the Game Environment</p>*/
-    private GameControls gameControls;
-    /**<p>The PauseMenuEnvironment that is used for the pause state.</p>*/
-    private GamePauseMenuEnvironment pauseMenuEnvironment;
-    /**<p>The list of Levels that the user will navigate between.</p>*/
-    private LevelsList levelsList;
     /**<p>The heads-up-display containing all overlays.</p>*/
     private HUDModel hudModel;
     /**<p>The player's inventory of collected items.</p>*/
     private PlayerInventory inventory;
-    /**<p>The Player Avatar model</p>*/
-    private PlayerAvatar character;
-    private Viewport viewport;
 
-    /**<p>If the game is paused</p>*/
-    private boolean isPaused = false;
     /**
      * If the game is awaiting reset
      */
@@ -70,10 +52,6 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
      * The time of death.
      */
     private long deathTimeoutStart = -1L;
-    /**<p>The Robot which keeps the mouse centered in the window in the unpaused game.</p>*/
-    private Robot robot;
-
-    private Thread viewportCollisionThread;
 
     /**
      * <p>Initializes the GameEnvironment with references to preconfigured object.</p>
@@ -88,21 +66,10 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                      GamePauseMenuEnvironment pauseMenuEnvironment, GameControls gameControls,
                      LevelsList levelsList, HUDModel hudModel, PlayerInventory inventory) {
 
-        super.init(parentEnvironmentsHandler, gameControls);
+        super.init(parentEnvironmentsHandler, pauseMenuEnvironment, gameControls, levelsList);
 
-        setAudioPlayer();
-
-        this.gameControls = gameControls;
-
-        try { robot = new Robot(); }
-        catch (AWTException e) { e.printStackTrace(); }
-
-        setPauseMenuEnvironment(pauseMenuEnvironment);
-        setLevelsList(levelsList);
         setHUDModel(hudModel);
         setPlayerInventory(inventory);
-
-        build(gameControls);
     }
 
     /**
@@ -113,50 +80,21 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         this.hudModel = hudModel;
     }
 
-    /**
-     * <p>Sets the PauseMenuEnvironment for the paused state of the Game Environment.</p>
-     * @param pauseMenuEnvironment The PauseMenuEnvironment used for the paused Game state. Cannot be null.
-     */
-    private void setPauseMenuEnvironment(GamePauseMenuEnvironment pauseMenuEnvironment) {
-        this.pauseMenuEnvironment = pauseMenuEnvironment;
-    }
-
-    /**
-     * <p>The LevelsList that contains all of the Levels in the game.</p>
-     * @param levelsList The list of levels and any other level data.
-     */
-    public void setLevelsList(LevelsList levelsList) {
-        this.levelsList = levelsList;
-    }
-
-    /**
-     * <p></p>
-     * @param controlsViewModel The ControlsModel that the actor should see.
-     * @param levelModel The LevelsList that the actor should see.
-     */
-    private void setPlayerAvatar(GameControls controlsViewModel, LevelsList levelModel) {
-        int[] startPos = levelModel.getCurrentLevel().getCharacterOrigin();
+    @Override
+    protected void setAvatar() {
+        int[] startPos = levelsList.getCurrentLevel().getCharacterOrigin();
         // Add in the Main Test Character
 
         float h = Tile.H * .9f;
-        character = new PlayerAvatar (
+        controllableCharacter = new PlayerAvatar (
                 getResources(),
-                controlsViewModel,
+                (GameControls) controls,
                 AActor.roundCoordinate(startPos[0]),
                 AActor.roundCoordinate(startPos[1]),
                 h * .714f, h,
                 0, 0,
                 true
         );
-
-    }
-
-    /**
-     * <p>Sets the current level by the use of index.</p>
-     * @param levelIndex The index of the level. Zero-based.
-     */
-    public void setCurrentLevel(int levelIndex) {
-        levelsList.setCurrentLevel(levelIndex);
     }
 
     /**
@@ -168,39 +106,17 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     /**
-     * <p>Sets the game environment to paused.</p>
-     * @param paused If the game should be paused.
-     */
-    public void setPaused(boolean paused) {
-        isPaused = paused;
-    }
-
-    /**
-     * <p>Builds the environment with a new Player Avatar and pairs the controls and Levels List  directly with the
-     * Player.</p>
-     * @param controlsModel The controls model that should control the PlayerAvatar.
-     */
-    public void build(GameControls controlsModel) {
-        setPlayerAvatar(controlsModel, levelsList);
-        viewport = new Viewport(0, 0,
-                Config.window_width_actual,
-                Config.window_height_actual
-        );
-    }
-
-    /**
      * <p>Updates the objects within the Game state. Controls the game objects, does collisions, updates positions, and
      * updates the Overlay.</p>
      * @param delta The ratio of actual/target update rate for the game ticks.
      */
-    public void doGameUpdates(float delta) {
+    public void doUpdates(float delta) {
 
         doGameControls();
         insertQueuedActors(); // Dequeue queued actors and add them to list of actors
         detectViewportCollisions();
         detectCollisions(delta); // Check Actor collisions with Level Props
         updateActors(delta); // Update the Game Objects
-        doCollisions(); // Execute all collisions
         updateLevel(delta); // Update level models.props
         updateHUD(delta); // Update HUD overlay
 
@@ -209,35 +125,6 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 reset();
             }
         }
-    }
-
-    private void detectViewportCollisions() {
-        if(viewportCollisionThread == null) {
-            viewportCollisionThread = new Thread(() -> {
-                while(!isPaused) {
-                    Rectangle vpRect = new Rectangle(
-                            (int) viewport.getX(), (int) viewport.getY(),
-                            (int) viewport.getW(), (int) viewport.getH());
-
-                    int count = 0;
-                    getLevelsList().getCurrentLevel().setLocalChunks(viewport);
-                    for(PropChunk localChunk: getLevelsList().getCurrentLevel().getLocalChunks()) {
-                        for (AProp[] pO : localChunk.getAllProps()) {
-                            for(AProp p: pO) {
-                                if (p == null) continue;
-                                p.setCanRender(true);
-                            }
-                        }
-                    }
-                    System.out.println("Render count: " + count);
-                    try {  Thread.sleep(500L);  }
-                    catch (InterruptedException e) {  throw new RuntimeException(e); }
-                }
-                viewportCollisionThread = null;
-            });
-            viewportCollisionThread.start();
-        }
-
     }
 
     /**
@@ -286,27 +173,11 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     }
 
     /**
-     * <p>Gets the LevelsList object which contains all loaded Levels.</p>
-     * @return The list of all created levels.
-     */
-    public LevelsList getLevelsList() {
-        return levelsList;
-    }
-
-    /**
      * <p>Updates components within the in-game HUD overlay.</p>
      * @param delta The ratio of actual/target update rate for the game ticks.
      */
     private void updateHUD(float delta) {
         hudModel.update(delta);
-    }
-
-    /**
-     * <p>Updates components the currently active level.</p>
-     * @param delta The ratio of actual/target update rate for the game ticks.
-     */
-    private void updateLevel(float delta) {
-        levelsList.getCurrentLevel().update(delta);
     }
 
     /**
@@ -376,7 +247,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
      * objects themselves.</p>
      * @param delta The ratio of actual/target update rate for the game ticks.
      */
-    private void detectCollisions(float delta) {
+    @Override
+    protected void detectCollisions(float delta) {
         new Thread(() -> {
 
             ArrayList<AProp> allProps = new ArrayList<>();
@@ -390,28 +262,16 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
                 if(a == null) continue;
                 for(AProp p: allProps) {
                     if(p == null) continue;
-                    if(p.canRender()) {
-                        if(p.checkCollision(a, delta, true));
-                    }
+                    if(p.checkCollision(a, delta, true));
                 }
-                //a.doCollisions();
             }
-            /*
-            for(AProp p: allProps) {
-                if(p == null) continue;
-                if(p.canRender()) {
-                    for (AActor a : actors) {
-                        p.hasCollision(a, delta);
-                    }
-                }
-            }*/
 
             for (AProp p1 : allProps) {
                 if(p1 == null) continue;
-                if(p1.canRender() && p1.hasGravity()) {
+                if(p1.hasGravity()) {
                     for (AProp p2 : allProps) {
                         if (p2 == null || p1 == p2) continue;
-                        if (p2.canRender() && p1.getY() < p2.getY()) {
+                        if (p1.getY() < p2.getY()) {
                             p2.checkCollision(p1, delta, true);
                         }
                     }
@@ -420,44 +280,6 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
         }).start();
 
-    }
-
-    private void doCollisions() {
-
-    }
-
-    /**
-     * <p>Inserts an actor from the queue into the primary list of actors.</p>
-     */
-    private void insertQueuedActors() {
-        for(int i = 0; i < 10 && !actorsQueue.isEmpty(); i++) {
-            addActor(actorsQueue.remove());
-        }
-    }
-
-    /**
-     * <p>Queues an actor into the queue list.
-     * Actors are incrementally shifted to the main list when process is available.</p>
-     * @param a Queues an actor to be added to the main list.
-     */
-    public void queueActor(AActor a) {
-        actorsQueue.add(a);
-    }
-
-    /**
-     * <p>Adds an actor to the main actors list.</p>
-     * @param actor The actor to be added to the list
-     */
-    public void addActor(AActor actor) {
-        actors.add(actor);
-    }
-
-    /**
-     * Removes an actor from the list of active entities
-     * @param actor The actor to be removed
-     */
-    public void removeActor(AActor actor) {
-        actors.remove(actor);
     }
 
     /**
@@ -472,8 +294,8 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
      * <p>Gets the PlayerAvatar object.</p>
      * @return the player
      */
-    public ACharacter getPlayerAvatar() {
-        return character;
+    public ACharacter getAvatar() {
+        return (ACharacter) controllableCharacter;
     }
 
     /**
@@ -497,10 +319,10 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
         for(int i = 0; i < 20; i++) {
             Particle p = new Particle(
                     getResources(),
-                    new Random().nextFloat((int)getPlayerAvatar().getX(),
-                            (int)(getPlayerAvatar().getX()+ getPlayerAvatar().getW())),
-                    new Random().nextFloat((int)getPlayerAvatar().getY(),
-                            (int)(getPlayerAvatar().getY()+ getPlayerAvatar().getH())),
+                    new Random().nextFloat((int) getAvatar().getX(),
+                            (int)(getAvatar().getX()+ getAvatar().getW())),
+                    new Random().nextFloat((int) getAvatar().getY(),
+                            (int)(getAvatar().getY()+ getAvatar().getH())),
                     new Random().nextFloat(2, 15),
                     new Random().nextFloat(2, 15),
                     new Random().nextFloat(-5, 5),
@@ -522,7 +344,7 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
     public void update(float delta) {
 
         if(!isPaused) {
-            doGameUpdates(delta);
+            doUpdates(delta);
         } else {
             doPauseMenuUpdates(delta);
         }
@@ -554,34 +376,12 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
             hudModel.draw(g2d);
         }
 
-        /*
-        g2d.setColor(Color.YELLOW);
-        float[] pos = Camera.getCamRelative();
-        g2d.drawString("Cam", (int)(pos[0] - 5), (int)(pos[1] - 5));
-        g2d.fillOval((int)(pos[0] - 5), (int)(pos[1] - 5), 10, 10);
-
-        g2d.setColor(Color.GREEN);
-        pos = Camera.getTargRelative();
-        g2d.drawString("Targ", (int)(pos[0] - 5), (int)(pos[1] - 5));
-        g2d.fillOval((int)(pos[0] - 5), (int)(pos[1] - 5), 10, 10);
-
-        g2d.setColor(Color.BLUE);
-        pos = Camera.getMapRelative();
-        g2d.drawString("Map", (int)(pos[0] - 5), (int)(pos[1] - 5));
-        g2d.fillOval((int)(pos[0] - 5), (int)(pos[1] - 5), 10, 10);
-
-        g2d.setColor(Color.BLACK);
-        g2d.drawLine(0, 0, Config.window_width_actual, Config.window_height_actual);
-        g2d.drawLine(0, Config.window_height_actual, Config.window_width_actual, 0);
-        */
-
-        //viewport.draw(g2d);
     }
 
     @Override
     public void drawAsHUD(Graphics2D g) {
         getCurrentLevel().drawAsHUD(g);
-        character.drawAsHUD(g);
+        getAvatar().drawAsHUD(g);
         viewport.drawAsHUD(g);
     }
 
@@ -604,12 +404,12 @@ public class GameEnvironment extends AEnvironment implements IDrawable, IUpdatab
 
     @Override
     public void reset() {
-        gameControls.reset();
+        controls.reset();
         hudModel.reset();
         inventory.reset();
         actors.clear();
-        actors.add(character);
-        character.reset(levelsList.getCurrentLevel().getCharacterOrigin());
+        actors.add(getAvatar());
+        getAvatar().reset(levelsList.getCurrentLevel().getCharacterOrigin());
         levelsList.reset();
         Camera.reset();
         isAwaitingReset = false;

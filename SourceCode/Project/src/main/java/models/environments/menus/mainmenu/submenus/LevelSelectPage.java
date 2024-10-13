@@ -1,8 +1,7 @@
 package models.environments.menus.mainmenu.submenus;
 
 import models.environments.EnvironmentType;
-import models.environments.EnvironmentsHandler;
-import models.environments.game.GameEnvironment;
+import models.environments.levelEnvironment.game.GameEnvironment;
 import models.prototypes.components.menuviews.types.AButtonView;
 import models.prototypes.components.menuviews.types.ATextView;
 import models.prototypes.environments.menu.AMenu;

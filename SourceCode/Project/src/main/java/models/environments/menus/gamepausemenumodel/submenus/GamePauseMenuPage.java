@@ -1,8 +1,8 @@
 package models.environments.menus.gamepausemenumodel.submenus;
 
 import models.environments.EnvironmentType;
-import models.environments.editor.EditorEnvironment;
-import models.environments.game.GameEnvironment;
+import models.environments.levelEnvironment.editor.EditorEnvironment;
+import models.environments.levelEnvironment.game.GameEnvironment;
 import models.environments.menus.mainmenu.submenus.HelpPage;
 import models.environments.menus.mainmenu.submenus.OptionsPage;
 import models.environments.menus.startscreen.StartScreenPage;

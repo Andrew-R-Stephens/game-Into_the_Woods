@@ -4,7 +4,7 @@ import models.actors.platforms.Platform;
 import models.actors.triggers.interactibles.Door;
 import models.actors.triggers.interactibles.Spikes;
 import models.actors.viewport.Viewport;
-import models.environments.game.background.ParallaxBackground;
+import models.environments.levelEnvironment.game.background.ParallaxBackground;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;
@@ -74,12 +74,6 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
     protected void addProp(AProp prop) {
         //levelProps.add(prop);
     }
-
-    /*
-    public ArrayList<AProp> getLevelProps() {
-        return levelProps;
-    }
-    */
 
     public void setLocalChunks(Viewport viewport) {
         if(allChunks != null) {
@@ -255,26 +249,31 @@ public abstract class ALevel implements IDrawable, IHUDDrawable, IUpdatable {
             for(AProp[] propsO: chunk.getAllProps()) {
                 for (AActor prop : propsO) {
                     if (prop == null) continue;
-                    if (prop instanceof Platform platform) {
-                        int meshFlag = platform.meshFlag;
 
-                        if((meshFlag & (TOP.flag | BOTTOM.flag | START.flag)) == (TOP.flag | BOTTOM.flag | START.flag)) platformTileFullStart.draw(g, platform);
-                        else if((meshFlag & (TOP.flag | BOTTOM.flag | END.flag)) == (TOP.flag | BOTTOM.flag | END.flag)) platformTileFullEnd.draw(g, platform);
-                        else if((meshFlag & (TOP.flag | START.flag)) == (TOP.flag | START.flag)) platformTileCorner0.draw(g, platform);
-                        else if((meshFlag & (TOP.flag | END.flag)) == (TOP.flag | END.flag)) platformTileCorner1.draw(g, platform);
-                        else if((meshFlag & (BOTTOM.flag | START.flag)) == (BOTTOM.flag | START.flag)) platformTileCorner2.draw(g, platform);
-                        else if((meshFlag & (BOTTOM.flag | END.flag)) == (BOTTOM.flag | END.flag)) platformTileCorner3.draw(g, platform);
-                        else if((meshFlag & (TOP.flag | BOTTOM.flag)) == (TOP.flag | BOTTOM.flag)) platformTileVertical.draw(g, platform);
-                        else if((meshFlag & (START.flag | END.flag)) == (START.flag | END.flag)) platformTileHorizontal.draw(g, platform);
-                        else if(meshFlag == TOP.flag) platformTileTop.draw(g, platform);
-                        else if(meshFlag == BOTTOM.flag) platformTileBottom.draw(g, platform);
-                        else if(meshFlag == START.flag) platformTileStart.draw(g, platform);
-                        else if(meshFlag == END.flag) platformTileEnd.draw(g, platform);
-                        else platformTileBody.draw(g, platform);
+                    switch(prop) {
+                        case Platform platform -> {
+                            int meshFlag = platform.meshFlag;
 
-                    } else if (prop instanceof Spikes spikes) {
-                        spikesTile.draw(g, spikes);
+                            if((meshFlag & FULL_START.flag) == FULL_START.flag) platformTileFullStart.draw(g, platform);
+                            else if((meshFlag & FULL_END.flag) == FULL_END.flag) platformTileFullEnd.draw(g, platform);
+                            else if((meshFlag & CORNER_TOP_START.flag) == CORNER_TOP_START.flag) platformTileCorner0.draw(g, platform);
+                            else if((meshFlag & CORNER_TOP_END.flag) == CORNER_TOP_END.flag) platformTileCorner1.draw(g, platform);
+                            else if((meshFlag & CORNER_BOTTOM_START.flag) == CORNER_BOTTOM_START.flag) platformTileCorner2.draw(g, platform);
+                            else if((meshFlag & CORNER_BOTTOM_END.flag) == CORNER_BOTTOM_END.flag) platformTileCorner3.draw(g, platform);
+                            else if((meshFlag & VERTICAL.flag) == VERTICAL.flag) platformTileVertical.draw(g, platform);
+                            else if((meshFlag & HORIZONTAL.flag) == HORIZONTAL.flag) platformTileHorizontal.draw(g, platform);
+                            else if(meshFlag == TOP.flag) platformTileTop.draw(g, platform);
+                            else if(meshFlag == BOTTOM.flag) platformTileBottom.draw(g, platform);
+                            else if(meshFlag == START.flag) platformTileStart.draw(g, platform);
+                            else if(meshFlag == END.flag) platformTileEnd.draw(g, platform);
+                            else platformTileBody.draw(g, platform);
+                        }
+                        case Spikes spikes -> {
+                            spikesTile.draw(g, spikes);
+                        }
+                        default -> { return; }
                     }
+
                 }
             }
 

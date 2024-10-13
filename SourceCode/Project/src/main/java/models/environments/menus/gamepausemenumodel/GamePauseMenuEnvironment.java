@@ -3,7 +3,7 @@ package models.environments.menus.gamepausemenumodel;
 import controls.menu.MenuControls;
 import models.environments.EnvironmentType;
 import models.environments.EnvironmentsHandler;
-import models.environments.game.GameEnvironment;
+import models.environments.levelEnvironment.game.GameEnvironment;
 import models.environments.menus.gamepausemenumodel.submenus.GamePauseMenuPage;
 import models.prototypes.environments.menu.AMenuEnvironment;
 import models.utils.config.Config;

@@ -1,6 +1,6 @@
 package models.prototypes.components.overlays;
 
-import models.environments.game.GameEnvironment;
+import models.environments.levelEnvironment.game.GameEnvironment;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;

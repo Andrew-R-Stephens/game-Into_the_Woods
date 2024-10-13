@@ -1,7 +1,7 @@
 package models.environments;
 
-import models.environments.editor.EditorEnvironment;
-import models.environments.game.GameEnvironment;
+import models.environments.levelEnvironment.editor.EditorEnvironment;
+import models.environments.levelEnvironment.game.GameEnvironment;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.threading.ARunnable;

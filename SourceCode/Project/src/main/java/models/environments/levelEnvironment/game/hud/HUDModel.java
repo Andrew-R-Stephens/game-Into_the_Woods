@@ -1,9 +1,9 @@
-package models.environments.game.hud;
+package models.environments.levelEnvironment.game.hud;
 
-import models.environments.game.GameEnvironment;
-import models.environments.game.hud.components.MapOverlay;
-import models.environments.game.hud.components.PlayerStatsOverlay;
-import models.environments.game.hud.components.TimeKeeperOverlay;
+import models.environments.levelEnvironment.game.GameEnvironment;
+import models.environments.levelEnvironment.game.hud.components.MapOverlay;
+import models.environments.levelEnvironment.game.hud.components.PlayerStatsOverlay;
+import models.environments.levelEnvironment.game.hud.components.TimeKeeperOverlay;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;
 import models.utils.updates.IUpdatable;

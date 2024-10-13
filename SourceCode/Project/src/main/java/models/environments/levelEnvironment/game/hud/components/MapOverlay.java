@@ -1,6 +1,6 @@
-package models.environments.game.hud.components;
+package models.environments.levelEnvironment.game.hud.components;
 
-import models.environments.game.GameEnvironment;
+import models.environments.levelEnvironment.game.GameEnvironment;
 import models.prototypes.components.overlays.AOverlayComponent;
 import models.utils.config.Config;
 import models.utils.drawables.IDrawable;

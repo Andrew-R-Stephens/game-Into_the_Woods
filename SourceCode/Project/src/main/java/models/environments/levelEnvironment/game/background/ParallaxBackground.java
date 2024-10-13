@@ -1,4 +1,4 @@
-package models.environments.game.background;
+package models.environments.levelEnvironment.game.background;
 
 import models.camera.Camera;
 import models.utils.config.Config;

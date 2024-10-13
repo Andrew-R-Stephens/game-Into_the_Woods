@@ -1,4 +1,4 @@
-package models.environments.game.hud.components;
+package models.environments.levelEnvironment.game.hud.components;
 
 import models.prototypes.components.overlays.AOverlayComponent;
 import models.utils.config.Config;

@@ -1,10 +1,8 @@
 package models.environments.menus.editpausemenumodel.submenus;
 
 import models.environments.EnvironmentType;
-import models.environments.editor.EditorEnvironment;
-import models.environments.game.GameEnvironment;
-import models.environments.menus.mainmenu.submenus.HelpPage;
-import models.environments.menus.mainmenu.submenus.OptionsPage;
+import models.environments.levelEnvironment.editor.EditorEnvironment;
+import models.environments.levelEnvironment.game.GameEnvironment;
 import models.environments.menus.startscreen.StartScreenPage;
 import models.prototypes.components.menuviews.types.AButtonView;
 import models.prototypes.environments.AEnvironment;
@@ -70,8 +68,8 @@ public class EditorPauseMenuPage extends AMenu {
                     return false;
                 }
 
-                //getParentEnvironment().push(new OptionsPage(getParentEnvironment()));
-                //return true;
+                getEnvironmentsHandler().getEditorEnvironment().getLevelsList().getCurrentLevel()
+                        .allChunks.regenerateChunks();
 
                 return false;
             }

@@ -2,7 +2,7 @@ package models.actors.triggers.interactibles;
 
 import models.camera.Camera;
 import models.environments.EnvironmentType;
-import models.environments.game.GameEnvironment;
+import models.environments.levelEnvironment.game.GameEnvironment;
 import models.environments.menus.mainmenu.MainMenuEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;

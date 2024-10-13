@@ -22,17 +22,27 @@ public abstract class AProp extends AActor implements IUpdatable {
         BOTTOM(2),
         START(3),
         END(4),
-        FULL_START(TOP.flag | BOTTOM.flag | START.flag),
-        FULL_END(TOP.flag | BOTTOM.flag | END.flag),
-        CORNER_TOP_START(TOP.flag | START.flag),
-        CORNER_TOP_END(TOP.flag | END.flag),
-        CORNER_BOTTOM_START(BOTTOM.flag | START.flag),
-        CORNER_BOTTOM_END(BOTTOM.flag | END.flag);
+        FULL_START(TOP.flag | BOTTOM.flag | START.flag, false),
+        FULL_END(TOP.flag | BOTTOM.flag | END.flag, false),
+        CORNER_TOP_START(TOP.flag | START.flag, false),
+        CORNER_TOP_END(TOP.flag | END.flag, false),
+        CORNER_BOTTOM_START(BOTTOM.flag | START.flag, false),
+        CORNER_BOTTOM_END(BOTTOM.flag | END.flag, false),
+        VERTICAL(TOP.flag | BOTTOM.flag, false),
+        HORIZONTAL(START.flag | END.flag, false);
 
         public final int flag;
 
         Side(int id) {
             this.flag = 1 << id;
+        }
+
+        Side(int id, boolean convert) {
+            if(convert) {
+                this.flag = 1 << id;
+            } else {
+                this.flag = id;
+            }
         }
     }
 

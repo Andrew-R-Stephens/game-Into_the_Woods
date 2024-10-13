@@ -1,7 +1,6 @@
 package models.prototypes.level.prop.reactor;
 
 import models.camera.Camera;
-import models.environments.game.GameEnvironment;
 import models.prototypes.actor.AActor;
 import models.prototypes.environments.AEnvironment;
 import models.prototypes.level.prop.AProp;

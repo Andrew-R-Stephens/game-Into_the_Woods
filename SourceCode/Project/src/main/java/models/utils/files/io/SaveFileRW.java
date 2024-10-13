@@ -15,7 +15,6 @@ import java.io.*;
  * @author Andrew Stephens
  */
 public class SaveFileRW {
-
     /**
      * The SaveData instance
      */

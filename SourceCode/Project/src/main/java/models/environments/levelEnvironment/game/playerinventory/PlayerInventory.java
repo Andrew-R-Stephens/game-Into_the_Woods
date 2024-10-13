@@ -1,4 +1,4 @@
-package models.environments.game.playerinventory;
+package models.environments.levelEnvironment.game.playerinventory;
 
 import models.actors.triggers.collectibles.key.DoorKey;
 import models.prototypes.level.prop.trigger.collectibles.ACollectibleTrigger;

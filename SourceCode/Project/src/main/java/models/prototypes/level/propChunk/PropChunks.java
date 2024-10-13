@@ -1,11 +1,9 @@
 package models.prototypes.level.propChunk;
 
-import models.actors.platforms.Platform;
-import models.actors.triggers.interactibles.Spikes;
 import models.actors.viewport.Viewport;
 import models.prototypes.level.LevelModelRW;
 import models.prototypes.level.prop.AProp;
-import models.prototypes.level.prop.AProp.Side;
+import models.prototypes.level.prop.APropFactory;
 import models.textures.meshes.Tile;
 
 import java.awt.*;
@@ -15,23 +13,24 @@ import static models.prototypes.level.prop.AProp.Side.*;
 
 public class PropChunks {
 
-    private PropChunk[][] propChunks = new PropChunk[0][0];
+    private PropChunk[][] propChunks;
 
     private ArrayList<PropChunk> localChunks = new ArrayList<>();
 
-    float arrShiftX = 0;
-    float arrShiftY = 0;
-    int arrMaxX = 0;
-    int arrMaxY = 0;
+    float arrShiftX, arrShiftY;
+    int arrMaxX, arrMaxY;
 
     public PropChunks(LevelModelRW.LevelModel levelModel) {
+        generateChunks(parseProps(levelModel));
+    }
+
+    private void generateChunks(ArrayList<AProp> props) {
 
         ArrayList<AProp> tempProps = new ArrayList<>();
         float minX = 0, maxX = 0, minY = 0, maxY = 0;
 
-        for (LevelModelRW.LevelModel.Prop p : levelModel.props) {
+        for (AProp prop: props) {
 
-            AProp prop = createProp(levelModel, p);
             if (prop != null) {
 
                 AProp[] subProps = prop.createTiles();
@@ -196,86 +195,7 @@ public class PropChunks {
         if(matrix[1][2]) mask = mask + START.flag;
         if(matrix[1][0]) mask = mask + END.flag;
 
-        System.out.println("Flag: " + mask + " | "
-                + (mask & TOP.flag) + " " + (mask & BOTTOM.flag) + " " +
-                + (mask & START.flag) + " " + (mask & END.flag));
-
         return mask - 1;
-    }
-
-    public AProp createProp(
-            LevelModelRW.LevelModel levelModel,
-            LevelModelRW.LevelModel.Prop propData
-    ) {
-        AProp outProp = null;
-        switch (propData.type) {
-            case "platform": {
-                outProp = new Platform(
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h,
-                        propData.motion.vX,
-                        propData.motion.vY,
-                        propData.hasGravity
-                );
-                break;
-            }
-            case "spikes": {
-                outProp = new Spikes(
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h,
-                        propData.motion.vX,
-                        propData.motion.vY,
-                        propData.maxCycles
-                );
-                break;
-            }
-            /*case "spring": {
-                outProp = new Spring(
-                        getResources(),
-                        environment,
-                        levelModel.typeImages.get(
-                                propData.type
-                        ).get(0),
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h,
-                        propData.maxCycles
-                );
-                break;
-            }
-            case "doorKey": {
-                outProp = new DoorKey(
-                        getResources(),
-                        environment,
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h
-                );
-                break;
-            }
-            case "door": {
-                outProp = new Door(
-                        getResources(),
-                        environment,
-                        levelModel.typeImages.get(
-                                propData.type
-                        ).get(0),
-                        propData.coords.x,
-                        propData.coords.y,
-                        propData.dims.w,
-                        propData.dims.h,
-                        propData.maxCycles
-                );
-                break;
-            }*/
-        }
-        return outProp;
     }
 
     public void resetAll() {
@@ -288,8 +208,10 @@ public class PropChunks {
         }
     }
 
-    public void update() {
+    public void update() { }
 
+    public void regenerateChunks() {
+        generateChunks(getAllProps());
     }
 
     public ArrayList<PropChunk> getChunksIn(Viewport viewport) {
@@ -326,4 +248,25 @@ public class PropChunks {
     public PropChunk[][] getAllChunks() {
         return propChunks;
     }
+
+    private ArrayList<AProp> getAllProps() {
+        ArrayList<AProp> props = new ArrayList<>();
+        for(PropChunk[] chunks: propChunks) {
+            for(PropChunk chunk: chunks) {
+                for(AProp[] prop: chunk.getAllProps()) {
+                    props.addAll(Arrays.asList(prop));
+                }
+            }
+        }
+        return props;
+    }
+
+    private ArrayList<AProp> parseProps(LevelModelRW.LevelModel levelModel) {
+        ArrayList<AProp> props = new ArrayList<>();
+        for (LevelModelRW.LevelModel.Prop p : levelModel.props) {
+            props.add(APropFactory.createProp(levelModel, p));
+        }
+        return props;
+    }
+
 }

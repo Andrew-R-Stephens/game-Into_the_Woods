@@ -1,7 +1,6 @@
 package models.environments.menus.mainmenu.submenus;
 
 import models.environments.EnvironmentType;
-import models.environments.EnvironmentsHandler;
 import models.prototypes.actor.pawn.character.ACharacter;
 import models.prototypes.components.menuviews.AMenuComponent;
 import models.prototypes.components.menuviews.types.AButtonView;
@@ -49,13 +48,13 @@ public class NewGamePage extends AMenu {
                 getParentEnvironment(),
                 (int) (mx - (200 * .5f)),300,
                 200,200,
-                avatars.get(getEnvironmentsHandler().getGameEnvironment().getPlayerAvatar()
+                avatars.get(getEnvironmentsHandler().getGameEnvironment().getAvatar()
                         .getCharacterType()),
                 AMenuComponent.ImageScale.FIT_CENTERED
         ){
             @Override
             public void update(float delta) {
-                backgroundImage = avatars.get(getEnvironmentsHandler().getGameEnvironment().getPlayerAvatar()
+                backgroundImage = avatars.get(getEnvironmentsHandler().getGameEnvironment().getAvatar()
                         .getCharacterType());
 
                 super.update(delta);
@@ -79,7 +78,7 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
-                getEnvironmentsHandler().getGameEnvironment().getPlayerAvatar()
+                getEnvironmentsHandler().getGameEnvironment().getAvatar()
                         .setCharacterType(ACharacter.CharacterType.TEO);
 
                 return true;
@@ -103,7 +102,7 @@ public class NewGamePage extends AMenu {
                     return false;
                 }
 
-                getEnvironmentsHandler().getGameEnvironment().getPlayerAvatar()
+                getEnvironmentsHandler().getGameEnvironment().getAvatar()
                         .setCharacterType(ACharacter.CharacterType.MELYNN);
 
                 return true;
